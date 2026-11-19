@@ -1,1 +1,3295 @@
-{"status": "in progress (independent verify 2026-11-19h; verdicts not final)", "candidate": "scraper/oem_fitment/groups/_report/nissan.candidate.json@084c178d", "seed": 15841119}
+{
+ "schema": 1,
+ "date": "2026-11-19",
+ "checker": "independent verify 1119h (blind; ops/interchange.md, hub.md, CURATION_SPEC, earlier reports, curation_tests, pf_guards_unit and policy/curate comments not read before these verdicts were pushed)",
+ "candidate": {
+  "path": "scraper/oem_fitment/groups/_report/nissan.candidate.json",
+  "commit": "084c178d",
+  "policy_sha256": "71024c85add3c7194e0b5ca1eddeedda566bbf0b554ed3161316222f19289440"
+ },
+ "raw": {
+  "branch": "oem-raw",
+  "commit": "57e8b5b99de04282b844ea41f035cee3b37d5484",
+  "sha256_checked": "all six files match the candidate raw block (nissanpartsdeal records 07991da2..., lists 12ed8d77..., years 62d1f7f8...; infinitipartsdeal records 7760a25e..., lists e9fafc90..., years 1dd47edd...)",
+  "line_refs": "lists:Ln / records:Ln are 1-based line numbers in raw/<site>.lists.jsonl / raw/<site>.jsonl; rN is the 0-based row index on that page"
+ },
+ "lot": {
+  "commit": "a85c654",
+  "inventory_live.json": "1a9cfa73e9c15e41809e1149c2e752504e797efd91c18de4668df454364ce1d6",
+  "vin_decodes.json.gz": "1357625b4429eaf936acafb234b64efb383abdbdcfbbe5ba84b3518139a32fc4",
+  "vehicle_extras.json": "6ff3d44b86fe224c0bf39398516c25c94f9ee01c551a9a803946cd3d09e065e3",
+  "cars": 338616
+ },
+ "replay": "payload apps from junkyard_scraper._oem_gated_apps at 084c178d (153 shippable groups after GROUP_HOLD_CATS; OEM_RELEASED empty); lot replayed with a copy of audit11_4/lot_replay.mjs that runs the OEM-GATE and AM-GATE blocks and helpers extracted verbatim from docs/app.js at 084c178d (only change: it also records each donor's warning text). Totals: plain 24198, if-equipped 2464, excluded 178.",
+ "draw": {
+  "seed": 15841119,
+  "method": "own script: shippable = candidate likely groups whose category is not in GROUP_HOLD_CATS (153); 30 groups by largest remainder over categories (window-regulator 18, side-mirrors 8, climate-control 3, gauge-cluster 1), per category rng.sample of the id-sorted list, categories in name order; then rng.sample(30) of the remaining 123 id-sorted groups; per pair seeker = rng.choice(expanded vehicle-years), donor = rng.choice(other vehicle-years with >=1 lot car) else any other.",
+  "groups": [
+   "oem:nissan:climate-control:C:1573cf6be3",
+   "oem:nissan:climate-control:C:e149091576",
+   "oem:nissan:climate-control:C:5b06ab53ea",
+   "oem:nissan:gauge-cluster:C:8598db7f2b",
+   "oem:nissan:side-mirrors:L:2e7eaacb31",
+   "oem:nissan:side-mirrors:R:2e0d578a9b",
+   "oem:nissan:side-mirrors:R:42a5905f53",
+   "oem:nissan:side-mirrors:R:ed9a05396c",
+   "oem:nissan:side-mirrors:L:04da60e034",
+   "oem:nissan:side-mirrors:L:e21dcd2288",
+   "oem:nissan:side-mirrors:L:c7e208257e",
+   "oem:nissan:side-mirrors:R:c8a2062caf",
+   "oem:nissan:window-regulator:FR:c6801d7fe5",
+   "oem:nissan:window-regulator:FL:f05355bd0d",
+   "oem:nissan:window-regulator:FR:cf8463c0f8",
+   "oem:nissan:window-regulator:RL:95dcd6e903",
+   "oem:nissan:window-regulator:RL:ff6945906c",
+   "oem:nissan:window-regulator:RR:5af5348a13",
+   "oem:nissan:window-regulator:RR:190575774f",
+   "oem:nissan:window-regulator:RR:ffaa8ff11f",
+   "oem:nissan:window-regulator:FR:600356f5ea",
+   "oem:nissan:window-regulator:FR:ecc50c6f8c",
+   "oem:nissan:window-regulator:RL:cb406a69f9",
+   "oem:nissan:window-regulator:RL:6201d377aa",
+   "oem:nissan:window-regulator:FL:5524f9f44e",
+   "oem:nissan:window-regulator:RL:000ac2ae39",
+   "oem:nissan:window-regulator:FL:628ab6fea2",
+   "oem:nissan:window-regulator:FL:ed07457961",
+   "oem:nissan:window-regulator:FL:6c7c1b9c18",
+   "oem:nissan:window-regulator:FR:65198fbb3c"
+  ],
+  "pairs": [
+   {
+    "id": "oem:nissan:window-regulator:RR:693859d766",
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1995
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:dfdc9646f6",
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1997
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1995
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:093b21daec",
+    "seeker": [
+     "Infiniti",
+     "M45",
+     2009
+    ],
+    "donor": [
+     "Infiniti",
+     "M35",
+     2009
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:7579549082",
+    "seeker": [
+     "Nissan",
+     "Armada",
+     2013
+    ],
+    "donor": [
+     "Nissan",
+     "Titan",
+     2006
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RR:0dd2e4b132",
+    "seeker": [
+     "Nissan",
+     "Rogue",
+     2017
+    ],
+    "donor": [
+     "Nissan",
+     "Rogue",
+     2016
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:e241aca37a",
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1993
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1994
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RR:d2ea825926",
+    "seeker": [
+     "Nissan",
+     "Juke",
+     2015
+    ],
+    "donor": [
+     "Nissan",
+     "Leaf",
+     2011
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:2444c15328",
+    "seeker": [
+     "Infiniti",
+     "Q70",
+     2014
+    ],
+    "donor": [
+     "Infiniti",
+     "M37",
+     2012
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:acc05f1183",
+    "seeker": [
+     "Nissan",
+     "Frontier",
+     2016
+    ],
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2014
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:d37db4856a",
+    "seeker": [
+     "Nissan",
+     "Sentra",
+     1999
+    ],
+    "donor": [
+     "Nissan",
+     "200SX",
+     1997
+    ]
+   },
+   {
+    "id": "oem:nissan:climate-control:C:8d55de172f",
+    "seeker": [
+     "Nissan",
+     "Xterra",
+     2002
+    ],
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2002
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:78088747fe",
+    "seeker": [
+     "Infiniti",
+     "FX35",
+     2003
+    ],
+    "donor": [
+     "Infiniti",
+     "Q45",
+     2005
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:L:3a7d2918b4",
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1995
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1996
+    ]
+   },
+   {
+    "id": "oem:nissan:climate-control:C:b6eb30db5d",
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1994
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:e1dbcc78e0",
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1997
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1996
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RR:300fc2f362",
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1997
+    ],
+    "donor": [
+     "Nissan",
+     "Stanza",
+     1997
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:abe0045c82",
+    "seeker": [
+     "Infiniti",
+     "QX56",
+     2011
+    ],
+    "donor": [
+     "Infiniti",
+     "QX80",
+     2014
+    ]
+   },
+   {
+    "id": "oem:nissan:climate-control:C:c87195cb31",
+    "seeker": [
+     "Nissan",
+     "Frontier",
+     1999
+    ],
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2001
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:864a4dfc29",
+    "seeker": [
+     "Nissan",
+     "Frontier",
+     2011
+    ],
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2005
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RL:e6dd47a01e",
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1997
+    ],
+    "donor": [
+     "Nissan",
+     "Stanza",
+     1997
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:6ffc5a8f41",
+    "seeker": [
+     "Nissan",
+     "Xterra",
+     2003
+    ],
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2001
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:df8b845bbf",
+    "seeker": [
+     "Infiniti",
+     "M45",
+     2008
+    ],
+    "donor": [
+     "Infiniti",
+     "M35",
+     2008
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:fe9aac0699",
+    "seeker": [
+     "Nissan",
+     "Murano",
+     2016
+    ],
+    "donor": [
+     "Nissan",
+     "Murano",
+     2019
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RL:9c3158fe6c",
+    "seeker": [
+     "Infiniti",
+     "QX60",
+     2018
+    ],
+    "donor": [
+     "Infiniti",
+     "QX60",
+     2015
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:cd708948c6",
+    "seeker": [
+     "Infiniti",
+     "M35",
+     2008
+    ],
+    "donor": [
+     "Infiniti",
+     "M35",
+     2009
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:L:d03cb29dad",
+    "seeker": [
+     "Infiniti",
+     "FX35",
+     2012
+    ],
+    "donor": [
+     "Infiniti",
+     "QX70",
+     2016
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:35d6c18452",
+    "seeker": [
+     "Infiniti",
+     "FX35",
+     2007
+    ],
+    "donor": [
+     "Infiniti",
+     "FX45",
+     2008
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RL:a1a9b342d1",
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1995
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RL:535fbed986",
+    "seeker": [
+     "Infiniti",
+     "Q40",
+     2015
+    ],
+    "donor": [
+     "Infiniti",
+     "G25",
+     2012
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:f606f17c72",
+    "seeker": [
+     "Infiniti",
+     "G25",
+     2012
+    ],
+    "donor": [
+     "Infiniti",
+     "G25",
+     2011
+    ]
+   }
+  ]
+ },
+ "span": {
+  "assumed": "model year N built 08/(N-1) through 07/N",
+  "plus_minus_one_month": "no verdict changes at 07/(N-1)-08/N or 09/(N-1)-06/N. Edge-sensitive at two months: 5af5348a13 and 6201d377aa (window ends 08/1993, Altima 1993 ungated), e6dd47a01e pair 20 (window from 07/1996, Altima/Stanza 1997 ungated), 8d55de172f pair 11 (07/2001 start)."
+ },
+ "checks_per_vehicle_year": "(a) production dates on each page that lists the number, read page by page; (b) same-option numbers before/after and changeover month; (c) option text tying to trans/drive/engine/cab/body; (d) hybrid/other variants; (e) door/position (Location field and front/rear page); (f) unexplained marks: \"*\" prefixes, the unnamed extra field (PRIMER, BLACK, F/AIR ...), FED. S./CAL. S., KC./CC./W./T./4S./C./S./SED, SB./XB./STD/BED, 2WDSTD/HICAS/4WAS, \"+\" joins; the record says which the verdict depends on.",
+ "counts": {
+  "groups": {
+   "RIGHT": 7,
+   "WRONG": 1,
+   "RISK": 22
+  },
+  "pairs": {
+   "RIGHT": 14,
+   "WRONG": 0,
+   "RISK": 16
+  }
+ },
+ "result": "FAIL (1 WRONG)",
+ "items": [
+  {
+   "kind": "group",
+   "id": "oem:nissan:climate-control:C:1573cf6be3",
+   "pn": [
+    "28525-1E505"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1996,
+     1996
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1996,
+     1996
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1996,
+     1996,
+     {
+      "built": "1996-02..1996-07"
+     }
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1996,
+     1996,
+     {
+      "built": "1996-02..1996-07"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #28525-1E505 for both — option: fits some option packages; built 02/1996-07/1996 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Altima/Stanza 1996 own pages list 28525-1E505 Production Date 02/1996-07/1996, FED. S. GLE + CAL. S. GLE; warning line matches the row; GLE-only covered by the option note.",
+   "refs": [
+    "nissanpartsdeal lists:L625 r24",
+    "lists:L826 r24",
+    "lists:L510 r23 (1997, not claimed)",
+    "records:L4804"
+   ],
+   "lot_cars": {
+    "unc": 9
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:climate-control:C:e149091576",
+   "pn": [
+    "28525-1E501"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1993
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1992-06..1994-07"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #28525-1E501 for both — option: fits some option packages; Altima 1994: built 06/1992-07/1994 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Altima 1993 L669 r19 undated GLE; Altima 1994 own row 06/1992-07/1994 (next 1E504 from 07/1994) gives the built line; Stanza 1993 L820 r19.",
+   "refs": [
+    "lists:L669 r19",
+    "lists:L546 r21-r22",
+    "lists:L820 r19"
+   ],
+   "lot_cars": {
+    "plain": 6,
+    "unc": 12
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:climate-control:C:5b06ab53ea",
+   "pn": [
+    "27510-ZD000"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2004,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2004,
+     2004
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Frontier",
+     2004,
+     2004,
+     {
+      "cab": "crew cab",
+      "eng": [
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2004,
+     2004,
+     {
+      "eng": [
+       "3.3L"
+      ]
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #27510-ZD000 for both — option: fits some option packages; Frontier: crew cab only; 3.3L only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Xterra 2004: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row) (year page years:L9 crawled wiper/knuckle/strut only); claim rests on product page L280 and the 2003 page (W. SE from 09/2002). Frontier 2004 cab gate rests on the unexplained code \"CC.\" (row: CC. SB. (SE+ SC) + CC. XB. (SE+ SC)); the warning line says \"listed for crew cab\". XE V6 uses ZD005 (trim, option note).",
+   "refs": [
+    "records:L280",
+    "lists:L435 r9-r10",
+    "lists:L274 r9-r10"
+   ],
+   "lot_cars": {
+    "plain": 128,
+    "unc": 46,
+    "exc": 27
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Xterra 2004 (143 cars)"
+    ],
+    "unexplained_mark": [
+     "Frontier 2004 CC./SB./XB. (31 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:gauge-cluster:C:8598db7f2b",
+   "pn": [
+    "24820-89Y00"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "200SX",
+     1995,
+     1998
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     1995,
+     1999
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "200SX",
+     1995,
+     1998,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     1997,
+     1999,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #24820-89Y00 for both — option: fits some option packages; 200SX: 1.6L only; Sentra 1997-1999: 1.6L only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "200SX 1997/1998 pages also list 24820-8B700 \"C, C. GA16DE\" for the same coupe GA16DE slot, undated (1999 page moves the coupe to 8B700); Sentra 1998/1999 list 24820-8Z002 \"4S. GA16DE\" beside 89Y00 \"4S. GLE\", undated. 4S./C. codes unexplained; 1.6L gate is on the product page.",
+   "refs": [
+    "lists:L790 r37-r41",
+    "lists:L792 r37-r42",
+    "lists:L740 r37-r42",
+    "lists:L749 r34-r38",
+    "lists:L838 r34-r38"
+   ],
+   "lot_cars": {
+    "plain": 120,
+    "unc": 10,
+    "exc": 4
+   },
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "200SX 1997-98 (11 cars)",
+     "Sentra 1998-99 (49 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:L:2e7eaacb31",
+   "pn": [
+    "96302-1NC3A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #96302-1NC3A for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RISK",
+   "why": "G25 2011/2012 S. JOURNEY rows support it. Q40 2015 page also lists 96302-6WJ0A \"S\" (product L2296: 2015 Q40 Journey) undated beside 1NC3A \"S. JOURNEY\": two numbers for the same trim, pages do not say which.",
+   "refs": [
+    "infinitipartsdeal lists:L607 r12",
+    "lists:L728 r12",
+    "lists:L827 r12,r14",
+    "records:L2296"
+   ],
+   "lot_cars": {
+    "plain": 38
+   },
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Q40 2015 (10 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:R:2e0d578a9b",
+   "pn": [
+    "K6301-1MA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2011
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2011
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2011,
+     {
+      "built": "2010-01..2010-12"
+     }
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2011,
+     {
+      "built": "2010-01..2010-12"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #K6301-1MA0A for both — fits some configurations; built 01/2010-12/2010 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "M56 2011 own page 01/2010-12/2010 (1MA0B from 12/2010, shared month). M37 2011: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row); window is in product record L850 captured from the 2011 M37 page.",
+   "refs": [
+    "lists:L1013 r10-r11",
+    "records:L850"
+   ],
+   "lot_cars": {
+    "unc": 28
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "M37 2011 (25 cars)"
+    ],
+    "window_edge": [
+     "12/2010 in both runs (28 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:R:42a5905f53",
+   "pn": [
+    "J6301-2B500"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1995,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1995,
+     1997
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #J6301-2B500 for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Altima 1995: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row). 1996/1997 and Stanza pages list J6301-2B500 GLE undated.",
+   "refs": [
+    "records:L1553",
+    "lists:L627 r23",
+    "lists:L512 r15",
+    "lists:L816 r26"
+   ],
+   "lot_cars": {
+    "plain": 49
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:R:ed9a05396c",
+   "pn": [
+    "96301-1NC4A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #96301-1NC4A for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RISK",
+   "why": "G25 rows support it; Q40 2015 page lists 96301-6WJ0A \"S\" (product L2297 Q40 Journey) undated in the same slot.",
+   "refs": [
+    "lists:L607 r14",
+    "lists:L728 r14",
+    "lists:L827 r15,r18",
+    "records:L2297"
+   ],
+   "lot_cars": {
+    "plain": 38
+   },
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Q40 2015 (10 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:L:04da60e034",
+   "pn": [
+    "K6302-1MA0B"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2012,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "M37",
+     2012,
+     2012,
+     {
+      "built": "2010-12..2012-04"
+     }
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014,
+     {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #K6302-1MA0B for both — option: fits some option packages; M37: built 12/2010-04/2012 only; Q70: gas only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "M37 2012 own page L915 r7 has no date; \"built 12/2010-04/2012\" comes from product L849 (2011 M37 page) and the 2013 M37 page L956 r7 still lists the number undated. Q70 2014 gas page lists it with M-era codes (2WDSTD/HICAS/TECHNOLO/ADVTECH) beside 96302-4AM0A \"SEDAN. BASE\" / 4AM0B for the same sedans; note \"Q70: gas only\" with the hybrid page never read.",
+   "refs": [
+    "lists:L915 r7-r8",
+    "lists:L956 r7",
+    "records:L849",
+    "lists:L1206 r17-r20",
+    "lists:L1179 r7",
+    "lists:L1477 r7"
+   ],
+   "lot_cars": {
+    "plain": 5,
+    "unc": 8
+   },
+   "risk_kinds": {
+    "window_from_other_page": [
+     "M37 2012 (8 cars)"
+    ],
+    "unexplained_mark": [
+     "Q70 2014 (2 cars)"
+    ],
+    "gas_only_wording": [
+     "Q70 2014"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:L:e21dcd2288",
+   "pn": [
+    "96302-EA000"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2012,
+     2012
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2005,
+     2011
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Frontier",
+     2012,
+     2012,
+     {
+      "built": "2010-08..2012-04"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-EA000 for both — option: fits some option packages; Frontier: built 08/2010-04/2012 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Xterra 2010: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row). Xterra 2005-2008 rows \"W. 2WD. S + W. 4WD. S. 6MT + W. BASECAMP\": a 4WD S takes this number only with the 6-speed manual (EA005 otherwise); no gate, 4WD automatic donors shown plain (Basecamp keeps it from being a contradiction). 2009 lists W. BASECAMP only. Frontier 2012 own page 08/2010-04/2012 matches the gate (2013 page says 08/2011-04/2012).",
+   "refs": [
+    "lists:L291 r13",
+    "lists:L218 r13",
+    "lists:L297 r13",
+    "lists:L359 r15",
+    "lists:L574 r15",
+    "lists:L507 r12",
+    "lists:L618 r23",
+    "lists:L685 r23"
+   ],
+   "lot_cars": {
+    "plain": 444,
+    "unc": 15
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Xterra 2010 (30 cars)"
+    ],
+    "drive_trans_tie_ungated": [
+     "Xterra 2005-2008 4WD automatic donors"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:L:c7e208257e",
+   "pn": [
+    "96302-1NC4A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #96302-1NC4A for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RISK",
+   "why": "As ed9a05396c (LH): Q40 2015 page also lists 96302-6WJ0A \"S\".",
+   "refs": [
+    "lists:L607 r13",
+    "lists:L728 r13",
+    "lists:L827 r13-r14"
+   ],
+   "lot_cars": {
+    "plain": 38
+   },
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Q40 2015 (10 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:R:c8a2062caf",
+   "pn": [
+    "96301-7S600"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Armada",
+     2005,
+     2005
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2005,
+     2005
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Armada",
+     2005,
+     2005,
+     {
+      "built": "2004-10..2005-08"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #96301-7S600 for both — option: fits some option packages; Armada: built 10/2004-08/2005 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Armada 2005 own page L271 r35 lists 7S600 undated; the gate window 10/2004-08/2005 is from the 2006 Armada page (L308 r33); the 2005 Titan page gives 10/2003-08/2005 for the same number. Titan 2005 plain supported by its own page.",
+   "refs": [
+    "lists:L271 r32-r36",
+    "lists:L308 r33",
+    "lists:L203 r52",
+    "lists:L185 r53"
+   ],
+   "lot_cars": {
+    "plain": 145,
+    "unc": 103
+   },
+   "risk_kinds": {
+    "window_from_other_page": [
+     "Armada 2005 (103 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FR:c6801d7fe5",
+   "pn": [
+    "80730-7B400"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2001,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2000
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2002,
+     2004
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #80730-7B400 for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Part is \"Motor Assy-Regulator, RH\" (category label \"Window regulator + motor\"). Frontier 2001-2004, Xterra 2000/2002/2003 own front-door pages list it undated. Xterra 2004: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row).",
+   "refs": [
+    "lists:L316 r18",
+    "lists:L333 r12",
+    "lists:L412 r10",
+    "lists:L439 r10",
+    "lists:L193 r13",
+    "lists:L176 r12",
+    "lists:L278 r9",
+    "records:L268"
+   ],
+   "lot_cars": {
+    "plain": 735
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Xterra 2004 (147 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:f05355bd0d",
+   "pn": [
+    "80731-1MA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2019
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2016
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2018,
+     2019
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2018,
+     {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80731-1MA0A for both — fits some configurations; Q70 2014-2018: gas only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Every claimed front-door page lists 80731-1MA0A undated (sole number). Note \"Q70 2014-2018: gas only\": only the Q70 Gas variant pages were read (year pages offer gas and hybrid, hybrid not read) and product L852 lists 6 Cyl 3.5L for Q70 2014-2019; product engine columns are unions across models, so the pages cannot settle the hybrid either way.",
+   "refs": [
+    "lists:L1182 r7",
+    "lists:L1251 r9",
+    "lists:L1209 r9",
+    "lists:L1497 r9",
+    "lists:L1370 r7",
+    "records:L852"
+   ],
+   "lot_cars": {
+    "plain": 58
+   },
+   "risk_kinds": {
+    "gas_only_wording": [
+     "Q70 2014-2018 (0 lot cars excluded)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FR:cf8463c0f8",
+   "pn": [
+    "80720-0E715"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1995,
+     1997
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1993-08.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80720-0E715 for both — fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Altima 1995: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row). Altima 1994 own row from 08/1993 (0E700 06/1992-08/1993) supports the gate. Every page lists 80700-0E710 in the same slot with no option text; the split is on the product pages (L1558 XE, L1559 GLE/GXE/SE).",
+   "refs": [
+    "lists:L550 r14-r16",
+    "lists:L629 r12-r13",
+    "records:L1558",
+    "records:L1559"
+   ],
+   "lot_cars": {
+    "plain": 49,
+    "unc": 12
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:95dcd6e903",
+   "pn": [
+    "82730-CV01B"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Cube",
+     2011,
+     2014
+    ],
+    [
+     "Nissan",
+     "Juke",
+     2016,
+     2016
+    ],
+    [
+     "Nissan",
+     "Leaf",
+     2011,
+     2012
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Juke",
+     2016,
+     2016,
+     {
+      "built": "2014-10..2015-03,2015-08..2016-02"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82730-CV01B for both — option: fits some option packages; Juke: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Rear LH motor. Cube 2011 03/2010-03/2015; Cube 2012-14, Leaf undated; Juke 2016 own row \"08/2015-02/2016,10/2014-03/2015\" equals the gate.",
+   "refs": [
+    "lists:L656 r13",
+    "lists:L742 r10",
+    "lists:L726 r9",
+    "lists:L735 r17-r19"
+   ],
+   "lot_cars": {
+    "plain": 110,
+    "unc": 13
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:ff6945906c",
+   "pn": [
+    "82731-1MA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2016,
+     2017
+    ],
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2017
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "Q70L",
+     2016,
+     2017,
+     {
+      "built": "2015-09..2017-04"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-1MA0A for both — fits some configurations; Q70L: built 09/2015-04/2017 only; verify the number on the part",
+   "verdict": "WRONG",
+   "why": "Lot car wap-STK039874 is listed as a 2017 QX80 but its VIN 5N1DL0MN0HC558063 decodes as a 2017 QX60, 3.5L 6-cyl, CUV. vpicMismatch only covers make/year, so the app shows it as a plain row for 82731-1MA0A, a number the pages list for the QX80 (5.6L VK56VD) and never for the QX60 (QX60 rear LH motor is 82731-3KG0A). Separately RISK: Q70L 2016 built 09/2015-04/2017 is not on its own page (L1359 r9 undated; window from the 2017/2018 Q70L pages).",
+   "refs": [
+    "lists:L1352 r12 (QX80 2017)",
+    "records:L577",
+    "vin_decodes 5N1DL0MN0HC558063",
+    "lists:L1359 r9",
+    "lists:L1503 r13"
+   ],
+   "lot_cars": {
+    "plain": 146,
+    "unc": 1
+   },
+   "risk_kinds": {
+    "wrong": [
+     "QX80 2017 decode QX60 (1 car, plain)"
+    ],
+    "window_from_other_page": [
+     "Q70L 2016 (1 car)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:5af5348a13",
+   "pn": [
+    "82730-1E400"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1993
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1993
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #82730-1E400 for both — fits some configurations; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Altima/Stanza 1993 rear RH motor 06/1992-08/1993 on own pages (D9000 from 08/1993).",
+   "refs": [
+    "1993 Altima rear page r15-r16",
+    "1993 Stanza rear page r15-r16"
+   ],
+   "lot_cars": {
+    "plain": 6
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:190575774f",
+   "pn": [
+    "82730-D9000"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1995,
+     1997
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1993-08.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82730-D9000 for both — fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Altima 1995: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row). Altima 1994 own row from 08/1993 supports the gate; 1996/97 and Stanza undated.",
+   "refs": [
+    "1994 Altima rear page r16",
+    "records:L1561"
+   ],
+   "lot_cars": {
+    "plain": 49,
+    "unc": 12
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:ffaa8ff11f",
+   "pn": [
+    "82720-1BA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2008,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2017
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #82720-1BA0A for both — fits some configurations; verify the number on the part",
+   "verdict": "RISK",
+   "why": "EX35 2008: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row) (year pages years:L15/L112). EX35 2009-2012, EX37 2013, QX50 2014-2017 rear pages list it undated, sole number.",
+   "refs": [
+    "records:L554",
+    "EX35 2009 rear page r9"
+   ],
+   "lot_cars": {
+    "plain": 107
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "EX35 2008 (48 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FR:600356f5ea",
+   "pn": [
+    "80720-1CA0B"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2010,
+     2012
+    ],
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2010,
+     2012
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2015,
+     2015
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX70",
+     2015,
+     2015,
+     {
+      "built": "2012-06..2015-03"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80720-1CA0B for both — fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "FX35 2011: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row). Windows for the same number disagree across pages: FX35/FX50 2009-2010 \"04/2009-06/2012\", QX70 2015 \"06/2012-03/2015\", QX70 2016 \"04/2014-03/2015\". QX70 2015 gate is its own row.",
+   "refs": [
+    "FX35 2010 front page r12-r13",
+    "QX70 2015 front page r12-r13",
+    "QX70 2016 front page r12"
+   ],
+   "lot_cars": {
+    "plain": 46,
+    "unc": 2
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "FX35 2011 (15 cars)"
+    ],
+    "window_disagrees_across_pages": [
+     "QX70 2015 (2 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FR:ecc50c6f8c",
+   "pn": [
+    "80720-JK00A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #80720-JK00A for both — fits some configurations; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "G25 2011/2012 and Q40 2015 front pages list 80720-JK00A undated, sole number in the slot.",
+   "refs": [
+    "G25 2011 front page r17",
+    "G25 2012 r13",
+    "Q40 2015 r13"
+   ],
+   "lot_cars": {
+    "plain": 38
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:cb406a69f9",
+   "pn": [
+    "82731-1MA0B"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "Q70",
+     2018,
+     2018
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2018,
+     2018
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2018,
+     2019
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "Q70",
+     2018,
+     2018,
+     {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2018,
+     2018,
+     {
+      "built": "2017-10.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-1MA0B for both — fits some configurations; Q70: gas only; QX80 2018: built from 10/2017 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Own rows support every gate (Q70/Q70L 2018 from 04/2017, QX80 2018 from 10/2017); RISK only for the note \"Q70: gas only\" (hybrid page unread). 0 lot cars.",
+   "refs": [
+    "Q70 2018 rear page r13-r14",
+    "QX80 2018 rear page r12-r13",
+    "records:L2424"
+   ],
+   "lot_cars": {},
+   "risk_kinds": {
+    "gas_only_wording": [
+     "Q70 2018"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:6201d377aa",
+   "pn": [
+    "82721-0E700"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1993
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1993
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #82721-0E700 for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Altima/Stanza 1993 rear LH regulator 06/1992-08/1993, GXE/GLE/SE (XE 82701-0E710).",
+   "refs": [
+    "1993 Altima rear page r17-r19",
+    "records:L4823"
+   ],
+   "lot_cars": {
+    "plain": 6
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:5524f9f44e",
+   "pn": [
+    "80721-AR000"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2003,
+     2004
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2004,
+     2004
+    ],
+    [
+     "Infiniti",
+     "Q45",
+     2002,
+     2005
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "FX35",
+     2003,
+     2003,
+     {
+      "built": "2002-11..2004-09"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80721-AR000 for both — fits some configurations; FX35 2003: built 11/2002-09/2004 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "FX35 2003 own page r11 undated; gate 11/2002-09/2004 borrowed from the FX35 2004/2005 pages (it covers MY2003, harmless). FX35 2004 ungated: own row 11/2002-09/2004 covers MY2004. Q45 2002-2005 undated; Q45 2006 page 01/2001-04/2006.",
+   "refs": [
+    "FX35 2003 front page r11",
+    "FX35 2004 front page r13-r14",
+    "Q45 2006 front page r9-r10"
+   ],
+   "lot_cars": {
+    "plain": 70,
+    "unc": 22
+   },
+   "risk_kinds": {
+    "window_from_other_page": [
+     "FX35 2003 (22 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:000ac2ae39",
+   "pn": [
+    "82731-4BA0A"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Murano",
+     2015,
+     2019
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2016,
+     2019
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Murano",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2019,
+     {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-4BA0A for both — fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Rogue 2016: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row) (year page years:L254 exists). Murano/Rogue rear pages list 82731-4BA0A undated. \"gas only\" note for Murano 2016-17 / Rogue 2017-19 with hybrid pages unread.",
+   "refs": [
+    "Rogue 2017 rear page r12",
+    "Murano 2016 rear page r10",
+    "records:L1291"
+   ],
+   "lot_cars": {
+    "plain": 435
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Rogue 2016 (191 cars)"
+    ],
+    "gas_only_wording": [
+     "Murano 2016-17, Rogue 2017-19"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:628ab6fea2",
+   "pn": [
+    "80731-AL511"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2003,
+     2008
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2003,
+     2008
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #80731-AL511 for both — fits some configurations; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "FX35/FX45 2003-2008 front pages list 80731-AL511 undated, sole motor number.",
+   "refs": [
+    "FX35 2003 front page r9",
+    "FX45 2008 front page r7"
+   ],
+   "lot_cars": {
+    "plain": 232
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:ed07457961",
+   "pn": [
+    "80731-EA005"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2005,
+     2019
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2005,
+     2015
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #80731-EA005 for both — fits some configurations; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Xterra 2010: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row). All other claimed years list 80731-EA005 undated, sole number.",
+   "refs": [
+    "Frontier 2005 front page r10",
+    "Xterra 2011 front page r5",
+    "records:L308"
+   ],
+   "lot_cars": {
+    "plain": 760,
+    "unc": 2
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Xterra 2010 (30 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:6c7c1b9c18",
+   "pn": [
+    "80731-1E400"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1997
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #80731-1E400 for both — fits some configurations; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Altima 1995: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row). Other years list 80731-1E400 undated.",
+   "refs": [
+    "records:L1554",
+    "1994 Altima front page r9"
+   ],
+   "lot_cars": {
+    "plain": 67
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FR:65198fbb3c",
+   "pn": [
+    "80700-0E710"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1997
+    ]
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #80700-0E710 for both — fits some configurations; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Altima 1995: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row). Pages list 80700-0E710 beside 0E700/0E715 with no option text; XE split only on product page L1558.",
+   "refs": [
+    "records:L1558",
+    "1994 Altima front page r14-r16"
+   ],
+   "lot_cars": {
+    "plain": 67
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 1,
+   "id": "oem:nissan:window-regulator:RR:693859d766",
+   "pn": [
+    "82720-0E715"
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1995
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1993-08..1996-07"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82720-0E715 for both — option: fits some option packages; Altima 1994: built 08/1993-07/1996 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Altima 1995: no list page of its own in raw (lists.jsonl has no record for this category/vehicle-year; for Altima 1995 a product record captured from that page holds only the one row). Altima 1994 own row 08/1993-07/1996 supports its gate; Stanza 1995 lists it undated.",
+   "refs": [
+    "lists:L550 r20-r22",
+    "lists:L818 r17-r18"
+   ],
+   "donor_lot_cars": {
+    "plain": 15
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 2,
+   "id": "oem:nissan:side-mirrors:R:dfdc9646f6",
+   "pn": [
+    "96301-2B500"
+   ],
+   "seeker": [
+    "Nissan",
+    "Altima",
+    1997
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1995
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1995,
+     1995,
+     {
+      "built": "1995-02.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #96301-2B500 for both — option: fits some option packages; Altima 1995: built from 02/1995 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Altima 1995: no list page; \"built from 02/1995\" is in product record L1551 captured from the 1995 Altima page, siblings not visible. Seeker Altima 1997 L512 r14.",
+   "refs": [
+    "records:L1551",
+    "lists:L627 r20-r21",
+    "lists:L512 r14"
+   ],
+   "donor_lot_cars": {
+    "unc": 15
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 3,
+   "id": "oem:nissan:window-regulator:FL:093b21daec",
+   "pn": [
+    "80721-EH10A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "M45",
+    2009
+   ],
+   "donor": [
+    "Infiniti",
+    "M35",
+    2009
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "M35",
+     2009,
+     2009,
+     {
+      "built": "2008-06..2009-03"
+     }
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2009,
+     2009,
+     {
+      "built": "2008-06..2009-03"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80721-EH10A for both — fits some configurations; built 06/2008-03/2009 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "M35/M45 2009 own rows 06/2008-03/2009 (EH100 to 06/2008, EH10B from 03/2009) match the gate.",
+   "refs": [
+    "lists:L647 r11-r13",
+    "lists:L1415 r11-r13"
+   ],
+   "donor_lot_cars": {
+    "unc": 19
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 4,
+   "id": "oem:nissan:side-mirrors:R:7579549082",
+   "pn": [
+    "96301-ZH10A"
+   ],
+   "seeker": [
+    "Nissan",
+    "Armada",
+    2013
+   ],
+   "donor": [
+    "Nissan",
+    "Titan",
+    2006
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Titan",
+     2006,
+     2006,
+     {
+      "built": "2005-08..2007-04"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #96301-ZH10A for both — option: fits some option packages; Titan: built 08/2005-04/2007 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Titan 2006 gate 08/2005-04/2007 is its own row, but the same \"*KC. SE + *CC. SE\" slot carries three numbers with the same window (ZC20A, ZH10A, ZH40E); the \"*\" mark is unexplained. Seeker Armada 2013 W. SE/SV.",
+   "refs": [
+    "lists:L185 r57,r59,r60",
+    "lists:L767 r31-r32"
+   ],
+   "donor_lot_cars": {
+    "unc": 152
+   },
+   "risk_kinds": {
+    "unexplained_mark": [
+     "Titan 2006 (152)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 5,
+   "id": "oem:nissan:window-regulator:RR:0dd2e4b132",
+   "pn": [
+    "82730-4BA0A"
+   ],
+   "seeker": [
+    "Nissan",
+    "Rogue",
+    2017
+   ],
+   "donor": [
+    "Nissan",
+    "Rogue",
+    2016
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Murano",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2019,
+     {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82730-4BA0A for both — fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Rogue 2016: no list page (year page years:L254). Seeker Rogue 2017 rear page r13; \"gas only\" wording.",
+   "refs": [
+    "records:L1292",
+    "lists:L632 r13"
+   ],
+   "donor_lot_cars": {
+    "plain": 191
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Rogue 2016 (191)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 6,
+   "id": "oem:nissan:side-mirrors:R:e241aca37a",
+   "pn": [
+    "J6301-1E400"
+   ],
+   "seeker": [
+    "Nissan",
+    "Altima",
+    1993
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1994
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #J6301-1E400 for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor Altima 1994 L548 r18 and seeker Altima 1993 L671 r18 list J6301-1E400 GLE.",
+   "refs": [
+    "lists:L548 r18",
+    "lists:L671 r18"
+   ],
+   "donor_lot_cars": {
+    "plain": 12
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 7,
+   "id": "oem:nissan:window-regulator:RR:d2ea825926",
+   "pn": [
+    "82720-1U600"
+   ],
+   "seeker": [
+    "Nissan",
+    "Juke",
+    2015
+   ],
+   "donor": [
+    "Nissan",
+    "Leaf",
+    2011
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Juke",
+     2015,
+     2015,
+     {
+      "built": "2011-09..2015-03,2015-09..2016-02"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82720-1U600 for both — fits some configurations; Juke: built 09/2011-03/2015, 09/2015-02/2016 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor Leaf 2011 rear page r12 undated; seeker Juke 2015 own row 09/2011-03/2015,09/2015-02/2016 matches its gate.",
+   "refs": [
+    "lists:L726 r12",
+    "lists:L710 r21-r22"
+   ],
+   "donor_lot_cars": {
+    "plain": 14
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 8,
+   "id": "oem:nissan:gauge-cluster:C:2444c15328",
+   "pn": [
+    "24820-1MA5B"
+   ],
+   "seeker": [
+    "Infiniti",
+    "Q70",
+    2014
+   ],
+   "donor": [
+    "Infiniti",
+    "M37",
+    2012
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014,
+     {
+      "eng": [
+       "3.7L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #24820-1MA5B for both — option: fits some option packages; Q70: 3.7L, gas only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor M37 2012 L910 r7 (option, 1MA2B replaced by 1MA5B). Seeker Q70 2014 L1201 r7 undated beside 24820-4AM1B \"SEDAN. VQ37VHR. (PREMIUM+ SPORTPRE) + SEDAN. BASE\" for the same sedans, M-era codes unexplained; \"gas only\" wording.",
+   "refs": [
+    "lists:L910 r3-r9",
+    "lists:L1201 r7,r12"
+   ],
+   "donor_lot_cars": {
+    "plain": 8
+   },
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Q70 2014 seeker"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 9,
+   "id": "oem:nissan:window-regulator:FL:acc05f1183",
+   "pn": [
+    "80721-9BF0A"
+   ],
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2016
+   ],
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2014
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Xterra",
+     2014,
+     2014,
+     {
+      "built": "2013-10.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80721-9BF0A for both — option: fits some option packages; Xterra 2014: built from 10/2013 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor Frontier 2014 L691 r12 05/2013-09/2016 covers MY2014; seeker 2016 L756 r12; S trims take EA010 (option note).",
+   "refs": [
+    "lists:L691 r11-r13",
+    "lists:L756 r12-r13"
+   ],
+   "donor_lot_cars": {
+    "plain": 14
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 10,
+   "id": "oem:nissan:gauge-cluster:C:d37db4856a",
+   "pn": [
+    "24820-8B703"
+   ],
+   "seeker": [
+    "Nissan",
+    "Sentra",
+    1999
+   ],
+   "donor": [
+    "Nissan",
+    "200SX",
+    1997
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "200SX",
+     1997,
+     1997,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Nissan",
+     "200SX",
+     1999,
+     1999,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     1999,
+     1999,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #24820-8B703 for both — option: fits some option packages; 2.0L only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor 200SX 1997 L790 r41 \"4S. SR20DE + C. SR20DE\", but the same page lists 24820-89Y06 \"C. SR20DE\" undated for the coupe SR20DE; seeker Sentra 1999 L749 r37.",
+   "refs": [
+    "lists:L790 r39,r41",
+    "lists:L749 r37"
+   ],
+   "donor_lot_cars": {
+    "plain": 2,
+    "exc": 5
+   },
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "200SX 1997 (2)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 11,
+   "id": "oem:nissan:climate-control:C:8d55de172f",
+   "pn": [
+    "27510-8Z310"
+   ],
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2002
+   ],
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2002
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2002,
+     {
+      "cab": "crew cab",
+      "eng": [
+       "3.3L"
+      ]
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #27510-8Z310 for both — option: fits some option packages; Frontier: crew cab only; Frontier: 3.3L only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Frontier 2002 L329 r12 07/2001-09/2002 \"*CC. SB. SC + *CC. XB. SC, CC. SB. XE + CC. XB. XE\"; cab gate depends on the unexplained \"CC.\"; seeker Xterra 2002 L171 r12.",
+   "refs": [
+    "lists:L329 r12",
+    "lists:L171 r12"
+   ],
+   "donor_lot_cars": {
+    "unc": 51,
+    "exc": 19
+   },
+   "risk_kinds": {
+    "unexplained_mark": [
+     "Frontier 2002 (51)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 12,
+   "id": "oem:nissan:window-regulator:FR:78088747fe",
+   "pn": [
+    "80720-AR000"
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX35",
+    2003
+   ],
+   "donor": [
+    "Infiniti",
+    "Q45",
+    2005
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "FX35",
+     2003,
+     2004,
+     {
+      "built": "2002-11..2004-07"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80720-AR000 for both — fits some configurations; FX35: built 11/2002-07/2004 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Q45 2005 L1353 r14 plain (Q45 2006 page 01/2001-04/2006). Seeker FX35 2003: own page L595 r12 undated, seeker line \"built 11/2002-07/2004\" borrowed from the 2004 page L489 r15.",
+   "refs": [
+    "lists:L1353 r14",
+    "lists:L1517 r11",
+    "lists:L595 r12",
+    "lists:L489 r15-r16"
+   ],
+   "donor_lot_cars": {
+    "plain": 5
+   },
+   "risk_kinds": {
+    "window_from_other_page": [
+     "FX35 2003 seeker"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 13,
+   "id": "oem:nissan:side-mirrors:L:3a7d2918b4",
+   "pn": [
+    "96302-2B500"
+   ],
+   "seeker": [
+    "Nissan",
+    "Altima",
+    1995
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1995,
+     1995,
+     {
+      "built": "1995-02.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-2B500 for both — option: fits some option packages; Altima 1995: built from 02/1995 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Seeker Altima 1995: no list page (window from product L1547). Donor Altima 1996 L627 r17 from 02/1995 plain.",
+   "refs": [
+    "records:L1547",
+    "lists:L627 r16-r17"
+   ],
+   "donor_lot_cars": {
+    "plain": 9
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 seeker"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 14,
+   "id": "oem:nissan:climate-control:C:b6eb30db5d",
+   "pn": [
+    "27515-2B001"
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1994
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #27515-2B001 for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Altima 1994 L546: 27515-2B001 r20 beside 27515-1E400 r18 and 27515-2B000 r19 for the same no-A/C XE/GXE seats, all undated; seeker Stanza 1995 L814 r15-r16 likewise.",
+   "refs": [
+    "lists:L546 r18-r20",
+    "lists:L814 r15-r16"
+   ],
+   "donor_lot_cars": {
+    "plain": 12
+   },
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Altima 1994 (12)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 15,
+   "id": "oem:nissan:window-regulator:FL:e1dbcc78e0",
+   "pn": [
+    "80721-0E715"
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1997
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1993-08.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80721-0E715 for both — fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor Altima 1996 and seeker Stanza 1997 front pages r11 list 80721-0E715 (XE 80701-0E710 split on product page).",
+   "refs": [
+    "1996 Altima front page r10-r11",
+    "1997 Stanza front page r10-r11",
+    "records:L1557"
+   ],
+   "donor_lot_cars": {
+    "plain": 9
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 16,
+   "id": "oem:nissan:window-regulator:RR:300fc2f362",
+   "pn": [
+    "82720-0E717"
+   ],
+   "seeker": [
+    "Nissan",
+    "Altima",
+    1997
+   ],
+   "donor": [
+    "Nissan",
+    "Stanza",
+    1997
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1997,
+     1997,
+     {
+      "built": "1996-07.."
+     }
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1997,
+     1997,
+     {
+      "built": "1996-07.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82720-0E717 for both — option: fits some option packages; built from 07/1996 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Altima/Stanza 1997 own rows 82720-0E717 from 07/1996 match the gate.",
+   "refs": [
+    "1997 Altima page r19-r20",
+    "1997 Stanza page r19-r20"
+   ],
+   "donor_lot_cars": {},
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 17,
+   "id": "oem:nissan:window-regulator:FL:abe0045c82",
+   "pn": [
+    "80730-1LE0A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX56",
+    2011
+   ],
+   "donor": [
+    "Infiniti",
+    "QX80",
+    2014
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014,
+     {
+      "built": "2010-04..2014-07"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80730-1LE0A for both — fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor QX80 2014 own row 04/2010-07/2014 (1LE0B from 07/2014) matches; seeker QX56 2011 r7.",
+   "refs": [
+    "QX80 2014 front page r7-r8",
+    "QX56 2011 front page r7"
+   ],
+   "donor_lot_cars": {
+    "unc": 14
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 18,
+   "id": "oem:nissan:climate-control:C:c87195cb31",
+   "pn": [
+    "27515-7Z100"
+   ],
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    1999
+   ],
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2001
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2000,
+     {
+      "built": "1999-05..1999-11"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #27515-7Z100 for both — option: fits some option packages; Xterra: built 05/1999-11/1999 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Frontier 2001 L311 r18 27515-7Z100 \"T + KC + CC\" beside 27515-7Z401 \"KC. KA24DE + KC. VG33E. XE, T + KC. KA24DE + ...\" and 3S510 for overlapping cab sets, undated; the pages do not say which applies. Seeker Frontier 1999 L529 r13.",
+   "refs": [
+    "lists:L311 r17-r19",
+    "lists:L529 r11-r13"
+   ],
+   "donor_lot_cars": {
+    "plain": 52
+   },
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Frontier 2001 (52)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 19,
+   "id": "oem:nissan:window-regulator:FR:864a4dfc29",
+   "pn": [
+    "80720-EA010"
+   ],
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2011
+   ],
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2005
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #80720-EA010 for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Frontier 2005 row \"CC. SE, KC. QR25DE + KC. SE\" while 80720-EA000 lists \"*CC. SE\" for the same cab/trim; the \"*\" is unexplained. Seeker Frontier 2011 likewise (EA000, ZL90A \"*CC. SE\").",
+   "refs": [
+    "2005 Frontier front page r14-r15",
+    "2011 Frontier front page r14-r16"
+   ],
+   "donor_lot_cars": {
+    "plain": 58
+   },
+   "risk_kinds": {
+    "unexplained_mark": [
+     "Frontier 2005 (58)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 20,
+   "id": "oem:nissan:window-regulator:RL:e6dd47a01e",
+   "pn": [
+    "82721-0E717"
+   ],
+   "seeker": [
+    "Nissan",
+    "Altima",
+    1997
+   ],
+   "donor": [
+    "Nissan",
+    "Stanza",
+    1997
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #82721-0E717 for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Altima/Stanza 1997 own rows 82721-0E717 from 07/1996 cover MY1997 under the assumed span (ungated).",
+   "refs": [
+    "1997 Altima rear page r16-r17",
+    "1997 Stanza rear page r16-r17"
+   ],
+   "donor_lot_cars": {},
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 21,
+   "id": "oem:nissan:window-regulator:FL:6ffc5a8f41",
+   "pn": [
+    "80731-7B400"
+   ],
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2003
+   ],
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2001
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #80731-7B400 for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor Frontier 2001 front page r17 and seeker Xterra 2003 r8 list 80731-7B400 undated, sole number.",
+   "refs": [
+    "lists:L316 r17",
+    "lists:L278 r8"
+   ],
+   "donor_lot_cars": {
+    "plain": 52
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 22,
+   "id": "oem:nissan:window-regulator:FL:df8b845bbf",
+   "pn": [
+    "80721-EH100"
+   ],
+   "seeker": [
+    "Infiniti",
+    "M45",
+    2008
+   ],
+   "donor": [
+    "Infiniti",
+    "M35",
+    2008
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80721-EH100 for both — fits some configurations; built 12/2004-06/2008 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "M35/M45 2008 own rows 12/2004-06/2008 (EH10A from 06/2008) match the gate.",
+   "refs": [
+    "2008 M35 front page r11-r12",
+    "2008 M45 front page r11-r12"
+   ],
+   "donor_lot_cars": {
+    "unc": 35
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 23,
+   "id": "oem:nissan:window-regulator:FL:fe9aac0699",
+   "pn": [
+    "80730-4BA1A"
+   ],
+   "seeker": [
+    "Nissan",
+    "Murano",
+    2016
+   ],
+   "donor": [
+    "Nissan",
+    "Murano",
+    2019
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Murano",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2019,
+     {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80730-4BA1A for both — fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Murano 2019 front page r12/r13 plain; seeker Murano 2016 sees \"with gas only\" while the Murano hybrid page was not read.",
+   "refs": [
+    "2019 Murano front page r12-r13",
+    "2016 Murano front page r10"
+   ],
+   "donor_lot_cars": {
+    "plain": 2
+   },
+   "risk_kinds": {
+    "gas_only_wording": [
+     "Murano 2016 seeker"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 24,
+   "id": "oem:nissan:window-regulator:RL:9c3158fe6c",
+   "pn": [
+    "82731-3KG0A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX60",
+    2018
+   ],
+   "donor": [
+    "Infiniti",
+    "QX60",
+    2015
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX60",
+     2014,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-3KG0A for both — fits some configurations; QX60 2014-2017: gas only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor QX60 2015 rear page r8 plain (1 hybrid 2.5L excluded); \"QX60 2014-2017: gas only\" with hybrid pages unread and product L385 listing 2.5L QR25DER for QX60 2014-2020. Seeker QX60 2018 r10.",
+   "refs": [
+    "QX60 2015 rear page r8",
+    "QX60 2018 rear page r10",
+    "records:L385"
+   ],
+   "donor_lot_cars": {
+    "plain": 56,
+    "exc": 1
+   },
+   "risk_kinds": {
+    "gas_only_wording": [
+     "QX60 2015 (1 excluded)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 25,
+   "id": "oem:nissan:side-mirrors:R:cd708948c6",
+   "pn": [
+    "96301-EV50A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "M35",
+    2008
+   ],
+   "donor": [
+    "Infiniti",
+    "M35",
+    2009
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2008,
+     {
+      "built": "2008-01.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #96301-EV50A for both — fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor M35 2009 L644 r8 from 01/2008 covers MY2009; seeker M35 2008 own row from 01/2008 matches its gate.",
+   "refs": [
+    "lists:L644 r7-r8",
+    "lists:L552 r9-r10"
+   ],
+   "donor_lot_cars": {
+    "plain": 19
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 26,
+   "id": "oem:nissan:side-mirrors:L:d03cb29dad",
+   "pn": [
+    "96302-1CA0A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX35",
+    2012
+   ],
+   "donor": [
+    "Infiniti",
+    "QX70",
+    2016
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #96302-1CA0A for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor QX70 2016 L1225 r5 \"*W. PREMIUM, W. PREMIUM\" beside 96302-3EV0B \"*W. PREMIUM\": the \"*\" variant has two numbers, mark unexplained. Seeker FX35 2012 L1050 r7 vs 1CA0B r6 split by \"*\"; FX50 claim rests on reading \"+\" in \"W. VQ35HR. PREMIUM + W. VK50VE\".",
+   "refs": [
+    "lists:L1225 r5-r7",
+    "lists:L1050 r6-r9",
+    "lists:L1065 r5-r6"
+   ],
+   "donor_lot_cars": {
+    "plain": 3
+   },
+   "risk_kinds": {
+    "unexplained_mark": [
+     "QX70 2016 (3)",
+     "FX50 2009 (4)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 27,
+   "id": "oem:nissan:window-regulator:FL:35d6c18452",
+   "pn": [
+    "80721-CL70B"
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX35",
+    2007
+   ],
+   "donor": [
+    "Infiniti",
+    "FX45",
+    2008
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "FX35",
+     2007,
+     2007,
+     {
+      "built": "2006-06.."
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80721-CL70B for both — fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor FX45 2008 r9 undated, CL70B from 06/2006 on the 2007 pages; seeker FX35 2007 own row from 06/2006 matches.",
+   "refs": [
+    "FX45 2008 front page r9",
+    "FX35 2007 front page r9-r10"
+   ],
+   "donor_lot_cars": {
+    "plain": 1
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 28,
+   "id": "oem:nissan:window-regulator:RL:a1a9b342d1",
+   "pn": [
+    "82731-D9000"
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1995
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1993-08..1996-02"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-D9000 for both — fits some configurations; Altima 1994: built 08/1993-02/1996 only; verify the number on the part",
+   "verdict": "RISK",
+   "why": "Donor Altima 1995: no list page. Seeker Stanza 1995 r13 undated.",
+   "refs": [
+    "records:L1560",
+    "1995 Stanza rear page r13"
+   ],
+   "donor_lot_cars": {
+    "plain": 15
+   },
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15)"
+    ]
+   }
+  },
+  {
+   "kind": "pair",
+   "n": 29,
+   "id": "oem:nissan:window-regulator:RL:535fbed986",
+   "pn": [
+    "80731-JK60C"
+   ],
+   "seeker": [
+    "Infiniti",
+    "Q40",
+    2015
+   ],
+   "donor": [
+    "Infiniti",
+    "G25",
+    2012
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "G25",
+     2012,
+     2012,
+     {
+      "built": "2011-06..2014-06"
+     }
+    ]
+   ],
+   "note": "Nissan catalog lists #80731-JK60C for both — option: fits some option packages; G25: built 06/2011-06/2014 only; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor G25 2012 rear page L732 r12 06/2011-06/2014 matches the gate (Leather takes JK00C, option note); seeker Q40 2015 L831 r8. Part is listed on the rear-door page as \"Motor Assy-Regulator, LH\", consistent with RL.",
+   "refs": [
+    "lists:L732 r9-r12",
+    "lists:L831 r8"
+   ],
+   "donor_lot_cars": {
+    "unc": 12
+   },
+   "risk_kinds": {}
+  },
+  {
+   "kind": "pair",
+   "n": 30,
+   "id": "oem:nissan:side-mirrors:R:f606f17c72",
+   "pn": [
+    "96301-1NC3A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "G25",
+    2012
+   ],
+   "donor": [
+    "Infiniti",
+    "G25",
+    2011
+   ],
+   "gates": null,
+   "note": "Nissan catalog lists #96301-1NC3A for both — option: fits some option packages; verify the number on the part",
+   "verdict": "RIGHT",
+   "why": "Donor G25 2011 L607 r16 and seeker G25 2012 L728 r16 list 96301-1NC3A S. JOURNEY.",
+   "refs": [
+    "lists:L607 r16",
+    "lists:L728 r16"
+   ],
+   "donor_lot_cars": {
+    "plain": 16
+   },
+   "risk_kinds": {}
+  }
+ ],
+ "census": {
+  "same_flaw_as_wrong": {
+   "what": "plain (or if-equipped) donors whose VIN decode names a model the group does not claim, which vpicMismatch (make/year only) does not catch; over all 153 shippable groups, replayed lot",
+   "result": "15 groups, 40 plain rows + 3 if-equipped rows, 18 distinct cars",
+   "wrong_class": "wap-STK039874 (listed QX80 2017, VIN 5N1DL0MN0HC558063 decodes QX60 2017 3.5L CUV) is a plain row in 4 groups: window-regulator RL ff6945906c (sampled), RL 613aa019d9, RR 70c55ce760, RR b1b62f2f6b",
+   "risk_class": "FX35 2011 cars whose VIN decodes model FX50 but engine 3.5L (15 cars, side-mirrors L d03cb29dad and R adc1c9817d: the decode contradicts itself); EX37 2013 nvpap-h064356 decodes EX35 2013 with 3.7L (vPIC naming; same part claimed for both, 6 groups, not a contradiction); Titan 2006 foss-jacksonville-stk014038 decodes a Yamaha (vpicMismatch set, shown if-equipped with the mismatch line, handled)"
+  },
+  "missing_own_page": "61 claimed vehicle-years in 61 groups have no list row of their own for the number (all are pages never crawled, none is a page that omits the number): Altima 1995 24, Xterra 2004 6, QX60 2014 6, FX35 2011 4, I30 2000 4, Xterra 2010 4, M35 2006 3, Rogue 2016 3, EX35 2008 2, EX35 2012 2, M37 2011 2, Frontier 2000 1; 3029 lot rows (plain + if-equipped)",
+  "built_window_not_on_own_row": "24 built gates in 24 groups whose window is not printed on that vehicle-year's own list row (own row undated, or own page missing): e.g. Armada 2005 (3 groups, 103 cars each), M35 2006 gauge e4748e0063 (86), Frontier 2002 (2 groups, 70 each), M37 2011/2012 (4 groups), FX35 2003 (2), Q70L 2015/2016 (4), Altima 1995 (4, window only in a product record), Xterra 2013 (2), Frontier 2012 (2); 743 lot rows",
+  "gas_only_wording": "56 gated vehicle-years in 22 groups carry fuel \"gas\" (Q70, QX60, Murano, Rogue) while only the gas/base variant pages were read; 1413 lot rows in those vehicle-years (no gas donor is excluded by it; hybrid donors are)"
+ }
+}

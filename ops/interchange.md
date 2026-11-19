@@ -5804,3 +5804,33 @@ The app would need to show the line on the donor row; that is an app change.
 - **G05 class:** decide whether "two same-option numbers, both undated" should
   be held. The census sizes it per make in `round7_census_2026-11-19.json`
   (class x).
+
+
+## 2026-11-19 — Nissan/Infiniti candidate, independent verify 1119h (blind)
+
+Branch `interchange/verify-nissan-1119h` (from main 084c178d). Verdicts: `scraper/oem_fitment/groups/_report/nissan_verify_2026-11-19h.json`.
+Written without reading this file, hub.md, CURATION_SPEC, earlier reports, curation_tests, pf_guards_unit or the policy/curate rule comments.
+
+**Result: FAIL — 1 WRONG.** Groups 7 RIGHT / 1 WRONG / 22 RISK; pairs 14 RIGHT / 0 WRONG / 16 RISK.
+
+Pins: candidate 084c178d; raw oem-raw 57e8b5b9 (the six nissan/infiniti files match the candidate's sha256); lot from main a85c654 (inventory_live 1a9cfa73…, vin_decodes 1357625b…, vehicle_extras 6ff3d44b…; 338,616 cars). Payload rows from `junkyard_scraper._oem_gated_apps`; replay with a copy of `audit11_4/lot_replay.mjs`, which runs the app's OEM-GATE/AM-GATE code extracted verbatim (the copy only also records the warning text). Draw: own script, seed 15841119, 30 groups by largest remainder (WR 18, mirrors 8, climate 3, gauge 1) + 30 pairs. Build span assumed: MY N = 08/(N-1)–07/N; no verdict moves at ±1 month.
+
+WRONG:
+- window-regulator RL ff6945906c, 82731-1MA0A (rear LH motor), QX80 2017: lot car wap-STK039874 is listed as a QX80, but its VIN 5N1DL0MN0HC558063 decodes as a 2017 QX60, 3.5L, CUV. `vpicMismatch` only checks make and year, so the app shows it as a plain row. The pages list this number for the QX80 5.6L only, and the QX60's motor is 82731-3KG0A. 1 lot car. The same car is also a plain row in RL 613aa019d9, RR 70c55ce760 and RR b1b62f2f6b.
+
+RISK, by kind:
+- A claimed vehicle-year that has no list page of its own (pages never crawled): Altima 1995 (24 groups across the candidate), Xterra 2004/2010, Rogue 2016, FX35 2011, EX35 2008, M37 2011, QX60 2014 and others. Census: 61 vehicle-years in 61 groups, 3029 lot rows.
+- A built window that is not on the vehicle-year's own row, taken from another model-year page instead: Armada 2005 (10/2004-08/2005 comes from the 2006 page, while the Titan 2005 page says 10/2003), M37 2012, FX35 2003, Q70L 2016. Census: 24 gates in 24 groups, 743 lot rows.
+- Same-option sibling numbers with no dates, where the pages do not say which applies: Q40 2015 mirrors (6WJ0A "S"), 200SX/Sentra clusters (8B700, 8Z002, 89Y06), Titan 2006 SE mirrors (3 numbers in one window), Frontier 2001 climate, Altima 1994 no-A/C controller, Q70 2014 cluster.
+- Unexplained marks that a gate or claim depends on: "CC." read as crew cab in the climate cab gates (warning says "listed for crew cab"), the "*" prefixes (Frontier EA000/EA010, QX70 3EV0B/1CA0A), and "+" in FX50 "W. VQ35HR. PREMIUM + W. VK50VE".
+- "gas only" notes on Q70, QX60, Murano and Rogue, although the hybrid variant pages were never read. Product engine columns list the hybrid engine, but those columns are unions across models, so the pages cannot settle it. 56 vehicle-years in 22 groups.
+- An option text that ties the number to drive and transmission with no gate: Xterra 2005-08 mirror EA000, "W. 4WD. S. 6MT". 4WD automatic donors are shown as plain rows.
+
+Suggestions (owner decides):
+1. Extend `vpicMismatch`, or add an OEM-gate check, so a VIN decode naming another model than the listing also stops a plain row.
+2. Re-crawl the missing pages: Altima 1995, Xterra 2004 (its year page crawled only wiper/knuckle/strut), Xterra 2010, Rogue 2016 and the others above. Until then, hold claims for vehicle-years without their own page, or phrase them "checked on neighbouring years".
+3. Take a built window only from the vehicle-year's own row. Where the own row is undated, either ship without a window or say "listed with this window on the YYYY page".
+4. Read the hybrid variant pages, or reword "gas only" as "checked on the gas-model pages".
+5. Treat several undated numbers in one option slot as "if equipped".
+
+Checker outputs only: the JSON above and this section. No rule, policy, group, payload, app or test file was changed.
