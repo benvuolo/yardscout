@@ -1,0 +1,4578 @@
+{
+ "_doc": "Cars whose VIN is hand-sorted as another vehicle (scraper/vin_model_names.json, 'different') re-matched on the VIN's model (junkyard_scraper._vin_rematch_model). before = parts list matched on the listing (current code; same VIN model year as the scan uses), after = matched on the VIN model; ids are part names. Built offline from the committed lot, no scan.",
+ "lot": "b22c3640",
+ "scrapedAt": "2026-11-19T14:58:12Z",
+ "totals": {
+  "rematched cars": 120,
+  "lists changed": 112,
+  "rows before": 889,
+  "rows after": 838,
+  "rows added": 323,
+  "rows dropped": 374,
+  "cars that gain a list (had none)": 14,
+  "cars that lose every row": 6,
+  "lists unchanged": 8
+ },
+ "cars": [
+  {
+   "key": "1G4HD57248U150821",
+   "id": "rgpickapart-anthony-stk64547",
+   "yard": "RG Pick-a-Part - Anthony",
+   "listed": "2008 Buick LeSabre",
+   "matchedOn": "2008 Buick Lucerne",
+   "flagAtLot": "VIN decodes as Buick Lucerne (listed LeSabre)",
+   "flagNow": "VIN decodes as Buick Lucerne (listed LeSabre)",
+   "before": [],
+   "after": [
+    "Headlights (clear pair)",
+    "Side Mirrors (heated, pair)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Sunroof Glass + Motor",
+    "Leather Heated Seats (CXL/CXS, pair)",
+    "Harman Kardon Amp + Speakers",
+    "17\"/18\" Alloy Wheels (set of 4, straight)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "Headlights (clear pair)",
+    "Side Mirrors (heated, pair)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Sunroof Glass + Motor",
+    "Leather Heated Seats (CXL/CXS, pair)",
+    "Harman Kardon Amp + Speakers",
+    "17\"/18\" Alloy Wheels (set of 4, straight)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "Sunroof Glass + Motor",
+    "Leather Heated Seats (CXL/CXS, pair)",
+    "Harman Kardon Amp + Speakers",
+    "17\"/18\" Alloy Wheels (set of 4, straight)"
+   ]
+  },
+  {
+   "key": "1G4GD5G35CF192111",
+   "id": "fenix-213084366",
+   "yard": "Fenix U-Pull - East Syracuse",
+   "listed": "2012 Buick Lucerne",
+   "matchedOn": "2012 Buick LaCrosse",
+   "flagAtLot": "VIN decodes as Buick LaCrosse (listed Lucerne)",
+   "flagNow": "VIN decodes as Buick LaCrosse (listed Lucerne)",
+   "before": [],
+   "after": [
+    "OEM HID/LED Headlights",
+    "Side Mirrors (heated, pair)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Sunroof Glass + Motor",
+    "Leather Power Driver Seat (CXL/CXS)",
+    "17\"/18\" Alloy Wheels (set of 4, straight)",
+    "Harman Kardon Amp + Speakers",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM HID/LED Headlights",
+    "Side Mirrors (heated, pair)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Sunroof Glass + Motor",
+    "Leather Power Driver Seat (CXL/CXS)",
+    "17\"/18\" Alloy Wheels (set of 4, straight)",
+    "Harman Kardon Amp + Speakers",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "Sunroof Glass + Motor",
+    "Leather Power Driver Seat (CXL/CXS)",
+    "17\"/18\" Alloy Wheels (set of 4, straight)",
+    "Harman Kardon Amp + Speakers"
+   ]
+  },
+  {
+   "key": "5N1DL0MN0HC558063",
+   "id": "wap-STK039874",
+   "yard": "Wrench-A-Part - Holland",
+   "listed": "2017 Infiniti QX80",
+   "matchedOn": "2017 Infiniti QX60",
+   "flagAtLot": "VIN decodes as Infiniti QX60 (listed QX80)",
+   "flagNow": "VIN decodes as Infiniti QX60 (listed QX80)",
+   "before": [
+    "3rd Row Seat",
+    "Bose Amp + Speakers",
+    "Power Liftgate Motor",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Sunroof Glass + Motor",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Sunroof Glass + Motor",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [
+    "3rd Row Seat",
+    "Bose Amp + Speakers",
+    "Power Liftgate Motor"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "4S3BH806017631151",
+   "id": "pns-stk099544",
+   "yard": "Pull-N-Save - Phoenix South",
+   "listed": "2001 Subaru Forester",
+   "matchedOn": "2001 Subaru Legacy",
+   "flagAtLot": "VIN decodes as Subaru Legacy (listed Forester)",
+   "flagNow": "VIN decodes as Subaru Legacy (listed Forester)",
+   "before": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Headlights (clear, non-hazed)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Rear Differential (match final-drive ratio)"
+   ],
+   "added": [
+    "Headlights (clear, non-hazed)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Rear Differential (match final-drive ratio)"
+   ],
+   "dropped": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "afterIfEquipped": [
+    "A/C Compressor (clutch spins free)"
+   ]
+  },
+  {
+   "key": "4S3BH896317657438",
+   "id": "pns-stk080523",
+   "yard": "Pull-N-Save - Phoenix North",
+   "listed": "2001 Subaru Forester",
+   "matchedOn": "2001 Subaru Legacy",
+   "flagAtLot": "VIN decodes as Subaru Legacy (listed Forester)",
+   "flagNow": "VIN decodes as Subaru Legacy (listed Forester)",
+   "before": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Headlights (clear, non-hazed)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Rear Differential (match final-drive ratio)"
+   ],
+   "added": [
+    "Headlights (clear, non-hazed)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Rear Differential (match final-drive ratio)"
+   ],
+   "dropped": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "afterIfEquipped": [
+    "A/C Compressor (clutch spins free)"
+   ]
+  },
+  {
+   "key": "4S3BH675437618888",
+   "id": "pns-stk100006",
+   "yard": "Pull-N-Save - Phoenix South",
+   "listed": "2003 Subaru Forester",
+   "matchedOn": "2003 Subaru Legacy",
+   "flagAtLot": "VIN decodes as Subaru Legacy (listed Forester)",
+   "flagNow": "VIN decodes as Subaru Legacy (listed Forester)",
+   "before": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Headlights (clear, non-hazed)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Rear Differential (match final-drive ratio)"
+   ],
+   "added": [
+    "Headlights (clear, non-hazed)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Rear Differential (match final-drive ratio)"
+   ],
+   "dropped": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "afterIfEquipped": [
+    "A/C Compressor (clutch spins free)"
+   ]
+  },
+  {
+   "key": "5LMTJ3DH2GUJ21717",
+   "id": "wilberts-stk92238",
+   "yard": "Wilbert's U-Pull-It - Rochester",
+   "listed": "2016 Lincoln MKZ",
+   "matchedOn": "2016 Lincoln MKC",
+   "flagAtLot": "VIN decodes as Lincoln MKC (listed MKZ)",
+   "flagNow": "VIN decodes as Lincoln MKC (listed MKZ)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "AWD Rear Differential / Transfer Unit",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "AWD Rear Differential / Transfer Unit",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "2C4RDGBG6CR183882",
+   "id": "pns-stk080019",
+   "yard": "Pull-N-Save - Phoenix North",
+   "listed": "2012 Dodge Caliber",
+   "matchedOn": "2012 Dodge Grand Caravan",
+   "flagAtLot": "VIN decodes as Dodge Grand Caravan (listed Caliber)",
+   "flagNow": "VIN decodes as Dodge Grand Caravan (listed Caliber)",
+   "before": [
+    "Headlights (clear pair)"
+   ],
+   "after": [
+    "Power Sliding Door Motor",
+    "Power Sliding Door Control Module",
+    "Stow-N-Go 2nd Row Seat (each)",
+    "Stow-N-Go 3rd Row Seat",
+    "Rear Entertainment Screen + DVD",
+    "Power Sliding Door Cable/Track",
+    "Uconnect Touchscreen Head Unit",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch"
+   ],
+   "added": [
+    "Power Sliding Door Motor",
+    "Power Sliding Door Control Module",
+    "Stow-N-Go 2nd Row Seat (each)",
+    "Stow-N-Go 3rd Row Seat",
+    "Rear Entertainment Screen + DVD",
+    "Power Sliding Door Cable/Track",
+    "Uconnect Touchscreen Head Unit",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch"
+   ],
+   "dropped": [
+    "Headlights (clear pair)"
+   ],
+   "afterIfEquipped": [
+    "Rear Entertainment Screen + DVD"
+   ]
+  },
+  {
+   "key": "1G1ZT51856F189372",
+   "id": "nvpap-l132621",
+   "yard": "Nevada Pic-A-Part - Las Vegas",
+   "listed": "2001 Saturn L-Series",
+   "matchedOn": "2006 Chevrolet Malibu",
+   "flagAtLot": "VIN decodes as 2006 (listed 2001); VIN decodes as Saturn Malibu (listed L-Series)",
+   "flagNow": "VIN decodes as 2006 (listed 2001); VIN decodes as Chevrolet Malibu (listed L-Series)",
+   "before": [],
+   "after": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch"
+   ],
+   "added": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch"
+   ],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "1GNDS135142389702",
+   "id": "ezpullnpay-montgomery-stk018475",
+   "yard": "EZ Pull N Pay - Montgomery",
+   "listed": "2004 Chevrolet Blazer",
+   "matchedOn": "2004 Chevrolet Trailblazer",
+   "flagAtLot": "VIN decodes as Chevrolet Trailblazer (listed Blazer)",
+   "flagNow": "VIN decodes as Chevrolet Trailblazer (listed Blazer)",
+   "before": [
+    "Rear Cargo/Jump Seat",
+    "Front Grille + Bezels"
+   ],
+   "after": [
+    "SS Intake / Engine Bay Trim",
+    "Transfer Case / 4WD Selector",
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "SS Intake / Engine Bay Trim",
+    "Transfer Case / 4WD Selector",
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [
+    "Rear Cargo/Jump Seat",
+    "Front Grille + Bezels"
+   ],
+   "afterIfEquipped": [
+    "SS Intake / Engine Bay Trim"
+   ]
+  },
+  {
+   "key": "1GNDT13W452197672",
+   "id": "standardupic-uiche06586",
+   "yard": "Standard Auto Wreckers UPIC - Toronto",
+   "listed": "2005 Chevrolet Blazer",
+   "matchedOn": "2005 Chevrolet Trailblazer",
+   "flagAtLot": "VIN decodes as Chevrolet Trailblazer (listed Blazer)",
+   "flagNow": "VIN decodes as Chevrolet Trailblazer (listed Blazer)",
+   "before": [
+    "Rear Cargo/Jump Seat",
+    "Front Grille + Bezels"
+   ],
+   "after": [
+    "SS Intake / Engine Bay Trim",
+    "Transfer Case / 4WD Selector",
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "SS Intake / Engine Bay Trim",
+    "Transfer Case / 4WD Selector",
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [
+    "Rear Cargo/Jump Seat",
+    "Front Grille + Bezels"
+   ],
+   "afterIfEquipped": [
+    "SS Intake / Engine Bay Trim"
+   ]
+  },
+  {
+   "key": "WBAWR335X9P461278",
+   "id": "nvpap-l129181",
+   "yard": "Nevada Pic-A-Part - Las Vegas",
+   "listed": "2009 BMW X3",
+   "matchedOn": "2009 BMW 328i",
+   "flagAtLot": "VIN decodes as BMW 328i (listed X3)",
+   "flagNow": "VIN decodes as BMW 328i (listed X3)",
+   "before": [
+    "iDrive / CIC / NBT Navigation Unit",
+    "Harman Kardon Amp + Speakers",
+    "Transfer Case Actuator (common failure)"
+   ],
+   "after": [
+    "iDrive Head Unit (E90 CCC/CIC)",
+    "Harman Kardon / Logic7 Amp + Speakers (E90)",
+    "Sport Seats (E90, pair)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "iDrive Head Unit (E90 CCC/CIC)",
+    "Harman Kardon / Logic7 Amp + Speakers (E90)",
+    "Sport Seats (E90, pair)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [
+    "iDrive / CIC / NBT Navigation Unit",
+    "Harman Kardon Amp + Speakers",
+    "Transfer Case Actuator (common failure)"
+   ],
+   "afterIfEquipped": [
+    "Sport Seats (E90, pair)"
+   ]
+  },
+  {
+   "key": "WBAPH7G59BNM57829",
+   "id": "pns-stk080162",
+   "yard": "Pull-N-Save - Phoenix North",
+   "listed": "2011 BMW 528i",
+   "matchedOn": "2011 BMW 328i",
+   "flagAtLot": "VIN decodes as BMW 328i (listed 528i)",
+   "flagNow": "VIN decodes as BMW 328i (listed 528i)",
+   "before": [
+    "OEM Adaptive Xenon/LED Headlights (F10, pair)",
+    "iDrive Head Unit (F10 CIC/NBT — NBT worth more)",
+    "Harman Kardon System (F10)",
+    "Instrument Cluster (F10, HUD cars worth more)"
+   ],
+   "after": [
+    "iDrive Head Unit (E90 CCC/CIC)",
+    "Harman Kardon / Logic7 Amp + Speakers (E90)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "iDrive Head Unit (E90 CCC/CIC)",
+    "Harman Kardon / Logic7 Amp + Speakers (E90)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [
+    "OEM Adaptive Xenon/LED Headlights (F10, pair)",
+    "iDrive Head Unit (F10 CIC/NBT — NBT worth more)",
+    "Harman Kardon System (F10)",
+    "Instrument Cluster (F10, HUD cars worth more)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "5NPE84AC2BH088801",
+   "id": "harrys-5NPE84AC2BH088801",
+   "yard": "Harry's U-Pull-It - Hazle Township",
+   "listed": "2011 Hyundai Elantra",
+   "matchedOn": "2011 Hyundai Sonata",
+   "flagAtLot": "VIN decodes as Hyundai Sonata (listed Elantra)",
+   "flagNow": "VIN decodes as Hyundai Sonata (listed Elantra)",
+   "before": [
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Navigation Touchscreen (Limited)",
+    "Limited Leather Heated Seats (pair)",
+    "Sunroof Glass + Motor",
+    "16\"/17\" Alloy Wheels (set of 4, straight)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Panoramic Sunroof Glass",
+    "Bose/Infinity Amp + Speakers",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "Panoramic Sunroof Glass",
+    "Bose/Infinity Amp + Speakers"
+   ],
+   "dropped": [
+    "Fuel Pump Module (in-tank, test before listing)",
+    "A/C Compressor (clutch spins free)",
+    "Radiator Fan Assembly",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Navigation Touchscreen (Limited)",
+    "Limited Leather Heated Seats (pair)",
+    "Sunroof Glass + Motor",
+    "16\"/17\" Alloy Wheels (set of 4, straight)"
+   ],
+   "afterIfEquipped": [
+    "Panoramic Sunroof Glass"
+   ]
+  },
+  {
+   "key": "ZFBERFAT7G6B39319",
+   "id": "wilberts-buf021219",
+   "yard": "Wilbert's U-Pull-It - Buffalo",
+   "listed": "2016 Ram 2500",
+   "matchedOn": "2016 Ram ProMaster City",
+   "flagAtLot": "VIN decodes as Ram ProMaster City (listed 2500)",
+   "flagNow": "VIN decodes as Ram ProMaster City (listed 2500)",
+   "before": [
+    "Cummins Parts (injectors, turbo — verify engine)",
+    "Tow Mirrors (pair)",
+    "Tailgate (straight)",
+    "Power-Fold Tow Mirrors (pair)",
+    "Tailgate (clean)"
+   ],
+   "after": [
+    "Power-Fold Tow Mirrors (pair)",
+    "Uconnect 8.4 Touchscreen",
+    "Tailgate (clean)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Uconnect 8.4 Touchscreen",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "dropped": [
+    "Cummins Parts (injectors, turbo — verify engine)",
+    "Tow Mirrors (pair)",
+    "Tailgate (straight)"
+   ],
+   "afterIfEquipped": [
+    "Power-Fold Tow Mirrors (pair)"
+   ]
+  },
+  {
+   "key": "ZFBERFAB4H6D91893",
+   "id": "wilberts-buf019285",
+   "yard": "Wilbert's U-Pull-It - Buffalo",
+   "listed": "2017 Ram 2500",
+   "matchedOn": "2017 Ram ProMaster City",
+   "flagAtLot": "VIN decodes as Ram ProMaster City (listed 2500)",
+   "flagNow": "VIN decodes as Ram ProMaster City (listed 2500)",
+   "before": [
+    "Cummins Parts (injectors, turbo — verify engine)",
+    "Tow Mirrors (pair)",
+    "Tailgate (straight)",
+    "Power-Fold Tow Mirrors (pair)",
+    "Tailgate (clean)"
+   ],
+   "after": [
+    "Power-Fold Tow Mirrors (pair)",
+    "Uconnect 8.4 Touchscreen",
+    "Tailgate (clean)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Uconnect 8.4 Touchscreen",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "dropped": [
+    "Cummins Parts (injectors, turbo — verify engine)",
+    "Tow Mirrors (pair)",
+    "Tailgate (straight)"
+   ],
+   "afterIfEquipped": [
+    "Power-Fold Tow Mirrors (pair)"
+   ]
+  },
+  {
+   "key": "ZFBERFAB8H6E00076",
+   "id": "wilberts-buf019286",
+   "yard": "Wilbert's U-Pull-It - Buffalo",
+   "listed": "2017 Ram 2500",
+   "matchedOn": "2017 Ram ProMaster City",
+   "flagAtLot": "VIN decodes as Ram ProMaster City (listed 2500)",
+   "flagNow": "VIN decodes as Ram ProMaster City (listed 2500)",
+   "before": [
+    "Cummins Parts (injectors, turbo — verify engine)",
+    "Tow Mirrors (pair)",
+    "Tailgate (straight)",
+    "Power-Fold Tow Mirrors (pair)",
+    "Tailgate (clean)"
+   ],
+   "after": [
+    "Power-Fold Tow Mirrors (pair)",
+    "Uconnect 8.4 Touchscreen",
+    "Tailgate (clean)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Uconnect 8.4 Touchscreen",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "dropped": [
+    "Cummins Parts (injectors, turbo — verify engine)",
+    "Tow Mirrors (pair)",
+    "Tailgate (straight)"
+   ],
+   "afterIfEquipped": [
+    "Power-Fold Tow Mirrors (pair)"
+   ]
+  },
+  {
+   "key": "WBAVB13536KR64809",
+   "id": "nvpap-l128740",
+   "yard": "Nevada Pic-A-Part - Las Vegas",
+   "listed": "2006 BMW X3",
+   "matchedOn": "2006 BMW 325i",
+   "flagAtLot": "VIN decodes as BMW 325i (listed X3)",
+   "flagNow": "VIN decodes as BMW 325i (listed X3)",
+   "before": [
+    "Transfer Case Actuator (common failure)"
+   ],
+   "after": [
+    "iDrive Head Unit (E90 CCC/CIC)",
+    "Harman Kardon / Logic7 Amp + Speakers (E90)",
+    "Sport Seats (E90, pair)",
+    "Manual Shift Assembly (E36/E46 swap demand)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "iDrive Head Unit (E90 CCC/CIC)",
+    "Harman Kardon / Logic7 Amp + Speakers (E90)",
+    "Sport Seats (E90, pair)",
+    "Manual Shift Assembly (E36/E46 swap demand)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [
+    "Transfer Case Actuator (common failure)"
+   ],
+   "afterIfEquipped": [
+    "Sport Seats (E90, pair)",
+    "Manual Shift Assembly (E36/E46 swap demand)"
+   ]
+  },
+  {
+   "key": "WBANU53588CT00939",
+   "id": "nvpap-h063202",
+   "yard": "Nevada Pic-A-Part - Henderson",
+   "listed": "2008 BMW X5",
+   "matchedOn": "2008 BMW 528i",
+   "flagAtLot": "VIN decodes as BMW 528i (listed X5)",
+   "flagNow": "VIN decodes as BMW 528i (listed X5)",
+   "before": [
+    "Rear Air Suspension Compressor",
+    "Headlight assemblies (pair, E70 xenon/halogen)",
+    "Air Suspension Compressor / Valve Block",
+    "iDrive / Navigation (CIC/NBT)",
+    "Harman Kardon / Logic7 Amp + Speakers",
+    "Transfer Case / XDrive Actuator"
+   ],
+   "after": [
+    "OEM Xenon Headlights (E60, pair)",
+    "iDrive Head Unit (E60 CCC/CIC)",
+    "Harman Kardon / Logic7 System (E60)",
+    "Comfort Seats / Multi-Contour (E60, pair)",
+    "Instrument Cluster (E60)"
+   ],
+   "added": [
+    "OEM Xenon Headlights (E60, pair)",
+    "iDrive Head Unit (E60 CCC/CIC)",
+    "Harman Kardon / Logic7 System (E60)",
+    "Comfort Seats / Multi-Contour (E60, pair)",
+    "Instrument Cluster (E60)"
+   ],
+   "dropped": [
+    "Rear Air Suspension Compressor",
+    "Headlight assemblies (pair, E70 xenon/halogen)",
+    "Air Suspension Compressor / Valve Block",
+    "iDrive / Navigation (CIC/NBT)",
+    "Harman Kardon / Logic7 Amp + Speakers",
+    "Transfer Case / XDrive Actuator"
+   ],
+   "afterIfEquipped": [
+    "Comfort Seats / Multi-Contour (E60, pair)"
+   ]
+  },
+  {
+   "key": "WBANU53599C121326",
+   "id": "nvpap-h062642",
+   "yard": "Nevada Pic-A-Part - Henderson",
+   "listed": "2009 BMW X5",
+   "matchedOn": "2009 BMW 528i",
+   "flagAtLot": "VIN decodes as BMW 528i (listed X5)",
+   "flagNow": "VIN decodes as BMW 528i (listed X5)",
+   "before": [
+    "Rear Air Suspension Compressor",
+    "Headlight assemblies (pair, E70 xenon/halogen)",
+    "Air Suspension Compressor / Valve Block",
+    "iDrive / Navigation (CIC/NBT)",
+    "Harman Kardon / Logic7 Amp + Speakers",
+    "Transfer Case / XDrive Actuator"
+   ],
+   "after": [
+    "OEM Xenon Headlights (E60, pair)",
+    "iDrive Head Unit (E60 CCC/CIC)",
+    "Harman Kardon / Logic7 System (E60)",
+    "Comfort Seats / Multi-Contour (E60, pair)",
+    "Instrument Cluster (E60)"
+   ],
+   "added": [
+    "OEM Xenon Headlights (E60, pair)",
+    "iDrive Head Unit (E60 CCC/CIC)",
+    "Harman Kardon / Logic7 System (E60)",
+    "Comfort Seats / Multi-Contour (E60, pair)",
+    "Instrument Cluster (E60)"
+   ],
+   "dropped": [
+    "Rear Air Suspension Compressor",
+    "Headlight assemblies (pair, E70 xenon/halogen)",
+    "Air Suspension Compressor / Valve Block",
+    "iDrive / Navigation (CIC/NBT)",
+    "Harman Kardon / Logic7 Amp + Speakers",
+    "Transfer Case / XDrive Actuator"
+   ],
+   "afterIfEquipped": [
+    "Comfort Seats / Multi-Contour (E60, pair)"
+   ]
+  },
+  {
+   "key": "JM1DE1LY2E0174959",
+   "id": "robertsupick-moffett-stk016918",
+   "yard": "Roberts Parts-U-Pick - Moffett",
+   "listed": "2014 Mazda MX-3",
+   "matchedOn": "2014 Mazda Mazda2",
+   "flagAtLot": "VIN decodes as Mazda Mazda2 (listed MX-3)",
+   "flagNow": "VIN decodes as Mazda Mazda2 (listed MX-3)",
+   "before": [],
+   "after": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "5N1AE2MN2FC722228",
+   "id": "fenix-213085217",
+   "yard": "Fenix U-Pull - East Syracuse",
+   "listed": "2015 Nissan Pathfinder",
+   "matchedOn": "2015 Nissan Quest",
+   "flagAtLot": "VIN decodes as Nissan Quest (listed Pathfinder)",
+   "flagNow": "VIN decodes as Nissan Quest (listed Pathfinder)",
+   "before": [
+    "4WD Actuator Motor",
+    "OEM Roof Rack",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Power Sliding Door Motor",
+    "3rd Row Seat",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Power Sliding Door Motor",
+    "3rd Row Seat"
+   ],
+   "dropped": [
+    "4WD Actuator Motor",
+    "OEM Roof Rack",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "WBAVB17576NK34488",
+   "id": "nvpap-l129253",
+   "yard": "Nevada Pic-A-Part - Las Vegas",
+   "listed": "2006 BMW X3",
+   "matchedOn": "2006 BMW 325i",
+   "flagAtLot": "VIN decodes as BMW 325i (listed X3)",
+   "flagNow": "VIN decodes as BMW 325i (listed X3)",
+   "before": [
+    "Transfer Case Actuator (common failure)"
+   ],
+   "after": [
+    "iDrive Head Unit (E90 CCC/CIC)",
+    "Harman Kardon / Logic7 Amp + Speakers (E90)",
+    "Manual Shift Assembly (E36/E46 swap demand)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "iDrive Head Unit (E90 CCC/CIC)",
+    "Harman Kardon / Logic7 Amp + Speakers (E90)",
+    "Manual Shift Assembly (E36/E46 swap demand)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [
+    "Transfer Case Actuator (common failure)"
+   ],
+   "afterIfEquipped": [
+    "Manual Shift Assembly (E36/E46 swap demand)"
+   ]
+  },
+  {
+   "key": "2S3DA417586124478",
+   "id": "pns-stk134508",
+   "yard": "Pull-N-Save - Salt Lake City",
+   "listed": "2008 Suzuki SX4",
+   "matchedOn": "2008 Suzuki XL-7",
+   "flagAtLot": "VIN decodes as Suzuki XL-7 (listed SX4)",
+   "flagNow": "VIN decodes as Suzuki XL-7 (listed SX4)",
+   "before": [],
+   "after": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JM1DKDD77H0172726",
+   "id": "budget-stk84854",
+   "yard": "Budget U-Pull-It - Winter Garden",
+   "listed": "2017 Mazda Mazda3",
+   "matchedOn": "2017 Mazda CX-3",
+   "flagAtLot": "VIN decodes as Mazda CX-3 (listed Mazda3)",
+   "flagNow": "VIN decodes as Mazda CX-3 (listed Mazda3)",
+   "before": [
+    "Mazdaspeed Turbo / Intercooler",
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [],
+   "added": [],
+   "dropped": [
+    "Mazdaspeed Turbo / Intercooler",
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "1FMBU14T3KUA12450",
+   "id": "foss-jacksonville-stk013903",
+   "yard": "Foss U-Pull-It - Jacksonville",
+   "listed": "1989 Ford Ranger",
+   "matchedOn": "1989 Ford Bronco II",
+   "flagAtLot": "VIN decodes as Ford Bronco II (listed Ranger)",
+   "flagNow": "VIN decodes as Ford Bronco II (listed Ranger)",
+   "before": [
+    "Tailgate (clean)",
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Rear Seat / Cargo Trim",
+    "Front Grille + Bezels"
+   ],
+   "added": [
+    "Rear Seat / Cargo Trim",
+    "Front Grille + Bezels"
+   ],
+   "dropped": [
+    "Tailgate (clean)",
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "2C4RDGBG3CR283518",
+   "id": "standardupic-uidod06476",
+   "yard": "Standard Auto Wreckers UPIC - Toronto",
+   "listed": "2012 Dodge Journey",
+   "matchedOn": "2012 Dodge Grand Caravan",
+   "flagAtLot": "VIN decodes as Dodge Grand Caravan (listed Journey)",
+   "flagNow": "VIN decodes as Dodge Grand Caravan (listed Journey)",
+   "before": [
+    "Uconnect Touchscreen Head Unit",
+    "3rd Row Seat",
+    "Headlights (clear pair)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Power Sliding Door Motor",
+    "Power Sliding Door Control Module",
+    "Stow-N-Go 2nd Row Seat (each)",
+    "Stow-N-Go 3rd Row Seat",
+    "Rear Entertainment Screen + DVD",
+    "Power Sliding Door Cable/Track",
+    "Uconnect Touchscreen Head Unit",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch"
+   ],
+   "added": [
+    "Power Sliding Door Motor",
+    "Power Sliding Door Control Module",
+    "Stow-N-Go 2nd Row Seat (each)",
+    "Stow-N-Go 3rd Row Seat",
+    "Rear Entertainment Screen + DVD",
+    "Power Sliding Door Cable/Track"
+   ],
+   "dropped": [
+    "3rd Row Seat",
+    "Headlights (clear pair)",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "afterIfEquipped": [
+    "Rear Entertainment Screen + DVD"
+   ]
+  },
+  {
+   "key": "1FDKE30M6PHA96285",
+   "id": "pap-6-1925502-1",
+   "yard": "Pull-A-Part - Nashville",
+   "listed": "1993 Ford F-450 Super Duty",
+   "matchedOn": "1993 Ford E-350",
+   "flagAtLot": "VIN decodes as Ford E-350 (listed F-450 Super Duty)",
+   "flagNow": "VIN decodes as Ford E-350 (listed F-450 Super Duty)",
+   "before": [],
+   "after": [
+    "Tow Mirrors (pair)",
+    "Bench Seats (rear rows)",
+    "7.3L Powerstroke Parts (verify engine)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "Tow Mirrors (pair)",
+    "Bench Seats (rear rows)",
+    "7.3L Powerstroke Parts (verify engine)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "Tow Mirrors (pair)"
+   ]
+  },
+  {
+   "key": "1D48GP25B27B10720",
+   "id": "robertsupick-moffett-stk016844",
+   "yard": "Roberts Parts-U-Pick - Moffett",
+   "listed": "2007 Dodge Caravan",
+   "matchedOn": "2002 Dodge Dakota",
+   "flagAtLot": "VIN decodes as 2002 (listed 2007); VIN decodes as Dodge Dakota (listed Caravan)",
+   "flagNow": "VIN decodes as 2002 (listed 2007); VIN decodes as Dodge Dakota (listed Caravan)",
+   "before": [
+    "Power Sliding Door Motor",
+    "Power Sliding Door Control Module",
+    "Power Sliding Door Cable/Track",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch"
+   ],
+   "after": [
+    "Tailgate (straight)",
+    "Tow Mirrors (pair)",
+    "Manual Shifter Assembly",
+    "R/T Badging + Trim",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "Tailgate (straight)",
+    "Tow Mirrors (pair)",
+    "Manual Shifter Assembly",
+    "R/T Badging + Trim",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "dropped": [
+    "Power Sliding Door Motor",
+    "Power Sliding Door Control Module",
+    "Power Sliding Door Cable/Track"
+   ],
+   "afterIfEquipped": [
+    "Tow Mirrors (pair)",
+    "Manual Shifter Assembly",
+    "R/T Badging + Trim"
+   ]
+  },
+  {
+   "key": "1YVHP81A895M24380",
+   "id": "grandpajohns-greenbay-stk014220",
+   "yard": "Grandpa John's Pick & Pull - Green Bay",
+   "listed": "2009 Mazda Mazda3",
+   "matchedOn": "2009 Mazda Mazda6",
+   "flagAtLot": "VIN decodes as Mazda Mazda6 (listed Mazda3)",
+   "flagNow": "VIN decodes as Mazda Mazda6 (listed Mazda3)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Bose Door Speakers + Amp",
+    "Headlights (clear, non-hazed)"
+   ],
+   "added": [
+    "Bose Door Speakers + Amp"
+   ],
+   "dropped": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JTHBN30F110012934",
+   "id": "pns-stk073701",
+   "yard": "Pull-N-Save - Glendale",
+   "listed": "2001 Lexus GS 430",
+   "matchedOn": "2001 Lexus LS",
+   "flagAtLot": "VIN decodes as Lexus LS (listed GS 430)",
+   "flagNow": "VIN decodes as Lexus LS (listed GS 430)",
+   "before": [
+    "2JZ-GE Accessories / Harness",
+    "Front Seats (heated)",
+    "OEM HID Headlights"
+   ],
+   "after": [
+    "Nakamichi Amp + Speakers",
+    "Front Seats (heated, uncracked)",
+    "Wood Trim Kit (complete)",
+    "OEM Wheels (set)"
+   ],
+   "added": [
+    "Nakamichi Amp + Speakers",
+    "Front Seats (heated, uncracked)",
+    "Wood Trim Kit (complete)",
+    "OEM Wheels (set)"
+   ],
+   "dropped": [
+    "2JZ-GE Accessories / Harness",
+    "Front Seats (heated)",
+    "OEM HID Headlights"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "1GNFK16Z22J339542",
+   "id": "1257-46337",
+   "yard": "Pick Your Part - Dayton",
+   "listed": "2000 Chevrolet Silverado 1500",
+   "matchedOn": "2002 Chevrolet Suburban",
+   "flagAtLot": "VIN decodes as 2002 (listed 2000); VIN decodes as Chevrolet Suburban (listed Silverado 1500)",
+   "flagNow": "VIN decodes as 2002 (listed 2000); VIN decodes as Chevrolet Suburban (listed Silverado 1500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Tow Mirrors (manual, pair)",
+    "Tailgate (straight)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "3rd Row Seat",
+    "Tow Mirrors (pair)",
+    "Rear Barn Door Glass + Hardware",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "3rd Row Seat",
+    "Tow Mirrors (pair)",
+    "Rear Barn Door Glass + Hardware"
+   ],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Tow Mirrors (manual, pair)",
+    "Tailgate (straight)"
+   ],
+   "afterIfEquipped": [
+    "Tow Mirrors (pair)"
+   ]
+  },
+  {
+   "key": "WBADT63451CF13626",
+   "id": "nvpap-h064199",
+   "yard": "Nevada Pic-A-Part - Henderson",
+   "listed": "2001 BMW X5",
+   "matchedOn": "2001 BMW 530i",
+   "flagAtLot": "VIN decodes as BMW 530i (listed X5)",
+   "flagNow": "VIN decodes as BMW 530i (listed X5)",
+   "before": [
+    "Rear Air Suspension Compressor"
+   ],
+   "after": [
+    "Headlights (E39 halo, pair)",
+    "Instrument Cluster (E39, pixel-perfect worth more)",
+    "DSP Amp + Speakers (E39)",
+    "Comfort Seats (E39, pair)",
+    "ABS/DSC Hydraulic Module (E39)"
+   ],
+   "added": [
+    "Headlights (E39 halo, pair)",
+    "Instrument Cluster (E39, pixel-perfect worth more)",
+    "DSP Amp + Speakers (E39)",
+    "Comfort Seats (E39, pair)",
+    "ABS/DSC Hydraulic Module (E39)"
+   ],
+   "dropped": [
+    "Rear Air Suspension Compressor"
+   ],
+   "afterIfEquipped": [
+    "Comfort Seats (E39, pair)"
+   ]
+  },
+  {
+   "key": "YV4SZ592961223251",
+   "id": "pns-stk073285",
+   "yard": "Pull-N-Save - Glendale",
+   "listed": "2006 Volvo XC90",
+   "matchedOn": "2006 Volvo XC70",
+   "flagAtLot": "VIN decodes as Volvo XC70 (listed XC90)",
+   "flagNow": "VIN decodes as Volvo XC70 (listed XC90)",
+   "before": [
+    "3rd Row Seat",
+    "Headlights (clear/xenon pair)",
+    "Integrated Child Booster Seats"
+   ],
+   "after": [
+    "Roof Rails + Crossbars",
+    "Cargo Cover / Dog Gate",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "added": [
+    "Roof Rails + Crossbars",
+    "Cargo Cover / Dog Gate",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "dropped": [
+    "3rd Row Seat",
+    "Headlights (clear/xenon pair)",
+    "Integrated Child Booster Seats"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JTHBK262062015195",
+   "id": "1245-78761",
+   "yard": "Pick Your Part - Oklahoma City",
+   "listed": "2008 Lexus GS 350",
+   "matchedOn": "2006 Lexus IS",
+   "flagAtLot": "VIN decodes as 2006 (listed 2008); VIN decodes as Lexus IS (listed GS 350)",
+   "flagNow": "VIN decodes as 2006 (listed 2008); VIN decodes as Lexus IS (listed GS 350)",
+   "before": [
+    "Front Seats (heated)",
+    "OEM HID Headlights",
+    "Mark Levinson Amp"
+   ],
+   "after": [
+    "F-Sport Brake Calipers",
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "added": [
+    "F-Sport Brake Calipers",
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "dropped": [
+    "Front Seats (heated)",
+    "OEM HID Headlights",
+    "Mark Levinson Amp"
+   ],
+   "afterIfEquipped": [
+    "F-Sport Brake Calipers"
+   ]
+  },
+  {
+   "key": "ZFBCFAAH3EZ008377",
+   "id": "pns-stk079438",
+   "yard": "Pull-N-Save - Phoenix North",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFABH1EZ019876",
+   "id": "nvpap-l130257",
+   "yard": "Nevada Pic-A-Part - Las Vegas",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFABH0EZ023823",
+   "id": "nvpap-l130880",
+   "yard": "Nevada Pic-A-Part - Las Vegas",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFADH5EZ007212",
+   "id": "papva-pap175971",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFACH7EZ005348",
+   "id": "papva-pap169290",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFAAH8EZ011601",
+   "id": "papva-pap173214",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFABH0EZ025989",
+   "id": "papva-stk111039",
+   "yard": "Pick-A-Part VA - Stafford",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFADH9EZ021713",
+   "id": "weller-zfbcfadh9ez021713",
+   "yard": "Weller Self Serve - Wyoming",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFACH9EZ022894",
+   "id": "weller-zfbcfach9ez022894",
+   "yard": "Weller Self Serve - Wyoming",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFACH8EZ021705",
+   "id": "standardupic-uifia06451",
+   "yard": "Standard Auto Wreckers UPIC - Toronto",
+   "listed": "2014 Fiat 500",
+   "matchedOn": "2014 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFADH9FZ032602",
+   "id": "papva-pap175058",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2015 Fiat 500",
+   "matchedOn": "2015 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFABH5FZ030381",
+   "id": "papva-pap140531",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2015 Fiat 500",
+   "matchedOn": "2015 Fiat 500L",
+   "flagAtLot": "VIN decodes as Fiat 500L (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500L (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "1C4NJEBAXFS263003",
+   "id": "fenix-203019938",
+   "yard": "Fenix U-Pull - Binghamton",
+   "listed": "2015 Jeep Patriot",
+   "matchedOn": "2015 Jeep Grand Cherokee",
+   "flagAtLot": "VIN decodes as Jeep Grand Cherokee (listed Patriot)",
+   "flagNow": "VIN decodes as Jeep Grand Cherokee (listed Patriot)",
+   "before": [
+    "Headlights (clear pair)",
+    "Roof Rails (pair)",
+    "Manual Shifter Assembly",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Air Suspension Compressor (Quadra-Lift)",
+    "Heated Leather Seats (pair)",
+    "Transfer Case Shift Motor",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Air Suspension Compressor (Quadra-Lift)",
+    "Heated Leather Seats (pair)",
+    "Transfer Case Shift Motor"
+   ],
+   "dropped": [
+    "Headlights (clear pair)",
+    "Roof Rails (pair)",
+    "Manual Shifter Assembly"
+   ],
+   "afterIfEquipped": [
+    "Air Suspension Compressor (Quadra-Lift)"
+   ]
+  },
+  {
+   "key": "ZFBCFYDT0GP331664",
+   "id": "papva-pap168293",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2016 Fiat 500",
+   "matchedOn": "2016 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFYETXGP400536",
+   "id": "papva-pap154903",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2016 Fiat 500",
+   "matchedOn": "2016 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFXBTXGP407064",
+   "id": "papva-pap175304",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2016 Fiat 500",
+   "matchedOn": "2016 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFXBT7GP396993",
+   "id": "papva-pap140536",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2016 Fiat 500",
+   "matchedOn": "2016 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFYET5GP380731",
+   "id": "papva-pap155989",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2016 Fiat 500",
+   "matchedOn": "2016 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFYBT4GP442527",
+   "id": "weller-zfbcfybt4gp442527",
+   "yard": "Weller Self Serve - Wyoming",
+   "listed": "2016 Fiat 500",
+   "matchedOn": "2016 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFXAB4HP612065",
+   "id": "papva-pap167358",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2017 Fiat 500",
+   "matchedOn": "2017 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFXCB1HP526547",
+   "id": "papva-pap172640",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2017 Fiat 500",
+   "matchedOn": "2017 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFYAB7JP694515",
+   "id": "papva-pap172619",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2018 Fiat 500",
+   "matchedOn": "2018 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "ZFBCFYCB2JP643341",
+   "id": "papva-pap172343",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2018 Fiat 500",
+   "matchedOn": "2018 Fiat 500X",
+   "flagAtLot": "VIN decodes as Fiat 500X (listed 500)",
+   "flagNow": "VIN decodes as Fiat 500X (listed 500)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JN6MD06S5CW122981",
+   "id": "1168-66739",
+   "yard": "Pick Your Part - Raleigh",
+   "listed": "1982 Nissan 210",
+   "matchedOn": "1982 Nissan Pickup",
+   "flagAtLot": "VIN decodes as Nissan Pickup (listed 210)",
+   "flagNow": "VIN decodes as Nissan Pickup (listed 210)",
+   "before": [],
+   "after": [
+    "Tailgate (straight)",
+    "KA24E Intake/EFI Parts",
+    "Front Grille + Headlight Bezels",
+    "Bench Seat",
+    "4x4 Transfer Case Shifter / Hubs"
+   ],
+   "added": [
+    "Tailgate (straight)",
+    "KA24E Intake/EFI Parts",
+    "Front Grille + Headlight Bezels",
+    "Bench Seat",
+    "4x4 Transfer Case Shifter / Hubs"
+   ],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "4S3BC6850V7643776",
+   "id": "foss-jacksonville-stk012687",
+   "yard": "Foss U-Pull-It - Jacksonville",
+   "listed": "1997 Subaru Forester",
+   "matchedOn": "1997 Subaru Legacy",
+   "flagAtLot": "VIN decodes as Subaru Legacy (listed Forester)",
+   "flagNow": "VIN decodes as Subaru Legacy (listed Forester)",
+   "before": [],
+   "after": [
+    "Headlights (clear, non-hazed)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Rear Differential (match final-drive ratio)"
+   ],
+   "added": [
+    "Headlights (clear, non-hazed)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Rear Differential (match final-drive ratio)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "A/C Compressor (clutch spins free)"
+   ]
+  },
+  {
+   "key": "JTJGF10U620120066",
+   "id": "pns-stk165803",
+   "yard": "Pull-N-Save - Riverside",
+   "listed": "2002 Lexus GS 300",
+   "matchedOn": "2002 Lexus RX",
+   "flagAtLot": "",
+   "flagNow": "VIN decodes as Lexus RX (listed GS 300)",
+   "before": [
+    "2JZ-GE Accessories / Harness",
+    "Front Seats (heated)",
+    "OEM HID Headlights"
+   ],
+   "after": [
+    "Mark Levinson Amp/Speakers",
+    "Alternator (spin-test at yard)"
+   ],
+   "added": [
+    "Mark Levinson Amp/Speakers",
+    "Alternator (spin-test at yard)"
+   ],
+   "dropped": [
+    "2JZ-GE Accessories / Harness",
+    "Front Seats (heated)",
+    "OEM HID Headlights"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "4S4BP63C274306046",
+   "id": "pns-stk100371",
+   "yard": "Pull-N-Save - Phoenix South",
+   "listed": "2007 Subaru Forester",
+   "matchedOn": "2007 Subaru Outback",
+   "flagAtLot": "VIN decodes as Subaru Outback (listed Forester)",
+   "flagNow": "VIN decodes as Subaru Outback (listed Forester)",
+   "before": [
+    "XT Hood Scoop",
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "XT Turbo Intercooler + Piping",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "added": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "dropped": [
+    "XT Hood Scoop",
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "XT Turbo Intercooler + Piping"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "1GBEG25Z4RF189738",
+   "id": "pap-18-1089858-15",
+   "yard": "Pull-A-Part - Indianapolis",
+   "listed": "1994 Chevrolet Astro",
+   "matchedOn": "1994 Chevrolet G-Series",
+   "flagAtLot": "VIN decodes as Chevrolet G-Series (listed Astro)",
+   "flagNow": "VIN decodes as Chevrolet G-Series (listed Astro)",
+   "before": [
+    "AWD Transfer Case (van-life gold)",
+    "Dutch Door Glass + Hardware",
+    "Rear Bench Seats",
+    "Roof Rack"
+   ],
+   "after": [],
+   "added": [],
+   "dropped": [
+    "AWD Transfer Case (van-life gold)",
+    "Dutch Door Glass + Hardware",
+    "Rear Bench Seats",
+    "Roof Rack"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JTJHA31U940032483",
+   "id": "pns-stk026722",
+   "yard": "Pull-N-Save - Springville",
+   "listed": "2004 Lexus GS 300",
+   "matchedOn": "2004 Lexus RX",
+   "flagAtLot": "VIN decodes as Lexus RX (listed GS 300)",
+   "flagNow": "VIN decodes as Lexus RX (listed GS 300)",
+   "before": [
+    "2JZ-GE Accessories / Harness",
+    "Front Seats (heated)",
+    "OEM HID Headlights"
+   ],
+   "after": [
+    "Mark Levinson Amp/Speakers"
+   ],
+   "added": [
+    "Mark Levinson Amp/Speakers"
+   ],
+   "dropped": [
+    "2JZ-GE Accessories / Harness",
+    "Front Seats (heated)",
+    "OEM HID Headlights"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "1FMEU63E76ZA14563",
+   "id": "vinplus-pnpsa-pnp026239",
+   "yard": "San Antonio Pick-N-Pull (Independent)",
+   "listed": "2006 Ford Expedition",
+   "matchedOn": "2006 Ford Explorer",
+   "flagAtLot": "VIN decodes as Ford Explorer (listed Expedition)",
+   "flagNow": "VIN decodes as Ford Explorer (listed Expedition)",
+   "before": [
+    "3rd Row Seat",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "3rd Row Seat",
+    "Rear Air Suspension Compressor",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "Rear Air Suspension Compressor",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "3rd Row Seat",
+    "Rear Air Suspension Compressor"
+   ]
+  },
+  {
+   "key": "JTHBK262X72043006",
+   "id": "1284-117943",
+   "yard": "Pick Your Part - Rialto",
+   "listed": "2007 Lexus ES 250",
+   "matchedOn": "2007 Lexus IS",
+   "flagAtLot": "VIN decodes as Lexus IS (listed ES 250)",
+   "flagNow": "VIN decodes as Lexus IS (listed ES 250)",
+   "before": [
+    "Mark Levinson Amp/Speakers",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "added": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "dropped": [
+    "Mark Levinson Amp/Speakers",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "4A4AJ3AU4DE606259",
+   "id": "standardupic-uimit06446",
+   "yard": "Standard Auto Wreckers UPIC - Toronto",
+   "listed": "2013 Mitsubishi Outlander",
+   "matchedOn": "2013 Mitsubishi RVR",
+   "flagAtLot": "VIN decodes as Mitsubishi RVR (listed Outlander)",
+   "flagNow": "VIN decodes as Mitsubishi RVR (listed Outlander)",
+   "before": [
+    "Headlights (clear pair)",
+    "Roof Rails + Crossbars",
+    "Tail Lights (pair, uncracked)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [],
+   "added": [],
+   "dropped": [
+    "Headlights (clear pair)",
+    "Roof Rails + Crossbars",
+    "Tail Lights (pair, uncracked)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "YV1612FH2D2209101",
+   "id": 7978237,
+   "yard": "Pick-n-Pull - Calgary (Barlow Trail)",
+   "listed": "2013 Volvo S40",
+   "matchedOn": "2013 Volvo S60",
+   "flagAtLot": "VIN decodes as Volvo S60 (listed S40)",
+   "flagNow": "VIN decodes as Volvo S60 (listed S40)",
+   "before": [],
+   "after": [
+    "Xenon/LED Headlights (pair)",
+    "R Trim Seats (pair)",
+    "Side Mirrors (heated, pair)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Xenon/LED Headlights (pair)",
+    "R Trim Seats (pair)",
+    "Side Mirrors (heated, pair)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "R Trim Seats (pair)"
+   ]
+  },
+  {
+   "key": "YV1612FH1D2219814",
+   "id": 8003453,
+   "yard": "Pick-n-Pull - Virginia Beach",
+   "listed": "2013 Volvo S40",
+   "matchedOn": "2013 Volvo S60",
+   "flagAtLot": "VIN decodes as Volvo S60 (listed S40)",
+   "flagNow": "VIN decodes as Volvo S60 (listed S40)",
+   "before": [],
+   "after": [
+    "Xenon/LED Headlights (pair)",
+    "R Trim Seats (pair)",
+    "Side Mirrors (heated, pair)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Xenon/LED Headlights (pair)",
+    "R Trim Seats (pair)",
+    "Side Mirrors (heated, pair)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "R Trim Seats (pair)"
+   ]
+  },
+  {
+   "key": "YV1612FH3D2209642",
+   "id": 7991449,
+   "yard": "Pick-n-Pull - Virginia Beach",
+   "listed": "2013 Volvo S40",
+   "matchedOn": "2013 Volvo S60",
+   "flagAtLot": "VIN decodes as Volvo S60 (listed S40)",
+   "flagNow": "VIN decodes as Volvo S60 (listed S40)",
+   "before": [],
+   "after": [
+    "Xenon/LED Headlights (pair)",
+    "R Trim Seats (pair)",
+    "Side Mirrors (heated, pair)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Xenon/LED Headlights (pair)",
+    "R Trim Seats (pair)",
+    "Side Mirrors (heated, pair)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "R Trim Seats (pair)"
+   ]
+  },
+  {
+   "key": "1FTYR110DX1TB0969",
+   "id": "milliron-mansfield-up039377",
+   "yard": "Milliron Auto Parts - Mansfield",
+   "listed": "1999 Ford F-150",
+   "matchedOn": "1999 Ford Ranger",
+   "flagAtLot": "VIN decodes as Ford Ranger (listed F-150)",
+   "flagNow": "VIN decodes as Ford Ranger (listed F-150)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Tailgate (straight)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Tow Mirrors (manual, pair)"
+   ],
+   "after": [
+    "Tailgate (clean)",
+    "Headlights (clear, non-hazed)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "Tailgate (clean)"
+   ],
+   "dropped": [
+    "Tailgate (straight)",
+    "Tow Mirrors (manual, pair)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "3VWCB61E6XM813187",
+   "id": "nvpap-h064573",
+   "yard": "Nevada Pic-A-Part - Henderson",
+   "listed": "1999 Volkswagen Beetle",
+   "matchedOn": "1999 Volkswagen Cabrio",
+   "flagAtLot": "VIN decodes as Volkswagen Cabrio (listed Beetle)",
+   "flagNow": "VIN decodes as Volkswagen Cabrio (listed Beetle)",
+   "before": [
+    "Headlights (clear pair)",
+    "Turbo Parts (1.8T/2.0T — verify engine)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "after": [],
+   "added": [],
+   "dropped": [
+    "Headlights (clear pair)",
+    "Turbo Parts (1.8T/2.0T — verify engine)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GF4858YH800956",
+   "id": 7958846,
+   "yard": "Pick-n-Pull - Sparks",
+   "listed": "2000 Subaru Outback",
+   "matchedOn": "2000 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GF4857YH804030",
+   "id": 7940162,
+   "yard": "Pick-n-Pull - Rancho Cordova",
+   "listed": "2000 Subaru Outback",
+   "matchedOn": "2000 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GF4852YG801199",
+   "id": 7951223,
+   "yard": "Pick-n-Pull - Carson City",
+   "listed": "2000 Subaru Outback",
+   "matchedOn": "2000 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68512G830225",
+   "id": 7948801,
+   "yard": "Pick-n-Pull - Sparks",
+   "listed": "2002 Subaru Outback",
+   "matchedOn": "2002 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68542H834571",
+   "id": 7955321,
+   "yard": "Pick-n-Pull - Windsor",
+   "listed": "2002 Subaru Outback",
+   "matchedOn": "2002 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68562H810904",
+   "id": 7989760,
+   "yard": "Pick-n-Pull - Tacoma",
+   "listed": "2002 Subaru Outback",
+   "matchedOn": "2002 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68532H825005",
+   "id": 7914284,
+   "yard": "Pick-n-Pull - Sacramento Mather",
+   "listed": "2002 Subaru Outback",
+   "matchedOn": "2002 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68572H808644",
+   "id": 7986141,
+   "yard": "Pick-n-Pull - Sacramento Mather",
+   "listed": "2002 Subaru Outback",
+   "matchedOn": "2002 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68552G822287",
+   "id": 7969469,
+   "yard": "Pick-n-Pull - Fairfield",
+   "listed": "2002 Subaru Outback",
+   "matchedOn": "2002 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68503G814051",
+   "id": 7919826,
+   "yard": "Pick-n-Pull - Windsor",
+   "listed": "2003 Subaru Outback",
+   "matchedOn": "2003 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68553H813195",
+   "id": 7983684,
+   "yard": "Pick-n-Pull - Tumwater",
+   "listed": "2003 Subaru Outback",
+   "matchedOn": "2003 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68513G802071",
+   "id": 7976790,
+   "yard": "Pick-n-Pull - Salt Lake City",
+   "listed": "2003 Subaru Outback",
+   "matchedOn": "2003 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68534H801886",
+   "id": 7878403,
+   "yard": "Pick-n-Pull - Carson City",
+   "listed": "2004 Subaru Outback",
+   "matchedOn": "2004 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG685X4G807738",
+   "id": 7965890,
+   "yard": "Pick-n-Pull - Carson City",
+   "listed": "2004 Subaru Outback",
+   "matchedOn": "2004 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68535H810475",
+   "id": 7964147,
+   "yard": "Pick-n-Pull - Sparks",
+   "listed": "2005 Subaru Outback",
+   "matchedOn": "2005 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68575H817428",
+   "id": 7999528,
+   "yard": "Pick-n-Pull - Richmond",
+   "listed": "2005 Subaru Outback",
+   "matchedOn": "2005 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68555H809912",
+   "id": 8000091,
+   "yard": "Pick-n-Pull - Salt Lake City",
+   "listed": "2005 Subaru Outback",
+   "matchedOn": "2005 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68515H803489",
+   "id": 7961229,
+   "yard": "Pick-n-Pull - Stockton",
+   "listed": "2005 Subaru Outback",
+   "matchedOn": "2005 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68555G815070",
+   "id": 7987090,
+   "yard": "Pick-n-Pull - Rocklin",
+   "listed": "2005 Subaru Outback",
+   "matchedOn": "2005 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68616H803549",
+   "id": 7952830,
+   "yard": "Pick-n-Pull - Chico",
+   "listed": "2006 Subaru Outback",
+   "matchedOn": "2006 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG686X6G815480",
+   "id": 7991636,
+   "yard": "Pick-n-Pull - Portland South",
+   "listed": "2006 Subaru Outback",
+   "matchedOn": "2006 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68666G811670",
+   "id": 7913586,
+   "yard": "Pick-n-Pull - Sparks",
+   "listed": "2006 Subaru Outback",
+   "matchedOn": "2006 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68636G814541",
+   "id": 7987826,
+   "yard": "Pick-n-Pull - Arlington",
+   "listed": "2006 Subaru Outback",
+   "matchedOn": "2006 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG68646H808518",
+   "id": 7985919,
+   "yard": "Pick-n-Pull - Kansas City (Truman Rd)",
+   "listed": "2006 Subaru Outback",
+   "matchedOn": "2006 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG63617H818402",
+   "id": 7977887,
+   "yard": "Pick-n-Pull - Arlington",
+   "listed": "2007 Subaru Outback",
+   "matchedOn": "2007 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GG63667H808786",
+   "id": 7997559,
+   "yard": "Pick-n-Pull - Sacramento Mather",
+   "listed": "2007 Subaru Outback",
+   "matchedOn": "2007 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "Headlights (clear, non-hazed)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars",
+    "Headlights (clear, non-hazed)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JNKAY01E78M606535",
+   "id": "ezpullnpay-montgomery-stk018556",
+   "yard": "EZ Pull N Pay - Montgomery",
+   "listed": "2008 Infiniti G20",
+   "matchedOn": "2008 Infiniti M35",
+   "flagAtLot": "VIN decodes as Infiniti M35 (listed G20)",
+   "flagNow": "VIN decodes as Infiniti M35 (listed G20)",
+   "before": [],
+   "after": [
+    "OEM HID Headlights",
+    "Bose Amp + Speakers",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "added": [
+    "OEM HID Headlights",
+    "Bose Amp + Speakers",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "4S4BRBLC7D3246981",
+   "id": "pns-stk165785",
+   "yard": "Pull-N-Save - Riverside",
+   "listed": "2013 Subaru Forester",
+   "matchedOn": "2013 Subaru Outback",
+   "flagAtLot": "",
+   "flagNow": "VIN decodes as Subaru Outback (listed Forester)",
+   "before": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Eyesight Camera Module",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Eyesight Camera Module"
+   ],
+   "dropped": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "4S4BRBHC9D3217605",
+   "id": "pns-stk045527",
+   "yard": "Pull-N-Save - Gilbert",
+   "listed": "2013 Subaru Impreza",
+   "matchedOn": "2013 Subaru Outback",
+   "flagAtLot": "VIN decodes as Subaru Outback (listed Impreza)",
+   "flagNow": "VIN decodes as Subaru Outback (listed Impreza)",
+   "before": [
+    "Eyesight Camera Module",
+    "OEM Headlights (clear)",
+    "Roof Rails",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Eyesight Camera Module",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Roof Rails + Crossbars"
+   ],
+   "dropped": [
+    "OEM Headlights (clear)",
+    "Roof Rails"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "1G1JH5SSB2E423752",
+   "id": "fenix-213083845",
+   "yard": "Fenix U-Pull - East Syracuse",
+   "listed": "2014 Chevrolet Sonic",
+   "matchedOn": "2002 Chevrolet Cavalier",
+   "flagAtLot": "VIN decodes as 2002 (listed 2014); VIN decodes as Chevrolet Cavalier (listed Sonic)",
+   "flagNow": "VIN decodes as 2002 (listed 2014); VIN decodes as Chevrolet Cavalier (listed Sonic)",
+   "before": [],
+   "after": [
+    "Z24 Ground Effects / Spoiler",
+    "Headlights (clear pair)",
+    "Manual Shifter Assembly"
+   ],
+   "added": [
+    "Z24 Ground Effects / Spoiler",
+    "Headlights (clear pair)",
+    "Manual Shifter Assembly"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "Manual Shifter Assembly"
+   ]
+  },
+  {
+   "key": "JTHBK1GG6F2158544",
+   "id": "pns-stk165821",
+   "yard": "Pull-N-Save - Riverside",
+   "listed": "2015 Lexus IS 350",
+   "matchedOn": "2015 Lexus ES",
+   "flagAtLot": "",
+   "flagNow": "VIN decodes as Lexus ES (listed IS 350)",
+   "before": [
+    "F-Sport Brake Calipers",
+    "OEM LED Headlights",
+    "Tail Lights (pair, uncracked)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Mark Levinson Amp/Speakers",
+    "OEM LED Headlights",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [
+    "Mark Levinson Amp/Speakers"
+   ],
+   "dropped": [
+    "F-Sport Brake Calipers",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GH636X8H837657",
+   "id": 7969790,
+   "yard": "Pick-n-Pull - Johnston",
+   "listed": "2008 Subaru Outback",
+   "matchedOn": "2008 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GH63658H828834",
+   "id": 7989173,
+   "yard": "Pick-n-Pull - Salt Lake City",
+   "listed": "2008 Subaru Outback",
+   "matchedOn": "2008 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GH63628H826863",
+   "id": 7973492,
+   "yard": "Pick-n-Pull - Salt Lake City",
+   "listed": "2008 Subaru Outback",
+   "matchedOn": "2008 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JF1GH63608H823878",
+   "id": 7999092,
+   "yard": "Pick-n-Pull - Stockton",
+   "listed": "2008 Subaru Outback",
+   "matchedOn": "2008 Subaru Impreza",
+   "flagAtLot": "VIN decodes as Subaru Impreza (listed Outback)",
+   "flagNow": "VIN decodes as Subaru Impreza (listed Outback)",
+   "before": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "OEM Headlights (clear)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [
+    "OEM Headlights (clear)"
+   ],
+   "dropped": [
+    "Roof Rails + Crossbars"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "WAUJFAFH3AN008696",
+   "id": "wilberts-buf021385",
+   "yard": "Wilbert's U-Pull-It - Buffalo",
+   "listed": "2010 Audi A6",
+   "matchedOn": "2010 Audi A5",
+   "flagAtLot": "VIN decodes as Audi A5 (listed A6)",
+   "flagNow": "VIN decodes as Audi A5 (listed A6)",
+   "before": [],
+   "after": [
+    "OEM Xenon / LED Headlights (pair)",
+    "B&O Premium Audio"
+   ],
+   "added": [
+    "OEM Xenon / LED Headlights (pair)",
+    "B&O Premium Audio"
+   ],
+   "dropped": [],
+   "afterIfEquipped": [
+    "B&O Premium Audio"
+   ]
+  },
+  {
+   "key": "4S4BRBGC8C3225842",
+   "id": "pns-stk099989",
+   "yard": "Pull-N-Save - Phoenix South",
+   "listed": "2012 Subaru Forester",
+   "matchedOn": "2012 Subaru Outback",
+   "flagAtLot": "VIN decodes as Subaru Outback (listed Forester)",
+   "flagNow": "VIN decodes as Subaru Outback (listed Forester)",
+   "before": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "4S4BRBCC7E3254886",
+   "id": "pns-stk073749",
+   "yard": "Pull-N-Save - Glendale",
+   "listed": "2014 Subaru Forester",
+   "matchedOn": "2014 Subaru Outback",
+   "flagAtLot": "VIN decodes as Subaru Outback (listed Forester)",
+   "flagNow": "VIN decodes as Subaru Outback (listed Forester)",
+   "before": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Eyesight Camera Module",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Eyesight Camera Module",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "4S4BSALC9F3314392",
+   "id": "pns-stk080314",
+   "yard": "Pull-N-Save - Phoenix North",
+   "listed": "2015 Subaru Forester",
+   "matchedOn": "2015 Subaru Outback",
+   "flagAtLot": "VIN decodes as Subaru Outback (listed Forester)",
+   "flagNow": "VIN decodes as Subaru Outback (listed Forester)",
+   "before": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)",
+    "Eyesight Camera Module",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "after": [
+    "Eyesight Camera Module",
+    "Roof Rails + Crossbars",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)",
+    "ABS / ESC Pump + Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [
+    "Panoramic Sunroof Assembly",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "1FDXE45S27DB18132",
+   "id": "papva-pap174901",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "2007 Ford F-350 Super Duty",
+   "matchedOn": "2007 Ford E-450",
+   "flagAtLot": "VIN decodes as Ford E-450 (listed F-350 Super Duty)",
+   "flagNow": "VIN decodes as Ford E-450 (listed F-350 Super Duty)",
+   "before": [
+    "Dually Fenders / Bed Parts"
+   ],
+   "after": [],
+   "added": [],
+   "dropped": [
+    "Dually Fenders / Bed Parts"
+   ],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JB7FK245XDY300321",
+   "id": "ipullca-edm029157",
+   "yard": "iPull-uPull - Edmonton",
+   "listed": "1983 Dodge Rampage",
+   "matchedOn": "1983 Dodge D50",
+   "flagAtLot": "VIN decodes as Dodge D50 (listed Rampage)",
+   "flagNow": "VIN decodes as Dodge D50 (listed Rampage)",
+   "before": [],
+   "after": [],
+   "added": [],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "1GCFP22M3F3325895",
+   "id": "papva-pap095843",
+   "yard": "Pick-A-Part VA - Fredericksburg",
+   "listed": "1985 Chevrolet 10 Van",
+   "matchedOn": "1985 Chevrolet P - Series",
+   "flagAtLot": "VIN decodes as Chevrolet P - Series (listed 10 Van)",
+   "flagNow": "VIN decodes as Chevrolet P - Series (listed 10 Van)",
+   "before": [],
+   "after": [],
+   "added": [],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "2B7HB21Y8PK511025",
+   "id": "pns-stk160627",
+   "yard": "Pull-N-Save - Riverside",
+   "listed": "1993 Dodge 150 Pickup",
+   "matchedOn": "1993 Dodge Ram Van",
+   "flagAtLot": "",
+   "flagNow": "VIN decodes as Dodge Ram Van (listed 150 Pickup)",
+   "before": [],
+   "after": [],
+   "added": [],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "J8DC4B1K3S7015291",
+   "id": "ifipull-stk015952",
+   "yard": "Intermountain Auto iPull - Idaho Falls",
+   "listed": "1995 GMC C3500",
+   "matchedOn": "1995 GMC W4",
+   "flagAtLot": "VIN decodes as GMC W4 (listed C3500)",
+   "flagNow": "VIN decodes as GMC W4 (listed C3500)",
+   "before": [],
+   "after": [],
+   "added": [],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "J8DB4B1K6T7007621",
+   "id": "foss-jacksonville-stk013248",
+   "yard": "Foss U-Pull-It - Jacksonville",
+   "listed": "1996 GMC C3500",
+   "matchedOn": "1996 GMC W4",
+   "flagAtLot": "VIN decodes as GMC W4 (listed C3500)",
+   "flagNow": "VIN decodes as GMC W4 (listed C3500)",
+   "before": [],
+   "after": [],
+   "added": [],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "JALE5B14947900511",
+   "id": "pns-stk021312",
+   "yard": "Pull-N-Save - Tucson",
+   "listed": "2004 Isuzu Ascender",
+   "matchedOn": "2004 Isuzu NQR",
+   "flagAtLot": "VIN decodes as Isuzu NQR (listed Ascender)",
+   "flagNow": "VIN decodes as Isuzu NQR (listed Ascender)",
+   "before": [],
+   "after": [],
+   "added": [],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "3C3CFFER8CT335671",
+   "id": "robertsupick-moffett-stk016561",
+   "yard": "Roberts Parts-U-Pick - Moffett",
+   "listed": "2012 Fiat 500L",
+   "matchedOn": "2012 Fiat 500",
+   "flagAtLot": "VIN decodes as Fiat 500 (listed 500L)",
+   "flagNow": "VIN decodes as Fiat 500 (listed 500L)",
+   "before": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "after": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)",
+    "Fuel Pump Module (in-tank, test before listing)",
+    "Radiator Fan Assembly",
+    "A/C Compressor (clutch spins free)",
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "Gauge Cluster",
+    "Climate Control Panel (works, knobs intact)",
+    "Window Regulator + Motor (front)",
+    "Power Window Master Switch",
+    "Engine/Body Control Module (match part #)"
+   ],
+   "added": [],
+   "dropped": [],
+   "afterIfEquipped": []
+  },
+  {
+   "key": "WMWXP7C50K2A51595",
+   "id": "pns-stk073258",
+   "yard": "Pull-N-Save - Glendale",
+   "listed": "2019 MINI Clubman",
+   "matchedOn": "2019 MINI Hardtop",
+   "flagAtLot": "VIN decodes as MINI Hardtop (listed Clubman)",
+   "flagNow": "VIN decodes as MINI Hardtop (listed Clubman)",
+   "before": [],
+   "after": [],
+   "added": [],
+   "dropped": [],
+   "afterIfEquipped": []
+  }
+ ]
+}

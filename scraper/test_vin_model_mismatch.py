@@ -142,9 +142,87 @@ with tempfile.TemporaryDirectory() as td:
               raised is None and m1 == "VIN decodes as 2017 (listed 2016)" and m2 == "VIN decodes as Chevrolet (listed Acura)",
               f"{m1!r} {m2!r}")
         check(f"malformed table ({name}): one warning", err.getvalue().count("WARNING") == 1, err.getvalue())
+        with contextlib.redirect_stderr(io.StringIO()):
+            check(f"malformed table ({name}): no re-match",
+                  js._vin_rematch_model({"make": "Infiniti", "model": "QX80", "year": 2017}, dec("INFINITI", "QX60", 2017)) is None)
 js.VIN_MODEL_NAMES_FILE = real
 js._VIN_MODEL_TABLE = None
 check("real table reloads after the fallback", msg("Infiniti", "QX80", 2017, "INFINITI", "QX60") is not None)
+
+# ---- re-match on the VIN's vehicle (2026-11-19, 'different' only) ----
+R = js._vin_rematch_model
+car = lambda mk, md, y: {"make": mk, "model": md, "year": y}
+check("re-match: different -> the VIN's make and model", R(car("Infiniti", "QX80", 2017), dec("INFINITI", "QX60", 2017)) == ("Infiniti", "QX60"))
+check("re-match: Outback / Impreza", R(car("Subaru", "Outback", 2006), dec("SUBARU", "Impreza", 2006)) == ("Subaru", "Impreza"))
+check("re-match: brand family uses the VIN's make (Saturn listing, Chevrolet VIN)",
+      R(car("Saturn", "L-Series", 2001), dec("CHEVROLET", "Malibu", 2006)) == ("Chevrolet", "Malibu"),
+      str(R(car("Saturn", "L-Series", 2001), dec("CHEVROLET", "Malibu", 2006))))
+check("…and its flag names the VIN's make", js._vpic_mismatch_msg(car("Saturn", "L-Series", 2006), dec("CHEVROLET", "Malibu", 2006))
+      == "VIN decodes as Chevrolet Malibu (listed L-Series)")
+check("no re-match: same (K1500 / GMT-400)", R(car("Chevrolet", "K1500", 1995), dec("CHEVROLET", "GMT-400", 1995)) is None)
+check("no re-match: unsure (Legacy / Outback)", R(car("Subaru", "Legacy", 2012), dec("SUBARU", "Outback", 2012)) is None)
+check("no re-match: decode_wrong (Silverado / S-10)", R(car("Chevrolet", "Silverado 1500", 2001), dec("CHEVROLET", "S-10", 2001)) is None)
+check("no re-match: pair in no list", R(car("Toyota", "Corolla", 2010), dec("TOYOTA", "Hilux", 2010)) is None)
+check("no re-match: make mismatch (Titan / Yamaha)", R(car("Nissan", "Titan", 2008), dec("YAMAHA", "YZF-R1", 2008)) is None)
+check("no re-match: no decode", R(car("Infiniti", "QX80", 2017), None) is None)
+check("10 Van / G-Series is sorted 'same'", R(car("Chevrolet", "10 Van", 1990), dec("CHEVROLET", "G-Series", 1990)) is None
+      and js._vin_model_table().get(js._vin_model_key("Chevrolet", "10 Van", "G-Series"), ("?",))[0] == "same")
+# Never Verified: the app demotes any car with vpicMismatch (pfDonorIdentity,
+# pfOemDonorGate). Every re-matched car must carry the flag.
+both = all(js._vpic_mismatch_msg(car(e["make"], e["listed"], 2010), dec(e["make"].upper(), e["decoded"], 2010))
+           for e in data["different"] if R(car(e["make"], e["listed"], 2010), dec(e["make"].upper(), e["decoded"], 2010)))
+check("every re-matched 'different' pair is also flagged (so never Verified in the app)", both)
+check("every 'different' pair re-matches", all(R(car(e["make"], e["listed"], 2010), dec(e["make"].upper(), e["decoded"], 2010))
+                                               for e in data["different"]))
+
+# Through the real enrich_vehicles path (decode functions stubbed, offline).
+QX_VIN, GM_VIN = "5N1DL0MN0HC558063", "1GCEK14K8SZ100001"
+DEC = {QX_VIN: dec("INFINITI", "QX60", 2017, trim="", series="", driveType="AWD", trimQuality="empty", bodyClass="Sport Utility Vehicle (SUV)/Multi-Purpose Vehicle (MPV)"),
+       GM_VIN: dec("CHEVROLET", "GMT-400", 1995, trim="", series="1/2 Ton Nominal", driveType="4WD", trimQuality="empty", bodyClass="Pickup")}
+saved = (js._decode_vpic_unique_parallel, js.fetch_vpic_decode)
+js._decode_vpic_unique_parallel = lambda vins: [DEC.get(x) for x in vins]
+js.fetch_vpic_decode = lambda vin: DEC.get(vin)
+try:
+    cars = [{"id": "wap-STK039874", "vin": QX_VIN, "year": 2017, "make": "Infiniti", "model": "QX80"},
+            {"id": "t-2", "vin": GM_VIN, "year": 1995, "make": "Chevrolet", "model": "K1500"}]
+    with contextlib.redirect_stderr(io.StringIO()):
+        js.enrich_vehicles(cars, decode_vins=True)
+    qx, gm = cars
+    names = lambda ms: [p["name"] for p in (ms[0]["top_parts"] if ms else [])]
+    want = names(js.match_vehicle(2017, "Infiniti", "QX60", vin_decode=qx["_vpic"]))
+    listing = names(js.match_vehicle(2017, "Infiniti", "QX80", vin_decode=qx["_vpic"]))
+    check("enrich: QX80 listing with a QX60 VIN gets the QX60's parts", [p["name"] for p in qx["_top_parts"]] == want and want != listing,
+          f"{[p['name'] for p in qx['_top_parts']]} vs {want} (listing {listing})")
+    check("enrich: QX80-only rows gone (3rd Row Seat)", "3rd Row Seat" in listing and "3rd Row Seat" not in want, str(listing))
+    check("enrich: listing fields unchanged (make, model, year)", (qx["make"], qx["model"], qx["year"]) == ("Infiniti", "QX80", 2017))
+    check("enrich: flagged and marked", qx.get("_vpic_mismatch") == "VIN decodes as Infiniti QX60 (listed QX80)"
+          and qx.get("_vin_rematch") == "Infiniti QX60", f"{qx.get('_vpic_mismatch')!r} {qx.get('_vin_rematch')!r}")
+    check("enrich: same field family as the year path (_matches/_top_parts/_max_value, spanYear from the VIN)",
+          qx["_matches"] and qx["_max_value"] == max(m["max_value"] for m in qx["_matches"]) and qx["_spanYear"] == 2017)
+    out = {e["id"]: e for e in js.output_json(cars, only_matches=False)}
+    e = out["wap-STK039874"]
+    check("output: record keeps the listing, carries vinRematch + vpicMismatch",
+          (e["make"], e["model"], e["year"]) == ("Infiniti", "QX80", 2017) and e.get("vinRematch") == "Infiniti QX60"
+          and e.get("vpicMismatch") and [p["name"] for p in e["topParts"]] == want, str({k: e.get(k) for k in ("make", "model", "vinRematch", "vpicMismatch")}))
+    check("enrich: a 'same' car (K1500 / GMT-400) keeps its listing match",
+          "_vin_rematch" not in gm and [p["name"] for p in gm["_top_parts"]] == names(js.match_vehicle(1995, "Chevrolet", "K1500", vin_decode=gm["_vpic"]))
+          and "vinRematch" not in out["t-2"])
+    # a broken table: the scan still runs, the listing is matched
+    js.VIN_MODEL_NAMES_FILE = Path(tempfile.gettempdir()) / "no-such-vin-model-table.json"
+    js._VIN_MODEL_TABLE = None
+    cars2 = [{"id": "wap-STK039874", "vin": QX_VIN, "year": 2017, "make": "Infiniti", "model": "QX80"}]
+    raised = None
+    try:
+        with contextlib.redirect_stderr(io.StringIO()):
+            js.enrich_vehicles(cars2, decode_vins=True)
+    except Exception as ex:  # noqa: BLE001
+        raised = ex
+    check("broken table: enrich does not raise and matches the listing",
+          raised is None and "_vin_rematch" not in cars2[0] and [p["name"] for p in cars2[0]["_top_parts"]] == listing, repr(raised))
+finally:
+    js._decode_vpic_unique_parallel, js.fetch_vpic_decode = saved
+    js.VIN_MODEL_NAMES_FILE = real
+    js._VIN_MODEL_TABLE = None
 
 print(f"\n{passes} passed, {len(fails)} failed")
 if fails:
