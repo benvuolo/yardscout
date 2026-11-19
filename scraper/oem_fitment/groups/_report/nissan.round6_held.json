@@ -1,240 +1,11 @@
 {
- "groups": 14,
+ "groups": 13,
  "groups_by_reason": {
   "held_cab_inferred": 6,
-  "held_option_tie": 8
+  "held_option_tie": 7
  },
- "groups_held_whole": 12,
+ "groups_held_whole": 11,
  "held": [
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "own_rows": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. FED. 4WD. VQ40DE. S. 5AT + W. S. 6MT"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2011-nissan-xterra/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-9BD5A"
-      }
-     ],
-     "reasons": [
-      "held_option_tie"
-     ],
-     "siblings": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. OFFROAD. 5AT"
-       ],
-       "pn": "24810-9BA0C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. OFFROAD. 6MT"
-       ],
-       "pn": "24810-9BA0D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. S. 6MT"
-       ],
-       "pn": "24810-9BA4D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. 4WD. S. 5AT + W. 4WD. X"
-       ],
-       "pn": "24810-9BA5A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. PRO-4X. 5AT"
-       ],
-       "pn": "24810-9BD1B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. PRO-4X. 6MT"
-       ],
-       "pn": "24810-9BD4C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. FED. 4WD. VQ40DE. S. 5AT"
-       ],
-       "pn": "24810-9BD4D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. OFFROAD. 5AT"
-       ],
-       "pn": "24810-9CA0C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. OFFROAD. 6MT"
-       ],
-       "pn": "24810-9CA0D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. S. 6MT"
-       ],
-       "pn": "24810-9CA4D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. 4WD. S. 5AT + W. 4WD. X"
-       ],
-       "pn": "24810-9CA5A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. 4WD. 6MT"
-       ],
-       "pn": "24810-ZL80A"
-      }
-     ],
-     "t": [
-      "Nissan",
-      "Xterra",
-      2011
-     ],
-     "tie": {
-      "a_gate_would_fit": null,
-      "uncovered": [
-       "2WD automatic"
-      ],
-      "via": "own"
-     }
-    },
-    {
-     "own_rows": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. FED. 4WD. VQ40DE. S. 5AT + W. S. 6MT"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2012-nissan-xterra/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-9BD5A"
-      }
-     ],
-     "reasons": [
-      "held_option_tie"
-     ],
-     "siblings": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. OFFROAD. 5AT"
-       ],
-       "pn": "24810-9BA0C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. OFFROAD. 6MT"
-       ],
-       "pn": "24810-9BA0D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. S. 6MT"
-       ],
-       "pn": "24810-9BA4D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. 4WD. S. 5AT + W. 4WD. X"
-       ],
-       "pn": "24810-9BA5A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. PRO-4X. 5AT"
-       ],
-       "pn": "24810-9BD1B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. PRO-4X. 6MT"
-       ],
-       "pn": "24810-9BD4C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. FED. 4WD. VQ40DE. S. 5AT"
-       ],
-       "pn": "24810-9BD4D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. PRO-4X. 5AT"
-       ],
-       "pn": "24810-9BF1B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. PRO-4X. 6MT"
-       ],
-       "pn": "24810-9BF4C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. S. 6MT"
-       ],
-       "pn": "24810-9BF4D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. 4WD. S. 5AT + W. 4WD. X"
-       ],
-       "pn": "24810-9BF5A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. OFFROAD. 5AT"
-       ],
-       "pn": "24810-9CA0C"
-      }
-     ],
-     "t": [
-      "Nissan",
-      "Xterra",
-      2012
-     ],
-     "tie": {
-      "a_gate_would_fit": null,
-      "uncovered": [
-       "2WD automatic"
-      ],
-      "via": "own"
-     }
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24810-9BD5A"
-   ],
-   "reason_text": "option text ties the part to a transmission the gates do not enforce",
-   "reasons": [
-    "held_option_tie"
-   ],
-   "round5_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2012,
-     2012
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2011,
-     2012
-    ]
-   ],
-   "unit": "group"
-  },
   {
    "cat": "gauge-cluster",
    "group_reason": "fewer than two models left",
@@ -365,7 +136,7 @@
     [
      "Nissan",
      "Xterra",
-     2011,
+     2012,
      2012
     ]
    ],
@@ -1241,7 +1012,7 @@
      "Nissan",
      "Xterra",
      2005,
-     2012
+     2011
     ]
    ],
    "pn": [
@@ -1262,6 +1033,12 @@
      "Nissan",
      "Xterra",
      2005,
+     2011
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2013,
      2013
     ]
    ],
@@ -1328,7 +1105,7 @@
      "Nissan",
      "Xterra",
      2005,
-     2012
+     2011
     ]
    ],
    "pn": [
@@ -1349,6 +1126,12 @@
      "Nissan",
      "Xterra",
      2005,
+     2011
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2013,
      2013
     ]
    ],
@@ -1360,6 +1143,6 @@
  "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
  "vehicle_years_by_reason": {
   "held_cab_inferred": 6,
-  "held_option_tie": 10
+  "held_option_tie": 8
  }
 }

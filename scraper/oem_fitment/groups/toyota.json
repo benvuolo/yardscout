@@ -87626,9 +87626,20 @@
    ],
    "cars": 74,
    "cat": "headlights",
+   "gates": [
+    [
+     "Lexus",
+     "GS 430",
+     2006,
+     2006,
+     {
+      "built": "2005-07..2006-07"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:L:20b05908a2",
    "kind": "body",
-   "note": "Toyota catalog lists #81070-30B51 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81070-30B51 for both — option: fits some option packages; GS 430: built 07/2005-07/2006 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:25:30Z",
    "pn": [
     "81070-30B51"
@@ -87653,9 +87664,20 @@
    ],
    "cars": 74,
    "cat": "headlights",
+   "gates": [
+    [
+     "Lexus",
+     "GS 430",
+     2006,
+     2006,
+     {
+      "built": "2005-07..2006-07"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:L:346dc5d674",
    "kind": "body",
-   "note": "Toyota catalog lists #81070-30B61 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81070-30B61 for both — option: fits some option packages; GS 430: built 07/2005-07/2006 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:25:06Z",
    "pn": [
     "81070-30B61"
@@ -88387,9 +88409,20 @@
    ],
    "cars": 6,
    "cat": "headlights",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-09..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:R:6b06f0343d",
    "kind": "body",
-   "note": "Toyota catalog lists #81145-53543 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81145-53543 for both — option: fits some option packages; IS 350: built 09/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:28:57Z",
    "pn": [
     "81145-53543"
@@ -88979,9 +89012,20 @@
    ],
    "cars": 6,
    "cat": "headlights",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-09..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:L:047d9f4962",
    "kind": "body",
-   "note": "Toyota catalog lists #81185-53543 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81185-53543 for both — option: fits some option packages; IS 350: built 09/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:29:22Z",
    "pn": [
     "81185-53543"

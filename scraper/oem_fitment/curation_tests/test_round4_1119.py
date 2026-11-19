@@ -67,6 +67,7 @@ class _Cur:
     build_window = C.Curation.build_window
     _pn_list_rows = C.Curation._pn_list_rows
     _pn_other_windows = C.Curation._pn_other_windows
+    _r7 = False     # the round-4/5 reading these checks pin (round 7: test_round7_1119.py)
 
     def __init__(self, ns, pages, links=(), sources=None):
         self.ns = ns

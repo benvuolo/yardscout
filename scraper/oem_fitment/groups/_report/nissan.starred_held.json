@@ -1,13 +1,13 @@
 {
- "groups": 45,
+ "groups": 47,
  "groups_by_kind": {
   "a": 5,
   "b": 5,
-  "c_drive": 2,
+  "c_drive": 4,
   "c_engine": 14,
   "starred_only": 41
  },
- "groups_held_whole": 35,
+ "groups_held_whole": 37,
  "held": [
   {
    "cat": "gauge-cluster",
@@ -270,66 +270,6 @@
       "Titan",
       2005
      ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE), *KC. 2WD. SE + *CC. 2WD. SE"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-titan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-7S01A",
-       "role": "own",
-       "starred": [
-        "*KC. (SE+ LE)",
-        "*CC. (SE+ LE)",
-        "*KC. 2WD. SE",
-        "*CC. 2WD. SE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Nissan",
-      "Titan",
-      2006
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE), *KC. 2WD. SE + *CC. 2WD. SE"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2007-nissan-titan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-7S01A",
-       "role": "own",
-       "starred": [
-        "*KC. (SE+ LE)",
-        "*CC. (SE+ LE)",
-        "*KC. 2WD. SE",
-        "*CC. 2WD. SE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Nissan",
-      "Titan",
-      2007
-     ]
     }
    ],
    "kept_apps": [],
@@ -349,7 +289,7 @@
      "Nissan",
      "Titan",
      2004,
-     2007
+     2005
     ]
    ],
    "unit": "group"
@@ -1003,7 +943,7 @@
     [
      "Nissan",
      "Armada",
-     2007,
+     2008,
      2008
     ],
     [
@@ -2284,62 +2224,6 @@
        "notes": [
         "Fitting Vehicle Options: *W. KA24DE + *W. VG33E. XE"
        ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2000-nissan-xterra/body_electrical/control_unit.html",
-       "pn": "27510-7Z411",
-       "role": "own",
-       "starred": [
-        "*W. KA24DE",
-        "*W. VG33E. XE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Nissan",
-      "Xterra",
-      2000
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. KA24DE + *W. VG33E. XE"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2001-nissan-xterra/body_electrical/control_unit.html",
-       "pn": "27510-7Z411",
-       "role": "own",
-       "starred": [
-        "*W. KA24DE",
-        "*W. VG33E. XE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Nissan",
-      "Xterra",
-      2001
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. KA24DE + *W. VG33E. XE"
-       ],
        "page": "https://www.nissanpartsdeal.com/parts-list/2002-nissan-xterra/body_electrical/control_unit.html",
        "pn": "27510-7Z411",
        "role": "own",
@@ -2379,7 +2263,7 @@
     [
      "Nissan",
      "Xterra",
-     2000,
+     2002,
      2002
     ]
    ],
@@ -3889,6 +3773,86 @@
      "QX70",
      2014,
      2017
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: W. BASE"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx60-gas/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3JA9A",
+       "role": "own",
+       "starred": []
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. AWD. BASE, *W. AWD. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx60-gas/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3JN9B",
+       "role": "sibling",
+       "starred": [
+        "*W. AWD. BASE",
+        "*W. AWD. PREMIUM"
+       ]
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. AWD. BASE"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx60-gas/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3JN9C",
+       "role": "sibling",
+       "starred": [
+        "*W. AWD. BASE"
+       ]
+      }
+     ],
+     "drive": {
+      "as_curated": "no limit",
+      "via": "star_blind",
+      "without_starred": "2WD only"
+     },
+     "kinds": [
+      "c_drive"
+     ],
+     "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
+     "t": [
+      "Infiniti",
+      "QX60",
+      2015
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96301-3JA9A"
+   ],
+   "reason": "held_starred_scope",
+   "reason_text": "starred clause decides scope",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "JX35",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX60",
+     2015,
+     2015
     ]
    ],
    "unit": "group"
@@ -6207,6 +6171,86 @@
      "clauses": [
       {
        "notes": [
+        "Fitting Vehicle Options: W. BASE"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx60-gas/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3JA9A",
+       "role": "own",
+       "starred": []
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. AWD. BASE, *W. AWD. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx60-gas/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3JN9B",
+       "role": "sibling",
+       "starred": [
+        "*W. AWD. BASE",
+        "*W. AWD. PREMIUM"
+       ]
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. AWD. BASE"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx60-gas/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3JN9C",
+       "role": "sibling",
+       "starred": [
+        "*W. AWD. BASE"
+       ]
+      }
+     ],
+     "drive": {
+      "as_curated": "no limit",
+      "via": "star_blind",
+      "without_starred": "2WD only"
+     },
+     "kinds": [
+      "c_drive"
+     ],
+     "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
+     "t": [
+      "Infiniti",
+      "QX60",
+      2015
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96302-3JA9A"
+   ],
+   "reason": "held_starred_scope",
+   "reason_text": "starred clause decides scope",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "JX35",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX60",
+     2015,
+     2015
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
         "Fitting Vehicle Options: *T. (FED. 2WD+ CAL. 2WD). XE. MT + *T. (FED. 4WD+ CAL. 4WD) + *T. AT + *KC"
        ],
        "page": "https://www.nissanpartsdeal.com/parts-list/1998-nissan-frontier/miscellaneous/rear_view_mirror.html",
@@ -7288,12 +7332,12 @@
  "note": "round5b-1119 (hub decision 1, 2026-11-19): vehicle-years held because a starred ('*') option configuration decides their drive or engine limit; the mark has no legend in the raw. reason held_starred_scope ('starred clause decides scope'). round6-1119 (hub decision 2): also every vehicle-year the number is listed for only through starred configurations, reason held_starred_only, kind starred_only. unit vehicle-year: the group ships without them (kept_apps, after every hold); unit group: the whole group is held. kinds: a = drive gate, b = engine gate, c_drive / c_engine = no gate, the starred configuration widens it. Not shipped; they come back when the mark is explained.",
  "ns": "nissan",
  "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
- "vehicle_years": 150,
+ "vehicle_years": 148,
  "vehicle_years_by_kind": {
   "a": 8,
   "b": 6,
-  "c_drive": 4,
+  "c_drive": 6,
   "c_engine": 43,
-  "starred_only": 120
+  "starred_only": 116
  }
 }

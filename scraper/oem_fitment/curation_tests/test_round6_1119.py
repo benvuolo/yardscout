@@ -169,10 +169,11 @@ check("candidate: claims resting only on '*' are gone (80730-7B400 Frontier 1999
       "24820-JK61C)", all(claim("window-regulator", "80730-7B400", "Nissan", "Frontier", y) is None for y in (1999, 2000))
       and all(claim("side-mirrors", "96301-3EV0B", "Infiniti", "QX70", y) is None for y in (2016, 2017))
       and ("gauge-cluster", "24820-JK61C") not in by)
+a05 = claim("side-mirrors", "96302-7S600", "Nissan", "Armada", 2005)
+q14 = claim("gauge-cluster", "24820-1MA5A", "Infiniti", "Q70", 2014)
 check("candidate: Q70 2014 24820-1MA5A gated built 01/2013-11/2013; Armada 2005 96302-7S600 gated from 10/2004 "
-      "(decision 4)", (claim("gauge-cluster", "24820-1MA5A", "Infiniti", "Q70", 2014) or {}).get("built") ==
-      "2013-01..2013-11" and (claim("side-mirrors", "96302-7S600", "Nissan", "Armada", 2005) or {}).get("built", "")
-      .startswith("2004-10"))
+      "(decision 4); or, since round 7 (M37 2013 / Titan 2006 gated too, the note over the cap), not claimed",
+      (q14 is None or q14.get("built") == "2013-01..2013-11") and (a05 is None or a05.get("built", "").startswith("2004-10")))
 r6 = json.loads((OEM / "groups" / "_report" / "nissan.round6_held.json").read_text())
 check("held list (round 6): reasons are cab_inferred / option_tie, each with the own rows; ties name what is uncovered",
       all(set(h["reasons"]) <= {"held_cab_inferred", "held_option_tie"} and h["own_rows"] is not None

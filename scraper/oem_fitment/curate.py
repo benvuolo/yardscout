@@ -3457,7 +3457,7 @@ class Curation:
                for o in rows if key_of(o) == c.key and getattr(o, "matched", True)
                and not self.note_excludes(notes_of(o), T)]
         keys = set()
-        for view in (self, self._star_view(c, cat, T)):
+        for view in (self, self._star_view(c, cat, T), self._star_view(c, cat, T, blind=True)):
             if "drive" in dims:
                 keys |= {(h[1].list_url, h[1].pn) for h in view.drive_sibling(c, cat, T)[1]}
             if "engine" in dims:

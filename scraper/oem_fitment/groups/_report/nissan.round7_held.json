@@ -1,0 +1,172 @@
+{
+ "groups": 5,
+ "held": [
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Murano",
+     2007,
+     2007
+    ],
+    [
+     "Nissan",
+     "Versa",
+     2010,
+     2011
+    ]
+   ],
+   "cat": "window-regulator",
+   "pn": [
+    "80730-8991A"
+   ],
+   "positions": {
+    "Nissan Murano": [
+     "RR"
+    ],
+    "Nissan Versa": [
+     "FR"
+    ]
+   },
+   "reason": "held_cross_position",
+   "reason_text": "the number sits in another door or position on another model; the note names no door",
+   "unit": "group"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Cube",
+     2011,
+     2011
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "window-regulator",
+   "pn": [
+    "80730-JX30B"
+   ],
+   "positions": {
+    "Nissan Cube": [
+     "FR"
+    ],
+    "Nissan Rogue": [
+     "RR"
+    ]
+   },
+   "reason": "held_cross_position",
+   "reason_text": "the number sits in another door or position on another model; the note names no door",
+   "unit": "group"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Cube",
+     2012,
+     2014
+    ],
+    [
+     "Nissan",
+     "Juke",
+     2012,
+     2014
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2012,
+     2012
+    ]
+   ],
+   "cat": "window-regulator",
+   "pn": [
+    "80730-JX30C"
+   ],
+   "positions": {
+    "Nissan Cube": [
+     "FR"
+    ],
+    "Nissan Juke": [
+     "FR"
+    ],
+    "Nissan Rogue": [
+     "RR"
+    ]
+   },
+   "reason": "held_cross_position",
+   "reason_text": "the number sits in another door or position on another model; the note names no door",
+   "unit": "group"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     2003,
+     2003
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     2005,
+     2006
+    ]
+   ],
+   "cat": "window-regulator",
+   "pn": [
+    "82730-3Z005"
+   ],
+   "positions": {
+    "Nissan Altima": [
+     "RR"
+    ],
+    "Nissan Sentra": [
+     "FR"
+    ]
+   },
+   "reason": "held_cross_position",
+   "reason_text": "the number sits in another door or position on another model; the note names no door",
+   "unit": "group"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     2003,
+     2003
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     2005,
+     2006
+    ]
+   ],
+   "cat": "window-regulator",
+   "pn": [
+    "82731-3Z005"
+   ],
+   "positions": {
+    "Nissan Altima": [
+     "RL"
+    ],
+    "Nissan Sentra": [
+     "FL"
+    ]
+   },
+   "reason": "held_cross_position",
+   "reason_text": "the number sits in another door or position on another model; the note names no door",
+   "unit": "group"
+  }
+ ],
+ "note": "round7-1119 (hub decisions 2026-11-19 ~11:40 UTC, decision 4): groups whose number sits in another door or position on another model of the group (positions: the slots the number takes on each model's own pages), held whole, reason held_cross_position, until the note can name the donor's door.",
+ "ns": "nissan",
+ "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484"
+}
