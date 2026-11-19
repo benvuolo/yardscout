@@ -2144,3 +2144,36 @@ groups); lot cars whose VIN decodes as another vehicle shown plain.
   means relaxing the owner's 11-16 rule "strictly by set-out day", so the
   hub asked instead of changing it: option = treat today and yesterday as
   one group, nearest yard first, older days as now.
+
+## 2026-11-19 ~05:15 UTC round 4 live; fifth nissan check started; store-app gap
+
+- Round 4 (`interchange/round4-1119`, 9da7e293) reviewed by the hub and merged
+  to main as df0bdc0a (sw jh-v214). Hub's own checks: `live_diff.py` re-run
+  against main = 0 added groups, 0 gained app-years, 0 widened gates on all 8
+  live makes (ford 1 group removed, 4 narrowed; toyota 16; hmg 1);
+  `pf_guards_unit.mjs` ALL PASS; `test_round4_1119.py` 28 checks;
+  `tools/regress.sh --quick` on the merged tree 71/0/0. Builder's full run on
+  the code head: 104/0/0.
+- Hub decisions on the builder's two "stricter than the brief" choices:
+  1. `no_page` windows (window only in the product record's notes, list page
+     not in the raw) stay gated. Claims only go down. Cost: ford 1 group.
+  2. Titan 7S00E / 7S006 "starred or not" read as a drive split (nissan
+     candidate only): left as built; the independent check judges it blind.
+- Fifth independent nissan check: verifier on `interchange/verify-nissan-1119e`,
+  seed 52941119, 30 groups + 30 pairs, blind to earlier reports. 0 WRONG to
+  ship.
+- **Store apps and the gates (new finding, owner told).** Store builds bundle
+  `docs/` (native/README.md); 1.13.1 was cut at 343262c2 = jh-v208, before
+  the OEM gates (jh-v212). The apps read the live payload with code that
+  ignores gates: every gated donor is a plain Likely row (the note names the
+  limit; multi-group rows may show another group's note). Pinned lot, 8 live
+  makes: the website hides 12,076 donor pairs and marks 13,294 "if
+  equipped"; the apps show all of them plain. Closing it = a store release
+  from current main (1.13.2). Rule 1: waits for the owner's "ship". Apple
+  1.13.1 is still in review, so iPhone follows that approval.
+- Builder suggestions carried forward (not done): the scraper's mismatch
+  check compares year and make only (a QX60 VIN listed as QX80 is not
+  flagged; data workstream); aftermarket rows, hand platform groups and
+  same-generation donors never read the mismatch flag; a short note once a
+  limit is a gate would keep 18 + 66 nissan groups the 160-char cap refuses;
+  Mopar "Up to / After" dates still unread.
