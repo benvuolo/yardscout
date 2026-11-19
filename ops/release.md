@@ -8,6 +8,7 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 
 | Version | iOS | Android |
 |---|---|---|
+| 1.13.2 | BUILT 2026-11-19 07:27 UTC (owner, 2026-11-19 ~06:40 UTC: "Ship"). Built from main 3591e082 (sw jh-v215, round 5 parts gates). iOS build 43, **submit=false** (TestFlight only), run 44479745314, succeeded 07:31. NOT submitted: 1.13.1 build 42 is still WAITING_FOR_REVIEW (asc-status 44480392647, 07:33) and the workflow's submit step withdraws whatever is in the queue. When 1.13.1 is READY_FOR_SALE: `release-ios.yml` with `submit_only=true`, `build_number=43`, `marketing_version=1.13.2` and the notes below. | versionCode 42, track production, run 44479741801, succeeded 07:32. play-status 44480389133: production 1.13.2 (42), status completed, rollout 100% (Google review pending). |
 | 1.13.0 | SHIPPED 2026-11-16 13:29 UTC (owner: "Do it and ship!"). Built from main 67fa5d2b (sw jh-v202). iOS build 41, submit=true, run 43876188232. asc-status 43877889988: 1.13.0 build 41 WAITING_FOR_REVIEW, submitted 13:39 UTC, automatic release on approval; listing text and six new screenshots went up with it. | versionCode 40, run 43876161947, uploaded 13:32 UTC. play-status 43876886357: production 1.13.0 (40), status completed, rollout 100% (Google review pending). Play listing text and screenshots NOT sent yet: send after 1.13.0 is live. |
 | 1.12.16 | SHIPPED 2026-11-14 17:03 UTC (owner: "ship"). Built from main ac24bcb5 (sw jh-v196). iOS build 40, submit=true, run 43618949981. asc-status: 1.12.16 build 40 WAITING_FOR_REVIEW, submitted 17:13 UTC, automatic release on approval. Carries: Cars-tab search box, per-tab scroll, filter panel fix, card share button, trim badge and filter, model-range line, hours and directions links, narrowing and checkout-outcome counters. | versionCode 39, Play production, status completed, rollout 100% (run 43618947678); Google review pending |
 | 1.12.15 | build 37, live (READY_FOR_SALE) | versionCode 38, Play production, completed |
@@ -92,3 +93,34 @@ included in Xcode 27 or later."
   (`submit=false`), and have the owner open it on a phone before any store
   submission uses it: a new SDK can change how the web view and system
   controls look. Hub check-in suggested for mid-January 2027.
+
+## 1.13.2 — dispatched 2026-11-19 07:27 UTC (owner, 2026-11-19: "Ship")
+
+Why: the store apps carry their own copy of the web shell, and 1.13.1 was cut
+at `jh-v208`, before the parts gates. Those apps show every catalog donor as
+a plain row whatever the part's limit (about 12,000 contradicted pairs and
+14,000 "if equipped" pairs on the pinned lot).
+Built from main 3591e082 = the round 5 tree 982adbf3 plus ops and scan data
+(no shell or native change in between). Checks on that tree: builder's full
+regression 102 passed, 2 failed (both layout halves, browser crashed with the
+disk full); hub's quick regression 71/0/0; hub's full layout suite on
+982adbf3 after freeing disk: both halves pass, 1,332 checks each, 0 failures.
+Live check of the website at 07:15 UTC: `jh-v215`.
+In it since 1.13.1: catalog donors honour each part's limits (drive, body,
+cab, engine, fuel, transmission, build window); a donor whose listing and VIN
+disagree is never a plain row; "list has not changed for a while" on a
+yard's page; the Parts tab re-runs its search when a late zip arrives; links
+and price sheets for Intermountain Auto iPull, S&S U-Pull-It and Standard
+UPIC. The free emailed alert stays web only.
+
+What's New (both stores):
+
+    More accurate parts matches.
+    • Donor cars are now checked against each part's limits: 2WD or 4WD, body style, cab, engine, transmission and build date. Cars that can't fit are hidden, and uncertain ones tell you what to check.
+    • A car whose listing and VIN disagree is marked "check the car".
+    • A yard whose list hasn't updated in a while now says so.
+    • Links and price lists for newly added yards.
+
+Still to do: submit iOS build 43 once 1.13.1 is live (see the table row);
+then `store-listing.yml` and `play-subscription-listing.yml` as planned for
+1.13.1.

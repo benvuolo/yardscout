@@ -2289,3 +2289,18 @@ ben@yardscout.io can be used.
   Routing; the owner's mail goes out from the Gmail account; Resend is set
   up for sending on the domain. ben@ needs a routing rule to receive and a
   Gmail "Send mail as" set-up to send. Nothing changed by the hub.
+- 07:15 UTC live check (one load): caches `jh-v215`; the sibling-basis line
+  and the build-window line render; `data/oem/side-mirrors.json` on the live
+  site has 100 `built` gates (12 before round 5), e.g. 87910-48240-A0
+  RX 400h 2006 "built 03/2005-01/2006 only". The 05:14 scan's commit kept
+  the round 5 payload.
+- 07:26 UTC full layout suite on 982adbf3: both halves pass (1,332 checks
+  each, 0 failures).
+- **07:27 UTC 1.13.2 dispatched** from main 3591e082: release-android run 32
+  (44479741801, production, versionCode 42) and release-ios run 43
+  (44479745314, `submit=false`, build 43); both succeeded by 07:32.
+  play-status 44480389133: production 1.13.2 (42) completed, rollout 100%.
+  asc-status 44480392647: 1.13.1 build 42 still WAITING_FOR_REVIEW (not
+  touched); build 43 not listed yet (Apple is processing it). Details and
+  the What's New text: `ops/release.md`. iPhone submission of build 43
+  follows 1.13.1's approval (`submit_only=true`).
