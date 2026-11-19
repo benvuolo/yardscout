@@ -2671,3 +2671,60 @@ Every gate in the sample was judged right with its basis on the pages.
   5. the two `*`-decides-AWD groups are held (reason: starred clause).
   Then an eighth independent check, new seed (used: 46021118, 61181118,
   73901118, 38271119, 52941119, 27641119, 91371119).
+
+## 2026-11-19 ~13:00 UTC Alerts-tab forecast on main (jh-v218); round 7 on main; eighth nissan check started
+
+- **Forecast under each watch on the Alerts tab** (builder A, branch
+  `feat/watch-forecast-1119`, head 4de98e1b): a compact block (subject,
+  headline, facts, eight small bars, the "past weeks, not a promise"
+  label) under a watch that names one make and one model, has a centre and
+  a finite radius, and has no trim filter, no drive filter and is not
+  "Parts only". Anything else shows nothing. Rule 6: the watch list is only
+  read; `watch_forecast_e2e` (30 checks) proves the stored list is byte for
+  byte the same after four renders.
+- **Full regression on `hub/rc3-1119`** (main + that branch): 109 passed, 2
+  failed, 0 skipped; both layout halves pass (1,392 checks each). Both
+  failures are tests overtaken by tonight's data, not the change:
+  - `pf_plan_e2e` "forecast absent: the mount point is there, empty, 0 px":
+    the real arrivals files exist on main since 11:17, so the real module
+    drew a real forecast ("2004-2008 TL: About 8 a week land within 100
+    mi"). The test now never serves the arrivals files; the card with the
+    real module is `pf_forecast_e2e`'s job.
+  - `tab_retap_e2e` "back to Cars: the same car at the top, in the same
+    place (the alert card is above it)": the car came back in place (14 px
+    before and after); the alert card was still on screen at the test's
+    fixed 1800 px with today's list. The same failure on main without the
+    change (run by the hub). The test now scrolls past the card.
+  Re-run: `pf_plan_e2e` ALL PASS (91), `tab_retap_e2e` ALL PASS,
+  `pf_forecast_e2e` PASS, `watch_forecast_e2e` PASS.
+- **Pushed to main 12:55 UTC (416ab407), sw `jh-v218`.** Live check queued
+  behind the deploy and the CDN.
+- **Round 7 (interchange builder), branch `interchange/round7-1119` head
+  9a5f78e9, merged to main at 084c178d.** Cause of the 1119g WRONG
+  confirmed: `build_window` merged the windows of every page of a model
+  year before the cut test (sedan + hatchback covered the year), and an
+  undated row on one page made the year plain even when another page cut
+  it. Now the cut test runs per page. Live makes: only toyota changed, 4
+  Lexus headlight groups gained `built` gates (81145/81185-53543 IS 350
+  2012; 81070-30B51/30B61 GS 430 2006); the other seven are byte-identical.
+  Hub's own `live_diff.py`: 0 added groups, 0 gained app-years, 0 widened
+  gates; `test_round7_1119` 21 checks; quick regression 74/0/0. Shipped
+  pairs: plain 290,089 -> 290,075; if equipped 14,264 -> 14,278.
+- Nissan candidate after round 7: 171 -> 153 shippable groups; plain pairs
+  30,048 -> 24,198. Held: cross-position 5 groups (the number sits in a
+  different door on different models), starred 47 groups, note cap 61
+  groups, inferred cab 6, transmission tie 7.
+- **Eighth independent nissan check started 12:58 UTC**: fresh agent,
+  blind, seed 15841119, candidate at 084c178d, branch
+  `interchange/verify-nissan-1119h`. Its brief now asks, for every sampled
+  vehicle-year, for each body page on its own, the changeover month, option
+  ties, hybrids, the door, and unexplained marks, and for the verdicts that
+  would change under a one-month-different build span. Used seeds:
+  46021118, 61181118, 73901118, 38271119, 52941119, 27641119, 91371119,
+  15841119.
+- For the owner, from round 7 (not acted on): a class sized but left alone:
+  two same-option numbers on a page, both undated, no date anywhere (36
+  vehicle-years on nissan, but 155 vehicle-years / 97 groups / 13,892 plain
+  rows on gm); naming the donor's door on the row would let the 5
+  cross-position groups ship (an app change); the note cap now refuses 61
+  nissan groups.
