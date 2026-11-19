@@ -373,8 +373,9 @@ try {
       pc && pc.ctx.make === sk[1] && pc.ctx.model === sk[2] && pc.ctx.year === sk[0]
       && pc.ctx.yrMin === (exp.w ? exp.w[0] : null) && pc.ctx.yrMax === (exp.w ? exp.w[1] : null)
       && pc.ctx.lat === exp.c.lat && pc.ctx.lng === exp.c.lng && pc.ctx.radiusMi === exp.r && pc.ctx.where === 'parts'
-      && JSON.stringify(Object.keys(pc.ctx).filter(k => k !== 'specs').sort()) === JSON.stringify(['lat', 'lng', 'make', 'model', 'radiusMi', 'where', 'year', 'yrMax', 'yrMin'])
-      && (pc.ctx.specs === undefined || (Array.isArray(pc.ctx.specs) && pc.ctx.specs.length > 0 && pc.ctx.specs.every(x => x.make && x.model && x.yrMin <= x.yrMax && Object.keys(x).length === 4))),
+      && JSON.stringify(Object.keys(pc.ctx).filter(k => k !== 'specs' && k !== 'lotNow').sort()) === JSON.stringify(['lat', 'lng', 'make', 'model', 'radiusMi', 'where', 'year', 'yrMax', 'yrMin'])
+      && (pc.ctx.specs === undefined || (Array.isArray(pc.ctx.specs) && pc.ctx.specs.length > 0 && pc.ctx.specs.every(x => x.make && x.model && x.yrMin <= x.yrMax && Object.keys(x).length === 4)))
+      && (pc.ctx.lotNow === undefined || (pc.ctx.specs && pc.ctx.lotNow.donors <= pc.ctx.lotNow.cars)),
       JSON.stringify({ pc, exp }));
     check('forecast stub: the forecast takes space when filled', fr.forecast.h > 0, JSON.stringify(fr.forecast));
     countProof('forecast stub: count proof', fr);
