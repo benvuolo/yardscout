@@ -1,0 +1,8 @@
+{
+ "changed": 0,
+ "held": 0,
+ "note": "round10-1119: window-regulator groups whose catalog part name is a motor gain 'window motor only' on the finished note (change 'phrase'); a note the words take past the cap, mixed or unreadable names hold the group (change 'held'). Names with site:file:line.",
+ "ns": "nissan",
+ "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
+ "rows": []
+}

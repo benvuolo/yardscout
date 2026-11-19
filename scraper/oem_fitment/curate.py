@@ -1421,6 +1421,7 @@ class Curation:
         self.release_notes = policy.release_notes()
         self.released_exterior = []
         self.round9_rows, self.round9_names = [], []
+        self.round10_rows = []
         brand0 = brand
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
@@ -1871,6 +1872,16 @@ class Curation:
                 text, drv, gate_by_T = lim2["text"], lim2["drv"], lim2["gates"]
                 apps = _runs(Ts)
             slot = "+".join(sorted(slots)) or "C"
+            if self.ns in ROUND10B_NS and self.ns not in ROUND10_NS and cat == "window-regulator":
+                dis = self._name_disagree(c, cat)
+                if dis:
+                    why = "the names disagree in kind (" + "/".join(dis["kinds"]) + ")"
+                    self.refuse("held_name_disagree", cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                                detail=why)
+                    self.round10_rows.append({"cat": cat, "pn": pns, "class": None, "change": "held",
+                                              "reason": "held_name_disagree", "detail": why,
+                                              "names_all_fields": dis["names"]})
+                    continue
             if self.ns in ROUND9_NS:
                 # round9-1119 A: the number's catalog part name decides the
                 # note's words; a name the rule cannot place holds the group
@@ -1882,6 +1893,32 @@ class Curation:
                                              "detail": nm["hold"], "names": nm["names"]})
                     continue
             note = _likely_note(brand, pns[0], text, _pack_text(cat, self._note_pack(c, cat), slot))
+            if self.ns in ROUND10_NS and cat == "window-regulator":
+                r10 = self._r10_class(c, cat)
+                pack0 = _pack_text(cat, self._note_pack(c, cat), slot)
+                row = {"cat": cat, "pn": pns, "class": r10["class"], "names": r10["names"], "old_note": note}
+                why10 = None
+                dis = self._name_disagree(c, cat)
+                row["names_all_fields"] = [{"field": f, "name": n, "ref": p_, "kind": _kind10b(n) or None}
+                                           for f, n, p_ in self._wide_names(c, cat)]
+                if dis:
+                    why10 = ("held_name_disagree", "the names disagree in kind (" + "/".join(dis["kinds"]) + ")")
+                elif r10["class"] not in ("motor", "regulator"):
+                    why10 = ("held_part_name", r10["hold"])
+                elif r10["class"] == "motor" and pack0 != PACK_TEXT["motor"]:
+                    if pack0:
+                        why10 = ("held_part_name", f"motor name, packaging words '{pack0}'")
+                    elif not _likely_note_fits(brand, pns[0], text, PACK_TEXT["motor"]):
+                        why10 = ("held_motor_words_cap", "'window motor only' takes the note past "
+                                                         f"{policy.NOTE_MAX_LEN} characters")
+                    else:
+                        note = _likely_note(brand, pns[0], text, PACK_TEXT["motor"])
+                        self.round10_rows.append(dict(row, change="phrase", new_note=note))
+                if why10:
+                    self.refuse(why10[0], cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                                detail=why10[1][:200])
+                    self.round10_rows.append(dict(row, change="held", reason=why10[0], detail=why10[1]))
+                    continue
             if self.ns in ROUND9_NS:
                 nm = self._name_class(c, cat)
                 self.round9_names.append({"cat": cat, "pn": pns, "class": nm["class"], "names": nm["names"],
@@ -3370,6 +3407,50 @@ class Curation:
                 cache[(c.key, cat)] = "motor" if self._name_class(c, cat)["class"] == "motor" else c.packaging
             return cache[(c.key, cat)]
         return c.packaging
+
+    def _wide_names(self, c, cat) -> list:
+        """round10b: [(field, name, 'site:file:Lline')] every naming field the
+        raw prints for the number: list rows on every page (main, aux) and the
+        product records (name, aux, description, other_names), each
+        ';'-separated value on its own."""
+        out = set()
+        for lr in self._pn_list_rows(c.key, cat):
+            for fld in ("main", "aux"):
+                for n in str(getattr(lr, fld, "") or "").split(";"):
+                    if n.strip():
+                        out.add((f"list.{fld}", n.strip(), f"{lr.site}:lists:L{lr.line}"))
+        for r in c.records:
+            for fld in ("name", "aux", "description", "other_names"):
+                for n in str(getattr(r, fld, "") or "").split(";"):
+                    if n.strip():
+                        out.add((f"record.{fld}", n.strip(), r.pointer))
+        return sorted(out)
+
+    def _name_disagree(self, c, cat) -> dict | None:
+        """round10b: {'kinds', 'names'} when the number's names disagree in
+        kind (a motor beside a regulator or regulator-with-motor), else None."""
+        names = self._wide_names(c, cat)
+        kinds = {k for _f, n, _p in names if (k := _kind10b(n))}
+        if "motor" in kinds and kinds & {"regulator", "regulator+motor"}:
+            return {"kinds": sorted(kinds),
+                    "names": [{"field": f, "name": n, "ref": p_, "kind": _kind10b(n) or None} for f, n, p_ in names]}
+        return None
+
+    def _r10_class(self, c, cat) -> dict:
+        """round10: 'motor' / 'regulator' from every catalog name the raw prints
+        for the number (list rows on every page, product records); 'mixed' when
+        both, 'other' when a name is neither, None (held) with no name."""
+        names = self._class_names(c, cat)
+        heads = sorted({re.sub(r"\s+", " ", n.split(",")[0]).strip() for n, _p in names})
+        kinds = {"motor" if _R10_MOTOR_RE.match(h) else "regulator" if _R10_REG_RE.match(h) else "other"
+                 for h in heads}
+        cls = None if not kinds else "mixed" if {"motor", "regulator"} <= kinds else \
+            "other" if "other" in kinds else kinds.pop()
+        hold = None if cls in ("motor", "regulator") else \
+            "no catalog part name in the raw" if cls is None else \
+            ("the names mix a motor and a regulator: " if cls == "mixed" else "a name is neither a motor nor a "
+             "regulator: ") + "; ".join(heads)[:160]
+        return {"class": cls, "names": [{"name": n, "ref": p_} for n, p_ in names], "heads": heads, "hold": hold}
 
     def round9_tests(self, c, cat, T, gate) -> list:
         """B1-B4 for one vehicle-year: [(reason, detail)]."""
@@ -5683,6 +5764,41 @@ ROUND8_NS = frozenset({"nissan"})
 #     with a drive word, the row names none and no gate reads it;
 #  C  the label and note name the site the pages came from (Infiniti catalog).
 ROUND9_NS = frozenset({"nissan"})
+# round10-1119 (hub 2026-11-19, after round 9's A5 measure): live makes whose
+# window-regulator motor numbers ("Motor - Window Regulator", "Window Motor",
+# "Motor Assembly-Regulator") said nothing about it: positions.packaging()
+# reads those names as 'reg?' because the head also says "Regulator", and
+# 'reg?' has no words. positions.py feeds policy_sha256, so the reading is
+# here: the finished note gains 'window motor only' and nothing else changes;
+# a note the words would take past the cap, a number whose names mix a motor
+# and a regulator, or one with no name in the raw, holds the group.
+ROUND10_NS = frozenset({"mopar", "subaru"})
+_R10_MOTOR_RE = re.compile(r"^\s*(?:power\s+)?(?:window\s+)?motor\b", re.I)
+# round10b-1119 (hub, after the round-10 check: mopar 68079283AB is named
+# "Motor - Window Regulator" / "Window Motor" but its record's description
+# says "Window Regulator, Front Driver Side"): the kind is read from every
+# naming field the raw prints (list rows main, aux; records name, aux,
+# description, other_names; ';'-separated values apart). A number whose
+# names disagree in kind, a motor beside a regulator or a regulator with its
+# motor, gets no packaging words and its group is held (mopar, subaru, nissan).
+ROUND10B_NS = frozenset({"mopar", "subaru", "nissan"})
+_R10B_REGMOTOR_RE = re.compile(r"\bmotor\s+(?:and|&)\s+regulator\b|\bregulator\s+(?:and|&)\s+motor\b|"
+                               r"\bregulator\b.*\b(?:with|w/)\s*motor\b", re.I)
+_R10B_MOTOR_RE = re.compile(r"^\s*(?:power\s+)?(?:window\s+)?motor\b|\b(?:window|regulator)\s+motor\b|"
+                            r"\bmotor\s+ass(?:y|embly)\b", re.I)
+_R10B_REG_RE = re.compile(r"\bregulator\b", re.I)
+
+
+def _kind10b(name: str) -> str:
+    """'regulator+motor' | 'motor' | 'regulator' | '' (says neither)."""
+    if _R10B_REGMOTOR_RE.search(name):
+        return "regulator+motor"
+    if _R10B_MOTOR_RE.search(name):
+        return "motor"
+    return "regulator" if _R10B_REG_RE.search(name) else ""
+
+
+_R10_REG_RE = re.compile(r"^\s*(?:power\s+)?(?:(?:front|rear)\s+)?(?:door\s+)?(?:window\s+)?regulator\b", re.I)
 _NAME_MOTOR_RE = re.compile(r"^\s*motor\s+ass(?:y|embly)\b", re.I)
 _NAME_REG_RE = re.compile(r"^\s*regulator\s+ass(?:y|embly)\b", re.I)
 _NAME_COMPONENT_RE = re.compile(r"^\s*(glass|cover|lens|bezel|knob|cap|garnish|holder|bulb|socket|finisher|"
@@ -6349,6 +6465,15 @@ def main(argv=None) -> int:
                 "ns": ns, "groups": len(cur9.round9_names),
                 "by_category_class": dict(sorted(Counter(f"{x['cat']}:{x['class']}" for x in cur9.round9_names).items())),
                 "rows": cur9.round9_names})
+        r10 = getattr(results[ns], "round10_rows", None)
+        if ns in ROUND10B_NS and r10 is not None:
+            write_json(out / "_report" / f"{ns}.round10.json", {
+                "note": "round10-1119: window-regulator groups whose catalog part name is a motor gain 'window "
+                        "motor only' on the finished note (change 'phrase'); a note the words take past the cap, "
+                        "mixed or unreadable names hold the group (change 'held'). Names with site:file:line.",
+                "ns": ns, "raw": results[ns].src.commit or "fixtures",
+                "changed": sum(r["change"] == "phrase" for r in r10), "held": sum(r["change"] == "held" for r in r10),
+                "rows": r10})
         r7 = getattr(results[ns], "round7_held", None)
         if r7:
             write_json(out / "_report" / f"{ns}.round7_held.json", {
