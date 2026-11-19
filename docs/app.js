@@ -9302,8 +9302,10 @@ document.getElementById('pf-results').addEventListener('change', e => {
   // the results container inherited nowrap into every line — the header grew
   // past the viewport and iOS zoomed the whole page out to fit it.
   document.getElementById('pf-results').classList.toggle('pf-vonly-on', pfVerifiedOnly);
-  // The yards card counts only the rows the list shows: count again.
+  // The yards card counts only the rows the list shows: count again; the
+  // forecast redraws with the specs that view shows.
   pfPlanRefresh();
+  pfPlanForecastMount();
   track(pfVerifiedOnly ? 'pf-verified-only-on' : 'pf-verified-only-off');
 });
 
@@ -9951,7 +9953,7 @@ function pfOemDonorGate(apps, v, ex) {
   return { verdict: 'unconfirmed', warn: `if equipped: ${lines.join('; ')}` };
 }
 /* OEM-GATE END */
-function pfAmRows(s, groups, results, radius, fam) {
+function pfAmRows(s, groups, results, radius, fam, specs) {
   let hit = 0;
   for (const g of groups || []) {
     if (g.cat !== pfCat.id || g.src !== 'aftermarket' || !Array.isArray(g.apps)) continue;
@@ -9962,6 +9964,9 @@ function pfAmRows(s, groups, results, radius, fam) {
     }
     if (!sRows.length) continue;
     hit++;
+    // Forecast specs (DONOR MODELS): every application of this unit, Likely
+    // (aftermarket rows are never Verified).
+    if (specs) for (const a of g.apps) pfSpecPush(specs, a, null, 'likely');
     const srcLine = escapeHtml(pfAmSourceText(g));
     const sEngines = [...new Set(sRows.map(a => a[4]).filter(Boolean))];
     let yours = sEngines.length
@@ -10242,12 +10247,13 @@ function pfPlanItems(rows) {
   });
 }
 /** Start a card for this render: rows = exactly the rows the list renders. */
-function pfPlanStart(rows, s, radius, variants, famId, total) {
+function pfPlanStart(rows, s, radius, variants, famId, total, specs) {
   const key = [pfCat && pfCat.id, s.year, s.make, s.model, famId || '', radius || ''].join('|');
   if (pfPlanView.key !== key) pfPlanView = { key, order: 'most', yard: '', all: false };
   const w = pfGenWindow(s.make, s.model, s.year);
   pfPlan = {
     rows, variants, radius, total: Math.max(total || 0, rows.length), perEach: !!(pfCat && pfCat.perEach),
+    specs: Array.isArray(specs) ? specs : [],
     ctx: { make: s.make, model: s.model, year: s.year, yrMin: w ? w[0] : null, yrMax: w ? w[1] : null,
       lat: activeZipCoords ? activeZipCoords.lat : null, lng: activeZipCoords ? activeZipCoords.lng : null,
       radiusMi: radius || null, where: 'parts' },
@@ -10333,7 +10339,45 @@ function pfPlanAfterRender() {
   if (!card || !pfPlan) return;
   pfPlanApplyFilter();
   if (!_pfPlanShown.has(pfPlanView.key)) { _pfPlanShown.add(pfPlanView.key); pfPlanCount('shown'); }
-  ysForecastMount(card.querySelector('.pf-forecast'), pfPlan.ctx);
+  pfPlanForecastMount();
+}
+/* ===== DONOR MODELS (the card's forecast, 2026-11-19) =====
+ * pfRunSearch collects, beside the rows, the vehicle specs its own matching
+ * accepts for the search ({make, model, yrMin, yrMax, tier}): the engine
+ * family's applications (inside the part's years) and the number lists that
+ * name the seeker, the platform and catalog groups that name the seeker, the
+ * aftermarket units that list the seeker, and the seeker's own generation.
+ * They come from the definitions, not from the cars on the lot today. The
+ * forecast counts every arrival of those specs ("Donor models"); with
+ * "Verified fits only" on, only the Verified-tier specs (the rows the list
+ * then shows). A set that is exactly the own generation reads as before. */
+function pfSpecPush(specs, app, years, tier) {
+  if (!specs || !app || !app[0] || !app[1]) return;
+  let lo = app[2], hi = app[3];
+  if (years) { lo = Math.max(lo, years[0]); hi = Math.min(hi, years[1]); }
+  if (!(Number.isFinite(lo) && Number.isFinite(hi) && lo <= hi)) return;
+  specs.push({ make: app[0], model: app[1], yrMin: lo, yrMax: hi, tier });
+}
+/** The forecast ctx for the card now: the specs the list's view shows. */
+function pfPlanForecastCtx() {
+  const specs = (pfPlan.specs || []).filter(sp => !pfVerifiedOnly || sp.tier === 'verified')
+    .map(sp => ({ make: sp.make, model: sp.model, yrMin: sp.yrMin, yrMax: sp.yrMax }));
+  return specs.length ? { ...pfPlan.ctx, specs } : { ...pfPlan.ctx };
+}
+const _pfDonorCounted = new Set();
+function pfPlanForecastMount() {
+  const el = document.querySelector('#pf-results .pf-plan .pf-forecast');
+  if (!el || !pfPlan) return;
+  const key = pfPlanView.key;
+  try {
+    if (!(window.YSForecast && typeof window.YSForecast.mount === 'function')) return;
+    Promise.resolve(window.YSForecast.mount(el, pfPlanForecastCtx())).then(() => {
+      if (el.querySelector('[data-ysf-kind="donor-models"]') && !_pfDonorCounted.has(key)) {
+        _pfDonorCounted.add(key);
+        try { sendEvent('pf-forecast/donor-models'); } catch (e) { /* never break */ }
+      }
+    }, () => {});
+  } catch (e) { /* the forecast must never break the list */ }
 }
 /** The forecast hook: docs/forecast.js defines window.YSForecast. Absent, the
  * mount point stays empty (CSS :empty hides it). */
@@ -10416,6 +10460,7 @@ function pfRunSearch() {
 
   const radius = effectiveRadiusMi();
   const results = new Map();  // vehicle id -> result row (verified wins)
+  const specs = [];           // the vehicle specs the matching below accepts (DONOR MODELS)
   let famNote = '';
   let groupNotes = [];
 
@@ -10434,7 +10479,7 @@ function pfRunSearch() {
     // Aftermarket unit lists (alternator, starter) can answer a car no
     // engine family covers (MINI, Land Rover...): Likely rows only.
     const amOnly = fam0 => {
-      const n = pfAmRows(s, lazy.amGroups, results, radius, fam0);
+      const n = pfAmRows(s, lazy.amGroups, results, radius, fam0, specs);
       if (n) groupNotes.push(PF_AM_HEAD);
       return n;
     };
@@ -10501,6 +10546,24 @@ function pfRunSearch() {
     const vgs = [...(part.vg || []).map(g => [g, false]), ...oemVg.map(g => [g, true])];
     const seekerApp = fam.apps.find(a => pfAppMatches(a, s.year, s.make, s.model));
     const seekerAmbig = seekerApp && seekerApp[5];
+    // Forecast specs (DONOR MODELS): the family's applications inside the
+    // part's years, Likely; Verified-tier where the rows below can be
+    // Verified for them (a published number list naming the seeker, as the
+    // tier rule below; engine assemblies: an unambiguous application).
+    for (const a of fam.apps) {
+      pfSpecPush(specs, a, part.years, pfCat.id === 'engine-assembly' && !a[5] && !seekerAmbig ? 'verified' : 'likely');
+    }
+    if (pfCat.id !== 'engine-assembly' && !seekerAmbig) {
+      for (const [g] of vgs) {
+        if (!g.some(sp => pfAppMatches(sp, s.year, s.make, s.model))) continue;
+        for (const sp of g) {
+          for (const a of fam.apps) {
+            if (a[5] || pfSquash(a[1]) !== pfSquash(sp[1]) || !a[0].toLowerCase().split('|').some(m => sp[0].toLowerCase().split('|').includes(m))) continue;
+            pfSpecPush(specs, [sp[0], sp[1], Math.max(sp[2], a[2]), Math.min(sp[3], a[3])], part.years, 'verified');
+          }
+        }
+      }
+    }
     if (seekerAmbig) groupNotes.push('Your car: ' + seekerAmbig);
     for (const v of liveInventory) {
       if (part.years && (v.year < part.years[0] || v.year > part.years[1])) continue;
@@ -10560,7 +10623,7 @@ function pfRunSearch() {
       results.set(v.id, { v, d, tier, warns, ...(tier === 'verified' && viaOem ? { src: 'oem' } : {}), ...(sameEngine ? { src: 'same-engine' } : {}) });
     }
     // Aftermarket donors this family's data didn't list (Likely, unit named).
-    if (pfAmRows(s, lazy.amGroups, results, radius, fam)) groupNotes.push(PF_AM_HEAD);
+    if (pfAmRows(s, lazy.amGroups, results, radius, fam, specs)) groupNotes.push(PF_AM_HEAD);
     }
   } else {
     // Chassis-side kinds (spec §3): body = platform groups + same-model
@@ -10604,6 +10667,7 @@ function pfRunSearch() {
         // missing, misspelled or unknown tier renders Likely.
         const gTier = g.tier === 'verified' ? 'verified' : 'likely';
         groupNotes.push(`${g.label}: ${g.note}`);
+        for (const a of g.apps) pfSpecPush(specs, a, null, gTier);   // DONOR MODELS
         for (const v of liveInventory) {
           if (!g.apps.some(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model))) continue;
           const d = vehicleDistanceMi(v);
@@ -10637,6 +10701,8 @@ function pfRunSearch() {
         // number listed only for some versions of the car says so up top
         if (sApps.every(a => pfOemGateParse(a[5]))) sApps.forEach(a => oemSeekerGates.add(pfOemGateText(a[5])));
         const gTier = (!fromLazy && g.tier === 'verified') ? 'verified' : 'likely';
+        // DONOR MODELS: a gated application is never Verified (as the rows)
+        for (const a of g.apps) pfSpecPush(specs, a, null, gTier === 'verified' && !pfOemGateParse(a[5]) ? 'verified' : 'likely');
         if (gTier === 'likely') oemLikelyHit = true;
         else groupNotes.push(`${g.label}: ${g.note}`);
         for (const v of liveInventory) {
@@ -10690,13 +10756,15 @@ function pfRunSearch() {
     // Aftermarket unit lists (Spectra, GSP/1A…) for chassis-side categories:
     // Likely rows that name their unit, before same-generation donors (a donor
     // both lists gains the unit line). Never Verified, never engine-family.
-    if (pfAmRows(s, lazy.amGroups, results, radius, famFilter)) groupNotes.push(PF_AM_HEAD_PART);
+    if (pfAmRows(s, lazy.amGroups, results, radius, famFilter, specs)) groupNotes.push(PF_AM_HEAD_PART);
     // Same model, same generation. Two honest sources, donor-row first:
     // (1) the donor's own researched part row carries a fits window;
     // (2) the factory generation table — seeker and donor years inside ONE
     //     window of the same model. Both are Likely, never Verified.
     const sKey = pfSquashModel(s.model, s.make);
     const sWin = pfGenWindow(s.make, s.model, s.year);
+    // DONOR MODELS: the seeker's own generation (Likely, as its rows)
+    if (sWin) specs.push({ make: s.make, model: s.model, yrMin: sWin[0], yrMax: sWin[1], tier: 'likely' });
     for (const v of liveInventory) {
       if (results.has(v.id)) continue;  // verified group row already won
       if (canonicalMake(v.make) !== s.make) continue;
@@ -10731,7 +10799,7 @@ function pfRunSearch() {
   const nVer = rows.filter(r => r.tier === 'verified').length;
   const nSame = rows.filter(r => r.src === 'same-engine').length;
   if (!rows.length) {
-    out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly &mdash; widen the search area, or watch for one below.</div>${pfPlanStart([], s, radius, [], pfChosenFam)}${pfWatchHtml(s)}`;
+    out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly &mdash; widen the search area, or watch for one below.</div>${pfPlanStart([], s, radius, [], pfChosenFam, 0, specs)}${pfWatchHtml(s)}`;
     pfPlanAfterRender();
     pfRenderTiles(); pfRevealResults();
     return;
@@ -10748,7 +10816,7 @@ function pfRunSearch() {
   }
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'} in range</strong> ${rows.length === 1 ? 'It carries' : 'They carry'} ${/s$/.test(pfCat.label) ? '' : 'a '}fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)}. ${pfSort === 'new' ? 'Newest arrivals first' : 'Nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
     // Best yards for this part: the rows rendered below, by yard.
-    + pfPlanStart(rows.slice(0, CAP), s, radius, quoteVariants, pfChosenFam, rows.length)
+    + pfPlanStart(rows.slice(0, CAP), s, radius, quoteVariants, pfChosenFam, rows.length, specs)
     + pfWatchHtml(s, true)
     + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit', nSame)

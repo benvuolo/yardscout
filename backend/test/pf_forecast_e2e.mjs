@@ -46,15 +46,23 @@ const INDEX = {
     ['Sample Yard - Stale', 37.40, -121.95, 8, 1],
     ['Sample Yard - Far Away', 45.5, -122.6, 8, 0],
   ],
-  makes: { Toyota: ['toyota', 0] },
+  makes: { Toyota: ['toyota', 0], Lexus: ['lexus', 0] },
 };
 const TOYOTA = {
   builtAt: BUILT, windowEnd: '2026-11-18', make: 'Toyota', slug: 'toyota',
-  models: { Camry: [[0, 2009, 2, 1, 3, 2, 1, 2, 3, 4], [1, 2010, 1, 1, 0, 1, 2, 1, 1, 2], [1, 1999, 5, 5, 5, 5, 5, 5, 5, 5], [3, 2009, 9, 9, 9, 9, 9, 9, 9, 9]] },
+  models: {
+    Camry: [[0, 2009, 2, 1, 3, 2, 1, 2, 3, 4], [1, 2010, 1, 1, 0, 1, 2, 1, 1, 2], [1, 1999, 5, 5, 5, 5, 5, 5, 5, 5], [3, 2009, 9, 9, 9, 9, 9, 9, 9, 9]],
+    // donor models of a 2004 4Runner alternator (the real 2UZ family's applications)
+    '4Runner': [[0, 2004, 1, 0, 1, 0, 1, 0, 1, 0], [1, 2012, 3, 3, 3, 3, 3, 3, 3, 3]],
+    Tundra: [[0, 2005, 1, 1, 1, 1, 1, 1, 1, 1], [1, 2003, 0, 1, 0, 1, 0, 1, 0, 1]],
+    Sequoia: [[1, 2006, 0, 0, 1, 0, 0, 1, 0, 1]],
+    'Land Cruiser': [[0, 2001, 0, 0, 0, 0, 0, 0, 1, 0]],
+  },
 };
-const ARRIVALS = { 'index.json': INDEX, 'toyota.json': TOYOTA };
+const LEXUS = { builtAt: BUILT, windowEnd: '2026-11-18', make: 'Lexus', slug: 'lexus', models: { 'GX 470': [[1, 2005, 0, 0, 0, 1, 0, 0, 0, 0]] } };
+const ARRIVALS = { 'index.json': INDEX, 'toyota.json': TOYOTA, 'lexus.json': LEXUS };
 
-async function open(browser, { arrivals = true } = {}) {
+async function open(browser, { arrivals = true, without = [] } = {}) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, serviceWorkers: 'block' });
   const page = await ctx.newPage();
   await page.route('**/*', async (route) => {
@@ -67,7 +75,7 @@ async function open(browser, { arrivals = true } = {}) {
     }
     if (u.hostname === 'yardscout.io') {
       const a = u.pathname.match(/\/data\/arrivals\/([^/]+\.json)$/);
-      if (a) return arrivals && ARRIVALS[a[1]] ? route.fulfill({ json: ARRIVALS[a[1]] }) : route.fulfill({ status: 404, body: '' });
+      if (a) return arrivals && ARRIVALS[a[1]] && !without.includes(a[1]) ? route.fulfill({ json: ARRIVALS[a[1]] }) : route.fulfill({ status: 404, body: '' });
       const f = fileFor(u.pathname);
       if (f) return route.fulfill({ path: f, contentType: TYPES[path.extname(f)] || 'application/octet-stream' });
       return route.fulfill({ status: 404, body: '' });
@@ -83,11 +91,11 @@ async function open(browser, { arrivals = true } = {}) {
   page.on('pageerror', (e) => errors.push(String(e.message).slice(0, 200)));
   await page.goto('https://yardscout.io/', { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => typeof liveLoaded !== 'undefined' && liveLoaded && typeof activeZipCoords !== 'undefined' && activeZipCoords, null, { timeout: 120000 });
-  await page.evaluate(() => { window.sendEvent = () => {}; });
+  await page.evaluate(() => { window.__ev = []; window.sendEvent = (e) => window.__ev.push(e); });
   return { ctx, page, errors };
 }
 
-async function partsSearch(page, [year, make, model], cat) {
+async function partsSearch(page, [year, make, model], cat, fam) {
   await page.click(".tab[data-tab='parts']");
   await page.waitForSelector('#tab-parts.active', { timeout: 20000 });
   await page.waitForFunction(() => typeof interchangeData !== 'undefined' && interchangeData, null, { timeout: 60000 }).catch(() => page.evaluate(() => loadInterchange()));
@@ -96,7 +104,7 @@ async function partsSearch(page, [year, make, model], cat) {
   await page.selectOption('#pf-make', make);
   await page.waitForFunction((md) => [...document.getElementById('pf-model').options].some(o => o.value === md), model, { timeout: 10000 });
   await page.selectOption('#pf-model', model);
-  await page.evaluate((cat) => { pfCat = interchangeData.categories.find(c => c.id === cat); pfPartInput.value = pfCat.label; pfRunSearch(); }, cat);
+  await page.evaluate(([cat, fam]) => { pfCat = interchangeData.categories.find(c => c.id === cat); pfPartInput.value = pfCat.label; if (fam) pfChosenFam = fam; pfRunSearch(); }, [cat, fam || null]);
   await page.waitForFunction(() => document.querySelector('#pf-results .pf-plan'), null, { timeout: 30000 });
 }
 
@@ -158,6 +166,66 @@ try {
     const yards = await page.evaluate(() => document.querySelectorAll('#pf-results .pf-plan .pf-plan-yard').length);
     check('the card shows its yards', yards >= 1, String(yards));
     check('the forecast mount point is empty and takes no space', !!f && f.text === '' && f.h === 0, JSON.stringify(f));
+    check('no page error', errors.length === 0, errors.join(' | '));
+    await ctx.close();
+  }
+
+  console.log('4. Donor models: a 2004 4Runner alternator counts the engine family\'s models');
+  const RUNNER = [2004, 'Toyota', '4Runner'];
+  const FAM = 'toyota-2uz';
+  const donorText = (page) => page.waitForFunction(() => { const e = document.querySelector('#pf-results .pf-plan .pf-forecast .ysf'); return e && e.innerText.trim().length > 20; }, null, { timeout: 15000 }).catch(() => {});
+  {
+    const { ctx, page, errors } = await open(browser);
+    await partsSearch(page, RUNNER, 'alternator', FAM);
+    await donorText(page);
+    const specs = await page.evaluate(() => pfPlan.specs.map(s => `${s.make} ${s.model} ${s.yrMin}-${s.yrMax} ${s.tier}`));
+    console.log('  specs: ' + specs.join('; '));
+    const f = await readForecast(page, '#pf-results .pf-plan .pf-forecast');
+    const kind = await page.evaluate(() => !!document.querySelector('#pf-results .pf-forecast [data-ysf-kind="donor-models"]'));
+    check('the donor set comes from the family\'s applications (Toyota and Lexus, not the lot)', specs.some(x => /^Lexus GX 470/.test(x)) && specs.some(x => /^Toyota Tundra/.test(x)), specs.join('; '));
+    check('subject "Donor models"', kind && /^Donor models/i.test(f.text), f && f.text);
+    // fixture, 2 counted yards: Tundra 8 + 4 = 12, 4Runner (2003-09) 4, Sequoia 3, GX 470 1, Land Cruiser 1 -> 21
+    check('headline and facts: the existing rules over the summed models', /in the last 8 weeks at 2 yards/.test(f.text) && /^Donor models About (one|\d+) (a week|every \d+ weeks) lands? within 100 mi/i.test(f.text) && /21 in the last 8 weeks/.test(f.text), f && f.text);
+    check('models line: three, most arrivals first, then "and 3 more"', /2000-09 Tundra, 2003-09 4Runner, 2001-09 Sequoia and 3 more/.test(f.text), f && f.text);
+    const more = await page.evaluate(() => { const d = document.querySelector('#pf-results .ysf-models-more'); const t = d.querySelector('summary').title; d.querySelector('summary').click(); return { t, rest: d.querySelector('.ysf-models-rest').innerText, open: d.open }; });
+    check('"and 3 more" opens the rest (and names them in its title)', more.open && /GX 470/.test(more.rest) && /LX 470/.test(more.rest) && /Land Cruiser/.test(more.t), JSON.stringify(more));
+    check('the caveat and the "not a promise" label', /Counts every car of these models and years\. The list shows, car by car, which have the right engine and options\./.test(f.text) && /Past weeks, not a promise\./.test(f.text), f && f.text);
+    check('never "donor cars", "carry", "have the part", "first", "only", "largest" in the forecast', !/donor car|carr(y|ies)|have the part|\bfirst\b|\bonly\b|largest/i.test(f.text.replace(/^Donor models/i, '')), f && f.text);
+    check('no horizontal overflow', f.right <= f.vw + 1 && f.scrollW <= f.vw + 1, JSON.stringify(f));
+    const ev = await page.evaluate(() => window.__ev.filter(e => e === 'pf-forecast/donor-models').length);
+    await page.evaluate(() => pfRunSearch());   // a re-render of the same search
+    await donorText(page);
+    const ev2 = await page.evaluate(() => window.__ev.filter(e => e === 'pf-forecast/donor-models').length);
+    check('counter pf-forecast/donor-models once per search', ev === 1 && ev2 === 1, `${ev} ${ev2}`);
+    // "Verified fits only": the forecast redraws with the Verified-tier specs (none here: the own model)
+    const vSpecs = await page.evaluate(() => pfPlan.specs.filter(s => s.tier === 'verified').length);
+    await page.check('#pf-vonly-cb');
+    await page.waitForFunction(() => !document.querySelector('#pf-results .pf-forecast [data-ysf-kind="donor-models"]') && /4RUNNER/i.test((document.querySelector('#pf-results .pf-forecast') || {}).innerText || ''), null, { timeout: 10000 }).catch(() => {});
+    const fv = await readForecast(page, '#pf-results .pf-plan .pf-forecast');
+    check('verified only on: redraws with the narrower set (' + vSpecs + ' Verified specs: the own model)', vSpecs === 0 && /^2003-2009 4Runner/i.test(fv.text) && !/Donor models/i.test(fv.text), fv && fv.text);
+    await page.uncheck('#pf-vonly-cb');
+    await donorText(page);
+    await page.waitForTimeout(300);
+    const fb = await readForecast(page, '#pf-results .pf-plan .pf-forecast');
+    check('verified only off: the donor models again', /^Donor models/i.test(fb.text), fb && fb.text);
+    check('no page error', errors.length === 0, errors.join(' | '));
+    if (process.env.SHOT_DONOR) {
+      await page.evaluate(() => document.querySelector('#pf-results .pf-plan .pf-forecast').scrollIntoView({ block: 'start' }));
+      await page.locator('#pf-results .pf-plan .pf-forecast').screenshot({ path: process.env.SHOT_DONOR });
+    }
+    await ctx.close();
+  }
+
+  console.log('5. Donor models, a needed make file missing: today\'s own-model forecast');
+  {
+    const { ctx, page, errors } = await open(browser, { without: ['lexus.json'] });
+    await partsSearch(page, RUNNER, 'alternator', FAM);
+    await donorText(page);
+    await page.waitForTimeout(500);
+    const f = await readForecast(page, '#pf-results .pf-plan .pf-forecast');
+    check('falls back to the own model, today\'s wording (no models line, no caveat)', /^2003-2009 4Runner/i.test(f.text) && !/Donor models|Counts every car/.test(f.text) && /4 in the last 8 weeks at 2 yards/.test(f.text), f && f.text);
+    const ev = await page.evaluate(() => window.__ev.filter(e => e === 'pf-forecast/donor-models').length);
+    check('no donor-models counter for the fallback', ev === 0, String(ev));
     check('no page error', errors.length === 0, errors.join(' | '));
     await ctx.close();
   }
