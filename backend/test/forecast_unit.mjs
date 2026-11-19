@@ -109,7 +109,11 @@ check('exactly 1 arrival: Rare here', W({ rate: 0.125, total: 1 }).headline === 
 check('exactly 1 even at a high rate (partial coverage): Rare here', W({ rate: 0.5, total: 1 }).headline.startsWith('Rare here: 1 landed'));
 check('none: None landed', W({ total: 0 }).headline === 'None landed within 50 mi in the last 8 weeks');
 check('no counted yard: Not enough history', W({ status: 'no counted yard', yardsCounted: 0 }).headline === 'Not enough history near you yet');
-check('where: "within 50 mi of Ogden"', W({ rate: 2, total: 16 }, { ...Q, where: 'Ogden' }).headline === 'About 2 a week land within 50 mi of Ogden');
+check('place: "within 50 mi of Ogden"', W({ rate: 2, total: 16 }, { ...Q, place: 'Ogden' }).headline === 'About 2 a week land within 50 mi of Ogden');
+// `where` is the surface that mounts the forecast (the app passes 'parts' or
+// 'cars'); it must never reach the sentence (hub, 2026-11-19).
+check('where is never shown: no "of parts"', W({ rate: 2, total: 16 }, { ...Q, where: 'parts' }).headline === 'About 2 a week land within 50 mi');
+check('where is never shown: no "of cars"', W({ total: 0 }, { ...Q, where: 'cars' }).headline === 'None landed within 50 mi in the last 8 weeks');
 
 check('facts: "T in the last 8 weeks at Y yards"', W({ rate: 2, total: 16 }).facts === '16 in the last 8 weeks at 3 yards');
 check('facts: one yard singular', W({ total: 0, yardsCounted: 1 }).facts === '0 in the last 8 weeks at 1 yard');
@@ -146,7 +150,7 @@ function fakeFetch(map, log) {
     return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve(JSON.parse(JSON.stringify(v))) });
   };
 }
-const ctxQ = { ...Q, radiusMi: 25, where: '84401' };
+const ctxQ = { ...Q, radiusMi: 25, place: '84401', where: 'parts' };
 {
   const log = [];
   const G = load({ fetch: fakeFetch({ 'data/arrivals/index.json': index, 'data/arrivals/toyota.json': file }, log) }).YSForecast;

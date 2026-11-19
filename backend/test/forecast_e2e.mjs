@@ -65,7 +65,7 @@ const toyota = {
   },
 };
 const FILES = { 'index.json': index, 'honda.json': honda, 'toyota.json': toyota };
-const SLC = { lat: 40.7608, lng: -111.891, radiusMi: 50, where: 'Salt Lake City' };
+const SLC = { lat: 40.7608, lng: -111.891, radiusMi: 50, place: 'Salt Lake City', where: 'parts' };
 const CIVIC = { make: 'Honda', model: 'Civic', yrMin: null, yrMax: null, ...SLC };
 const RUNNER = { make: 'Toyota', model: '4Runner', yrMin: 2003, yrMax: 2009, ...SLC };
 const PREVIA = { make: 'Toyota', model: 'Previa', yrMin: null, yrMax: null, ...SLC };
@@ -165,7 +165,7 @@ try {
     check(`${width}px: exactly one: Rare here`, r3.headline === 'Rare here: 1 landed within 50 mi of Salt Lake City in the last 8 weeks', r3.headline);
     await mount(page, { ...CIVIC, model: 'Fit' });
     check(`${width}px: none landed`, (await read(page)).headline === 'None landed within 50 mi of Salt Lake City in the last 8 weeks');
-    await mount(page, { ...CIVIC, lat: 40.53, lng: -112.30, radiusMi: 5, where: '' });
+    await mount(page, { ...CIVIC, lat: 40.53, lng: -112.30, radiusMi: 5, place: '' });
     const r4 = await read(page);
     check(`${width}px: only a new yard in reach: not enough history, no bars`, r4.headline === 'Not enough history near you yet' && r4.bars.length === 0 && r4.facts.includes('(1 yard not counted: new to YardScout)'), r4.headline + ' | ' + r4.facts);
     const st5 = await mount(page, { ...CIVIC, lat: null, lng: null });

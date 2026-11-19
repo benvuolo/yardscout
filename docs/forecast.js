@@ -13,10 +13,13 @@
  *                                 renders into el; resolves to the status, or
  *                                 null when it rendered nothing. Never throws.
  *
- * ctx = { make, model, year, yrMin, yrMax, lat, lng, radiusMi, where }.
+ * ctx = { make, model, year, yrMin, yrMax, lat, lng, radiusMi, where, place }.
  * yrMin/yrMax null = any year; `year` is used as a one-year span only when
- * yrMin and yrMax are both left out (undefined). `where` (a place name or
- * ZIP) is added to the line as "within R mi of <where>".
+ * yrMin and yrMax are both left out (undefined). `place` (a place name or
+ * ZIP, optional) is added to the line as "within R mi of <place>". `where`
+ * is the surface that mounts the forecast ('parts' in the Parts card, 'cars'
+ * in the Cars watch strip); it is never shown (hub, 2026-11-19: the app
+ * passes where: 'parts', which once read "within 100 mi of parts").
  *
  * Data comes from the same place as the app's other data: app.js's global
  * DATA_BASE ('' on the web, 'https://yardscout.io/' in the native shells).
@@ -110,7 +113,7 @@
   function words(s, q) {
     q = q || {};
     if (!s || s.status === 'no place' || s.status === 'no data') return null;
-    var r = s.radiusMi, where = q.where ? ' of ' + q.where : '';
+    var r = s.radiusMi, where = q.place ? ' of ' + q.place : '';
     var within = 'within ' + r + ' mi' + where;
     var headline;
     if (s.status === 'no counted yard') headline = 'Not enough history near you yet';
