@@ -2781,3 +2781,50 @@ one-month-wider or narrower build span.
      census of the same classes on the live makes (no live action without
      the hub).
   Then a ninth independent check on the smaller candidate.
+
+## 2026-11-19 ~13:40 UTC listing/VIN model mismatch on main; a scan started by hand
+
+- **Data builder (B), branch `data/model-mismatch-1119` head 5cb64f12,
+  merged to main at a0a467eb.** The listing/VIN check now also compares the
+  model, through a hand-sorted table `scraper/vin_model_names.json`: 505
+  name pairs (6,036 lot cars whose listed and decoded model share no word
+  after the scan's normalization), each with a one-line basis.
+  - `same` 428 pairs / 5,737 cars (another name for the same vehicle): not
+    flagged.
+  - `different` 56 pairs / 121 cars: flagged "VIN decodes as <Make> <Model>
+    (listed <model>)" in the existing mismatch field. Largest: Subaru
+    Outback / Impreza 30 (Impreza Outback Sport), Fiat 500 / 500L 12, 500 /
+    500X 10, Forester / Outback 5, Forester / Legacy 4; the 1119h car
+    (QX80 / QX60) is one of them. Hub read all 56 bases: each names two
+    plainly different vehicles.
+  - `unsure` 15 pairs / 120 cars: not flagged (Subaru Legacy / Outback 96 is
+    the large one).
+  - `decode_wrong` 6 pairs / 58 cars (the builder's addition, and right):
+    the VIN's own series and engine show the listing is right and the
+    decoder's model name is wrong (Silverado decoded "S-10" 36 cars, all
+    2001, full-size series codes; Genesis decoded "Equus" 10; FX35 decoded
+    "FX50" 12). Not flagged. So the hub's 04:xx examples of "real
+    mislabels" were mostly decoder errors.
+  - Effect of the flag, with no app change and in the released apps too:
+    the car card shows the warning; a Verified parts row drops to Likely; a
+    catalog donor is never a plain row. Cars with any VIN flag: 265 -> 381.
+  - Parts matching stays on the listing for a model mismatch (only a year
+    mismatch re-matches on the VIN today). Open for the owner: re-match the
+    121 on the VIN's model (113 parts lists would change), and the card
+    tooltip's "The VIN is used for matching", which is true for the year
+    only (an app text change; next shell batch).
+  - A broken table never fails a scan (one WARNING, year/make checks only).
+    New scan log line `[vin model] N car(s) flagged ... top unclassified`.
+  - Tests: `test_vin_model_mismatch.py` 48 checks; `test_arrivals.py` 63;
+    quick regression on the merged tree 75/0/0.
+- **Scan 44535632042 dispatched by hand at 13:39 UTC** on a0a467eb.
+  GitHub's scheduler has not started `scan.yml` since 05:13 UTC (the 08:00
+  and 12:00 slots never ran), so this is the regular 4-hourly scan, 3 h 43
+  min after the last one started, not an extra one. It will be the first
+  with arrivals rules 2 and the model flag. To check after it: the
+  `[arrivals]` line ("bulk week", `rules: 2`), the `[vin model]` line
+  (about 121 flagged), and one live load.
+- Worth the owner knowing: the scheduler gap. If GitHub keeps skipping
+  cron runs, lists go stale; the daily ops email reports scan age. A
+  second trigger (a scheduled task that dispatches the scan when the last
+  one is over 5 hours old) would close it. Not built.
