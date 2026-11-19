@@ -28,9 +28,10 @@
  "reader_sha256": {
   "draw.py": "988e5da0b3dac78da0b4b745a51ed248acd399aa0814b8f61dbfcb8dec2e8688",
   "appgate.py": "270994bda7f79bb74d724d4d90ff34e4841d904e242f813e7d95adeb070696e0",
-  "dossier.py": "e7bc59b23e958c74673c114f057bfc37eb64535d4255c00790fa63b02e287a0c"
+  "dossier.py": "e7bc59b23e958c74673c114f057bfc37eb64535d4255c00790fa63b02e287a0c",
+  "census.py": "af099ad9538c9f647f9885dd4eb7cc1f12f7b1429a2fbfc283b493d60c05be88"
  },
- "standard": "Each item is judged from the raw product-page fitment rows and each app vehicle-year's own list-page row (Fitting Vehicle Options, Production Date), plus the lot at a85c654 replayed through a Python port of the app's OEM-GATE code (pfOemDonorGate). WRONG: a car the app shows as a plain row cannot take the part per the raw evidence, judged on what the app could know: the car's own decode/listing (drive, engine, body, cab, trans, fuel) contradicts a limit the catalog states (product-page engine column, own-page option codes), or no car of an app-year can take it, or the number is a market variant (km/h cluster) whose US-market counterpart is a different number with different sharing. Trim, option-package and partial production-date limits that no decode can show are taken as carried by the group's 'fits some option packages / configurations; verify the number on the part' note (the design the app ships), and recorded as observations when the catalog names the trim plainly. RISK: the evidence for a shown row is incomplete either way. PARTIAL WORK: verdicts still being written; PENDING items are not yet judged.",
+ "standard": "Each item is judged from the raw product-page fitment rows and each app vehicle-year's own list-page row (Fitting Vehicle Options, Production Date), plus the lot at a85c654 replayed through a Python port of the app's OEM-GATE code (pfOemDonorGate, pfAppMatches; drive/body/cab/eng/fuel/trans verdicts line by line). WRONG: a car the app shows as a plain row cannot take the part per the raw evidence. That covers (a) a car whose own decode or listing contradicts a limit the catalog states (product-page engine column, own-page option codes), (b) a stated drive/body/cab/engine/trans/fuel limit that excludes a configuration the same catalog shows exists for that app-year, left ungated so those cars get plain rows (the earlier drive failure class), (c) an app-year no US car of which can take the number, (d) a market variant (km/h cluster) whose US counterpart has different sharing, (e) a feed model that mixes two catalog models (Rogue / Rogue Select). Trim, option-package and partial production-date limits that no decode can show are taken as carried by the group's 'fits some option packages / configurations; verify the number on the part' note, which is the design the app ships; where the catalog names the trim plainly this is recorded as an observation. RISK: the evidence for a shown row is incomplete either way, with what is missing named. Items 25 and 27 are WRONG under (b) but borderline (see their 'borderline' field).",
  "counts": {
   "groups": {
    "RIGHT": 21,
@@ -45,8 +46,2594 @@
    "PENDING": 0
   }
  },
- "census": null,
- "recommendation": null,
+ "census": {
+  "scope": "all 283 shippable groups (286 in the candidate; the 3 wiper-motor groups are held by GROUP_HOLD_CATS and never ship). Own parser of the Fitting Vehicle Options strings: alternatives split on top-level ', ', configurations on top-level '+', leading '*' dropped; a pn row is drive-limited when every configuration names one drive family (2WD tokens vs 4WD/AWD/AUTO) and some other row on the same page names the other family.",
+  "class1_drive_limited_shown_plain_for_both_families": {
+   "drive_limited_app_years": 48,
+   "gated": 43,
+   "ungated_app_years": 5,
+   "ungated_groups": 2,
+   "groups": [
+    "oem:nissan:gauge-cluster:C:cfc273851c 24820-1MK5A (M37 2012, 2013, Q70 2014: '*SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE', infinitipartsdeal lists L910/L951/L1201)",
+    "oem:nissan:gauge-cluster:C:0c05f2a0d3 24820-6AH2A (M37 2013, Q70 2014: '*SEDAN. 2WDSTD. SPORTPRE, *SEDAN. 2WDSTD. VQ37VHR. PREMIUM + *SEDAN. 2WDSTD. BASE', L951/L1201)"
+   ],
+   "lot_plain_other_family": "M37x AWD decoded 4WD shown plain: 24820-1MK5A 6 cars (JN1BY1AR5CM393658, JN1BY1AR4CM395210, JN1BY1AR2CM392760, JN1BY1AR8CM393329, JN1BY1AR3DM603515, JN1BY1AR3DM601568); 24820-6AH2A 2 cars (the two 2013s). Q70 2014 carries eng+fuel gates but no drive gate (no AWD Q70 2014 on the lot).",
+   "subclass_4wd_gate_with_AUTO_sibling": {
+    "app_years": 2,
+    "groups": [
+     "oem:nissan:gauge-cluster:C:d45cea6871 24810-EA48D Pathfinder 2005 (sample pair 43; 89 lot 4WD plain)",
+     "oem:nissan:gauge-cluster:C:5217f3ed85 24810-9BA7C Pathfinder 2011 ('W. 4WD. S' vs 'W. 4WD. SV + W. AUTO. VQ40DE' siblings; 0 lot 4WD today)"
+    ]
+   }
+  },
+  "class2_B14_200SX_sedan_coupe_body_mix": {
+   "b14_groups": 2,
+   "b14_failures": 0,
+   "detail": "24820-89Y00 and 24820-8B703 both list sedan and coupe ('4S. GLE + C. GA16DE', '4S. SR20DE + C. SR20DE') on the 200SX and Sentra pages, so a 200SX decoded 'sedan' or a Sentra is not a body contradiction. Option-code body limits elsewhere: 1 ungated app-year (Sentra 1999 '4S. GLE' for 89Y00; feed Sentra is the sedan, harmless). Catalog-variant body splits (pn on the sedan page but not the coupe/hatchback page of the same model-year): 0 among candidate apps (G35/G37 2008 JK61x speedometers are on both variant pages).",
+   "related": "89Y00's Sentra 1999 app-year is ungated for engine; 1 lot Sentra 1999 decoded 2.0L is a plain row for the 1.6L GLE speedometer (counted in the engine class)."
+  },
+  "extra_classes_found_in_the_sample": {
+   "ungated_engine_contradiction": {
+    "groups": 20,
+    "plain_lot_cars": 286,
+    "note": "product-page engine column for that model-year excludes the car's decoded displacement and the car is a plain row; excludes decodes that do not exist for the model-year (Xterra 2005 3.3L, QX80 2017 3.5L) and decodes under 1.2L. Largest: 27510-7Z416 Frontier/Xterra SE A/C controller (78 cars decoded 2.4L), 96301-EA18E / 96302-EA18E PRO-4X/LE/Off-Road mirrors (54 each, decoded 2.5L), QX60 Hybrid under 'gas' gates (3JA9C x2, 3JA1B), US Q40 3.7L under JK00C/1NC2A numbers listed for the 2.5L, Pathfinder V8 under 4.0L-only clusters, mirrors and motors."
+   },
+   "kmh_cluster": {
+    "groups": 1,
+    "ids": [
+     "oem:nissan:gauge-cluster:C:44ee3d0f81 24810-EC44C 'Meter Assy-Combined,Instrument-Kph'"
+    ]
+   },
+   "rogue_rogue_select_mix": {
+    "groups": 3,
+    "ids": [
+     "80730-4BA1A",
+     "82730-4BA0A",
+     "82731-4BA0A"
+    ],
+    "s35_cars_shown_each": 34
+   },
+   "trans_ungated_noted": "24820-JK61C / 24820-JK61D (G35/G37 2008): Sport trims listed with 5AT only, 6MT Sport takes JK61A/JK61B; ungated, 0 decoded-manual cars on the lot today"
+  }
+ },
+ "census_detail": {
+  "groups_checked": 283,
+  "drive_limited_appyears": 48,
+  "drive_limited_appyears_ungated": 5,
+  "drive_limited_groups_ungated": 2,
+  "drive_limited_appyears_gated": 43,
+  "drive_ungated_rows": [
+   {
+    "id": "oem:nissan:gauge-cluster:C:cfc273851c",
+    "pn": "24820-1MK5A",
+    "vy": [
+     "Infiniti",
+     "M37",
+     2012
+    ],
+    "limit": "2wd-family",
+    "gate": null,
+    "refs": [
+     "www.infinitipartsdeal.com:lists:L910"
+    ],
+    "notes": [
+     "*SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE"
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:cfc273851c",
+    "pn": "24820-1MK5A",
+    "vy": [
+     "Infiniti",
+     "M37",
+     2013
+    ],
+    "limit": "2wd-family",
+    "gate": null,
+    "refs": [
+     "www.infinitipartsdeal.com:lists:L951"
+    ],
+    "notes": [
+     "*SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE"
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:cfc273851c",
+    "pn": "24820-1MK5A",
+    "vy": [
+     "Infiniti",
+     "Q70",
+     2014
+    ],
+    "limit": "2wd-family",
+    "gate": null,
+    "refs": [
+     "www.infinitipartsdeal.com:lists:L1201"
+    ],
+    "notes": [
+     "*SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE"
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:0c05f2a0d3",
+    "pn": "24820-6AH2A",
+    "vy": [
+     "Infiniti",
+     "M37",
+     2013
+    ],
+    "limit": "2wd-family",
+    "gate": null,
+    "refs": [
+     "www.infinitipartsdeal.com:lists:L951"
+    ],
+    "notes": [
+     "*SEDAN. 2WDSTD. SPORTPRE, *SEDAN. 2WDSTD. VQ37VHR. PREMIUM + *SEDAN. 2WDSTD. BASE"
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:0c05f2a0d3",
+    "pn": "24820-6AH2A",
+    "vy": [
+     "Infiniti",
+     "Q70",
+     2014
+    ],
+    "limit": "2wd-family",
+    "gate": null,
+    "refs": [
+     "www.infinitipartsdeal.com:lists:L1201"
+    ],
+    "notes": [
+     "*SEDAN. 2WDSTD. SPORTPRE, *SEDAN. 2WDSTD. VQ37VHR. PREMIUM + *SEDAN. 2WDSTD. BASE"
+    ]
+   }
+  ],
+  "drive_4wd_gate_with_auto_sibling_appyears": 2,
+  "drive_4wd_gate_with_auto_sibling_groups": 2,
+  "drive_auto_rows": [
+   {
+    "id": "oem:nissan:gauge-cluster:C:5217f3ed85",
+    "pn": "24810-9BA7C",
+    "vy": [
+     "Nissan",
+     "Pathfinder",
+     2011
+    ],
+    "gate": "4wd",
+    "refs": [
+     "www.nissanpartsdeal.com:lists:L393"
+    ],
+    "notes": [
+     "W. 4WD. S"
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:d45cea6871",
+    "pn": "24810-EA48D",
+    "vy": [
+     "Nissan",
+     "Pathfinder",
+     2005
+    ],
+    "gate": "4wd",
+    "refs": [
+     "www.nissanpartsdeal.com:lists:L224"
+    ],
+    "notes": [
+     "W. 4WD"
+    ]
+   }
+  ],
+  "body_code_limited_appyears": 1,
+  "body_code_limited_appyears_ungated": 1,
+  "body_ungated_rows": [
+   {
+    "id": "oem:nissan:gauge-cluster:C:8598db7f2b",
+    "pn": "24820-89Y00",
+    "vy": [
+     "Nissan",
+     "Sentra",
+     1999
+    ],
+    "body": "sedan",
+    "other_bodies": [
+     "coupe"
+    ],
+    "gate": null,
+    "refs": [
+     "www.nissanpartsdeal.com:lists:L749"
+    ],
+    "notes": [
+     "4S. GLE"
+    ]
+   }
+  ],
+  "body_variant_split_appyears": 0,
+  "body_variant_split_appyears_ungated": 0,
+  "body_variant_rows": [],
+  "b14_groups": 2,
+  "b14": [
+   {
+    "id": "oem:nissan:gauge-cluster:C:8598db7f2b",
+    "cat": "gauge-cluster",
+    "pn": "24820-89Y00",
+    "apps": [
+     [
+      "Nissan",
+      "200SX",
+      1995,
+      1998
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      1995,
+      1999
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "200SX",
+      1995,
+      1998,
+      {
+       "eng": [
+        "1.6L"
+       ]
+      }
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      1997,
+      1998,
+      {
+       "eng": [
+        "1.6L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24820-89Y00 for both — option: fits some option packages; 200SX: 1.6L only; Sentra 1997-1998: 1.6L only; verify the number on the part",
+    "own_page_options": [
+     [
+      "200SX",
+      1995,
+      [
+       "4S. GLE + C. GA16DE"
+      ]
+     ],
+     [
+      "200SX",
+      1996,
+      [
+       "4S. GLE + C. GA16DE"
+      ]
+     ],
+     [
+      "200SX",
+      1997,
+      [
+       "4S. GLE, 4S. GLE + C. GA16DE"
+      ]
+     ],
+     [
+      "200SX",
+      1998,
+      [
+       "4S. GLE, 4S. GLE + C. GA16DE"
+      ]
+     ],
+     [
+      "Sentra",
+      1995,
+      [
+       "4S. GLE + C. GA16DE"
+      ]
+     ],
+     [
+      "Sentra",
+      1996,
+      [
+       "4S. GLE + C. GA16DE"
+      ]
+     ],
+     [
+      "Sentra",
+      1997,
+      [
+       "4S. GLE, 4S. GLE + C. GA16DE"
+      ]
+     ],
+     [
+      "Sentra",
+      1998,
+      [
+       "4S. GLE, 4S. GLE + C. GA16DE"
+      ]
+     ],
+     [
+      "Sentra",
+      1999,
+      [
+       "4S. GLE"
+      ]
+     ]
+    ],
+    "lot": {
+     "200SX|hidden|coupe|2.0": 3,
+     "200SX|if-equipped|-|None": 3,
+     "200SX|plain|coupe|1.6": 10,
+     "200SX|plain|sedan|1.6": 4,
+     "Sentra|if-equipped|-|None": 4,
+     "Sentra|plain|-|1.6": 1,
+     "Sentra|plain|-|None": 9,
+     "Sentra|plain|sedan|1.6": 99,
+     "Sentra|plain|sedan|2.0": 1
+    }
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:150ce36f67",
+    "cat": "gauge-cluster",
+    "pn": "24820-8B703",
+    "apps": [
+     [
+      "Nissan",
+      "200SX",
+      1997,
+      1999
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      1997,
+      1999
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "200SX",
+      1997,
+      1999,
+      {
+       "eng": [
+        "2.0L"
+       ]
+      }
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      1997,
+      1999,
+      {
+       "eng": [
+        "2.0L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24820-8B703 for both — option: fits some option packages; 2.0L only; verify the number on the part",
+    "own_page_options": [
+     [
+      "200SX",
+      1997,
+      [
+       "4S. SR20DE + C. SR20DE"
+      ]
+     ],
+     [
+      "200SX",
+      1998,
+      [
+       "4S. SR20DE, 4S. SR20DE + C. SR20DE"
+      ]
+     ],
+     [
+      "200SX",
+      1999,
+      [
+       "4S. SR20DE, 4S. SR20DE + C. SR20DE"
+      ]
+     ],
+     [
+      "Sentra",
+      1997,
+      [
+       "4S. SR20DE + C. SR20DE"
+      ]
+     ],
+     [
+      "Sentra",
+      1998,
+      [
+       "4S. SR20DE, 4S. SR20DE + C. SR20DE"
+      ]
+     ],
+     [
+      "Sentra",
+      1999,
+      [
+       "4S. SR20DE, 4S. SR20DE + C. SR20DE"
+      ]
+     ]
+    ],
+    "lot": {
+     "200SX|hidden|coupe|1.6": 5,
+     "200SX|hidden|sedan|1.6": 4,
+     "200SX|if-equipped|-|None": 2,
+     "200SX|plain|coupe|2.0": 2,
+     "Sentra|hidden|-|1.6": 1,
+     "Sentra|hidden|sedan|1.6": 72,
+     "Sentra|if-equipped|-|None": 7,
+     "Sentra|plain|sedan|2.0": 1
+    }
+   }
+  ],
+  "kph_cluster_groups": 1,
+  "kph": [
+   {
+    "id": "oem:nissan:gauge-cluster:C:44ee3d0f81",
+    "pn": "24810-EC44C",
+    "apps": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2006,
+      2007
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006,
+      2007
+     ]
+    ],
+    "desc": "Meter Assy-Combined,Instrument-Kph ; Combination Meter Assy-Instrument",
+    "ref": "www.nissanpartsdeal.com:records:L2727"
+   }
+  ],
+  "engine_contradiction_groups": 32,
+  "engine_contradiction_plain_cars": 301,
+  "engine_contradiction": [
+   {
+    "id": "oem:nissan:gauge-cluster:C:c88d3f8d32",
+    "pn": "24810-3JA1B",
+    "n_plain_cars": 8,
+    "cars": [
+     [
+      "5N1CL0MN8EC524170",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MN1EC521952",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM9EC514772",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MN6EC514804",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MN5EC521713",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM0EC527619",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM6EC525311",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM9EC548064",
+      "QX60",
+      2014,
+      "2.5L"
+     ]
+    ],
+    "evidence_backed_cars": 8
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:52732d2e6f",
+    "pn": "24810-7Z809",
+    "n_plain_cars": 7,
+    "cars": [
+     [
+      "5N1DD28T22C593535",
+      "Xterra",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T52C503603",
+      "Xterra",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T91C594227",
+      "Xterra",
+      2001,
+      "2.4L"
+     ],
+     [
+      "5N1DD28T11C591144",
+      "Xterra",
+      2001,
+      "2.4L"
+     ],
+     [
+      "5N1DD28T11C595212",
+      "Xterra",
+      2001,
+      "2.4L"
+     ],
+     [
+      "5N1DD28T92C530285",
+      "Xterra",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T41C559708",
+      "Xterra",
+      2001,
+      "2.4L"
+     ]
+    ],
+    "evidence_backed_cars": 7
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:8d32932797",
+    "pn": "24810-EA67D",
+    "n_plain_cars": 2,
+    "cars": [
+     [
+      "5N1BR18A78C600182",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1BR18A58C631916",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ]
+    ],
+    "evidence_backed_cars": 2
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:ac64e3f5f0",
+    "pn": "24810-EA67E",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:84f5d15413",
+    "pn": "24810-ZP77A",
+    "n_plain_cars": 2,
+    "cars": [
+     [
+      "5N1BR18A78C600182",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1BR18A58C631916",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ]
+    ],
+    "evidence_backed_cars": 2
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:457a37cd07",
+    "pn": "24810-ZS44D",
+    "n_plain_cars": 2,
+    "cars": [
+     [
+      "5N1BR18A78C600182",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1BR18A58C631916",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ]
+    ],
+    "evidence_backed_cars": 2
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:8598db7f2b",
+    "pn": "24820-89Y00",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "3N1BB41D5XL001091",
+      "Sentra",
+      1999,
+      "2.0L 4-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 1
+   },
+   {
+    "id": "oem:nissan:climate-control:C:dec0cdf8a9",
+    "pn": "27510-7Z416",
+    "n_plain_cars": 78,
+    "cars": [
+     [
+      "1N6DD26SX1C332051",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S5YC334428",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S5YC400606",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S4YC329253",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S8YC432983",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S11C378982",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S9YC427758",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S91C396100",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S4YC409491",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S62C359572",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S5YC423898",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S71C344593",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S01C332222",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S6YC358219",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S72C363338",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T4YC589446",
+      "Xterra",
+      2000,
+      "2.4L"
+     ],
+     [
+      "1N6DD26S0YC335213",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S81C367963",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S8YC366533",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T91C594227",
+      "Xterra",
+      2001,
+      "2.4L"
+     ],
+     [
+      "1N6DD26S01C326467",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S92C337811",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S6YC428429",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S72C312485",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S8YC342863",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26SX2C305319",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S02C374004",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S52C306748",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S51C347234",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S7YC375014",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S41C361352",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26SX1C305612",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S1YC393489",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S42C370747",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S11C396219",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD21S11C378648",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD21S6YC345199",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S1YC351730",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S5YC369115",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26SX2C335548",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S8YC321821",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S61C315747",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S5YC311554",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T11C591144",
+      "Xterra",
+      2001,
+      "2.4L"
+     ],
+     [
+      "5N1DD28T11C595212",
+      "Xterra",
+      2001,
+      "2.4L"
+     ],
+     [
+      "1N6DD26S02C383057",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S91C354381",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S52C394250",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "",
+      "Frontier",
+      2000,
+      "2.4L 4cyl"
+     ],
+     [
+      "1N6DD26S52C331133",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26SXYC437215",
+      "Frontier",
+      2000,
+      "4cyl 2.4L"
+     ],
+     [
+      "1N6DD26S6YC386005",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S02C342671",
+      "Frontier",
+      2002,
+      "4cyl 2.4L"
+     ],
+     [
+      "1N6DD26S11C364127",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S21C393667",
+      "Frontier",
+      2001,
+      "4cyl 2.4L"
+     ],
+     [
+      "1N6DD26S81C380065",
+      "Frontier",
+      2001,
+      "4cyl 2.4L"
+     ],
+     [
+      "",
+      "Frontier",
+      2002,
+      "2.4L 4cyl"
+     ],
+     [
+      "1N6DD26SX2C317356",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S2YC348853",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S81C337653",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S52C382194",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S6YC426051",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T41C559708",
+      "Xterra",
+      2001,
+      "2.4L"
+     ],
+     [
+      "1N6DD26S3YC381666",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S71C395379",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26SXYC389909",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S2YC384901",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD21S1YC322848",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S01C320412",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S61C305560",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S6YC320067",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S71C399416",
+      "Frontier",
+      2001,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S32C316386",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S72C308548",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD21S2YC344342",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S52C318897",
+      "Frontier",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S2YC365474",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ],
+     [
+      "1N6DD26S7YC419187",
+      "Frontier",
+      2000,
+      "2.4L 4-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 78
+   },
+   {
+    "id": "oem:nissan:climate-control:C:43f6f5c4fe",
+    "pn": "27510-8Z315",
+    "n_plain_cars": 3,
+    "cars": [
+     [
+      "5N1DD28T22C593535",
+      "Xterra",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T52C503603",
+      "Xterra",
+      2002,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T92C530285",
+      "Xterra",
+      2002,
+      "2.4L 4-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 3
+   },
+   {
+    "id": "oem:nissan:climate-control:C:d11023fe49",
+    "pn": "27510-ZD000",
+    "n_plain_cars": 5,
+    "cars": [
+     [
+      "5N1DD28TX3C702146",
+      "Xterra",
+      2003,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T44C624965",
+      "Xterra",
+      2004,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T94C648503",
+      "Xterra",
+      2004,
+      "2.4L 4-cyl"
+     ],
+     [
+      "5N1DD28T54C619158",
+      "Xterra",
+      2004,
+      "4cyl 2.4L"
+     ],
+     [
+      "5N1DD28T34C647220",
+      "Xterra",
+      2004,
+      "2.4L 4-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 5
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:ebb9bd82ec",
+    "pn": "80720-EA000",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:864a4dfc29",
+    "pn": "80720-EA010",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:29f6b085ee",
+    "pn": "80721-EA000",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:8f295062d9",
+    "pn": "80721-EA010",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:2acad14646",
+    "pn": "80730-EA005",
+    "n_plain_cars": 5,
+    "cars": [
+     [
+      "5N1BR18A78C600182",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1BR18B98C603769",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ],
+     [
+      "5N1BR18B58C624683",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1BR18A58C631916",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ]
+    ],
+    "evidence_backed_cars": 4
+   },
+   {
+    "id": "oem:nissan:window-regulator:RR:25a426fbeb",
+    "pn": "80730-JK00C",
+    "n_plain_cars": 9,
+    "cars": [
+     [
+      "JN1CV6AP4FM503483",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AP6FM501654",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6APXFM503150",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR8FM522460",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR8FM520501",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR7FM651256",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AP5FM580458",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR0FM523148",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "",
+      "Q40",
+      2015,
+      "3.7L 0cyl"
+     ]
+    ],
+    "evidence_backed_cars": 9
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:ed07457961",
+    "pn": "80731-EA005",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:window-regulator:RL:cf41277a8a",
+    "pn": "80731-JK00C",
+    "n_plain_cars": 9,
+    "cars": [
+     [
+      "JN1CV6AP4FM503483",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AP6FM501654",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6APXFM503150",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR8FM522460",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR8FM520501",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR7FM651256",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AP5FM580458",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR0FM523148",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "",
+      "Q40",
+      2015,
+      "3.7L 0cyl"
+     ]
+    ],
+    "evidence_backed_cars": 9
+   },
+   {
+    "id": "oem:nissan:window-regulator:RR:b1b62f2f6b",
+    "pn": "82720-1LA0A",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1DL0MN0HC558063",
+      "QX80",
+      2017,
+      "3.5L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:window-regulator:RL:613aa019d9",
+    "pn": "82721-1LA0A",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1DL0MN0HC558063",
+      "QX80",
+      2017,
+      "3.5L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:window-regulator:RR:01a5e5c3cb",
+    "pn": "82730-1MA0A",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1DL0MN0HC558063",
+      "QX80",
+      2017,
+      "3.5L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:window-regulator:RL:e50ba52174",
+    "pn": "82731-1MA0A",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1DL0MN0HC558063",
+      "QX80",
+      2017,
+      "3.5L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:43b5b260d2",
+    "pn": "96301-1NC2A",
+    "n_plain_cars": 9,
+    "cars": [
+     [
+      "JN1CV6AP4FM503483",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AP6FM501654",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6APXFM503150",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR8FM522460",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR8FM520501",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR7FM651256",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AP5FM580458",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR0FM523148",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "",
+      "Q40",
+      2015,
+      "3.7L 0cyl"
+     ]
+    ],
+    "evidence_backed_cars": 9
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:a7ddcf6d8a",
+    "pn": "96301-3JA9C",
+    "n_plain_cars": 9,
+    "cars": [
+     [
+      "5N1CL0MN8EC524170",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MN1EC521952",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM9EC514772",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MN6EC514804",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MN5EC521713",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM0EC527619",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM3FC513909",
+      "QX60",
+      2015,
+      "2.5L 4-cyl"
+     ],
+     [
+      "5N1CL0MM6EC525311",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM9EC548064",
+      "QX60",
+      2014,
+      "2.5L"
+     ]
+    ],
+    "evidence_backed_cars": 9
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:14d646d045",
+    "pn": "96301-EA000",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:7da703ef6f",
+    "pn": "96301-EA005",
+    "n_plain_cars": 7,
+    "cars": [
+     [
+      "5N1BR18A78C600182",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1BR18B98C603769",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ],
+     [
+      "5N1BR1NB7AC602467",
+      "Pathfinder",
+      2010,
+      "5.6L"
+     ],
+     [
+      "5N1BR1NB8BC617626",
+      "Pathfinder",
+      2011,
+      "5.6L"
+     ],
+     [
+      "5N1BR18B58C624683",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1BR18A58C631916",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ]
+    ],
+    "evidence_backed_cars": 6
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:6ec9f7ef3e",
+    "pn": "96301-EA18E",
+    "n_plain_cars": 54,
+    "cars": [
+     [
+      "1N6BD06T65C463004",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT2FN751158",
+      "Frontier",
+      2015,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX6C424787",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX6C465811",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT6DN759793",
+      "Frontier",
+      2013,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T35C447004",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT8EN720480",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T85C460301",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T36C476603",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT2FN768249",
+      "Frontier",
+      2015,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CTXKN725868",
+      "Frontier",
+      2019,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT0DN733996",
+      "Frontier",
+      2013,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T05C435988",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT3AC444442",
+      "Frontier",
+      2010,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT1HN747945",
+      "Frontier",
+      2017,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT5AC405559",
+      "Frontier",
+      2010,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT9HN749300",
+      "Frontier",
+      2017,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT3GN750585",
+      "Frontier",
+      2016,
+      "2.5L 4-cyl"
+     ],
+     [
+      "1N6BD06T27C410299",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T37C465683",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T55C466024",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX7C425066",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT2GN796408",
+      "Frontier",
+      2016,
+      "2.5L 4-cyl"
+     ],
+     [
+      "1N6BD06T16C451019",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T37C422252",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T77C434808",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T17C423478",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T55C416000",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T57C423385",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T56C457969",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T35C426895",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT0HN712829",
+      "Frontier",
+      2017,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T46C400534",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T29C410869",
+      "Frontier",
+      2009,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT1FN732682",
+      "Frontier",
+      2015,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T85C415567",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX5C463409",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T66C460945",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T16C415881",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX5C460932",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT7DN722302",
+      "Frontier",
+      2013,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT8EN726716",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT8EN717673",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT9CC416860",
+      "Frontier",
+      2012,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT4FN741232",
+      "Frontier",
+      2015,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT5DN758571",
+      "Frontier",
+      2013,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T75C431985",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT7EN709843",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T07C433984",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T28C405346",
+      "Frontier",
+      2008,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T47C432689",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T57C455706",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT7EN766379",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T06C417069",
+      "Frontier",
+      2006,
+      "2.5L"
+     ]
+    ],
+    "evidence_backed_cars": 54
+   },
+   {
+    "id": "oem:nissan:side-mirrors:L:f1e24bab76",
+    "pn": "96302-1NC2A",
+    "n_plain_cars": 9,
+    "cars": [
+     [
+      "JN1CV6AP4FM503483",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AP6FM501654",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6APXFM503150",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR8FM522460",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR8FM520501",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR7FM651256",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AP5FM580458",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "JN1CV6AR0FM523148",
+      "Q40",
+      2015,
+      "3.7L"
+     ],
+     [
+      "",
+      "Q40",
+      2015,
+      "3.7L 0cyl"
+     ]
+    ],
+    "evidence_backed_cars": 9
+   },
+   {
+    "id": "oem:nissan:side-mirrors:L:c3e7a89859",
+    "pn": "96302-3JA9C",
+    "n_plain_cars": 9,
+    "cars": [
+     [
+      "5N1CL0MN8EC524170",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MN1EC521952",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM9EC514772",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MN6EC514804",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MN5EC521713",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM0EC527619",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM3FC513909",
+      "QX60",
+      2015,
+      "2.5L 4-cyl"
+     ],
+     [
+      "5N1CL0MM6EC525311",
+      "QX60",
+      2014,
+      "2.5L"
+     ],
+     [
+      "5N1CL0MM9EC548064",
+      "QX60",
+      2014,
+      "2.5L"
+     ]
+    ],
+    "evidence_backed_cars": 9
+   },
+   {
+    "id": "oem:nissan:side-mirrors:L:ef799f1000",
+    "pn": "96302-EA000",
+    "n_plain_cars": 1,
+    "cars": [
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ]
+    ],
+    "evidence_backed_cars": 0
+   },
+   {
+    "id": "oem:nissan:side-mirrors:L:29e8df1988",
+    "pn": "96302-EA005",
+    "n_plain_cars": 7,
+    "cars": [
+     [
+      "5N1BR18A78C600182",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1BR18B98C603769",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1ED28T64C687084",
+      "Xterra",
+      2005,
+      "3.3L 6-cyl"
+     ],
+     [
+      "5N1BR1NB7AC602467",
+      "Pathfinder",
+      2010,
+      "5.6L"
+     ],
+     [
+      "5N1BR1NB8BC617626",
+      "Pathfinder",
+      2011,
+      "5.6L"
+     ],
+     [
+      "5N1BR18B58C624683",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ],
+     [
+      "5N1BR18A58C631916",
+      "Pathfinder",
+      2008,
+      "5.6L"
+     ]
+    ],
+    "evidence_backed_cars": 6
+   },
+   {
+    "id": "oem:nissan:side-mirrors:L:7d840b91a9",
+    "pn": "96302-EA18E",
+    "n_plain_cars": 54,
+    "cars": [
+     [
+      "1N6BD06T65C463004",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT2FN751158",
+      "Frontier",
+      2015,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX6C424787",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX6C465811",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT6DN759793",
+      "Frontier",
+      2013,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T35C447004",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT8EN720480",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T85C460301",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T36C476603",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT2FN768249",
+      "Frontier",
+      2015,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CTXKN725868",
+      "Frontier",
+      2019,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT0DN733996",
+      "Frontier",
+      2013,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T05C435988",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT3AC444442",
+      "Frontier",
+      2010,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT1HN747945",
+      "Frontier",
+      2017,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT5AC405559",
+      "Frontier",
+      2010,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT9HN749300",
+      "Frontier",
+      2017,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT3GN750585",
+      "Frontier",
+      2016,
+      "2.5L 4-cyl"
+     ],
+     [
+      "1N6BD06T27C410299",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T37C465683",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T55C466024",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX7C425066",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT2GN796408",
+      "Frontier",
+      2016,
+      "2.5L 4-cyl"
+     ],
+     [
+      "1N6BD06T16C451019",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T37C422252",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T77C434808",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T17C423478",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T55C416000",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T57C423385",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T56C457969",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T35C426895",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT0HN712829",
+      "Frontier",
+      2017,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T46C400534",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T29C410869",
+      "Frontier",
+      2009,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT1FN732682",
+      "Frontier",
+      2015,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T85C415567",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX5C463409",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T66C460945",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T16C415881",
+      "Frontier",
+      2006,
+      "2.5L"
+     ],
+     [
+      "1N6BD06TX5C460932",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT7DN722302",
+      "Frontier",
+      2013,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT8EN726716",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT8EN717673",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT9CC416860",
+      "Frontier",
+      2012,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT4FN741232",
+      "Frontier",
+      2015,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT5DN758571",
+      "Frontier",
+      2013,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T75C431985",
+      "Frontier",
+      2005,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT7EN709843",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T07C433984",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T28C405346",
+      "Frontier",
+      2008,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T47C432689",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T57C455706",
+      "Frontier",
+      2007,
+      "2.5L"
+     ],
+     [
+      "1N6BD0CT7EN766379",
+      "Frontier",
+      2014,
+      "2.5L"
+     ],
+     [
+      "1N6BD06T06C417069",
+      "Frontier",
+      2006,
+      "2.5L"
+     ]
+    ],
+    "evidence_backed_cars": 54
+   }
+  ],
+  "rogue_2014_2015_groups": 3,
+  "rogue_s35_cars_shown_total": 102,
+  "rogue": [
+   {
+    "id": "oem:nissan:window-regulator:FL:47ac865c1f",
+    "pn": "80730-4BA1A",
+    "apps": [
+     [
+      "Nissan",
+      "Murano",
+      2015,
+      2019
+     ],
+     [
+      "Nissan",
+      "Rogue",
+      2014,
+      2019
+     ]
+    ],
+    "s35_cars_shown": 34
+   },
+   {
+    "id": "oem:nissan:window-regulator:RR:0828314061",
+    "pn": "82730-4BA0A",
+    "apps": [
+     [
+      "Nissan",
+      "Murano",
+      2015,
+      2019
+     ],
+     [
+      "Nissan",
+      "Rogue",
+      2014,
+      2019
+     ]
+    ],
+    "s35_cars_shown": 34
+   },
+   {
+    "id": "oem:nissan:window-regulator:RL:1b8959b151",
+    "pn": "82731-4BA0A",
+    "apps": [
+     [
+      "Nissan",
+      "Murano",
+      2015,
+      2019
+     ],
+     [
+      "Nissan",
+      "Rogue",
+      2014,
+      2019
+     ]
+    ],
+    "s35_cars_shown": 34
+   }
+  ],
+  "engine_contradiction_evidence_backed_groups": 20,
+  "engine_contradiction_evidence_backed_plain_cars": 286,
+  "engine_contradiction_note": "product-page engine column for that model-year excludes the car's decoded displacement and the app shows the car as a plain row; evidence_backed excludes decodes that do not exist for the model-year (Xterra 2005 3.3L, QX80 2017 3.5L) and decodes under 1.2L. Engine limits that follow a trim (SE/SC 3.3L, PRO-4X/LE 4.0L, QX60 Hybrid 2.5L, US Q40 3.7L, Pathfinder V8) are included."
+ },
+ "reader_files": [
+  "draw.py",
+  "appgate.py",
+  "dossier.py",
+  "census.py (scratch, not committed; sha256 above)"
+ ],
+ "recommendation": "Do not ship: the sample found 9 WRONG groups (7 if the two regular-cab items are treated as option limits) and 2 WRONG pairs, and the census still finds both earlier classes' kind of failure (2 ungated RWD-only speedometer groups showing M37x AWD cars plain) plus a systemic ungated-engine class (20 groups, 286 plain lot cars).",
  "groups": [
   {
    "n": 1,
@@ -9398,6 +11985,7 @@
    "verdict": "WRONG",
    "reason": "80721-3S500 (power front LH regulator, 'F/POWER WINDOW'). Frontier 1998-2001 own pages list it for T (regular cab), KC and CC, but the 2002 page (nissanpartsdeal lists L333) lists it only for '*KC + *CC, *KC + *CC. SB + *CC. XB' while the same page lists the regular cab under 80721-3S510 'KC + CC. SB + CC. XB, T + KC + CC'. So a 2002 regular-cab Frontier takes 3S510, not 3S500. The Frontier app is ungated, so every 2002 Frontier on the lot (70 cars, cab unknown) is a plain row; a cab gate cannot say 'king cab or crew cab' in the current format, so the year needed refusing or a two-cab gate. The 2003 page lists no regular cab for any front regulator. Xterra 2004 gate eng 3.3L is weaker than the 2004 row ('*W. VG33ER. XE'), but displacement cannot separate VG33E from VG33ER.",
    "class": "ungated cab exclusion (regular cab)",
+   "borderline": "the regular cab's exclusion follows from power windows being a KC/CC option on 2002; if the hub treats it as an option limit carried by the note, this item is RIGHT",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L269",
@@ -10808,6 +13396,7 @@
    "verdict": "WRONG",
    "reason": "80721-2Z700 (front LH power regulator; replaces 80721-3S500). Frontier own pages 2002-2004 list it only for KC and CC ('*KC + *CC. SB + *CC. XB, KC + CC. SB + CC. XB'); the 2002 page (nissanpartsdeal lists L333) lists the regular cab only under 80721-3S510 ('KC + CC. SB + CC. XB, T + KC + CC'). The Frontier app is ungated, so all 2002-2004 Frontiers on the lot (172, cab unknown) are plain rows, including any 2002 regular cab, which per the catalog takes 3S510. Xterra rows fine (KA24DE/VG33E XE, VG33E SE, VG33ER).",
    "class": "ungated cab exclusion (regular cab)",
+   "borderline": "same as item 25: if the regular cab's exclusion is treated as the power-window option, carried by the note, this item is RIGHT",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L270",
