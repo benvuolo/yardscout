@@ -2343,3 +2343,120 @@ ben@yardscout.io can be used.
   refuses 88 nissan groups; naming models that share a label once would
   keep many. Windows no other number carries stay plain by design (ford 5,
   toyota 4, nissan 49 app-years).
+
+## 2026-11-19 ~08:00 UTC owner: list order "Yes"; Ario left as it is; trial on hold; ben@ rule added
+
+Owner, answering the 07:35 summary by number: 1 list order "Yes"; 2 the new
+Apple vendor number "I'll do this tmrw" (task #76 waits); 3 Ario "I'll email
+when we stop reading them into the app" (hub's reading, told to the owner:
+leave the Ario reader as it is and send nothing now; the owner emails Ario
+if the feed ever stops; rule 2 still applies then, no workaround); 4 free
+trial on hold "Ok" (look again about 11-26). No "swap": iOS 1.13.2 build 43
+still waits for 1.13.1's approval. Also: "I added the cloud flare rule, am
+I good to put it in my sig" (ben@yardscout.io).
+
+- **List order (task #74), branch `hub/list-two-day-1119` (d3540acc, sw
+  `jh-v216`).** Newest arrivals: the newest day in the list (never a day
+  after today) and the day before it sort as ONE group: nearest yard, then
+  the newer day, then the car whose photo shows. Older days unchanged
+  (day, photo, nearest). Held cars last, as before.
+  - Why "the newest day in the list" and not the calendar's today: before
+    a yard publishes today's cars the calendar reading would put one far
+    yard's yesterday cars over a near yard's cars of the day before, which
+    is the complaint again.
+  - The 2026-11-16 rule ("new arrivals should not be buried by a day
+    because they don't have a picture") is why photos cannot come first
+    across the two days: inside the group distance decides between yards,
+    and a photo only orders cars of the same yard and day. So in the top
+    group a nearer car without a photo now sits above a farther car with
+    one. Told to the owner.
+  - The "set out before your last visit" divider assumed the new cars
+    lead; it is now drawn only where they all do (the count line and "Show
+    just those" are unchanged).
+  - `cars_feed_e2e` section 1b rewritten: 142 passed, 0 failed (group of
+    478 cars over 2 days in the test view; both divider cases exercised).
+    Full regression running; then main, live check.
+  - Apps: web only until the next store build. Android 1.13.2 (42) and iOS
+    build 43 do not have it. A 1.13.3 needs the owner's "ship".
+- **ben@yardscout.io:** no mail has arrived for it yet (searched 08:00
+  UTC). The hub does not send mail, so the test is the owner's: one message
+  from a different account (Gmail hides a message an account sends to its
+  own forwarding address).
+
+## 2026-11-19 ~08:20 UTC owner asleep until ~15:00 UTC: "build something meaningful ... jaw dropping"
+
+Owner (08:05 UTC): "Going to bed, I'll be up around 7ish. Until then build
+something meaningful and useful. Something that differentiates us from any
+competitor. I want to wake up to something jaw dropping."
+
+Hub's choice, and why: a **game plan in the Parts results**. Today the
+Parts tab lists donor cars. Tonight it also says (1) which yard to drive
+to: donors by yard with distance, newest set-out and the yard's own price,
+and (2) how often the seeker's model lands near them, from the history
+database only a tracker has (252,356 recorded departures as of the 05:14
+scan). Facts only: counts and past weeks, no percentages, no promise, no
+"first" or "only" claims. Considered and not chosen tonight: a rare-finds
+feed (fun, less useful to someone fixing their own car), a multi-yard
+route planner (too large to finish tested in one night).
+
+- Builder A, branch `feat/where-to-go-1119` (from
+  `origin/hub/list-two-day-1119`): "Best yards for this part" card, chips,
+  tap-to-filter, the count-equals-list proof, mount points for the
+  forecast in the card and in the Cars watch strip; sw `jh-v217`.
+- Builder B, branch `feat/arrival-forecast-1119` (same base): the scan
+  writes `docs/data/arrivals/` (8 full weeks, per yard coverage, relists
+  and flush scans excluded, frozen yards marked stale, at most once per 20
+  hours, never fails the scan); `docs/forecast.js` with
+  `YSForecast.summary` and `.mount`; offline tests on a synthetic DB.
+- Hub: review both (the scan writer is on the scan's critical path), merge
+  list order -> A -> B, ONE full regression on the combined tree, main,
+  then a real scan for real arrivals data (dispatch `scan.yml` or the
+  13:14 UTC cron), read its log and file sizes, one live load, screenshots
+  in `ops/screens/` for the owner. Web only; the apps need a "ship"
+  (1.13.3). Task #77.
+- Running alongside: the list-order full regression (task #74), the sixth
+  nissan check (task #72), Apple check-in 09:10 UTC (task #75), Cloudflare
+  check-in 11:25 UTC.
+
+## 2026-11-19 ~08:25 UTC sixth independent nissan check: FAIL (2 WRONG, one class); nissan stays off
+
+Check 1119f (seed 27641119, candidate at 29e5fe96, branch
+`interchange/verify-nissan-1119f`, head bad522d4, report
+`groups/_report/nissan_verify_2026-11-19f.json` on that branch).
+Groups 23 RIGHT / 1 WRONG / 6 RISK; pairs 21 / 1 / 8.
+
+- **WRONG (both the same):** a `cab: "crew cab"` gate on Titan rear-door
+  regulators (82720-7S000 Titan 2005, 145 lot donors; 82730-9FJ0A Titan
+  2012, 20). The part's own row has no cab clause, and "crew cab" appears
+  nowhere in the raw; the gate was inferred from page structure. The app
+  then says "this part is listed for crew cab only" and the note "Titan:
+  crew cab only": a stated basis the pages do not carry. No donor is
+  wrongly shown as plain (cab is never decoded, all are "if equipped").
+  Census: 6 groups, 8 vehicle-years, 227 Titan donors; the other 9 cab
+  gates have KC/CC/T clauses on their own rows.
+- **RISK kinds:** claims that rest ONLY on starred clauses (33 groups / 91
+  vehicle-years; round 5b held only those where the star decides drive or
+  engine scope); QX60 "gas only" gates with no `eng_not` 2.5L, so decoded
+  2.5L hybrids are plain (8 groups, 54 cars; the fix reached the gauge
+  clusters but not regulators or mirrors); transmission or drive words on
+  the page with no gate (G35/G37 2008 JK61D, Xterra 96302-EA000 "4WD. S.
+  6MT"); production windows that end inside the model year and are not
+  gated (7 groups / 12 vehicle-years / 264 plain); pages that date one
+  number differently (96302-7S600).
+- Hub's reading: round 5's fixes held (no linked-window WRONG, no drive
+  basis WRONG). The new class is the cab twin of the drive-basis class
+  fixed in round 5. Six checks, each finding the next thinner class.
+- **Round 6, NOT started** (the overnight build has the builders; a third
+  agent risks the 5-hour usage limit, as on 11-17). Decisions ready for it:
+  1. cab gates get a basis like drive (`stated` only when the number's own
+     row carries the cab code); an inferred cab limit is held out of the
+     candidate (the 6 groups' Titan years), not reworded;
+  2. hold every vehicle-year whose claim rests only on starred clauses;
+  3. `eng_not` 2.5L on every QX60/JX gas-only gate, all categories;
+  4. a census of every production window against the model-year span, and
+     gate or drop the ones that end inside it;
+  5. a page that ties the part to a transmission or drive in the option
+     text gets the gate or is held;
+  6. where two pages date a number differently, the narrower window.
+  Then a seventh independent check, new seed (used: 46021118, 61181118,
+  73901118, 38271119, 52941119, 27641119).
