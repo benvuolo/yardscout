@@ -5641,3 +5641,15 @@ gauge-cluster 1) + 30 pairs.
 - Suggestions: gate Versa 2007; say the door on the 6 cross-door groups; gate both sides of a
   changeover month consistently (FX 2005 gated, FX 2006 not; M 2009 gated, M 2008 not); read
   `*` before relying on an AWD sibling; recrawl the missing 1995 Altima pages.
+
+Compared with earlier reports (read after the verdicts above were pushed, b464f0c0): the Versa
+2007 window is new. Check 1118 rated the same Murano/Versa number RIGHT (P07, before gates
+existed); rounds 4-6 gate every cutting window under the 07/(y-1)-06/y span, yet Versa 2007 stayed
+ungated although each Versa page cuts that span on its own (sedan 12/2006-07/2007, hatch
+05/2006-01/2007). My guess, not checked in curate.py: the two body-variant windows are joined
+before the cut test, and together they cover the year. Under the 07-06 span my census also finds
+only this one vehicle-year. Round 6 left Xterra 2002-2003 80720-2Z710 as RISK for the next
+checker; I reach the same RISK (G27). The 3JA9A mirror pair (my G10 RISK) was raised before.
+Round 5 ("no split on `*` alone") put it back on purpose, so it stays a RISK that the hub has
+already decided, not a new flaw. The cross-door groups are not named in the earlier reports I
+searched.

@@ -2745,5 +2745,7 @@
     "plain": 4
    }
   }
- ]
+ ],
+ "compared_with_earlier_reports": "Compared with earlier reports (read after the verdicts above were pushed, b464f0c0): the Versa\n2007 window is new. Check 1118 rated the same Murano/Versa number RIGHT (P07, before gates\nexisted); rounds 4-6 gate every cutting window under the 07/(y-1)-06/y span, yet Versa 2007 stayed\nungated although each Versa page cuts that span on its own (sedan 12/2006-07/2007, hatch\n05/2006-01/2007). My guess, not checked in curate.py: the two body-variant windows are joined\nbefore the cut test, and together they cover the year. Under the 07-06 span my census also finds\nonly this one vehicle-year. Round 6 left Xterra 2002-2003 80720-2Z710 as RISK for the next\nchecker; I reach the same RISK (G27). The 3JA9A mirror pair (my G10 RISK) was raised before.\nRound 5 (\"no split on `*` alone\") put it back on purpose, so it stays a RISK that the hub has\nalready decided, not a new flaw. The cross-door groups are not named in the earlier reports I\nsearched.",
+ "compared_with_earlier_reports_written_after": "b464f0c0 (verdicts pushed first)"
 }
