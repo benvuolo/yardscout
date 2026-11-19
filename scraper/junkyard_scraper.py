@@ -27281,6 +27281,15 @@ def enrich_vehicles(
         mismatch = _vpic_mismatch_msg(v, vin_dec, stats=True)
         if mismatch:
             v["_vpic_mismatch"] = mismatch
+        # A VIN whose make is in another maker group than the listing's (a
+        # Titan with a Yamaha VIN, a Yaris with a trailer VIN) belongs to some
+        # other vehicle: nothing from it steers the match (year, gates,
+        # VIN-confirmed marks) and output_json drops its specs. The flag
+        # stays. Hub decision 2026-11-19; same test as the transmission rule.
+        if vin_dec and _trans_make_conflict(v, vin_dec):
+            v["_vin_other_vehicle"] = True
+            MODEL_MISMATCH_STATS["vin_other_vehicle"] += 1
+            vin_dec = None
         match_year = v.get("year", 0)
         if vin_dec:
             # Trust the VIN over the lot sign for the model year used in
@@ -27502,6 +27511,7 @@ def _log_model_mismatch_stats() -> None:
         top = ", ".join(f"{mk} {li} / {de} {n}" for (mk, li, de), n in MODEL_MISMATCH_UNCLASSIFIED.most_common(10))
         print(f"  [vin model] {s.get('different', 0)} car(s) flagged: VIN decodes as another model "
               f"({s.get('rematched', 0)} matched on the VIN's model); "
+              f"{s.get('vin_other_vehicle', 0)} VIN(s) of another maker's vehicle ignored for matching and specs; "
               f"not flagged: same name {s.get('same', 0)}, unsure {s.get('unsure', 0)}, "
               f"decode wrong {s.get('decode_wrong', 0)}, unclassified {s.get('unclassified', 0)} "
               f"in {len(MODEL_MISMATCH_UNCLASSIFIED)} pair(s)" + (f"; top unclassified: {top}" if top else ""),
@@ -27709,6 +27719,8 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
         # "Manual"; the UI names the source in plain words.
         vp = v.get("_vpic")
         vp = vp if isinstance(vp, dict) and vp else None
+        if v.get("_vin_other_vehicle"):
+            vp = None   # the VIN is another maker's vehicle: none of its specs
         entry["trans"], entry["transSrc"] = _resolve_trans(v, vp, entry)
         entry["body"] = body_style_from_vpic(vp, entry.get("make", ""))
         if vp:

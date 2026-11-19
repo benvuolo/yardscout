@@ -224,6 +224,57 @@ finally:
     js.VIN_MODEL_NAMES_FILE = real
     js._VIN_MODEL_TABLE = None
 
+# ---- a VIN of another maker's vehicle steers nothing (hub 2026-11-19) ----
+YAM_VIN, GMC_VIN = "JYARN23E1FA000001", "1GTGC24K0PE500001"
+DEC2 = {YAM_VIN: dec("YAMAHA", "YZF-R1", 2015, trim="R1", series="", driveType="RWD", trimQuality="usable",
+                     bodyClass="Motorcycle - Sport", transmission="6-Speed Manual", engine="1.0L 4-cyl"),
+        GMC_VIN: dec("GMC", "Sierra", 1993, trim="SLE", series="3/4 Ton Nominal", driveType="4WD", trimQuality="usable",
+                     bodyClass="Pickup", transmission="", engine="5.7L 8-cyl")}
+saved = (js._decode_vpic_unique_parallel, js.fetch_vpic_decode)
+js._decode_vpic_unique_parallel = lambda vins: [DEC2.get(x) for x in vins]
+js.fetch_vpic_decode = lambda vin: DEC2.get(vin)
+try:
+    cars = [{"id": "x-titan", "vin": YAM_VIN, "year": 2008, "make": "Nissan", "model": "Titan"},
+            {"id": "x-c2500", "vin": GMC_VIN, "year": 1992, "make": "Chevrolet", "model": "C2500"}]
+    js.MODEL_MISMATCH_STATS.clear()
+    with contextlib.redirect_stderr(io.StringIO()):
+        js.enrich_vehicles(cars, decode_vins=True)
+    ti, ck = cars
+    names = lambda ms: [p["name"] for p in (ms[0]["top_parts"] if ms else [])]
+    check("cross group: flag kept", ti.get("_vpic_mismatch") == "VIN decodes as 2015 (listed 2008); VIN decodes as Yamaha (listed Nissan)",
+          repr(ti.get("_vpic_mismatch")))
+    check("cross group: marked, counted", ti.get("_vin_other_vehicle") is True and js.MODEL_MISMATCH_STATS["vin_other_vehicle"] == 1)
+    check("cross group: matched on the listing's year (not the VIN's 2015)", ti["_spanYear"] == 2008)
+    check("cross group: parts = listing make/model/year with no decode",
+          [p["name"] for p in ti["_top_parts"]] == names(js.match_vehicle(2008, "Nissan", "Titan", vin_decode=None)) and ti["_top_parts"],
+          str([p["name"] for p in ti["_top_parts"]]))
+    check("cross group: no VIN-confirmed row", not any(p.get("trim_status") == "vin" for p in ti["_top_parts"]))
+    check("cross group: no re-match", "_vin_rematch" not in ti)
+    out = {e["id"]: e for e in js.output_json(cars, only_matches=False)}
+    t = out["x-titan"]
+    check("cross group output: no decode specs (trim, series, drive, quality, decode-well)",
+          not any(k in t for k in ("vpicTrim", "vpicTrimQuality", "vpicSeries", "vpicDriveType", "vpicDecodeWell")),
+          str({k: t.get(k) for k in ("vpicTrim", "vpicSeries", "vpicDriveType")}))
+    check("cross group output: engine, body and transmission not from the VIN",
+          t.get("engine") == "" and t.get("body") == "" and t.get("transSrc") != "vin" and "Manual" not in str(t.get("trans")),
+          str({k: t.get(k) for k in ("engine", "body", "trans", "transSrc")}))
+    check("cross group output: listing fields and flag kept, spanYear the listing's",
+          (t["make"], t["model"], t["year"]) == ("Nissan", "Titan", 2008) and t.get("vpicMismatch") and t.get("spanYear") == 2008)
+    # one maker group (Chevrolet listing, GMC VIN): unchanged behaviour
+    check("same group: flagged for make but not marked", ck.get("_vpic_mismatch") and "_vin_other_vehicle" not in ck, repr(ck.get("_vpic_mismatch")))
+    check("same group: still matched on the VIN's year", ck["_spanYear"] == 1993)
+    check("same group: parts use the decode",
+          [p["name"] for p in ck["_top_parts"]] == names(js.match_vehicle(1993, "Chevrolet", "C2500", vin_decode=ck["_vpic"])))
+    c = out["x-c2500"]
+    check("same group output: decode specs kept", c.get("vpicTrim") == "SLE" and c.get("vpicDriveType") == "4WD" and c.get("body") == "pickup",
+          str({k: c.get(k) for k in ("vpicTrim", "vpicDriveType", "body")}))
+    err = io.StringIO()
+    with contextlib.redirect_stderr(err):
+        js._log_model_mismatch_stats()
+    check("log line names the ignored VINs", "1 VIN(s) of another maker's vehicle ignored" in err.getvalue(), err.getvalue())
+finally:
+    js._decode_vpic_unique_parallel, js.fetch_vpic_decode = saved
+
 print(f"\n{passes} passed, {len(fails)} failed")
 if fails:
     print("FAILED:", ", ".join(fails))
