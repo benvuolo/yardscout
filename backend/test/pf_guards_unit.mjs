@@ -1017,6 +1017,109 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
   check('r3 OEM cab list: the ungated twin is unchanged', r.rows['2003 Nissan Xterra'] && !r.rows['2003 Nissan Xterra'].warn.includes('if equipped'));
   lazyPreset = null;
 }
+/* ==== OEM-GATE round4-1119 (hub decisions 2026-11-19): a same-option drive
+ * sibling (96301-3JA9B "*W. PREMIUM" beside 3JN9B "*W. AWD. PREMIUM" on the
+ * 2015-2017 QX60 pages), build windows (built: never confirmed), a VIN that
+ * disagrees with its listing (never a plain row), an ungated group unchanged */
+{
+  const G = (gate, v = {}, ex = null) => ctx.pfOemGate(gate, { model: 'QX60', ...v }, ex).verdict;
+  const AWD = 'AWD/All-Wheel Drive', DT4 = '4WD/4-Wheel Drive/4x4', FWD = 'FWD/Front-Wheel Drive';
+  // the gate curate gives 3JA9B's QX60 2015-2017 (drive_sibling_limit: AWD is the
+  // only 4-family word on those pages, so excluding it leaves 2WD; stated)
+  const S2 = { drive: '2wd', drive_basis: 'stated', fuel: 'gas' };
+  check('r4 sibling: a QX60 decoded AWD or 4WD is ruled out for 3JA9B; FWD confirms; undecoded "if equipped"',
+    G(S2, { vpicDriveType: AWD }) === 'exclude' && G(S2, { vpicDriveType: DT4 }) === 'exclude'
+    && G(S2, { vpicDriveType: FWD }) === 'confirm' && G(S2, {}) === 'unconfirmed');
+  // drive_not alone: the other system of the family stays possible
+  check('r4 drive_not alone: a 4WD decode stays "if equipped" (part-time or All-Mode), 2WD confirms, nothing excluded',
+    G({ drive_not: '4wd' }, { model: 'Pathfinder', vpicDriveType: DT4 }) === 'unconfirmed'
+    && G({ drive_not: '4wd' }, { model: 'Pathfinder', vpicDriveType: '4x2' }) === 'confirm'
+    && G({ drive_not: '4wd' }, { model: 'Pathfinder' }) === 'unconfirmed');
+  check('r4 drive_not alone text: "not part-time 4WD"', ctx.pfOemGateText({ drive_not: '4wd' }) === 'not part-time 4WD');
+  // built: never confirmed by anything on the car
+  const B = { built: '2009-08..2010-01' };
+  check('r4 built: unconfirmed with every decode the car could carry',
+    G(B, { model: 'Pathfinder', vpicDriveType: DT4, vpicTrim: 'SE', vpicTrimQuality: 'usable' }, ['', '', '4.0L 6-cyl', 'Automatic', '', 'suv']) === 'unconfirmed'
+    && G(B, { model: 'Pathfinder' }) === 'unconfirmed');
+  check('r4 built + eng: a decode naming another engine still excludes; the right engine leaves only the window open',
+    G({ ...B, eng: ['4.0L'] }, { model: 'Pathfinder' }, ['', '', '5.6L 8-cyl']) === 'exclude'
+    && ctx.pfOemGate({ ...B, eng: ['4.0L'] }, { model: 'Pathfinder' }, ['', '', '4.0L 6-cyl']).keys.join() === 'built');
+  check('r4 built text: ranges, open ends, several runs', typeof ctx.pfOemBuiltText === 'function' &&
+    ctx.pfOemBuiltText('2009-08..2010-01') === '08/2009-01/2010' && ctx.pfOemBuiltText('2010-01..') === 'from 01/2010'
+    && ctx.pfOemBuiltText('..2005-12') === 'to 12/2005' && ctx.pfOemBuiltText('2009-08..2010-01,2010-06..') === '08/2009-01/2010, from 06/2010'
+    && ctx.pfOemGateText({ eng: ['4.0L'], built: '2009-08..2010-01' }) === '4.0L, built 08/2009-01/2010');
+  const DW = (gate, v = {}, ex = null) => ctx.pfOemDonorGate([['Nissan', 'Pathfinder', 2010, 2010, null, gate]], { model: 'Pathfinder', ...v }, ex);
+  const d1 = DW(B, { vpicDriveType: DT4 });
+  check('r4 built donor line: "if equipped", the window named, the door sticker', d1.verdict === 'unconfirmed'
+    && d1.warn === 'if equipped: this part is listed for cars built 08/2009-01/2010 only — check the build date on the door sticker', d1.warn);
+  const d2 = DW({ ...B, eng: ['4.0L'] }, {}, null);
+  check('r4 built + undecoded engine: both lines, the engine one without the window',
+    d2.warn === "if equipped: this part is listed for 4.0L only — this donor's engine isn't confirmed, check the car; this part is listed for cars built 08/2009-01/2010 only — check the build date on the door sticker", d2.warn);
+  // VIN / listing mismatch (expandV2Row's vpicMismatch, the vpic side table's 5th field)
+  const MM = 'VIN decodes as 2004 (listed 2005)';
+  const m1 = ctx.pfOemDonorGate([['Nissan', 'Xterra', 2005, 2015]], { model: 'Xterra', vpicMismatch: MM }, null);
+  check('r4 VIN mismatch: an ungated app is "if equipped" with the listing/VIN line, never confirm',
+    m1.verdict === 'unconfirmed' && m1.warn === "if equipped: this car's listing and VIN disagree, check the car", JSON.stringify(m1));
+  const m2 = ctx.pfOemDonorGate([['Nissan', 'Xterra', 2005, 2005, null, { drive: '2wd', drive_basis: 'stated' }]], { model: 'Xterra', vpicMismatch: MM, vpicDriveType: DT4 }, null);
+  check('r4 VIN mismatch: a gate the decode rules out still excludes', m2.verdict === 'exclude', JSON.stringify(m2));
+  const m3 = ctx.pfOemDonorGate([['Nissan', 'Xterra', 2005, 2005, null, { drive: '2wd', drive_basis: 'stated' }]], { model: 'Xterra', vpicMismatch: MM }, null);
+  check('r4 VIN mismatch + unconfirmed gate: both lines', m3.verdict === 'unconfirmed'
+    && m3.warn.endsWith("isn't confirmed, check the car; this car's listing and VIN disagree, check the car"), m3.warn);
+  const m0 = ctx.pfOemDonorGate([['Nissan', 'Xterra', 2005, 2015]], { model: 'Xterra' }, null);
+  check('r4 no mismatch, no gate: confirm, no line (unchanged)', m0.verdict === 'confirm' && m0.warn === '', JSON.stringify(m0));
+}
+{
+  // pfRunSearch: the QX60 2016 mirror with the round-4 sibling gate beside the ungated JX35 twin,
+  // a 2010 Pathfinder climate panel with a build window, a 2005 Xterra whose VIN says 2004
+  const gQ = oemG({ id: 'oem:nissan:side-mirrors:R:r4q', ns: 'nissan', label: 'Nissan catalog', pn: ['96301-3JA9B'],
+    note: 'Nissan catalog lists #96301-3JA9B for both — option: fits some option packages; QX60: 2WD, gas only; verify the number on the part',
+    apps: [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2015, 2017, null, { drive: '2wd', drive_basis: 'stated', fuel: 'gas' }]] });
+  const inv = [car(1, 2016, 'Infiniti', 'QX60', { vpicDriveType: 'AWD/All-Wheel Drive' }),
+    car(2, 2016, 'Infiniti', 'QX60', { vpicDriveType: '4WD/4-Wheel Drive/4x4' }),
+    car(3, 2016, 'Infiniti', 'QX60', { vpicDriveType: 'FWD/Front-Wheel Drive' }),
+    car(4, 2017, 'Infiniti', 'QX60'), car(5, 2013, 'Infiniti', 'JX35', { vpicDriveType: 'AWD/All-Wheel Drive' })];
+  lazyPreset = { 'side-mirrors': { oemGroups: [gQ], amGroups: [] } };
+  const r = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, { year: 2013, make: 'Infiniti', model: 'JX35' }, cat());
+  // rows are keyed by name: three 2016 QX60s share one name, so count the cards
+  const cards = (r.html.match(/<span class="pf-car-name">2016 Infiniti QX60<\/span>/g) || []).length;
+  check('r4 OEM sibling: no decoded-AWD/4WD QX60 is a donor for 3JA9B; of the three 2016 QX60s only the FWD one is offered, as a plain row',
+    cards === 1 && r.rows['2016 Infiniti QX60'] && !r.rows['2016 Infiniti QX60'].warn.includes('if equipped'), `${cards} ${JSON.stringify(r.rows['2016 Infiniti QX60'])}`);
+  check('r4 OEM sibling: an undecoded 2017 QX60 is "if equipped" with the drive named',
+    (r.rows['2017 Infiniti QX60']?.warn || '').includes("listed for 2WD, gas only — this donor's drivetrain isn't confirmed, check the car"), JSON.stringify(r.rows['2017 Infiniti QX60']));
+  check('r4 OEM sibling: the ungated JX35 twin (AWD) is unchanged, a plain row', r.rows['2013 Infiniti JX35'] && !r.rows['2013 Infiniti JX35'].warn.includes('if equipped'));
+  // build window: every donor of the app-year "if equipped", none plain, never Verified
+  const gP = oemG({ id: 'oem:nissan:climate-control:C:r4p', ns: 'nissan', cat: 'climate-control', label: 'Nissan catalog', pn: ['27510-EA00A'],
+    note: 'Nissan catalog lists #27510-EA00A for both — option: fits some option packages; Pathfinder 2010: 4.0L, built 08/2009-01/2010 only; verify the number on the part',
+    apps: [['Nissan', 'Pathfinder', 2010, 2010, null, { built: '2009-08..2010-01', eng: ['4.0L'] }], ['Nissan', 'Xterra', 2010, 2010]] });
+  const ccat = cat({ id: 'climate-control', label: 'Climate control', tokens: ['climate control'], priceTokens: ['climate'], rowWarn: '' });
+  const invP = [car(11, 2010, 'Nissan', 'Pathfinder', { vpicDriveType: '4WD/4-Wheel Drive/4x4', vin: VIN_2012 }), car(12, 2010, 'Nissan', 'Pathfinder'),
+    car(13, 2010, 'Nissan', 'Pathfinder'), car(14, 2010, 'Nissan', 'Xterra')];
+  const exP = { 11: ['', '', '4.0L 6-cyl'], 12: ['', '', '5.6L 8-cyl'] };
+  lazyPreset = { 'climate-control': { oemGroups: [gP], amGroups: [] } };
+  const rp = run(base([], lazyIdx({ 'climate-control': { oem: 1, am: 0 } })), invP, { year: 2010, make: 'Nissan', model: 'Xterra' }, ccat, exP);
+  const pCards = (rp.html.match(/<span class="pf-car-name">2010 Nissan Pathfinder<\/span>/g) || []).length;
+  const pRows = rp.html.split('<div class="pf-row-card ').slice(1).filter(ch => ch.includes('2010 Nissan Pathfinder'));
+  check('r4 OEM built: the 5.6L Pathfinder is ruled out by the engine; the other two are offered', pCards === 2, String(pCards));
+  check('r4 OEM built: no 2010 Pathfinder is a plain row: each says "check the build date on the door sticker"',
+    pRows.length === 2 && pRows.every(ch => ch.includes('check the build date on the door sticker') && ch.startsWith('pf-likely')), pRows.map(ch => ch.slice(0, 40)).join(' | '));
+  check('r4 OEM built: the ungated Xterra twin is unchanged', rp.rows['2010 Nissan Xterra'] && !rp.rows['2010 Nissan Xterra'].warn.includes('if equipped'));
+  const rs = run(base([], lazyIdx({ 'climate-control': { oem: 1, am: 0 } })), invP, { year: 2010, make: 'Nissan', model: 'Pathfinder' }, ccat, exP);
+  check('r4 OEM built: a seeker on the windowed app-year is told in the header',
+    rs.head.includes('Some catalog numbers here were found for a 2010 Pathfinder with 4.0L, built 08/2009-01/2010 only'), rs.head);
+  // VIN / listing mismatch through pfRunSearch, on an ungated group
+  const gX = oemG({ id: 'oem:nissan:side-mirrors:L:r4x', ns: 'nissan', label: 'Nissan catalog', pn: ['96302-EA000'],
+    note: 'Nissan catalog lists #96302-EA000 for both — option: fits some option packages; verify the number on the part',
+    apps: [['Nissan', 'Frontier', 2005, 2012], ['Nissan', 'Xterra', 2005, 2013]] });
+  const invX = [car(21, 2005, 'Nissan', 'Xterra', { vpicMismatch: 'VIN decodes as 2004 (listed 2005)' }), car(22, 2006, 'Nissan', 'Xterra')];
+  lazyPreset = { 'side-mirrors': { oemGroups: [gX], amGroups: [] } };
+  const rx = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), invX, { year: 2008, make: 'Nissan', model: 'Frontier' }, cat());
+  check('r4 OEM VIN mismatch: the 2005 Xterra whose VIN says 2004 is offered "if equipped", never plain',
+    rx.rows['2005 Nissan Xterra']?.tier === 'likely' && rx.rows['2005 Nissan Xterra'].warn.includes("if equipped: this car's listing and VIN disagree, check the car"),
+    JSON.stringify(rx.rows['2005 Nissan Xterra']));
+  check('r4 OEM ungated group unchanged: the 2006 Xterra (no mismatch) is a plain row with no "if equipped" line',
+    rx.rows['2006 Nissan Xterra'] && !rx.rows['2006 Nissan Xterra'].warn.includes('if equipped'), JSON.stringify(rx.rows['2006 Nissan Xterra']));
+  lazyPreset = null;
+}
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);

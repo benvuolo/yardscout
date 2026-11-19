@@ -88377,6 +88377,15 @@
    "gates": [
     [
      "Lexus",
+     "IS 250",
+     2013,
+     2013,
+     {
+      "built": "2011-09..2013-04"
+     }
+    ],
+    [
+     "Lexus",
      "IS 350",
      2012,
      2012,
@@ -88387,7 +88396,7 @@
    ],
    "id": "oem:toyota:headlights:R:a64c5fb516",
    "kind": "body",
-   "note": "Toyota catalog lists #81145-53673 for both — option: fits some option packages; IS 350: built 09/2011-04/2013 only; verify the number on the part",
+   "note": "Toyota catalog lists #81145-53673 for both — option: fits some option packages; built 09/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:30:01Z",
    "pn": [
     "81145-53673"
@@ -88960,6 +88969,15 @@
    "gates": [
     [
      "Lexus",
+     "IS 250",
+     2013,
+     2013,
+     {
+      "built": "2011-09..2013-04"
+     }
+    ],
+    [
+     "Lexus",
      "IS 350",
      2012,
      2012,
@@ -88970,7 +88988,7 @@
    ],
    "id": "oem:toyota:headlights:L:f5de7086d4",
    "kind": "body",
-   "note": "Toyota catalog lists #81185-53673 for both — option: fits some option packages; IS 350: built 09/2011-04/2013 only; verify the number on the part",
+   "note": "Toyota catalog lists #81185-53673 for both — option: fits some option packages; built 09/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:30:49Z",
    "pn": [
     "81185-53673"

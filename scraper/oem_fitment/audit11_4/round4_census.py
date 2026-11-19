@@ -14,7 +14,8 @@ lot as the app shows it (REPLAY_JSON from lot_replay.mjs). Read-only; no fetch.
   2 window   this number's own rows on T's page print a window that leaves
              part of the model year out and a dated row of the same part that
              is not its predecessor/successor carries the rest
-             (Curation.build_window kind 'unlinked', src 'page'); the gate has
+             (Curation.build_window kind 'unlinked', src 'page'; or 'no_page':
+             T's page is not in the raw, the record's seed notes date it); the gate has
              no 'built'; plain lot cars of T are counted (no decode gives the
              build month). 'edge' = 1-2 months at a model-year edge
   3 pages    T's page prints no date and another model-year page of the same
@@ -120,9 +121,9 @@ def main(argv):
                        "edge": w["edge"], "others": [[p, C._win_label(list(ws)), lk] for p, ws, lk in w["others"]][:6],
                        "gate": gate, "handled": "built" in gate, "plain_cars_T": len(ps),
                        "plain_contra": 0 if "built" in gate else len(ps)}
-                if w["src"] == "other_page" and w["kind"] in ("drop", "unlinked"):
+                if w["src"] == "other_page" and w["kind"] in ("drop", "unlinked", "no_page"):
                     found["pages"].append(rec)
-                elif w["kind"] == "unlinked":
+                elif w["kind"] in ("unlinked", "no_page"):
                     found["window"].append(rec)
                 elif w["kind"] == "linked":
                     found["window_linked"].append(rec)

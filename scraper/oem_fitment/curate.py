@@ -1572,7 +1572,7 @@ class Curation:
                     else:
                         dnot_by_T[T] = frozenset(sl[1])
                     self.likely_drive_sibling[cat] += 1
-                if w and w["kind"] == "unlinked":
+                if w and w["kind"] in ("unlinked", "no_page"):
                     win_by_T[T] = w
                 keep.append(T)
             if len(keep) != len(Ts):
@@ -2873,10 +2873,11 @@ class Curation:
                  _PROD_MIN_MONTHS of the model year: not listed, as if T's page
                  printed it) | 'no_other_row' (no dated row of the same part
                  carries the gap) | 'linked' (every row that does is this
-                 number's predecessor or successor) | 'unlinked'
+                 number's predecessor or successor) | 'unlinked' | 'no_page'
+                 (T's page is not in the raw: the rest of the year unknown)
           others [(pn, wins, linked)] the dated rows carrying the gap
           edge   the gap is 1-2 months at a model-year edge
-        Only 'unlinked' becomes a window limit; 'drop' leaves T out."""
+        'unlinked' and 'no_page' become a window limit; 'drop' leaves T out."""
         if not policy.LIKELY_BUILD_WINDOW_RULE or cat in PROD_RULE_SKIP_CATS:
             return None
         self._cat_ctx = cat
@@ -2901,9 +2902,9 @@ class Curation:
             sites = {lr.site for _n, lr in items if lr is not None} or {r.site for r in c.records}
             models = {(lr.seed[0], lr.seed[1]) for _n, lr in items if lr is not None and lr.seed} or \
                 set(self.t_sources.get(T, set()))
-            if rows and any(policy.pn_key(self.ns, lr.pn) != c.key and _row_windows(lr.notes)
+            if rows and any(policy.pn_key(self.ns, lr.pn) != c.key
                             and self.comparable(cat, c.key, policy.pn_key(self.ns, lr.pn)) for lr in rows):
-                return None         # the page lists a dated predecessor/successor: a supersession listing
+                return None         # the page lists a predecessor/successor: a supersession listing
             # per configuration: every option clause of this number on T's
             # page must be printed with a window on another page of the same
             # catalog model (the same clause, word for word); a clause no
@@ -2955,7 +2956,12 @@ class Curation:
             if ow and any(_win_overlap(ow, a, b) for a, b in out["gap"]):
                 others.append((lr.pn, _win_merge(ow), self.comparable(cat, c.key, k2)))
         out["others"] = sorted(set((p, tuple(w), lk) for p, w, lk in others))
-        if not others:
+        if not rows:
+            # T's page in this category is not in the raw (the record's seed-
+            # page notes only): nothing shows the rest of the year is this
+            # number's own predecessor or successor, so the window stands
+            out["kind"] = "no_page"
+        elif not others:
             out["kind"] = "no_other_row"
         elif all(lk for _p, _w, lk in others):
             out["kind"] = "linked"
