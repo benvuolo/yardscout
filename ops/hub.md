@@ -3218,3 +3218,28 @@ identify the account).
   `ASC_VENDOR_NUMBER_LLC`. If the menu shows one entity only, the owner
   adds the number they see under that name anyway and the hub compares the
   two in `usage-stats.yml` (identical output means the same number).
+
+## 2026-11-19 17:01 UTC LLC vendor number in; subscriber count fixed (Apple 4, Google 1)
+
+Owner added secret `ASC_VENDOR_NUMBER_LLC` (about 16:55 UTC). No vendor
+number is written here.
+- `usage-stats.yml` run 44571628330, both numbers. They are different
+  numbers: the first still has its newest sales report on 11-05 (naming
+  both entities); the LLC one has reports from 11-05 to 11-17, Developer
+  "YardScout LLC".
+- LLC number, 11-05 to 11-18: 64 first-time downloads; 2 subscription
+  sales, 15.28 USD (a new subscriber 11-10, a renewal 11-13).
+- Active paid subscriptions by day: first number 4 until 11-12, 3 from
+  11-13, 2 on 11-18 (one Cancel event 11-18); LLC number 1 from 11-10, 2
+  from 11-13. A subscription shows under the old number until it renews,
+  then under the new one (the 11-13 renewal moved one). So 11-18: 2 + 2 =
+  **4 on iPhone**. The count had read the first number only and showed 2.
+- Fix on main 3c971eef: `tools/store_subscribers.py` reads both numbers
+  for the same report day and adds them (`apple_combine`; adding different
+  days could count a moving subscription twice), per-entity counts in the
+  output without the numbers; `store-subscribers.yml` passes the second
+  secret; 8 new checks in `tools/test_store_subscribers.py`, all pass.
+  Run 44572345210 stored: Apple 4 active, 0 trial, as of 11-18 (2 + 2);
+  Google 1 as of 11-17. The daily ops email reads that value.
+- This closes the 11-18 puzzle of "0 downloads since 11-06": they were
+  under the LLC number.
