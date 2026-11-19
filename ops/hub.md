@@ -2497,3 +2497,52 @@ Groups 23 RIGHT / 1 WRONG / 6 RISK; pairs 21 / 1 / 8.
   commands whose text names the app's main script or index page (those
   files hold the public support address). Use the Read, Grep and Edit
   tools on them, and write ops text with the Write tool, then append it.
+
+## 2026-11-19 ~10:15 UTC list order LIVE; arrivals writer on main and a scan running; card + forecast in one full regression
+
+- **List order LIVE (task #74 done).** `hub/rc-1119` (list order + main +
+  arrivals builder B, sw `jh-v216`) pushed to main at 09:56 UTC (8c48be12)
+  after: quick regression 73/0/0, `cars_feed_e2e` PASS,
+  `free_email_alert_ui_e2e` PASS, `forecast_e2e` PASS twice. One live load
+  at 10:08 UTC with zip 95112: caches `jh-v216`; 18,011 cars in view, the
+  two-day group is 478 cars and leads, nearest first holds; the list opens
+  with Pick-n-Pull San Jose North, 1 mi, set out the day before the newest
+  day (the owner's own case); `YSForecast` is defined (unused until the
+  card lands).
+- `forecast_e2e` failed once on the release candidate (the 390 px case read
+  the real, missing files): the test did not block service workers, so the
+  fixture was served or not depending on timing. Hub fixed the test
+  (`serviceWorkers: 'block'`, as the other e2e tests do); it then passed
+  twice.
+- **Scan 44500938468** dispatched by hand at 09:56 UTC on 8c48be12: the
+  first run of the arrivals writer against the real history database. To
+  check when it ends: the `[arrivals]` log line (arrivals in the low
+  hundreds of thousands, flush scans in the thousands, 4-6 MB, under 30
+  s), `docs/data/arrivals/index.json` (about 307 yards, most with 8
+  covered weeks), steady weekly counts for a common model at a big yard,
+  and that the commit carried the new directory. GitHub's cron for this
+  workflow runs hours late (the 04:00 run started 05:13, the 08:00 run had
+  not started by 09:55), so the hand dispatch was the way to get data
+  tonight.
+- **Builder A handed back** (`feat/where-to-go-1119`, head 5c80e8e9, sw
+  `jh-v217`): "Best yards for this part" card: headline "N donor cars at Y
+  yards within R mi", rank numerals, chips (Most donor cars / Closest /
+  Newest arrival / Lowest price), tap-to-filter with the maps link, held
+  yards last, the count-equals-list proof in `pf_plan_e2e` (91 checks),
+  layout screens. Its first layout run failed at 320 px with 200% text (39
+  failures, "yard price $X" could not wrap); fixed, then both halves
+  passed (1,380 checks each).
+- **Integration bug found by the hub:** the card passes `where: 'parts'`
+  and the strip `where: 'cars'` (the surface), and the forecast module
+  read `where` as a place name, so the line would have said "within 100
+  mi of parts". Fixed in the module: the place comes only from `place`;
+  `where` is never shown. New `pf_forecast_e2e` (17 checks) runs the real
+  card with the real module, the Cars strip, and the missing-files case;
+  `forecast_unit` gained the two "never shown" cases (73 checks).
+- Release candidate `hub/rc2-1119` (ec53c018) = main + A + the fix. The
+  one full regression on the combined tree started 10:00 UTC.
+- **Nissan round 6 started 10:10 UTC** (interchange builder resumed, branch
+  `interchange/round6-1119`): the 08:25 decisions plus a census of the
+  same classes on the live makes first (cab gates not on the number's own
+  row, ungated windows that cut the model year, option text tying a part
+  to a transmission or drive).
