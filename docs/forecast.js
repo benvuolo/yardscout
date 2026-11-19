@@ -314,13 +314,18 @@
   /* compact (the Alerts tab's watch rows): the same subject, headline, facts
    * and label, and the eight bars small (no per-bar numbers; the bars keep the
    * same text alternative); no "Most land at" line. Nothing new is said. */
+  // A year span never breaks at its hyphen ("2003-" / "09 4Runner").
+  function labelHtml(l) {
+    var m = /^(\S+) (.*)$/.exec(l);
+    return m ? '<span class="ysf-yrs">' + esc(m[1]) + '</span> ' + esc(m[2]) : esc(l);
+  }
   function modelsHtml(w) {
-    var line = esc(w.models.join(', '));
+    var line = w.models.map(labelHtml).join(', ');
     if (!w.modelsMore.length) return '<p class="ysf-models">' + line + '</p>';
     var all = w.modelsMore.join(', ');
     return '<details class="ysf-models ysf-models-more"><summary title="' + esc(all) + '">' + line +
       ' <span class="ysf-more">and ' + w.modelsMore.length + ' more</span></summary>' +
-      '<p class="ysf-models-rest">' + esc(all) + '</p></details>';
+      '<p class="ysf-models-rest">' + w.modelsMore.map(labelHtml).join(', ') + '</p></details>';
   }
   function render(el, s, w, compact) {
     var max = Math.max.apply(null, s.weeks.concat([1]));

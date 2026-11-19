@@ -638,3 +638,15 @@ forecast half (`docs/forecast.js`, `YSForecast`) is another builder's.
   engine family's models overstates where the model had other engines
   (2002 ES 300 alternator: every 1997-2003 Camry, 4-cyl included); the
   caveat says so, but a decoded-engine split in the arrivals data would fix it.
+- **Calibration (hub review, same day; supersedes the strings above):**
+  subject "Cars of the donor models"; directly under the headline, from
+  today's lot (`pfPlanLotNow`, the app's own `pfAppMatches` over the specs
+  in use, after Verified-only): "On lots within R mi now: D of C cars of
+  these models are donors for this part." (D = the list's rows before the
+  120 cap among those cars, so D <= C; singular "is a donor" / "1 car";
+  no line when C is 0 or the numbers are missing). Caveat shortened to "The
+  8-week counts include every car of these models and years, whatever its
+  engine or options." Real data near 95112: 2004 4Runner alternator "About 6
+  a week" with 42 of 61; 2002 ES 300 alternator "About 72 a week" with 363
+  of 570. The ES 300 list itself offers "engine not confirmed" donors, so
+  its ratio still includes cars the decode cannot rule out.

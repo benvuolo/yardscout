@@ -314,7 +314,7 @@ const ctxQ = { ...Q, radiusMi: 25, place: '84401', where: 'parts' };
     await G.mount(b, { ...ctxS, specs: [R] });
     check('mount: specs = own generation renders byte-identical HTML', a.innerHTML === b.innerHTML && a.innerHTML.length > 100);
     const st = await G.mount(c, { ...ctxS, specs: [R, GX] });
-    check('mount: donor models render', st === 'ok' && c.innerHTML.includes('data-ysf-kind="donor-models"') && c.innerHTML.includes('>Cars of the donor models<') && c.innerHTML.includes('2003-09 4Runner, 2003-09 GX 470') && c.innerHTML.includes('class="ysf-caveat"') && c.innerHTML.includes('Past weeks, not a promise.'), c.innerHTML.slice(0, 400));
+    check('mount: donor models render', st === 'ok' && c.innerHTML.includes('data-ysf-kind="donor-models"') && c.innerHTML.includes('>Cars of the donor models<') && c.innerHTML.replace(/<[^>]+>/g, '').includes('2003-09 4Runner, 2003-09 GX 470') && c.innerHTML.includes('class="ysf-caveat"') && c.innerHTML.includes('Past weeks, not a promise.'), c.innerHTML.slice(0, 400));
     const c2 = { innerHTML: '' };
     await G.mount(c2, { ...ctxS, specs: [R, GX], lotNow: { donors: 3, cars: 11 } });
     const iH = c2.innerHTML.indexOf('ysf-headline'), iL = c2.innerHTML.indexOf('class="ysf-lot"'), iF = c2.innerHTML.indexOf('ysf-facts');
