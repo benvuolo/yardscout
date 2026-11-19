@@ -5026,3 +5026,203 @@ main checkout's for the run; removed, not committed. origin/main moved to
    "starred or not" applied to the Titan 7S00E / 7S006 pair (the verifier
    read that pair as no split).
 3. Nissan: 225 shippable, not shipped; a new independent sample decides.
+
+## 2026-11-19 Round 5: linked windows, number-matched page windows, no split on "*" alone, sibling drive basis (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round5-1119`)
+
+Hub brief after the independent check `interchange/verify-nissan-1119e`
+(seed 52941119; groups 21/4/5, pairs 23/3/4; 7 WRONG, all one flaw). Base
+origin/main 599c8bec (round 4 live, df0bdc0a, sw jh-v214). Pins unchanged
+(oem-raw@dca9cd84 shipped, @57e8b5b9 nissan, lot main@a85c654). No fetch,
+crawl, dispatch, email, release sample or main push.
+
+### Rules (curate.py / policy.py / validate.py; hashed: all 8 shipped namespaces and the candidate re-curated in the same push)
+
+- **Decision 1, linked windows are windows.** `build_window` kind `linked`
+  (the rest of T's year under the number's own predecessor or successor) is
+  gated like `unlinked` / `no_page`: window in the note + `built` gate; a
+  note over 160 characters drops that vehicle-year. `no_other_row` (launch
+  or end of production) stays unchanged. July-June model year and edge
+  handling as in round 4.
+- **Decision 2, other-page windows match on the number.** When T's page
+  dates no row of the number, its dated rows on the catalog model's other
+  model-year pages are read whatever their option clause, and a predecessor
+  on T's page no longer exempts it (Sentra 2004 82730-3Z005). Under 5
+  months of T's year: T is left out. Also: an undated gap carrier on T's
+  page takes its window from the other pages too (`_pn_other_windows`);
+  without that, Q70 2015 80720-1MA0B stayed plain (1MA0A and 1MA0B both
+  undated on the 2015 page, dated on the 2016 page).
+  - **Stanza 1995, the cause:** the Stanza 1995 mirror page lists 1E400
+    (06/1992-02/1995, "Replaced By" 2B500) beside 2B500 (from 02/1995), so
+    round 4 classed it `linked` and left it plain; Altima 1995 has no page
+    in the raw, fell to `no_page` and was gated. Decision 1 removes the
+    difference. Both are now windowed; the two-model note is over 160, so
+    Stanza 1995 is the vehicle-year dropped and Altima 1995 keeps
+    `built 1995-02..` (96301/96302-2B500).
+  - **Pages read, a choice for the hub:** every model-year page of the model
+    (`_OTHER_PAGE_SPAN = None`: the literal "narrower reading wins"). Live
+    makes are identical either way. On the candidate, an earlier build of
+    this branch that read adjacent years only gained 77 app-years over round
+    4 and lost 34; reading every page gains 1 and loses 107. Example of the
+    cost: 96301/96302-ZC20A Armada 2008-2015 left out (the 2006 page dates
+    "W. SE" 08/2005-10/2007; the 2009-2015 pages list it undated for the
+    later SV/SL trims).
+- **Decision 3, an asterisk alone is no drive split.** The drive word must
+  sit on the same clause with the same "*" mark (`_row_clauses_star`); a
+  sibling listing the clause bare, or for the other drive family, under
+  either mark is counter-evidence. Same-mark matching alone was not enough:
+  7S002 lists "*KC. 2WD. (SE+ LE)" and "KC. 4WD. (SE+ LE)", which would have
+  re-made the 7S00E gate on a star difference.
+- **Decision 4, basis "sibling".** A gate read from a same-option sibling
+  carries `drive_basis: "sibling"` and `drive_sib` (the sibling's drive);
+  "stated" stays where the number's own row (or its product-page fitment
+  row) names the drive: on the live makes Kia Forte struts (held category,
+  "[AUTO - 6 SPEED 2WD]" on the row), Ram 1500 2012 ("6 - Lt. Duty DODGE
+  4WD"). **Kept "stated", for the hub:** GMC Yukon 2003 mirrors
+  19153377/78, a limit filed by the catalog's own "2wd" page with the
+  "4wd" page read without the number; the drive word is in the page name,
+  not the row.
+- Validator: `drive_basis` adds "sibling"; `drive_sib` only with it and of
+  the other family.
+
+### App (docs/app.js OEM-GATE; sw `jh-v215`)
+
+- Sibling line: "if equipped: the catalog lists a separate AWD number for
+  this option, so this part is read as 2WD only — this donor's drivetrain
+  isn't confirmed, check the car" (the word from `drive_sib`). Other
+  unconfirmed limits keep their line without the drive; verdicts unchanged.
+- Old apps: the round-4 app on this payload gives identical verdicts on
+  every pinned-lot pair (plain / if equipped / excluded: same counts); it
+  words the sibling basis "listed for 2WD only" (only "unchecked" changes
+  the verb). In `pf_guards_unit` with the round-4 app.js the 3 wording
+  checks fail, the verdict checks pass.
+
+### Part A, 8 shipped makes (`groups/_report/round5_census_2026-11-19.json`)
+
+Before = round 4 live (origin/main groups and app); after = this branch.
+App-years (plain lot pairs).
+
+| kind | gm | ford | mopar | toyota | subaru | hmg | vag | mb |
+|---|---|---|---|---|---|---|---|---|
+| linked window, before | 0 | 1 (13) | 0 | 88 (676) | 0 | 1 (322) | 0 | 0 |
+| linked window, after | 0 | 0 (app-year dropped) | 0 | 88 gated | 0 | 1 gated | 0 | 0 |
+| other-page window (number-matched) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| sibling drive gates | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| no other number (unchanged by decision) | 0 | 5 (303) | 0 | 4 (46) | 0 | 0 | 0 | 0 |
+
+Live diff (`groups/_report/live_diff_2026-11-19_round5.txt`): **0 added
+groups, 0 gained app-years, 0 widened gates on every live make; 0 groups
+removed.** Narrowed: toyota 88 groups (Lexus colour mirrors whose earlier or
+later builds carry the same colour's predecessor/successor, e.g.
+87910-48240-A0 RX 400h 2006 "built 03/2005-01/2006"), hmg 1 (76003-C1000
+Sonata 2015 "built 04/2014-12/2014"), ford 1 (BE5Z-10849-AC: MKZ 2011
+dropped, its window over the note cap). gm, mopar, subaru, vag, mb: only
+`policy_sha256`. Payload rebuilt, oemStatus ok x8.
+
+Donor pairs on the pinned lot (plain / if equipped / excluded):
+
+| ns | plain | if equipped | excluded |
+|---|---|---|---|
+| toyota | 97,272 -> 96,596 | 7,714 -> 8,390 | 7,196 -> 7,196 |
+| hmg | 3,426 -> 3,104 | 328 -> 650 | 0 -> 0 |
+| ford | 23,839 -> 23,826 | 1,124 -> 1,117 | 229 -> 187 |
+| gm, mopar, subaru, vag, mb | unchanged | | |
+| **shipped** | **291,603 -> 290,592** | **13,294 -> 14,285** | **12,076 -> 12,034** |
+
+### Part B, nissan candidate (NOT shipped)
+
+`groups/_report/nissan.candidate.json`: 226 Likely, **223 shippable** (was
+225): window-regulator 112, side-mirrors 62, gauge-cluster 32,
+climate-control 17; 136 groups gated (built 84). **The 160-character cap
+refuses 88 groups** (window cap 26, drive/engine-limit cap 62). Lot pairs:
+plain 47,411 -> 40,326, if equipped 4,281 -> 5,590, excluded 847 -> 801.
+Against the round-4 candidate: 4 removed, 67 narrowed, 107 app-years left,
+0 widened gates, but **2 groups and 1 app-year come back**:
+96301/96302-3JA9A (JX35 2013 + QX60 2015: round 4's "starred or not"
+sibling had pushed their note over the cap; decision 3 reverts it) and
+82730-CV01B Juke 2016 (window-gated; the note-cap drop now takes another
+year). Census after: linked 67 -> 0 plain, other-page 85 -> 0, the 7
+sibling gates all basis "sibling".
+
+Every 1119e WRONG / RISK item (`groups/_report/nissan_recheck_2026-11-19e.json`; my own re-check, not independent):
+
+| item | now |
+|---|---|
+| WRONG 24810-7Z809 Xterra/Frontier 2002 | refused (`held_window_note_cap`): "3.3L, built 07/2001-04/2002 only" on both, one model left |
+| WRONG K6301-1MA0B M56 2011 | M56 2011 dropped (window over the cap); M37 2013 and M56 2013 also dropped |
+| WRONG 82730-3Z005 Altima 2003 / Sentra 2004 | Altima 2003 `built 2002-11..2004-01`; Sentra 2004 left out (from 04/2004, under 5 months) |
+| WRONG 80720-1MA0B Q70/Q70L 2015 | both dropped (linked window read from the 2016 page, note cap); Q70 2016-2018, Q70L 2016/2018 remain |
+| WRONG pair 82731-3Z005 (Altima 2003 donor) | Altima 2003 `built 2002-11..2004-01`: 205 plain -> 205 if equipped |
+| WRONG pair 96302-ZC20A (Armada 2005 seeker, 2010 donor) | Armada 2005 left out (2006 page from 08/2005); Armada 2008-2015 left out (same window, every page) |
+| WRONG pair 80730-JX30B (Cube 2011 donor) | Cube 2011 `built 2009-02..2011-04`: 37 plain -> if equipped; Juke 2011 gone |
+| RISK 24810-7S00E Titan 2005 4WD gate "stated" | still 4WD, now basis `sibling` (drive_sib 2wd) from **7S007** "*KC. 2WD. (SE+ LE) + *CC. 2WD. (SE+ LE)" (same mark, nissan.lists:198), not 7S006; Armada 2005 left out (other-page window). A second look is worth it |
+| RISK 24820-3ZD0A QX56 2013 2WD (pair with QX80 2014) | `drive 2wd`, basis `sibling` (drive_sib awd) + built; QX80 2014 unchanged (its page lists no AWD sibling) |
+| RISK "*" scope: 24810-ZD103, K6301-1PM0B, 96301-3EV0B, pair 96301-1CA0B FX50 2009 | unchanged (decision 5: no claim changed on "*") |
+| RISK 80721-CL00A / pair 80720-CL00A FX 2006 edge | FX35 2005 80721 `built 2004-09..2006-06` (unchanged); 80720-CL00A prints 07/2004-06/2006, the whole July-June years 2005-2006: no window under the kept convention (the checker used Aug-Jul) |
+| RISK pair 80721-EA000 (Xterra 2008 donor) | Xterra 2005-2008 left out; the "*" question unchanged |
+| census: 7 "stated" gates with no drive word | 6 now `sibling` (3ZD0A, 3ZD1A, 96301/96302-9BC9A Xterra 2012-2013); 7S00E's gate now rests on 7S007 (above) |
+| Stanza 1995 ungated | cause found (above); dropped by the note cap, Altima 1995 gated |
+
+### Decision 5, the leading "*" (no fetch; raw at both pins)
+
+- Every string in the nissan/infiniti lists, records and year manifests
+  (@57e8b5b9) was searched for a stray "*" or a legend word (asterisk,
+  legend, footnote, indicates, denotes, marked): **no page text explains
+  the mark.** Outside option clauses "*" appears only as "*SELECT USE" on 11
+  infiniti bolt/nut rows (1998 I30) and as a bare "*" / "**" on 4 nissan
+  rows. "SELECT USE" elsewhere names a supplier choice ("SELECT USE NSK"),
+  which hints at "optional / select" but settles nothing.
+- Candidate groups depending on a starred clause: 63 groups (269
+  app-years) have a starred own clause; a drive gate resting only on
+  starred clauses: 4 groups / 8 app-years; an engine gate: 6 / 12;
+  ungated app-years where starred and unstarred configurations differ in
+  drive: 2 groups / 10, in engine: 12 / 52. Shipped: subaru 4 groups with a
+  starred clause, none drive- or engine-scoped by it; mopar groups 0; the
+  other shipped sites print no "*" in option columns. No claim changed.
+
+### Tests
+
+- New `curation_tests/test_round5_1119.py` (14 checks): the mark per clause;
+  7S006 and 7S002 no split, 7S007 same-mark split; Stanza 1995 linked
+  window; Sentra 2004 number-matched drop; Q70 2015 undated gap carriers;
+  drive_sib vocabulary; committed files (sibling gates name drive_sib, the
+  1119e "stated" gates are sibling, every 1119e WRONG vehicle-year gone or
+  built-gated, Sentra 2004 out, Stanza 1995 windowed or out).
+  `test_round4_1119.py`: 5 checks updated to the round-5 meaning.
+- `pf_guards_unit.mjs` r5 block, 7 checks (sibling line both ways, same
+  verdicts as stated, engine + sibling + built line order, stated wording
+  unchanged, a linked window never plain, the ungated years plain).
+- curation_tests 25/25 files pass (Phase 2 parity SKIP unchanged);
+  pf_guards_unit ALL PASS.
+
+### Stricter or looser than the brief
+
+- Stricter: number-matched windows from every page of the model; undated
+  gap carriers read from other pages (Q70 2015).
+- Looser than round 4, on the candidate only: 2 groups and 1 app-year come
+  back (above), consequences of decisions 3 and 1.
+- GM page-filed drive limits keep "stated" (above).
+
+### Noticed, not fixed / suggestions
+
+- The 160 cap is now the main cost: 88 candidate groups refused. A note that
+  names models sharing one label once ("Altima 1995, Stanza 1995: built from
+  02/1995 only") would keep Stanza 1995 and others; or the short-note form
+  suggested in round 3.
+- `no_other_row` stays plain by decision: ford 5, toyota 4, nissan 49
+  app-years (1,887 plain candidate pairs), the largest remaining unknown.
+- Titan 2005 7S00E: the 4WD gate rests on 7S007 (same mark); the Titan
+  cluster page lists 40 option variants and a second reader may disagree.
+- The "*" question needs a source outside the raw (owner's call).
+
+### Regression
+
+(filled in when the run ends)
+
+### For the hub
+
+1. Merge `interchange/round5-1119`? Live: 0 added claims, 0 groups removed,
+   90 app-years narrowed (toyota 88, hmg 1) or dropped (ford 1); app wording
+   + sw jh-v215.
+2. Confirm "every page of the model" for number-matched windows (vs adjacent
+   years only), and "stated" for the GM page-filed limits.
+3. Nissan: 223 shippable, not shipped; the next independent check decides.
