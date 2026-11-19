@@ -821,6 +821,22 @@ heated splits remain. It is deferred.
   when no row on T's pages in the category names a body and the product
   page's fitment trims for T do not leave a body out (`fit_bodies_plausible`:
   "4 DOOR" only rules out a coupe). Fitment trims never add a body.
+- **Starred option clauses (round5b-1119, hub 2026-11-19; nissan only,
+  `curate.STARRED_SCOPE_NS`).** The leading "*" of a Nissan / Infiniti
+  option configuration has no legend in the raw, so a vehicle-year whose
+  drive or engine limit a starred configuration decides is held
+  (`held_starred_scope`, "starred clause decides scope"; vehicle-years left
+  out, a group held whole when fewer than two models stay or the rest's note
+  no longer fits). Decides: re-reading T's page without the starred
+  configurations, the number's own and its siblings', changes T's drive
+  limit (drive / drive_not / part-time) or engine limit, or leaves T out.
+  Where the number is listed for T only through starred configurations, they
+  are kept with their drive and engine words unread instead (leaving them out
+  would remove the claim, not its scope). A starred configuration that
+  changes neither stays. Read on the group round 5 ships, after every hold
+  that depends on its vehicle-years: only narrows. The held list is
+  `groups/_report/nissan.starred_held.json`. Kept out of `policy.py`, so the
+  shipped namespaces' `policy_sha256` is unchanged.
 - **Skips and refusals.** Single-model classes are skipped, because the
   same-model generation loop already covers them. Classes over the 12-model
   cap are refused.
