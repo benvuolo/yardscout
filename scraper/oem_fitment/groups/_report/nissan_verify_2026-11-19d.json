@@ -1,0 +1,415 @@
+{
+ "report": "nissan_verify_2026-11-19d",
+ "status": "PARTIAL (verdicts in progress)",
+ "checker_session": "https://claude.ai/code/session_01LsgNuWEh1vdaDCtdP1jxMM",
+ "candidate": "scraper/oem_fitment/groups/_report/nissan.candidate.json @ origin/main ac7a87aa",
+ "pins": {
+  "raw": "oem-raw 57e8b5b99de0 (nissanpartsdeal records sha256 07991da2..., lists 12ed8d77..., years 62d1f7f8...; infinitipartsdeal records 7760a25e..., lists e9fafc90..., years 1dd47edd...)",
+  "inventory": "a85c654 docs/data/inventory_live.json sha256 1a9cfa73e9c1...",
+  "extras": "a85c654 docs/data/vehicle_extras.json sha256 6ff3d44b86fe...",
+  "decodes": "a85c654 docs/data/vin_decodes.json.gz sha256 1357625b4429..."
+ },
+ "seed": 38271119,
+ "draw": "own reader and draw (not audit11_4/sample.py): 30 groups stratified by category by largest remainder on the candidate's counts, then 30 distinct groups not in the 30, uniform, each with one vehicle-year uniform over its expanded apps",
+ "quota": {
+  "climate-control": 2,
+  "gauge-cluster": 6,
+  "side-mirrors": 8,
+  "window-regulator": 14,
+  "wiper-motor": 0
+ },
+ "groups": [
+  {
+   "id": "oem:nissan:climate-control:C:75527baaaa",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:climate-control:C:e4f5056395",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:639ae7b7a3",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:41e9a3d6fc",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:d37db4856a",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:8fda9acbc5",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:d8db3116fc",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:d45cea6871",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:L:c398b8c387",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:d5f882d545",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:42c40cadc5",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:L:e3b1beb25b",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:da7775231b",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:7a4166c9a0",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:L:89ed13e28c",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:1ed3e230e7",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:0b5d770aef",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:093b21daec",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RL:e6dd47a01e",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RR:96af8bd4ed",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:73b8ecb566",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR:cdc8f04746",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RR:9709cdbc28",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:5aacabbf4a",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR:2acad14646",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RR:43fd8a971d",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RR:300fc2f362",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RL:07ca7ce35e",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR:bcd256d33f",
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RR:9cc45eb7c6",
+   "verdict": null
+  }
+ ],
+ "pairs": [
+  {
+   "id": "oem:nissan:window-regulator:FL:eabd639176",
+   "vy": [
+    "Infiniti",
+    "Q70L",
+    2018
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:fcb5d1a31a",
+   "vy": [
+    "Nissan",
+    "Pathfinder",
+    2012
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:3d122f1ab9",
+   "vy": [
+    "Nissan",
+    "Frontier",
+    2004
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:L:1291e1794f",
+   "vy": [
+    "Nissan",
+    "Xterra",
+    2004
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:4bb386f38e",
+   "vy": [
+    "Nissan",
+    "Armada",
+    2007
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL+RL:837f5d2b8f",
+   "vy": [
+    "Nissan",
+    "Sentra",
+    2005
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:c7c1dab96d",
+   "vy": [
+    "Infiniti",
+    "M45",
+    2008
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR:f7531ad609",
+   "vy": [
+    "Nissan",
+    "Altima",
+    1993
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RL:613aa019d9",
+   "vy": [
+    "Infiniti",
+    "QX80",
+    2014
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR:6f0276b8ac",
+   "vy": [
+    "Infiniti",
+    "Q70L",
+    2015
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:0a6d4c77d8",
+   "vy": [
+    "Infiniti",
+    "QX60",
+    2016
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:8a8c3dabe5",
+   "vy": [
+    "Infiniti",
+    "Q40",
+    2015
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:1c6c599444",
+   "vy": [
+    "Nissan",
+    "Xterra",
+    2011
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RR:6fa0b8f2c7",
+   "vy": [
+    "Nissan",
+    "Stanza",
+    1993
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:L:36e8dc61d5",
+   "vy": [
+    "Infiniti",
+    "EX37",
+    2013
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RL:6201d377aa",
+   "vy": [
+    "Nissan",
+    "Stanza",
+    1993
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:ac64e3f5f0",
+   "vy": [
+    "Nissan",
+    "Xterra",
+    2005
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:b75fe309fd",
+   "vy": [
+    "Infiniti",
+    "M35",
+    2008
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RR:4e683f9bc0",
+   "vy": [
+    "Nissan",
+    "Altima",
+    2017
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:wiper-motor:F:856ae4a8fa",
+   "vy": [
+    "Infiniti",
+    "QX56",
+    2012
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RL:000ac2ae39",
+   "vy": [
+    "Nissan",
+    "Rogue",
+    2018
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:L:ef799f1000",
+   "vy": [
+    "Nissan",
+    "Xterra",
+    2005
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:L:33151185cc",
+   "vy": [
+    "Infiniti",
+    "M35",
+    2008
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:c207bafd8e",
+   "vy": [
+    "Infiniti",
+    "QX70",
+    2017
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:92fd5159df",
+   "vy": [
+    "Infiniti",
+    "M45",
+    2007
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:e241aca37a",
+   "vy": [
+    "Nissan",
+    "Stanza",
+    1993
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:fe9aac0699",
+   "vy": [
+    "Nissan",
+    "Rogue",
+    2018
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:5c393d96c0",
+   "vy": [
+    "Infiniti",
+    "FX35",
+    2011
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:window-regulator:RL:9c3158fe6c",
+   "vy": [
+    "Infiniti",
+    "QX60",
+    2014
+   ],
+   "verdict": null
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:cfc273851c",
+   "vy": [
+    "Infiniti",
+    "M37",
+    2012
+   ],
+   "verdict": null
+  }
+ ]
+}
