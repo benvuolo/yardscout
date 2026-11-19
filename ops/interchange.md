@@ -6042,3 +6042,21 @@ earlier report (independence kept; the comparison note further down was added af
   apply the existing "sibling" drive basis to QX56 2013 3ZD1C; date-gate or hold undated numbers
   whose twin changes inside the year; Infiniti rows say "Nissan catalog" / "Nissan factory parts
   catalog" though the pages are the Infiniti site; notes say "for both" on 3- to 6-model groups.
+
+### 1119i: compared with earlier reports (read only after the verdicts were pushed, 566f1439)
+
+- None of the earlier WRONG classes recurs in this sample: every sampled vehicle-year has its own
+  page row; no window is borrowed from another year or merged across body pages (each page's date
+  checked on its own, and no duplicate page of a vehicle-year disagrees); "+" readings are gone
+  from the sampled rows; the gas wording is the round-8 "checked on gas-model pages" text.
+- Kind 3 above (27510-2B000; J6301-/J6302-1E400) sits just outside round 8's
+  `held_undated_siblings` scope: that rule needs the same-option numbers to be all undated and
+  skips the number's own predecessor/successor, so an undated number whose twin is dated inside the
+  year (2B001 "from 04/1994"), or whose undated successor is shown changing over on the parallel
+  colour (2B500), still ships.
+- Kind 1 (Rogue 2017 t32j/t32d pages unread) does not appear in the 1119h table; round 8's gas
+  rule treats only the hybrid catalog as the unread variant.
+- Kinds 4 (WAG/LWB) and 5 (AWD-only sibling on QX56 2013) are not named in the round-8 table;
+  "*" marks are listed there as known and unchanged.
+- The VIN-identity cases match 1119h's class: the flagged ones now show "if equipped"; the
+  EX37-listed / EX35-decoded car is not flagged (model pair not hand-sorted "different").
