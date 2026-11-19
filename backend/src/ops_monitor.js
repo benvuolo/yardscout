@@ -64,6 +64,32 @@ const CHAIN_FROZEN_SHARE = 0.8;
  * 05:00 ET) listed 9 chains "frozen" since Saturday that were just quiet.
  * Exported for the unit test. */
 const BIZ_START_H = 14, BIZ_END_H = 22;
+/* The Parts tab's game plan, 7 d (2026-11-19): the "Best yards for this
+ * part" card (pf-yards/shown, pf-yards/tap, pf-yards/chip-<order> summed,
+ * pf-yards/all), the card's donor-model forecast (pf-forecast/donor-models)
+ * and the forecast under Alerts watch rows (watch-forecast/shown). Aggregate
+ * counts only. Pure (tested). rows: [{event, n}]. */
+export function partsCardCounts(rows) {
+  const out = { shown: 0, taps: 0, orders: 0, all: 0, donor: 0, alertForecasts: 0 };
+  for (const r of rows || []) {
+    const e = String(r.event || ''), n = Number(r.n) || 0;
+    if (e === 'pf-yards/shown') out.shown += n;
+    else if (e === 'pf-yards/tap') out.taps += n;
+    else if (e.startsWith('pf-yards/chip-')) out.orders += n;
+    else if (e === 'pf-yards/all') out.all += n;
+    else if (e === 'pf-forecast/donor-models') out.donor += n;
+    else if (e === 'watch-forecast/shown') out.alertForecasts += n;
+  }
+  return out;
+}
+/** The two lines, printed even when every count is 0. */
+export function partsCardLines(c) {
+  const k = c || partsCardCounts([]);
+  return [
+    `Parts card (7 d): shown ${fmtInt(k.shown)}, yard taps ${fmtInt(k.taps)}, order changes ${fmtInt(k.orders)}, show all ${fmtInt(k.all)}, donor-model forecasts ${fmtInt(k.donor)}`,
+    `Alert forecasts shown (7 d): ${fmtInt(k.alertForecasts)}`,
+  ];
+}
 export function fullBusinessDaysBetween(fromMs, toMs) {
   if (!(toMs > fromMs)) return 0;
   let n = 0;
@@ -694,6 +720,7 @@ function usageLines(u, audience) {
   if (u.topWatches.length) L.push(`  Most watched: ${u.topWatches.map((w) => `${w.name} ${fmtInt(w.n)}`).join(', ')}`);
   if (u.topParts && u.topParts.length) L.push(`  Most searched parts (7 d): ${u.topParts.map((x) => `${x.name} ${fmtInt(x.n)}`).join(', ')}`);
   if (u.topCars && u.topCars.length) L.push(`  Most searched cars (7 d): ${u.topCars.map((x) => `${x.name} ${fmtInt(x.n)}`).join(', ')}`);
+  for (const line of partsCardLines(u.partsCard)) L.push(`  ${line}`);
   // Which gate opened the sheet, and which gate people bought from (7 d).
   if (u.gates && u.gates.length) {
     L.push('  Pro sheet by gate (7 d): opens / checkout taps / purchases');
@@ -836,10 +863,12 @@ async function loadUsage(env, now) {
         WHERE day >= ?1 AND day < ?2 AND (event LIKE 'paywall/%' OR event LIKE 'checkout/%' OR event LIKE 'purchase/%')
         GROUP BY event`
     ).bind(weekAgo, today),
-    // What the Parts tab is asked for (pf/<category>, pf-car/<make-model>), 7 d.
+    // What the Parts tab is asked for (pf/<category>, pf-car/<make-model>), 7 d,
+    // and the game plan's counters (pf-yards/*, pf-forecast/*, watch-forecast/*).
     env.DB.prepare(
       `SELECT event, SUM(n) AS n FROM events_daily
-        WHERE day >= ?1 AND day < ?2 AND (event LIKE 'pf/%' OR event LIKE 'pf-car/%')
+        WHERE day >= ?1 AND day < ?2 AND (event LIKE 'pf/%' OR event LIKE 'pf-car/%'
+          OR event LIKE 'pf-yards/%' OR event LIKE 'pf-forecast/%' OR event LIKE 'watch-forecast/%')
         GROUP BY event ORDER BY n DESC`
     ).bind(weekAgo, today),
     // First day each platform sent an event on counting rules v2 (all time).
@@ -925,6 +954,7 @@ async function loadUsage(env, now) {
     sources: sources.map((r) => ({ source: r.source, n: r.n })),
     topWatches: top.map((r) => ({ name: [r.make, r.model].filter(Boolean).join(' ') || 'any', n: r.n })),
     topParts, topCars,
+    partsCard: partsCardCounts(pfRows),
     gates: [...gates.values()].sort((a, b) => b.purchase - a.purchase || b.checkout - a.checkout || b.paywall - a.paywall).slice(0, 10),
   };
 }
@@ -1101,6 +1131,10 @@ export function composeDailyHtml(r) {
     if (u.topWatches.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most watched:</span> ${u.topWatches.map((w) => `${esc(w.name)} <strong>${fmtInt(w.n)}</strong>`).join(', ')}</div>`);
     if (u.topParts && u.topParts.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most searched parts (7 d):</span> ${u.topParts.map((x) => `${esc(x.name)} <strong>${fmtInt(x.n)}</strong>`).join(', ')}</div>`);
     if (u.topCars && u.topCars.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most searched cars (7 d):</span> ${u.topCars.map((x) => `${esc(x.name)} <strong>${fmtInt(x.n)}</strong>`).join(', ')}</div>`);
+    for (const line of partsCardLines(u.partsCard)) {
+      const i = line.indexOf(': ');
+      extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">${esc(line.slice(0, i + 1))}</span> ${esc(line.slice(i + 2))}</div>`);
+    }
     S.push(hSection('Where people come from', extras.join('')));
   } else {
     S.push(hSection('Usage', hMuted(`Could not load (${esc((u && u.error) || 'unknown')})`)));

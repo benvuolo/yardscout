@@ -373,7 +373,9 @@ try {
       pc && pc.ctx.make === sk[1] && pc.ctx.model === sk[2] && pc.ctx.year === sk[0]
       && pc.ctx.yrMin === (exp.w ? exp.w[0] : null) && pc.ctx.yrMax === (exp.w ? exp.w[1] : null)
       && pc.ctx.lat === exp.c.lat && pc.ctx.lng === exp.c.lng && pc.ctx.radiusMi === exp.r && pc.ctx.where === 'parts'
-      && JSON.stringify(Object.keys(pc.ctx).sort()) === JSON.stringify(['lat', 'lng', 'make', 'model', 'radiusMi', 'where', 'year', 'yrMax', 'yrMin']),
+      && JSON.stringify(Object.keys(pc.ctx).filter(k => k !== 'specs' && k !== 'lotNow').sort()) === JSON.stringify(['lat', 'lng', 'make', 'model', 'radiusMi', 'where', 'year', 'yrMax', 'yrMin'])
+      && (pc.ctx.specs === undefined || (Array.isArray(pc.ctx.specs) && pc.ctx.specs.length > 0 && pc.ctx.specs.every(x => x.make && x.model && x.yrMin <= x.yrMax && Object.keys(x).length === 4)))
+      && (pc.ctx.lotNow === undefined || (pc.ctx.specs && pc.ctx.lotNow.donors <= pc.ctx.lotNow.cars)),
       JSON.stringify({ pc, exp }));
     check('forecast stub: the forecast takes space when filled', fr.forecast.h > 0, JSON.stringify(fr.forecast));
     countProof('forecast stub: count proof', fr);
@@ -388,8 +390,16 @@ try {
     const last = cc.calls[cc.calls.length - 1];
     check('forecast stub: the Cars watch strip mounts it for one model', cc.el && last && last.cls === 'strip-forecast' && last.ctx.make === sk[1] && last.ctx.model === sk[2] && last.ctx.where === 'cars', JSON.stringify(cc));
     // two models: no mount point
-    await f.page.evaluate(() => { selectedModels.add('__other__'); renderLive(); });
-    check('forecast stub: no strip mount point for two models', await f.page.evaluate(() => !document.querySelector('#live-grid .strip-forecast')));
+    // (a real second model of the make: a made-up name can be pruned by a
+    // later list refresh, which made this check flaky under load)
+    const two = await f.page.evaluate((s) => {
+      const other = liveInventory.map(v => canonicalModel(v.make, v.model)).find(m => canonicalMake(liveInventory.find(v => canonicalModel(v.make, v.model) === m).make) === s[1] && m !== s[2]);
+      if (other) selectedModels.add(other);
+      renderLive();
+      return other || null;
+    }, sk);
+    await f.page.waitForTimeout(500);
+    check('forecast stub: no strip mount point for two models', await f.page.evaluate(() => selectedModels.size === 2 && !document.querySelector('#live-grid .strip-forecast')), String(two));
     check('forecast stub: no page error', !f.errors.length, f.errors.join(' | '));
     await f.ctx.close();
 

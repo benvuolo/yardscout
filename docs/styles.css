@@ -3838,3 +3838,14 @@ select { white-space: normal; height: auto; }
 .ysf-compact .ysf-bar-track { height: 24px; }
 .ysf-compact .ysf-facts { margin-top: var(--s1); font-size: var(--t-xs); }
 .ysf-compact .ysf-label { margin-top: var(--s1); }
+/* Donor models (the Parts card's forecast, 2026-11-19): the models line
+   (three, then "and N more" opening the rest) and the plain caveat. */
+.ysf .ysf-models { margin-top: var(--s1); font-size: var(--t-sm); line-height: 1.4; color: var(--text); overflow-wrap: anywhere; }
+.ysf-models-more > summary { list-style: none; cursor: pointer; display: block; min-height: var(--tap); padding: var(--s2) 0; }
+.ysf-models-more > summary::-webkit-details-marker { display: none; }
+.ysf-more { color: var(--accent); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.ysf-models-more[open] .ysf-more { text-decoration: none; }
+.ysf .ysf-models-rest { margin: 0 0 var(--s1); font-size: var(--t-sm); line-height: 1.4; color: var(--text-dim); overflow-wrap: anywhere; }
+.ysf .ysf-caveat { margin-top: var(--s2); font-size: var(--t-sm); line-height: 1.4; color: var(--text-dim); overflow-wrap: anywhere; }
+.ysf .ysf-lot { margin-top: var(--s1); font-size: var(--t-sm); line-height: 1.4; color: var(--text); font-weight: 600; overflow-wrap: anywhere; }
+.ysf-yrs { white-space: nowrap; }

@@ -187,6 +187,7 @@ const ev = (e, extra = {}) => fetch(BASE + '/v1/events', { method: 'POST', heade
   body: JSON.stringify({ e, p: 'ios', ...extra }) });
 await ev('first-visit', { src: 'reddit', cmp: 'r-4runner' }); await ev('first-visit'); await ev('checkout-start');
 await ev('paywall/part-value'); await ev('paywall/part-value'); await ev('paywall/watch-limit'); await ev('checkout/watch-limit'); await ev('purchase/watch-limit');
+for (const e of ['pf-yards/shown', 'pf-yards/shown', 'pf-yards/shown', 'pf-yards/tap', 'pf-yards/chip-near', 'pf-yards/chip-price', 'pf-yards/chip-most', 'pf-yards/all', 'pf-forecast/donor-models', 'watch-forecast/shown', 'watch-forecast/shown']) await ev(e);
 await ev('pf/alternator'); await ev('pf/alternator'); await ev('pf/headlights'); await ev('pf-car/honda-civic'); await ev('pf-car/honda-civic'); await ev('pf-car/toyota-4runner');
 // Counting rules v2 (docs/app.js EVENTS_V): a web client on the fixed counters
 // says {v: 2}; the legacy iOS events above carry no v. Store-link taps are web only.
@@ -258,6 +259,10 @@ check('usage: email lists gates', /Pro sheet by gate[\s\S]*watch-limit\s+1 \/ 1 
 check('usage: most searched parts and cars ranked', JSON.stringify(u.topParts) === JSON.stringify([{ name: 'alternator', n: 2 }, { name: 'headlights', n: 1 }])
   && JSON.stringify(u.topCars) === JSON.stringify([{ name: 'honda-civic', n: 2 }, { name: 'toyota-4runner', n: 1 }]), JSON.stringify([u.topParts, u.topCars]));
 check('usage: email lists searched parts and cars', /Most searched parts \(7 d\): alternator 2, headlights 1/.test(r.data.email?.text || '') && /Most searched cars \(7 d\): honda-civic 2, toyota-4runner 1/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
+check('usage: the Parts card counts (7 d)', JSON.stringify(u.partsCard) === JSON.stringify({ shown: 3, taps: 1, orders: 3, all: 1, donor: 1, alertForecasts: 2 }), JSON.stringify(u.partsCard));
+check('usage: email has the Parts card and alert forecast lines', /Parts card \(7 d\): shown 3, yard taps 1, order changes 3, show all 1, donor-model forecasts 1/.test(r.data.email?.text || '')
+  && /Alert forecasts shown \(7 d\): 2/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
+check('usage: html has them too', /Parts card \(7 d\):<\/span> shown 3, yard taps 1, order changes 3, show all 1, donor-model forecasts 1/.test(r.data.email?.html || '') && /Alert forecasts shown \(7 d\):<\/span> 2/.test(r.data.email?.html || ''));
 check('usage: tagged source listed', JSON.stringify(u.sources) === JSON.stringify([{ source: 'reddit', n: 1 }]), JSON.stringify(u.sources));
 check('usage: email shows source + checkout taps', /Tagged sources \(first visits, 7 d\): reddit 1/.test(r.data.email?.text || '')
   && /Checkout taps\s+1\s+1\s+1\s+1\s+0\s+0\n/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
