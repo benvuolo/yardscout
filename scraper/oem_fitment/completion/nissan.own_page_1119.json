@@ -1,0 +1,208 @@
+{
+ "as_of": "2026-11-19",
+ "kind": "own_page",
+ "note": "R3 input, round 9 F (owner 'crawl' 2026-11-19 16:20 UTC, relayed by the hub): the own pages the round-8 census (groups/_report/round8_census_2026-11-19.json part_a_crawl_lists, nissan_crawl) found unread, less the pages oem-raw@57e8b5b99de0 already holds as read for that category, on sites with no .blocked or .paused marker. crawl.py --complete reads each row's year page and the categories' list pages, then product() for numbers not yet seen; the curator re-checks them. Never shipped. Plan and request counts: groups/_report/round9_crawl_plan_2026-11-19.json.",
+ "ns": "nissan",
+ "raw": "oem-raw@57e8b5b99de0",
+ "rows": [
+  {
+   "cats": [
+    "window-regulator"
+   ],
+   "census_pages": {
+    "window-regulator": [
+     "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-ex35/body_side_rear/rear_door_window_regulator.html"
+    ]
+   },
+   "make": "Infiniti",
+   "model": "EX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cats": [
+    "side-mirrors"
+   ],
+   "census_pages": {
+    "side-mirrors": [
+     "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html"
+    ]
+   },
+   "make": "Infiniti",
+   "model": "EX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "census_pages": {
+    "side-mirrors": [
+     "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html"
+    ],
+    "window-regulator": [
+     "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/body_side_rear/front_door_window_regulator.html"
+    ]
+   },
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "census_pages": {
+    "side-mirrors": [
+     "https://www.infinitipartsdeal.com/parts-list/2000-infiniti-i30/miscellaneous/rear_view_mirror.html"
+    ],
+    "window-regulator": [
+     "https://www.infinitipartsdeal.com/parts-list/2000-infiniti-i30/body_side_rear/front_door_window_regulator.html"
+    ]
+   },
+   "make": "Infiniti",
+   "model": "I30",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "census_pages": {
+    "gauge-cluster": [
+     "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_electrical/instrument_meter_gauge.html"
+    ],
+    "window-regulator": [
+     "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_side_rear/rear_door_window_regulator.html"
+    ]
+   },
+   "make": "Infiniti",
+   "model": "M35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cats": [
+    "side-mirrors"
+   ],
+   "census_pages": {
+    "side-mirrors": [
+     "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-m37/miscellaneous/rear_view_mirror.html"
+    ]
+   },
+   "make": "Infiniti",
+   "model": "M37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cats": [
+    "window-regulator"
+   ],
+   "census_pages": {
+    "window-regulator": [
+     "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_side_rear/front_door_window_regulator.html",
+     "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_side_rear/rear_door_window_regulator.html"
+    ]
+   },
+   "make": "Infiniti",
+   "model": "QX60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/body_electrical/control_unit.html"
+    ],
+    "side-mirrors": [
+     "https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/miscellaneous/rear_view_mirror.html"
+    ],
+    "window-regulator": [
+     "https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/body_side_rear/front_door_window_regulator.html",
+     "https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/body_side_rear/rear_door_window_regulator.html"
+    ]
+   },
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.nissanpartsdeal.com/parts-list/2000-nissan-frontier/body_electrical/control_unit.html"
+    ]
+   },
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "window-regulator"
+   ],
+   "census_pages": {
+    "window-regulator": [
+     "https://www.nissanpartsdeal.com/parts-list/2016-nissan-rogue-t32u/body_side_rear/front_door_window_regulator.html",
+     "https://www.nissanpartsdeal.com/parts-list/2016-nissan-rogue-t32u/body_side_rear/rear_door_window_regulator.html"
+    ]
+   },
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_electrical/control_unit.html"
+    ],
+    "window-regulator": [
+     "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_side_rear/front_door_window_regulator.html"
+    ]
+   },
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "census_pages": {
+    "side-mirrors": [
+     "https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/miscellaneous/rear_view_mirror.html"
+    ],
+    "window-regulator": [
+     "https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/body_side_rear/front_door_window_regulator.html"
+    ]
+   },
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  }
+ ]
+}

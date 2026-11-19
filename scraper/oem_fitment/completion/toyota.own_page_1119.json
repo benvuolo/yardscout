@@ -1,0 +1,400 @@
+{
+ "as_of": "2026-11-19",
+ "kind": "own_page",
+ "note": "R3 input, round 9 F (owner 'crawl' 2026-11-19 16:20 UTC, relayed by the hub): the own pages the round-8 census (groups/_report/round8_census_2026-11-19.json part_a_crawl_lists, nissan_crawl) found unread, less the pages oem-raw@57e8b5b99de0 already holds as read for that category, on sites with no .blocked or .paused marker. crawl.py --complete reads each row's year page and the categories' list pages, then product() for numbers not yet seen; the curator re-checks them. Never shipped. Plan and request counts: groups/_report/round9_crawl_plan_2026-11-19.json.",
+ "ns": "toyota",
+ "raw": "oem-raw@57e8b5b99de0",
+ "rows": [
+  {
+   "cats": [
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "census_pages": {
+    "side-mirrors": [
+     "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/electrical/mirror.html"
+    ],
+    "tail-lights": [
+     "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/electrical/rear_combination_lamp.html"
+    ]
+   },
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2006
+  },
+  {
+   "cats": [
+    "tail-lights",
+    "window-regulator"
+   ],
+   "census_pages": {
+    "tail-lights": [
+     "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/electrical/rear_combination_lamp.html"
+    ],
+    "window-regulator": [
+     "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_door_window_regulator_hinge.html",
+     "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/rear_door_window_regulator_hinge.html"
+    ]
+   },
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "census_pages": {
+    "tail-lights": [
+     "https://www.lexuspartsnow.com/parts-list/2013-lexus-is250-base/electrical/rear_combination_lamp.html",
+     "https://www.lexuspartsnow.com/parts-list/2013-lexus-is250-c/electrical/rear_combination_lamp.html"
+    ]
+   },
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "census_pages": {
+    "tail-lights": [
+     "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/electrical/rear_combination_lamp.html",
+     "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/electrical/rear_combination_lamp.html"
+    ]
+   },
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "census_pages": {
+    "bumper-front": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/bumper-components-front"
+    ],
+    "bumper-rear": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/bumper-components-rear"
+    ],
+    "climate-control": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/a-c-heating/a-c-heater-control-units"
+    ],
+    "door-rear": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/door-components"
+    ],
+    "fender": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/fender-components"
+    ],
+    "grille": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/grille-components"
+    ],
+    "headlights": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/headlights-lighting/headlamp-components-headlights"
+    ],
+    "hood": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/hood-components"
+    ],
+    "window-regulator": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/front-door-body",
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/rear-door-body"
+    ],
+    "window-switch": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/electrical/front-door"
+    ]
+   },
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/a-c-heating/a-c-heater-control-units"
+    ],
+    "gauge-cluster": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/gauges"
+    ],
+    "grille": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/grille-components"
+    ],
+    "headlights": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/headlamp-components-headlights"
+    ],
+    "tail-lights": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/combination-lamps"
+    ],
+    "window-switch": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/front-door"
+    ]
+   },
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/a-c-heating/a-c-heater-control-units"
+    ],
+    "door-front": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/door-components"
+    ],
+    "door-rear": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/door-components"
+    ],
+    "grille": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/grille-components"
+    ],
+    "hood": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/hood-components"
+    ],
+    "tail-lights": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/headlights-lighting/combination-lamps"
+    ],
+    "window-regulator": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/front-door-body",
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/rear-door-body"
+    ]
+   },
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "hood",
+    "tail-lights",
+    "window-switch"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/a-c-heating/a-c-heater-control-units"
+    ],
+    "door-front": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/door-components"
+    ],
+    "door-rear": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/door-components"
+    ],
+    "grille": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/grille-components"
+    ],
+    "hood": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/hood-components"
+    ],
+    "tail-lights": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/headlights-lighting/tail-lamps-headlights"
+    ],
+    "window-switch": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/electrical/front-door"
+    ]
+   },
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "census_pages": {
+    "bumper-front": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/bumper-components-front"
+    ],
+    "bumper-rear": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/bumper-components-rear"
+    ],
+    "climate-control": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/a-c-heating/a-c-heater-control-units"
+    ],
+    "door-rear": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/door-components"
+    ],
+    "fender": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/fender-components"
+    ],
+    "grille": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/grille-components"
+    ],
+    "headlights": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/headlights-lighting/headlamp-components-headlights"
+    ],
+    "hood": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/hood-components"
+    ],
+    "window-regulator": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/front-door-body",
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/rear-door-body"
+    ],
+    "window-switch": [
+     "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/electrical/front-door"
+    ]
+   },
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/a-c-heating/a-c-heater-control-units"
+    ],
+    "gauge-cluster": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/gauges"
+    ],
+    "grille": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/grille-components"
+    ],
+    "headlights": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/headlamp-components-headlights"
+    ],
+    "tail-lights": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/combination-lamps"
+    ],
+    "window-switch": [
+     "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/front-door"
+    ]
+   },
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/a-c-heating/a-c-heater-control-units"
+    ],
+    "door-front": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/door-components"
+    ],
+    "door-rear": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/door-components"
+    ],
+    "grille": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/grille-components"
+    ],
+    "hood": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/hood-components"
+    ],
+    "tail-lights": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/headlights-lighting/combination-lamps"
+    ],
+    "window-regulator": [
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/front-door-body",
+     "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/rear-door-body"
+    ]
+   },
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "hood",
+    "tail-lights",
+    "window-switch"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/a-c-heating/a-c-heater-control-units"
+    ],
+    "door-front": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/door-components"
+    ],
+    "door-rear": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/door-components"
+    ],
+    "grille": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/grille-components"
+    ],
+    "hood": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/hood-components"
+    ],
+    "tail-lights": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/headlights-lighting/tail-lamps-headlights"
+    ],
+    "window-switch": [
+     "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/electrical/front-door"
+    ]
+   },
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  }
+ ]
+}

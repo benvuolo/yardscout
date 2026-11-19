@@ -178,6 +178,16 @@ seed site are counted in `unrouted_makes`). To enable it for a site:
    new `version`; done `C|` keys skip pages already read. `.blocked` /
    `.paused` stop it like any crawl.
 
+Pass 2 (2026-11-19, owner "crawl"): `completion/<ns>.own_page_1119.json`
+(nissan, toyota, mopar, vag) hold the own pages the round-8 census found
+unread, less what oem-raw already read for that category; six sites point at
+them with `"version": 2` (finish marker `raw/<site>.c2.done`). gm, ford and
+subaru stay out (`.blocked`). Rows carry `census_pages` (the pages the census
+named; the crawler ignores the key). A completion row cannot pick a variant
+catalog the site module's variant rules leave out (nissanpartsdeal Rogue
+`t32j`/`t32d`, Sentra `b14x`): those vehicle-years stay held. Plan and
+request counts: `groups/_report/round9_crawl_plan_2026-11-19.json`.
+
 ## Raw files (crawl.py writes raw/)
 
 Each `.jsonl` is append-only. When a file reaches `crawl.PART_BYTES` (40 MB)
