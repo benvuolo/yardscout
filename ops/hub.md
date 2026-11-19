@@ -3504,3 +3504,10 @@ after the next deploy.
   1.13.3 is on Play production; iPhone 1.13.3 build 44 is in Apple's queue
   (WAITING_FOR_REVIEW since 19:55); the website carries everything built
   today. The next wording round is data only and needs no store release.
+
+## 2026-11-19 21:17 UTC Apple check: 1.13.3 still waiting for review
+
+asc-status 44617030388 at 21:16 UTC: version 1.13.3, WAITING_FOR_REVIEW,
+build 44 (1 h 20 min in the queue). Live iPhone app 1.13.0. Next check
+03:17 UTC 11-20, then every 6 hours; past 19:55 UTC 11-21 the hub suggests
+the owner look in App Store Connect. Nothing submitted.
