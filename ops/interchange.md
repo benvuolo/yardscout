@@ -5216,7 +5216,24 @@ Every 1119e WRONG / RISK item (`groups/_report/nissan_recheck_2026-11-19e.json`;
 
 ### Regression
 
-(filled in when the run ends)
+`tools/regress.sh --out <scratch>` (not under flock) on code head d0fee954
+(only ops text follows): **102 passed, 2 failed, 0 skipped.**
+- FAIL both layout halves (`ui_no_truncation.mjs`), setup errors only, no
+  layout finding:
+  - WIDTHS=320,375,390: 49 setup errors, all at 320 and all after the
+    browser page crashed ("page.evaluate: Target crashed", then "Page
+    crashed" on pf-browse); 1,104 checks run.
+  - WIDTHS=430,768,1280: 1 setup error, `[yards-map-premium]` at 1280,
+    "page.waitForFunction: Timeout 30000ms exceeded"; 1,328 checks run.
+  - Re-run alone under `flock /tmp/ys-test.lock` on the same tree:
+    `WIDTHS=320` **444 checks, 0 failures**; `WIDTHS=1280
+    SCREENS=yards-map-premium` **4 checks, 0 failures**. Not reproduced, so
+    not run on origin/main. This branch changes app.js only inside the
+    OEM-GATE block (the donor line wording).
+- Everything else passed, including pf_guards_unit (r4 + r5 blocks),
+  test_am_gates, test_interchange, interchange_e2e, part_finder_e2e,
+  pf_ux_e2e and cars_feed_e2e. backend/node_modules was a symlink for the
+  run; removed, not committed.
 
 ### For the hub
 
