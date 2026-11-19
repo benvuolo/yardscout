@@ -13,7 +13,8 @@
  *                                 renders into el; resolves to the status, or
  *                                 null when it rendered nothing. Never throws.
  *
- * ctx = { make, model, year, yrMin, yrMax, lat, lng, radiusMi, where, place }.
+ * ctx = { make, model, year, yrMin, yrMax, lat, lng, radiusMi, where, place,
+ * compact }. compact = true renders the small block (watch rows, see render).
  * yrMin/yrMax null = any year; `year` is used as a one-year span only when
  * yrMin and yrMax are both left out (undefined). `place` (a place name or
  * ZIP, optional) is added to the line as "within R mi of <place>". `where`
@@ -145,7 +146,10 @@
     });
   }
 
-  function render(el, s, w) {
+  /* compact (the Alerts tab's watch rows): the same subject, headline, facts
+   * and label, and the eight bars small (no per-bar numbers; the bars keep the
+   * same text alternative); no "Most land at" line. Nothing new is said. */
+  function render(el, s, w, compact) {
     var max = Math.max.apply(null, s.weeks.concat([1]));
     var showBars = s.status === 'ok';
     var bars = '';
@@ -155,16 +159,16 @@
           var h = c ? Math.max(8, Math.round(100 * c / max)) : 0;
           return '<div class="ysf-bar" aria-hidden="true"><div class="ysf-bar-track">' +
             '<div class="ysf-bar-fill' + (c ? '' : ' ysf-zero') + '" style="height:' + h + '%"></div></div>' +
-            '<span class="ysf-bar-n">' + c + '</span></div>';
+            (compact ? '' : '<span class="ysf-bar-n">' + c + '</span>') + '</div>';
         }).join('') + '</div>' +
         '<div class="ysf-axis" aria-hidden="true"><span>8 weeks ago</span><span>last week</span></div>';
     }
-    el.innerHTML = '<div class="ysf" data-ysf-status="' + esc(s.status) + '">' +
+    el.innerHTML = '<div class="ysf' + (compact ? ' ysf-compact' : '') + '" data-ysf-status="' + esc(s.status) + '">' +
       '<div class="ysf-subject">' + esc(w.subject) + '</div>' +
       '<p class="ysf-headline">' + esc(w.headline) + '</p>' +
       bars +
       '<p class="ysf-facts">' + esc(w.facts) + '</p>' +
-      (w.most ? '<p class="ysf-most">' + esc(w.most) + '</p>' : '') +
+      (w.most && !compact ? '<p class="ysf-most">' + esc(w.most) + '</p>' : '') +
       '<p class="ysf-label">' + esc(w.label) + '</p>' +
       '</div>';
   }
@@ -246,7 +250,7 @@
         var s = summary(data, q);
         var w = words(s, q);
         if (!w) return clear();
-        render(el, s, w);
+        render(el, s, w, !!q.compact);
         return s.status;
       }).catch(clear);
     } catch (e) {

@@ -575,3 +575,23 @@ forecast half (`docs/forecast.js`, `YSForecast`) is another builder's.
 - **Open / next:** the verified-only count proof ran on a search with 0
   Verified rows (side mirrors); a search with Verified rows would make it
   stronger. Show the counters in the ops email (backend, hub's call).
+
+## 2026-11-19 Forecast under Alerts watch rows (branch `feat/watch-forecast-1119`, sw `jh-v218`)
+
+- A watch row in the Alerts tab gets the compact arrival forecast
+  (`<div class="watch-forecast">`, `ysForecastMount`-style call to
+  `YSForecast.mount(el, {make, model, year:null, yrMin, yrMax, lat, lng,
+  radiusMi, where:'alerts', compact:true})`) only when `watchForecastCtx(e)`
+  says the history answers for exactly what is watched: one make AND one
+  model, a saved centre (lat/lng numbers) and a finite radius > 0, and no
+  trim, drive or "Parts only" (matchOnly) filter. Anything else: no mount
+  point at all. A make whose arrivals file is missing or fails: empty, 0 px.
+- Read only (rule 6): `renderAlerts` reads `loadWatchlist()` as before;
+  nothing new writes it. `watch_forecast_e2e.mjs` proves the stored list's
+  bytes are unchanged.
+- `docs/forecast.js` compact mode: same subject, headline, facts and label
+  words; eight 24 px bars with the same text alternative, no per-bar
+  numbers; no "Most land at" line. Styles at the end of `docs/styles.css`.
+- Counter `watch-forecast/shown`, once per visit, when one renders.
+- Screenshot `ops/screens/watch-forecast-1119-1.png` (real data, 4Runner
+  2003-2009 within 100 mi of 95112).

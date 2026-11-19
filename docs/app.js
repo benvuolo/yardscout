@@ -11422,6 +11422,41 @@ function getWatchlistHits() {
   return results;
 }
 
+/* ===== FORECAST UNDER A WATCH (Alerts tab, 2026-11-19) =====
+ * A watch row gets the compact arrival forecast (docs/forecast.js) when the
+ * history can answer for exactly what it watches: one make and one model, a
+ * saved centre and a finite radius, and no trim, drive or "Parts only"
+ * filter (the history counts the whole model, so a narrower watch would be
+ * overstated: nothing shows there). Read only: the watch list is never
+ * written here (rule 6). Pure (tested): the ctx, or null. */
+function watchForecastCtx(e) {
+  if (!e || typeof e !== 'object') return null;
+  const make = String(e.make || '').trim();
+  let model = String(e.model || '').trim();
+  if (!make || !model) return null;
+  if (e.trimFilter || e.driveFilter || e.matchOnly) return null;
+  const lat = typeof e.lat === 'number' && isFinite(e.lat) ? e.lat : null;
+  const lng = typeof e.lng === 'number' && isFinite(e.lng) ? e.lng : null;
+  const r = typeof e.radiusMi === 'number' && isFinite(e.radiusMi) && e.radiusMi > 0 ? e.radiusMi : null;
+  if (lat === null || lng === null || r === null) return null;
+  // Older watches carry their own make in the model ("Infiniti G35").
+  if (model.toLowerCase().startsWith(make.toLowerCase() + ' ')) model = model.slice(make.length + 1).trim();
+  const yr = (v) => { const n = parseInt(v, 10); return Number.isFinite(n) && n > 0 ? n : null; };
+  return { make, model, year: null, yrMin: yr(e.yrMin), yrMax: yr(e.yrMax), lat, lng, radiusMi: r, where: 'alerts', compact: true };
+}
+let _watchForecastCounted = false;
+function watchForecastMountAll(entries) {
+  document.querySelectorAll('#alert-watchlist .watch-forecast[data-wf]').forEach(el => {
+    const ctx = watchForecastCtx(entries[+el.dataset.wf]);
+    if (!ctx) return;
+    try {
+      if (!(window.YSForecast && typeof window.YSForecast.mount === 'function')) return;
+      Promise.resolve(window.YSForecast.mount(el, ctx)).then(st => {
+        if (st && !_watchForecastCounted) { _watchForecastCounted = true; try { sendEvent('watch-forecast/shown'); } catch (e) { /* never break */ } }
+      }, () => {});
+    } catch (e) { /* the forecast must never break the watch list */ }
+  });
+}
 function renderAlerts() {
   // The form's names (when the whole scan is not in yet) and the zip / car card.
   if (document.getElementById('tab-alerts').classList.contains('active')) loadWatchNames();
@@ -11502,8 +11537,10 @@ function renderAlerts() {
           <button class="wl-remove wl-edit" onclick="editWatchItem(${i})">Edit</button>
           <button class="wl-remove" onclick="removeWatchItem(${i})">Remove</button>
         </div>
+        ${watchForecastCtx(e) ? `<div class="watch-forecast" data-wf="${i}"></div>` : ''}
       </div>`;
     }).join('');
+    watchForecastMountAll(results.map(r => r.entry));
   }
   // The free email alert card under the list (web, free; FREE EMAILED ALERT).
   renderFreeAlert();

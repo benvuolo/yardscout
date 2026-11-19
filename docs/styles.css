@@ -3829,3 +3829,12 @@ select { white-space: normal; height: auto; }
 .ysf .ysf-facts { margin-top: var(--s2); font-size: var(--t-sm); line-height: 1.4; overflow-wrap: anywhere; }
 .ysf .ysf-most { margin-top: var(--s1); font-size: var(--t-sm); line-height: 1.4; color: var(--text); overflow-wrap: anywhere; }
 .ysf .ysf-label { margin-top: var(--s2); font-size: var(--t-xs); line-height: 1.4; color: var(--text-dim); overflow-wrap: anywhere; }
+/* Compact forecast under an Alerts watch row (2026-11-19): same words, small bars. */
+.watch-forecast { flex: 1 1 100%; min-width: 0; }
+.watch-forecast:empty { display: none; }
+.ysf.ysf-compact { padding: var(--s2) var(--s3); background: var(--bg); }
+.ysf-compact .ysf-headline { font-size: var(--t-sm); }
+.ysf-compact .ysf-bars { margin-top: var(--s2); gap: 2px; }
+.ysf-compact .ysf-bar-track { height: 24px; }
+.ysf-compact .ysf-facts { margin-top: var(--s1); font-size: var(--t-xs); }
+.ysf-compact .ysf-label { margin-top: var(--s1); }

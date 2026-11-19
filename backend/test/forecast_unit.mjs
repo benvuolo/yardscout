@@ -222,6 +222,28 @@ const ctxQ = { ...Q, radiusMi: 25, place: '84401', where: 'parts' };
   await Promise.all([p1, p2]);
   check('mount: the newest mount on an element wins', el.innerHTML.includes('within 25 mi') && !el.innerHTML.includes('within 10 mi'));
 }
+{
+  // compact (Alerts watch rows): the full block's own words, small bars, no "Most land at"
+  const log = [];
+  const G = load({ fetch: fakeFetch({ 'data/arrivals/index.json': index, 'data/arrivals/toyota.json': file }, log) }).YSForecast;
+  const full = { innerHTML: '' }, small = { innerHTML: '' };
+  const ctxA = { ...Q, radiusMi: 25, where: 'alerts' };
+  await G.mount(full, ctxA);
+  const st = await G.mount(small, { ...ctxA, compact: true });
+  const text = (h, cls) => { const m = h.match(new RegExp(`<p class="${cls}">([^<]*)</p>`)) || h.match(new RegExp(`<div class="${cls}">([^<]*)</div>`)); return m ? m[1] : null; };
+  const ww = G.words(G.summary(data, { ...ctxA, yrMin: null, yrMax: null }), ctxA);
+  check('compact: renders, resolves "ok", marked ysf-compact', st === 'ok' && small.innerHTML.includes('class="ysf ysf-compact"'), small.innerHTML.slice(0, 200));
+  for (const [cls, k] of [['ysf-subject', 'subject'], ['ysf-headline', 'headline'], ['ysf-facts', 'facts'], ['ysf-label', 'label']]) {
+    const a = text(small.innerHTML, cls), b = text(full.innerHTML, cls);
+    check(`compact: ${k} is the full block's words`, a !== null && a === b && a === ww[k].replace(/&/g, '&amp;'), `${a} | ${b} | ${ww[k]}`);
+  }
+  check('compact: eight bars with the same text alternative', (small.innerHTML.match(/class="ysf-bar"/g) || []).length === 8
+    && small.innerHTML.includes(`aria-label="${ww.alt}"`) && full.innerHTML.includes(`aria-label="${ww.alt}"`));
+  check('compact: no "Most land at" line (the full block has one)', !small.innerHTML.includes('ysf-most') && full.innerHTML.includes('Most land at'));
+  check('compact: no per-bar numbers', !small.innerHTML.includes('ysf-bar-n') && full.innerHTML.includes('ysf-bar-n'));
+  check('compact: "where" is never shown', !/alerts/.test(small.innerHTML));
+  check('compact: files loaded once for both mounts', log.length === 2, JSON.stringify(log));
+}
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
