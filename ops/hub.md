@@ -2145,7 +2145,7 @@ groups); lot cars whose VIN decodes as another vehicle shown plain.
   hub asked instead of changing it: option = treat today and yesterday as
   one group, nearest yard first, older days as now.
 
-## 2026-11-19 ~05:15 UTC round 4 live; fifth nissan check started; store-app gap
+## 2026-11-19 ~05:00 UTC round 4 live; fifth nissan check started; store-app gap
 
 - Round 4 (`interchange/round4-1119`, 9da7e293) reviewed by the hub and merged
   to main as df0bdc0a (sw jh-v214). Hub's own checks: `live_diff.py` re-run
@@ -2177,3 +2177,10 @@ groups); lot cars whose VIN decodes as another vehicle shown plain.
   same-generation donors never read the mismatch flag; a short note once a
   limit is a gate would keep 18 + 66 nissan groups the 160-char cap refuses;
   Mopar "Up to / After" dates still unread.
+- Live check 05:07 UTC (one load of the home page): cache `jh-v214`, no page
+  errors; the live gate code returns "if equipped ... built 04/2014-12/2014
+  only — check the build date on the door sticker" for a windowed app-year,
+  a plain row for an ungated one, and "if equipped: this car's listing and
+  VIN disagree, check the car" for a mismatch car.
+- Data need written to ops/data.md (model mismatches not flagged; census:
+  3,143 cars in 316 name pairs, most are naming, a few hundred real).
