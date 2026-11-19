@@ -4716,6 +4716,13 @@ a new independent checker decides.
     test_interchange, interchange_e2e, part_finder_e2e, pf_ux_e2e and
     photo_layout_e2e. backend/node_modules was a symlink for the run; removed,
     not committed.
+- After the run, origin/main moved (55cb877a, an auto-scan and an ops note)
+  and was merged (f0682e10): the 30 payload files taken from main and rebuilt
+  from this branch's groups (oemStatus ok x8). On the merged tree
+  curation_tests 23/23, oem_fitment/tests 42/42, test_interchange,
+  test_am_gates and pf_guards_unit pass; the cards-mixed layout screen still
+  fails with the same setup error on the new feed data. The full regression
+  was not re-run on the merge.
 
 ### Noticed, not fixed
 
