@@ -5587,6 +5587,9 @@ re-check, not independent):
 - curation_tests: 27/27 files pass (Phase 2 parity SKIP unchanged).
 - pf_guards_unit: ALL PASS.
 - test_interchange and test_am_gates: pass.
+- `tools/regress.sh --quick` (on 8a211e6b, queued behind the hub's lock):
+  **73 passed, 0 failed, 0 skipped**.
+- No full regression: `docs/app.js` is unchanged.
 
 ### Stricter or looser than the brief
 
