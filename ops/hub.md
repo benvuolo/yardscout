@@ -2728,3 +2728,10 @@ Every gate in the sample was judged right with its basis on the pages.
   rows on gm); naming the donor's door on the row would let the 5
   cross-position groups ship (an app change); the note cap now refuses 61
   nissan groups.
+- **13:09 UTC live check (one load, zip 95112): caches `jh-v218`**, no page
+  error. Alerts tab, a 2003-2009 4Runner watch within 100 mi (made in the
+  check's own throwaway browser): "8 in yard now" and under it the compact
+  forecast "About one every 2 weeks lands within 100 mi", eight bars, "5 in
+  the last 8 weeks at 17 yards", the "past weeks, not a promise" label.
+  The Parts card (42 donor cars at 12 yards) and both full forecasts read
+  as at 11:21. Screenshot: `ops/screens/game-plan-live-1119-4.png`.
