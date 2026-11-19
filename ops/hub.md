@@ -2105,3 +2105,21 @@ payload shape unchanged.
 - Owner-facing observation, not changed: near San Jose the newest-first list
   opens with 82-mi-away Sacramento arrivals without photos. A possible tweak:
   within the same day, nearer yards first (photo-first stays within a day).
+
+## 2026-11-19 ~03:45 UTC nissan check 1119d: 2 WRONG; round 4 started
+
+`interchange/verify-nissan-1119d` (e4bd8ccc). Seed 38271119: groups 19 / 2 /
+9, pairs 26 / 0 / 4. Round 3's classes are fixed (0 engine leaks, 0 Kph, 0
+Rogue Select, cab gates hold). New: same-option AWD siblings ("*W. AWD.
+PREMIUM" vs "*W. PREMIUM": 96301-3JA9B QX60 mirror, 24820-3ZD0A QX56
+speedometer; 4 groups, 94 plain AWD rows); build-date windows that split a
+model year with an unlinked number for the other builds (166 rows / 111
+groups); lot cars whose VIN decodes as another vehicle shown plain.
+- Hub decisions for round 4 (stricter rule 3, recorded in the brief): drive
+  gate for same-option drive siblings; a build window inside a model year is
+  kept only with the window named in the note and a `built` gate that makes
+  every donor "if equipped: check the build date" (never plain), else refused;
+  two pages disagreeing on a window take the narrower one; a VIN/listing
+  mismatch car is never a plain OEM donor ("if equipped").
+- Round 4 builder on `interchange/round4-1119` (sw jh-v214): live makes
+  first, then nissan; another independent check follows.
