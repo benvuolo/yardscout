@@ -2225,3 +2225,67 @@ groups); lot cars whose VIN decodes as another vehicle shown plain.
 - After round 5: hub review, live diff 0 added, regress, merge the live
   part, live check; then a sixth independent nissan check (new seed; used:
   46021118, 61181118, 73901118, 38271119, 52941119).
+
+## 2026-11-19 ~07:05 UTC owner replies; Apple sales finding; round 5 on main; "Ship" 1.13.2
+
+Owner (~06:40 UTC) answered the 03:40 list by number: 1 list order "What are
+you talking about" (the question was not understood; re-ask as one plain
+question, nothing changed); 2 Apple "See photo" (Trends, Oct 18 to Nov 17:
+App Units 275, In-App Purchases 5, Sales $44.95, units on every day through
+Nov 17; the account header reads "YardScout LLC"); 3 Ario "Are we blocked?";
+4 free trial "Are we positive?"; 5 drafts "Will look"; 6 Reddit "I'll peep";
+then "Ship" (= 1.13.2, task #75). Then: an email signature with the logo
+(`ops/email-signature.html`, "Ben | title"), "am I the CEO?", and whether
+ben@yardscout.io can be used.
+
+- **Apple sales** (usage-stats 44475176114, read-only checks added in
+  e31966b0): for `ASC_VENDOR_NUMBER`, SALES is 404 "There were no sales for
+  the date specified" on every day since 11-06. Its newest report is 11-05,
+  and that report's Developer column carries both "BENJAMIN ALEXANDER VUOLO"
+  and "YardScout LLC". The SUBSCRIPTION snapshot still arrives (4 active
+  through 11-12, 3 from 11-13); SUBSCRIPTION_EVENT and SUBSCRIBER have
+  nothing in 16 days. Reading: the account's legal entity became YardScout
+  LLC on 11-05 and sales since 11-06 are filed under a new vendor number.
+  Not proven until that number is read. `usage-stats.yml` now runs the same
+  report for a second number when the secret `ASC_VENDOR_NUMBER_LLC` exists
+  (the owner adds it; the secrets API is not reachable from the hub). Then:
+  decide from the two subscription snapshots how
+  `tools/store_subscribers.py` counts (both numbers, or the new one). Our
+  "App Store 3" may be low, and "0 downloads since 11-06" was the report,
+  not the users.
+- **Correction (hub's mistake):** "all 11 people who reached Apple's payment
+  screen backed out" (told to the owner 11-18 and 11-19) was not sound. They
+  are 11 taps, 10 of them on Nov 14 while build 40 was in App Review (this
+  file, 11-16 entry: "Apple's reviewer and testers, not customers"), and
+  Apple's page shows purchases around Nov 11 and Nov 13 that the app's
+  counter did not record. The free-trial idea has no evidence behind it yet;
+  look again after a clean week (about 11-26).
+- **Round 5 merged.** Builder head 982adbf3 pushed to main at 07:02 UTC as a
+  fast-forward (sw `jh-v215`). Hub's own `live_diff.py` against main: toyota
+  88 groups narrowed (build-window gates), hmg 1 narrowed, ford 1 app-year
+  lost (MKZ 2011, note over the cap), 0 added claims on the 8 live makes.
+  The hub's merge and the builder's merge gave the same 30 payload files
+  apart from `builtAt`. Quick regression on the merged tree 71/0/0. Shipped
+  donor pairs on the pinned lot: plain 291,603 -> 290,592; "if equipped"
+  13,294 -> 14,285; excluded 12,076 -> 12,034.
+- **Disk full.** The container had 0 bytes free near the end of the
+  builder's full regression: its 2 failures (both layout halves, "Target
+  crashed") and the hub's first quick run (22 scraper tests could not
+  write) were that, not code. Hub removed 17 working copies with no edits
+  whose commits are on origin (6 GB freed); kept every copy with edits or
+  with commits that are not on origin. Hub is running the full layout
+  suite again on 982adbf3 before the store builds.
+- **Nissan: round 5b started** (builder resumed, branch
+  `interchange/round5b-1119`, candidate only): hold out every claim whose
+  drive or engine scope is decided by a starred option clause, since the
+  raw has no legend for the "*". Then the sixth independent check (new
+  seed; used 46021118, 61181118, 73901118, 38271119, 52941119).
+- **1.13.2** goes out from main once the live check and the layout pass are
+  in: Android production; iPhone build to TestFlight only (`submit=false`),
+  because 1.13.1 build 42 is still WAITING_FOR_REVIEW (asc-status
+  44476352084, 07:01 UTC). When 1.13.1 is READY_FOR_SALE: `release-ios.yml`
+  with `submit_only=true` and the 1.13.2 build number.
+- **Email set-up, as found:** yardscout.io receives through Cloudflare Email
+  Routing; the owner's mail goes out from the Gmail account; Resend is set
+  up for sending on the domain. ben@ needs a routing rule to receive and a
+  Gmail "Send mail as" set-up to send. Nothing changed by the hub.

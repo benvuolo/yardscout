@@ -53,12 +53,24 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_P8: ${{ secrets.ASC_SALES_P8 || secrets.ASC_API_KEY_P8 }}
           VENDOR: ${{ secrets.ASC_VENDOR_NUMBER }}
+          # 2026-11-19: the developer account became YardScout LLC on 11-05 and the first
+          # number has had no sales since 11-06 (Apple: "no sales for the date"), while the
+          # owner's Trends page shows units through 11-17. A legal-entity change gets its own
+          # vendor number: when the owner adds it as ASC_VENDOR_NUMBER_LLC, the same report
+          # runs for both numbers, one after the other.
+          VENDOR_LLC: ${{ secrets.ASC_VENDOR_NUMBER_LLC }}
         run: |
           if [ -z "$VENDOR" ]; then
             echo "Skipped: add the ASC_VENDOR_NUMBER repo secret (App Store Connect → Payments and Financial Reports → number next to your name)."
             exit 0
           fi
           pip install -q pyjwt cryptography requests
+          [ -n "$VENDOR_LLC" ] || echo "ASC_VENDOR_NUMBER_LLC is not set: only the first vendor number is read."
+          FIRST="$VENDOR"
+          for WHICH in first llc; do
+          if [ "$WHICH" = first ]; then export VENDOR="$FIRST"; else export VENDOR="$VENDOR_LLC"; fi
+          [ -n "$VENDOR" ] || continue
+          echo "########## vendor number: $WHICH ($([ "$WHICH" = first ] && echo ASC_VENDOR_NUMBER || echo ASC_VENDOR_NUMBER_LLC))"
           python3 - <<'PY'
           import csv, datetime as dt, gzip, io, os, time, jwt, requests
           key = os.environ["ASC_P8"].strip().replace("\\n", "\n")
@@ -185,3 +197,4 @@ jobs:
                   elif r.status_code != 404:
                       print(f"  {day}: HTTP {r.status_code} {why(r.text)[:90]}")
           PY
+          done
