@@ -3193,3 +3193,28 @@ Run 16:18 to about 16:28 UTC, conclusion success; oem-raw head d867a65a.
   account the alias forwards to; Gmail hides the forwarded copy of a
   message the account itself sent (one copy, in Sent, 16:19 UTC, checked).
   A test from any other account settles it.
+
+## 2026-11-19 16:53 UTC owner asked: two App Store Connect pages show different numbers; which vendor number goes in GitHub
+
+Owner sent two screenshots (numbers kept out of this file where they
+identify the account).
+- Payments and Financial Reports, October 2026, legal entity shown: the
+  owner's personal name, with its vendor number: 3 units, 22.92 USD,
+  paid about Dec 3.
+- Analytics, last 90 days to Nov 18: 523 first-time downloads, 19
+  redownloads, 569 product page views, 10.4K impressions, 6 in-app
+  purchases, 48 USD proceeds; download to paid: day 1 0.6%, day 7 0.8%,
+  day 35 3.45%.
+- Hub's answer: not a contradiction. One page is one fiscal month of paid
+  sales for one legal entity; the other is 90 days of everything (free
+  downloads never appear in financial reports). 3 of the 6 purchases fall
+  in fiscal October. 22.92 / 3 = 7.64 per sale, which is 8.99 less Apple's
+  15%.
+- The vendor number on that page sits under the personal name, i.e. the
+  entity that stopped receiving sales about 11-05, so it is most likely
+  the one already stored as `ASC_VENDOR_NUMBER`. The one task 76 needs is
+  the YardScout LLC entity's: the name on that page is a menu; choose
+  YardScout LLC there and take the vendor number shown under it, as secret
+  `ASC_VENDOR_NUMBER_LLC`. If the menu shows one entity only, the owner
+  adds the number they see under that name anyway and the hub compares the
+  two in `usage-stats.yml` (identical output means the same number).
