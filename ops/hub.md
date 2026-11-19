@@ -2460,3 +2460,40 @@ Groups 23 RIGHT / 1 WRONG / 6 RISK; pairs 21 / 1 / 8.
   6. where two pages date a number differently, the narrower window.
   Then a seventh independent check, new seed (used: 46021118, 61181118,
   73901118, 38271119, 52941119, 27641119).
+
+## 2026-11-19 ~09:10 UTC list order cleared; arrivals builder done; Apple still waiting
+
+- **List order (task #74):** full regression on `hub/list-two-day-1119`
+  (d3540acc): 103 passed, 1 failed, 0 skipped. The failure:
+  `free_email_alert_ui_e2e` "strip: 'check your inbox' for the alert, and
+  the car is watched": the strip had already re-rendered as watched
+  ("Watching Acura TL — new ones light up in Alerts. Check your inbox to
+  turn on its email alert.") when the test read it, so the first-moment
+  wording it expects was gone. Two builders and the regression were running
+  at once. Re-run alone on the same commit, twice: PASS, PASS (41-44 s).
+  Read as a timing flake of that check under load, not the order change;
+  both layout halves passed. Cleared to merge.
+- **Arrivals builder (B) handed back**, branch `feat/arrival-forecast-1119`
+  head 664bc459: the scan writer (never fatal, temp + rename, at most once
+  per 20 h; coverage restarts after a flush at the hub's request), the new
+  forecast module in `docs/` (`YSForecast.summary/words/mount`, reads the
+  app's `DATA_BASE`), tests: `test_arrivals.py` 55, `forecast_unit` 71,
+  `forecast_e2e` 70, quick regression 73/0/0. Hub read the writer and the
+  query line by line. Size estimate 4-6 MB raw in ~80 files, about once a
+  day. The app's main script is untouched; nothing calls the module until
+  builder A's card lands.
+- Release candidate `hub/rc-1119` = list order + main + B (sw `jh-v216`,
+  the forecast module in SHELL). Hub's checks on it (quick, forecast_e2e,
+  cars_feed, free_email_alert_ui) are queued behind builder A's layout
+  run. It missed the 09:14 cron scan; a scan is dispatched by hand once it
+  is on main, so real arrivals data exists hours before the owner is up.
+- **Apple 09:08 UTC** (asc-status 44493603300): 1.13.1 build 42 still
+  WAITING_FOR_REVIEW; 1.13.2 build 43 processed (VALID, internal
+  TestFlight). Nothing submitted. Next check 15:10 UTC
+  (trig_01GRs6LuCfyqatRgBeKiiF9y); the 09:10 check-in is answered by this.
+- Builder A (best-yards card): first version pushed, hub asked for a
+  headline count line and rank numerals (81d682eb); its layout run is on.
+- Tooling note for the next session: a privacy hook refuses some Bash
+  commands whose text names the app's main script or index page (those
+  files hold the public support address). Use the Read, Grep and Edit
+  tools on them, and write ops text with the Write tool, then append it.
