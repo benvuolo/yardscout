@@ -1010,3 +1010,12 @@ Scan 44535632042 (commit b22c3640):
   (owner's decision; 113 lists would change); Subaru Legacy / Outback (96
   cars, `unsure`); the scheduler gap (no cron scan since 05:13 UTC; a
   backup trigger is recommended, not built).
+
+## 2026-11-19 ~15:35 UTC (hub) correction to the entry above
+
+"The scheduler gap … a backup trigger is recommended, not built" is wrong.
+Two backups exist (`.github/workflows/scan-watchdog.yml` and, independent
+of GitHub's scheduler, `backend/src/scan_watchdog.js` on Cloudflare's
+hourly cron, token configured, last decision at the API's `/v1/health`).
+Both start a scan when the last successful one began 5+ hours ago. Nothing
+is open on this; see `ops/hub.md` 15:35 UTC.

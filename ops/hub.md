@@ -2926,3 +2926,28 @@ Can I have a png of the logo I can use as my google profile pic?"
 - GitHub's scheduler: no `scan.yml` cron run since 05:13 UTC. The next
   slot is 16:00 UTC; if it does not start by about 17:40 (4 h after the
   last scan began) the hub dispatches the regular scan by hand again.
+
+## 2026-11-19 ~15:35 UTC correction: the backup scan trigger exists and works (hub was wrong to call it "not built")
+
+The 13:40 and 15:20 entries (and `ops/data.md`) said a backup trigger for
+skipped scans was "recommended, not built". Wrong: two exist, and the hub
+had not looked.
+
+- `.github/workflows/scan-watchdog.yml`: hourly at :23 on GitHub's own
+  scheduler, starts a scan when the last successful one began 5+ hours
+  ago. GitHub runs it as irregularly as the scan itself (4 runs in the
+  last 24 h instead of 24).
+- `backend/src/scan_watchdog.js`: the same rule on Cloudflare's hourly
+  cron, independent of GitHub's scheduler. Token configured; last decision
+  readable at the API's `/v1/health` (15:20 UTC: 14:23 "scan active").
+- What happened today: GitHub skipped the 08:00 and 12:00 slots; the hub
+  dispatched by hand at 09:56 (4 h 43 after the last scan began) and 13:39
+  (3 h 43), each time before the Cloudflare watchdog's 5-hour mark, so the
+  watchdog never had to fire. Without the hub it would have started scans
+  at 10:23 and about 15:23.
+- So with GitHub's cron skipping, lists are at most about 6 hours old, by
+  design. No owner decision is open on this. The hub does NOT need to
+  dispatch at 17:40 (line in the 15:20 entry withdrawn); the 16:00 slot or
+  the watchdog (19:23 UTC at the latest) starts the next scan.
+- Observed delay of GitHub's scan cron over the last two days when it did
+  run: 30 min to 2 h 47 min after the slot.
