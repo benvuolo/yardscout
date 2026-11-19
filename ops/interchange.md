@@ -6317,3 +6317,45 @@ records and lists; no continuation parts exist). Output:
   68037296AA/97AA: curation calls it a plain regulator, but the aux "Motor" rows and the motor
   aliases make it RISK. Gap: the curation rule does not read `description` or `other_names`.
   Recommendation: have it read them too and hold a group when they disagree in kind.
+
+## 2026-11-19 Round 10b: every naming field; names that disagree in kind hold the group (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round10-1119`, the check's branch merged in)
+
+**Rule (curate.py, `ROUND10B_NS = {mopar, subaru, nissan}`).** The kind of a window-regulator
+number is read from every naming field the raw prints for it: list rows on every page (`main`,
+`aux`) and product records (`name`, `aux`, `description`, `other_names`), each `;`-separated value
+on its own, each with `site:lists|records:L<line>` (`Curation._wide_names`, `_kind10b`).
+- A value is one of four kinds: `regulator+motor` (motor and/& regulator, or a regulator with
+  motor), `motor` (starts with motor / window motor / power window motor, or says window motor,
+  regulator motor or motor assembly), `regulator`, or neither.
+- A number whose values disagree in kind (a motor beside a regulator or a regulator-with-motor)
+  gets no packaging words, and its group is held (`held_name_disagree`).
+- Otherwise round 10 stands: a motor's finished note gains "window motor only; ", and nothing else
+  changes.
+- No "includes motor" wording this round.
+
+**Held (live removals, all mopar; lot rows on the lot main ships, all plain):**
+- **68079283AB** (`oem:mopar:window-regulator:FL:2889c4891f`, 290 plain). Name "Motor - Window
+  Regulator", aux "Window Motor", other names "Power Window Motor, Front Left" (records L282;
+  lists L521); description "Window Regulator, Front Driver Side". The 2013 Durango front-door page
+  (lists L521) lists the regulators 68079286AA / 68079287AA and the motors 68079282AB / 68079283AB
+  (predecessor 68079283AA "MOTOR Window Regulator Front Door") as separate numbers. The page
+  therefore reads 68079283AB as the motor, and the description looks like a slip; it is held all
+  the same.
+- **68037296AA** (`…:FR:6f32cd7474`, 136 plain) and **68037297AA** (`…:FL:193ac0fcdf`, 136 plain).
+  Name "Regulator Assembly - Front Door Window", listed twice per page (lists L228, L258, L272,
+  L624) with aux "Regulator" and aux "Motor"; other names "Power Window Motor; Window Motor"
+  (records L1680 / L1681). The pages do not say whether the motor is included.
+- Nothing else disagrees: subaru 0, and nissan 0 of its 79 shipped window-regulator groups.
+  `nissan.json` is unchanged.
+
+**"window motor only" notes after the change:** mopar 20, subaru 8, nissan 30 (unchanged).
+
+**Payload** (documented command), against the round-10 head 4e0bac45:
+- `docs/data/oem/window-regulator.json` loses exactly the three groups above from `oemGroups`;
+  `oemGroups2` (nissan) is unchanged.
+- `interchange.json` changes `oemLazy.cats.window-regulator.oem` 198 → 195 and mopar's
+  `oemStatus` 291 → 288 groups.
+- The other 28 files differ only in `builtAt`.
+
+**Tests.** test_round10_1119 39/0, including a number whose description disagrees, which is held
+and carries no phrase. test_ship_1119 16/0. All 32 curation test files pass.
