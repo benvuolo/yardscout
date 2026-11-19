@@ -9504,6 +9504,14 @@ const PF_AM_HEAD = 'Aftermarket match: one replacement unit is listed for your c
 const PF_AM_HEAD_PART = 'Aftermarket match: one replacement unit is listed for your car and these donors. That list is the rebuilder\u2019s, not the carmaker\u2019s — match the part number and the fittings before you pull.';
 let pfOemLazyData = {};   // cat id -> {oemGroups, amGroups} (loaded or failed-empty)
 let pfOemLazyWait = {};   // cat id -> in-flight Promise
+/* The OEM groups a payload file carries for this shell: oemGroups, which
+ * every shell reads, then oemGroups2 (round 9, 2026-11-19): a namespace or
+ * gate key an older store shell cannot read correctly ships there, and older
+ * shells never look at it. */
+function pfOemGroupsOf(d) {
+  return [...(d && Array.isArray(d.oemGroups) ? d.oemGroups : []),
+    ...(d && Array.isArray(d.oemGroups2) ? d.oemGroups2 : [])];
+}
 function pfOemLazyLoad(catId) {
   const idx = interchangeData && interchangeData.oemLazy;
   if (!idx || !idx.cats || !idx.cats[catId] || pfOemLazyData[catId]) return null;
@@ -9517,7 +9525,7 @@ function pfOemLazyLoad(catId) {
         // A missing or mismatched file is an empty layer: the hand data
         // still renders, and we never retry in a loop.
         pfOemLazyData[catId] = {
-          oemGroups: ok && Array.isArray(d.oemGroups) ? d.oemGroups : [],
+          oemGroups: ok ? pfOemGroupsOf(d) : [],
           amGroups: ok && Array.isArray(d.amGroups) ? d.amGroups : [],
         };
         delete pfOemLazyWait[catId];
@@ -10624,7 +10632,7 @@ function pfRunSearch() {
       // year); every lazy-file group is Likely. Likely groups share ONE
       // header line per search; each row keeps its group's note and names
       // the catalog and part numbers.
-      const oemList = [...(interchangeData.oemGroups || []).map(g => [g, false]),
+      const oemList = [...pfOemGroupsOf(interchangeData).map(g => [g, false]),
                        ...(lazy.oemGroups || []).map(g => [g, true])];
       let oemLikelyHit = false;
       const oemHits = new Map();   // vehicle id -> {label, pns, note, gw: gate lines}
