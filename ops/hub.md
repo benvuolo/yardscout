@@ -3066,3 +3066,20 @@ headings now carry the commit times (15:21, 15:22, 15:40, 16:02); the
 owner's "ship and crawl" came at about 15:55 UTC, not 16:20 (the briefs to
 the two builders say 16:20; same message). No 16:00 scheduled scan has
 started by 16:10 UTC; the Cloudflare watchdog covers it from 18:39.
+
+## 2026-11-19 16:14 UTC donor-model forecast: built, sent back once for calibration
+
+Builder A, `feat/donor-forecast-1119` head 239dd15d (sw `jh-v219`), all
+its tests passing (quick 76/0, forecast/pf set 16/0, layout 1,416 checks
+per half). Hub read the app-side diff: the donor set comes from the
+definitions the rows come from; tooltip and ops-email commits as asked.
+
+Not merged yet, hub's call: for engine parts the count includes cars with
+other engines (2002 ES 300 alternator: "About 72 a week", every 1997-2003
+Camry counted). The caveat line is true but the number stands uncalibrated.
+Sent back for: subject "Cars of the donor models", and one line of fact
+from today's lot under the headline, "On lots within 100 mi now: 42 of 118
+cars of these models are donors for this part" (cars = lot cars in range
+matching the spec set; donors = the rows the list shows among them). No
+scaled or estimated rate. The source fix (arrivals history split by
+decoded engine) is a later data task.
