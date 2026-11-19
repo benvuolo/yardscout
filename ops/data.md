@@ -854,3 +854,141 @@ Open, from the builder and the hub:
 - The Parts card's forecast counts the seeker's own model and generation,
   not every donor model the interchange finds. A donor-model forecast is
   the natural next step.
+
+## 2026-11-19 — a VIN that decodes as another model is flagged (branch data/model-mismatch-1119)
+
+Follows "need noted by the hub: model mismatches are not flagged" above and
+the eighth independent nissan check (1119h: 1 WRONG, lot car
+wap-STK039874 listed QX80, VIN decodes as QX60, offered as a plain donor).
+
+### Census (inventory 2026-11-19T11:13:44Z, decodes exported 11-18 23:30)
+
+338,426 cars; 280,551 with a cached decode; 390 with no model on one side;
+91 already flagged for make; 280,070 compared. A pair counts when the
+listed model and the decoded model (run through `normalize_model` with the
+listing's make, as the scan does) share no word and are not the same name
+once spaces and punctuation drop: **6,036 cars in 505 (make, listed,
+decoded) pairs** (167 pairs with 5+ cars hold 5,494). The hub's earlier
+3,143 used a looser comparison.
+
+### The table (`scraper/vin_model_names.json`, every pair sorted by hand)
+
+| list | pairs | cars | flagged |
+|---|---|---|---|
+| same (another name: platform code, badge, body or trim name, rename) | 428 | 5,737 | no |
+| different (another vehicle) | 56 | 121 | **yes** |
+| unsure (not settled from names + decode fields) | 15 | 120 | no |
+| decode_wrong (the VIN's own series/engine prove the listing right) | 6 | 58 | no |
+
+Each entry carries its basis and car count. `decode_wrong` is a fourth list
+the brief did not name: for these the hub expected a flag, but the evidence
+says the decode is wrong, not the listing:
+- Silverado 1500 / 2500 / 2500HD listed, decoded "S-10" (36 cars, all
+  2001): VINs `1GCEC14…`, `1GCGC24…`, `1GCHK24…` carry the full-size C/K
+  series code (S-10 is S14/T14), and the decode's own series (1500 / 2500)
+  and engines (6.0L V8, 6.6L diesel) are Silverado's.
+- Genesis listed, decoded "Equus" (10, 2014): VIN `KMHGC4DD` is the
+  Genesis sedan; the decode's own trim (GLS 3.8) and engine (3.8L V6) are
+  Genesis; the Equus had only a V8.
+- FX35 / FX listed, decoded "FX50" (12, 2011): VIN `JN8AS1M` is the FX35
+  (FX50 is `JN8BS1M`), decode engine 3.5L.
+Limit: the table is per pair, so a real S-10 VIN listed "Silverado 1500"
+would not be flagged either.
+
+Largest different pairs: Subaru Outback / Impreza 30 (VINs JF1GG, trim
+"Outback" = Impreza Outback Sport, not the Legacy-based Outback), Fiat 500
+/ 500L 12, 500 / 500X 10, Subaru Forester / Outback 5, Forester / Legacy 4
+(the VIN is a Legacy Outback), Ram 2500 / ProMaster City 3, Volvo S40 /
+S60 3 (S40 ended 2011; the cars are 2013), BMW X3 / 325i 2, X5 / 528i 2,
+Chevrolet Blazer / Trailblazer 2 (2004-05: GMT360, not the S-10 Blazer),
+GMC C3500 / W4 2, Lexus GS 300 / RX 2 (chassis MCU), Audi A6 / A5 1, BMW
+528i / 328i 1, BMW X3 / 328i 1; also Infiniti QX80 / QX60 1 (the 1119h
+car), Chevrolet Silverado 1500 / Suburban 1 (VIN 1GN = SUV), Lexus
+ES 250 / IS, GS 350 / IS, GS 430 / LS, IS 350 / ES (chassis codes).
+
+Unsure (all 15): Subaru Legacy / Outback 96 (the Outback is the
+Legacy-based wagon, its own line since 2005: whether a "Legacy" listing
+should match Outback parts is not settled by names), Chevrolet "Blazer
+S10/Jimmy S15" / S-10 11 (a feed family label; the VIN is the pickup),
+and 13 one-car pairs: 6 where the decode itself is inconsistent (a 2006
+CT4, a 1983 ATS, a 1977 280ZX, a 1994 Sebring with a 2001+ series code, a
+1901 Fuso chassis, a Sprinter decoded as a 1996 truck-tractor), 4 where the
+listing names nothing placeable (MINI "1", Datsun "Sakura", 2001 Mercury
+"LTD", 1982 "Crown Victoria"), and Amigo / Rodeo, Sunfire / Sunbird
+(1995), TrailBlazer / Blazer (2002).
+
+### What the scan does now (`_vpic_mismatch_msg`)
+
+Year and make checks are unchanged. When the makes agree (no make message)
+and the two models share no word, the pair is looked up (make, listed,
+decoded; lowercase letters and digits only). `different` adds "VIN decodes
+as <Make> <Model> (listed <model>)" to the same `vpicMismatch` field, joined
+with "; " after a year message like the make message is. `same`, `unsure`,
+`decode_wrong` and pairs in no list are not flagged. The file loads once; a
+missing, non-JSON or malformed file logs one WARNING and the scan runs with
+year/make only. `_trans_make_conflict` keeps asking the make-only question
+(`check_model=False`). Log line per scan: `[vin model] N car(s) flagged:
+VIN decodes as another model; not flagged: same name …, unsure …, decode
+wrong …, unclassified … in P pair(s); top unclassified: <make> <listed> /
+<decoded> <n>, …` (top 10). Cost about 1 s per scan (280k decoded cars).
+
+On the census: **121 cars flagged by model**; 5 of them already carried a
+year flag, so cars with any VIN flag go 265 -> 381.
+
+### What a mismatch flag changes today (point 4, as found)
+
+- **Year mismatch**: parts are matched on the VIN's model year
+  (`enrich_vehicles`: `match_year` = decoded modelYear; `_spanYear` too);
+  the listing year is still shown with the flag.
+- **Make mismatch**: nothing is re-matched. Parts are matched on the
+  listing's make and model; the decode's trim/series/drive/body/trans
+  fields still gate within those parts (as for every car). Only the
+  transmission rule claims (VIN code, trim, EPA) are skipped when the makes
+  cross maker groups (`_trans_make_conflict`).
+- **Any flag (year, make, and now model), app side, no change needed**: the
+  car card shows the warning (tooltip "…The VIN is used for matching;
+  verify at the yard"); Part Finder `pfDonorIdentity` demotes a Verified
+  row to Likely ("the yard's listing doesn't match the VIN — verify"); the
+  OEM interchange `pfOemDonorGate` turns a confirmed donor into "if
+  equipped: this car's listing and VIN disagree, check the car". So the
+  1119h QX80 becomes "if equipped" on the next scan with no app change.
+  The backend (alerts, site worker) does not read the flag.
+- **Model mismatch, matching left on the listing.** There is no existing
+  path that re-matches on the VIN's model (only `resolve_model_blob` for
+  generic blob names and the foreign-make resolution, neither of which
+  fits), so none was added. If it were: of the 121 flagged cars, 113 would
+  get a different parts list (93 different parts, 14 gain parts the listing
+  model has none of, 6 lose all), 8 unchanged. The tooltip's "The VIN is
+  used for matching" is true for the year only; it is not touched (app).
+
+### Tests
+
+- `python3 scraper/test_vin_model_mismatch.py`: 48 checks (table shape, no
+  pair in two lists, every pair really disjoint; no flag on K1500 /
+  GMT-400, Outback / Legacy, CC / Passat, ML350 / M-Class, Ram 1500 / Ram
+  and three more; flags on QX80 / QX60, Outback / Impreza, 500 / 500L,
+  GS 300 / RX, Silverado 1500 / Suburban; no flag on Silverado / S-10 and
+  Genesis / Equus (decode_wrong); unsure and unknown pairs not flagged;
+  year-only, make-only, brand family, year + model join, check_model=False,
+  `_trans_make_conflict`; stats and the log line; malformed table (not
+  JSON, missing list, bad entry, missing file): no exception, year/make
+  only, one warning).
+- Re-run, all pass: test_am_gates, test_interchange, test_inventory_shards,
+  test_landed_models, test_listing_trans, test_manual_detect,
+  test_model_normalization, test_make_normalization, test_notable_trims,
+  test_parts_gaps, test_photo_sources, test_pns_make_model,
+  test_vin_schema_upgrade, test_vpic_fixes, test_wap_photo,
+  test_yard_freshness.
+- `tools/regress.sh --quick` on 53f641ee: 75 passed, 0 failed, 0 skipped (picks up the new test).
+
+### Open / for the hub or owner
+
+- Decide whether a `different` car should be matched on the VIN's model
+  (113 of 121 would change parts) and, if so, whether the tooltip stays.
+- Grow the table from the scan log's "top unclassified" pairs (new cars and
+  new decodes bring new pairs; unclassified pairs are never flagged).
+- `decode_wrong` is per pair; a per-VIN check (GM series code, Hyundai /
+  Infiniti VDS) would let a real S-10 under a "Silverado" listing be
+  flagged.
+- Legacy / Outback (96 cars) is the one large unsure pair; an owner call on
+  whether an Outback is "another vehicle" for parts would settle it.
