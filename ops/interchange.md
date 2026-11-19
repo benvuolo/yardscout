@@ -5995,3 +5995,50 @@ gm 57, ford 15, subaru 5, mopar 4, vag 1.
   conflicts are not tested: "KC. SE + CC. SE" would contradict itself under
   an "and" reading, which is strong evidence that "+" means "or".
 
+
+## 2026-11-19 (i) — independent blind check of the Nissan/Infiniti candidate @ b22c3640: PASS, 0 WRONG
+
+Checker session, branch `interchange/verify-nissan-1119i`. Verdicts with per-item evidence:
+`scraper/oem_fitment/groups/_report/nissan_verify_2026-11-19i.json`. Written before reading any
+earlier report (independence kept; the comparison note further down was added after the push).
+
+- **Inputs.** Candidate `nissan.candidate.json` @ b22c3640. Raw oem-raw @ 57e8b5b9: all six
+  nissanpartsdeal / infinitipartsdeal files match the candidate's `raw` sha256. Lot @ b22c3640:
+  337,838 cars (33,433 Nissan/Infiniti); inventory_live.json sha256 8dce8189…, vehicle_extras.json
+  7956b34d…, vin_decodes.json.gz dfed9211…. (The candidate has no `lot` block at this commit.)
+  App: OEM-GATE block of the app's main script @ b22c3640, run unchanged through
+  `audit11_4/lot_replay.mjs`'s extraction; payload rows from `junkyard_scraper._oem_gated_apps`.
+  Tool output on this lot: 108 groups, 15,001 plain / 1,150 if-equipped / 31 excluded.
+- **Draw** (own code, seed 60231119): 108 shippable Likely groups (3 wiper-motor held);
+  largest remainder 23 window-regulator / 4 side-mirrors / 2 climate-control / 1 gauge-cluster;
+  then 30 pairs from the other 78 groups.
+- **Span**: model year Y = builds 08/(Y-1)..07/Y; also tried 07..08 (wider) and 09..06 (narrower).
+  No item changes under either: every claimed vehicle-year whose page window does not cover the
+  span carries a built gate, and every built gate equals its pages' dates verbatim (checked on
+  the whole candidate, not only the sample).
+- **Result: groups 20 RIGHT / 0 WRONG / 10 RISK; pairs 26 RIGHT / 0 WRONG / 4 RISK.**
+- RISK kinds (items touched):
+  1. Unread sibling variant pages: Rogue 2017 offers hybrid/t32j/t32d/t32u, only t32u read, no
+     t32j/t32d page anywhere in raw; the gate keeps hybrids out only; all 102 Rogue 2017 donors
+     are plain rows (48 KNM-, 27 JN8-, 11 blank VINs). The note "Rogue: checked on gas-model pages"
+     overstates (2 items: 82731-4BA0A, 82730-4BA0A; same in non-sample 80730-4BA1A).
+  2. Gas gate with the hybrid page unread: donors with no engine decode are plain rows (Q70 2014: 1,
+     Murano 2016: 1, QX60 2017: 2) (4 items, 2 of them also in kind 1).
+  3. Undated number beside a same-option number that changes over inside the model year:
+     27510-2B000 (2B001 from 04/1994; 12 Altima 1994 plain); J6301-/J6302-1E400 on the 1995-96 pages
+     (2B500 undated, black twin changes 02/1995; 6 Altima 1996 plain each) (3 items).
+  4. Body word left open: QX50 2016 mirror page lists 96302-1BA1D "*WAG" undated beside 5UB0A
+     "LWB" undated; leather rows switch WAG->LWB at 07/2015 (6 QX50 2016 plain) (1 item).
+  5. Drive left open: QX56 2013 gauge page has AWD-only 1ZS0A/0C undated; the 3ZD1C row names no
+     drive; 4 of 6 donors decode 4WD and get the build line only; 3ZD0C/3ZD1C differ only by '*'
+     (1 item).
+  6. Feed/VIN identity: EX37 2013 decoded as EX35 2013, not flagged, plain (3 items); QX80 2017
+     decoded as QX60, flagged, if-equipped (2 items); a Titan 2006 whose VIN decodes as a Yamaha
+     motorcycle, flagged, if-equipped (1 item).
+- **Suggestions** (none acted on): name the component on rows — 33 of 82 window-regulator groups
+  are motor-only numbers ("Motor Assy-Regulator"), 12,269 lot rows, all cross-model, some
+  cross-platform (M37 sedan <-> QX56, Murano <-> Rogue) where the regulators differ; read the Rogue
+  t32j/t32d pages or hold Rogue 2017; treat "no engine decode" as if-equipped under a gas gate;
+  apply the existing "sibling" drive basis to QX56 2013 3ZD1C; date-gate or hold undated numbers
+  whose twin changes inside the year; Infiniti rows say "Nissan catalog" / "Nissan factory parts
+  catalog" though the pages are the Infiniti site; notes say "for both" on 3- to 6-model groups.

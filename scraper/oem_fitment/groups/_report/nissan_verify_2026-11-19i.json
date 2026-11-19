@@ -1,0 +1,7673 @@
+{
+ "checker": "independent blind check, 2026-11-19 (i)",
+ "candidate": "scraper/oem_fitment/groups/_report/nissan.candidate.json @ b22c3640",
+ "candidate_sha256": "4f60c8a7b26a9f32c0db78fbd35e20d7fdce6571dd74f9b83f4cd1f49afe334d",
+ "raw": {
+  "commit": "57e8b5b99de04282b844ea41f035cee3b37d5484",
+  "sha256_match_candidate_raw_block": true,
+  "files": {
+   "n.records.jsonl": "07991da2713f7b5e3507af0fd09a046ad0190d0404392e3c6b0fadfec63ebbe9",
+   "n.lists.jsonl": "12ed8d77825c9b95f2da36b9071e59e57e2f68d797e027fcc20d3184d8dbab01",
+   "n.years.jsonl": "62d1f7f84b8aac306165d1a4e60838ced74c5adb78dd0ec004dd800b5729ea9e",
+   "i.records.jsonl": "7760a25e5e34f6a7183ebd30d2322bd28a44bbd112f660ae6657257ccb92dba8",
+   "i.lists.jsonl": "e9fafc909fe58d16124c32bb90aca72fb149720a4969ae66516f8b7b7460a7fd",
+   "i.years.jsonl": "1dd47eddeca7ebda93f5edcdc02ed790f11d172063aa86d38d1c2b7b3f2c6666"
+  },
+  "names": {
+   "n.*": "raw/www.nissanpartsdeal.com.{jsonl,lists.jsonl,years.jsonl}",
+   "i.*": "raw/www.infinitipartsdeal.com.{jsonl,lists.jsonl,years.jsonl}"
+  }
+ },
+ "lot": {
+  "commit": "b22c3640",
+  "cars": 337838,
+  "nissan_infiniti_cars": 33433,
+  "sha256": {
+   "docs/data/inventory_live.json": "8dce8189ca8e10173459ea3ba9be40e0b44e89c1add9895da00fbe90f0cf67f0",
+   "docs/data/vehicle_extras.json": "7956b34d87ab94b5438dbf6fc65708cea989f203b2ec8d26803a673f0da187ff",
+   "docs/data/vin_decodes.json.gz": "dfed9211dd1bf4eb8e92428cc1a638c80938cf5c86c85778a59d6f5a0960e6ab"
+  },
+  "note": "candidate has no 'lot' block at this commit (keys: as_of, cells, classes, curate_version, engine_cells, groups, likely, ns, policy_sha256, raw, schema, sigs, vg)"
+ },
+ "app": "docs app main script @ b22c3640, OEM-GATE block run unchanged via audit11_4/lot_replay.mjs extraction (my copy adds warn text and a full scan of every Nissan/Infiniti car instead of the tool's index; plain/if-equipped/excluded sets identical to the tool's own output: 108 groups, 15001 plain / 1150 if-equipped / 31 excluded)",
+ "payload_rows": "junkyard_scraper._oem_gated_apps on each shippable likely group",
+ "model_year_span": {
+  "base": "08/(Y-1)..07/Y",
+  "wider": "07/(Y-1)..08/Y",
+  "narrower": "09/(Y-1)..06/Y",
+  "span_sensitive_items": "none: no claimed vehicle-year in the whole candidate has a page window that fails to cover any of the three spans without a matching built gate; every built gate equals its pages' dates verbatim"
+ },
+ "draw": {
+  "seed": 60231119,
+  "shippable_likely": 108,
+  "held_by_GROUP_HOLD_CATS": [
+   "wiper-motor x3"
+  ],
+  "quota_largest_remainder": {
+   "climate-control": 2,
+   "gauge-cluster": 1,
+   "side-mirrors": 4,
+   "window-regulator": 23
+  },
+  "method": "shippable likely sorted by id; per category (sorted) rng.sample(k); pairs rng.sample(rest,30), seeker=rng.choice(vehicle-years), donor=rng.choice(other vehicle-years)"
+ },
+ "counts": {
+  "groups": {
+   "RISK": 10,
+   "RIGHT": 20
+  },
+  "pairs": {
+   "RIGHT": 26,
+   "RISK": 4
+  }
+ },
+ "result": "PASS (0 WRONG)",
+ "items": [
+  {
+   "kind": "group",
+   "id": "oem:nissan:climate-control:C:fc5bd1df08",
+   "cat": "climate-control",
+   "pn": [
+    "27510-2B000"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #27510-2B000 for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1994,
+     1994
+    ]
+   ],
+   "gates": null,
+   "verdict": "RISK",
+   "risk_kind": "undated number beside a dated same-option successor inside the model year",
+   "why": "Both 1994 pages list 27510-2B000 with no production date, but list 27510-2B001 for the same option (F/AIR CONDITIONER-STD TYPE, XE/SE) 'from 04/1994' and 27510-1E400 '06/1992-08/1993'. 1994 cars built from 04/1994 may carry 2B001; the pages never date 2B000, so no build window can be stated. App: all 12 Altima 1994 donors plain rows.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L546",
+    "www.nissanpartsdeal.com:lists:L808",
+    "www.nissanpartsdeal.com:records:L1568"
+   ],
+   "d_option_tie": "remark F/AIR CONDITIONER-STD TYPE (A/C cars); FED. S. SE listed, CAL. S. SE not",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "'*' prefix on option text (unexplained by the pages)",
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 12,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L546",
+       "variant": "",
+       "production_date": null,
+       "options": "=F/AIR CONDITIONER-STD TYPE ; Fitting Vehicle Options=*FED. S. XE + *CAL. S. XE, FED. S. SE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L808",
+       "variant": "",
+       "production_date": null,
+       "options": "=F/AIR CONDITIONER-STD TYPE ; Fitting Vehicle Options=*FED. S. XE + *CAL. S. XE, FED. S. SE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:climate-control:C:14a91b9048",
+   "cat": "climate-control",
+   "pn": [
+    "27515-2B000"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #27515-2B000 for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1995
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "27515-2B000 is listed undated on all five pages (Altima 1993-94, Stanza 1993-95) with identical option text; the other no-A/C numbers 27515-1E400 / -2B001 are also undated and differ only by the remark (WITHOUT AIRCON,ASCD & CASSETTE vs W/O AIR CONDITIONER), which the 'option: fits some option packages' note covers.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L669",
+    "www.nissanpartsdeal.com:lists:L546",
+    "www.nissanpartsdeal.com:lists:L814",
+    "www.nissanpartsdeal.com:records:L1570"
+   ],
+   "d_option_tie": "remark WITHOUT AIRCON,ASCD & CASSETTE ties it to cars without A/C, cruise (ASCD) and cassette: an option, not a drive/engine/body/cab/trans",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "'*' prefix on option text (unexplained by the pages)",
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)",
+    "ASCD (unexplained)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 18,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L669",
+       "variant": "",
+       "production_date": null,
+       "options": "=WITHOUT AIRCON,ASCD & CASSETTE ; Fitting Vehicle Options=*FED. S. GXE + *CAL. S. GXE, FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L546",
+       "variant": "",
+       "production_date": null,
+       "options": "=WITHOUT AIRCON,ASCD & CASSETTE ; Fitting Vehicle Options=*FED. S. GXE + *CAL. S. GXE, FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L820",
+       "variant": "",
+       "production_date": null,
+       "options": "=WITHOUT AIRCON,ASCD & CASSETTE ; Fitting Vehicle Options=*FED. S. GXE + *CAL. S. GXE, FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L808",
+       "variant": "",
+       "production_date": null,
+       "options": "=WITHOUT AIRCON,ASCD & CASSETTE ; Fitting Vehicle Options=*FED. S. GXE + *CAL. S. GXE, FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1995",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L814",
+       "variant": "",
+       "production_date": null,
+       "options": "=WITHOUT AIRCON,ASCD & CASSETTE ; Fitting Vehicle Options=*FED. S. GXE + *CAL. S. GXE, FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:gauge-cluster:C:49489ca199",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-3ZD1C"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #24820-3ZD1C for both \u2014 option: fits some option packages; QX56: built 02/2013-08/2014 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "QX56",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX56",
+     2013,
+     2013,
+     {
+      "built": "2013-02..2014-08"
+     }
+    ]
+   ],
+   "verdict": "RISK",
+   "risk_kind": "drive left open by an AWD-only sibling; number distinguished from a twin only by an unexplained mark",
+   "why": "QX56 2013 page lists 24820-3ZD1C (02/2013-08/2014, '3ROW') and, undated, 24820-1ZS0A / -1ZS0C for '*3ROW. AWD ...'. The page never says 3ZD1C is 2WD-only, but an AWD-specific number exists; 4 of the 6 QX56 2013 donors decode 4WD and get only the build-date line. 3ZD0C ('*3ROW') and 3ZD1C ('3ROW') share dates and option and differ only by '*'. QX80 2014 page has no AWD rows; its 12 donors are plain rows. Build gate on QX56 2013 matches the page exactly.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L793",
+    "www.infinitipartsdeal.com:lists:L778",
+    "www.infinitipartsdeal.com:records:L1727"
+   ],
+   "d_option_tie": "'3ROW', 'AWD', '7P', '8P', 'PREMIUM', 'LE/HIGH' in the option column; AWD on sibling rows only",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "'*' prefix on option text (unexplained by the pages) distinguishes 3ZD0C from 3ZD1C",
+    "3ROW / 7P / 8P (unexplained)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 12,
+    "if_equipped": 6,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti QX56 2013",
+     "gate": {
+      "built": "2013-02..2014-08"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L793",
+       "variant": "",
+       "production_date": "02/2013-08/2014",
+       "options": "Fitting Vehicle Options=3ROW"
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide",
+      "PARTIAL_narrow"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L778",
+       "variant": "",
+       "production_date": "02/2013-08/2014",
+       "options": "Fitting Vehicle Options=3ROW"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:L:8655da36ab",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-1E400"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #96302-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1994
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "96302-1E400 (BLACK, XE/GXE/SE) is listed on all four 1993-94 pages, undated; the product page dates it 06/1992-02/1995, covering both model years; its successor 96302-2B500 (from 02/1995) appears only on 1995+ pages.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L671",
+    "www.nissanpartsdeal.com:lists:L548",
+    "www.nissanpartsdeal.com:records:L1546"
+   ],
+   "d_option_tie": "BLACK vs LESS PAINT (GLE) colour/trim option",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 18,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L671",
+       "variant": "",
+       "production_date": null,
+       "options": "=BLACK ; Fitting Vehicle Options=FED. S. (XE+ GXE+ SE) + CAL. S. (XE+ GXE+ SE)"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L548",
+       "variant": "",
+       "production_date": null,
+       "options": "=BLACK ; Fitting Vehicle Options=FED. S. (XE+ GXE+ SE) + CAL. S. (XE+ GXE+ SE)"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L822",
+       "variant": "",
+       "production_date": null,
+       "options": "=BLACK ; Fitting Vehicle Options=FED. S. (XE+ GXE+ SE) + CAL. S. (XE+ GXE+ SE)"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L810",
+       "variant": "",
+       "production_date": null,
+       "options": "=BLACK ; Fitting Vehicle Options=FED. S. (XE+ GXE+ SE) + CAL. S. (XE+ GXE+ SE)"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:R:1c10d0453a",
+   "cat": "side-mirrors",
+   "pn": [
+    "J6301-1E400"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #J6301-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Altima",
+     1996,
+     1996
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1996
+    ]
+   ],
+   "gates": null,
+   "verdict": "RISK",
+   "risk_kind": "undated number beside an undated same-option successor; parallel number changes over inside the model year",
+   "why": "Altima 1996 and Stanza 1995/1996 pages list J6301-1E400 (LESS PAINT, GLE) and J6301-2B500 (LESS PAINT / PRIMER, GLE, which replaces it) both undated, while the black counterpart changes 96301-1E400 06/1992-02/1995 -> 96301-2B500 from 02/1995. Which number a 1995-96 GLE carries is not settled by the pages. App: 6 Altima 1996 donors plain rows. 1993-94 years: RIGHT.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L627",
+    "www.nissanpartsdeal.com:lists:L816",
+    "www.nissanpartsdeal.com:lists:L828",
+    "www.nissanpartsdeal.com:records:L1552"
+   ],
+   "d_option_tie": "LESS PAINT (GLE only)",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 24,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L671",
+       "variant": "",
+       "production_date": null,
+       "options": "=LESS PAINT ; Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L548",
+       "variant": "",
+       "production_date": null,
+       "options": "=LESS PAINT ; Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1996",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L627",
+       "variant": "",
+       "production_date": null,
+       "options": "=LESS PAINT ; Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L822",
+       "variant": "",
+       "production_date": null,
+       "options": "=LESS PAINT ; Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L810",
+       "variant": "",
+       "production_date": null,
+       "options": "=LESS PAINT ; Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1995",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L816",
+       "variant": "",
+       "production_date": null,
+       "options": "=LESS PAINT ; Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1996",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L828",
+       "variant": "",
+       "production_date": null,
+       "options": "=LESS PAINT ; Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:L:b74ed59e12",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-1BA1D"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #96302-1BA1D for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2016
+    ]
+   ],
+   "gates": null,
+   "verdict": "RISK",
+   "risk_kind": "body clause the pages leave open (WAG vs LWB); feed/VIN identity",
+   "why": "QX50 2016 page lists 96302-1BA1D undated for '*WAG, WAG' beside 96302-5UB0A undated for 'LWB'; the leather rows switch from WAG (1BA1E/3D/3E, to 07/2015) to LWB (5UB1A/3A, from 07/2015), so MY2016 cars may all be LWB, which would rule 1BA1D out; the pages do not say. App: 6 QX50 2016 donors plain rows. Also: 1 donor listed EX37 2013 decodes as EX35 2013 (no catalog page exists for a 2013 EX35), not flagged, plain row. EX37 2013, QX50 2014-2015: RIGHT.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L999",
+    "www.infinitipartsdeal.com:lists:L1303",
+    "www.infinitipartsdeal.com:lists:L1274",
+    "www.infinitipartsdeal.com:records:L653"
+   ],
+   "d_option_tie": "WAG / LWB (body words, unexplained); LEATHER",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "'*' prefix on option text (unexplained by the pages)",
+    "WAG / LWB (unexplained body words)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 12,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti EX37 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1274",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=*WAG, WAG"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX50 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1079",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=*WAG, WAG"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX50 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1303",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=*WAG, WAG"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX50 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L999",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=*WAG, WAG"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:side-mirrors:L:786a2d03ce",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-EV50A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #96302-EV50A for both \u2014 fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2010
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2009,
+     2010
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2008,
+     {
+      "built": "2008-01.."
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "M35 2008 page: 96302-EV50A from 01/2008 (EH100 to 01/2008) -> gated built 2008-01.. exactly; M35/M45 2009 pages: from 01/2008, covering MY2009; 2010 pages undated, no sibling.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L552",
+    "www.infinitipartsdeal.com:lists:L644",
+    "www.infinitipartsdeal.com:lists:L869",
+    "www.infinitipartsdeal.com:lists:L1412",
+    "www.infinitipartsdeal.com:lists:L1440"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 26,
+    "if_equipped": 30,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti M35 2008",
+     "gate": {
+      "built": "2008-01.."
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L552",
+       "variant": "",
+       "production_date": "from 01/2008",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide",
+      "PARTIAL_narrow"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M35 2009",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L644",
+       "variant": "",
+       "production_date": "from 01/2008",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M35 2010",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L869",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M45 2009",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1412",
+       "variant": "",
+       "production_date": "from 01/2008",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M45 2010",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1440",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:8a100575f1",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-0E700"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80721-0E700 for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1993
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1993
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "80721-0E700 06/1992-08/1993 on both 1993 pages, covering MY1993 under every span tried; 80721-0E715 takes over from 08/1993. The XE number 80701-0E710 is split off by the product pages' trim column (XE vs GLE/GXE/SE); the list rows carry no option text.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L673",
+    "www.nissanpartsdeal.com:lists:L824",
+    "www.nissanpartsdeal.com:records:L4819"
+   ],
+   "d_option_tie": "no option text on the deciding rows (trim split only on product pages)",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 6,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L673",
+       "variant": "",
+       "production_date": "06/1992-08/1993",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [
+      "DATED_PN_UNDATED_SIBLING 80701-0E710"
+     ],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L824",
+       "variant": "",
+       "production_date": "06/1992-08/1993",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [
+      "DATED_PN_UNDATED_SIBLING 80701-0E710"
+     ],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:dd2ee3c898",
+   "cat": "window-regulator",
+   "pn": [
+    "82721-1U600"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82721-1U600 for both \u2014 fits some configurations; Juke: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Juke",
+     2016,
+     2016
+    ],
+    [
+     "Nissan",
+     "Leaf",
+     2011,
+     2012
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Juke",
+     2016,
+     2016,
+     {
+      "built": "2014-10..2015-03,2015-08..2016-02"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Juke 2016 page: 82721-1U600 '08/2015-02/2016,10/2014-03/2015' (82721-1KA0B fills 03/2015-08/2015 and from 02/2016) -> gate built matches the page; Leaf 2011/2012 pages list it undated with no sibling.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L735",
+    "www.nissanpartsdeal.com:lists:L726",
+    "www.nissanpartsdeal.com:lists:L694"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 36,
+    "if_equipped": 12,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Juke 2016",
+     "gate": {
+      "built": "2014-10..2015-03,2015-08..2016-02"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L735",
+       "variant": "",
+       "production_date": "08/2015-02/2016,10/2014-03/2015",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide",
+      "PARTIAL_narrow"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Leaf 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L726",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Leaf 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L694",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:8380ea4d2d",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-CL00A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80721-CL00A for both \u2014 fits some configurations; built 09/2004-06/2006 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2005,
+     2006
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2006,
+     2006
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "FX35",
+     2005,
+     2006,
+     {
+      "built": "2004-09..2006-06"
+     }
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2006,
+     2006,
+     {
+      "built": "2004-09..2006-06"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "80721-CL00A 09/2004-06/2006 on every claimed page (FX35 2005/2006, FX45 2006); AR000 before 09/2004, CL70B from 06/2006; all three vehicle-years gated with that window, every donor \"if equipped\".",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L702",
+    "www.infinitipartsdeal.com:lists:L476",
+    "www.infinitipartsdeal.com:lists:L931"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 83,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti FX35 2005",
+     "gate": {
+      "built": "2004-09..2006-06"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L702",
+       "variant": "",
+       "production_date": "09/2004-06/2006",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti FX35 2006",
+     "gate": {
+      "built": "2004-09..2006-06"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L476",
+       "variant": "",
+       "production_date": "09/2004-06/2006",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti FX45 2006",
+     "gate": {
+      "built": "2004-09..2006-06"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L931",
+       "variant": "",
+       "production_date": "09/2004-06/2006",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:33159d4c40",
+   "cat": "window-regulator",
+   "pn": [
+    "80701-0E710"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80701-0E710 for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1994
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "80701-0E710 undated on all four 1993-94 pages; the dated 0E700/0E715 rows are the GLE/GXE/SE numbers per the product pages (80701-0E710 product page: XE only).",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L673",
+    "www.nissanpartsdeal.com:lists:L550",
+    "www.nissanpartsdeal.com:records:L1556"
+   ],
+   "d_option_tie": "no option text on the deciding rows (XE split only on product pages)",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 18,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L673",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [
+      "UNDATED_PN_DATED_SIBLING_IN_MY 80721-0E700 06/1992-08/1993"
+     ],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L550",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [
+      "UNDATED_PN_DATED_SIBLING_IN_MY 80721-0E700 06/1992-08/1993",
+      "UNDATED_PN_DATED_SIBLING_IN_MY 80721-0E715 from 08/1993"
+     ],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L824",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [
+      "UNDATED_PN_DATED_SIBLING_IN_MY 80721-0E700 06/1992-08/1993"
+     ],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L812",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [
+      "UNDATED_PN_DATED_SIBLING_IN_MY 80721-0E700 06/1992-08/1993",
+      "UNDATED_PN_DATED_SIBLING_IN_MY 80721-0E715 from 08/1993"
+     ],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:933a258031",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-1MA0B"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82731-1MA0B for both \u2014 fits some configurations; Q70: checked on gas-model pages; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "Q70",
+     2018,
+     2018
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2018,
+     2018
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2019,
+     2019
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "Q70",
+     2018,
+     2018,
+     {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Q70 2018 (gas page) and Q70L 2018: 82731-1MA0B from 04/2017 (1MA0A 09/2015-04/2017), covering MY2018; QX80 2019 undated. Q70 2018 hybrid page unread -> gas/eng_not 3.5L gate, note says 'checked on gas-model pages'. 0 lot cars.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1498",
+    "www.infinitipartsdeal.com:lists:L1508",
+    "www.infinitipartsdeal.com:lists:L1511"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti Q70 2018",
+     "gate": {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1498",
+       "variant": "gas",
+       "production_date": "from 04/2017",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Infiniti Q70L 2018",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1508",
+       "variant": "",
+       "production_date": "from 04/2017",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2019",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1511",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:b1b62f2f6b",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-1LA0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82720-1LA0A for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2019
+    ]
+   ],
+   "gates": null,
+   "verdict": "RISK",
+   "risk_kind": "feed/VIN identity",
+   "why": "82720-1LA0A undated on all nine QX56 2011-13 / QX80 2014-19 rear-door pages, no sibling: pages support the claim. One donor listed QX80 2017 decodes as QX60 2017 (flagged vpicMismatch): shown 'if equipped: this car's listing and VIN disagree' \u2014 not plain, but its decode names a model the catalog does not list for this number.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L621",
+    "www.infinitipartsdeal.com:lists:L1352",
+    "www.infinitipartsdeal.com:records:L580"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [
+    {
+     "id": "wap-STK039874",
+     "listed": "Infiniti QX80 2017",
+     "flag": "VIN decodes as Infiniti QX60 (listed QX80)",
+     "shown": "unconfirmed",
+     "warn": "if equipped: this car's listing and VIN disagree, check the car"
+    }
+   ],
+   "lot_b22c3640": {
+    "plain": 91,
+    "if_equipped": 1,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti QX56 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L621",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX56 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L988",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX56 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L802",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L787",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1141",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1248",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2017",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1352",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2018",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1488",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2019",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1511",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FR:ecc50c6f8c",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-JK00A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80720-JK00A for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "80720-JK00A undated on G25 2011, G25 2012, Q40 2015 pages, no sibling. (The product page's 11/2009-08/2010 date comes from the 2009 G37 sedan page, not a claimed vehicle-year.)",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L610",
+    "www.infinitipartsdeal.com:lists:L731",
+    "www.infinitipartsdeal.com:lists:L830"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 41,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti G25 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L610",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti G25 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L731",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti Q40 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L830",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FR:2cb4dbbce8",
+   "cat": "window-regulator",
+   "pn": [
+    "80730-2Y000"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80730-2Y000 for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "I30",
+     2001,
+     2001
+    ],
+    [
+     "Infiniti",
+     "I35",
+     2002,
+     2003
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "I35 2003 page: 80730-2Y000 07/2001-08/2003, 2Y001 from 08/2003: covers MY2003 under every span tried; I30 2001 and I35 2002 pages undated, no sibling.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L569",
+    "www.infinitipartsdeal.com:lists:L634",
+    "www.infinitipartsdeal.com:lists:L716"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 74,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti I30 2001",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L569",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti I35 2002",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L634",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti I35 2003",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L716",
+       "variant": "",
+       "production_date": "07/2001-08/2003",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:5af5348a13",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-1E400"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82730-1E400 for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1993
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1993
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "82730-1E400 06/1992-08/1993 on both 1993 pages (D9000 from 08/1993).",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L674",
+    "www.nissanpartsdeal.com:lists:L825"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 6,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L674",
+       "variant": "",
+       "production_date": "06/1992-08/1993",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L825",
+       "variant": "",
+       "production_date": "06/1992-08/1993",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:9709cdbc28",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-JK000"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82720-JK000 for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "G35",
+     2008,
+     2008
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "82720-JK000 undated on G25 2011/2012, G35 2008 (sedan page; the year record offers only the sedan variant), Q40 2015 rear-door pages; no coupe donors on the lot.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L611",
+    "www.infinitipartsdeal.com:lists:L759",
+    "www.infinitipartsdeal.com:lists:L831"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 176,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti G25 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L611",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti G25 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L732",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti G35 2008",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L759",
+       "variant": "sedan",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti Q40 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L831",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FR:5247ba7a44",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-EH10A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80720-EH10A for both \u2014 fits some configurations; built 06/2008-03/2009 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M35",
+     2009,
+     2009
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2009,
+     2009
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "M35",
+     2009,
+     2009,
+     {
+      "built": "2008-06..2009-03"
+     }
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2009,
+     2009,
+     {
+      "built": "2008-06..2009-03"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "80720-EH10A 06/2008-03/2009 on M35 2009 and M45 2009 pages (EH100 before, EH10B from 03/2009); gate matches.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L647",
+    "www.infinitipartsdeal.com:lists:L1415"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 16,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti M35 2009",
+     "gate": {
+      "built": "2008-06..2009-03"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L647",
+       "variant": "",
+       "production_date": "06/2008-03/2009",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide",
+      "PARTIAL_narrow"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M45 2009",
+     "gate": {
+      "built": "2008-06..2009-03"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1415",
+       "variant": "",
+       "production_date": "06/2008-03/2009",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide",
+      "PARTIAL_narrow"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:e361623530",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-4BA0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82731-4BA0A for both \u2014 fits some configurations; Murano 2016-2017, Rogue: checked on gas-model pages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Murano",
+     2015,
+     2019
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Murano",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017,
+     {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "verdict": "RISK",
+   "risk_kind": "unread sibling variant pages (Rogue 2017 t32j / t32d) and unknown-fuel donors under a gas gate",
+   "why": "Murano 2015-2019 pages and the Rogue 2017 t32u page list 82731-4BA0A undated. The Rogue 2017 year record offers four variants (hybrid, t32j, t32d, t32u); only t32u was read, and no t32j/t32d page exists anywhere in the raw. The gate keeps hybrids out only. App: all 102 Rogue 2017 donors plain rows (48 KNM-, 27 JN8-, 11 blank-VIN; 16 5N1-); note says 'Rogue: checked on gas-model pages' though one of three non-hybrid variant pages was read. 1 Murano 2016 donor with no decode is plain under the gas gate (hybrid page unread). The variant codes t32j/t32d/t32u are not explained by the pages.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:years:L135",
+    "www.nissanpartsdeal.com:lists:L632",
+    "www.nissanpartsdeal.com:lists:L719",
+    "www.nissanpartsdeal.com:lists:L759",
+    "www.nissanpartsdeal.com:lists:L751"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "variant codes t32j / t32d / t32u (unexplained)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 187,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Murano 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L719",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Murano 2016",
+     "gate": {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L759",
+       "variant": "base",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Nissan Murano 2017",
+     "gate": {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L751",
+       "variant": "base",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Nissan Murano 2018",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L770",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Murano 2019",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L802",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Rogue 2017",
+     "gate": {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L632",
+       "variant": "t32u",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid",
+      "t32d",
+      "t32j"
+     ]
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:4e683f9bc0",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-3TA2A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82730-3TA2A for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     2014,
+     2018
+    ],
+    [
+     "Nissan",
+     "Maxima",
+     2016,
+     2019
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     2014,
+     2017
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Altima 2014-18 sedan pages (sedan the only variant offered), Maxima 2016-19, Sentra 2015/2016 undated; Sentra 2014 page 05/2013-12/2015 and Sentra 2017 page 12/2015-10/2017 each cover their model year under every span tried. One donor listed Sentra 2015 decodes as 2014 (flagged, \"if equipped\"); both years are claimed with this number.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L442",
+    "www.nissanpartsdeal.com:lists:L480",
+    "www.nissanpartsdeal.com:lists:L591",
+    "www.nissanpartsdeal.com:lists:L721"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [
+    {
+     "id": "pns-stk073987",
+     "listed": "Nissan Sentra 2015",
+     "flag": "VIN decodes as 2014 (listed 2015)",
+     "shown": "unconfirmed",
+     "warn": "if equipped: this car's listing and VIN disagree, check the car"
+    }
+   ],
+   "lot_b22c3640": {
+    "plain": 3536,
+    "if_equipped": 1,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L442",
+       "variant": "sedan",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L377",
+       "variant": "sedan",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L528",
+       "variant": "sedan",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 2017",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L555",
+       "variant": "sedan",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 2018",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L678",
+       "variant": "sedan",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Maxima 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L721",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Maxima 2017",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L733",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Maxima 2018",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L773",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Maxima 2019",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L840",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Sentra 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L480",
+       "variant": "",
+       "production_date": "05/2013-12/2015",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Sentra 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L486",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Sentra 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L566",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Sentra 2017",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L591",
+       "variant": "",
+       "production_date": "12/2015-10/2017",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:96909ce3ff",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-4BA0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82730-4BA0A for both \u2014 fits some configurations; Murano 2016-2017, Rogue: checked on gas-model pages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Murano",
+     2015,
+     2019
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Murano",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017,
+     {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "verdict": "RISK",
+   "risk_kind": "unread sibling variant pages (Rogue 2017 t32j / t32d) and unknown-fuel donors under a gas gate",
+   "why": "Same as the LH motor 82731-4BA0A: 82730-4BA0A listed on Murano 2015-2019 and Rogue 2017 t32u pages only; t32j/t32d unread; all 102 Rogue 2017 donors plain rows; 1 undecoded Murano 2016 donor plain under the gas gate.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:years:L135",
+    "www.nissanpartsdeal.com:lists:L632",
+    "www.nissanpartsdeal.com:lists:L719"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "variant codes t32j / t32d / t32u (unexplained)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 187,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Murano 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L719",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Murano 2016",
+     "gate": {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L759",
+       "variant": "base",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Nissan Murano 2017",
+     "gate": {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L751",
+       "variant": "base",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Nissan Murano 2018",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L770",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Murano 2019",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L802",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Rogue 2017",
+     "gate": {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L632",
+       "variant": "t32u",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid",
+      "t32d",
+      "t32j"
+     ]
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:613aa019d9",
+   "cat": "window-regulator",
+   "pn": [
+    "82721-1LA0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82721-1LA0A for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2019
+    ]
+   ],
+   "gates": null,
+   "verdict": "RISK",
+   "risk_kind": "feed/VIN identity",
+   "why": "82721-1LA0A undated on all nine QX56/QX80 rear-door pages, no sibling: pages support the claim. The same QX80-listed / QX60-decoded donor as 82720-1LA0A is shown \"if equipped: listing and VIN disagree\".",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L621",
+    "www.infinitipartsdeal.com:lists:L1352",
+    "www.infinitipartsdeal.com:records:L579"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [
+    {
+     "id": "wap-STK039874",
+     "listed": "Infiniti QX80 2017",
+     "flag": "VIN decodes as Infiniti QX60 (listed QX80)",
+     "shown": "unconfirmed",
+     "warn": "if equipped: this car's listing and VIN disagree, check the car"
+    }
+   ],
+   "lot_b22c3640": {
+    "plain": 91,
+    "if_equipped": 1,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti QX56 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L621",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX56 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L988",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX56 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L802",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L787",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1141",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1248",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2017",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1352",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2018",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1488",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX80 2019",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1511",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:e6dd47a01e",
+   "cat": "window-regulator",
+   "pn": [
+    "82721-0E717"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #82721-0E717 for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1997,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1997,
+     1997
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "82721-0E717 'from 07/1996' on Altima 1997 and Stanza 1997 pages, covering MY1997 under the base and wide spans (0E715 ends 02/1996). Ungated, plain rows: correct.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L515",
+    "www.nissanpartsdeal.com:lists:L837"
+   ],
+   "d_option_tie": "FED. S. (GXE+ GLE+ SE) + CAL. S. (...) vs XE 82701-0E710: trim option",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 24,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1997",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L515",
+       "variant": "",
+       "production_date": "from 07/1996",
+       "options": "Fitting Vehicle Options=FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1997",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L837",
+       "variant": "",
+       "production_date": "from 07/1996",
+       "options": "Fitting Vehicle Options=FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:33c19e2380",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-1BA0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82720-1BA0A for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2009,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2017
+    ]
+   ],
+   "gates": null,
+   "verdict": "RISK",
+   "risk_kind": "feed/VIN identity",
+   "why": "82720-1BA0A undated on EX35 2009-12, EX37 2013, QX50 2014-17 rear-door pages, no sibling: pages support the claim. One donor listed EX37 2013 decodes as EX35 2013 (no 2013 EX35 page exists; product page lists EX35 only to 2012); not flagged, plain row.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1040",
+    "www.infinitipartsdeal.com:lists:L1277",
+    "www.infinitipartsdeal.com:lists:L1113",
+    "www.infinitipartsdeal.com:records:L554"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 64,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti EX35 2009",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1040",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti EX35 2010",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L757",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti EX35 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L904",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti EX35 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1195",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti EX37 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1277",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX50 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1082",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX50 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1306",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX50 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1002",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX50 2017",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1113",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:300fc2f362",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-0E717"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #82720-0E717 for both \u2014 option: fits some option packages; built from 07/1996 only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1997,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1997,
+     1997
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1997,
+     1997,
+     {
+      "built": "1996-07.."
+     }
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1997,
+     1997,
+     {
+      "built": "1996-07.."
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "82720-0E717 'from 07/1996' on both 1997 pages; gate built '1996-07..' states exactly the page's window (0E715 ends 07/1996, so the wide span overlaps it). Every donor 'if equipped' with a true line.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L515",
+    "www.nissanpartsdeal.com:lists:L837"
+   ],
+   "d_option_tie": "trim option as above",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 24,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1997",
+     "gate": {
+      "built": "1996-07.."
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L515",
+       "variant": "",
+       "production_date": "from 07/1996",
+       "options": "Fitting Vehicle Options=FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1997",
+     "gate": {
+      "built": "1996-07.."
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L837",
+       "variant": "",
+       "production_date": "from 07/1996",
+       "options": "Fitting Vehicle Options=FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:c1c2e4c0aa",
+   "cat": "window-regulator",
+   "pn": [
+    "80731-JX30C"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80731-JX30C for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Cube",
+     2012,
+     2014
+    ],
+    [
+     "Nissan",
+     "Juke",
+     2012,
+     2014
+    ],
+    [
+     "Nissan",
+     "Leaf",
+     2012,
+     2012
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "80731-JX30C: Cube 2012 from 04/2011, Juke 2012 04/2011-10/2014, Leaf 2012 from 04/2011 (JX30B before 04/2011), Cube/Juke 2013-14 undated; every model year covered.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L741",
+    "www.nissanpartsdeal.com:lists:L540",
+    "www.nissanpartsdeal.com:lists:L693"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 260,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Cube 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L741",
+       "variant": "",
+       "production_date": "from 04/2011",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Cube 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L746",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Cube 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L784",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Juke 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L540",
+       "variant": "",
+       "production_date": "04/2011-10/2014",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Juke 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L542",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Juke 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L602",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Leaf 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L693",
+       "variant": "",
+       "production_date": "from 04/2011",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RR:f75b55f595",
+   "cat": "window-regulator",
+   "pn": [
+    "82700-0E710"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #82700-0E710 for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Altima",
+     1996,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1997
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "82700-0E710 'FED. S. XE + CAL. S. XE' undated on every claimed page (Altima 1993-94, 1996-97; Stanza 1993-97); the dated rows are the GXE/GLE/SE numbers.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L674",
+    "www.nissanpartsdeal.com:lists:L630",
+    "www.nissanpartsdeal.com:lists:L515"
+   ],
+   "d_option_tie": "XE trim option",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 48,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L674",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L551",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1996",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L630",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1997",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L515",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L825",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L813",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1995",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L819",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1996",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L831",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1997",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L837",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:FL:f05355bd0d",
+   "cat": "window-regulator",
+   "pn": [
+    "80731-1MA0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80731-1MA0A for both \u2014 fits some configurations; Q70 2014-2018: checked on gas-model pages; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2019
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2016
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2018,
+     2019
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2018,
+     {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "verdict": "RISK",
+   "risk_kind": "unknown-fuel donor under a gas gate (hybrid page unread)",
+   "why": "80731-1MA0A undated on every claimed page (M35h 2012-13, M37/M56 2011-13, Q70 2014-19 gas pages, Q70L). Q70 2014-2018 hybrid pages unread -> gas / eng_not 3.5L gate (note says so). 1 Q70 2014 donor has no VIN or engine and is a plain row. (M35h pages do list the number, so the hybrid risk is small.)",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1176",
+    "www.infinitipartsdeal.com:lists:L1224",
+    "www.infinitipartsdeal.com:lists:L1370",
+    "www.infinitipartsdeal.com:lists:L1318"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 61,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti M35h 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1182",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M35h 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1480",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M37 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1251",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M37 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L918",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M37 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L959",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M56 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1016",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M56 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1430",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M56 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1291",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti Q70 2014",
+     "gate": {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1209",
+       "variant": "gas",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Infiniti Q70 2015",
+     "gate": {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1125",
+       "variant": "gas",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Infiniti Q70 2016",
+     "gate": {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1492",
+       "variant": "gas",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Infiniti Q70 2017",
+     "gate": {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1363",
+       "variant": "gas",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Infiniti Q70 2018",
+     "gate": {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1497",
+       "variant": "gas",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Infiniti Q70 2019",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1370",
+       "variant": "gas",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti Q70L 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1318",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti Q70L 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1358",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti Q70L 2018",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1507",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti Q70L 2019",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1515",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:3815a77992",
+   "cat": "window-regulator",
+   "pn": [
+    "82701-0E710"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #82701-0E710 for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Altima",
+     1996,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1997
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "82701-0E710 'FED. S. XE + CAL. S. XE' undated on every claimed page.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L674",
+    "www.nissanpartsdeal.com:lists:L630",
+    "www.nissanpartsdeal.com:lists:L837"
+   ],
+   "d_option_tie": "XE trim option",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 48,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L674",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L551",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1996",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L630",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 1997",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L515",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L825",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L813",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1995",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L819",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1996",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L831",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1997",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L837",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. XE + CAL. S. XE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "group",
+   "id": "oem:nissan:window-regulator:RL:0d07775a4b",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-D9000"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82731-D9000 for both \u2014 fits some configurations; Altima: built 08/1993-02/1996 only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1995,
+     1995
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1993-08..1996-02"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Altima 1994 page 82731-D9000 08/1993-02/1996 (1E400 06/1992-08/1993) -> gated exactly; Stanza 1995 page undated, no sibling.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L551",
+    "www.nissanpartsdeal.com:lists:L819"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 12,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {
+      "built": "1993-08..1996-02"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L551",
+       "variant": "",
+       "production_date": "08/1993-02/1996",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1995",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L819",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FL:850d96d981",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1CA0B"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80721-1CA0B for both \u2014 fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2010,
+     2010
+    ],
+    [
+     "Infiniti",
+     "FX35",
+     2012,
+     2012
+    ],
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2010,
+     2012
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2015,
+     2015
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX70",
+     2015,
+     2015,
+     {
+      "built": "2012-06..2015-03"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "FX35 2010 page 04/2009-06/2012 (1CA0A to 04/2009) covers MY2010; FX50 2011 undated.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L683",
+    "www.infinitipartsdeal.com:lists:L1159"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 19,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti FX35 2010",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L683",
+       "variant": "",
+       "production_date": "04/2009-06/2012",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti FX50 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1159",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX35",
+    2010
+   ],
+   "donor": [
+    "Infiniti",
+    "FX50",
+    2011
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:RR:82b1c2f0d3",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-D9000"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82730-D9000 for both \u2014 fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994
+    ],
+    [
+     "Nissan",
+     "Altima",
+     1996,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1995,
+     1997
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1993-08.."
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Stanza 1996 and 1995 rear-door pages list 82730-D9000 undated, no sibling. 0 lot cars for these two vehicle-years.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L831",
+    "www.nissanpartsdeal.com:lists:L819"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Stanza 1995",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L819",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1996",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L831",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1996
+   ],
+   "donor": [
+    "Nissan",
+    "Stanza",
+    1995
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FR:d6b89efe10",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-2Y000"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80720-2Y000 for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "I30",
+     2001,
+     2001
+    ],
+    [
+     "Infiniti",
+     "I35",
+     2002,
+     2004
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "I35 2004 and I30 2001 pages list 80720-2Y000 undated, no sibling.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L815",
+    "www.infinitipartsdeal.com:lists:L569"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 40,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti I30 2001",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L569",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti I35 2004",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L815",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "I35",
+    2004
+   ],
+   "donor": [
+    "Infiniti",
+    "I30",
+    2001
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FL:2ac42fbd22",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1BA0B"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80721-1BA0B for both \u2014 fits some configurations; EX35: built 08/2009-07/2012 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2010,
+     2010
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2017
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "EX35",
+     2010,
+     2010,
+     {
+      "built": "2009-08..2012-07"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "QX50 2017 and 2015 pages list 80721-1BA0B undated, no sibling (no WAG/LWB split on the regulator pages).",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1112",
+    "www.infinitipartsdeal.com:lists:L1305"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 13,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti QX50 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1305",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX50 2017",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1112",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX50",
+    2017
+   ],
+   "donor": [
+    "Infiniti",
+    "QX50",
+    2015
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FR:11668ccb7b",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1CA0B"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80720-1CA0B for both \u2014 fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2010,
+     2010
+    ],
+    [
+     "Infiniti",
+     "FX35",
+     2012,
+     2012
+    ],
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2010,
+     2012
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2015,
+     2015
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX70",
+     2015,
+     2015,
+     {
+      "built": "2012-06..2015-03"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "FX50 2012 undated; FX35 2010 04/2009-06/2012 covers MY2010.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1456",
+    "www.infinitipartsdeal.com:lists:L683"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 16,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti FX35 2010",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L683",
+       "variant": "",
+       "production_date": "04/2009-06/2012",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti FX50 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1456",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX50",
+    2012
+   ],
+   "donor": [
+    "Infiniti",
+    "FX35",
+    2010
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:RR:d2ea825926",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-1U600"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82720-1U600 for both \u2014 fits some configurations; Juke: built 09/2011-03/2015, 09/2015-02/2016 only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Juke",
+     2015,
+     2015
+    ],
+    [
+     "Nissan",
+     "Leaf",
+     2011,
+     2012
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Juke",
+     2015,
+     2015,
+     {
+      "built": "2011-09..2015-03,2015-09..2016-02"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Juke 2015 page: 82720-1U600 '09/2011-03/2015,09/2015-02/2016' (1KA0B 03/2015-09/2015) -> gate matches; Leaf 2012 undated.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L710",
+    "www.nissanpartsdeal.com:lists:L694"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 23,
+    "if_equipped": 19,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Juke 2015",
+     "gate": {
+      "built": "2011-09..2015-03,2015-09..2016-02"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L710",
+       "variant": "",
+       "production_date": "09/2011-03/2015,09/2015-02/2016",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide",
+      "PARTIAL_narrow"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Leaf 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L694",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Juke",
+    2015
+   ],
+   "donor": [
+    "Nissan",
+    "Leaf",
+    2012
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:RL:cac8305a53",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-3KG0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82731-3KG0A for both \u2014 fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "JX35",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX60",
+     2015,
+     2019
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX60",
+     2015,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "verdict": "RISK",
+   "risk_kind": "unknown-fuel donor under a gas gate (hybrid page unread)",
+   "why": "QX60 2018 (gas the only variant offered) and QX60 2017 gas page list 82731-3KG0A undated. QX60 2017 hybrid page unread -> gas / eng_not 2.5L gate; 1 2.5L donor excluded elsewhere in the group; 2 QX60 2017 donors with no engine decode are plain rows.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1145",
+    "www.infinitipartsdeal.com:lists:L744"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 32,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti QX60 2017",
+     "gate": {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L744",
+       "variant": "gas",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Infiniti QX60 2018",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1145",
+       "variant": "gas",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX60",
+    2018
+   ],
+   "donor": [
+    "Infiniti",
+    "QX60",
+    2017
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:side-mirrors:R:a938274757",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-1BA1D"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #96301-1BA1D for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2016
+    ]
+   ],
+   "gates": null,
+   "verdict": "RISK",
+   "risk_kind": "feed/VIN identity",
+   "why": "EX37 2013 and QX50 2014 pages list 96301-1BA1D ('*WAG, WAG') undated; pages support the pair. The one EX37 2013 donor decodes as EX35 2013 (no such catalog page), not flagged, plain row. (QX50 2016, outside this pair, has the same WAG/LWB question as the LH mirror.)",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1274",
+    "www.infinitipartsdeal.com:lists:L1079"
+   ],
+   "d_option_tie": "WAG body word; LEATHER",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "'*' prefix on option text (unexplained by the pages)",
+    "WAG (unexplained)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 5,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti EX37 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1274",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=*WAG, WAG"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX50 2014",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1079",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=*WAG, WAG"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "EX37",
+    2013
+   ],
+   "donor": [
+    "Infiniti",
+    "QX50",
+    2014
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FL:8a8c3dabe5",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-JK00A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80721-JK00A for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "G25 2012 and Q40 2015 pages list 80721-JK00A undated, no sibling.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L731",
+    "www.infinitipartsdeal.com:lists:L830"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 24,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti G25 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L731",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti Q40 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L830",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "G25",
+    2012
+   ],
+   "donor": [
+    "Infiniti",
+    "Q40",
+    2015
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FR:e61a6d2f3f",
+   "cat": "window-regulator",
+   "pn": [
+    "80731-1LE0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80731-1LE0A for both \u2014 fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014,
+     {
+      "built": "2010-04..2014-07"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "QX56 2012 and 2011 pages list 80731-1LE0A undated, no sibling.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L987",
+    "www.infinitipartsdeal.com:lists:L620"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 68,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti QX56 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L620",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX56 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L987",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX56",
+    2012
+   ],
+   "donor": [
+    "Infiniti",
+    "QX56",
+    2011
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:RR:a01bb7be2c",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-3KG0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82730-3KG0A for both \u2014 fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "JX35",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX60",
+     2015,
+     2019
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX60",
+     2015,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "QX60 2019 (one variant offered, no hybrid) and JX35 2013 pages list 82730-3KG0A undated.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1263",
+    "www.infinitipartsdeal.com:lists:L339"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 120,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti JX35 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L339",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX60 2019",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1263",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX60",
+    2019
+   ],
+   "donor": [
+    "Infiniti",
+    "JX35",
+    2013
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FR:ed65463647",
+   "cat": "window-regulator",
+   "pn": [
+    "80730-EA005"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #80730-EA005 for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2005,
+     2019
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2005,
+     2009
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2011,
+     2015
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Xterra 2015 and Frontier 2013 pages list 80730-EA005 undated with no option text (no cab or engine clause on the deciding rows).",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L804",
+    "www.nissanpartsdeal.com:lists:L686"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 13,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Frontier 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L686",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Xterra 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L804",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2015
+   ],
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2013
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:side-mirrors:L:9c57240c24",
+   "cat": "side-mirrors",
+   "pn": [
+    "J6302-1E400"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #J6302-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Altima",
+     1996,
+     1996
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1996
+    ]
+   ],
+   "gates": null,
+   "verdict": "RISK",
+   "risk_kind": "undated number beside an undated same-option successor; parallel number changes over inside the model year",
+   "why": "Stanza 1994 page lists J6302-1E400 (LESS PAINT, GLE) alone: fine. Altima 1996 page lists J6302-1E400 and its replacement J6302-2B500 (LESS PAINT / PRIMER, GLE) both undated, while black 96302-1E400 ends 02/1995 and 96302-2B500 starts 02/1995. App: 6 Altima 1996 donors plain rows.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L810",
+    "www.nissanpartsdeal.com:lists:L627"
+   ],
+   "d_option_tie": "LESS PAINT (GLE)",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 6,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1996",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L627",
+       "variant": "",
+       "production_date": null,
+       "options": "=LESS PAINT ; Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L810",
+       "variant": "",
+       "production_date": null,
+       "options": "=LESS PAINT ; Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1994
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1996
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FR:7dce330660",
+   "cat": "window-regulator",
+   "pn": [
+    "80730-AL501"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80730-AL501 for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2003,
+     2008
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2003,
+     2008
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "FX35 2006 and FX45 2005 pages list 80730-AL501 undated, no option text (the product page's 'S' option comes from a G35 coupe page, not claimed).",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L476",
+    "www.infinitipartsdeal.com:lists:L944"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 31,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti FX35 2006",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L476",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti FX45 2005",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L944",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX35",
+    2006
+   ],
+   "donor": [
+    "Infiniti",
+    "FX45",
+    2005
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FL:8f4bbee9d9",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1CA0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80721-1CA0A for both \u2014 fits some configurations; built 03/2008-04/2009 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2009,
+     2009
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2009,
+     2009
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "FX35",
+     2009,
+     2009,
+     {
+      "built": "2008-03..2009-04"
+     }
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2009,
+     2009,
+     {
+      "built": "2008-03..2009-04"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "80721-1CA0A 03/2008-04/2009 on both 2009 pages (1CA0B from 04/2009); both gated with that window.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L666",
+    "www.infinitipartsdeal.com:lists:L1067"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 21,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti FX35 2009",
+     "gate": {
+      "built": "2008-03..2009-04"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L666",
+       "variant": "",
+       "production_date": "03/2008-04/2009",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide",
+      "PARTIAL_narrow"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti FX50 2009",
+     "gate": {
+      "built": "2008-03..2009-04"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1067",
+       "variant": "",
+       "production_date": "03/2008-04/2009",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide",
+      "PARTIAL_narrow"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX35",
+    2009
+   ],
+   "donor": [
+    "Infiniti",
+    "FX50",
+    2009
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:RL:95dcd6e903",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-CV01B"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #82730-CV01B for both \u2014 option: fits some option packages; Juke: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Cube",
+     2011,
+     2014
+    ],
+    [
+     "Nissan",
+     "Juke",
+     2016,
+     2016
+    ],
+    [
+     "Nissan",
+     "Leaf",
+     2011,
+     2012
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Juke",
+     2016,
+     2016,
+     {
+      "built": "2014-10..2015-03,2015-08..2016-02"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Cube 2011 page 82730-CV01B 03/2010-03/2015 (CV01A before) covers MY2011; Cube 2012 undated. Both rows read 'Motor Assy-Regulator, LH / Driver side' on the rear-door page.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L742",
+    "www.nissanpartsdeal.com:lists:L656"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 48,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Cube 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L656",
+       "variant": "",
+       "production_date": "03/2010-03/2015",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Cube 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L742",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Cube",
+    2012
+   ],
+   "donor": [
+    "Nissan",
+    "Cube",
+    2011
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FL:df8b845bbf",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-EH100"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80721-EH100 for both \u2014 fits some configurations; built 12/2004-06/2008 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2008
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2008,
+     2008
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "80721-EH100 12/2004-06/2008 on both 2008 pages (EH10A from 06/2008); both gated.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L984",
+    "www.infinitipartsdeal.com:lists:L555"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 34,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti M35 2008",
+     "gate": {
+      "built": "2004-12..2008-06"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L555",
+       "variant": "",
+       "production_date": "12/2004-06/2008",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M45 2008",
+     "gate": {
+      "built": "2004-12..2008-06"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L984",
+       "variant": "",
+       "production_date": "12/2004-06/2008",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "M45",
+    2008
+   ],
+   "donor": [
+    "Infiniti",
+    "M35",
+    2008
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:RR:0399e251c5",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-1MA0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82730-1MA0A for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2017
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "QX56 2013 and M35h 2013 rear-door pages both list 82730-1MA0A (Motor Assy-Regulator, RH, passenger side) undated.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L802",
+    "www.infinitipartsdeal.com:lists:L1481"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 7,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti M35h 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1481",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX56 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L802",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX56",
+    2013
+   ],
+   "donor": [
+    "Infiniti",
+    "M35h",
+    2013
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:side-mirrors:R:e84b7019b7",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-ZH10A"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #96301-ZH10A for both \u2014 option: fits some option packages; Titan: built 08/2005-04/2007 only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Armada",
+     2014,
+     2015
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2006,
+     2006
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Titan",
+     2006,
+     2006,
+     {
+      "built": "2005-08..2007-04"
+     }
+    ]
+   ],
+   "verdict": "RISK",
+   "risk_kind": "feed/VIN identity",
+   "why": "Armada 2015 page: 96301-ZH10A 'W. SE/SV' undated; Titan 2006 page: 08/2005-04/2007 '*KC. SE + *CC. SE, KC. SE + CC. SE' -> gate built matches. The Titan page also lists 96301-ZC20A with the identical window and option text (the note's 'some option packages' covers it). One Titan 2006 donor's VIN decodes as a Yamaha motorcycle (flagged): shown 'if equipped' with the build line and 'listing and VIN disagree'.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L764",
+    "www.nissanpartsdeal.com:lists:L185"
+   ],
+   "d_option_tie": "SE/SV trim; KC/CC cab words name both Titan cabs",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "'*' prefix on option text (unexplained by the pages)",
+    "KC / CC (unexplained; both listed)"
+   ],
+   "h_vin_vs_listing": [
+    {
+     "id": "foss-jacksonville-stk014038",
+     "listed": "Nissan Titan 2006",
+     "flag": "VIN decodes as Yamaha (listed Nissan)",
+     "shown": "unconfirmed",
+     "warn": "if equipped: this part is listed for cars built 08/2005-04/2007 only \u2014 check the build date on the door sticker; this car's listing and VIN disagree, check the car"
+    }
+   ],
+   "lot_b22c3640": {
+    "plain": 10,
+    "if_equipped": 152,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Armada 2015",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L764",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=W. SE/SV"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Titan 2006",
+     "gate": {
+      "built": "2005-08..2007-04"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L185",
+       "variant": "",
+       "production_date": "08/2005-04/2007",
+       "options": "Fitting Vehicle Options=*KC. SE + *CC. SE, KC. SE + CC. SE"
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Armada",
+    2015
+   ],
+   "donor": [
+    "Nissan",
+    "Titan",
+    2006
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FR:b9dba4519b",
+   "cat": "window-regulator",
+   "pn": [
+    "80730-1E400"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80730-1E400 for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Altima",
+     1996,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1997
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Stanza 1994 and 1993 pages list 80730-1E400 undated, no sibling. 0 lot cars.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L812",
+    "www.nissanpartsdeal.com:lists:L824"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L824",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1994",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L812",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1994
+   ],
+   "donor": [
+    "Nissan",
+    "Stanza",
+    1993
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FL:abe0045c82",
+   "cat": "window-regulator",
+   "pn": [
+    "80730-1LE0A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80730-1LE0A for both \u2014 fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014,
+     {
+      "built": "2010-04..2014-07"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "QX56 2011 and 2013 pages list 80730-1LE0A undated, no sibling.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L620",
+    "www.infinitipartsdeal.com:lists:L801"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 40,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti QX56 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L620",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti QX56 2013",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L801",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX56",
+    2011
+   ],
+   "donor": [
+    "Infiniti",
+    "QX56",
+    2013
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:climate-control:C:e149091576",
+   "cat": "climate-control",
+   "pn": [
+    "28525-1E501"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #28525-1E501 for both \u2014 option: fits some option packages; Altima 1994: built 06/1992-07/1994 only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1993
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1992-06..1994-07"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Stanza 1993 page lists 28525-1E501 (GLE) undated; Altima 1994 page 06/1992-07/1994 (1E504 from 07/1994) -> gated exactly.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L820",
+    "www.nissanpartsdeal.com:lists:L546"
+   ],
+   "d_option_tie": "GLE trim option",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 12,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {
+      "built": "1992-06..1994-07"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L546",
+       "variant": "",
+       "production_date": "06/1992-07/1994",
+       "options": "Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1993",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 1,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L820",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. GLE + CAL. S. GLE"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1993
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1994
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:RL:5863edc17c",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-3TA2A"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82731-3TA2A for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     2014,
+     2018
+    ],
+    [
+     "Nissan",
+     "Maxima",
+     2016,
+     2019
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     2014,
+     2017
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Altima 2017 and 2016 sedan pages list 82731-3TA2A undated (sedan the only variant offered).",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L555",
+    "www.nissanpartsdeal.com:lists:L528"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 560,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L528",
+       "variant": "sedan",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Altima 2017",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L555",
+       "variant": "sedan",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Altima",
+    2017
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    2016
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:RR:ef4975d606",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-0E715"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #82720-0E715 for both \u2014 option: fits some option packages; Altima: built 08/1993-07/1996 only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1995,
+     1995
+    ]
+   ],
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1994,
+     {
+      "built": "1993-08..1996-07"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Altima 1994 page 82720-0E715 08/1993-07/1996 -> gated exactly; Stanza 1995 page undated.",
+   "deciding_refs": [
+    "www.nissanpartsdeal.com:lists:L551",
+    "www.nissanpartsdeal.com:lists:L819"
+   ],
+   "d_option_tie": "GXE/GLE/SE trim option",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "FED. / CAL. / S. in the option column (unexplained; read as 49-state / California / sedan)"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 12,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Nissan Altima 1994",
+     "gate": {
+      "built": "1993-08..1996-07"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L551",
+       "variant": "",
+       "production_date": "08/1993-07/1996",
+       "options": "Fitting Vehicle Options=FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Nissan Stanza 1995",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.nissanpartsdeal.com:lists:L819",
+       "variant": "",
+       "production_date": null,
+       "options": "Fitting Vehicle Options=FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Nissan",
+    "Altima",
+    1994
+   ],
+   "donor": [
+    "Nissan",
+    "Stanza",
+    1995
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FL:e51f9518bf",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1MA0A"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #80721-1MA0A for both \u2014 option: fits some option packages; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "M56 2012 and M37 2011 pages list 80721-1MA0A undated, no sibling.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1430",
+    "www.infinitipartsdeal.com:lists:L1251"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 25,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti M37 2011",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1251",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M56 2012",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1430",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "M56",
+    2012
+   ],
+   "donor": [
+    "Infiniti",
+    "M37",
+    2011
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FR:9b9ad14dfa",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1MA0B"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #80720-1MA0B for both \u2014 option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "Q70",
+     2016,
+     2017
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2016,
+     2016
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "Q70",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Q70 2016 gas page and Q70L 2016 page: 80720-1MA0B 02/2015-02/2018 (1MA0A 07/2014-02/2015) covers MY2016; Q70 gas gate stated in the note; the one lot donor (Q70L 2016) has a 3.7L decode.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1492",
+    "www.infinitipartsdeal.com:lists:L1358"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 1,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti Q70 2016",
+     "gate": {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1492",
+       "variant": "gas",
+       "production_date": "02/2015-02/2018",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Infiniti Q70L 2016",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1358",
+       "variant": "",
+       "production_date": "02/2015-02/2018",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "Q70",
+    2016
+   ],
+   "donor": [
+    "Infiniti",
+    "Q70L",
+    2016
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:RL:0044687416",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-EH100"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #82731-EH100 for both \u2014 fits some configurations; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M35",
+     2007,
+     2010
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2006,
+     2010
+    ]
+   ],
+   "gates": null,
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "M45 2007 and 2006 rear-door pages list 82731-EH100 undated.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L772",
+    "www.infinitipartsdeal.com:lists:L697"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 29,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti M45 2006",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L697",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M45 2007",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L772",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "M45",
+    2007
+   ],
+   "donor": [
+    "Infiniti",
+    "M45",
+    2006
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FR:36a5b7ab0d",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-EH100"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80720-EH100 for both \u2014 fits some configurations; built 12/2004-06/2008 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2008
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2008,
+     2008
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "80720-EH100 12/2004-06/2008 on both 2008 pages; gated.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L984",
+    "www.infinitipartsdeal.com:lists:L555"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 0,
+    "if_equipped": 34,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti M35 2008",
+     "gate": {
+      "built": "2004-12..2008-06"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L555",
+       "variant": "",
+       "production_date": "12/2004-06/2008",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti M45 2008",
+     "gate": {
+      "built": "2004-12..2008-06"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L984",
+       "variant": "",
+       "production_date": "12/2004-06/2008",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [
+      "PARTIAL_base",
+      "PARTIAL_wide"
+     ],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "M45",
+    2008
+   ],
+   "donor": [
+    "Infiniti",
+    "M35",
+    2008
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FL:c6147b76d6",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1MA0B"
+   ],
+   "reason": "option",
+   "note": "Nissan catalog lists #80721-1MA0B for both \u2014 option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "Q70",
+     2016,
+     2017
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2016,
+     2016
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "Q70",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "Q70 2016 gas page 80721-1MA0B 02/2015-02/2018; Q70 2017 gas page undated; both gas-gated; the one lot donor (Q70 2017) decodes 3.7L.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1492",
+    "www.infinitipartsdeal.com:lists:L1363"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 1,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti Q70 2016",
+     "gate": {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1492",
+       "variant": "gas",
+       "production_date": "02/2015-02/2018",
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    },
+    {
+     "vy": "Infiniti Q70 2017",
+     "gate": {
+      "eng_not": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     },
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1363",
+       "variant": "gas",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": [
+      "hybrid"
+     ]
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "Q70",
+    2016
+   ],
+   "donor": [
+    "Infiniti",
+    "Q70",
+    2017
+   ]
+  },
+  {
+   "kind": "pair",
+   "id": "oem:nissan:window-regulator:FR:9c547d77ec",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-CL70B"
+   ],
+   "reason": "conditional",
+   "note": "Nissan catalog lists #80720-CL70B for both \u2014 fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2007,
+     2008
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2008,
+     2008
+    ]
+   ],
+   "gates": [
+    [
+     "Infiniti",
+     "FX35",
+     2007,
+     2007,
+     {
+      "built": "2006-06.."
+     }
+    ]
+   ],
+   "verdict": "RIGHT",
+   "risk_kind": null,
+   "why": "FX45 2008 and FX35 2008 pages list 80720-CL70B undated.",
+   "deciding_refs": [
+    "www.infinitipartsdeal.com:lists:L1239",
+    "www.infinitipartsdeal.com:lists:L542"
+   ],
+   "d_option_tie": "no option text on the deciding rows",
+   "f_position": "door/side consistent on every claimed page (checked mechanically: page file front/rear and Location vs group position)",
+   "g_marks": [
+    "none on the deciding rows"
+   ],
+   "h_vin_vs_listing": [],
+   "lot_b22c3640": {
+    "plain": 37,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "per_vehicle_year": [
+    {
+     "vy": "Infiniti FX35 2008",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L542",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    },
+    {
+     "vy": "Infiniti FX45 2008",
+     "gate": {},
+     "a_own_page_lists_number": true,
+     "pages_in_category": 2,
+     "b_dates_on_pages": [
+      {
+       "ref": "www.infinitipartsdeal.com:lists:L1239",
+       "variant": "",
+       "production_date": null,
+       "options": ""
+      }
+     ],
+     "b_span_flags": [],
+     "c_siblings": [],
+     "e_unread_variants": []
+    }
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX45",
+    2008
+   ],
+   "donor": [
+    "Infiniti",
+    "FX35",
+    2008
+   ]
+  }
+ ]
+}
