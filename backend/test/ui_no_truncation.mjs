@@ -785,9 +785,20 @@ const SCREENS = [
       renderLive();
       // A card with its own real photo, then the next three cards: their own
       // colour, a fixture body style, and one marked as a heavy source.
-      const all = [...document.querySelectorAll('#live-grid .car-card[data-eid]')];
       const photoOf = (c) => c.querySelector('.card-photo') || c.firstElementChild;   // tiles (Cars feed): inside .tile-media
       const hasImg = (c) => photoOf(c) && photoOf(c).querySelector('img');
+      let all = [...document.querySelectorAll('#live-grid .car-card[data-eid]')];
+      // The list is newest first, so a day's arrivals at a yard whose photos
+      // come later can fill the whole first page (2026-11-19: 48 new
+      // iPull-uPull Sacramento cars, no photos yet, were the first 40 cards
+      // near San Jose). Then narrow the list to one yard of the scan whose
+      // cars carry their own photos (the cleanup below resets the filter).
+      if (!all.some(hasImg)) {
+        const sel = document.getElementById('live-filter-location');
+        const opts = [...sel.options].map(o => o.value).filter(Boolean);
+        const pick = opts.find(v => /^Pick-n-Pull/.test(v)) || opts[0];
+        if (pick) { sel.value = pick; renderLive(); all = [...document.querySelectorAll('#live-grid .car-card[data-eid]')]; }
+      }
       const painted = (c) => { const col = String((vehicleExtras[c.dataset.eid] || [])[1] || ''); return !!col && !/unknown|other/i.test(col); };
       // Prefer a stretch whose next cars list a paint colour (shows the tint).
       const run = (k, n) => all.slice(k + 1, k + 1 + n).length === n && all.slice(k + 1, k + 1 + n).every(x => !hasImg(x) && painted(x));
