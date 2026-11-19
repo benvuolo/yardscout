@@ -5422,3 +5422,10 @@ Candidate @29e5fe96 (sha256 7bce6c02...), raw oem-raw@57e8b5b9 (six jsonl sha256
 - Suggestions (owner/hub decide): a stated/inferred basis for cab gates like drive_basis; eng_not 2.5L or read the QX60 hybrid pages; a window-vs-build-span census; settle what '*' means.
 
 Method notes, every reference and the census are in the JSON. Nothing else changed; scratch deleted.
+
+### Compared with earlier reports (read after the verdicts above were pushed, a0e51d2a)
+
+- Titan rear-door cab: an earlier check flagged Titan rear-door motors with no cab code and proposed "crew cab only, by page structure (the rear-door glass is split KC/CC)"; a later recheck read 82730-9FJ0A RIGHT once gated. I agree the gate is a fair inference and offers no wrong donor. My WRONG is the wording: the line says the part "is listed for crew cab only", which the pages do not say (no cab clause on the row; no "crew cab" text anywhere in oem-raw@57e8b5b9). The earlier note that "the search text names Crew Cab for 9FJ0A" is not in the pinned raw pages. Fix is wording/basis, not fitment.
+- '*' clauses: round 5b held starred clauses that decide drive or engine scope and kept the rest by design. My star-only RISKs are all option/trim-scope claims that round 5b deliberately kept; they are RISK by the brief's "unexplained mark" rule, not new errors.
+- QX60 hybrid: the gauge-cluster QX60 2014 case (8 hybrids) was found before and is now gated eng 3.5L + gas. The same 2.5L hybrids still pass the gas-only gate on the window-regulator and mirror QX60 groups (54 car x group rows, 8 groups): the fix did not reach those categories.
+- New in this check, as far as I can see from the file: ungated production windows that end inside the model year (M35/M45 2008, Altima 1996 and 5 others in the census).
