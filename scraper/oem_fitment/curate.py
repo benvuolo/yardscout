@@ -1415,6 +1415,7 @@ class Curation:
         # round6-1119: (reason, cat) -> vehicle-years held; their list
         self.likely_round6_held = Counter()
         self.round6_held = []
+        self.round7_held = []       # round7-1119 decision 4: cross-position groups
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
         self.release_notes = policy.release_notes()
         self.released_exterior = []
@@ -1472,6 +1473,7 @@ class Curation:
             # the 2006 300 page for mirror 1BY421R3AA) contradicts a twin's
             # page that lists it bare (2007 Charger); fail closed for Likely
             Ts, whys, slots = [], set(), set()
+            slot_T = {}             # round7-1119 decision 4: the number's position per vehicle-year
             for T, m in cand:
                 if self.note_excludes(class_notes, T, market=False):
                     self.likely_note_restricted[cat] += 1
@@ -1479,6 +1481,8 @@ class Curation:
                 Ts.append(T)
                 whys |= set(m["why"])
                 slots |= set(m["slot"].slots)
+                if m["slot"].reason is None:            # a known position (not missing / conflicting)
+                    slot_T[T] = frozenset(m["slot"].slots)
             Ts = self._drop_catchall_twins(Ts)
             if len({(T[0], T[1]) for T in Ts}) < 2:
                 continue        # single-model: the same-model generation loop covers it
@@ -1549,12 +1553,16 @@ class Curation:
             # one (no narrowing, no_other_row ungated): the note cap below runs
             # on both and the group keeps only what both keep (only narrows)
             win_old, keep_old = {}, []
+            win_6, keep_6 = {}, []          # round7-1119: the round-6 reading too
             for T in Ts:
                 w = self.build_window(c, cat, T)
+                self._r7 = False
+                w6 = self.build_window(c, cat, T)
                 self._r6_narrow = False
                 w_old = self.build_window(c, cat, T)
-                self._r6_narrow = True
-                if (w and w["kind"] == "drop") and (w_old and w_old["kind"] == "drop"):
+                self._r6_narrow, self._r7 = True, True
+                if (w and w["kind"] == "drop") and (w_old and w_old["kind"] == "drop") and \
+                        (w6 and w6["kind"] == "drop"):
                     self.likely_window_dropped[cat] += 1
                     continue
                 sl = self.drive_sibling_limit(c, cat, T) if policy.LIKELY_DRIVE_RULE else None
@@ -1593,18 +1601,23 @@ class Curation:
                 # carries the rest of (launch, end of production, a gap): every
                 # window that starts or ends inside the model-year span is gated,
                 # or its vehicle-year leaves at the note cap below
-                keep_old.append(T)
-                if w_old and w_old["kind"] in ("unlinked", "no_page", "linked"):
-                    win_old[T] = w_old
+                if not (w_old and w_old["kind"] == "drop"):
+                    keep_old.append(T)
+                    if w_old and w_old["kind"] in ("unlinked", "no_page", "linked"):
+                        win_old[T] = w_old
+                if not (w6 and w6["kind"] == "drop"):
+                    keep_6.append(T)
+                    if w6 and w6["kind"] in ROUND6_WINDOW_KINDS:
+                        win_6[T] = w6
                 if w and w["kind"] == "drop":
                     self.likely_window_dropped[cat] += 1
                     continue
-                if w and w["kind"] in ROUND6_WINDOW_KINDS:
+                if w and w["kind"] in ROUND7_WINDOW_KINDS:
                     win_by_T[T] = w
                 keep.append(T)
             if len(keep) != len(Ts):
                 Ts = keep
-                drive_by_T = {T: d for T, d in drive_by_T.items() if T in set(keep_old)}
+                drive_by_T = {T: d for T, d in drive_by_T.items() if T in set(keep_old) | set(keep_6)}
                 if len({(T[0], T[1]) for T in Ts}) < 2:
                     continue
             if cat in policy.STRICT_NOTE_CATS:
@@ -1645,13 +1658,17 @@ class Curation:
             # vehicle-years the round-5b reading keeps: a stricter window note
             # cap that drops another year brings nothing round 5b dropped back
             lim_old, Ts_old = cap_loop(list(keep_old), win_old, False)
+            lim_6, Ts_6 = cap_loop(list(keep_6), win_6, False) if lim_old["status"] == "ok" else (lim_old, [])
             if lim_old["status"] != "ok":
                 lim, Ts = cap_loop(list(keep_old), win_old, True)
+            elif lim_6["status"] != "ok":
+                lim, Ts = cap_loop(list(keep_6), win_6, True)     # refused as round 6 refused it
             else:
                 lim, Ts = cap_loop(Ts, win_by_T, True)
-                if lim["status"] == "ok" and [T for T in Ts if T not in set(Ts_old)]:
-                    self.likely_round6_held[("round5b_cap_kept_out", cat)] += sum(T not in set(Ts_old) for T in Ts)
-                    Ts = [T for T in Ts if T in set(Ts_old)]
+                both = set(Ts_old) & set(Ts_6)
+                if lim["status"] == "ok" and [T for T in Ts if T not in both]:
+                    self.likely_round6_held[("earlier_cap_kept_out", cat)] += sum(T not in both for T in Ts)
+                    Ts = [T for T in Ts if T in both]
                     if len({(T[0], T[1]) for T in Ts}) < 2:
                         self.refuse("held_window_note_cap", cat=cat, pn=sorted(c.pns)[0],
                                     evidence=[r.pointer for r in c.records], detail="as round 5b")
@@ -1718,6 +1735,23 @@ class Curation:
             #   held_starred_only  listed for T only through starred clauses (6/2)
             #   held_starred_scope a starred clause decides drive or engine (5b)
             #   held_option_tie    a transmission tie the gates do not enforce (6/5)
+            # round7-1119 (hub decision 4): a number that sits in another door
+            # or position on another model of the group (80730-89915: rear
+            # right on the Murano pages, front right on the Versa pages) is
+            # held whole until the note can name the donor's door
+            pos = defaultdict(set)
+            for T in Ts:
+                pos[(T[0], T[1])] |= set(slot_T.get(T, ()))
+            if len({frozenset(v) for v in pos.values() if v}) > 1:
+                self.likely_round6_held[("held_cross_position", cat)] += len(Ts)
+                self.round7_held.append({
+                    "cat": cat, "pn": pns, "unit": "group", "reason": "held_cross_position",
+                    "reason_text": "the number sits in another door or position on another model; the note names "
+                                   "no door", "apps": apps,
+                    "positions": {f"{mk} {md}": sorted(v) for (mk, md), v in sorted(pos.items())}})
+                self.refuse("held_cross_position", cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                            detail="; ".join(f"{md}: {'+'.join(sorted(v))}" for (_mk, md), v in sorted(pos.items())))
+                continue
             held, why6 = {}, {}
             for T in Ts:
                 g = gate_by_T.get(T, {})
@@ -3192,7 +3226,7 @@ class Curation:
         left = [n2 for n, st in own for n2 in [_unstar_notes(n, st)] if n2 is not None]
         return bool(own) and not any(not self.note_excludes(n2, T) for n2 in left)
 
-    def _star_view(self, c, cat, T, siblings=True):
+    def _star_view(self, c, cat, T, siblings=True, blind=False):
         """This curation with T's page rows in cat (the only rows T's drive and
         engine limits read) re-read for STARRED_SCOPE_NS: starred
         configurations are left out (_unstar_notes; a row with nothing
@@ -3212,10 +3246,16 @@ class Curation:
         v._t_drive_systems, v._t_engines, v._t_trans_seen = self._t_drive_systems, self._t_engines, \
             self._t_trans_seen
         unstate = self._own_starred_only(c, cat, T)
+        if blind:
+            # round7-1119 (hub decision 5): every configuration read without
+            # its mark (as round 4 read them), own and siblings'
+            unstate = None
 
         def re_read(o, attr, own):
             notes = getattr(o, attr)
-            if own:
+            if blind:
+                n2 = _blind_notes(notes, o.site)
+            elif own:
                 n2 = _unstate_notes(notes, o.site) if unstate else _unstar_notes(notes, o.site)
             elif siblings:
                 n2 = _unstar_notes(notes, o.site)
@@ -3298,6 +3338,13 @@ class Curation:
         full = self._scopes(c, cat, T, slots, gas_only)
         alt = self._star_view(c, cat, T)._scopes(c, cat, T, slots, gas_only, base=self)
         dims = [k for k in full if full[k] != alt[k]]
+        if not dims and getattr(self, "_r7", True):
+            # round7-1119 (hub decision 5): the mark decides when reading the
+            # starred configurations as plain ones changes the limit (96301-
+            # 3JA9A 'W. BASE' beside 3JN9B '*W. AWD. BASE': read without the
+            # mark, the AWD base car takes 3JN9B and 3JA9A is 2WD only)
+            bl = self._star_view(c, cat, T, blind=True)._scopes(c, cat, T, slots, gas_only)
+            return {k: (full[k], bl[k], "star_blind") for k in full if full[k] != bl[k]}
         if not dims:
             return {}
         own = self._star_view(c, cat, T, siblings=False)._scopes(c, cat, T, slots, gas_only, base=self)
@@ -3410,7 +3457,7 @@ class Curation:
                for o in rows if key_of(o) == c.key and getattr(o, "matched", True)
                and not self.note_excludes(notes_of(o), T)]
         keys = set()
-        for view in (self, self._star_view(c, cat, T)):
+        for view in (self, self._star_view(c, cat, T), self._star_view(c, cat, T, blind=True)):
             if "drive" in dims:
                 keys |= {(h[1].list_url, h[1].pn) for h in view.drive_sibling(c, cat, T)[1]}
             if "engine" in dims:
@@ -3468,7 +3515,37 @@ class Curation:
         sites = {lr.site for _n, lr in items if lr is not None} or {r.site for r in c.records}
         models = {(lr.seed[0], lr.seed[1]) for _n, lr in items if lr is not None and lr.seed} or \
             set(self.t_sources.get(T, set()))
-        if all(per):
+        r7 = getattr(self, "_r7", True)
+        r7_kind = None
+        if r7 and any(per):
+            # round7-1119 (hub decision 1): the cut test runs on each page that
+            # lists the number (body variants: the 2007 Versa sedan page dates
+            # 80730-89915 12/2006-07/2007, the hatchback page 05/2006-01/2007),
+            # never on their union. A page with an undated row covers the year;
+            # when a dated page cuts the span, the gate is the months every
+            # dated page lists (the narrower reading); pages with no month in
+            # common leave the vehicle-year out.
+            pages = defaultdict(list)
+            for (n, lr0), ws in zip(items, per):
+                pages[lr0.list_url if lr0 is not None else None].append(ws)
+            dated = [_win_merge([x for ws in v for x in ws]) for v in pages.values() if all(v)]
+            if not dated:
+                return None         # every page has a dateless row: listed for the whole year
+            if any(_win_gap(w, T[2]) for w in dated):
+                wins = dated[0]
+                for w in dated[1:]:
+                    wins = _win_intersect(wins, w)
+                if len(dated) > 1:
+                    r7_kind = "pages"
+                if not wins:
+                    return {"wins": _win_merge([x for w in dated for x in w]), "src": "page", "gap": [],
+                            "others": [], "edge": False, "kind": "drop", "r7": "pages_disjoint"}
+            elif all(per):
+                wins = _win_merge([w for ws in per for w in ws])
+            else:
+                wins = _win_merge([x for w in dated for x in w])
+                r7_kind = "dated_page_covers"
+        elif all(per):
             wins = _win_merge([w for ws in per for w in ws])
         elif any(per):
             return None             # a dateless own row: listed for the whole year
@@ -3482,15 +3559,42 @@ class Curation:
             # ("Replaced By" runs one way). Pages within _OTHER_PAGE_SPAN
             # model years of T (None: every year of the model).
             other = self._pn_other_windows(c.key, cat, T, sites, models, c.records)
+            if r7:
+                # round7-1119 (hub decision 3): T's page lists the number
+                # undated beside a same-option sibling, and another page (any
+                # model of the site: 80721-EA000 / ZL90A split at 04/2010 on the
+                # 2010-2011 Pathfinder and Xterra pages, the Frontier pages date
+                # neither) dates the split: the narrower reading, gated
+                split, cross = self._split_windows(c, cat, T, self._same_option_sibs(c, cat, T, items), sites)
+                if split:
+                    # the model's own pages' window when they date the number
+                    # (decision 6 reading), else the pages that show the split
+                    other = other or cross
+                    r7_kind = "split"
             if not other:
                 return None
             wins, src = _win_merge(other), "other_page"
         lo, hi = _my_range(T[2])
         out = {"wins": wins, "src": src, "gap": _win_gap(wins, T[2]), "others": [], "edge": False}
+        if r7_kind:
+            out["r7"] = r7_kind
         if src == "other_page" and _win_overlap(wins, lo, hi) < _PROD_MIN_MONTHS:
             out["kind"] = "drop"
             return out
         if not out["gap"]:
+            if r7 and r7_kind == "split":
+                out["kind"] = "split"
+                return out
+            if r7 and src == "page":
+                # round7-1119 (hub decision 2): a changeover month with a
+                # same-option number on the page inside the model-year span,
+                # widened a month either way for the 07-06 convention (FX35
+                # 2006 80721-CL00A to 06/2006, CL70B from 06/2006): gated
+                # on both sides
+                co = self._changeover(items, self._same_option_sibs(c, cat, T, items), T)
+                if co:
+                    out["kind"], out["changeover"] = "changeover", co
+                    return out
             out["kind"] = "full"
             return out
         months = sum(b - a + 1 for a, b in out["gap"])
@@ -3528,6 +3632,87 @@ class Curation:
         else:
             out["kind"] = "unlinked"
         return out
+
+    def _same_option_sibs(self, c, cat, T, items) -> list:
+        """Rows of other numbers on T's page in cat for the same part and
+        position whose option clause is one of ours (build_window's test:
+        drive words and asterisks aside; a row with no option text covers
+        every configuration)."""
+        rows = self.t_list_rows.get((T, cat)) or []
+        mine = {t for n, lr0 in items if lr0 is not None for t, _p, _n2 in _row_clauses(n, lr0.site)}
+        out = []
+        for lr in rows:
+            if policy.pn_key(self.ns, lr.pn) == c.key or not any(
+                    lr0 is not None and lr0.list_url == lr.list_url and self._same_part(lr0, lr) for _n, lr0 in items):
+                continue
+            theirs = {t for t, _p, _n2 in _row_clauses(lr.notes, lr.site)}
+            if mine & theirs or () in mine or () in theirs:
+                out.append(lr)
+        return out
+
+    @staticmethod
+    def _adjacent(W, SW):
+        """The changeover month when one window list ends where the other
+        starts (the same month or the next): (month, 'end' | 'start'), else None."""
+        for a, b in W:
+            for a2, b2 in SW:
+                if b < _WIN_OPEN and a2 > 0 and a2 in (b, b + 1):
+                    return b, "end"
+                if a > 0 and b2 < _WIN_OPEN and b2 in (a, a - 1):
+                    return a, "start"
+        return None
+
+    def _changeover(self, items, sibs, T):
+        """Round7 decision 2: '<mm/yyyy> <sibling pn>' when the number's own
+        dated row on T's page and a same-option sibling on that page change
+        over in a month inside T's model-year span widened a month either way
+        (07/(y-1)-06/y +- 1)."""
+        lo, hi = _my_range(T[2])
+        for n, lr0 in items:
+            if lr0 is None:
+                continue
+            W = _row_windows(n)
+            for s in sibs:
+                if s.list_url != lr0.list_url:
+                    continue
+                adj = self._adjacent(W, _row_windows(s.notes))
+                if adj and lo - 1 <= adj[0] <= hi + 1:
+                    return f"{_mm(adj[0])} {s.pn}"
+        return None
+
+    def _split_windows(self, c, cat, T, sibs, sites):
+        """Round7 decision 3: (split, windows). split: the number's dated rows
+        and a dated row of one of T's same-option siblings change over (one
+        ends where the other starts) on the site's pages, T's own page aside
+        (96302-7S600 to 08/2006 on the 2007 Titan page, 96302-ZC400 from
+        08/2006 on the 2008 page). windows: the number's windows on the pages
+        whose rows make that changeover, read narrowly (every page's common
+        months; their union if none), for a model none of whose own pages
+        dates the number (80721-EA000 on the Frontier: only the Pathfinder and
+        Xterra pages date it)."""
+        if not sibs:
+            return None, []
+        own_urls = {s.list_url for s in sibs}
+        sib_keys = {policy.pn_key(self.ns, s.pn) for s in sibs}
+        sw = [w for k in sib_keys for lr in self._pn_list_rows(k, cat)
+              if lr.site in sites and lr.list_url not in own_urls for w in _row_windows(lr.notes)]
+        if not sw:
+            return None, []
+        pages, split = [], None
+        for lr in self._pn_list_rows(c.key, cat):
+            if lr.site not in sites or lr.list_url in own_urls:
+                continue
+            W = _row_windows(lr.notes)
+            adj = W and self._adjacent(W, sw)
+            if adj:
+                split = split or _mm(adj[0])
+                pages.append(_win_merge(W))
+        if not split:
+            return None, []
+        narrow = pages[0]
+        for p in pages[1:]:
+            narrow = _win_intersect(narrow, p)
+        return split, (narrow or _win_merge([w for p in pages for w in p]))
 
     def _pn_other_windows(self, key, cat, T, sites, models, records=()):
         """Windows the number's dated rows print on the catalog model's other
@@ -5160,6 +5345,11 @@ STARRED_SCOPE_NS = frozenset({"nissan"})
 # Kept here, not in policy.py: policy_sha256 does not move.
 HYBRID_ENG_NOT_NS = frozenset({"nissan"})
 ROUND6_WINDOW_KINDS = ("unlinked", "no_page", "linked", "no_other_row")
+# round7-1119 (hub 2026-11-19 ~11:40 UTC, after check 1119g): per-page cut
+# test (1), changeover months gated on both sides (2), date splits read from
+# other pages (3); cross-position groups held (4); the star-blind reading in
+# starred_scope (5).
+ROUND7_WINDOW_KINDS = ROUND6_WINDOW_KINDS + ("changeover", "split")
 
 
 def _starred(cfg: str) -> bool:
@@ -5243,6 +5433,24 @@ def _starred_dims(rows) -> set:
                 out.add("drive")
             if _engine_terms(cfg):
                 out.add("engine")
+    return out
+
+
+def _blind_notes(notes, site: str) -> list:
+    """notes with the leading '*' of every option configuration taken off."""
+    out = []
+    for n in notes or []:
+        m = _FVO_BODY_RE.match(n or "")
+        if not m:
+            out.append(n)
+            continue
+        alts = []
+        for alt in _split_top_plus(m.group(1), ","):
+            if site in policy.DRIVE_CONFIG_FVO_SITES:
+                alts.append(" + ".join(x.lstrip().lstrip("*").strip() for x in _split_top_plus(alt, "+")))
+            else:
+                alts.append(alt.lstrip().lstrip("*").strip())
+        out.append(n[:m.start(1)] + ", ".join(alts) if alts else n)
     return out
 
 
@@ -5706,6 +5914,14 @@ def main(argv=None) -> int:
                 "vehicle_years_by_reason": dict(sorted(rv.items())),
                 "groups_by_reason": {k: sum(any(k in h["reasons"] for h in g["held"]) for g in r6) for k in sorted(rv)},
                 "held": r6})
+        r7 = getattr(results[ns], "round7_held", None)
+        if r7:
+            write_json(out / "_report" / f"{ns}.round7_held.json", {
+                "note": "round7-1119 (hub decisions 2026-11-19 ~11:40 UTC, decision 4): groups whose number sits in "
+                        "another door or position on another model of the group (positions: the slots the number "
+                        "takes on each model's own pages), held whole, reason held_cross_position, until the note "
+                        "can name the donor's door.",
+                "ns": ns, "raw": results[ns].src.commit or "fixtures", "groups": len(r7), "held": r7})
     coll = cross_ns_collisions(results)
     if coll:
         write_json(out / "_report" / "cross_ns_string_collisions.json", coll)

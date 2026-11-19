@@ -89,8 +89,10 @@ sc = scope(T05, [E, S007], "24810-7S00E")
 check("item 2: Titan 2005 7S00E's 4WD gate rests on 7S007 '*KC. 2WD. (SE+ LE)', a starred clause: held, via the sibling",
       set(sc) == {"drive"} and sc["drive"][0][0] and set(sc["drive"][0][0]) <= C._FOUR and sc["drive"][1] == (None, None, False)
       and sc["drive"][2] == "sibling", sc)
-check("no drive gate (7S006 unstarred beside starred 7S00E: round 5): nothing for a star to decide",
-      scope(T05, [E, S006], "24810-7S00E") == {})
+sc = scope(T05, [E, S006], "24810-7S00E")
+check("no drive gate (7S006 unstarred beside starred 7S00E, round 5); round 7 (decision 5): read without the mark "
+      "7S006 'KC. 2WD' would split '*KC', so the mark decides (via star_blind)",
+      set(sc) == {"drive"} and sc["drive"][0] == (None, None, False) and sc["drive"][2] == "star_blind", sc)
 T06 = ("Nissan", "Titan", 2006)
 sc = scope(T06, [lr("24810-7S005", [F + "*KC. 2WD. SE + *CC. 2WD. SE"], seed=T06)], "24810-7S005")
 check("(a) a drive gate stated by starred clauses only (7S005 '*KC. 2WD. SE'): held, via own",

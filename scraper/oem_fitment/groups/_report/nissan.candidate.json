@@ -69611,20 +69611,6 @@
   ]
  ],
  "classes": {
-  "nissan:248201MA5A": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L2307"
-   ],
-   "names": [
-    "Speedometer Assy"
-   ],
-   "pns": [
-    "24820-1MA5A"
-   ],
-   "reman": false
-  },
   "nissan:248201MA5B": {
    "cat": "gauge-cluster",
    "comp": null,
@@ -69779,20 +69765,6 @@
    ],
    "reman": false
   },
-  "nissan:275108Z315": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4265"
-   ],
-   "names": [
-    "Controller Assy-Air Conditiner"
-   ],
-   "pns": [
-    "27510-8Z315"
-   ],
-   "reman": false
-  },
   "nissan:275109BF0B": {
    "cat": "climate-control",
    "comp": "assy",
@@ -69891,20 +69863,6 @@
    ],
    "reman": false
   },
-  "nissan:275157Z401": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L1352"
-   ],
-   "names": [
-    "Controller Assy-Air Conditiner"
-   ],
-   "pns": [
-    "27515-7Z401"
-   ],
-   "reman": false
-  },
   "nissan:285251E501": {
    "cat": "climate-control",
    "comp": "assy",
@@ -69916,20 +69874,6 @@
    ],
    "pns": [
     "28525-1E501"
-   ],
-   "reman": false
-  },
-  "nissan:285251E504": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L1573"
-   ],
-   "names": [
-    "Controller Assy-Air Conditiner"
-   ],
-   "pns": [
-    "28525-1E504"
    ],
    "reman": false
   },
@@ -70143,20 +70087,6 @@
    ],
    "reman": false
   },
-  "nissan:807202Z710": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4278"
-   ],
-   "names": [
-    "Regulator Assy-Door Window, RH"
-   ],
-   "pns": [
-    "80720-2Z710"
-   ],
-   "reman": false
-  },
   "nissan:807203JA0A": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -70238,20 +70168,6 @@
    ],
    "pns": [
     "80720-CL70B"
-   ],
-   "reman": false
-  },
-  "nissan:80720EA000": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L312"
-   ],
-   "names": [
-    "Regulator Assy-Door Window, RH"
-   ],
-   "pns": [
-    "80720-EA000"
    ],
    "reman": false
   },
@@ -70437,20 +70353,6 @@
    ],
    "reman": false
   },
-  "nissan:807212Z710": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4277"
-   ],
-   "names": [
-    "Regulator Assy-Door Window, LH"
-   ],
-   "pns": [
-    "80721-2Z710"
-   ],
-   "reman": false
-  },
   "nissan:807213JA0A": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -70532,20 +70434,6 @@
    ],
    "pns": [
     "80721-CL70B"
-   ],
-   "reman": false
-  },
-  "nissan:80721EA000": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L310"
-   ],
-   "names": [
-    "Regulator Assy-Door Window, LH"
-   ],
-   "pns": [
-    "80721-EA000"
    ],
    "reman": false
   },
@@ -70703,34 +70591,6 @@
    ],
    "reman": false
   },
-  "nissan:8073089915": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L920"
-   ],
-   "names": [
-    "Motor Assy-Regulator, RH"
-   ],
-   "pns": [
-    "80730-89915"
-   ],
-   "reman": false
-  },
-  "nissan:807308991A": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L467"
-   ],
-   "names": [
-    "Motor Assy-Regulator, RH"
-   ],
-   "pns": [
-    "80730-8991A"
-   ],
-   "reman": false
-  },
   "nissan:80730AL501": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -70770,34 +70630,6 @@
    ],
    "pns": [
     "80730-JK60C"
-   ],
-   "reman": false
-  },
-  "nissan:80730JX30B": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L939"
-   ],
-   "names": [
-    "Motor Assy-Regulator, RH"
-   ],
-   "pns": [
-    "80730-JX30B"
-   ],
-   "reman": false
-  },
-  "nissan:80730JX30C": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L235"
-   ],
-   "names": [
-    "Motor Assy-Regulator, RH"
-   ],
-   "pns": [
-    "80730-JX30C"
    ],
    "reman": false
   },
@@ -71235,20 +71067,6 @@
    ],
    "reman": false
   },
-  "nissan:827303Z005": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L415"
-   ],
-   "names": [
-    "Motor Assy-Regulator, RH"
-   ],
-   "pns": [
-    "82730-3Z005"
-   ],
-   "reman": false
-  },
   "nissan:827304BA0A": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -71372,20 +71190,6 @@
    ],
    "pns": [
     "82731-3TA2A"
-   ],
-   "reman": false
-  },
-  "nissan:827313Z005": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L414"
-   ],
-   "names": [
-    "Motor Assy-Regulator, LH"
-   ],
-   "pns": [
-    "82731-3Z005"
    ],
    "reman": false
   },
@@ -71540,20 +71344,6 @@
    ],
    "pns": [
     "96301-2B500"
-   ],
-   "reman": false
-  },
-  "nissan:963013JA9A": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L374"
-   ],
-   "names": [
-    "Mirror Assy-Outside, RH"
-   ],
-   "pns": [
-    "96301-3JA9A"
    ],
    "reman": false
   },
@@ -71781,20 +71571,6 @@
    ],
    "reman": false
   },
-  "nissan:963023JA9A": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L369"
-   ],
-   "names": [
-    "Mirror Assy-Outside, LH"
-   ],
-   "pns": [
-    "96302-3JA9A"
-   ],
-   "reman": false
-  },
   "nissan:963023Y200": {
    "cat": "side-mirrors",
    "comp": null,
@@ -71820,20 +71596,6 @@
    ],
    "pns": [
     "96302-7S200"
-   ],
-   "reman": false
-  },
-  "nissan:963027S600": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L838"
-   ],
-   "names": [
-    "Mirror Assy-Outside, LH"
-   ],
-   "pns": [
-    "96302-7S600"
    ],
    "reman": false
   },
@@ -71890,20 +71652,6 @@
    ],
    "pns": [
     "96302-EV50A"
-   ],
-   "reman": false
-  },
-  "nissan:96302S3800": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4380"
-   ],
-   "names": [
-    "Door Mirror Assy-LH"
-   ],
-   "pns": [
-    "96302-S3800"
    ],
    "reman": false
   },
@@ -78922,48 +78670,6 @@
     [
      "Infiniti",
      "M37",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "Q70",
-     2014,
-     2014
-    ]
-   ],
-   "cars": 10,
-   "cat": "gauge-cluster",
-   "gates": [
-    [
-     "Infiniti",
-     "Q70",
-     2014,
-     2014,
-     {
-      "built": "2013-01..2013-11",
-      "eng": [
-       "3.7L"
-      ],
-      "fuel": "gas"
-     }
-    ]
-   ],
-   "id": "oem:nissan:gauge-cluster:C:397ce76b2d",
-   "kind": "body",
-   "note": "Nissan catalog lists #24820-1MA5A for both — option: fits some option packages; Q70: 3.7L, gas, built 01/2013-11/2013 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-10T12:37:22Z",
-   "pn": [
-    "24820-1MA5A"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Infiniti",
-     "M37",
      2012,
      2013
     ],
@@ -79413,58 +79119,6 @@
     [
      "Nissan",
      "Frontier",
-     2002,
-     2002
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2002,
-     2002
-    ]
-   ],
-   "cars": 229,
-   "cat": "climate-control",
-   "gates": [
-    [
-     "Nissan",
-     "Frontier",
-     2002,
-     2002,
-     {
-      "cab": "crew cab",
-      "eng": [
-       "3.3L"
-      ]
-     }
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2002,
-     2002,
-     {
-      "eng": [
-       "3.3L"
-      ]
-     }
-    ]
-   ],
-   "id": "oem:nissan:climate-control:C:1483a558f3",
-   "kind": "body",
-   "note": "Nissan catalog lists #27510-8Z315 for both — option: fits some option packages; Frontier: crew cab only; 3.3L only; verify the number on the part",
-   "oldest_retrieved": "2026-11-12T22:17:25Z",
-   "pn": [
-    "27510-8Z315"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Frontier",
      2012,
      2014
     ],
@@ -79717,47 +79371,6 @@
    "apps": [
     [
      "Nissan",
-     "Frontier",
-     2002,
-     2002
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2001,
-     2001
-    ]
-   ],
-   "cars": 166,
-   "cat": "climate-control",
-   "gates": [
-    [
-     "Nissan",
-     "Frontier",
-     2002,
-     2002,
-     {
-      "cab": [
-       "regular cab",
-       "king cab"
-      ]
-     }
-    ]
-   ],
-   "id": "oem:nissan:climate-control:C:88ffd5369b",
-   "kind": "body",
-   "note": "Nissan catalog lists #27515-7Z401 for both — option: fits some option packages; Frontier: regular cab/king cab only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T09:55:37Z",
-   "pn": [
-    "27515-7Z401"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
      "Altima",
      1993,
      1994
@@ -79766,55 +79379,28 @@
      "Nissan",
      "Stanza",
      1993,
-     1994
+     1993
     ]
    ],
    "cars": 18,
    "cat": "climate-control",
-   "id": "oem:nissan:climate-control:C:e4f5056395",
-   "kind": "body",
-   "note": "Nissan catalog lists #28525-1E501 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T10:38:12Z",
-   "pn": [
-    "28525-1E501"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Altima",
-     1995,
-     1996
-    ],
-    [
-     "Nissan",
-     "Stanza",
-     1995,
-     1995
-    ]
-   ],
-   "cars": 24,
-   "cat": "climate-control",
    "gates": [
     [
      "Nissan",
      "Altima",
-     1996,
-     1996,
+     1994,
+     1994,
      {
-      "built": "1994-07..1996-02"
+      "built": "1992-06..1994-07"
      }
     ]
    ],
-   "id": "oem:nissan:climate-control:C:b4d97777e8",
+   "id": "oem:nissan:climate-control:C:e149091576",
    "kind": "body",
-   "note": "Nissan catalog lists #28525-1E504 for both — option: fits some option packages; Altima 1996: built 07/1994-02/1996 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T10:38:20Z",
+   "note": "Nissan catalog lists #28525-1E501 for both — option: fits some option packages; Altima 1994: built 06/1992-07/1994 only; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T10:38:12Z",
    "pn": [
-    "28525-1E504"
+    "28525-1E501"
    ],
    "reason": "option",
    "tier": "likely"
@@ -80381,44 +79967,6 @@
   {
    "apps": [
     [
-     "Nissan",
-     "Frontier",
-     2003,
-     2004
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2002,
-     2003
-    ]
-   ],
-   "cars": 363,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Nissan",
-     "Frontier",
-     2003,
-     2003,
-     {
-      "built": "2002-10.."
-     }
-    ]
-   ],
-   "id": "oem:nissan:window-regulator:FR:7bfa59850d",
-   "kind": "body",
-   "note": "Nissan catalog lists #80720-2Z710 for both — option: fits some option packages; Frontier 2003: built from 10/2002 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-12T22:19:49Z",
-   "pn": [
-    "80720-2Z710"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Infiniti",
      "JX35",
      2013,
@@ -80469,14 +80017,25 @@
      "Nissan",
      "Xterra",
      2000,
-     2003
+     2001
     ]
    ],
-   "cars": 530,
+   "cars": 269,
    "cat": "window-regulator",
-   "id": "oem:nissan:window-regulator:FR:f4d06b4658",
+   "gates": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2002,
+     {
+      "built": "2001-07..2002-09"
+     }
+    ]
+   ],
+   "id": "oem:nissan:window-regulator:FR:879a4cc007",
    "kind": "body",
-   "note": "Nissan catalog lists #80720-3S510 for both — option: fits some option packages; verify the number on the part",
+   "note": "Nissan catalog lists #80720-3S510 for both — option: fits some option packages; Frontier: built 07/2001-09/2002 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:53:05Z",
    "pn": [
     "80720-3S510"
@@ -80532,33 +80091,27 @@
     ],
     [
      "Infiniti",
-     "FX45",
-     2004,
-     2004
-    ],
-    [
-     "Infiniti",
      "Q45",
      2002,
      2005
     ]
    ],
-   "cars": 92,
+   "cars": 87,
    "cat": "window-regulator",
    "gates": [
     [
      "Infiniti",
      "FX35",
      2003,
-     2003,
+     2004,
      {
       "built": "2002-11..2004-07"
      }
     ]
    ],
-   "id": "oem:nissan:window-regulator:FR:094e07629f",
+   "id": "oem:nissan:window-regulator:FR:78088747fe",
    "kind": "body",
-   "note": "Nissan catalog lists #80720-AR000 for both — fits some configurations; FX35 2003: built 11/2002-07/2004 only; verify the number on the part",
+   "note": "Nissan catalog lists #80720-AR000 for both — fits some configurations; FX35: built 11/2002-07/2004 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:16:32Z",
    "pn": [
     "80720-AR000"
@@ -80583,9 +80136,29 @@
    ],
    "cars": 90,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Infiniti",
+     "FX35",
+     2005,
+     2006,
+     {
+      "built": "2004-07..2006-06"
+     }
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2005,
+     2006,
+     {
+      "built": "2004-07..2006-06"
+     }
+    ]
+   ],
    "id": "oem:nissan:window-regulator:FR:a6c50f650e",
    "kind": "body",
-   "note": "Nissan catalog lists #80720-CL00A for both — fits some configurations; verify the number on the part",
+   "note": "Nissan catalog lists #80720-CL00A for both — fits some configurations; built 07/2004-06/2006 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:31:28Z",
    "pn": [
     "80720-CL00A"
@@ -80604,58 +80177,31 @@
     [
      "Infiniti",
      "FX45",
-     2007,
+     2008,
      2008
     ]
    ],
    "cars": 64,
    "cat": "window-regulator",
-   "id": "oem:nissan:window-regulator:FR:0564c83b59",
+   "gates": [
+    [
+     "Infiniti",
+     "FX35",
+     2007,
+     2007,
+     {
+      "built": "2006-06.."
+     }
+    ]
+   ],
+   "id": "oem:nissan:window-regulator:FR:9c547d77ec",
    "kind": "body",
-   "note": "Nissan catalog lists #80720-CL70B for both — fits some configurations; verify the number on the part",
+   "note": "Nissan catalog lists #80720-CL70B for both — fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:17:47Z",
    "pn": [
     "80720-CL70B"
    ],
    "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2005,
-     2011
-    ],
-    [
-     "Nissan",
-     "Pathfinder",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 272,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Nissan",
-     "Pathfinder",
-     2010,
-     2010,
-     {
-      "built": "2008-07..2010-04"
-     }
-    ]
-   ],
-   "id": "oem:nissan:window-regulator:FR:d42602a823",
-   "kind": "body",
-   "note": "Nissan catalog lists #80720-EA000 for both — option: fits some option packages; Pathfinder: built 07/2008-04/2010 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:42:50Z",
-   "pn": [
-    "80720-EA000"
-   ],
-   "reason": "option",
    "tier": "likely"
   },
   {
@@ -80702,9 +80248,29 @@
    ],
    "cars": 39,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ]
+   ],
    "id": "oem:nissan:window-regulator:FR:36a5b7ab0d",
    "kind": "body",
-   "note": "Nissan catalog lists #80720-EH100 for both — fits some configurations; verify the number on the part",
+   "note": "Nissan catalog lists #80720-EH100 for both — fits some configurations; built 12/2004-06/2008 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:40:04Z",
    "pn": [
     "80720-EH100"
@@ -81171,44 +80737,6 @@
   {
    "apps": [
     [
-     "Nissan",
-     "Frontier",
-     2003,
-     2004
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2002,
-     2003
-    ]
-   ],
-   "cars": 363,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Nissan",
-     "Frontier",
-     2003,
-     2003,
-     {
-      "built": "2002-10.."
-     }
-    ]
-   ],
-   "id": "oem:nissan:window-regulator:FL:c0880fb396",
-   "kind": "body",
-   "note": "Nissan catalog lists #80721-2Z710 for both — option: fits some option packages; Frontier 2003: built from 10/2002 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-12T22:19:41Z",
-   "pn": [
-    "80721-2Z710"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Infiniti",
      "JX35",
      2013,
@@ -81259,14 +80787,25 @@
      "Nissan",
      "Xterra",
      2000,
-     2003
+     2001
     ]
    ],
-   "cars": 530,
+   "cars": 269,
    "cat": "window-regulator",
-   "id": "oem:nissan:window-regulator:FL:9f28322932",
+   "gates": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2002,
+     {
+      "built": "2001-07..2002-09"
+     }
+    ]
+   ],
+   "id": "oem:nissan:window-regulator:FL:3aec309817",
    "kind": "body",
-   "note": "Nissan catalog lists #80721-3S510 for both — option: fits some option packages; verify the number on the part",
+   "note": "Nissan catalog lists #80721-3S510 for both — option: fits some option packages; Frontier: built 07/2001-09/2002 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:52:57Z",
    "pn": [
     "80721-3S510"
@@ -81378,7 +80917,16 @@
      "Infiniti",
      "FX35",
      2005,
-     2005,
+     2006,
+     {
+      "built": "2004-09..2006-06"
+     }
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2006,
+     2006,
      {
       "built": "2004-09..2006-06"
      }
@@ -81386,7 +80934,7 @@
    ],
    "id": "oem:nissan:window-regulator:FL:8380ea4d2d",
    "kind": "body",
-   "note": "Nissan catalog lists #80721-CL00A for both — fits some configurations; FX35 2005: built 09/2004-06/2006 only; verify the number on the part",
+   "note": "Nissan catalog lists #80721-CL00A for both — fits some configurations; built 09/2004-06/2006 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:31:24Z",
    "pn": [
     "80721-CL00A"
@@ -81405,58 +80953,31 @@
     [
      "Infiniti",
      "FX45",
-     2007,
+     2008,
      2008
     ]
    ],
    "cars": 64,
    "cat": "window-regulator",
-   "id": "oem:nissan:window-regulator:FL:5aacabbf4a",
+   "gates": [
+    [
+     "Infiniti",
+     "FX35",
+     2007,
+     2007,
+     {
+      "built": "2006-06.."
+     }
+    ]
+   ],
+   "id": "oem:nissan:window-regulator:FL:35d6c18452",
    "kind": "body",
-   "note": "Nissan catalog lists #80721-CL70B for both — fits some configurations; verify the number on the part",
+   "note": "Nissan catalog lists #80721-CL70B for both — fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:17:43Z",
    "pn": [
     "80721-CL70B"
    ],
    "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2005,
-     2011
-    ],
-    [
-     "Nissan",
-     "Pathfinder",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 272,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Nissan",
-     "Pathfinder",
-     2010,
-     2010,
-     {
-      "built": "2008-07..2010-04"
-     }
-    ]
-   ],
-   "id": "oem:nissan:window-regulator:FL:caae218094",
-   "kind": "body",
-   "note": "Nissan catalog lists #80721-EA000 for both — option: fits some option packages; Pathfinder: built 07/2008-04/2010 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:42:42Z",
-   "pn": [
-    "80721-EA000"
-   ],
-   "reason": "option",
    "tier": "likely"
   },
   {
@@ -81503,9 +81024,29 @@
    ],
    "cars": 39,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2008,
+     2008,
+     {
+      "built": "2004-12..2008-06"
+     }
+    ]
+   ],
    "id": "oem:nissan:window-regulator:FL:df8b845bbf",
    "kind": "body",
-   "note": "Nissan catalog lists #80721-EH100 for both — fits some configurations; verify the number on the part",
+   "note": "Nissan catalog lists #80721-EH100 for both — fits some configurations; built 12/2004-06/2008 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:40:00Z",
    "pn": [
     "80721-EH100"
@@ -81675,9 +81216,20 @@
    ],
    "cars": 91,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014,
+     {
+      "built": "2010-04..2014-07"
+     }
+    ]
+   ],
    "id": "oem:nissan:window-regulator:FL:abe0045c82",
    "kind": "body",
-   "note": "Nissan catalog lists #80730-1LE0A for both — fits some configurations; verify the number on the part",
+   "note": "Nissan catalog lists #80730-1LE0A for both — fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:09:43Z",
    "pn": [
     "80730-1LE0A"
@@ -81866,88 +81418,6 @@
   {
    "apps": [
     [
-     "Nissan",
-     "Murano",
-     2005,
-     2006
-    ],
-    [
-     "Nissan",
-     "Versa",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 500,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Nissan",
-     "Murano",
-     2005,
-     2005,
-     {
-      "built": "2004-08..2006-12"
-     }
-    ]
-   ],
-   "id": "oem:nissan:window-regulator:FR+RR:c0080caac8",
-   "kind": "body",
-   "note": "Nissan catalog lists #80730-89915 for both — fits some configurations; Murano 2005: built 08/2004-12/2006 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:25:05Z",
-   "pn": [
-    "80730-89915"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Murano",
-     2007,
-     2007
-    ],
-    [
-     "Nissan",
-     "Versa",
-     2008,
-     2008
-    ],
-    [
-     "Nissan",
-     "Versa",
-     2010,
-     2011
-    ]
-   ],
-   "cars": 807,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Nissan",
-     "Murano",
-     2007,
-     2007,
-     {
-      "built": "2006-12.."
-     }
-    ]
-   ],
-   "id": "oem:nissan:window-regulator:FR+RR:c2463fafc6",
-   "kind": "body",
-   "note": "Nissan catalog lists #80730-8991A for both — fits some configurations; Murano: built from 12/2006 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:56:45Z",
-   "pn": [
-    "80730-8991A"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Infiniti",
      "FX35",
      2003,
@@ -82035,85 +81505,25 @@
    ],
    "cars": 22,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Infiniti",
+     "G25",
+     2012,
+     2012,
+     {
+      "built": "2011-06..2014-06"
+     }
+    ]
+   ],
    "id": "oem:nissan:window-regulator:RR:1334ba2257",
    "kind": "body",
-   "note": "Nissan catalog lists #80730-JK60C for both — option: fits some option packages; verify the number on the part",
+   "note": "Nissan catalog lists #80730-JK60C for both — option: fits some option packages; G25: built 06/2011-06/2014 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:33:27Z",
    "pn": [
     "80730-JK60C"
    ],
    "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Cube",
-     2011,
-     2011
-    ],
-    [
-     "Nissan",
-     "Rogue",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 298,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Nissan",
-     "Cube",
-     2011,
-     2011,
-     {
-      "built": "2009-02..2011-04"
-     }
-    ]
-   ],
-   "id": "oem:nissan:window-regulator:FR+RR:cb1df0b30f",
-   "kind": "body",
-   "note": "Nissan catalog lists #80730-JX30B for both — fits some configurations; Cube: built 02/2009-04/2011 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:29:46Z",
-   "pn": [
-    "80730-JX30B"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Cube",
-     2012,
-     2014
-    ],
-    [
-     "Nissan",
-     "Juke",
-     2012,
-     2014
-    ],
-    [
-     "Nissan",
-     "Rogue",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 605,
-   "cat": "window-regulator",
-   "id": "oem:nissan:window-regulator:FR+RR:619b0a9e08",
-   "kind": "body",
-   "note": "Nissan catalog lists #80730-JX30C for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:35:50Z",
-   "pn": [
-    "80730-JX30C"
-   ],
-   "reason": "conditional",
    "tier": "likely"
   },
   {
@@ -82160,9 +81570,20 @@
    ],
    "cars": 91,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014,
+     {
+      "built": "2010-04..2014-07"
+     }
+    ]
+   ],
    "id": "oem:nissan:window-regulator:FR:e61a6d2f3f",
    "kind": "body",
-   "note": "Nissan catalog lists #80731-1LE0A for both — fits some configurations; verify the number on the part",
+   "note": "Nissan catalog lists #80731-1LE0A for both — fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:09:47Z",
    "pn": [
     "80731-1LE0A"
@@ -82339,9 +81760,20 @@
    ],
    "cars": 22,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Infiniti",
+     "G25",
+     2012,
+     2012,
+     {
+      "built": "2011-06..2014-06"
+     }
+    ]
+   ],
    "id": "oem:nissan:window-regulator:RL:535fbed986",
    "kind": "body",
-   "note": "Nissan catalog lists #80731-JK60C for both — option: fits some option packages; verify the number on the part",
+   "note": "Nissan catalog lists #80731-JK60C for both — option: fits some option packages; G25: built 06/2011-06/2014 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:33:11Z",
    "pn": [
     "80731-JK60C"
@@ -82469,16 +81901,16 @@
      "Nissan",
      "Altima",
      1994,
-     1996
+     1995
     ],
     [
      "Nissan",
      "Stanza",
      1995,
-     1996
+     1995
     ]
    ],
-   "cars": 36,
+   "cars": 27,
    "cat": "window-regulator",
    "gates": [
     [
@@ -82491,7 +81923,7 @@
      }
     ]
    ],
-   "id": "oem:nissan:window-regulator:RR:ebc79844c0",
+   "id": "oem:nissan:window-regulator:RR:693859d766",
    "kind": "body",
    "note": "Nissan catalog lists #82720-0E715 for both — option: fits some option packages; Altima 1994: built 08/1993-07/1996 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:36:59Z",
@@ -82518,9 +81950,29 @@
    ],
    "cars": 25,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Nissan",
+     "Altima",
+     1997,
+     1997,
+     {
+      "built": "1996-07.."
+     }
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1997,
+     1997,
+     {
+      "built": "1996-07.."
+     }
+    ]
+   ],
    "id": "oem:nissan:window-regulator:RR:300fc2f362",
    "kind": "body",
-   "note": "Nissan catalog lists #82720-0E717 for both — option: fits some option packages; verify the number on the part",
+   "note": "Nissan catalog lists #82720-0E717 for both — option: fits some option packages; built from 07/1996 only; verify the number on the part",
    "oldest_retrieved": "2026-11-13T11:08:13Z",
    "pn": [
     "82720-0E717"
@@ -83187,44 +82639,6 @@
    "apps": [
     [
      "Nissan",
-     "Altima",
-     2003,
-     2003
-    ],
-    [
-     "Nissan",
-     "Sentra",
-     2005,
-     2006
-    ]
-   ],
-   "cars": 551,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Nissan",
-     "Altima",
-     2003,
-     2003,
-     {
-      "built": "2002-11..2004-01"
-     }
-    ]
-   ],
-   "id": "oem:nissan:window-regulator:FR+RR:378263fba3",
-   "kind": "body",
-   "note": "Nissan catalog lists #82730-3Z005 for both — option: fits some option packages; Altima: built 11/2002-01/2004 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:51:49Z",
-   "pn": [
-    "82730-3Z005"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
      "Murano",
      2015,
      2019
@@ -83600,44 +83014,6 @@
     "82731-3TA2A"
    ],
    "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Altima",
-     2003,
-     2003
-    ],
-    [
-     "Nissan",
-     "Sentra",
-     2005,
-     2006
-    ]
-   ],
-   "cars": 551,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Nissan",
-     "Altima",
-     2003,
-     2003,
-     {
-      "built": "2002-11..2004-01"
-     }
-    ]
-   ],
-   "id": "oem:nissan:window-regulator:FL+RL:1446fc5acb",
-   "kind": "body",
-   "note": "Nissan catalog lists #82731-3Z005 for both — option: fits some option packages; Altima: built 11/2002-01/2004 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:51:45Z",
-   "pn": [
-    "82731-3Z005"
-   ],
-   "reason": "option",
    "tier": "likely"
   },
   {
@@ -84035,47 +83411,6 @@
    "apps": [
     [
      "Infiniti",
-     "JX35",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "QX60",
-     2015,
-     2015
-    ]
-   ],
-   "cars": 171,
-   "cat": "side-mirrors",
-   "gates": [
-    [
-     "Infiniti",
-     "QX60",
-     2015,
-     2015,
-     {
-      "eng_not": [
-       "2.5L"
-      ],
-      "fuel": "gas"
-     }
-    ]
-   ],
-   "id": "oem:nissan:side-mirrors:R:ccf0dd8c02",
-   "kind": "body",
-   "note": "Nissan catalog lists #96301-3JA9A for both — option: fits some option packages; QX60: gas only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:47:00Z",
-   "pn": [
-    "96301-3JA9A"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Infiniti",
      "I30",
      2000,
      2001
@@ -84111,10 +83446,10 @@
      "Nissan",
      "Titan",
      2004,
-     2006
+     2004
     ]
    ],
-   "cars": 569,
+   "cars": 272,
    "cat": "side-mirrors",
    "gates": [
     [
@@ -84127,7 +83462,7 @@
      }
     ]
    ],
-   "id": "oem:nissan:side-mirrors:R:d99a592b0b",
+   "id": "oem:nissan:side-mirrors:R:196a854b3b",
    "kind": "body",
    "note": "Nissan catalog lists #96301-7S200 for both — option: fits some option packages; Armada: built 10/2004-08/2005 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:12:17Z",
@@ -84186,28 +83521,29 @@
     [
      "Nissan",
      "Xterra",
-     2012,
+     2013,
      2013
     ]
    ],
-   "cars": 65,
+   "cars": 51,
    "cat": "side-mirrors",
    "gates": [
     [
      "Nissan",
      "Xterra",
-     2012,
+     2013,
      2013,
      {
+      "built": "2012-04..2016-09",
       "drive": "2wd",
       "drive_basis": "sibling",
       "drive_sib": "4wd"
      }
     ]
    ],
-   "id": "oem:nissan:side-mirrors:R:0145a31b97",
+   "id": "oem:nissan:side-mirrors:R:83dc0e682b",
    "kind": "body",
-   "note": "Nissan catalog lists #96301-9BC9A for both — option: fits some option packages; Xterra: 2WD only; verify the number on the part",
+   "note": "Nissan catalog lists #96301-9BC9A for both — option: fits some option packages; Xterra: 2WD, built 04/2012-09/2016 only; verify the number on the part",
    "oldest_retrieved": "2026-11-13T20:55:50Z",
    "pn": [
     "96301-9BC9A"
@@ -84254,10 +83590,10 @@
      "Nissan",
      "Xterra",
      2005,
-     2012
+     2011
     ]
    ],
-   "cars": 473,
+   "cars": 459,
    "cat": "side-mirrors",
    "gates": [
     [
@@ -84270,7 +83606,7 @@
      }
     ]
    ],
-   "id": "oem:nissan:side-mirrors:R:5ddb530219",
+   "id": "oem:nissan:side-mirrors:R:86d4f6e713",
    "kind": "body",
    "note": "Nissan catalog lists #96301-EA000 for both — option: fits some option packages; Frontier: built 08/2010-04/2012 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:42:26Z",
@@ -84370,17 +83706,17 @@
     [
      "Nissan",
      "Armada",
-     2012,
+     2013,
      2015
     ],
     [
      "Nissan",
      "Titan",
      2006,
-     2007
+     2006
     ]
    ],
-   "cars": 312,
+   "cars": 189,
    "cat": "side-mirrors",
    "gates": [
     [
@@ -84393,9 +83729,9 @@
      }
     ]
    ],
-   "id": "oem:nissan:side-mirrors:R:4dc59c31dd",
+   "id": "oem:nissan:side-mirrors:R:7579549082",
    "kind": "body",
-   "note": "Nissan catalog lists #96301-ZH10A for both — option: fits some option packages; Titan 2006: built 08/2005-04/2007 only; verify the number on the part",
+   "note": "Nissan catalog lists #96301-ZH10A for both — option: fits some option packages; Titan: built 08/2005-04/2007 only; verify the number on the part",
    "oldest_retrieved": "2026-11-12T22:27:09Z",
    "pn": [
     "96301-ZH10A"
@@ -84636,47 +83972,6 @@
    "apps": [
     [
      "Infiniti",
-     "JX35",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "QX60",
-     2015,
-     2015
-    ]
-   ],
-   "cars": 171,
-   "cat": "side-mirrors",
-   "gates": [
-    [
-     "Infiniti",
-     "QX60",
-     2015,
-     2015,
-     {
-      "eng_not": [
-       "2.5L"
-      ],
-      "fuel": "gas"
-     }
-    ]
-   ],
-   "id": "oem:nissan:side-mirrors:L:27714784b8",
-   "kind": "body",
-   "note": "Nissan catalog lists #96302-3JA9A for both — option: fits some option packages; QX60: gas only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:46:40Z",
-   "pn": [
-    "96302-3JA9A"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Infiniti",
      "I30",
      2000,
      2001
@@ -84742,44 +84037,6 @@
    "apps": [
     [
      "Nissan",
-     "Armada",
-     2005,
-     2005
-    ],
-    [
-     "Nissan",
-     "Titan",
-     2006,
-     2006
-    ]
-   ],
-   "cars": 255,
-   "cat": "side-mirrors",
-   "gates": [
-    [
-     "Nissan",
-     "Armada",
-     2005,
-     2005,
-     {
-      "built": "2004-10..2005-08"
-     }
-    ]
-   ],
-   "id": "oem:nissan:side-mirrors:L:275797ed4b",
-   "kind": "body",
-   "note": "Nissan catalog lists #96302-7S600 for both — option: fits some option packages; Armada: built 10/2004-08/2005 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:11:37Z",
-   "pn": [
-    "96302-7S600"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
      "Frontier",
      2013,
      2016
@@ -84787,28 +84044,29 @@
     [
      "Nissan",
      "Xterra",
-     2012,
+     2013,
      2013
     ]
    ],
-   "cars": 65,
+   "cars": 51,
    "cat": "side-mirrors",
    "gates": [
     [
      "Nissan",
      "Xterra",
-     2012,
+     2013,
      2013,
      {
+      "built": "2012-04..2016-09",
       "drive": "2wd",
       "drive_basis": "sibling",
       "drive_sib": "4wd"
      }
     ]
    ],
-   "id": "oem:nissan:side-mirrors:L:46dcbd7186",
+   "id": "oem:nissan:side-mirrors:L:c92c21ee9a",
    "kind": "body",
-   "note": "Nissan catalog lists #96302-9BC9A for both — option: fits some option packages; Xterra: 2WD only; verify the number on the part",
+   "note": "Nissan catalog lists #96302-9BC9A for both — option: fits some option packages; Xterra: 2WD, built 04/2012-09/2016 only; verify the number on the part",
    "oldest_retrieved": "2026-11-13T20:55:34Z",
    "pn": [
     "96302-9BC9A"
@@ -84855,10 +84113,10 @@
      "Nissan",
      "Xterra",
      2005,
-     2012
+     2011
     ]
    ],
-   "cars": 473,
+   "cars": 459,
    "cat": "side-mirrors",
    "gates": [
     [
@@ -84871,7 +84129,7 @@
      }
     ]
    ],
-   "id": "oem:nissan:side-mirrors:L:eae2f0c6ab",
+   "id": "oem:nissan:side-mirrors:L:e21dcd2288",
    "kind": "body",
    "note": "Nissan catalog lists #96302-EA000 for both — option: fits some option packages; Frontier: built 08/2010-04/2012 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:42:14Z",
@@ -84917,47 +84175,6 @@
     "96302-EV50A"
    ],
    "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2002,
-     2002
-    ],
-    [
-     "Nissan",
-     "Pathfinder",
-     1989,
-     1993
-    ]
-   ],
-   "cars": 102,
-   "cat": "side-mirrors",
-   "gates": [
-    [
-     "Nissan",
-     "Frontier",
-     2002,
-     2002,
-     {
-      "cab": "king cab",
-      "eng": [
-       "2.4L"
-      ]
-     }
-    ]
-   ],
-   "id": "oem:nissan:side-mirrors:L:2b55c9fe90",
-   "kind": "body",
-   "note": "Nissan catalog lists #96302-S3800 for both — option: fits some option packages; Frontier: king cab only; Frontier: 2.4L only; verify the number on the part",
-   "oldest_retrieved": "2026-11-13T00:58:53Z",
-   "pn": [
-    "96302-S3800"
-   ],
-   "reason": "option",
    "tier": "likely"
   },
   {

@@ -1,0 +1,586 @@
+{
+ "report": "nissan_recheck_2026-11-19g",
+ "status": "builder's own re-check, NOT independent",
+ "of": "groups/_report/nissan_verify_2026-11-19g.json (branch interchange/verify-nissan-1119g, d0399b47)",
+ "candidate": "groups/_report/nissan.candidate.json on interchange/round7-1119",
+ "items": [
+  {
+   "item": "G23 WRONG",
+   "cat": "window-regulator",
+   "pn": "80730-89915",
+   "t": [
+    "Nissan",
+    "Versa",
+    2007
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G23 WRONG",
+   "cat": "window-regulator",
+   "pn": "80730-89915",
+   "t": [
+    "Nissan",
+    "Murano",
+    2005
+   ],
+   "main": "gate {\"built\": \"2004-08..2006-12\"}",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G23 WRONG",
+   "cat": "window-regulator",
+   "pn": "80730-89915",
+   "t": [
+    "Nissan",
+    "Murano",
+    2006
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G03",
+   "cat": "climate-control",
+   "pn": "27510-8Z310",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2002
+   ],
+   "main": "gate {\"cab\": \"crew cab\", \"eng\": [\"3.3L\"]}",
+   "round7": "gate {\"cab\": \"crew cab\", \"eng\": [\"3.3L\"]}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G03",
+   "cat": "climate-control",
+   "pn": "27510-8Z310",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2002
+   ],
+   "main": "plain",
+   "round7": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G05",
+   "cat": "side-mirrors",
+   "pn": "J6301-1E400",
+   "t": [
+    "Nissan",
+    "Altima",
+    1995
+   ],
+   "main": "plain",
+   "round7": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G05",
+   "cat": "side-mirrors",
+   "pn": "J6301-1E400",
+   "t": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "main": "plain",
+   "round7": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G05",
+   "cat": "side-mirrors",
+   "pn": "J6301-1E400",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "main": "plain",
+   "round7": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G05",
+   "cat": "side-mirrors",
+   "pn": "J6301-1E400",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1996
+   ],
+   "main": "plain",
+   "round7": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G08",
+   "cat": "side-mirrors",
+   "pn": "96302-7S200",
+   "t": [
+    "Nissan",
+    "Titan",
+    2006
+   ],
+   "main": "plain",
+   "round7": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G08",
+   "cat": "side-mirrors",
+   "pn": "96302-7S200",
+   "t": [
+    "Nissan",
+    "Armada",
+    2005
+   ],
+   "main": "gate {\"built\": \"2004-10..2005-08\"}",
+   "round7": "gate {\"built\": \"2004-10..2005-08\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G10",
+   "cat": "side-mirrors",
+   "pn": "96301-3JA9A",
+   "t": [
+    "Infiniti",
+    "JX35",
+    2013
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_starred_scope"
+  },
+  {
+   "item": "G10",
+   "cat": "side-mirrors",
+   "pn": "96301-3JA9A",
+   "t": [
+    "Infiniti",
+    "QX60",
+    2015
+   ],
+   "main": "gate {\"eng_not\": [\"2.5L\"], \"fuel\": \"gas\"}",
+   "round7": "group not shipped",
+   "held": [
+    "held_starred_scope"
+   ],
+   "group_refusal": "held_starred_scope"
+  },
+  {
+   "item": "G10 twin",
+   "cat": "side-mirrors",
+   "pn": "96302-3JA9A",
+   "t": [
+    "Infiniti",
+    "JX35",
+    2013
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_starred_scope"
+  },
+  {
+   "item": "G10 twin",
+   "cat": "side-mirrors",
+   "pn": "96302-3JA9A",
+   "t": [
+    "Infiniti",
+    "QX60",
+    2015
+   ],
+   "main": "gate {\"eng_not\": [\"2.5L\"], \"fuel\": \"gas\"}",
+   "round7": "group not shipped",
+   "held": [
+    "held_starred_scope"
+   ],
+   "group_refusal": "held_starred_scope"
+  },
+  {
+   "item": "G12",
+   "cat": "side-mirrors",
+   "pn": "96302-7S600",
+   "t": [
+    "Nissan",
+    "Titan",
+    2006
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G12",
+   "cat": "side-mirrors",
+   "pn": "96302-7S600",
+   "t": [
+    "Nissan",
+    "Armada",
+    2005
+   ],
+   "main": "gate {\"built\": \"2004-10..2005-08\"}",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G15",
+   "cat": "window-regulator",
+   "pn": "80721-CL00A",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2005
+   ],
+   "main": "gate {\"built\": \"2004-09..2006-06\"}",
+   "round7": "gate {\"built\": \"2004-09..2006-06\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G15",
+   "cat": "window-regulator",
+   "pn": "80721-CL00A",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2006
+   ],
+   "main": "plain",
+   "round7": "gate {\"built\": \"2004-09..2006-06\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G15",
+   "cat": "window-regulator",
+   "pn": "80721-CL00A",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2006
+   ],
+   "main": "plain",
+   "round7": "gate {\"built\": \"2004-09..2006-06\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G16",
+   "cat": "window-regulator",
+   "pn": "80730-JK60C",
+   "t": [
+    "Infiniti",
+    "G25",
+    2012
+   ],
+   "main": "plain",
+   "round7": "gate {\"built\": \"2011-06..2014-06\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G16",
+   "cat": "window-regulator",
+   "pn": "80730-JK60C",
+   "t": [
+    "Infiniti",
+    "Q40",
+    2015
+   ],
+   "main": "plain",
+   "round7": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G21",
+   "cat": "window-regulator",
+   "pn": "80730-2Y000",
+   "t": [
+    "Infiniti",
+    "I30",
+    2001
+   ],
+   "main": "plain",
+   "round7": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G21",
+   "cat": "window-regulator",
+   "pn": "80730-2Y000",
+   "t": [
+    "Infiniti",
+    "I35",
+    2003
+   ],
+   "main": "plain",
+   "round7": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "G24",
+   "cat": "window-regulator",
+   "pn": "80721-EA000",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2010
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G24",
+   "cat": "window-regulator",
+   "pn": "80721-EA000",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2011
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G24",
+   "cat": "window-regulator",
+   "pn": "80721-EA000",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2010
+   ],
+   "main": "gate {\"built\": \"2008-07..2010-04\"}",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G25",
+   "cat": "window-regulator",
+   "pn": "82730-3Z005",
+   "t": [
+    "Nissan",
+    "Altima",
+    2003
+   ],
+   "main": "gate {\"built\": \"2002-11..2004-01\"}",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_cross_position"
+  },
+  {
+   "item": "G25",
+   "cat": "window-regulator",
+   "pn": "82730-3Z005",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2005
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_cross_position"
+  },
+  {
+   "item": "G27",
+   "cat": "window-regulator",
+   "pn": "80720-2Z710",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2002
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G27",
+   "cat": "window-regulator",
+   "pn": "80720-2Z710",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2003
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "G27",
+   "cat": "window-regulator",
+   "pn": "80720-2Z710",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2003
+   ],
+   "main": "gate {\"built\": \"2002-10..\"}",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_window_note_cap"
+  },
+  {
+   "item": "P03",
+   "cat": "window-regulator",
+   "pn": "82720-0E717",
+   "t": [
+    "Nissan",
+    "Altima",
+    1997
+   ],
+   "main": "plain",
+   "round7": "gate {\"built\": \"1996-07..\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "P03",
+   "cat": "window-regulator",
+   "pn": "82720-0E717",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1997
+   ],
+   "main": "plain",
+   "round7": "gate {\"built\": \"1996-07..\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "P08",
+   "cat": "window-regulator",
+   "pn": "80730-JX30B",
+   "t": [
+    "Nissan",
+    "Cube",
+    2011
+   ],
+   "main": "gate {\"built\": \"2009-02..2011-04\"}",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_cross_position"
+  },
+  {
+   "item": "P08",
+   "cat": "window-regulator",
+   "pn": "80730-JX30B",
+   "t": [
+    "Nissan",
+    "Rogue",
+    2010
+   ],
+   "main": "plain",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": "held_cross_position"
+  },
+  {
+   "item": "P12",
+   "cat": "window-regulator",
+   "pn": "80721-EH100",
+   "t": [
+    "Infiniti",
+    "M35",
+    2008
+   ],
+   "main": "plain",
+   "round7": "gate {\"built\": \"2004-12..2008-06\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "P12",
+   "cat": "window-regulator",
+   "pn": "80721-EH100",
+   "t": [
+    "Infiniti",
+    "M45",
+    2008
+   ],
+   "main": "plain",
+   "round7": "gate {\"built\": \"2004-12..2008-06\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "P30",
+   "cat": "window-regulator",
+   "pn": "80720-EH100",
+   "t": [
+    "Infiniti",
+    "M35",
+    2008
+   ],
+   "main": "plain",
+   "round7": "gate {\"built\": \"2004-12..2008-06\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "P30",
+   "cat": "window-regulator",
+   "pn": "80720-EH100",
+   "t": [
+    "Infiniti",
+    "M45",
+    2008
+   ],
+   "main": "plain",
+   "round7": "gate {\"built\": \"2004-12..2008-06\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "cross-door",
+   "cat": "window-regulator",
+   "pn": "80731-89915",
+   "t": [
+    "Nissan",
+    "Versa",
+    2007
+   ],
+   "main": "group not shipped",
+   "round7": "group not shipped",
+   "held": [],
+   "group_refusal": null
+  }
+ ]
+}
