@@ -9677,6 +9677,16 @@ function pfAmSplitNote(note) {
  *   displacements the part's engine column leaves out, the hybrid's own
  *   among them; a decode naming one rules the donor out, nothing else
  *   changes).
+ * Round 4 (2026-11-19, hub decisions): drive_not may stand alone, classes of
+ *   one family a same-option sibling number takes ("4wd" beside an AUTO
+ *   system): a decode in that family stays "if equipped", one in the other
+ *   family confirms, nothing is ruled out; built "2009-08..2010-01" (an open
+ *   end left empty, runs joined by ","): the number is listed for those
+ *   builds only, which no VIN decode gives, so a built limit is never
+ *   confirmed: every donor of that app-year is "if equipped" with "check the
+ *   build date on the door sticker". A donor whose VIN decode names another
+ *   make or model year than its listing (v.vpicMismatch) is never a plain
+ *   row either: "this car's listing and VIN disagree, check the car".
  * Same honesty as the aftermarket gate above and the car-card parts table
  * (match_vehicle's drive, body and manual gates): the donor's own VIN decode
  * or listing naming the limit confirms it; one naming something else rules
@@ -9721,6 +9731,31 @@ function pfOemDriveVerdict1(drive, model, driveType) {
   if (two && one === '2wd') return 'unconfirmed';       // "4x2" does not say front or rear
   if (allow.has('a4wd')) return 'unconfirmed';          // All-Mode 4WD is not in a decode
   return 'exclude';                                     // one class named, not the limit's
+}
+/* drive_not alone (round 4): the drive classes of one family the page lists
+ * under another number for the same option, beside another system of that
+ * family the number may still fit (part-time 4WD vs All-Mode AUTO). A decode
+ * never says which system, so that family stays "if equipped"; the other
+ * family confirms; nothing is ruled out. */
+function pfOemDriveNotVerdict(driveNot, model, driveType) {
+  const not = pfOemDriveSet(driveNot);
+  const four = [...not].every(c => !PF_OEM_TWO.includes(c));
+  const cls = pfAmDriveClasses(driveType);
+  const one = cls.size === 1 ? [...cls][0] : '';
+  if (!one) return 'unconfirmed';
+  const oneFour = one === '4wd' || one === 'awd';
+  return oneFour === four ? 'unconfirmed' : 'confirm';
+}
+/* built (round 4): "2009-08..2010-01,2010-06.." -> "08/2009-01/2010, from 06/2010" */
+function pfOemBuiltText(built) {
+  const mm = s => { const m = /^(\d{4})-(\d{2})$/.exec(s || ''); return m ? `${m[2]}/${m[1]}` : ''; };
+  return String(built || '').split(',').map(run => {
+    const [a, b] = run.split('..');
+    if (mm(a) && mm(b)) return `${mm(a)}-${mm(b)}`;
+    if (mm(a)) return `from ${mm(a)}`;
+    if (mm(b)) return `to ${mm(b)}`;
+    return '';
+  }).filter(Boolean).join(', ');
 }
 function pfOemBodyVerdict(body, model, sil) {
   const vs = (Array.isArray(body) ? body : [body]).map(b => pfAmBodyVerdict(b, model, sil));
@@ -9783,6 +9818,8 @@ function pfOemGate(gate, v, ex) {
   if (!g) return { verdict: 'confirm', keys: [] };
   const vs = {};
   if (g.drive) vs.drive = pfOemDriveVerdict(g.drive, v.model, v.vpicDriveType, g.drive_not);
+  else if (g.drive_not) vs.drive = pfOemDriveNotVerdict(g.drive_not, v.model, v.vpicDriveType);
+  if (g.built) vs.built = 'unconfirmed';   // no decode gives the build month
   if (g.body) vs.body = pfOemBodyVerdict(g.body, v.model, ex ? ex[extraIdx.body] : '');
   if (g.cab) vs.cab = pfOemCabVerdict(g.cab, v);
   if (g.eng) vs.eng = pfOemEngVerdict(g.eng, ex ? ex[extraIdx.engine] : '');
@@ -9806,31 +9843,55 @@ function pfOemGateText(gate) {
       ? (a.size === 1 && a.has('fwd') ? 'FWD' : a.size === 1 && a.has('rwd') ? 'RWD' : '2WD')
       : (g.drive_not === 'a4wd' && a.size === 1 && a.has('4wd')) ? 'part-time 4WD'
       : ['4wd', 'awd', 'a4wd'].filter(c => a.has(c)).map(c => (c === 'a4wd' ? '4WD AUTO' : c.toUpperCase())).join('/'));
+  } else if (g.drive_not) {
+    const a = pfOemDriveSet(g.drive_not);
+    bits.push('not ' + ([...a].every(c => PF_OEM_TWO.includes(c)) ? '2WD'
+      : ['4wd', 'awd', 'a4wd'].filter(c => a.has(c)).map(c => (c === 'a4wd' ? '4WD AUTO' : c === '4wd' ? 'part-time 4WD' : 'AWD')).join('/')));
   }
   if (g.body) bits.push((Array.isArray(g.body) ? g.body : [g.body]).join(' or '));
   if (g.eng) bits.push((Array.isArray(g.eng) ? g.eng : [g.eng]).join('/'));
   if (g.trans) bits.push(g.trans === 'MT' ? 'manual' : 'automatic');
   if (g.fuel) bits.push(String(g.fuel));
+  if (g.built && pfOemBuiltText(g.built)) bits.push(`built ${pfOemBuiltText(g.built)}`);
   return bits.join(', ');
+}
+/* The gate without its build window: the limits a car's own data can confirm. */
+function pfOemGateNoBuilt(gate) {
+  const g = pfOemGateParse(gate);
+  if (!g || !g.built) return g;
+  const { built, ...rest } = g;
+  return pfOemGateParse(rest);
 }
 /* A donor against the apps of one group that match it: an ungated or
  * confirmed app keeps it as a plain row; else an "if equipped" app keeps it
  * with a line naming the limit; when every matching app is ruled out by the
  * car's own decode or listing, the donor is not offered for this group. */
+const PF_OEM_VIN_MISMATCH = "if equipped: this car's listing and VIN disagree, check the car";
 function pfOemDonorGate(apps, v, ex) {
+  // round 4: a car whose VIN decode names another make or model year than
+  // its listing may not be the car the listing says: never a plain row
+  const mism = !!(v && v.vpicMismatch);
   let unc = null;
   for (const a of apps) {
     const r = pfOemGate(a[5], v, ex);
-    if (r.verdict === 'confirm') return { verdict: 'confirm', warn: '' };
+    if (r.verdict === 'confirm') return mism ? { verdict: 'unconfirmed', warn: PF_OEM_VIN_MISMATCH } : { verdict: 'confirm', warn: '' };
     if (r.verdict === 'unconfirmed' && !unc) unc = { r, a };
   }
   if (!unc) return { verdict: 'exclude', warn: '' };
-  const nouns = unc.r.keys.map(k => PF_OEM_GATE_NOUN[k]);
-  // a drive limit from the one drive page read ("only 2WD checked") is not
-  // the catalog's own statement: say "checked", as the note does
-  const verb = unc.a[5].drive_basis === 'unchecked' ? 'checked' : 'listed';
-  return { verdict: 'unconfirmed',
-    warn: `if equipped: this part is ${verb} for ${pfOemGateText(unc.a[5])} only — this donor's ${nouns.join(' and ')} ${nouns.length > 1 ? "aren't" : "isn't"} confirmed, check the car` };
+  const lines = [];
+  const keys = unc.r.keys.filter(k => k !== 'built');
+  if (keys.length) {
+    const nouns = keys.map(k => PF_OEM_GATE_NOUN[k]);
+    // a drive limit from the one drive page read ("only 2WD checked") is not
+    // the catalog's own statement: say "checked", as the note does
+    const verb = unc.a[5].drive_basis === 'unchecked' ? 'checked' : 'listed';
+    lines.push(`this part is ${verb} for ${pfOemGateText(pfOemGateNoBuilt(unc.a[5]))} only — this donor's ${nouns.join(' and ')} ${nouns.length > 1 ? "aren't" : "isn't"} confirmed, check the car`);
+  }
+  if (unc.r.keys.includes('built')) {
+    lines.push(`this part is listed for cars built ${pfOemBuiltText(unc.a[5].built)} only — check the build date on the door sticker`);
+  }
+  if (mism) lines.push("this car's listing and VIN disagree, check the car");
+  return { verdict: 'unconfirmed', warn: `if equipped: ${lines.join('; ')}` };
 }
 /* OEM-GATE END */
 function pfAmRows(s, groups, results, radius, fam) {
@@ -10321,7 +10382,9 @@ function pfRunSearch() {
       }
       if (oemLikelyHit) groupNotes.push(PF_OEM_LIKELY_HEAD);
       if (oemSeekerGates.size) {
-        groupNotes.push(`Some catalog numbers here were found for a ${s.year} ${s.model} with ${[...oemSeekerGates].join(' or ')} only — check yours matches before you pull.`);
+        // a build window alone reads "built 08/2009-01/2010" (round 4), the rest "with 2WD"
+        const sg = [...oemSeekerGates].map(t => (t.startsWith('built ') ? t : `with ${t}`)).join(' or ');
+        groupNotes.push(`Some catalog numbers here were found for a ${s.year} ${s.model} ${sg} only — check yours matches before you pull.`);
       }
     }
     // Aftermarket unit lists (Spectra, GSP/1A…) for chassis-side categories:

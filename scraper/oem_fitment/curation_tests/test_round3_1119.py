@@ -257,7 +257,8 @@ check("Rogue 2014-2015 also holds the Rogue Select; 2013 and 2016 do not",
 check("gate: drive_not a4wd only beside a 4WD-family drive without a4wd",
       V.gate_problem({"drive": "4wd", "drive_basis": "stated", "drive_not": "a4wd"}) is None
       and V.gate_problem({"drive": "2wd", "drive_not": "a4wd"}) and V.gate_problem({"drive": "a4wd", "drive_not": "a4wd"})
-      and V.gate_problem({"drive_not": "a4wd"}))
+      # round4-1119: drive_not alone (a same-option drive sibling) is classes of ONE family
+      and V.gate_problem({"drive_not": "a4wd"}) is None and V.gate_problem({"drive_not": "a4wd/2wd"}))
 check("gate: eng_not only on a gas gate without an engine list",
       V.gate_problem({"fuel": "gas", "eng_not": ["2.5L"]}) is None
       and V.gate_problem({"eng_not": ["2.5L"]}) and V.gate_problem({"fuel": "hybrid", "eng_not": ["2.5L"]})

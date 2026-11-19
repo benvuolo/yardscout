@@ -1,0 +1,1957 @@
+{
+ "report": "nissan_recheck_2026-11-19d",
+ "status": "builder's own re-check, NOT independent",
+ "of": "groups/_report/nissan_verify_2026-11-19d.json (seed 38271119): every WRONG and RISK item",
+ "candidate": "groups/_report/nissan.candidate.json on interchange/round4-1119 (oem-raw@57e8b5b99de0, lot a85c654)",
+ "lot_counts": "the item's vehicle-year (pairs) or the whole group: plain / unc (if equipped) / exc, lot_replay.mjs",
+ "items": [
+  {
+   "item": "oem:nissan:climate-control:C:75527baaaa",
+   "kind": "groups",
+   "verdict_1119d": "RISK",
+   "cat": "climate-control",
+   "pn": [
+    "27510-EA00A"
+   ],
+   "vy": null,
+   "reason_1119d": "Production split, not stated in the note. 2010 Pathfinder own page (nissanpartsdeal lists L414): 27510-EA00A 'Production Date: 08/2009-01/2010'; 27510-9BH0A 'from 01/2010'; both (and 27510-EA000 07/2008-08/2009) 'Replaced By: 27510-9CA0A' (common successor only). About half of MY2010 Pathfinder buil",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2010,
+      2010
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2009,
+      2010
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2010,
+      2010,
+      {
+       "eng": [
+        "4.0L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #27510-EA00A for both \u2014 option: fits some option packages; Pathfinder: 4.0L only; verify the number on the part"
+   },
+   "after": null,
+   "refusals_after": [
+    {
+     "reason": "held_window_note_cap",
+     "detail": "Pathfinder: 4.0L, built 08/2009-01/2010 only; Xterra: built 08/2009-01/2010 only"
+    }
+   ],
+   "lot_before": {
+    "plain": 92,
+    "unc": 4,
+    "exc": 1
+   },
+   "lot_after": null,
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Pathfinder",
+      2010
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 08/2009-01/2010",
+      "edge": false,
+      "others": [
+       [
+        "27510-9BH0A",
+        "built from 01/2010",
+        false
+       ],
+       [
+        "27510-EA000",
+        "built 07/2008-08/2009",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Xterra",
+      2009
+     ],
+     "window": {
+      "kind": "drop",
+      "src": "other_page",
+      "label": "built 08/2009-01/2010",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Xterra",
+      2010
+     ],
+     "window": {
+      "kind": "no_page",
+      "src": "page",
+      "label": "built 08/2009-01/2010",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:gauge-cluster:C:639ae7b7a3",
+   "kind": "groups",
+   "verdict_1119d": "RISK",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7Z803"
+   ],
+   "vy": null,
+   "reason_1119d": "Pages of the same catalog disagree on MY2001. The 2001 Frontier and Xterra pages (lists L313, L211) list 24810-7Z803 for 'KC. VG33E. XE + CC. SB. XE + CC. XB. XE' / 'W. (VG33E + VG33ER). XE' with no date, but the 2002 pages and the product record give 'Production Date: 07/2001-04/2002', which lies w",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2001,
+      2002
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2001,
+      2002
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Frontier",
+      2001,
+      2002,
+      {
+       "cab": [
+        "king cab",
+        "crew cab"
+       ],
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2001,
+      2002,
+      {
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-7Z803 for both \u2014 option: fits some option packages; Frontier: king cab/crew cab only; 3.3L only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2002,
+      2002
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2002,
+      2002
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Frontier",
+      2002,
+      2002,
+      {
+       "cab": [
+        "king cab",
+        "crew cab"
+       ],
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2002,
+      2002,
+      {
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-7Z803 for both \u2014 option: fits some option packages; Frontier: king cab/crew cab only; 3.3L only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 215,
+    "unc": 114,
+    "exc": 48
+   },
+   "lot_after": {
+    "plain": 131,
+    "unc": 76,
+    "exc": 22
+   },
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Frontier",
+      2001
+     ],
+     "window": {
+      "kind": "drop",
+      "src": "other_page",
+      "label": "built 07/2001-04/2002",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     "window": {
+      "kind": "linked",
+      "src": "page",
+      "label": "built 07/2001-04/2002",
+      "edge": true,
+      "others": [
+       [
+        "24810-7Z903",
+        "built 04/2002-09/2002",
+        true
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Xterra",
+      2001
+     ],
+     "window": {
+      "kind": "drop",
+      "src": "other_page",
+      "label": "built 07/2001-04/2002",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Xterra",
+      2002
+     ],
+     "window": {
+      "kind": "linked",
+      "src": "page",
+      "label": "built 07/2001-04/2002",
+      "edge": true,
+      "others": [
+       [
+        "24810-7Z903",
+        "built 04/2002-08/2002",
+        true
+       ]
+      ]
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:gauge-cluster:C:41e9a3d6fc",
+   "kind": "groups",
+   "verdict_1119d": "RISK",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7S00E"
+   ],
+   "vy": null,
+   "reason_1119d": "Feed identity: one plain row is lot record 'Nissan Titan 2006' whose VIN JYARN15E66A000358 decodes as a Yamaha (1.0L; scraper flag 'VIN decodes as Yamaha (listed Nissan)'); the product page's engine column says 5.6L VK56DE and the group has no eng gate, so the app shows it as a plain row. If the lis",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2006
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2004,
+      2006
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #24810-7S00E for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2006
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2006
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2005,
+      {
+       "drive": "4wd",
+       "drive_basis": "stated"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-7S00E for both \u2014 option: fits some option packages; Titan 2005: 4WD only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 688,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 418,
+    "unc": 21,
+    "exc": 80
+   },
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Armada",
+      2005
+     ],
+     "window": {
+      "kind": "linked",
+      "src": "page",
+      "label": "built 10/2004-08/2006",
+      "edge": false,
+      "others": [
+       [
+        "24810-7S004",
+        "built 08/2003-10/2004",
+        true
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Armada",
+      2006
+     ],
+     "window": {
+      "kind": "full",
+      "src": "page",
+      "label": "built 10/2004-08/2006",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2004
+     ],
+     "window": {
+      "kind": "drop",
+      "src": "other_page",
+      "label": "built 10/2004-08/2006",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2005
+     ],
+     "window": {
+      "kind": "no_other_row",
+      "src": "page",
+      "label": "built 10/2004-08/2006",
+      "edge": false,
+      "others": []
+     },
+     "sibling": [
+      "drive",
+      [
+       "4wd"
+      ]
+     ]
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "window": {
+      "kind": "full",
+      "src": "page",
+      "label": "built 10/2004-08/2006",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:gauge-cluster:C:8fda9acbc5",
+   "kind": "groups",
+   "verdict_1119d": "RISK",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7S02E"
+   ],
+   "vy": null,
+   "reason_1119d": "Feed identity: one plain row is lot record 'Nissan Titan 2006' whose VIN JYARN15E66A000358 decodes as a Yamaha (1.0L; scraper flag 'VIN decodes as Yamaha (listed Nissan)'); the product page's engine column says 5.6L VK56DE and the group has no eng gate, so the app shows it as a plain row. If the lis",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2006,
+      2006
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2006,
+      2006
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #24810-7S02E for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2006,
+      2006
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2006,
+      2006
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Armada",
+      2006,
+      2006,
+      {
+       "built": "2005-08..2006-08"
+      }
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2006,
+      2006,
+      {
+       "built": "2005-08..2006-08"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-7S02E for both \u2014 option: fits some option packages; built 08/2005-08/2006 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 271,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 0,
+    "unc": 271,
+    "exc": 0
+   },
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Armada",
+      2006
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 08/2005-08/2006",
+      "edge": true,
+      "others": [
+       [
+        "24810-7S00E",
+        "built 10/2004-08/2006",
+        false
+       ],
+       [
+        "24810-7S01A",
+        "built 10/2004-08/2006",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 08/2005-08/2006",
+      "edge": true,
+      "others": [
+       [
+        "24810-7S00E",
+        "built 10/2004-08/2006",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:gauge-cluster:C:d8db3116fc",
+   "kind": "groups",
+   "verdict_1119d": "WRONG",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-3ZD0A"
+   ],
+   "vy": null,
+   "reason_1119d": "Drive (AWD sibling), plus an unlinked production split. 2013 QX56 page (infinitipartsdeal lists L793): 24820-3ZD0A '*3ROW. PREMIUM', while 24820-1ZS0A is listed for '*3ROW. AWD. PREMIUM' and 24820-1ZS0C for '*3ROW. AWD. 7P. LE, *3ROW. AWD. LE, *3ROW. AWD. PREMIUM' (both dateless; 1ZS0A's product pag",
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "QX56",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX80",
+      2014,
+      2014
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #24820-3ZD0A for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Infiniti",
+      "QX56",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX80",
+      2014,
+      2014
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "QX56",
+      2013,
+      2013,
+      {
+       "built": "2013-02..2014-08",
+       "drive": "2wd",
+       "drive_basis": "stated"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24820-3ZD0A for both \u2014 option: fits some option packages; QX56: 2WD, built 02/2013-08/2014 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 22,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 14,
+    "unc": 2,
+    "exc": 6
+   },
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Infiniti",
+      "QX56",
+      2013
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 02/2013-08/2014",
+      "edge": false,
+      "others": [
+       [
+        "24820-1V90A",
+        "built 08/2012-02/2013",
+        false
+       ],
+       [
+        "24820-1V91A",
+        "built 08/2012-02/2013",
+        false
+       ],
+       [
+        "24820-1ZS1A",
+        "built 07/2011-08/2012",
+        false
+       ]
+      ]
+     },
+     "sibling": [
+      "drive",
+      [
+       "2wd"
+      ]
+     ]
+    },
+    {
+     "T": [
+      "Infiniti",
+      "QX80",
+      2014
+     ],
+     "window": {
+      "kind": "full",
+      "src": "page",
+      "label": "built 02/2013-08/2014",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:side-mirrors:R:d5f882d545",
+   "kind": "groups",
+   "verdict_1119d": "WRONG",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-3JA9B"
+   ],
+   "vy": null,
+   "reason_1119d": "Drive (AWD sibling). On the 2015, 2016 and 2017 QX60 (gas) pages (infinitipartsdeal lists L528, L840, L741) 96301-3JA9B is listed for '*W. PREMIUM' only, while 96301-3JN9B is listed for '*W. AWD. BASE, *W. AWD. PREMIUM' (2016-17: '*W. AWD. PREMIUM'); AWD without the asterisked option takes 96301-3JA",
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "JX35",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX60",
+      2014,
+      2017
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "QX60",
+      2014,
+      2017,
+      {
+       "fuel": "gas"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #96301-3JA9B for both \u2014 option: fits some option packages; QX60: gas only; verify the number on the part"
+   },
+   "after": null,
+   "refusals_after": [
+    {
+     "reason": "held_drive_qualifier",
+     "detail": "JX35: 2WD only; QX60 2014: gas only; QX60 2015-2017: 2WD, gas only"
+    }
+   ],
+   "lot_before": {
+    "plain": 281,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": null,
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Infiniti",
+      "JX35",
+      2013
+     ],
+     "window": null,
+     "sibling": [
+      "drive",
+      [
+       "2wd"
+      ]
+     ]
+    },
+    {
+     "T": [
+      "Infiniti",
+      "QX60",
+      2015
+     ],
+     "window": null,
+     "sibling": [
+      "drive",
+      [
+       "2wd"
+      ]
+     ]
+    },
+    {
+     "T": [
+      "Infiniti",
+      "QX60",
+      2016
+     ],
+     "window": null,
+     "sibling": [
+      "drive",
+      [
+       "2wd"
+      ]
+     ]
+    },
+    {
+     "T": [
+      "Infiniti",
+      "QX60",
+      2017
+     ],
+     "window": null,
+     "sibling": [
+      "drive",
+      [
+       "2wd"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:side-mirrors:R:da7775231b",
+   "kind": "groups",
+   "verdict_1119d": "RISK",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-3JA9A"
+   ],
+   "vy": null,
+   "reason_1119d": "(1) AWD sibling: the same pages list 96301-3JN9B '*W. AWD. BASE, *W. AWD. PREMIUM' and 96301-3JN9C '*W. AWD. BASE' beside 96301-3JA9A 'W, W. BASE' / 'W. BASE'. An AWD base car without the asterisked option would take 3JA9A, one with it takes 3JN9B/3JN9C; what the asterisk marks is not stated, and ev",
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "JX35",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX60",
+      2014,
+      2016
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "QX60",
+      2014,
+      2016,
+      {
+       "fuel": "gas"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #96301-3JA9A for both \u2014 option: fits some option packages; QX60: gas only; verify the number on the part"
+   },
+   "after": null,
+   "refusals_after": [
+    {
+     "reason": "held_drive_qualifier",
+     "detail": "QX60 2014: gas only; QX60 2015: 2WD, gas only; QX60 2016: 2WD, gas, built 08/2013-01/2016 only"
+    }
+   ],
+   "lot_before": {
+    "plain": 261,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": null,
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Infiniti",
+      "QX60",
+      2015
+     ],
+     "window": {
+      "kind": "full",
+      "src": "other_page",
+      "label": "built 08/2013-01/2016",
+      "edge": false,
+      "others": []
+     },
+     "sibling": [
+      "drive",
+      [
+       "2wd"
+      ]
+     ]
+    },
+    {
+     "T": [
+      "Infiniti",
+      "QX60",
+      2016
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 08/2013-01/2016",
+      "edge": false,
+      "others": [
+       [
+        "96301-9NF9A",
+        "built from 01/2016",
+        false
+       ],
+       [
+        "96301-9NG9C",
+        "built from 01/2016",
+        false
+       ]
+      ]
+     },
+     "sibling": [
+      "drive",
+      [
+       "2wd"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:side-mirrors:R:7a4166c9a0",
+   "kind": "groups",
+   "verdict_1119d": "RISK",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-ZC20A"
+   ],
+   "vy": null,
+   "reason_1119d": "Feed identity: one plain row is lot record 'Nissan Titan 2006' whose VIN JYARN15E66A000358 decodes as a Yamaha (1.0L; scraper flag 'VIN decodes as Yamaha (listed Nissan)'); the product page's engine column says 5.6L VK56DE and the group has no eng gate, so the app shows it as a plain row. If the lis",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2015
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2008
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #96301-ZC20A for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2015
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2007
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Titan",
+      2006,
+      2006,
+      {
+       "built": "2005-08..2007-04"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #96301-ZC20A for both \u2014 option: fits some option packages; Titan 2006: built 08/2005-04/2007 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 1063,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 809,
+    "unc": 152,
+    "exc": 0
+   },
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Armada",
+      2006
+     ],
+     "window": {
+      "kind": "linked",
+      "src": "page",
+      "label": "built 08/2005-10/2007",
+      "edge": true,
+      "others": [
+       [
+        "96301-7S200",
+        "built 10/2004-08/2005",
+        true
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 08/2005-04/2007",
+      "edge": true,
+      "others": [
+       [
+        "96301-8S100",
+        "built 10/2004-04/2007",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2007
+     ],
+     "window": {
+      "kind": "full",
+      "src": "other_page",
+      "label": "built 08/2005-04/2008",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2008
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 08/2006-04/2008",
+      "edge": true,
+      "others": [
+       [
+        "96301-ZR20A",
+        "built 04/2008-08/2010",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:window-regulator:FR:cdc8f04746",
+   "kind": "groups",
+   "verdict_1119d": "RISK",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-2Z710"
+   ],
+   "vy": null,
+   "reason_1119d": "Pages disagree / unlinked production split. The 2002 Frontier and Xterra pages list 80720-2Z710 with no date, but the 2003 Frontier page (lists L412) gives 2Z710 'Production Date: from 10/2002' and 80720-3S510 '07/2001-09/2002' for the same 'KC + CC. SB + CC. XB' (no supersession between them). So n",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2002,
+      2004
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2002,
+      2003
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Frontier",
+      2002,
+      2002,
+      {
+       "cab": [
+        "king cab",
+        "crew cab"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80720-2Z710 for both \u2014 option: fits some option packages; Frontier 2002: king cab/crew cab only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2003,
+      2004
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2002,
+      2003
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Frontier",
+      2003,
+      2003,
+      {
+       "built": "2002-10.."
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80720-2Z710 for both \u2014 option: fits some option packages; Frontier 2003: built from 10/2002 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 363,
+    "unc": 70,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 315,
+    "unc": 48,
+    "exc": 0
+   },
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     "window": {
+      "kind": "drop",
+      "src": "other_page",
+      "label": "built from 10/2002",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Frontier",
+      2003
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built from 10/2002",
+      "edge": false,
+      "others": [
+       [
+        "80720-3S510",
+        "built 07/2001-09/2002",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Frontier",
+      2004
+     ],
+     "window": {
+      "kind": "full",
+      "src": "other_page",
+      "label": "built from 10/2002",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:window-regulator:FR:2acad14646",
+   "kind": "groups",
+   "verdict_1119d": "RISK",
+   "cat": "window-regulator",
+   "pn": [
+    "80730-EA005"
+   ],
+   "vy": null,
+   "reason_1119d": "Feed identity: one plain row is lot record 'Nissan Xterra 2005' whose VIN 5N1ED28T64C687084 decodes as a 2004 WD22 Xterra 3.3L (scraper flag 'VIN decodes as 2004 (listed 2005)'); the product page's engine column says 4.0L VQ40DE and there is no eng gate, so it shows as a plain row. If the VIN is rig",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2005,
+      2019
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2005,
+      2008
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005,
+      2015
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2008,
+      2008,
+      {
+       "eng": [
+        "4.0L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80730-EA005 for both \u2014 option: fits some option packages; Pathfinder 2008: 4.0L only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2005,
+      2019
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2005,
+      2008
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005,
+      2015
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2008,
+      2008,
+      {
+       "eng": [
+        "4.0L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80730-EA005 for both \u2014 option: fits some option packages; Pathfinder 2008: 4.0L only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 1364,
+    "unc": 11,
+    "exc": 4
+   },
+   "lot_after": {
+    "plain": 1362,
+    "unc": 13,
+    "exc": 4
+   },
+   "round4_by_app_year": []
+  },
+  {
+   "item": "oem:nissan:window-regulator:RR:43fd8a971d",
+   "kind": "groups",
+   "verdict_1119d": "RISK",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-7S000"
+   ],
+   "vy": null,
+   "reason_1119d": "Production split linked only through a common successor. 2006 Armada and 2006 Titan pages: 82720-7S000 'Production Date: 10/2004-12/2005'; 82720-ZC30A '12/2005-08/2006' (Armada) / '12/2005-04/2007' (Titan); both 'Replaced By: 82720-ZV50A'. About half of MY2006 builds carry ZC30A. 2004-2005 are fully",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2004,
+      2006
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2004,
+      2006
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Titan",
+      2004,
+      2006,
+      {
+       "cab": "crew cab"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #82720-7S000 for both \u2014 fits some configurations; Titan: crew cab only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2004,
+      2005
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2005
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2005,
+      {
+       "cab": "crew cab"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #82720-7S000 for both \u2014 fits some configurations; Titan: crew cab only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 307,
+    "unc": 466,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 188,
+    "unc": 145,
+    "exc": 0
+   },
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Armada",
+      2004
+     ],
+     "window": {
+      "kind": "no_other_row",
+      "src": "other_page",
+      "label": "built 08/2003-12/2005",
+      "edge": true,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Armada",
+      2005
+     ],
+     "window": {
+      "kind": "full",
+      "src": "page",
+      "label": "built 08/2003-12/2005",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Armada",
+      2006
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 10/2004-12/2005",
+      "edge": false,
+      "others": [
+       [
+        "82720-ZC30A",
+        "built 12/2005-04/2008",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2004
+     ],
+     "window": {
+      "kind": "no_page",
+      "src": "other_page",
+      "label": "built 10/2003-12/2005",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2005
+     ],
+     "window": {
+      "kind": "full",
+      "src": "page",
+      "label": "built 10/2003-12/2005",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 10/2004-12/2005",
+      "edge": false,
+      "others": [
+       [
+        "82720-ZC30A",
+        "built 12/2005-04/2007",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:side-mirrors:R:4bb386f38e",
+   "kind": "pairs",
+   "verdict_1119d": "RISK",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-ZC60A"
+   ],
+   "vy": [
+    "Nissan",
+    "Armada",
+    2007
+   ],
+   "reason_1119d": "Pages disagree. 2007 Armada page lists 96301-ZC60A 'W. LE' with no date, but its product record (2006 Armada page) says 'Production Date: 08/2005-08/2006' (MY2007 overlap about 2 months); the 2007 page also lists, for 'W. LE', 96301-ZC400 '10/2004-04/2007' and 96301-ZQ40A '04/2007-04/2008' (neither ",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2007
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2006,
+      2006
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #96301-ZC60A for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2006
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2006,
+      2006
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #96301-ZC60A for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 77,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 0,
+    "unc": 0,
+    "exc": 0
+   },
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Armada",
+      2006
+     ],
+     "window": {
+      "kind": "linked",
+      "src": "page",
+      "label": "built 08/2005-08/2006",
+      "edge": true,
+      "others": [
+       [
+        "96301-7S600",
+        "built 10/2004-08/2005",
+        true
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Armada",
+      2007
+     ],
+     "window": {
+      "kind": "drop",
+      "src": "other_page",
+      "label": "built 08/2005-08/2006",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "window": {
+      "kind": "linked",
+      "src": "page",
+      "label": "built 08/2005-08/2006",
+      "edge": true,
+      "others": [
+       [
+        "96301-7S600",
+        "built 10/2004-08/2005",
+        true
+       ]
+      ]
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:gauge-cluster:C:1c6c599444",
+   "kind": "pairs",
+   "verdict_1119d": "RISK",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-9BA5B"
+   ],
+   "vy": [
+    "Nissan",
+    "Xterra",
+    2011
+   ],
+   "reason_1119d": "Unlinked production split. 2011 Xterra page: 24810-9BA5B 'Production Date: 08/2010-04/2011; FVO: W. 2WD' (no supersession), then 24810-9CA5B '04/2011-08/2011; W. 2WD'; 24810-9BD5B 'W. 2WD + W. 4WD. X' dateless. Roughly the last third of MY2011 2WD builds is listed under 9CA5B. Drive gate 2wd right: ",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2010,
+      2011
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2010,
+      2011
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Frontier",
+      2010,
+      2011,
+      {
+       "drive": "2wd",
+       "drive_basis": "stated",
+       "eng": [
+        "4.0L"
+       ]
+      }
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2010,
+      2011,
+      {
+       "drive": "2wd",
+       "drive_basis": "stated"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-9BA5B for both \u2014 option: fits some option packages; Frontier: 2WD, 4.0L only; Xterra: 2WD only; verify the number on the part"
+   },
+   "after": null,
+   "refusals_after": [
+    {
+     "reason": "held_window_note_cap",
+     "detail": "Frontier: 2WD, 4.0L, built 08/2010-04/2011 only; Xterra: 2WD, built 08/2010-04/2011 only"
+    }
+   ],
+   "lot_before": {
+    "plain": 11,
+    "unc": 1,
+    "exc": 8
+   },
+   "lot_after": null,
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     "window": {
+      "kind": "drop",
+      "src": "other_page",
+      "label": "built 08/2010-04/2011",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 08/2010-04/2011",
+      "edge": false,
+      "others": [
+       [
+        "24810-9CA5A",
+        "built 04/2011-08/2011",
+        false
+       ],
+       [
+        "24810-9CA5B",
+        "built 04/2011-08/2011",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Xterra",
+      2010
+     ],
+     "window": {
+      "kind": "drop",
+      "src": "other_page",
+      "label": "built 08/2010-04/2011",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Xterra",
+      2011
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 08/2010-04/2011",
+      "edge": false,
+      "others": [
+       [
+        "24810-9CA5B",
+        "built 04/2011-08/2011",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:gauge-cluster:C:ac64e3f5f0",
+   "kind": "pairs",
+   "verdict_1119d": "RISK",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-EA67E"
+   ],
+   "vy": [
+    "Nissan",
+    "Xterra",
+    2005
+   ],
+   "reason_1119d": "Feed identity: one plain row is lot record 'Nissan Xterra 2005' whose VIN 5N1ED28T64C687084 decodes as a 2004 WD22 Xterra 3.3L (scraper flag 'VIN decodes as 2004 (listed 2005)'); the product page's engine column says 4.0L VQ40DE and there is no eng gate, so it shows as a plain row. If the VIN is rig",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2005,
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005,
+      2005
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2005,
+      2005,
+      {
+       "drive": "2wd",
+       "drive_basis": "stated"
+      }
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005,
+      2005,
+      {
+       "drive": "2wd",
+       "drive_basis": "stated"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-EA67E for both \u2014 option: fits some option packages; 2WD only; verify the number on the part"
+   },
+   "after": null,
+   "refusals_after": [
+    {
+     "reason": "held_window_note_cap",
+     "detail": "Pathfinder: 2WD, built 12/2004-09/2005 only; Xterra: 2WD only"
+    }
+   ],
+   "lot_before": {
+    "plain": 48,
+    "unc": 8,
+    "exc": 37
+   },
+   "lot_after": null,
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Pathfinder",
+      2005
+     ],
+     "window": {
+      "kind": "unlinked",
+      "src": "page",
+      "label": "built 12/2004-09/2005",
+      "edge": false,
+      "others": [
+       [
+        "24810-EA401",
+        "built 08/2004-12/2004",
+        false
+       ],
+       [
+        "24810-EA403",
+        "built 08/2004-12/2004",
+        false
+       ],
+       [
+        "24810-EA602",
+        "built 08/2004-12/2004",
+        false
+       ]
+      ]
+     },
+     "sibling": null
+    },
+    {
+     "T": [
+      "Nissan",
+      "Xterra",
+      2005
+     ],
+     "window": {
+      "kind": "no_other_row",
+      "src": "page",
+      "label": "built 01/2005-09/2005",
+      "edge": false,
+      "others": []
+     },
+     "sibling": null
+    }
+   ]
+  },
+  {
+   "item": "oem:nissan:side-mirrors:L:ef799f1000",
+   "kind": "pairs",
+   "verdict_1119d": "RISK",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-EA000"
+   ],
+   "vy": [
+    "Nissan",
+    "Xterra",
+    2005
+   ],
+   "reason_1119d": "Feed identity: one plain row is lot record 'Nissan Xterra 2005' whose VIN 5N1ED28T64C687084 decodes as a 2004 WD22 Xterra 3.3L (scraper flag 'VIN decodes as 2004 (listed 2005)'); the product page's engine column says 4.0L VQ40DE and there is no eng gate, so it shows as a plain row. If the VIN is rig",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2005,
+      2012
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005,
+      2013
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #96302-EA000 for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2005,
+      2012
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005,
+      2013
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #96302-EA000 for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 93,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 92,
+    "unc": 1,
+    "exc": 0
+   },
+   "round4_by_app_year": [
+    {
+     "T": [
+      "Nissan",
+      "Frontier",
+      2012
+     ],
+     "window": {
+      "kind": "linked",
+      "src": "page",
+      "label": "built 08/2010-04/2012",
+      "edge": true,
+      "others": [
+       [
+        "96302-9BC9A",
+        "built 04/2012-09/2016",
+        true
+       ]
+      ]
+     },
+     "sibling": null
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,387 @@
+ford CHANGED LIVE ('climate-control', ('8G1Z-19980-C',)) [['Ford', 'Taurus', 2008, 2008], ['Ford', 'Taurus X', 2008, 2008]] lost [] gained []
+    old: Ford catalog lists #8G1Z-19980-C for both — fits some configurations; verify the number on the part
+    new: Ford catalog lists #8G1Z-19980-C for both — fits some configurations; Taurus: built 04/2007-12/2007 only; verify the number on the part
+    GATE-NARROWED ('Ford', 'Taurus', 2008): None -> {'built': '2007-04..2007-12'}
+ford CHANGED LIVE ('climate-control', ('8G1Z-19980-F',)) [['Ford', 'Taurus', 2008, 2008], ['Ford', 'Taurus X', 2008, 2008]] lost [] gained []
+    old: Ford catalog lists #8G1Z-19980-F for both — trim-limited; verify the number on the part
+    new: Ford catalog lists #8G1Z-19980-F for both — trim-limited; Taurus: built 12/2007-06/2009 only; verify the number on the part
+    GATE-NARROWED ('Ford', 'Taurus', 2008): None -> {'built': '2007-12..2009-06'}
+ford CHANGED LIVE ('window-regulator', ('1L2Z-7823394-BB',)) [['Ford', 'Explorer Sport', 2001, 2001], ['Ford', 'Explorer Sport Trac', 2001, 2001]] lost [] gained []
+    old: Ford catalog lists #1L2Z-7823394-BB for both — window motor only; trim-limited; verify the number on the part
+    new: Ford catalog lists #1L2Z-7823394-BB for both — window motor only; trim-limited; Explorer Sport Trac: built 01/2001-06/2005 only; verify the number on the part
+    GATE-NARROWED ('Ford', 'Explorer Sport Trac', 2001): None -> {'built': '2001-01..2005-06'}
+ford REMOVED LIVE ('window-regulator', ('F87Z-7823394-AA',)) [['Ford', 'Explorer Sport', 2001, 2001], ['Ford', 'Explorer Sport Trac', 2001, 2001]]
+ford CHANGED LIVE ('window-switch', ('5F9Z-14529-BAC',)) [['Ford', 'Five Hundred', 2005, 2005], ['Mercury', 'Montego', 2005, 2005]] lost [] gained []
+    old: Ford catalog lists #5F9Z-14529-BAC for both — fits some configurations; verify the number on the part
+    new: Ford catalog lists #5F9Z-14529-BAC for both — fits some configurations; Five Hundred: built 07/2004-03/2005 only; verify the number on the part
+    GATE-NARROWED ('Ford', 'Five Hundred', 2005): None -> {'built': '2004-07..2005-03'}
+toyota CHANGED LIVE ('headlights', ('81145-48261',)) [['Lexus', 'RX 350', 2007, 2007], ['Lexus', 'RX 400h', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #81145-48261 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #81145-48261 for both — option: fits some option packages; RX 400h: built 08/2005-08/2007 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'RX 400h', 2006): None -> {'built': '2005-08..2007-08'}
+toyota CHANGED LIVE ('headlights', ('81145-53673',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #81145-53673 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #81145-53673 for both — option: fits some option packages; built 09/2011-04/2013 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 250', 2013): None -> {'built': '2011-09..2013-04'}
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-09..2013-04'}
+toyota CHANGED LIVE ('headlights', ('81185-48261',)) [['Lexus', 'RX 350', 2007, 2007], ['Lexus', 'RX 400h', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #81185-48261 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #81185-48261 for both — option: fits some option packages; RX 400h: built 08/2005-08/2007 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'RX 400h', 2006): None -> {'built': '2005-08..2007-08'}
+toyota CHANGED LIVE ('headlights', ('81185-53673',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #81185-53673 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #81185-53673 for both — option: fits some option packages; built 09/2011-04/2013 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 250', 2013): None -> {'built': '2011-09..2013-04'}
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-09..2013-04'}
+toyota CHANGED LIVE ('side-mirrors', ('87910-53401-C1',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87910-53401-C1 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87910-53401-C1 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2013-04'}
+toyota CHANGED LIVE ('side-mirrors', ('87910-53471-B2',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87910-53471-B2 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87910-53471-B2 for both — option: fits some option packages; IS 350: built 11/2011-07/2015 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2015-07'}
+toyota CHANGED LIVE ('side-mirrors', ('87910-53471-J2',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87910-53471-J2 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87910-53471-J2 for both — option: fits some option packages; IS 350: built 11/2011-08/2012 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2012-08'}
+toyota CHANGED LIVE ('side-mirrors', ('87910-53551-C1',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87910-53551-C1 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87910-53551-C1 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2013-04'}
+toyota CHANGED LIVE ('side-mirrors', ('87910-53551-J2',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87910-53551-J2 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87910-53551-J2 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2013-04'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-53401-C1',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87940-53401-C1 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87940-53401-C1 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2013-04'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-53401-J2',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87940-53401-J2 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87940-53401-J2 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2013-04'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-53471-B2',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87940-53471-B2 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87940-53471-B2 for both — option: fits some option packages; IS 350: built 11/2011-07/2015 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2015-07'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-53471-J3',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87940-53471-J3 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87940-53471-J3 for both — option: fits some option packages; IS 350: built 11/2011-07/2015 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2015-07'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-53561-C1',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87940-53561-C1 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87940-53561-C1 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2013-04'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-53561-J2',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87940-53561-J2 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87940-53561-J2 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2013-04'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-53571-B2',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #87940-53571-B2 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #87940-53571-B2 for both — option: fits some option packages; IS 350: built 11/2011-07/2015 only; verify the number on the part
+    GATE-NARROWED ('Lexus', 'IS 350', 2012): None -> {'built': '2011-11..2015-07'}
+hmg CHANGED LIVE ('door-front', ('76004-C1000',)) [['Hyundai', 'Sonata', 2015, 2015], ['Hyundai', 'Sonata Hybrid', 2017, 2017]] lost [] gained []
+    old: Hyundai/Kia catalog lists #76004-C1000 for both — fits some configurations; verify the number on the part
+    new: Hyundai/Kia catalog lists #76004-C1000 for both — fits some configurations; Sonata: built 04/2014-12/2014 only; verify the number on the part
+    GATE-NARROWED ('Hyundai', 'Sonata', 2015): None -> {'built': '2014-04..2014-12'}
+nissan CHANGED LIVE ('climate-control', ('27510-8Z310',)) [['Nissan', 'Frontier', 2002, 2002], ['Nissan', 'Xterra', 2002, 2002]] lost [('Nissan', 'Frontier', 2001), ('Nissan', 'Xterra', 2001)] gained []
+nissan CHANGED LIVE ('climate-control', ('27510-8Z315',)) [['Nissan', 'Frontier', 2002, 2002], ['Nissan', 'Xterra', 2002, 2002]] lost [('Nissan', 'Frontier', 2001)] gained []
+nissan REMOVED LIVE ('climate-control', ('27510-9BH0A',)) [['Nissan', 'Pathfinder', 2010, 2012], ['Nissan', 'Xterra', 2010, 2010]]
+nissan REMOVED LIVE ('climate-control', ('27510-9BK0B',)) [['Nissan', 'Frontier', 2014, 2014], ['Nissan', 'Xterra', 2013, 2014]]
+nissan REMOVED LIVE ('climate-control', ('27510-EA00A',)) [['Nissan', 'Pathfinder', 2010, 2010], ['Nissan', 'Xterra', 2009, 2010]]
+nissan CHANGED LIVE ('climate-control', ('27510-ZD000',)) [['Nissan', 'Frontier', 2004, 2004], ['Nissan', 'Xterra', 2004, 2004]] lost [('Nissan', 'Frontier', 2003), ('Nissan', 'Xterra', 2003)] gained []
+nissan CHANGED LIVE ('climate-control', ('27510-ZD005',)) [['Nissan', 'Frontier', 2004, 2004], ['Nissan', 'Xterra', 2004, 2004]] lost [('Nissan', 'Frontier', 2003), ('Nissan', 'Xterra', 2003)] gained []
+nissan CHANGED LIVE ('climate-control', ('27510-ZL00B',)) [['Nissan', 'Frontier', 2010, 2011], ['Nissan', 'Xterra', 2011, 2011]] lost [('Nissan', 'Xterra', 2010)] gained []
+nissan CHANGED LIVE ('climate-control', ('27515-7Z100',)) [['Nissan', 'Frontier', 1999, 2001], ['Nissan', 'Xterra', 2000, 2000]] lost [] gained []
+    old: Nissan catalog lists #27515-7Z100 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #27515-7Z100 for both — option: fits some option packages; Xterra: built 05/1999-11/1999 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Xterra', 2000): None -> {'built': '1999-05..1999-11'}
+nissan CHANGED LIVE ('climate-control', ('27515-7Z401',)) [['Nissan', 'Frontier', 2000, 2002], ['Nissan', 'Xterra', 2001, 2001]] lost [('Nissan', 'Xterra', 2002)] gained []
+nissan CHANGED LIVE ('gauge-cluster', ('24810-7S00E',)) [['Nissan', 'Armada', 2005, 2006], ['Nissan', 'Titan', 2005, 2006]] lost [('Nissan', 'Titan', 2004)] gained []
+    old: Nissan catalog lists #24810-7S00E for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24810-7S00E for both — option: fits some option packages; Titan 2005: 4WD only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Titan', 2005): None -> {'drive': '4wd', 'drive_basis': 'stated'}
+nissan CHANGED LIVE ('gauge-cluster', ('24810-7S02E',)) [['Nissan', 'Armada', 2006, 2006], ['Nissan', 'Titan', 2006, 2006]] lost [] gained []
+    old: Nissan catalog lists #24810-7S02E for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24810-7S02E for both — option: fits some option packages; built 08/2005-08/2006 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Armada', 2006): None -> {'built': '2005-08..2006-08'}
+    GATE-NARROWED ('Nissan', 'Titan', 2006): None -> {'built': '2005-08..2006-08'}
+nissan CHANGED LIVE ('gauge-cluster', ('24810-7S03A',)) [['Nissan', 'Armada', 2006, 2006], ['Nissan', 'Titan', 2006, 2006]] lost [] gained []
+    old: Nissan catalog lists #24810-7S03A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24810-7S03A for both — option: fits some option packages; built 08/2005-08/2006 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Armada', 2006): None -> {'built': '2005-08..2006-08'}
+    GATE-NARROWED ('Nissan', 'Titan', 2006): None -> {'built': '2005-08..2006-08'}
+nissan CHANGED LIVE ('gauge-cluster', ('24810-7S04E',)) [['Nissan', 'Armada', 2007, 2007], ['Nissan', 'Titan', 2007, 2007]] lost [] gained []
+    old: Nissan catalog lists #24810-7S04E for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24810-7S04E for both — option: fits some option packages; built 08/2006-04/2007 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Armada', 2007): None -> {'built': '2006-08..2007-04'}
+    GATE-NARROWED ('Nissan', 'Titan', 2007): None -> {'built': '2006-08..2007-04'}
+nissan CHANGED LIVE ('gauge-cluster', ('24810-7S05A',)) [['Nissan', 'Armada', 2007, 2007], ['Nissan', 'Titan', 2007, 2007]] lost [('Nissan', 'Armada', 2008)] gained []
+    old: Nissan catalog lists #24810-7S05A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24810-7S05A for both — option: fits some option packages; built 08/2006-04/2007 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Armada', 2007): None -> {'built': '2006-08..2007-04'}
+    GATE-NARROWED ('Nissan', 'Titan', 2007): None -> {'built': '2006-08..2007-04'}
+nissan REMOVED LIVE ('gauge-cluster', ('24810-7S84E',)) [['Nissan', 'Armada', 2007, 2007], ['Nissan', 'Titan', 2006, 2008]]
+nissan CHANGED LIVE ('gauge-cluster', ('24810-7Z803',)) [['Nissan', 'Frontier', 2002, 2002], ['Nissan', 'Xterra', 2002, 2002]] lost [('Nissan', 'Frontier', 2001), ('Nissan', 'Xterra', 2001)] gained []
+nissan CHANGED LIVE ('gauge-cluster', ('24810-7Z809',)) [['Nissan', 'Frontier', 2002, 2002], ['Nissan', 'Xterra', 2002, 2002]] lost [('Nissan', 'Frontier', 2001), ('Nissan', 'Xterra', 2001)] gained []
+nissan REMOVED LIVE ('gauge-cluster', ('24810-9BA5A',)) [['Nissan', 'Frontier', 2010, 2011], ['Nissan', 'Xterra', 2010, 2011]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-9BA5B',)) [['Nissan', 'Frontier', 2010, 2011], ['Nissan', 'Xterra', 2010, 2011]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-9BA7D',)) [['Nissan', 'Frontier', 2010, 2011], ['Nissan', 'Pathfinder', 2011, 2011]]
+nissan CHANGED LIVE ('gauge-cluster', ('24810-9BD4C',)) [['Nissan', 'Frontier', 2012, 2012], ['Nissan', 'Xterra', 2012, 2012]] lost [('Nissan', 'Frontier', 2011), ('Nissan', 'Xterra', 2011)] gained []
+nissan CHANGED LIVE ('gauge-cluster', ('24810-9BD5A',)) [['Nissan', 'Frontier', 2012, 2012], ['Nissan', 'Xterra', 2011, 2012]] lost [] gained []
+    old: Nissan catalog lists #24810-9BD5A for both — option: fits some option packages; Frontier: 4WD, 4.0L only; verify the number on the part
+    new: Nissan catalog lists #24810-9BD5A for both — option: fits some option packages; Frontier: 4WD, 4.0L, built 08/2011-12/2012 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2012): {'drive': '4wd', 'drive_basis': 'stated', 'eng': ['4.0L']} -> {'built': '2011-08..2012-12', 'drive': '4wd', 'drive_basis': 'stated', 'eng': ['4.0L']}
+nissan CHANGED LIVE ('gauge-cluster', ('24810-9BD5B',)) [['Nissan', 'Frontier', 2012, 2012], ['Nissan', 'Xterra', 2011, 2012]] lost [('Nissan', 'Frontier', 2011)] gained []
+    old: Nissan catalog lists #24810-9BD5B for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24810-9BD5B for both — option: fits some option packages; Frontier: built 08/2011-12/2012 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2012): None -> {'built': '2011-08..2012-12'}
+nissan REMOVED LIVE ('gauge-cluster', ('24810-9NA5C',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2014]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-EA48D',)) [['Nissan', 'Pathfinder', 2005, 2005], ['Nissan', 'Xterra', 2005, 2005]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-EA67E',)) [['Nissan', 'Pathfinder', 2005, 2005], ['Nissan', 'Xterra', 2005, 2005]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-ZL80C',)) [['Nissan', 'Frontier', 2010, 2010], ['Nissan', 'Xterra', 2009, 2010]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-ZL96B',)) [['Nissan', 'Frontier', 2010, 2010], ['Nissan', 'Xterra', 2010, 2010]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-ZP93A',)) [['Nissan', 'Pathfinder', 2007, 2007], ['Nissan', 'Xterra', 2007, 2007]]
+nissan CHANGED LIVE ('gauge-cluster', ('24810-ZR29A',)) [['Nissan', 'Armada', 2007, 2008], ['Nissan', 'Titan', 2008, 2008]] lost [] gained []
+    old: Nissan catalog lists #24810-ZR29A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24810-ZR29A for both — option: fits some option packages; Titan: built 04/2007-04/2008 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Titan', 2008): None -> {'built': '2007-04..2008-04'}
+nissan CHANGED LIVE ('gauge-cluster', ('24820-3ZD0A',)) [['Infiniti', 'QX56', 2013, 2013], ['Infiniti', 'QX80', 2014, 2014]] lost [] gained []
+    old: Nissan catalog lists #24820-3ZD0A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24820-3ZD0A for both — option: fits some option packages; QX56: 2WD, built 02/2013-08/2014 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'QX56', 2013): None -> {'built': '2013-02..2014-08', 'drive': '2wd', 'drive_basis': 'stated'}
+nissan CHANGED LIVE ('gauge-cluster', ('24820-3ZD0C',)) [['Infiniti', 'QX56', 2013, 2013], ['Infiniti', 'QX80', 2014, 2014]] lost [('Infiniti', 'QX80', 2015)] gained []
+    old: Nissan catalog lists #24820-3ZD0C for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24820-3ZD0C for both — option: fits some option packages; QX56: built 02/2013-08/2014 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'QX56', 2013): None -> {'built': '2013-02..2014-08'}
+nissan CHANGED LIVE ('gauge-cluster', ('24820-3ZD1A',)) [['Infiniti', 'QX56', 2013, 2013], ['Infiniti', 'QX80', 2014, 2014]] lost [] gained []
+    old: Nissan catalog lists #24820-3ZD1A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24820-3ZD1A for both — option: fits some option packages; QX56: 2WD, built 02/2013-08/2014 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'QX56', 2013): None -> {'built': '2013-02..2014-08', 'drive': '2wd', 'drive_basis': 'stated'}
+nissan CHANGED LIVE ('gauge-cluster', ('24820-3ZD1C',)) [['Infiniti', 'QX56', 2013, 2013], ['Infiniti', 'QX80', 2014, 2014]] lost [('Infiniti', 'QX80', 2015)] gained []
+    old: Nissan catalog lists #24820-3ZD1C for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24820-3ZD1C for both — option: fits some option packages; QX56: built 02/2013-08/2014 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'QX56', 2013): None -> {'built': '2013-02..2014-08'}
+nissan CHANGED LIVE ('gauge-cluster', ('24820-EH11A',)) [['Infiniti', 'M35', 2006, 2006], ['Infiniti', 'M45', 2006, 2006]] lost [] gained []
+    old: Nissan catalog lists #24820-EH11A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24820-EH11A for both — option: fits some option packages; built 05/2005-05/2006 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'M35', 2006): None -> {'built': '2005-05..2006-05'}
+    GATE-NARROWED ('Infiniti', 'M45', 2006): None -> {'built': '2005-05..2006-05'}
+nissan CHANGED LIVE ('gauge-cluster', ('24820-EH11B',)) [['Infiniti', 'M35', 2006, 2006], ['Infiniti', 'M45', 2006, 2006]] lost [] gained []
+    old: Nissan catalog lists #24820-EH11B for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #24820-EH11B for both — option: fits some option packages; built 05/2005-05/2006 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'M35', 2006): None -> {'built': '2005-05..2006-05'}
+    GATE-NARROWED ('Infiniti', 'M45', 2006): None -> {'built': '2005-05..2006-05'}
+nissan REMOVED LIVE ('gauge-cluster', ('24820-JK61A',)) [['Infiniti', 'G35', 2008, 2008], ['Infiniti', 'G37', 2008, 2008]]
+nissan REMOVED LIVE ('gauge-cluster', ('24820-JK61B',)) [['Infiniti', 'G35', 2008, 2008], ['Infiniti', 'G37', 2008, 2008]]
+nissan CHANGED LIVE ('side-mirrors', ('96301-1BA3D',)) [['Infiniti', 'EX35', 2011, 2012], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2015]] lost [] gained []
+    old: Nissan catalog lists #96301-1BA3D for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96301-1BA3D for both — option: fits some option packages; EX35 2011: built 01/2011-07/2012 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'EX35', 2011): None -> {'built': '2011-01..2012-07'}
+nissan CHANGED LIVE ('side-mirrors', ('96301-1E400',)) [['Nissan', 'Altima', 1993, 1995], ['Nissan', 'Stanza', 1993, 1995]] lost [] gained []
+    old: Nissan catalog lists #96301-1E400 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96301-1E400 for both — option: fits some option packages; Altima 1995: built 06/1992-02/1995 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1995): None -> {'built': '1992-06..1995-02'}
+nissan CHANGED LIVE ('side-mirrors', ('96301-2B500',)) [['Nissan', 'Altima', 1995, 1997], ['Nissan', 'Stanza', 1995, 1997]] lost [] gained []
+    old: Nissan catalog lists #96301-2B500 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96301-2B500 for both — option: fits some option packages; Altima 1995: built from 02/1995 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1995): None -> {'built': '1995-02..'}
+nissan REMOVED LIVE ('side-mirrors', ('96301-3JA9A',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2016]]
+nissan REMOVED LIVE ('side-mirrors', ('96301-3JA9B',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2017]]
+nissan CHANGED LIVE ('side-mirrors', ('96301-9BC9A',)) [['Nissan', 'Frontier', 2013, 2016], ['Nissan', 'Xterra', 2012, 2013]] lost [('Nissan', 'Frontier', 2017), ('Nissan', 'Frontier', 2018), ('Nissan', 'Frontier', 2019)] gained []
+    old: Nissan catalog lists #96301-9BC9A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96301-9BC9A for both — option: fits some option packages; Xterra: 2WD only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Xterra', 2012): None -> {'drive': '2wd', 'drive_basis': 'stated'}
+    GATE-NARROWED ('Nissan', 'Xterra', 2013): None -> {'drive': '2wd', 'drive_basis': 'stated'}
+nissan CHANGED LIVE ('side-mirrors', ('96301-ZC20A',)) [['Nissan', 'Armada', 2005, 2015], ['Nissan', 'Titan', 2005, 2007]] lost [('Nissan', 'Titan', 2008)] gained []
+    old: Nissan catalog lists #96301-ZC20A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96301-ZC20A for both — option: fits some option packages; Titan 2006: built 08/2005-04/2007 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Titan', 2006): None -> {'built': '2005-08..2007-04'}
+nissan CHANGED LIVE ('side-mirrors', ('96301-ZC60A',)) [['Nissan', 'Armada', 2005, 2006], ['Nissan', 'Titan', 2006, 2006]] lost [('Nissan', 'Armada', 2007)] gained []
+nissan REMOVED LIVE ('side-mirrors', ('96301-ZD000',)) [['Nissan', 'Frontier', 2004, 2004], ['Nissan', 'Xterra', 2004, 2004]]
+nissan CHANGED LIVE ('side-mirrors', ('96301-ZH10A',)) [['Nissan', 'Armada', 2012, 2015], ['Nissan', 'Titan', 2006, 2007]] lost [('Nissan', 'Titan', 2008)] gained []
+    old: Nissan catalog lists #96301-ZH10A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96301-ZH10A for both — option: fits some option packages; Titan 2006: built 08/2005-04/2007 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Titan', 2006): None -> {'built': '2005-08..2007-04'}
+nissan CHANGED LIVE ('side-mirrors', ('96302-1BA1E',)) [['Infiniti', 'EX35', 2011, 2012], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2015]] lost [] gained []
+    old: Nissan catalog lists #96302-1BA1E for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96302-1BA1E for both — option: fits some option packages; EX35 2011: built 01/2011-07/2012 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'EX35', 2011): None -> {'built': '2011-01..2012-07'}
+nissan CHANGED LIVE ('side-mirrors', ('96302-1BA3D',)) [['Infiniti', 'EX35', 2011, 2012], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2015]] lost [] gained []
+    old: Nissan catalog lists #96302-1BA3D for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96302-1BA3D for both — option: fits some option packages; EX35 2011: built 01/2011-07/2012 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'EX35', 2011): None -> {'built': '2011-01..2012-07'}
+nissan CHANGED LIVE ('side-mirrors', ('96302-1BA3E',)) [['Infiniti', 'EX35', 2011, 2012], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2015]] lost [] gained []
+    old: Nissan catalog lists #96302-1BA3E for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96302-1BA3E for both — option: fits some option packages; EX35 2011: built 01/2011-07/2012 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'EX35', 2011): None -> {'built': '2011-01..2012-07'}
+nissan CHANGED LIVE ('side-mirrors', ('96302-1E400',)) [['Nissan', 'Altima', 1993, 1995], ['Nissan', 'Stanza', 1993, 1995]] lost [] gained []
+    old: Nissan catalog lists #96302-1E400 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96302-1E400 for both — option: fits some option packages; Altima 1995: built 06/1992-02/1995 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1995): None -> {'built': '1992-06..1995-02'}
+nissan CHANGED LIVE ('side-mirrors', ('96302-2B500',)) [['Nissan', 'Altima', 1995, 1997], ['Nissan', 'Stanza', 1995, 1997]] lost [] gained []
+    old: Nissan catalog lists #96302-2B500 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96302-2B500 for both — option: fits some option packages; Altima 1995: built from 02/1995 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1995): None -> {'built': '1995-02..'}
+nissan REMOVED LIVE ('side-mirrors', ('96302-3JA9A',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2016]]
+nissan REMOVED LIVE ('side-mirrors', ('96302-3JA9B',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2017]]
+nissan CHANGED LIVE ('side-mirrors', ('96302-7S200',)) [['Nissan', 'Armada', 2004, 2005], ['Nissan', 'Titan', 2005, 2007]] lost [('Nissan', 'Titan', 2004)] gained []
+nissan CHANGED LIVE ('side-mirrors', ('96302-7S600',)) [['Nissan', 'Armada', 2004, 2005], ['Nissan', 'Titan', 2005, 2006]] lost [('Nissan', 'Titan', 2004)] gained []
+    old: Nissan catalog lists #96302-7S600 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96302-7S600 for both — option: fits some option packages; Titan 2005: built 10/2004-08/2006 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Titan', 2005): None -> {'built': '2004-10..2006-08'}
+nissan CHANGED LIVE ('side-mirrors', ('96302-9BC9A',)) [['Nissan', 'Frontier', 2013, 2016], ['Nissan', 'Xterra', 2012, 2013]] lost [('Nissan', 'Frontier', 2017), ('Nissan', 'Frontier', 2018), ('Nissan', 'Frontier', 2019)] gained []
+    old: Nissan catalog lists #96302-9BC9A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96302-9BC9A for both — option: fits some option packages; Xterra: 2WD only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Xterra', 2012): None -> {'drive': '2wd', 'drive_basis': 'stated'}
+    GATE-NARROWED ('Nissan', 'Xterra', 2013): None -> {'drive': '2wd', 'drive_basis': 'stated'}
+nissan CHANGED LIVE ('side-mirrors', ('96302-S3800',)) [['Nissan', 'Frontier', 2002, 2002], ['Nissan', 'Pathfinder', 1989, 1993]] lost [('Nissan', 'Frontier', 2001)] gained []
+nissan CHANGED LIVE ('side-mirrors', ('96302-ZC20A',)) [['Nissan', 'Armada', 2005, 2015], ['Nissan', 'Titan', 2006, 2008]] lost [] gained []
+    old: Nissan catalog lists #96302-ZC20A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96302-ZC20A for both — option: fits some option packages; Titan 2006: built 08/2005-04/2007 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Titan', 2006): None -> {'built': '2005-08..2007-04'}
+nissan REMOVED LIVE ('side-mirrors', ('96302-ZD000',)) [['Nissan', 'Frontier', 2004, 2004], ['Nissan', 'Xterra', 2004, 2004]]
+nissan CHANGED LIVE ('side-mirrors', ('96302-ZH10A',)) [['Nissan', 'Armada', 2012, 2015], ['Nissan', 'Titan', 2007, 2008]] lost [] gained []
+    old: Nissan catalog lists #96302-ZH10A for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #96302-ZH10A for both — option: fits some option packages; Titan 2008: built 08/2006-04/2008 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Titan', 2008): None -> {'built': '2006-08..2008-04'}
+nissan CHANGED LIVE ('side-mirrors', ('K6301-1MA0A',)) [['Infiniti', 'M37', 2011, 2011], ['Infiniti', 'M56', 2011, 2011]] lost [] gained []
+    old: Nissan catalog lists #K6301-1MA0A for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #K6301-1MA0A for both — fits some configurations; M37: built 01/2010-12/2010 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'M37', 2011): None -> {'built': '2010-01..2010-12'}
+nissan CHANGED LIVE ('side-mirrors', ('K6301-1MA0B',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2012, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'Q70', 2014, 2014]] lost [('Infiniti', 'M37', 2011)] gained []
+nissan CHANGED LIVE ('side-mirrors', ('K6302-1MA0A',)) [['Infiniti', 'M37', 2011, 2011], ['Infiniti', 'M56', 2011, 2011]] lost [] gained []
+    old: Nissan catalog lists #K6302-1MA0A for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #K6302-1MA0A for both — fits some configurations; M37: built 01/2010-12/2010 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'M37', 2011): None -> {'built': '2010-01..2010-12'}
+nissan CHANGED LIVE ('side-mirrors', ('K6302-1MA0B',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2012, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'Q70', 2014, 2014]] lost [('Infiniti', 'M37', 2011)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80720-0E715',)) [['Nissan', 'Altima', 1994, 1997], ['Nissan', 'Stanza', 1995, 1997]] lost [('Nissan', 'Stanza', 1994)] gained []
+    old: Nissan catalog lists #80720-0E715 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80720-0E715 for both — fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1994): None -> {'built': '1993-08..'}
+nissan CHANGED LIVE ('window-regulator', ('80720-1BA0B',)) [['Infiniti', 'EX35', 2010, 2012], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #80720-1BA0B for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80720-1BA0B for both — fits some configurations; EX35 2010: built 08/2009-07/2012 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'EX35', 2010): None -> {'built': '2009-08..2012-07'}
+nissan CHANGED LIVE ('window-regulator', ('80720-1CA0A',)) [['Infiniti', 'FX35', 2009, 2009], ['Infiniti', 'FX50', 2009, 2009]] lost [] gained []
+    old: Nissan catalog lists #80720-1CA0A for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80720-1CA0A for both — fits some configurations; built 03/2008-04/2009 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'FX35', 2009): None -> {'built': '2008-03..2009-04'}
+    GATE-NARROWED ('Infiniti', 'FX50', 2009): None -> {'built': '2008-03..2009-04'}
+nissan CHANGED LIVE ('window-regulator', ('80720-1CA0B',)) [['Infiniti', 'FX35', 2010, 2012], ['Infiniti', 'FX37', 2013, 2013], ['Infiniti', 'FX50', 2010, 2012], ['Infiniti', 'QX70', 2014, 2015]] lost [('Infiniti', 'FX50', 2013)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80720-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'Q70', 2015, 2015], ['Infiniti', 'Q70L', 2015, 2015]] lost [('Infiniti', 'Q70', 2014)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80720-1MA0B',)) [['Infiniti', 'Q70', 2015, 2018], ['Infiniti', 'Q70L', 2015, 2016], ['Infiniti', 'Q70L', 2018, 2018]] lost [('Infiniti', 'Q70', 2019), ('Infiniti', 'Q70L', 2019)] gained []
+    old: Nissan catalog lists #80720-1MA0B for both — option: fits some option packages; Q70 2015-2018: gas only; verify the number on the part
+    new: Nissan catalog lists #80720-1MA0B for both — option: fits some option packages; Q70: gas only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-2Z710',)) [['Nissan', 'Frontier', 2003, 2004], ['Nissan', 'Xterra', 2002, 2003]] lost [('Nissan', 'Frontier', 2002)] gained []
+    old: Nissan catalog lists #80720-2Z710 for both — option: fits some option packages; Frontier 2002: king cab/crew cab only; verify the number on the part
+    new: Nissan catalog lists #80720-2Z710 for both — option: fits some option packages; Frontier 2003: built from 10/2002 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2003): None -> {'built': '2002-10..'}
+nissan CHANGED LIVE ('window-regulator', ('80720-9BF0A',)) [['Nissan', 'Frontier', 2014, 2016], ['Nissan', 'Xterra', 2014, 2015]] lost [('Nissan', 'Frontier', 2017), ('Nissan', 'Frontier', 2018), ('Nissan', 'Frontier', 2019)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80720-AR000',)) [['Infiniti', 'FX35', 2003, 2004], ['Infiniti', 'FX45', 2003, 2004], ['Infiniti', 'Q45', 2002, 2006]] lost [] gained []
+    old: Nissan catalog lists #80720-AR000 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80720-AR000 for both — fits some configurations; Q45 2006: built 01/2001-04/2006 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'Q45', 2006): None -> {'built': '2001-01..2006-04'}
+nissan CHANGED LIVE ('window-regulator', ('80720-EA000',)) [['Nissan', 'Frontier', 2005, 2011], ['Nissan', 'Pathfinder', 2009, 2010], ['Nissan', 'Xterra', 2005, 2009]] lost [('Nissan', 'Pathfinder', 2005), ('Nissan', 'Pathfinder', 2006), ('Nissan', 'Pathfinder', 2007), ('Nissan', 'Pathfinder', 2008), ('Nissan', 'Xterra', 2010)] gained []
+    old: Nissan catalog lists #80720-EA000 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80720-EA000 for both — option: fits some option packages; Pathfinder 2010: built 07/2008-04/2010 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Pathfinder', 2010): None -> {'built': '2008-07..2010-04'}
+nissan CHANGED LIVE ('window-regulator', ('80720-EH10A',)) [['Infiniti', 'M35', 2009, 2009], ['Infiniti', 'M45', 2009, 2009]] lost [] gained []
+    old: Nissan catalog lists #80720-EH10A for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80720-EH10A for both — fits some configurations; built 06/2008-03/2009 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'M35', 2009): None -> {'built': '2008-06..2009-03'}
+    GATE-NARROWED ('Infiniti', 'M45', 2009): None -> {'built': '2008-06..2009-03'}
+nissan CHANGED LIVE ('window-regulator', ('80721-0E715',)) [['Nissan', 'Altima', 1994, 1997], ['Nissan', 'Stanza', 1995, 1997]] lost [('Nissan', 'Stanza', 1994)] gained []
+    old: Nissan catalog lists #80721-0E715 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80721-0E715 for both — fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1994): None -> {'built': '1993-08..'}
+nissan CHANGED LIVE ('window-regulator', ('80721-1BA0B',)) [['Infiniti', 'EX35', 2010, 2012], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #80721-1BA0B for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80721-1BA0B for both — fits some configurations; EX35 2010: built 08/2009-07/2012 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'EX35', 2010): None -> {'built': '2009-08..2012-07'}
+nissan CHANGED LIVE ('window-regulator', ('80721-1CA0A',)) [['Infiniti', 'FX35', 2009, 2009], ['Infiniti', 'FX50', 2009, 2009]] lost [] gained []
+    old: Nissan catalog lists #80721-1CA0A for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80721-1CA0A for both — fits some configurations; built 03/2008-04/2009 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'FX35', 2009): None -> {'built': '2008-03..2009-04'}
+    GATE-NARROWED ('Infiniti', 'FX50', 2009): None -> {'built': '2008-03..2009-04'}
+nissan CHANGED LIVE ('window-regulator', ('80721-1CA0B',)) [['Infiniti', 'FX35', 2010, 2012], ['Infiniti', 'FX37', 2013, 2013], ['Infiniti', 'FX50', 2010, 2012], ['Infiniti', 'QX70', 2014, 2015]] lost [('Infiniti', 'FX50', 2013)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80721-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'Q70', 2015, 2015], ['Infiniti', 'Q70L', 2015, 2015]] lost [('Infiniti', 'Q70', 2014)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80721-1MA0B',)) [['Infiniti', 'Q70', 2015, 2018], ['Infiniti', 'Q70L', 2015, 2016], ['Infiniti', 'Q70L', 2018, 2018]] lost [('Infiniti', 'Q70', 2019), ('Infiniti', 'Q70L', 2019)] gained []
+    old: Nissan catalog lists #80721-1MA0B for both — option: fits some option packages; Q70 2015-2018: gas only; verify the number on the part
+    new: Nissan catalog lists #80721-1MA0B for both — option: fits some option packages; Q70: gas only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-2Z710',)) [['Nissan', 'Frontier', 2003, 2004], ['Nissan', 'Xterra', 2002, 2003]] lost [('Nissan', 'Frontier', 2002)] gained []
+    old: Nissan catalog lists #80721-2Z710 for both — option: fits some option packages; Frontier 2002: king cab/crew cab only; verify the number on the part
+    new: Nissan catalog lists #80721-2Z710 for both — option: fits some option packages; Frontier 2003: built from 10/2002 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2003): None -> {'built': '2002-10..'}
+nissan CHANGED LIVE ('window-regulator', ('80721-9BF0A',)) [['Nissan', 'Frontier', 2014, 2016], ['Nissan', 'Xterra', 2014, 2015]] lost [('Nissan', 'Frontier', 2017), ('Nissan', 'Frontier', 2018), ('Nissan', 'Frontier', 2019)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80721-AR000',)) [['Infiniti', 'FX35', 2003, 2004], ['Infiniti', 'FX45', 2003, 2004], ['Infiniti', 'Q45', 2002, 2006]] lost [] gained []
+    old: Nissan catalog lists #80721-AR000 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80721-AR000 for both — fits some configurations; Q45 2006: built 01/2001-04/2006 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'Q45', 2006): None -> {'built': '2001-01..2006-04'}
+nissan CHANGED LIVE ('window-regulator', ('80721-CL00A',)) [['Infiniti', 'FX35', 2005, 2006], ['Infiniti', 'FX45', 2006, 2006]] lost [('Infiniti', 'FX45', 2005)] gained []
+    old: Nissan catalog lists #80721-CL00A for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80721-CL00A for both — fits some configurations; FX35 2005: built 09/2004-06/2006 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'FX35', 2005): None -> {'built': '2004-09..2006-06'}
+nissan CHANGED LIVE ('window-regulator', ('80721-EA000',)) [['Nissan', 'Frontier', 2005, 2011], ['Nissan', 'Pathfinder', 2009, 2010], ['Nissan', 'Xterra', 2005, 2009]] lost [('Nissan', 'Pathfinder', 2005), ('Nissan', 'Pathfinder', 2006), ('Nissan', 'Pathfinder', 2007), ('Nissan', 'Pathfinder', 2008), ('Nissan', 'Xterra', 2010)] gained []
+    old: Nissan catalog lists #80721-EA000 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80721-EA000 for both — option: fits some option packages; Pathfinder 2010: built 07/2008-04/2010 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Pathfinder', 2010): None -> {'built': '2008-07..2010-04'}
+nissan CHANGED LIVE ('window-regulator', ('80721-EH10A',)) [['Infiniti', 'M35', 2009, 2009], ['Infiniti', 'M45', 2009, 2009]] lost [] gained []
+    old: Nissan catalog lists #80721-EH10A for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80721-EH10A for both — fits some configurations; built 06/2008-03/2009 only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'M35', 2009): None -> {'built': '2008-06..2009-03'}
+    GATE-NARROWED ('Infiniti', 'M45', 2009): None -> {'built': '2008-06..2009-03'}
+nissan CHANGED LIVE ('window-regulator', ('80730-89915',)) [['Nissan', 'Murano', 2005, 2007], ['Nissan', 'Versa', 2007, 2007]] lost [('Nissan', 'Murano', 2003), ('Nissan', 'Murano', 2004)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80730-JX30B',)) [['Nissan', 'Cube', 2009, 2011], ['Nissan', 'Juke', 2011, 2011], ['Nissan', 'Rogue', 2009, 2011]] lost [] gained []
+    old: Nissan catalog lists #80730-JX30B for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80730-JX30B for both — fits some configurations; Rogue 2009: built 10/2008-06/2010 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Rogue', 2009): None -> {'built': '2008-10..2010-06'}
+nissan CHANGED LIVE ('window-regulator', ('80730-JX30C',)) [['Nissan', 'Cube', 2012, 2014], ['Nissan', 'Juke', 2012, 2014], ['Nissan', 'Rogue', 2012, 2013]] lost [('Nissan', 'Juke', 2015), ('Nissan', 'Juke', 2016), ('Nissan', 'Juke', 2017)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80731-JX30C',)) [['Nissan', 'Cube', 2012, 2014], ['Nissan', 'Juke', 2012, 2014], ['Nissan', 'Leaf', 2012, 2012]] lost [('Nissan', 'Juke', 2015), ('Nissan', 'Juke', 2016), ('Nissan', 'Juke', 2017)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82720-0E715',)) [['Nissan', 'Altima', 1994, 1996], ['Nissan', 'Stanza', 1995, 1996]] lost [('Nissan', 'Stanza', 1994)] gained []
+    old: Nissan catalog lists #82720-0E715 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #82720-0E715 for both — option: fits some option packages; Altima 1994: built 08/1993-07/1996 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1994): None -> {'built': '1993-08..1996-07'}
+nissan CHANGED LIVE ('window-regulator', ('82720-1U600',)) [['Nissan', 'Juke', 2012, 2015], ['Nissan', 'Leaf', 2011, 2012]] lost [('Nissan', 'Juke', 2011), ('Nissan', 'Juke', 2016)] gained []
+    old: Nissan catalog lists #82720-1U600 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #82720-1U600 for both — fits some configurations; Juke 2015: built 09/2011-03/2015, 09/2015-02/2016 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Juke', 2015): None -> {'built': '2011-09..2015-03,2015-09..2016-02'}
+nissan CHANGED LIVE ('window-regulator', ('82720-7S000',)) [['Nissan', 'Armada', 2004, 2005], ['Nissan', 'Titan', 2005, 2005]] lost [('Nissan', 'Armada', 2006), ('Nissan', 'Titan', 2004), ('Nissan', 'Titan', 2006)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82721-0E715',)) [['Nissan', 'Altima', 1994, 1996], ['Nissan', 'Stanza', 1995, 1996]] lost [('Nissan', 'Stanza', 1994)] gained []
+    old: Nissan catalog lists #82721-0E715 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #82721-0E715 for both — option: fits some option packages; Altima 1994: built 08/1993-02/1996 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1994): None -> {'built': '1993-08..1996-02'}
+nissan CHANGED LIVE ('window-regulator', ('82721-1U600',)) [['Nissan', 'Juke', 2012, 2014], ['Nissan', 'Juke', 2016, 2016], ['Nissan', 'Leaf', 2011, 2012]] lost [('Nissan', 'Juke', 2011)] gained []
+    old: Nissan catalog lists #82721-1U600 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #82721-1U600 for both — fits some configurations; Juke 2016: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Juke', 2016): None -> {'built': '2014-10..2015-03,2015-08..2016-02'}
+nissan CHANGED LIVE ('window-regulator', ('82721-7S000',)) [['Nissan', 'Armada', 2004, 2005], ['Nissan', 'Titan', 2005, 2005]] lost [('Nissan', 'Armada', 2006), ('Nissan', 'Titan', 2004), ('Nissan', 'Titan', 2006)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82730-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'Q70', 2016, 2017], ['Infiniti', 'Q70L', 2016, 2017], ['Infiniti', 'QX56', 2011, 2013], ['Infiniti', 'QX80', 2014, 2017]] lost [('Infiniti', 'Q70', 2014), ('Infiniti', 'Q70', 2015), ('Infiniti', 'Q70L', 2015)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82730-3Z005',)) [['Nissan', 'Altima', 2003, 2004], ['Nissan', 'Sentra', 2004, 2006]] lost [('Nissan', 'Altima', 2005), ('Nissan', 'Altima', 2006)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82730-7S000',)) [['Nissan', 'Armada', 2007, 2008], ['Nissan', 'Titan', 2010, 2011]] lost [('Nissan', 'Armada', 2004), ('Nissan', 'Armada', 2005), ('Nissan', 'Armada', 2006), ('Nissan', 'Titan', 2004), ('Nissan', 'Titan', 2005), ('Nissan', 'Titan', 2006), ('Nissan', 'Titan', 2007), ('Nissan', 'Titan', 2008), ('Nissan', 'Titan', 2009)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82730-CV01B',)) [['Nissan', 'Cube', 2011, 2014], ['Nissan', 'Juke', 2015, 2015], ['Nissan', 'Leaf', 2011, 2012]] lost [('Nissan', 'Juke', 2011), ('Nissan', 'Juke', 2012), ('Nissan', 'Juke', 2013), ('Nissan', 'Juke', 2014), ('Nissan', 'Juke', 2016)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82730-D9000',)) [['Nissan', 'Altima', 1994, 1997], ['Nissan', 'Stanza', 1995, 1997]] lost [('Nissan', 'Stanza', 1994)] gained []
+    old: Nissan catalog lists #82730-D9000 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #82730-D9000 for both — fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1994): None -> {'built': '1993-08..'}
+nissan CHANGED LIVE ('window-regulator', ('82731-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'Q70', 2016, 2017], ['Infiniti', 'Q70L', 2016, 2017], ['Infiniti', 'QX56', 2011, 2013], ['Infiniti', 'QX80', 2014, 2017]] lost [('Infiniti', 'Q70', 2014), ('Infiniti', 'Q70', 2015), ('Infiniti', 'Q70L', 2015)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82731-3Z005',)) [['Nissan', 'Altima', 2003, 2004], ['Nissan', 'Sentra', 2004, 2006]] lost [('Nissan', 'Altima', 2005), ('Nissan', 'Altima', 2006)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82731-7S000',)) [['Nissan', 'Armada', 2007, 2008], ['Nissan', 'Titan', 2010, 2011]] lost [('Nissan', 'Armada', 2004), ('Nissan', 'Armada', 2005), ('Nissan', 'Armada', 2006), ('Nissan', 'Titan', 2004), ('Nissan', 'Titan', 2005), ('Nissan', 'Titan', 2006), ('Nissan', 'Titan', 2007), ('Nissan', 'Titan', 2008), ('Nissan', 'Titan', 2009)] gained []
+nissan CHANGED LIVE ('window-regulator', ('82731-CV01B',)) [['Nissan', 'Cube', 2011, 2014], ['Nissan', 'Juke', 2013, 2014], ['Nissan', 'Juke', 2016, 2016], ['Nissan', 'Leaf', 2011, 2012]] lost [('Nissan', 'Juke', 2011), ('Nissan', 'Juke', 2012)] gained []
+    old: Nissan catalog lists #82731-CV01B for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #82731-CV01B for both — fits some configurations; Juke 2016: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Juke', 2016): None -> {'built': '2014-10..2015-03,2015-08..2016-02'}
+nissan CHANGED LIVE ('window-regulator', ('82731-D9000',)) [['Nissan', 'Altima', 1994, 1996], ['Nissan', 'Stanza', 1995, 1996]] lost [('Nissan', 'Altima', 1997), ('Nissan', 'Stanza', 1994), ('Nissan', 'Stanza', 1997)] gained []
+    old: Nissan catalog lists #82731-D9000 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #82731-D9000 for both — fits some configurations; Altima 1994: built 08/1993-02/1996 only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Altima', 1994): None -> {'built': '1993-08..1996-02'}
+# gm LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# ford LIVE: removed 1 groups, added 0 groups, changed 4; app-years lost 0, gained 0; gates narrowed 4, widened 0; added claims 0
+# mopar LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# toyota LIVE: removed 0 groups, added 0 groups, changed 16; app-years lost 0, gained 0; gates narrowed 18, widened 0; added claims 0
+# subaru LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# hmg LIVE: removed 0 groups, added 0 groups, changed 1; app-years lost 0, gained 0; gates narrowed 1, widened 0; added claims 0
+# vag LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# mb LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# nissan LIVE: removed 21 groups, added 0 groups, changed 89; app-years lost 121, gained 0; gates narrowed 67, widened 0; added claims 0

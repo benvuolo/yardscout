@@ -88309,9 +88309,20 @@
    ],
    "cars": 71,
    "cat": "headlights",
+   "gates": [
+    [
+     "Lexus",
+     "RX 400h",
+     2006,
+     2006,
+     {
+      "built": "2005-08..2007-08"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:R:e1f531f9fb",
    "kind": "body",
-   "note": "Toyota catalog lists #81145-48261 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81145-48261 for both — option: fits some option packages; RX 400h: built 08/2005-08/2007 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:36:51Z",
    "pn": [
     "81145-48261"
@@ -88363,9 +88374,29 @@
    ],
    "cars": 6,
    "cat": "headlights",
+   "gates": [
+    [
+     "Lexus",
+     "IS 250",
+     2013,
+     2013,
+     {
+      "built": "2011-09..2013-04"
+     }
+    ],
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-09..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:R:a64c5fb516",
    "kind": "body",
-   "note": "Toyota catalog lists #81145-53673 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81145-53673 for both — option: fits some option packages; built 09/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:30:01Z",
    "pn": [
     "81145-53673"
@@ -88870,9 +88901,20 @@
    ],
    "cars": 71,
    "cat": "headlights",
+   "gates": [
+    [
+     "Lexus",
+     "RX 400h",
+     2006,
+     2006,
+     {
+      "built": "2005-08..2007-08"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:L:c48fe52d7e",
    "kind": "body",
-   "note": "Toyota catalog lists #81185-48261 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81185-48261 for both — option: fits some option packages; RX 400h: built 08/2005-08/2007 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:36:19Z",
    "pn": [
     "81185-48261"
@@ -88924,9 +88966,29 @@
    ],
    "cars": 6,
    "cat": "headlights",
+   "gates": [
+    [
+     "Lexus",
+     "IS 250",
+     2013,
+     2013,
+     {
+      "built": "2011-09..2013-04"
+     }
+    ],
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-09..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:L:f5de7086d4",
    "kind": "body",
-   "note": "Toyota catalog lists #81185-53673 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81185-53673 for both — option: fits some option packages; built 09/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:30:49Z",
    "pn": [
     "81185-53673"
@@ -94401,9 +94463,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:R:2c8c8dcc08",
    "kind": "body",
-   "note": "Toyota catalog lists #87910-53401-C1 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87910-53401-C1 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:32:42Z",
    "pn": [
     "87910-53401-C1"
@@ -94644,9 +94717,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2015-07"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:R:bd8c968baf",
    "kind": "body",
-   "note": "Toyota catalog lists #87910-53471-B2 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87910-53471-B2 for both — option: fits some option packages; IS 350: built 11/2011-07/2015 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:47:38Z",
    "pn": [
     "87910-53471-B2"
@@ -94779,9 +94863,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2012-08"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:R:37bce55499",
    "kind": "body",
-   "note": "Toyota catalog lists #87910-53471-J2 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87910-53471-J2 for both — option: fits some option packages; IS 350: built 11/2011-08/2012 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:47:54Z",
    "pn": [
     "87910-53471-J2"
@@ -94941,9 +95036,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:R:28cab7e351",
    "kind": "body",
-   "note": "Toyota catalog lists #87910-53551-C1 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87910-53551-C1 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:33:54Z",
    "pn": [
     "87910-53551-C1"
@@ -95022,9 +95128,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:R:d9152516e4",
    "kind": "body",
-   "note": "Toyota catalog lists #87910-53551-J2 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87910-53551-J2 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:34:18Z",
    "pn": [
     "87910-53551-J2"
@@ -96777,9 +96894,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:65c85655d8",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-53401-C1 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87940-53401-C1 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:37:53Z",
    "pn": [
     "87940-53401-C1"
@@ -96858,9 +96986,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:3ce6f60802",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-53401-J2 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87940-53401-J2 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:38:18Z",
    "pn": [
     "87940-53401-J2"
@@ -97020,9 +97159,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2015-07"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:cbf365400a",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-53471-B2 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87940-53471-B2 for both — option: fits some option packages; IS 350: built 11/2011-07/2015 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:48:26Z",
    "pn": [
     "87940-53471-B2"
@@ -97182,9 +97332,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2015-07"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:64181a2141",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-53471-J3 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87940-53471-J3 for both — option: fits some option packages; IS 350: built 11/2011-07/2015 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:49:14Z",
    "pn": [
     "87940-53471-J3"
@@ -97317,9 +97478,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:e90170b145",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-53561-C1 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87940-53561-C1 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:42:42Z",
    "pn": [
     "87940-53561-C1"
@@ -97398,9 +97570,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2013-04"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:f540f341ab",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-53561-J2 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87940-53561-J2 for both — option: fits some option packages; IS 350: built 11/2011-04/2013 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:40:26Z",
    "pn": [
     "87940-53561-J2"
@@ -97533,9 +97716,20 @@
    ],
    "cars": 6,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012,
+     {
+      "built": "2011-11..2015-07"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:f9c949a64f",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-53571-B2 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #87940-53571-B2 for both — option: fits some option packages; IS 350: built 11/2011-07/2015 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:49:38Z",
    "pn": [
     "87940-53571-B2"
@@ -97707,7 +97901,7 @@
   }
  ],
  "ns": "toyota",
- "policy_sha256": "24b4de0f9754a8265583fbe348b62f0c5f7037403f6c356c475a9250e7a83e2b",
+ "policy_sha256": "4efb25d23b58524b41a2e71c90f3fd1c2eb888f87216a37eea39e71ac7acb84b",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

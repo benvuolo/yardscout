@@ -4749,3 +4749,280 @@ a new independent checker decides.
 2. Nissan: 246 shippable, not shipped; needs a new independent sample.
 3. Decide the note-cap suggestion above before the next round; it is the
    largest remaining coverage cost.
+
+## 2026-11-19 Round 4: same-option drive siblings, build windows, pages that disagree, VIN/listing mismatch (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round4-1119`)
+
+Hub brief: apply the four round-4 decisions (after the independent check
+`interchange/verify-nissan-1119d`, seed 38271119: 2 WRONG, 13 RISK) on the 8
+shipped makes first, claims only down (Part A), then on the nissan candidate
+(Part B, not shipped). Base origin/main 613d18e5. Pins: oem-raw@dca9cd84
+(shipped), @57e8b5b9 (nissan), lot main@a85c654 (inventory, vin_decodes,
+vehicle_extras; sha256 1a9cfa73 / 1357625b / 6ff3d44b, checked). No fetch,
+crawl, dispatch, email or main push. Baseline check first: main's code
+re-curated on the pins reproduces every committed groups file byte for byte.
+
+### Rules (curate.py / policy.py / validate.py; hashed, all 8 shipped namespaces and the candidate re-curated in the same push)
+
+- **Decision 1, `policy.LIKELY_DRIVE_SIBLING_RULE`**
+  (`Curation.drive_sibling`, `drive_sibling_limit`). Per own-page row of the
+  number on T's page and per option clause (each "Fitting Vehicle Options"
+  alternative; on the config-tuple sites each "+" part too, as `_fvo_drive`
+  reads them; asterisks ignored, so "starred or not"): a row of the same part
+  name and position with the same clause plus a drive word means this clause
+  does not cover that drive. Not read as a split (each is a case in the raw):
+  a sibling that also lists the bare clause or lists it for both drive
+  families (the Titan clusters 7S005 / 7S002), a sibling linked by
+  supersession, one not listed for T itself (a production window under 5
+  months of T's year: JX35 2013 3JA1B beside 9NA1B 06/2013-09/2014). The
+  limit is then read against the drive words T's pages use: excluding AWD on
+  a QX60 page (AWD is its only 4-family word) leaves `drive: "2wd"`, basis
+  stated; excluding one 4-family system beside another (4WD beside AUTO)
+  gives `drive_not` alone (none occurs in today's data; the app supports it).
+  Siblings that exclude both families, or a sibling that contradicts the
+  row's own drive, leave the vehicle-year out.
+- **Decision 2, `policy.LIKELY_BUILD_WINDOW_RULE`** (`Curation.build_window`).
+  The window(s) the number's own rows on T's page print ("Production Date":
+  `08/2009-01/2010`, `from 01/2010`, hyundai `till 05/2012`, comma lists, and
+  subarupartsdeal `200409 - 200608`, which no rule read before) against T's
+  model year as the production rule takes it (07/(y-1)-06/y). Where they
+  leave months out and a dated row of the same part, position and
+  configuration (same clause; another colour or package is another car) that
+  is NOT the number's predecessor or successor (`comparable`: a common
+  successor is not a link) carries those months, the vehicle-year keeps the
+  claim only with the window in the note ("Pathfinder 2010: 4.0L, built
+  08/2009-01/2010 only") and a gate `built: "2009-08..2010-01"` (open ends
+  empty: `"2010-01.."`, `"..2005-12"`; runs joined by ","). Rest carried by
+  a linked number: unchanged. No dated row carries the rest: unchanged
+  (`no_other_row`, counted). One extra choice, stricter than the brief, for
+  the hub to confirm: where T's page in the category is not in the raw (the
+  product record's own seed-page notes are the only evidence, e.g. the 2010
+  Xterra for 27510-EA00A) nothing can show the rest is linked, so a dated
+  window with a gap is gated too (`no_page`).
+- **Note cap**: a window whose words take the note past 160 characters
+  leaves that vehicle-year out (never cut), one at a time, longest label
+  first; if that leaves one model, the group is refused
+  (`held_window_note_cap`, recorded). Other over-long limits refuse as before.
+- **Decision 3** (same function). T's page prints no date for any row of the
+  number, and another model-year page of the same catalog model (same site,
+  same seed model) prints a window for the same clause, word for word: that
+  window is read. Under 5 months of T's year leaves T out (as if T's page
+  printed it); otherwise decision 2 applies. Not narrowed: a clause no other
+  page dates (96301-ZC20A is dated "W. SE" on the 2006 Armada page and listed
+  undated for "W. LE/SL" on the 2009-2015 pages), and a page that lists the
+  number's predecessor or successor (a supersession listing: the 2005 Armada
+  page lists 7S200 "Replaced By" ZC20A).
+- **Never adding**: a group round 3 refuses stays refused (the round-3
+  vehicle-years and drive limits are tried first; the strict-note check runs
+  on them too). An earlier build without this guard brought back 12 nissan
+  groups whose note fitted only after a vehicle-year left.
+- `validate.gate_problem`: `built` (format, start <= end, not both ends
+  empty), `drive_not` alone (classes of one family). Payload shape unchanged
+  (`[make, model, lo, hi, null, gate]`).
+
+### App (docs/app.js OEM-GATE; sw `jh-v214`)
+
+- `built`: verdict always "unconfirmed" (no decode gives the build month).
+  Donor line: "if equipped: this part is listed for cars built
+  08/2009-01/2010 only — check the build date on the door sticker"; with
+  another unconfirmed limit both lines, the first without the window. Other
+  limits still exclude (a 5.6L Pathfinder on a 4.0L + window gate). Seeker
+  header: "found for a 2010 Pathfinder with 4.0L, built 08/2009-01/2010
+  only" ("built ..." alone without "with").
+- `drive_not` alone: a decode in that family stays "if equipped", the other
+  family confirms, nothing is excluded.
+- **Decision 4** (in `pfOemDonorGate`): a car with `v.vpicMismatch`
+  (expandV2Row, the vpic side table's 5th field: the scraper's
+  `_vpic_mismatch_msg`, year and make) is never a plain OEM row: a confirm
+  becomes "if equipped: this car's listing and VIN disagree, check the car";
+  an unconfirmed gate gets the line added; a gate the decode rules out still
+  excludes. A group with no gate and a car with no flag render exactly as
+  before. Aftermarket, platform-group and same-generation paths unchanged.
+
+### Part A census, 8 shipped makes (`groups/_report/round4_census_2026-11-19.json`)
+
+Before = origin/main groups and app; after = this branch. App-years (plain
+lot pairs the class contradicts). The detectors are curate.py's own, run by
+`audit11_4/round4_census.py`; the lot through `audit11_4/lot_replay.mjs`.
+
+| class | gm | ford | mopar | toyota | subaru | hmg | vag | mb |
+|---|---|---|---|---|---|---|---|---|
+| 1 same-option drive sibling | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 2 window, unlinked or no page: before | 0 | 5 (640), all no_page | 0 | 18 (68): 16 unlinked, 2 no_page; 6 edge | 0 | 1 (323) | 0 | 0 |
+| 2 after | 0 | 4 gated + 1 group refused | 0 | 18 gated | 0 | 1 gated | 0 | 0 |
+| 3 pages disagree | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 4 VIN/listing mismatch, plain pairs (cars): before | 193 (10) | 1 (1) | 2 (2) | 89 (1) | 0 | 6 (1) | 0 | 0 |
+| 4 after | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+- Class 1 is a Nissan/Infiniti pattern; a raw-level scan of every shipped
+  site's pages found clause-level drive siblings only on 1992 Subaru Legacy
+  pages, which no live group touches. Mopar line codes ("C - CHRYSLER" beside
+  "F - BRAND AWD") are a substitution, not "the same option plus a drive
+  word", and are left to the existing drive rule.
+- Class 2 live cases: Lexus IS 350 2012 / IS 250 2013 headlamps and colour
+  mirrors (e.g. 87910-53401-C1 11/2011-04/2013; the earlier 53400-C1 has no
+  "Replaced By"), RX 400h 2006 headlamps (08/2005-08/2007, 07/2005 under
+  48260), Hyundai Sonata 2015 door 76004-C1000 (04/2014-12/2014, then
+  C2000), Ford Taurus 2008 climate panels, Explorer Sport Trac 2001 motor,
+  Five Hundred 2005 switch (seed-page notes only). Edge cases (1-2 months at
+  a model-year edge): toyota 6.
+- GM, Mopar, VW/Audi and Mercedes pages print no "Production Date" field;
+  Mopar's "Up to 07/23/2012" / "After ..." free notes are not read as windows
+  (the verifier's 2012 Ram 1500 point stands, see below).
+- Class 4 cars: 8 Trailblazers listed 2004 with 2005 VINs, a 2014 Cruze (VIN
+  2013), a 2000 Silverado 1500 (VIN 2002), a 2007 Expedition (VIN 2008), a
+  2000 Durango (VIN 1999), a "Jeep Patriot" with a Kia VIN, a 2007 IS 250
+  (VIN 2008), a "2015 Sonata" with a 2000 Buick VIN.
+
+### Live diff vs origin/main (`groups/_report/live_diff_2026-11-19_round4.txt`)
+
+**0 added groups, 0 gained app-years, 0 widened gates on every shipped
+namespace.** gm, mopar, subaru, vag, mb: only `policy_sha256`. ford: 1
+removed (F87Z-7823394-AA, Explorer Sport + Sport Trac 2001: both app-years
+windowed from seed-page notes, the note over the cap), 4 narrowed; toyota 16
+groups narrowed (18 app-years gated); hmg 1 narrowed. Payload rebuilt,
+oemStatus ok x8.
+
+### Donor pairs on the pinned lot (plain / if equipped / excluded), app code in node
+
+| ns | plain | if equipped | excluded | cars with a plain row | old app on the new payload: plain / if eq. |
+|---|---|---|---|---|---|
+| gm | 53,238 -> 53,045 | 1,913 -> 2,106 | 3,867 -> 3,867 | 8,046 -> 8,036 | 53,238 / 1,913 |
+| ford | 24,523 -> 23,839 | 581 -> 1,124 | 229 -> 229 | 6,949 -> 6,802 | 24,382 / 581 |
+| mopar | 108,299 -> 108,297 | 1,978 -> 1,980 | 751 -> 751 | 7,521 -> 7,519 | 108,299 / 1,978 |
+| toyota | 97,429 -> 97,272 | 7,557 -> 7,714 | 7,196 -> 7,196 | 2,211 -> 2,210 | 97,429 / 7,557 |
+| subaru, vag, mb | unchanged (3,992; 1,489; 243) | | | | |
+| hmg | 3,754 -> 3,426 | 0 -> 328 | 0 -> 0 | 734 -> 733 | 3,754 / 0 |
+| **shipped** | **292,967 -> 291,603** | **12,071 -> 13,294** | **12,076 -> 12,076** | | 292,826 / 12,071 |
+| nissan candidate | 59,047 -> 47,411 | 4,961 -> 4,281 | 1,790 -> 847 | 14,995 -> 13,511 | 50,289 / 1,403 |
+
+The new app on main's groups moves exactly the mismatch pairs (shipped 291,
+nissan 32); nothing else.
+
+### Old reader and `built` (checked: origin/main docs/app.js on the new payload)
+
+- An old app ignores the unknown key: `pfOemGate` returns confirm, so a
+  donor of a built app-year renders as a **plain row**. On the pinned lot:
+  1,099 shipped rows (ford 708, toyota 68, hmg 323; nissan candidate 2,852).
+- Every one is in a group whose note names the window ("RX 400h: built
+  08/2005-08/2007 only", or "built 09/2011-04/2013 only" when every app-year
+  shares it; a committed-file test checks this for every built gate).
+- But an old `pfRunSearch` keeps only the first Likely group's note on a row.
+  Where the same car is also a donor for another group of the category whose
+  note names no window, that row may show without the window: **489 of the
+  1,099 shipped rows** (ford 98, toyota 68, hmg 323). So the requirement "an
+  old app does not show the donor plain without a note" holds per group but
+  not for those multi-group rows. The new app adds every gate line to the
+  row and is not affected; an app older than gates-1118 ignores all gates.
+- Old readers in the field: the web app reloads its shell on jh-v214; the
+  native store builds bundle app.js (native/README.md) and read new payloads
+  with their own code until a store release (rule 1: the owner's "ship").
+
+### Part B, nissan candidate (oem-raw@57e8b5b9; NOT shipped)
+
+`groups/_report/nissan.candidate.json`: 228 Likely, **225 shippable** (was
+246): window-regulator 113, side-mirrors 60, gauge-cluster 34,
+climate-control 18; 115 groups carry gates (built 52, fuel 32, eng 26, cab
+18, drive 10, trans 1). Against the old candidate: 21 removed, 89 narrowed
+(121 app-years left), **0 added**, 0 widened. Refusals new this round:
+`held_window_note_cap` 18; `held_drive_qualifier` 66 (was 65).
+
+Census before -> after (app-years): sibling 20 (254 plain AWD/4WD pairs) ->
+7 gated, 0 contradicted; window 109 (3,834 plain; 49 edge; 22 no_page) -> 60
+gated (31 edge); pages 107 (102 under 5 months: left out) -> 2 gated; VIN
+mismatch 32 pairs (6 cars) -> 0.
+
+Every WRONG and RISK item of the 1119d report (`groups/_report/nissan_recheck_2026-11-19d.json`; my own re-check, not independent):
+
+| item (1119d) | now |
+|---|---|
+| WRONG 96301-3JA9B QX60 mirror (and LH 96302-3JA9B, census) | refused: with "QX60 2015-2017: 2WD, gas only" (sibling 3JN9B) the note is over 160; no QX60 row |
+| WRONG 24820-3ZD0A QX56 2013 speedometer (and 3ZD1A) | QX56 2013 gated `drive 2wd` (sibling 1ZS0A "*3ROW. AWD. PREMIUM") + `built 2013-02..2014-08`; 6 4WD QX56 out, the rest "if equipped"; QX80 2014 unchanged |
+| RISK 27510-EA00A Pathfinder 2010 window | refused (`held_window_note_cap`): Pathfinder 2010 and Xterra 2010 (seed notes, no_page) both windowed, the note over 160; Xterra 2009 left out by decision 3 |
+| RISK 82720-7S000 (and 82721-7S000) 2006 window | Armada/Titan 2006 and Titan 2004 (seed notes only, window from 10/2003) left out by the note cap; Armada 2004-2005 + Titan 2005 crew cab remain |
+| RISK P13 24810-9BA5B Xterra 2011 window | group refused (note cap; 2010 left out by decision 3) |
+| RISK 96301-3JA9A (AWD starred sibling + 2016 window) | refused: "W. BASE" beside "*W. AWD. BASE" is a sibling ("starred or not"); note over 160 |
+| RISK 24810-7Z803 pages disagree (2001 vs 2002) | 2001 Frontier/Xterra left out (decision 3); 2002 unchanged |
+| RISK 80720-2Z710 pages disagree | Frontier 2002 left out (decision 3); Frontier 2003 `built 2002-10..`; **Xterra 2002-2003 unchanged** (the dated page is the Frontier's; decision 3 reads the same catalog model only) |
+| RISK P5 96301-ZC60A Armada 2007 | Armada 2007 left out (2 months of MY2007 on the 2006 page's window) |
+| RISK feed identity (Yamaha-VIN "Titan 2006": 7S00E, 7S02E, ZC20A; "Xterra 2005" with a 2004 VIN: EA005, P17 EA67E, P22 EA000) | decision 4: those cars are "if equipped" with the listing/VIN line in every group (lot plain pairs 32 -> 0). Also: 7S00E Titan 2005 gated `drive 4wd` (sibling 7S006 "KC. 2WD. (SE+ LE)", a reading the verifier did not take: "starred or not"); 7S02E Armada/Titan 2006 `built 2005-08..2006-08` (a 1-month edge, 07/2005 under 7S00E); ZC20A Titan 2006 `built 2005-08..2007-04`, Titan 2008 left out (note cap); EA67E refused (note cap) |
+| feed record "QX80 2017" with a QX60 VIN (5N1DL0MN...) | **not fixed**: `vpicMismatch` checks year and make only, so the app cannot see a model mismatch (below) |
+
+### Tests
+
+- New `curation_tests/test_round4_1119.py` (28 checks: window and clause
+  helpers, decision 1-3 on stubs including every non-split case above, gate
+  vocabulary, live_diff gate comparison, committed files: every built gate
+  well formed and named in its note, no note over 160, 3JA9B/3ZD0A/EA00A/
+  7Z803 as above). `test_round3_1119.py`: the drive_not-alone vocabulary
+  check updated (now valid when one family).
+- `pf_guards_unit.mjs` r4 block, 21 checks: decoded-AWD/4WD QX60 not offered
+  for 3JA9B, FWD plain, undecoded "if equipped"; a built app-year never plain
+  (every donor says "check the build date on the door sticker"; header);
+  a mismatched-VIN car never plain; an ungated group unchanged; drive_not
+  alone. 12 of them fail on origin/main's app.js; the 9 that pass there are
+  the sibling-gate checks (a `drive` gate is old vocabulary) and the
+  unchanged-behaviour checks, as they should.
+- curation_tests 24/24 files pass (Phase 2 parity SKIP unchanged);
+  oem_fitment/tests 42/42; pf_guards_unit ALL PASS.
+- Full regression: see "Regression" below.
+
+### Noticed, not fixed
+
+- **Model mismatches are not flagged**: `_vpic_mismatch_msg` (scraper)
+  compares year and make only ("model strings vary too much"), so a "QX80
+  2017" with a QX60 VIN reaches the app unflagged and decision 4 cannot catch
+  it. Data workstream: a model check against the decode (e.g. vPIC model in
+  the squashed model family) would close it.
+- **Same hole on other paths** (not changed, as briefed): the aftermarket
+  rows (`pfAmRows`), the hand platform groups' Likely tier and the
+  same-generation donors never read `vpicMismatch`; a mismatched car shows
+  there without a line. The parts table matches on the VIN's year
+  (`match_year`), so a year mismatch is handled there, but a make mismatch
+  (the Yamaha-VIN "Titan") is matched on the listing's make and model.
+- **Old readers**: 489 shipped multi-group rows can show a built donor
+  plain without the window on an app older than this branch (above).
+  Suggest a store release soon after the merge (owner's "ship").
+- **The note cap now costs most of the nissan losses**: 18 groups refused by
+  the window cap and 66 by the drive cap. The round-3 suggestion stands: once
+  a limit is a gate, a short note ("built-date limited; see each car") would
+  keep them; hub/owner decision.
+- **no_page windows** (stricter than the brief): ford 4 app-years + 1 group,
+  toyota 2, nissan 8 rest on seed-page notes alone. The Explorer Sport Trac
+  2001 window (from 01/2001) probably is the launch, not a split; a list-page
+  crawl of those pages would tell (gmpartsgiant-style completion; owner's
+  call on crawling).
+- **Mopar "Up to / After mm/dd/yy" windows** in free notes (2012 Ram 1500
+  headlamps) are still not read; under the 07-06 model-year convention "Up
+  to 07/23/2012" covers MY2012 anyway, but the "After" numbers on the same
+  page would be credited. A parser for those notes is the next window step.
+- **Model-year convention**: windows are judged against 07/(y-1)-06/y;
+  Titan (10/yyyy changeover) and Ram (08) years start later, which makes
+  some edge windows (nissan 31 after) that the catalog's own changeover would
+  not. Treated as windows, as decided.
+- Xterra 2002-2003 80720-2Z710: the Frontier 2003 page dates it "from
+  10/2002"; reading another model's page (decision 3 across models) would be
+  stricter but over-narrows where windows differ by model (82720-ZC30A:
+  Armada 08/2006, Titan 04/2007 end). Left as RISK for the next checker.
+- Shipped `_report/<ns>.json` curate reports were not regenerated (as in
+  earlier rounds); the nissan one was.
+
+### Regression
+
+`tools/regress.sh --out <scratch>` (not under flock) on code head 1ba97fd7
+(only this ops text follows it): **104 passed, 0 failed, 0 skipped**. It
+includes pf_guards_unit (r4 block), test_am_gates, test_interchange,
+interchange_e2e, part_finder_e2e, pf_ux_e2e, cars_feed_e2e (the round-3
+flake passed) and both layout halves (the cards-mixed setup error of round 3
+is gone with main's af391cf1 fix). backend/node_modules was a symlink to the
+main checkout's for the run; removed, not committed. origin/main moved to
+79de0758 meanwhile (ops/hub.md and ops/yards.md only): no merge needed.
+
+### For the hub
+
+1. Merge `interchange/round4-1119`? Live: 0 added claims; ford 1 removed +
+   4 narrowed, toyota 16, hmg 1 narrowed; app change (built, drive_not
+   alone, VIN mismatch) + sw jh-v214.
+2. Confirm the two choices stricter than the brief: `no_page` windows, and
+   "starred or not" applied to the Titan 7S00E / 7S006 pair (the verifier
+   read that pair as no split).
+3. Nissan: 225 shippable, not shipped; a new independent sample decides.
