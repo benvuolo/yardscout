@@ -1,0 +1,536 @@
+gm CHANGED LIVE ('side-mirrors', ('20809948',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    GATE-NARROWED ('Chevrolet', 'Silverado 1500', 2012): {'fuel': 'gas'} -> {'eng_not': ['8.1L'], 'fuel': 'gas'}
+gm CHANGED LIVE ('side-mirrors', ('20809968',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    GATE-NARROWED ('Chevrolet', 'Silverado 1500', 2012): {'fuel': 'gas'} -> {'eng_not': ['8.1L'], 'fuel': 'gas'}
+gm CHANGED LIVE ('side-mirrors', ('20843116',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    GATE-NARROWED ('Chevrolet', 'Silverado 1500', 2012): {'fuel': 'gas'} -> {'eng_not': ['8.1L'], 'fuel': 'gas'}
+gm CHANGED LIVE ('side-mirrors', ('20843177',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    GATE-NARROWED ('Chevrolet', 'Silverado 1500', 2012): {'fuel': 'gas'} -> {'eng_not': ['8.1L'], 'fuel': 'gas'}
+gm CHANGED LIVE ('side-mirrors', ('20862098',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    GATE-NARROWED ('Chevrolet', 'Silverado 1500', 2012): {'fuel': 'gas'} -> {'eng_not': ['8.1L'], 'fuel': 'gas'}
+gm CHANGED LIVE ('window-regulator', ('19152000',)) [['Buick', 'LeSabre', 2003, 2003], ['Oldsmobile', 'Alero', 2001, 2001], ['Pontiac', 'Bonneville', 2002, 2002]] lost [] gained []
+    old: GM catalog lists #19152000 for both — window motor only; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #19152000 for both — window motor only; option: fits some option packages; Alero: coupe only; verify the number on the part
+    GATE-NARROWED ('Oldsmobile', 'Alero', 2001): None -> {'body': 'coupe'}
+gm CHANGED LIVE ('window-regulator', ('19152005',)) [['Buick', 'LeSabre', 2003, 2003], ['Oldsmobile', 'Alero', 2001, 2001], ['Pontiac', 'Bonneville', 2002, 2002]] lost [] gained []
+    old: GM catalog lists #19152005 for both — window motor only; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #19152005 for both — window motor only; option: fits some option packages; Alero: coupe only; verify the number on the part
+    GATE-NARROWED ('Oldsmobile', 'Alero', 2001): None -> {'body': 'coupe'}
+gm CHANGED LIVE ('window-regulator', ('20914715',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    GATE-NARROWED ('Chevrolet', 'Silverado 1500', 2012): {'fuel': 'gas'} -> {'eng_not': ['8.1L'], 'fuel': 'gas'}
+gm CHANGED LIVE ('window-regulator', ('20914716',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    GATE-NARROWED ('Chevrolet', 'Silverado 1500', 2012): {'fuel': 'gas'} -> {'eng_not': ['8.1L'], 'fuel': 'gas'}
+gm CHANGED LIVE ('window-regulator', ('84198841',)) [['Chevrolet', 'Equinox', 2018, 2018], ['Chevrolet', 'Malibu', 2016, 2016], ['Chevrolet', 'Malibu', 2020, 2020]] lost [] gained []
+    old: GM catalog lists #84198841 for both — window motor only; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #84198841 for both — window motor only; option: fits some option packages; Malibu 2016: 1.5L/1.8L/2.0L only; verify the number on the part
+    GATE-NARROWED ('Chevrolet', 'Malibu', 2016): None -> {'eng': ['1.5L', '1.8L', '2.0L']}
+gm CHANGED LIVE ('window-regulator', ('84198850',)) [['Chevrolet', 'Equinox', 2018, 2018], ['Chevrolet', 'Malibu', 2016, 2016], ['Chevrolet', 'Malibu', 2020, 2020]] lost [] gained []
+    old: GM catalog lists #84198850 for both — window motor only; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #84198850 for both — window motor only; option: fits some option packages; Malibu 2016: 1.5L/1.8L/2.0L only; verify the number on the part
+    GATE-NARROWED ('Chevrolet', 'Malibu', 2016): None -> {'eng': ['1.5L', '1.8L', '2.0L']}
+gm CHANGED LIVE ('window-regulator', ('84198851',)) [['Chevrolet', 'Equinox', 2018, 2018], ['Chevrolet', 'Malibu', 2016, 2016], ['Chevrolet', 'Malibu', 2020, 2020]] lost [] gained []
+    old: GM catalog lists #84198851 for both — window motor only; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #84198851 for both — window motor only; option: fits some option packages; Malibu 2016: 1.5L/1.8L/2.0L only; verify the number on the part
+    GATE-NARROWED ('Chevrolet', 'Malibu', 2016): None -> {'eng': ['1.5L', '1.8L', '2.0L']}
+gm REMOVED LIVE ('window-switch', ('20835552',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+gm REMOVED LIVE ('window-switch', ('20835553',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+ford REMOVED LIVE ('gauge-cluster', ('AE5Z-10849-LA',)) [['Lincoln', 'MKZ', 2010, 2010], ['Mercury', 'Milan', 2010, 2010]]
+ford REMOVED LIVE ('gauge-cluster', ('AE5Z-10849-MA',)) [['Lincoln', 'MKZ', 2010, 2010], ['Mercury', 'Milan', 2010, 2010]]
+ford CHANGED LIVE ('gauge-cluster', ('BE5Z-10849-AC',)) [['Ford', 'Fusion', 2012, 2012], ['Lincoln', 'MKZ', 2011, 2012]] lost [] gained []
+    old: Ford catalog lists #BE5Z-10849-AC for both — trim-limited; verify the number on the part
+    new: Ford catalog lists #BE5Z-10849-AC for both — trim-limited; 2.5L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Ford', 'Fusion', 2012): None -> {'eng': ['2.5L'], 'fuel': 'hybrid'}
+    GATE-NARROWED ('Lincoln', 'MKZ', 2011): None -> {'eng': ['2.5L'], 'fuel': 'hybrid'}
+    GATE-NARROWED ('Lincoln', 'MKZ', 2012): None -> {'eng': ['2.5L'], 'fuel': 'hybrid'}
+ford REMOVED LIVE ('gauge-cluster', ('BE5Z-10849-BC',)) [['Ford', 'Fusion', 2012, 2012], ['Lincoln', 'MKZ', 2011, 2012]]
+ford REMOVED LIVE ('gauge-cluster', ('YL3Z-10849-DA',)) [['Ford', 'Expedition', 2000, 2000], ['Ford', 'F-150', 2001, 2001]]
+mopar CHANGED LIVE ('climate-control', ('5134624AA',)) [['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2004]] lost [] gained []
+    old: Mopar catalog lists #5134624AA for both — option: fits some option packages; verify the number on the part
+    new: Mopar catalog lists #5134624AA for both — option: fits some option packages; Caravan: 2.4L/3.3L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+mopar CHANGED LIVE ('climate-control', ('5134624AC',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #5134624AC for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5134624AC for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('climate-control', ('5134625AC',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #5134625AC for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5134625AC for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('climate-control', ('5134626AC',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #5134626AC for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5134626AC for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('climate-control', ('5134627AC',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #5134627AC for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5134627AC for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('climate-control', ('5136781AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2005, 2005]] lost [] gained []
+    old: Mopar catalog lists #5136781AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5136781AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('climate-control', ('55111290AD',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55111290AD for both — older catalog-only number; 1500: only 4WD checked; verify the number on the part
+    new: Mopar catalog lists #55111290AD for both — older catalog-only number; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part
+    GATE-NARROWED ('Ram', '1500', 2012): {'drive': '4wd', 'drive_basis': 'unchecked'} -> {'drive': '4wd', 'drive_basis': 'unchecked', 'eng': ['4.7L', '5.7L']}
+mopar CHANGED LIVE ('climate-control', ('55111291AC',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55111291AC for both — older catalog-only number; 1500: only 4WD checked; verify the number on the part
+    new: Mopar catalog lists #55111291AC for both — older catalog-only number; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part
+    GATE-NARROWED ('Ram', '1500', 2012): {'drive': '4wd', 'drive_basis': 'unchecked'} -> {'drive': '4wd', 'drive_basis': 'unchecked', 'eng': ['4.7L', '5.7L']}
+mopar CHANGED LIVE ('climate-control', ('55111292AD',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55111292AD for both — older catalog-only number; 1500: only 4WD checked; verify the number on the part
+    new: Mopar catalog lists #55111292AD for both — older catalog-only number; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part
+    GATE-NARROWED ('Ram', '1500', 2012): {'drive': '4wd', 'drive_basis': 'unchecked'} -> {'drive': '4wd', 'drive_basis': 'unchecked', 'eng': ['4.7L', '5.7L']}
+mopar CHANGED LIVE ('fender', ('5018442AB',)) [['Chrysler', 'Town & Country', 2001, 2001], ['Chrysler', 'Town & Country', 2005, 2005], ['Chrysler', 'Voyager', 2003, 2003], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #5018442AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5018442AB for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('fender', ('5018443AB',)) [['Chrysler', 'Town & Country', 2001, 2001], ['Chrysler', 'Town & Country', 2005, 2005], ['Chrysler', 'Voyager', 2003, 2003], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #5018443AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5018443AB for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('gauge-cluster', ('4760404AH',)) [['Chrysler', 'Concorde', 2002, 2002], ['Chrysler', 'LHS', 2000, 2000]] lost [] gained []
+    old: Mopar catalog lists #4760404AH for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4760404AH for both — trim-limited; Concorde: 3.5L only; verify the number on the part
+    GATE-NARROWED ('Chrysler', 'Concorde', 2002): None -> {'eng': ['3.5L']}
+mopar CHANGED LIVE ('gauge-cluster', ('5082400AD',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2005, 2005]] lost [] gained []
+    old: Mopar catalog lists #5082400AD for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5082400AD for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('gauge-cluster', ('5082406AI',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2005, 2005]] lost [] gained []
+    old: Mopar catalog lists #5082406AI for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5082406AI for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('gauge-cluster', ('5082552AE',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2005, 2005]] lost [] gained []
+    old: Mopar catalog lists #5082552AE for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5082552AE for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('headlights', ('55277409AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277409AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part
+    new: Mopar catalog lists #55277409AE for both — option: fits some option packages; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part
+    GATE-NARROWED ('Ram', '1500', 2012): {'drive': '4wd', 'drive_basis': 'unchecked'} -> {'drive': '4wd', 'drive_basis': 'unchecked', 'eng': ['4.7L', '5.7L']}
+mopar CHANGED LIVE ('headlights', ('55277410AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277410AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part
+    new: Mopar catalog lists #55277410AE for both — option: fits some option packages; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part
+    GATE-NARROWED ('Ram', '1500', 2012): {'drive': '4wd', 'drive_basis': 'unchecked'} -> {'drive': '4wd', 'drive_basis': 'unchecked', 'eng': ['4.7L', '5.7L']}
+mopar CHANGED LIVE ('headlights', ('68001484AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68001484AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part
+    new: Mopar catalog lists #68001484AE for both — option: fits some option packages; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part
+    GATE-NARROWED ('Ram', '1500', 2012): {'drive': '4wd', 'drive_basis': 'unchecked'} -> {'drive': '4wd', 'drive_basis': 'unchecked', 'eng': ['4.7L', '5.7L']}
+mopar CHANGED LIVE ('headlights', ('68001485AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68001485AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part
+    new: Mopar catalog lists #68001485AE for both — option: fits some option packages; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part
+    GATE-NARROWED ('Ram', '1500', 2012): {'drive': '4wd', 'drive_basis': 'unchecked'} -> {'drive': '4wd', 'drive_basis': 'unchecked', 'eng': ['4.7L', '5.7L']}
+mopar CHANGED LIVE ('hood', ('4860455AC',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2005, 2005]] lost [] gained []
+    old: Mopar catalog lists #4860455AC for both — older catalog-only number; verify the number on the part
+    new: Mopar catalog lists #4860455AC for both — older catalog-only number; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar REMOVED LIVE ('side-mirrors', ('4805424AI',)) [['Chrysler', '300M', 2002, 2002], ['Chrysler', 'Concorde', 2002, 2002]]
+mopar REMOVED LIVE ('side-mirrors', ('4805947AB',)) [['Chrysler', '300M', 2002, 2002], ['Chrysler', 'Concorde', 2002, 2002]]
+mopar REMOVED LIVE ('side-mirrors', ('4806270AA',)) [['Chrysler', '300', 2006, 2006], ['Dodge', 'Charger', 2007, 2007]]
+mopar REMOVED LIVE ('side-mirrors', ('4894401AB',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005]]
+mopar CHANGED LIVE ('side-mirrors', ('4894401AE',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Chrysler', 'Voyager', 2003, 2003], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894401AE for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894401AE for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar REMOVED LIVE ('side-mirrors', ('4894403AB',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005]]
+mopar CHANGED LIVE ('side-mirrors', ('4894403AG',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Chrysler', 'Voyager', 2003, 2003], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894403AG for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894403AG for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar REMOVED LIVE ('side-mirrors', ('4894404AC',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005]]
+mopar REMOVED LIVE ('side-mirrors', ('4894404AD',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2005, 2005]]
+mopar CHANGED LIVE ('side-mirrors', ('4894404AF',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Chrysler', 'Voyager', 2003, 2003], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894404AF for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894404AF for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar REMOVED LIVE ('side-mirrors', ('4894405AC',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005]]
+mopar REMOVED LIVE ('side-mirrors', ('4894405AE',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2005, 2005]]
+mopar CHANGED LIVE ('side-mirrors', ('4894405AF',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Chrysler', 'Voyager', 2003, 2003], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894405AF for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894405AF for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('side-mirrors', ('4894410AE',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Chrysler', 'Voyager', 2003, 2003], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894410AE for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894410AE for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar REMOVED LIVE ('side-mirrors', ('4894411AC',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005]]
+mopar CHANGED LIVE ('side-mirrors', ('4894411AE',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Chrysler', 'Voyager', 2003, 2003], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894411AE for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894411AE for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('tail-lights', ('4857954AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2006]] lost [] gained []
+    old: Mopar catalog lists #4857954AA for both — older catalog-only number; verify the number on the part
+    new: Mopar catalog lists #4857954AA for both — older catalog-only number; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('tail-lights', ('4857955AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2006]] lost [] gained []
+    old: Mopar catalog lists #4857955AA for both — older catalog-only number; verify the number on the part
+    new: Mopar catalog lists #4857955AA for both — older catalog-only number; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('tail-lights', ('55277414AB',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277414AB for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+    new: Mopar catalog lists #55277414AB for both — option: fits some option packages; 1500: 4WD, 3.6L/4.7L/5.7L only; verify the number on the part
+    GATE-NARROWED ('Ram', '1500', 2012): {'drive': '4wd', 'drive_basis': 'stated'} -> {'drive': '4wd', 'drive_basis': 'stated', 'eng': ['3.6L', '4.7L', '5.7L']}
+mopar CHANGED LIVE ('tail-lights', ('55277415AB',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277415AB for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+    new: Mopar catalog lists #55277415AB for both — option: fits some option packages; 1500: 4WD, 3.6L/4.7L/5.7L only; verify the number on the part
+    GATE-NARROWED ('Ram', '1500', 2012): {'drive': '4wd', 'drive_basis': 'stated'} -> {'drive': '4wd', 'drive_basis': 'stated', 'eng': ['3.6L', '4.7L', '5.7L']}
+mopar CHANGED LIVE ('tail-lights', ('68241334AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #68241334AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68241334AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('tail-lights', ('68241335AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #68241335AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68241335AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('wheels', ('4766332AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Chrysler', 'Voyager', 2003, 2003], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4766332AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4766332AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('wheels', ('5GR83PAKAC',)) [['Dodge', 'Dakota', 2004, 2004], ['Dodge', 'Durango', 2001, 2001], ['Dodge', 'Durango', 2003, 2003]] lost [] gained []
+    old: Mopar catalog lists #5GR83PAKAC for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5GR83PAKAC for both — trim-limited; Durango 2001: 4.7L/5.9L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Durango', 2001): None -> {'eng': ['4.7L', '5.9L']}
+mopar CHANGED LIVE ('window-regulator', ('4894526AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894526AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894526AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('window-regulator', ('4894527AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894527AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894527AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('window-regulator', ('4894528AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894528AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894528AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+mopar CHANGED LIVE ('window-regulator', ('4894529AA',)) [['Chrysler', 'Town & Country', 2005, 2005], ['Dodge', 'Caravan', 2005, 2005], ['Dodge', 'Grand Caravan', 2004, 2005], ['Dodge', 'Grand Caravan', 2007, 2007]] lost [] gained []
+    old: Mopar catalog lists #4894529AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #4894529AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part
+    GATE-NARROWED ('Dodge', 'Caravan', 2005): None -> {'eng': ['2.4L', '3.3L']}
+    GATE-NARROWED ('Dodge', 'Grand Caravan', 2005): None -> {'eng': ['3.3L', '3.8L']}
+toyota CHANGED LIVE ('bumper-front', ('52119-06957',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #52119-06957 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #52119-06957 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('bumper-front', ('52119-33967',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #52119-33967 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #52119-33967 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('bumper-rear', ('52159-06952',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52159-06952 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #52159-06952 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2007): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('bumper-rear', ('52159-33924',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52159-33924 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #52159-33924 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2007): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('climate-control', ('55900-06271',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #55900-06271 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #55900-06271 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2007): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('climate-control', ('55900-06330',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #55900-06330 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #55900-06330 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('climate-control', ('55900-06370',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #55900-06370 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #55900-06370 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2012): None -> {'eng': ['2.5L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('gauge-cluster', ('83800-06J50',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #83800-06J50 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #83800-06J50 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('gauge-cluster', ('83800-06Q60',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #83800-06Q60 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #83800-06Q60 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2007): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('gauge-cluster', ('83800-33G20',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #83800-33G20 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #83800-33G20 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('grille', ('53101-06350',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #53101-06350 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #53101-06350 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2012): None -> {'eng': ['2.5L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('grille', ('53101-06441',)) [['Toyota', 'Camry', 2015, 2015], ['Toyota', 'Camry Hybrid', 2015, 2015]] lost [] gained []
+    old: Toyota catalog lists #53101-06441 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #53101-06441 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2015): None -> {'eng': ['2.5L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('grille', ('53101-06621',)) [['Toyota', 'Camry', 2015, 2015], ['Toyota', 'Camry Hybrid', 2015, 2015]] lost [] gained []
+    old: Toyota catalog lists #53101-06621 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #53101-06621 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2015): None -> {'eng': ['2.5L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('grille', ('53101-33220',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #53101-33220 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #53101-33220 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2007): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('grille', ('53101-33260',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #53101-33260 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #53101-33260 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('grille', ('53114-33900',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #53114-33900 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #53114-33900 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('headlights', ('81110-06520',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #81110-06520 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #81110-06520 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('headlights', ('81110-06C10',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #81110-06C10 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #81110-06C10 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2007): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('headlights', ('81130-06890',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #81130-06890 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #81130-06890 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2012): None -> {'eng': ['2.5L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('headlights', ('81150-06520',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #81150-06520 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #81150-06520 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('headlights', ('81150-06C10',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #81150-06C10 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #81150-06C10 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2007): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('headlights', ('81170-06890',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #81170-06890 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #81170-06890 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2012): None -> {'eng': ['2.5L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('side-mirrors', ('87910-33660-J2',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #87910-33660-J2 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #87910-33660-J2 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('side-mirrors', ('87910-33670-G0',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #87910-33670-G0 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #87910-33670-G0 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2007): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('side-mirrors', ('87910-33670-J2',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #87910-33670-J2 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #87910-33670-J2 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-33620-J2',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #87940-33620-J2 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #87940-33620-J2 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-33630-G0',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #87940-33630-G0 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #87940-33630-G0 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2007): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('side-mirrors', ('87940-33630-J2',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #87940-33630-J2 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #87940-33630-J2 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('tail-lights', ('81550-06350',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #81550-06350 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #81550-06350 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('tail-lights', ('81551-33530',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #81551-33530 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #81551-33530 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('tail-lights', ('81560-06350',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #81560-06350 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #81560-06350 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+toyota CHANGED LIVE ('tail-lights', ('81561-33530',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #81561-33530 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #81561-33530 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    GATE-NARROWED ('Toyota', 'Camry', 2011): None -> {'eng': ['2.4L'], 'fuel': 'hybrid'}
+subaru CHANGED LIVE ('climate-control', ('72311AL10A',)) [['Subaru', 'Legacy', 2015, 2015], ['Subaru', 'Outback', 2015, 2015]] lost [] gained []
+    old: Subaru catalog lists #72311AL10A for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #72311AL10A for both — fits some configurations; 2.5L only; verify the number on the part
+    GATE-NARROWED ('Subaru', 'Legacy', 2015): None -> {'eng': ['2.5L']}
+    GATE-NARROWED ('Subaru', 'Outback', 2015): None -> {'eng': ['2.5L']}
+subaru CHANGED LIVE ('hood', ('57229AG04A9P',)) [['Subaru', 'Legacy', 2005, 2005], ['Subaru', 'Outback', 2005, 2005]] lost [] gained []
+    old: Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; verify the number on the part
+    new: Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; Outback: 2.5L only; verify the number on the part
+    GATE-NARROWED ('Subaru', 'Outback', 2005): None -> {'eng': ['2.5L']}
+hmg REMOVED HELD ('strut', ('54651A7600',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]]
+hmg REMOVED HELD ('strut', ('54661A7600',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]]
+hmg REMOVED HELD ('strut', ('55300A7600',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]]
+hmg REMOVED HELD ('strut', ('55300A7670',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]]
+vag CHANGED LIVE ('gauge-cluster', ('1J5-920-906-J',)) [['Volkswagen', 'Golf', 2003, 2003], ['Volkswagen', 'Jetta', 2003, 2003]] lost [] gained []
+    old: VW/Audi catalog lists #1J5-920-906-J for both — trim-limited; verify the number on the part
+    new: VW/Audi catalog lists #1J5-920-906-J for both — trim-limited; Golf: 1.8L/2.0L only; verify the number on the part
+    GATE-NARROWED ('Volkswagen', 'Golf', 2003): None -> {'eng': ['1.8L', '2.0L']}
+vag CHANGED LIVE ('gauge-cluster', ('1J5-920-906-N',)) [['Volkswagen', 'Golf', 2003, 2003], ['Volkswagen', 'Jetta', 2003, 2003]] lost [] gained []
+    old: VW/Audi catalog lists #1J5-920-906-N for both — trim-limited; verify the number on the part
+    new: VW/Audi catalog lists #1J5-920-906-N for both — trim-limited; Golf: 1.8L/2.0L only; verify the number on the part
+    GATE-NARROWED ('Volkswagen', 'Golf', 2003): None -> {'eng': ['1.8L', '2.0L']}
+nissan REMOVED LIVE ('climate-control', ('27510-7Z416',)) [['Nissan', 'Frontier', 2000, 2002], ['Nissan', 'Xterra', 2000, 2001]]
+nissan CHANGED LIVE ('climate-control', ('27510-8Z310',)) [['Nissan', 'Frontier', 2001, 2002], ['Nissan', 'Xterra', 2001, 2002]] lost [] gained []
+    old: Nissan catalog lists #27510-8Z310 for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part
+    new: Nissan catalog lists #27510-8Z310 for both — option: fits some option packages; Frontier: crew cab only; Frontier: 3.3L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2001): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Frontier', 2002): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['3.3L']}
+nissan CHANGED LIVE ('climate-control', ('27510-8Z315',)) [['Nissan', 'Frontier', 2001, 2002], ['Nissan', 'Xterra', 2002, 2002]] lost [] gained []
+    old: Nissan catalog lists #27510-8Z315 for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part
+    new: Nissan catalog lists #27510-8Z315 for both — option: fits some option packages; Frontier: crew cab only; 3.3L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2001): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Frontier', 2002): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Xterra', 2002): None -> {'eng': ['3.3L']}
+nissan CHANGED LIVE ('climate-control', ('27510-9BF0B',)) [['Nissan', 'Frontier', 2012, 2014], ['Nissan', 'Xterra', 2012, 2014]] lost [] gained []
+    old: Nissan catalog lists #27510-9BF0B for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part
+    new: Nissan catalog lists #27510-9BF0B for both — option: fits some option packages; Frontier: crew cab only; Frontier: 4.0L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2012): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['4.0L']}
+    GATE-NARROWED ('Nissan', 'Frontier', 2013): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['4.0L']}
+    GATE-NARROWED ('Nissan', 'Frontier', 2014): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['4.0L']}
+nissan REMOVED LIVE ('climate-control', ('27510-9BH0C',)) [['Nissan', 'Frontier', 2010, 2013], ['Nissan', 'Xterra', 2010, 2013]]
+nissan CHANGED LIVE ('climate-control', ('27510-9BK0B',)) [['Nissan', 'Frontier', 2014, 2014], ['Nissan', 'Xterra', 2013, 2014]] lost [] gained []
+    old: Nissan catalog lists #27510-9BK0B for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part
+    new: Nissan catalog lists #27510-9BK0B for both — option: fits some option packages; Frontier: crew cab only; Frontier: 4.0L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2014): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['4.0L']}
+nissan REMOVED LIVE ('climate-control', ('27510-9CA0A',)) [['Nissan', 'Frontier', 2010, 2013], ['Nissan', 'Pathfinder', 2011, 2012], ['Nissan', 'Xterra', 2010, 2014]]
+nissan CHANGED LIVE ('climate-control', ('27510-ZD000',)) [['Nissan', 'Frontier', 2003, 2004], ['Nissan', 'Xterra', 2003, 2004]] lost [] gained []
+    old: Nissan catalog lists #27510-ZD000 for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part
+    new: Nissan catalog lists #27510-ZD000 for both — option: fits some option packages; Frontier: crew cab only; 3.3L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2003): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Frontier', 2004): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Xterra', 2003): None -> {'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Xterra', 2004): None -> {'eng': ['3.3L']}
+nissan CHANGED LIVE ('climate-control', ('27510-ZD005',)) [['Nissan', 'Frontier', 2003, 2004], ['Nissan', 'Xterra', 2003, 2004]] lost [] gained []
+    old: Nissan catalog lists #27510-ZD005 for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part
+    new: Nissan catalog lists #27510-ZD005 for both — option: fits some option packages; Frontier: crew cab only; Frontier: 3.3L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2003): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Frontier', 2004): {'cab': 'crew cab'} -> {'cab': 'crew cab', 'eng': ['3.3L']}
+nissan REMOVED LIVE ('climate-control', ('27510-ZL00A',)) [['Nissan', 'Frontier', 2009, 2010], ['Nissan', 'Xterra', 2008, 2009]]
+nissan CHANGED LIVE ('climate-control', ('27515-7Z401',)) [['Nissan', 'Frontier', 2000, 2002], ['Nissan', 'Xterra', 2001, 2002]] lost [] gained []
+    old: Nissan catalog lists #27515-7Z401 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #27515-7Z401 for both — option: fits some option packages; Frontier 2001-2002: regular cab/king cab only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2001): None -> {'cab': ['regular cab', 'king cab']}
+    GATE-NARROWED ('Nissan', 'Frontier', 2002): None -> {'cab': ['regular cab', 'king cab']}
+nissan REMOVED LIVE ('gauge-cluster', ('24810-2Z903',)) [['Nissan', 'Frontier', 2002, 2004], ['Nissan', 'Xterra', 2002, 2004]]
+nissan CHANGED LIVE ('gauge-cluster', ('24810-3JA1B',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2014]] lost [] gained []
+    old: Nissan catalog lists #24810-3JA1B for both — option: fits some option packages; QX60: gas only; verify the number on the part
+    new: Nissan catalog lists #24810-3JA1B for both — option: fits some option packages; QX60: 3.5L, gas only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'QX60', 2014): {'fuel': 'gas'} -> {'eng': ['3.5L'], 'fuel': 'gas'}
+nissan CHANGED LIVE ('gauge-cluster', ('24810-7Z803',)) [['Nissan', 'Frontier', 2001, 2002], ['Nissan', 'Xterra', 2001, 2002]] lost [] gained []
+    old: Nissan catalog lists #24810-7Z803 for both — option: fits some option packages; 3.3L only; verify the number on the part
+    new: Nissan catalog lists #24810-7Z803 for both — option: fits some option packages; Frontier: king cab/crew cab only; 3.3L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2001): {'eng': ['3.3L']} -> {'cab': ['king cab', 'crew cab'], 'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Frontier', 2002): {'eng': ['3.3L']} -> {'cab': ['king cab', 'crew cab'], 'eng': ['3.3L']}
+nissan CHANGED LIVE ('gauge-cluster', ('24810-7Z809',)) [['Nissan', 'Frontier', 2001, 2002], ['Nissan', 'Xterra', 2001, 2002]] lost [] gained []
+    old: Nissan catalog lists #24810-7Z809 for both — option: fits some option packages; Frontier: 3.3L only; verify the number on the part
+    new: Nissan catalog lists #24810-7Z809 for both — option: fits some option packages; Frontier: king cab/crew cab only; 3.3L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2001): {'eng': ['3.3L']} -> {'cab': ['king cab', 'crew cab'], 'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Frontier', 2002): {'eng': ['3.3L']} -> {'cab': ['king cab', 'crew cab'], 'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Xterra', 2001): None -> {'eng': ['3.3L']}
+    GATE-NARROWED ('Nissan', 'Xterra', 2002): None -> {'eng': ['3.3L']}
+nissan REMOVED LIVE ('gauge-cluster', ('24810-9BA7C',)) [['Nissan', 'Frontier', 2010, 2011], ['Nissan', 'Pathfinder', 2011, 2011]]
+nissan ADDED LIVE ('gauge-cluster', ('24810-9BD4C',)) [['Nissan', 'Frontier', 2011, 2012], ['Nissan', 'Xterra', 2011, 2012]] | Nissan catalog lists #24810-9BD4C for both — option: fits some option packages; Frontier: 4.0L, manual only; Xterra: manual only; verify the number on the part
+nissan CHANGED LIVE ('gauge-cluster', ('24810-9BD5A',)) [['Nissan', 'Frontier', 2012, 2012], ['Nissan', 'Xterra', 2011, 2012]] lost [] gained []
+    old: Nissan catalog lists #24810-9BD5A for both — option: fits some option packages; Frontier: 4WD only; verify the number on the part
+    new: Nissan catalog lists #24810-9BD5A for both — option: fits some option packages; Frontier: 4WD, 4.0L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2012): {'drive': '4wd', 'drive_basis': 'stated'} -> {'drive': '4wd', 'drive_basis': 'stated', 'eng': ['4.0L']}
+nissan CHANGED LIVE ('gauge-cluster', ('24810-9NA5C',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2014]] lost [] gained []
+    old: Nissan catalog lists #24810-9NA5C for both — option: fits some option packages; JX35: AWD only; QX60: AWD, gas only; verify the number on the part
+    new: Nissan catalog lists #24810-9NA5C for both — option: fits some option packages; JX35: AWD only; QX60: AWD, 3.5L, gas only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'QX60', 2014): {'drive': 'awd', 'drive_basis': 'stated', 'fuel': 'gas'} -> {'drive': 'awd', 'drive_basis': 'stated', 'eng': ['3.5L'], 'fuel': 'gas'}
+nissan CHANGED LIVE ('gauge-cluster', ('24810-EA48D',)) [['Nissan', 'Pathfinder', 2005, 2005], ['Nissan', 'Xterra', 2005, 2005]] lost [] gained []
+    old: Nissan catalog lists #24810-EA48D for both — option: fits some option packages; 4WD only; verify the number on the part
+    new: Nissan catalog lists #24810-EA48D for both — option: fits some option packages; Pathfinder: part-time 4WD only; Xterra: 4WD only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Pathfinder', 2005): {'drive': '4wd', 'drive_basis': 'stated'} -> {'drive': '4wd', 'drive_basis': 'stated', 'drive_not': 'a4wd'}
+nissan REMOVED LIVE ('gauge-cluster', ('24810-EA67D',)) [['Nissan', 'Pathfinder', 2006, 2008], ['Nissan', 'Xterra', 2006, 2007]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-EC44C',)) [['Nissan', 'Pathfinder', 2006, 2007], ['Nissan', 'Xterra', 2006, 2007]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-ZP77A',)) [['Nissan', 'Pathfinder', 2006, 2008], ['Nissan', 'Xterra', 2006, 2008]]
+nissan REMOVED LIVE ('gauge-cluster', ('24810-ZS44D',)) [['Nissan', 'Pathfinder', 2008, 2009], ['Nissan', 'Xterra', 2008, 2009]]
+nissan REMOVED LIVE ('gauge-cluster', ('24820-1MA5C',)) [['Infiniti', 'M56', 2013, 2013], ['Infiniti', 'Q70', 2014, 2014]]
+nissan REMOVED LIVE ('gauge-cluster', ('24820-1MA5D',)) [['Infiniti', 'M56', 2013, 2013], ['Infiniti', 'Q70', 2014, 2014]]
+nissan CHANGED LIVE ('gauge-cluster', ('24820-1MK5A',)) [['Infiniti', 'M37', 2012, 2013], ['Infiniti', 'Q70', 2014, 2014]] lost [] gained []
+    old: Nissan catalog lists #24820-1MK5A for both — option: fits some option packages; Q70: 3.7L, gas only; verify the number on the part
+    new: Nissan catalog lists #24820-1MK5A for both — option: fits some option packages; M37: 2WD only; Q70: 2WD, 3.7L, gas only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'M37', 2012): None -> {'drive': '2wd', 'drive_basis': 'stated'}
+    GATE-NARROWED ('Infiniti', 'M37', 2013): None -> {'drive': '2wd', 'drive_basis': 'stated'}
+    GATE-NARROWED ('Infiniti', 'Q70', 2014): {'eng': ['3.7L'], 'fuel': 'gas'} -> {'drive': '2wd', 'drive_basis': 'stated', 'eng': ['3.7L'], 'fuel': 'gas'}
+nissan REMOVED LIVE ('gauge-cluster', ('24820-6AH1C',)) [['Infiniti', 'M56', 2013, 2013], ['Infiniti', 'Q70', 2014, 2014]]
+nissan REMOVED LIVE ('gauge-cluster', ('24820-6AH1D',)) [['Infiniti', 'M56', 2013, 2013], ['Infiniti', 'Q70', 2014, 2014]]
+nissan CHANGED LIVE ('gauge-cluster', ('24820-6AH2A',)) [['Infiniti', 'M37', 2013, 2013], ['Infiniti', 'Q70', 2014, 2014]] lost [] gained []
+    old: Nissan catalog lists #24820-6AH2A for both — option: fits some option packages; Q70: 3.7L, gas only; verify the number on the part
+    new: Nissan catalog lists #24820-6AH2A for both — option: fits some option packages; M37: 2WD only; Q70: 2WD, 3.7L, gas only; verify the number on the part
+    GATE-NARROWED ('Infiniti', 'M37', 2013): None -> {'drive': '2wd', 'drive_basis': 'stated'}
+    GATE-NARROWED ('Infiniti', 'Q70', 2014): {'eng': ['3.7L'], 'fuel': 'gas'} -> {'drive': '2wd', 'drive_basis': 'stated', 'eng': ['3.7L'], 'fuel': 'gas'}
+nissan CHANGED LIVE ('gauge-cluster', ('24820-89Y00',)) [['Nissan', '200SX', 1995, 1998], ['Nissan', 'Sentra', 1995, 1999]] lost [] gained []
+    old: Nissan catalog lists #24820-89Y00 for both — option: fits some option packages; 200SX: 1.6L only; Sentra 1997-1998: 1.6L only; verify the number on the part
+    new: Nissan catalog lists #24820-89Y00 for both — option: fits some option packages; 200SX: 1.6L only; Sentra 1997-1999: 1.6L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Sentra', 1999): None -> {'eng': ['1.6L']}
+nissan CHANGED LIVE ('gauge-cluster', ('24820-8B703',)) [['Nissan', '200SX', 1997, 1997], ['Nissan', '200SX', 1999, 1999], ['Nissan', 'Sentra', 1999, 1999]] lost [('Nissan', '200SX', 1998), ('Nissan', 'Sentra', 1997), ('Nissan', 'Sentra', 1998)] gained []
+nissan REMOVED LIVE ('side-mirrors', ('96301-1NC2A',)) [['Infiniti', 'G25', 2011, 2012], ['Infiniti', 'Q40', 2015, 2015]]
+nissan REMOVED LIVE ('side-mirrors', ('96301-3JA9C',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2017]]
+nissan REMOVED LIVE ('side-mirrors', ('96301-3JN9B',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2017]]
+nissan REMOVED LIVE ('side-mirrors', ('96301-EA005',)) [['Nissan', 'Frontier', 2005, 2012], ['Nissan', 'Pathfinder', 2005, 2012], ['Nissan', 'Xterra', 2005, 2013]]
+nissan REMOVED LIVE ('side-mirrors', ('96301-EA18E',)) [['Nissan', 'Frontier', 2005, 2019], ['Nissan', 'Pathfinder', 2005, 2012], ['Nissan', 'Xterra', 2008, 2011]]
+nissan REMOVED LIVE ('side-mirrors', ('96301-EA19E',)) [['Nissan', 'Frontier', 2005, 2019], ['Nissan', 'Pathfinder', 2005, 2012]]
+nissan REMOVED LIVE ('side-mirrors', ('96301-S3800',)) [['Nissan', 'Frontier', 1998, 2003], ['Nissan', 'Pathfinder', 1989, 1993], ['Nissan', 'Xterra', 2000, 2003]]
+nissan REMOVED LIVE ('side-mirrors', ('96302-1NC2A',)) [['Infiniti', 'G25', 2011, 2012], ['Infiniti', 'Q40', 2015, 2015]]
+nissan REMOVED LIVE ('side-mirrors', ('96302-3B300',)) [['Nissan', 'Frontier', 1998, 2003], ['Nissan', 'Xterra', 2000, 2003]]
+nissan REMOVED LIVE ('side-mirrors', ('96302-3JA9C',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2017]]
+nissan REMOVED LIVE ('side-mirrors', ('96302-3JN9B',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2014, 2017]]
+nissan REMOVED LIVE ('side-mirrors', ('96302-EA005',)) [['Nissan', 'Frontier', 2005, 2012], ['Nissan', 'Pathfinder', 2005, 2012], ['Nissan', 'Xterra', 2005, 2013]]
+nissan REMOVED LIVE ('side-mirrors', ('96302-EA18E',)) [['Nissan', 'Frontier', 2005, 2019], ['Nissan', 'Pathfinder', 2005, 2012], ['Nissan', 'Xterra', 2008, 2011]]
+nissan REMOVED LIVE ('side-mirrors', ('96302-EA19E',)) [['Nissan', 'Frontier', 2005, 2019], ['Nissan', 'Pathfinder', 2005, 2012]]
+nissan CHANGED LIVE ('window-regulator', ('80720-2Z700',)) [['Nissan', 'Frontier', 2002, 2004], ['Nissan', 'Xterra', 2002, 2004]] lost [] gained []
+    old: Nissan catalog lists #80720-2Z700 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80720-2Z700 for both — option: fits some option packages; Frontier 2002: king cab/crew cab only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2002): None -> {'cab': ['king cab', 'crew cab']}
+nissan CHANGED LIVE ('window-regulator', ('80720-2Z710',)) [['Nissan', 'Frontier', 2002, 2004], ['Nissan', 'Xterra', 2002, 2003]] lost [] gained []
+    old: Nissan catalog lists #80720-2Z710 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80720-2Z710 for both — option: fits some option packages; Frontier 2002: king cab/crew cab only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2002): None -> {'cab': ['king cab', 'crew cab']}
+nissan REMOVED LIVE ('window-regulator', ('80720-3S500',)) [['Nissan', 'Frontier', 1998, 2003], ['Nissan', 'Xterra', 2000, 2004]]
+nissan CHANGED LIVE ('window-regulator', ('80721-2Z700',)) [['Nissan', 'Frontier', 2002, 2004], ['Nissan', 'Xterra', 2002, 2004]] lost [] gained []
+    old: Nissan catalog lists #80721-2Z700 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80721-2Z700 for both — option: fits some option packages; Frontier 2002: king cab/crew cab only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2002): None -> {'cab': ['king cab', 'crew cab']}
+nissan CHANGED LIVE ('window-regulator', ('80721-2Z710',)) [['Nissan', 'Frontier', 2002, 2004], ['Nissan', 'Xterra', 2002, 2003]] lost [] gained []
+    old: Nissan catalog lists #80721-2Z710 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80721-2Z710 for both — option: fits some option packages; Frontier 2002: king cab/crew cab only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Frontier', 2002): None -> {'cab': ['king cab', 'crew cab']}
+nissan REMOVED LIVE ('window-regulator', ('80721-3S500',)) [['Nissan', 'Frontier', 1998, 2003], ['Nissan', 'Xterra', 2000, 2004]]
+nissan CHANGED LIVE ('window-regulator', ('80730-4BA1A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2016, 2019]] lost [('Nissan', 'Rogue', 2014), ('Nissan', 'Rogue', 2015)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80730-EA005',)) [['Nissan', 'Frontier', 2005, 2019], ['Nissan', 'Pathfinder', 2005, 2008], ['Nissan', 'Xterra', 2005, 2015]] lost [] gained []
+    old: Nissan catalog lists #80730-EA005 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80730-EA005 for both — option: fits some option packages; Pathfinder 2008: 4.0L only; verify the number on the part
+    GATE-NARROWED ('Nissan', 'Pathfinder', 2008): None -> {'eng': ['4.0L']}
+nissan REMOVED LIVE ('window-regulator', ('80730-JK00C',)) [['Infiniti', 'G25', 2012, 2012], ['Infiniti', 'Q40', 2015, 2015]]
+nissan REMOVED LIVE ('window-regulator', ('80731-JK00C',)) [['Infiniti', 'G25', 2012, 2012], ['Infiniti', 'Q40', 2015, 2015]]
+nissan REMOVED LIVE ('window-regulator', ('82720-7Z000',)) [['Nissan', 'Frontier', 2001, 2001], ['Nissan', 'Xterra', 2000, 2004]]
+nissan REMOVED LIVE ('window-regulator', ('82720-7Z005',)) [['Nissan', 'Frontier', 2001, 2001], ['Nissan', 'Xterra', 2000, 2004]]
+nissan REMOVED LIVE ('window-regulator', ('82721-7Z000',)) [['Nissan', 'Frontier', 2001, 2001], ['Nissan', 'Xterra', 2000, 2004]]
+nissan REMOVED LIVE ('window-regulator', ('82721-7Z005',)) [['Nissan', 'Frontier', 2001, 2001], ['Nissan', 'Xterra', 2000, 2004]]
+nissan CHANGED LIVE ('window-regulator', ('82730-4BA0A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2016, 2019]] lost [('Nissan', 'Rogue', 2014), ('Nissan', 'Rogue', 2015)] gained []
+nissan REMOVED LIVE ('window-regulator', ('82730-7Z005',)) [['Nissan', 'Frontier', 2001, 2001], ['Nissan', 'Xterra', 2000, 2002]]
+nissan CHANGED LIVE ('window-regulator', ('82731-4BA0A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2016, 2019]] lost [('Nissan', 'Rogue', 2014), ('Nissan', 'Rogue', 2015)] gained []
+nissan REMOVED LIVE ('window-regulator', ('82731-7Z005',)) [['Nissan', 'Frontier', 2001, 2001], ['Nissan', 'Xterra', 2000, 2002]]
+# gm LIVE: removed 2 groups, added 0 groups, changed 12; app-years lost 0, gained 0; gates narrowed 12, widened 0; added claims 0
+# ford LIVE: removed 4 groups, added 0 groups, changed 1; app-years lost 0, gained 0; gates narrowed 3, widened 0; added claims 0
+# mopar LIVE: removed 10 groups, added 0 groups, changed 38; app-years lost 0, gained 0; gates narrowed 64, widened 0; added claims 0
+# toyota LIVE: removed 0 groups, added 0 groups, changed 32; app-years lost 0, gained 0; gates narrowed 32, widened 0; added claims 0
+# subaru LIVE: removed 0 groups, added 0 groups, changed 2; app-years lost 0, gained 0; gates narrowed 3, widened 0; added claims 0
+# hmg LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# vag LIVE: removed 0 groups, added 0 groups, changed 2; app-years lost 0, gained 0; gates narrowed 2, widened 0; added claims 0
+# mb LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# nissan LIVE: removed 38 groups, added 1 groups, changed 25; app-years lost 9, gained 0; gates narrowed 38, widened 0; added claims 4

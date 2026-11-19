@@ -1,0 +1,656 @@
+{
+ "check": "the 2026-11-18c verifier's WRONG / RISK items and census items against the rebuilt candidate",
+ "candidate": "groups/_report/nissan.candidate.json (interchange/round3-1119, oem-raw@57e8b5b9, NOT shipped)",
+ "lot": "main@a85c654, replayed with this branch's docs/app.js (audit11_4/lot_replay.mjs)",
+ "note": "builder's own re-check, not an independent sample; plain/unc/exc are lot cars by model, year, decoded litres, vPIC drive, VIN prefix",
+ "items": [
+  {
+   "item": "G3 WRONG",
+   "cat": "climate-control",
+   "pn": "27510-8Z315",
+   "concern": "Xterra 2.4L plain",
+   "note": "Nissan catalog lists #27510-8Z315 for both \u2014 option: fits some option packages; Frontier: crew cab only; 3.3L only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2001,
+     2002,
+     null,
+     {
+      "cab": "crew cab",
+      "eng": [
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2002,
+     2002,
+     null,
+     {
+      "eng": [
+       "3.3L"
+      ]
+     }
+    ]
+   ],
+   "plain": [
+    "Xterra 2002 3.3L - : 3",
+    "Xterra 2002 3.3L 2 5N1ED2: 71",
+    "Xterra 2002 3.3L 2 5N1MD2: 3",
+    "Xterra 2002 3.3L 4WD 5N1ED2: 49",
+    "Xterra 2002 3.3L 4WD 5N1MD2: 5"
+   ],
+   "unc": [
+    "Frontier 2001 3.3L 2 1N6ED2: 17",
+    "Frontier 2001 3.3L 2 1N6MD2: 1",
+    "Frontier 2001 3.3L 4WD 1N6ED2: 5",
+    "Frontier 2001 3.3L 4WD 1N6MD2: 1",
+    "Frontier 2001 NoneL - : 4",
+    "Frontier 2001 NoneL - 1N6ED2: 1",
+    "Frontier 2001 NoneL - 1N6MD2: 1",
+    "Frontier 2002 3.3L - : 1",
+    "Frontier 2002 3.3L - 1N6ED2: 5",
+    "Frontier 2002 3.3L - 1N6MD2: 2",
+    "Frontier 2002 3.3L 2 1N6ED2: 29",
+    "Frontier 2002 3.3L 2 1N6MD2: 2",
+    "Frontier 2002 3.3L 4WD 1N6ED2: 3",
+    "Frontier 2002 3.3L 4WD 1N6MD2: 2",
+    "Frontier 2002 NoneL - : 4",
+    "Frontier 2002 NoneL - 1N6DD2: 1",
+    "Frontier 2002 NoneL - 1N6ED2: 2",
+    "Xterra 2002 NoneL - : 20",
+    "Xterra 2002 NoneL - 5N1ED2: 4",
+    "Xterra 2002 NoneL - 5N1MD2: 1"
+   ],
+   "exc": [
+    "Frontier 2001 2.4L 2 1N6DD2: 22",
+    "Frontier 2002 2.4L - : 1",
+    "Frontier 2002 2.4L - 1N6DD2: 18",
+    "Xterra 2002 2.4L 2 5N1DD2: 3"
+   ],
+   "now": "FIXED: Xterra 2002 and Frontier carry eng 3.3L (Frontier also crew cab); the 3 Xterra and 41 Frontier lot cars decoded 2.4L are not offered. SE/SC vs XE stays under the generic 'fits some option packages' note."
+  },
+  {
+   "item": "G4 WRONG",
+   "cat": "gauge-cluster",
+   "pn": "24810-EC44C",
+   "concern": "km/h cluster",
+   "now": "FIXED: refused (held_market_kph: 'Instrument-Kph' in the record name)."
+  },
+  {
+   "item": "G5 WRONG",
+   "cat": "gauge-cluster",
+   "pn": "24810-7Z809",
+   "concern": "Xterra 2.4L plain",
+   "note": "Nissan catalog lists #24810-7Z809 for both \u2014 option: fits some option packages; Frontier: king cab/crew cab only; 3.3L only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2001,
+     2002,
+     null,
+     {
+      "cab": [
+       "king cab",
+       "crew cab"
+      ],
+      "eng": [
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2001,
+     2002,
+     null,
+     {
+      "eng": [
+       "3.3L"
+      ]
+     }
+    ]
+   ],
+   "plain": [
+    "Xterra 2001 3.3L - : 2",
+    "Xterra 2001 3.3L 2 5N1ED2: 54",
+    "Xterra 2001 3.3L 4WD 5N1ED2: 28",
+    "Xterra 2002 3.3L - : 3",
+    "Xterra 2002 3.3L 2 5N1ED2: 71",
+    "Xterra 2002 3.3L 2 5N1MD2: 3",
+    "Xterra 2002 3.3L 4WD 5N1ED2: 49",
+    "Xterra 2002 3.3L 4WD 5N1MD2: 5"
+   ],
+   "unc": [
+    "Frontier 2001 3.3L 2 1N6ED2: 17",
+    "Frontier 2001 3.3L 2 1N6MD2: 1",
+    "Frontier 2001 3.3L 4WD 1N6ED2: 5",
+    "Frontier 2001 3.3L 4WD 1N6MD2: 1",
+    "Frontier 2001 NoneL - : 4",
+    "Frontier 2001 NoneL - 1N6ED2: 1",
+    "Frontier 2001 NoneL - 1N6MD2: 1",
+    "Xterra 2001 NoneL - : 8",
+    "Frontier 2002 3.3L - : 1",
+    "Frontier 2002 3.3L - 1N6ED2: 5",
+    "Frontier 2002 3.3L - 1N6MD2: 2",
+    "Frontier 2002 3.3L 2 1N6ED2: 29",
+    "Frontier 2002 3.3L 2 1N6MD2: 2",
+    "Frontier 2002 3.3L 4WD 1N6ED2: 3",
+    "Frontier 2002 3.3L 4WD 1N6MD2: 2",
+    "Frontier 2002 NoneL - : 4",
+    "Frontier 2002 NoneL - 1N6DD2: 1",
+    "Frontier 2002 NoneL - 1N6ED2: 2",
+    "Xterra 2002 NoneL - : 20",
+    "Xterra 2002 NoneL - 5N1ED2: 4",
+    "Xterra 2002 NoneL - 5N1MD2: 1"
+   ],
+   "exc": [
+    "Frontier 2001 2.4L 2 1N6DD2: 22",
+    "Xterra 2001 2.4L 2 5N1DD2: 4",
+    "Frontier 2002 2.4L - : 1",
+    "Frontier 2002 2.4L - 1N6DD2: 18",
+    "Xterra 2002 2.4L 2 5N1DD2: 3"
+   ],
+   "now": "FIXED: Xterra 2001-2002 eng 3.3L, Frontier king/crew cab + 3.3L; 7 Xterra and 41 Frontier 2.4L decodes not offered."
+  },
+  {
+   "item": "G7 WRONG",
+   "cat": "gauge-cluster",
+   "pn": "24810-ZP77A",
+   "concern": "2008 Pathfinder V8 plain",
+   "now": "GONE: refused (held_drive_qualifier, 'Pathfinder 2008: 2WD, 4.0L only' makes the note > 160 chars)."
+  },
+  {
+   "item": "G12 WRONG",
+   "cat": "side-mirrors",
+   "pn": "96302-3JA9C",
+   "concern": "QX60 Hybrid (2.5L) plain",
+   "now": "GONE: refused (held_drive_qualifier, QX60 2014-2015 '3.5L, gas only' + 2016-2017 'gas only' > 160 chars)."
+  },
+  {
+   "item": "G25 WRONG",
+   "cat": "window-regulator",
+   "pn": "80721-3S500",
+   "concern": "2002 Frontier regular cab",
+   "now": "GONE: refused (held_drive_qualifier, 'Frontier 2002: king cab/crew cab only; Xterra 2004: 3.3L only')."
+  },
+  {
+   "item": "G27 WRONG",
+   "cat": "window-regulator",
+   "pn": "80721-2Z700",
+   "concern": "2002-04 Frontier regular cab",
+   "note": "Nissan catalog lists #80721-2Z700 for both \u2014 option: fits some option packages; Frontier 2002: king cab/crew cab only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2002,
+     null,
+     {
+      "cab": [
+       "king cab",
+       "crew cab"
+      ]
+     }
+    ],
+    [
+     "Nissan",
+     "Frontier",
+     2003,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2002,
+     2004
+    ]
+   ],
+   "plain": [
+    "Xterra 2002 2.4L 2 5N1DD2: 3",
+    "Xterra 2002 3.3L - : 3",
+    "Xterra 2002 3.3L 2 5N1ED2: 71",
+    "Xterra 2002 3.3L 2 5N1MD2: 3",
+    "Xterra 2002 3.3L 4WD 5N1ED2: 49",
+    "Xterra 2002 3.3L 4WD 5N1MD2: 5",
+    "Xterra 2002 NoneL - : 20",
+    "Xterra 2002 NoneL - 5N1ED2: 4",
+    "Xterra 2002 NoneL - 5N1MD2: 1",
+    "Frontier 2003 2.4L - : 1",
+    "Frontier 2003 2.4L 2 1N6DD2: 16",
+    "Frontier 2003 3.3L - : 2",
+    "Frontier 2003 3.3L - 1N6ED2: 1",
+    "Frontier 2003 3.3L 2 1N6ED2: 17",
+    "Frontier 2003 3.3L 4WD 1N6ED2: 4",
+    "Frontier 2003 NoneL - : 7",
+    "Xterra 2003 2.4L 2 5N1DD2: 1",
+    "Xterra 2003 3.3L - : 4",
+    "Xterra 2003 3.3L 2 5N1ED2: 50",
+    "Xterra 2003 3.3L 2 5N1MD2: 1",
+    "Xterra 2003 3.3L 4WD 5N1ED2: 30",
+    "Xterra 2003 3.3L 4WD 5N1MD2: 7",
+    "Xterra 2003 NoneL - : 9",
+    "Frontier 2004 2.4L 2 1N6DD2: 23",
+    "Frontier 2004 3.3L 2 1N6ED2: 19",
+    "Frontier 2004 3.3L 4WD 1N6ED2: 5",
+    "Frontier 2004 3.3L 4WD 1N6MD2: 2",
+    "Frontier 2004 NoneL - : 3",
+    "Frontier 2004 NoneL - 1N6ED2: 2",
+    "Xterra 2004 2.4L 2 5N1DD2: 4",
+    "Xterra 2004 3.3L - : 5",
+    "Xterra 2004 3.3L - 5N1ED2: 1",
+    "Xterra 2004 3.3L 2 5N1ED2: 86",
+    "Xterra 2004 3.3L 4WD 5N1ED2: 36",
+    "Xterra 2004 NoneL - : 13",
+    "Xterra 2004 NoneL - 5N1ED2: 2"
+   ],
+   "unc": [
+    "Frontier 2002 2.4L - : 1",
+    "Frontier 2002 2.4L - 1N6DD2: 18",
+    "Frontier 2002 3.3L - : 1",
+    "Frontier 2002 3.3L - 1N6ED2: 5",
+    "Frontier 2002 3.3L - 1N6MD2: 2",
+    "Frontier 2002 3.3L 2 1N6ED2: 29",
+    "Frontier 2002 3.3L 2 1N6MD2: 2",
+    "Frontier 2002 3.3L 4WD 1N6ED2: 3",
+    "Frontier 2002 3.3L 4WD 1N6MD2: 2",
+    "Frontier 2002 NoneL - : 4",
+    "Frontier 2002 NoneL - 1N6DD2: 1",
+    "Frontier 2002 NoneL - 1N6ED2: 2"
+   ],
+   "exc": [],
+   "now": "FIXED: Frontier 2002 gated king cab/crew cab (regular cab under 3S510 on that page). 2003-2004 stay plain: no category on the 2003 or 2004 Frontier pages codes a regular cab (T) at all (2003: KC 62 / CC 60 rows; 2004: KC 41 / CC 42), so the catalog shows those years as king/crew cab only."
+  },
+  {
+   "item": "G29 WRONG",
+   "cat": "window-regulator",
+   "pn": "80730-JK00C",
+   "concern": "Q40 3.7L and G25x AWD plain",
+   "now": "GONE: Q40 2015 left out (engine column '6 Cyl 2.5L', every Q40 is 3.7L), G25 alone is single-model."
+  },
+  {
+   "item": "G30 WRONG",
+   "cat": "window-regulator",
+   "pn": "80730-4BA1A",
+   "concern": "Rogue 2014-15 = Rogue Select",
+   "note": "Nissan catalog lists #80730-4BA1A for both \u2014 fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Murano",
+     2015,
+     2015
+    ],
+    [
+     "Nissan",
+     "Murano",
+     2016,
+     2017,
+     null,
+     {
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Nissan",
+     "Murano",
+     2018,
+     2019
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2016,
+     2016
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2019,
+     null,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "plain": [
+    "Murano 2015 3.5L 2 5N1AZ2: 15",
+    "Murano 2015 3.5L 4WD 5N1AZ2: 13",
+    "Murano 2015 NoneL - : 1",
+    "Murano 2016 3.5L 2 5N1AZ2: 6",
+    "Murano 2016 3.5L 4WD 5N1AZ2: 7",
+    "Murano 2016 NoneL - : 1",
+    "Rogue 2016 2.5L - : 5",
+    "Rogue 2016 2.5L 2 5N1AT2: 38",
+    "Rogue 2016 2.5L 2 JN8AT2: 17",
+    "Rogue 2016 2.5L 2 KNMAT2: 36",
+    "Rogue 2016 2.5L 4WD 5N1AT2: 21",
+    "Rogue 2016 2.5L 4WD JN8AT2: 11",
+    "Rogue 2016 2.5L 4WD KNMAT2: 39",
+    "Rogue 2016 NoneL - : 23",
+    "Rogue 2016 NoneL - KNMAT2: 1",
+    "Murano 2017 3.5L 2 5N1AZ2: 10",
+    "Murano 2017 3.5L 4WD 5N1AZ2: 7",
+    "Rogue 2017 2.5L 2 5N1AT2: 6",
+    "Rogue 2017 2.5L 2 JN8AT2: 10",
+    "Rogue 2017 2.5L 2 KNMAT2: 35",
+    "Rogue 2017 2.5L 4WD 5N1AT2: 6",
+    "Rogue 2017 2.5L 4WD JN8AT2: 10",
+    "Rogue 2017 2.5L 4WD KNMAT2: 15",
+    "Rogue 2017 NoneL - : 8",
+    "Murano 2018 3.5L 2 5N1AZ2: 4",
+    "Murano 2018 3.5L 4WD 5N1AZ2: 5",
+    "Murano 2018 NoneL - : 1",
+    "Rogue 2018 2.5L 2 5N1AT2: 8",
+    "Rogue 2018 2.5L 2 JN8AT2: 5",
+    "Rogue 2018 2.5L 2 KNMAT2: 16",
+    "Rogue 2018 2.5L 4WD 5N1AT2: 9",
+    "Rogue 2018 2.5L 4WD JN8AT2: 4",
+    "Rogue 2018 2.5L 4WD KNMAT2: 16",
+    "Rogue 2018 NoneL - : 6",
+    "Rogue 2018 NoneL - 5N1AT2: 1",
+    "Murano 2019 3.5L 2 5N1AZ2: 2",
+    "Rogue 2019 2.5L 2 5N1AT2: 4",
+    "Rogue 2019 2.5L 2 JN8AT2: 3",
+    "Rogue 2019 2.5L 2 KNMAT2: 2",
+    "Rogue 2019 2.5L 4WD 5N1AT2: 2",
+    "Rogue 2019 2.5L 4WD JN8AT2: 1",
+    "Rogue 2019 NoneL - : 5"
+   ],
+   "unc": [],
+   "exc": [],
+   "now": "FIXED: Rogue 2014-2015 left out (the Rogue Select pages do not list 4BA1A). Murano 2016-17 / Rogue 2017-19 keep 'gas only' with no engine gate: 4BA1A's product page prints no engine column, so eng_not cannot be read; no 2.5L Murano or 2.0L Rogue hybrid is on the pinned lot (RISK stays for a future one)."
+  },
+  {
+   "item": "P38 WRONG",
+   "cat": "gauge-cluster",
+   "pn": "24810-3JA1B",
+   "concern": "QX60 2014 hybrid 2.5L plain",
+   "note": "Nissan catalog lists #24810-3JA1B for both \u2014 option: fits some option packages; QX60: 3.5L, gas only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "JX35",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX60",
+     2014,
+     2014,
+     null,
+     {
+      "eng": [
+       "3.5L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "plain": [
+    "JX35 2013 3.5L - : 3",
+    "JX35 2013 3.5L - 5N1AL0: 62",
+    "JX35 2013 3.5L 2 5N1AL0: 35",
+    "JX35 2013 NoneL - : 13",
+    "JX35 2013 NoneL - 5N1AL0: 1",
+    "QX60 2014 3.5L - : 1",
+    "QX60 2014 3.5L 2 5N1AL0: 30",
+    "QX60 2014 3.5L 4WD 5N1AL0: 37"
+   ],
+   "unc": [
+    "QX60 2014 NoneL - : 2",
+    "QX60 2014 NoneL - 5N1AL0: 1"
+   ],
+   "exc": [
+    "QX60 2014 2.5L 2 5N1CL0: 4",
+    "QX60 2014 2.5L 4WD 5N1CL0: 4"
+   ],
+   "now": "FIXED: QX60 2014 gate eng 3.5L + gas; the 8 lot QX60 2014 decoded 2.5L (5N1CL0) are not offered."
+  },
+  {
+   "item": "P43 WRONG",
+   "cat": "gauge-cluster",
+   "pn": "24810-EA48D",
+   "concern": "Pathfinder 2005 4WD plain (All-Mode sibling)",
+   "note": "Nissan catalog lists #24810-EA48D for both \u2014 option: fits some option packages; Pathfinder: part-time 4WD only; Xterra: 4WD only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Pathfinder",
+     2005,
+     2005,
+     null,
+     {
+      "drive": "4wd",
+      "drive_basis": "stated",
+      "drive_not": "a4wd"
+     }
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2005,
+     2005,
+     null,
+     {
+      "drive": "4wd",
+      "drive_basis": "stated"
+     }
+    ]
+   ],
+   "plain": [
+    "Xterra 2005 4.0L 4WD 5N1AN0: 37"
+   ],
+   "unc": [
+    "Pathfinder 2005 4.0L - : 1",
+    "Pathfinder 2005 4.0L 4WD 5N1AR1: 89",
+    "Pathfinder 2005 NoneL - : 10",
+    "Pathfinder 2005 NoneL - 5N1AR1: 7",
+    "Xterra 2005 4.0L - : 2",
+    "Xterra 2005 NoneL - : 5",
+    "Xterra 2005 NoneL - 5N1AN0: 1"
+   ],
+   "exc": [
+    "Pathfinder 2005 4.0L 2 5N1AR1: 70",
+    "Xterra 2005 3.3L 2 5N1ED2: 1",
+    "Xterra 2005 4.0L 2 5N1AN0: 47"
+   ],
+   "now": "FIXED: Pathfinder 2005 gate 4wd + drive_not a4wd ('part-time 4WD only'); the 89 4WD-decoded Pathfinders are 'if equipped', 70 4x2 excluded."
+  },
+  {
+   "item": "P48 RISK",
+   "cat": "gauge-cluster",
+   "pn": "24810-ZP93A",
+   "concern": "Pathfinder AUTO + Xterra 4WD SE, no unit printed",
+   "note": "Nissan catalog lists #24810-ZP93A for both \u2014 option: fits some option packages; Pathfinder: 4WD AUTO only; Xterra: 4WD only; verify the number on the part",
+   "apps": [
+    [
+     "Nissan",
+     "Pathfinder",
+     2007,
+     2007,
+     null,
+     {
+      "drive": "a4wd",
+      "drive_basis": "stated"
+     }
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2007,
+     2007,
+     null,
+     {
+      "drive": "4wd",
+      "drive_basis": "stated"
+     }
+    ]
+   ],
+   "plain": [
+    "Xterra 2007 4.0L 4WD 5N1AN0: 43"
+   ],
+   "unc": [
+    "Pathfinder 2007 4.0L - : 1",
+    "Pathfinder 2007 4.0L 4WD 5N1AR1: 47",
+    "Pathfinder 2007 NoneL - : 7",
+    "Pathfinder 2007 NoneL - 5N1AR1: 1",
+    "Xterra 2007 4.0L - : 2",
+    "Xterra 2007 NoneL - : 4",
+    "Xterra 2007 NoneL - 5N1AN0: 5"
+   ],
+   "exc": [
+    "Pathfinder 2007 4.0L 2 5N1AR1: 56",
+    "Xterra 2007 4.0L 2 5N1AN0: 42"
+   ],
+   "now": "UNCHANGED (RISK): ZP93A, Pathfinder 2007 a4wd (stated) / Xterra 2007 4wd; no unit is printed on the record or own pages, so the km/h rule cannot read it. 43 Xterra 4WD plain, 47 Pathfinder 4WD 'if equipped'."
+  },
+  {
+   "item": "census joined",
+   "cat": "gauge-cluster",
+   "pn": "24820-1MK5A",
+   "concern": "M37x AWD plain (2WDSTD/2WDHICAS)",
+   "note": "Nissan catalog lists #24820-1MK5A for both \u2014 option: fits some option packages; M37: 2WD only; Q70: 2WD, 3.7L, gas only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2012,
+     2013,
+     null,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014,
+     null,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "3.7L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "plain": [
+    "M37 2012 3.7L 2 JN1BY1: 4",
+    "M37 2013 3.7L 2 JN1BY1: 5",
+    "Q70 2014 3.7L 2 JN1BY1: 1"
+   ],
+   "unc": [
+    "M37 2013 NoneL - : 1",
+    "Q70 2014 NoneL - : 1"
+   ],
+   "exc": [
+    "M37 2012 3.7L 4WD JN1BY1: 4",
+    "M37 2013 3.7L 4WD JN1BY1: 2"
+   ],
+   "now": "FIXED: 24820-1MK5A / 6AH2A now M37 '2WD only' (stated); the 6 M37x AWD lot cars are not offered."
+  },
+  {
+   "item": "census joined",
+   "cat": "gauge-cluster",
+   "pn": "24820-6AH2A",
+   "concern": "M37/Q70 AWD plain",
+   "note": "Nissan catalog lists #24820-6AH2A for both \u2014 option: fits some option packages; M37: 2WD only; Q70: 2WD, 3.7L, gas only; verify the number on the part",
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2013,
+     2013,
+     null,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014,
+     null,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "3.7L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "plain": [
+    "M37 2013 3.7L 2 JN1BY1: 5",
+    "Q70 2014 3.7L 2 JN1BY1: 1"
+   ],
+   "unc": [
+    "M37 2013 NoneL - : 1",
+    "Q70 2014 NoneL - : 1"
+   ],
+   "exc": [
+    "M37 2013 3.7L 4WD JN1BY1: 2"
+   ],
+   "now": "FIXED: 24820-1MK5A / 6AH2A now M37 '2WD only' (stated); the 6 M37x AWD lot cars are not offered."
+  },
+  {
+   "item": "census auto",
+   "cat": "gauge-cluster",
+   "pn": "24810-9BA7C",
+   "concern": "Pathfinder 2011 4wd beside AUTO",
+   "now": "GONE: 9BA7C refused (held_drive_qualifier: 'Frontier: 4WD, 4.0L only; Pathfinder: part-time 4WD, 4.0L only')."
+  },
+  {
+   "item": "census trans",
+   "cat": "gauge-cluster",
+   "pn": "24810-JK61C",
+   "concern": "AT-only speedometer, no gate",
+   "now": "GONE: JK61C / JK61D are not Likely groups in the rebuilt candidate and have no refusal record (they drop out before the note step; the exact step was not traced). Not fixed by a rule: the AT-only limit is still not read for them."
+  },
+  {
+   "item": "census trans",
+   "cat": "gauge-cluster",
+   "pn": "24810-JK61D",
+   "concern": "AT-only speedometer, no gate",
+   "now": "GONE: JK61C / JK61D are not Likely groups in the rebuilt candidate and have no refusal record (they drop out before the note step; the exact step was not traced). Not fixed by a rule: the AT-only limit is still not read for them."
+  },
+  {
+   "item": "census engine",
+   "cat": "climate-control",
+   "pn": "27510-7Z416",
+   "concern": "engine contradiction (78 cars)",
+   "now": "27510-7Z416 refused (note > 160 once 'Frontier 2001-2002: king cab/crew cab, 3.3L only' is named); 96301/96302-EA18E refused ('Frontier 2005-2007: crew cab, 4.0L only; 2008-2010 / 2012-2017 / 2019: 4.0L only')."
+  },
+  {
+   "item": "census engine",
+   "cat": "side-mirrors",
+   "pn": "96301-EA18E",
+   "concern": "engine contradiction (54 cars)",
+   "now": "27510-7Z416 refused (note > 160 once 'Frontier 2001-2002: king cab/crew cab, 3.3L only' is named); 96301/96302-EA18E refused ('Frontier 2005-2007: crew cab, 4.0L only; 2008-2010 / 2012-2017 / 2019: 4.0L only')."
+  },
+  {
+   "item": "census engine",
+   "cat": "side-mirrors",
+   "pn": "96302-EA18E",
+   "concern": "engine contradiction (54 cars)",
+   "now": "27510-7Z416 refused (note > 160 once 'Frontier 2001-2002: king cab/crew cab, 3.3L only' is named); 96301/96302-EA18E refused ('Frontier 2005-2007: crew cab, 4.0L only; 2008-2010 / 2012-2017 / 2019: 4.0L only')."
+  }
+ ]
+}
