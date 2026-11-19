@@ -2735,3 +2735,49 @@ Every gate in the sample was judged right with its basis on the pages.
   the last 8 weeks at 17 yards", the "past weeks, not a promise" label.
   The Parts card (42 donor cars at 12 yards) and both full forecasts read
   as at 11:21. Screenshot: `ops/screens/game-plan-live-1119-4.png`.
+
+## 2026-11-19 ~13:20 UTC eighth independent nissan check: FAIL (1 WRONG, a mislabeled lot car); two fixes started
+
+Check 1119h (seed 15841119, candidate at 084c178d, branch
+`interchange/verify-nissan-1119h`, head 86b211a3, report
+`groups/_report/nissan_verify_2026-11-19h.json` on that branch). Groups 7
+RIGHT / 1 WRONG / 22 RISK; pairs 14 / 0 / 16. No verdict moves with a
+one-month-wider or narrower build span.
+
+- **WRONG, and it is not a curation flaw:** lot car wap-STK039874 is listed
+  as a 2017 QX80; its VIN decodes as a 2017 QX60 (3.5L). The listing/VIN
+  check compares year and make only, so the car is a plain donor for a
+  QX80-only regulator motor (82731-1MA0A) and for 3 more groups. This is
+  the gap the hub wrote into `ops/data.md` at 04:xx UTC ("model mismatches
+  are not flagged") and did not start. It applies to every make, live ones
+  included: 3,143 lot cars have a listed and a decoded model with no word
+  in common, most of them naming differences, a few hundred real.
+- **RISK is much higher than in check 7 (22 of 30 groups)** because this
+  brief asked for more per vehicle-year. Kinds: the claimed vehicle-year
+  has no catalog page of its own in the raw (61 vehicle-years / 61 groups /
+  3,029 lot rows; e.g. Altima 1995, Xterra 2004 and 2010, Rogue 2016); a
+  build window taken from another model year's page (24 gates / 743 rows);
+  several same-option numbers on a page, none dated; codes the pages never
+  explain ("CC." read as crew cab, the "*", a "+"); "gas only" notes where
+  the hybrid's own pages were never read (56 vehicle-years / 22 groups);
+  Xterra 2005-08 mirror EA000 "W. 4WD. S. 6MT" with 4WD automatics plain.
+- Hub's reading: the curation rules now hold (no curation WRONG in two
+  checks running); what is left is what the raw cannot show. A clean pass
+  needs either more pages read (a crawl: the owner's decision, like the
+  open gm one) or a smaller candidate that claims only what its own pages
+  carry.
+- **Started 13:20 UTC:**
+  1. Data builder (B) resumed, branch `data/model-mismatch-1119`: the
+     listing/VIN check learns the model, from a hand-sorted table of the
+     name pairs (same vehicle under another name / a different vehicle),
+     each with its basis. A different-vehicle car gets the existing
+     mismatch message, so every client, the released apps included, stops
+     showing it as a plain catalog donor at the next scan. No app change.
+  2. Interchange builder resumed, round 8, branch
+     `interchange/round8-1119`: hold every nissan vehicle-year with no page
+     of its own, take build windows from the car's own row only, hold the
+     undated same-option siblings and the Xterra tie, say "checked on
+     gas-model pages" where the hybrid pages were not read; and first a
+     census of the same classes on the live makes (no live action without
+     the hub).
+  Then a ninth independent check on the smaller candidate.
