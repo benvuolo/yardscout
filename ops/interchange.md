@@ -6359,3 +6359,28 @@ on its own, each with `site:lists|records:L<line>` (`Curation._wide_names`, `_ki
 
 **Tests.** test_round10_1119 39/0, including a number whose description disagrees, which is held
 and carries no phrase. test_ship_1119 16/0. All 32 curation test files pass.
+
+## 2026-11-19 — round 10b names verify (independent, blind): window-regulator "window motor only"
+
+Checker session, branch `interchange/verify-round10b-names-1119` (from 6449ee7e). Report:
+`scraper/oem_fitment/groups/_report/round10b_names_verify_2026-11-19.json`.
+
+- Scope: every `cat: window-regulator` group in mopar/subaru/nissan groups files (they sit under
+  `likely`; `groups` is empty in all three). Raw read from git only: mopar/subaru at oem-raw dca9cd84,
+  nissan at 57e8b5b9, records + `.lists` manifests (no continuation parts exist at those commits;
+  `.years` manifests not read). Fields: name, main, aux, aux_desc, description, other_names (split ";"),
+  list_group/group, "Part Description" evidence lines.
+- Result: **PASS, 0 WRONG.** mopar 51 groups (49 RIGHT / 0 WRONG / 2 RISK, 20 notes "window motor only",
+  longest 146); subaru 17 (17/0/0, 8 motor-only, longest 118); nissan 79 (79/0/0, 30 motor-only,
+  longest 159). No note over 160.
+- RISK: mopar 68079286AA, 68079287AA — names say regulator (main/name/description/aux) but one
+  other_names value says "Power Window Motor and Regulator Assembly, Front Right/Left"; note silent on packaging.
+- Regulator-with-motor names: subaru 61041AL00A, 61041AL01A, 61041AL02A, 61042AL00A, 61042AL01A
+  ("Regulator & Motor Assembly-…") — notes make no packaging claim (RIGHT); plus the two mopar RISK above.
+- Suggestion: a "regulator with motor" wording for the five Subaru groups would tell pickers the motor
+  comes along; the two Mopar RISK groups need a source that settles packaging before any wording.
+- After push, compared with `round10_names_2026-11-19.json`: motor-only sets agree exactly (mopar 20,
+  subaru 8, nissan 30). One difference: mopar 68079286AA / 68079287AA — curator left them as plain
+  regulators and its report does not mention their other_names value "Power Window Motor and Regulator
+  Assembly"; I read RISK (regulator vs regulator-with-motor). Neither note says "window motor only", so
+  this does not block the wording change.
