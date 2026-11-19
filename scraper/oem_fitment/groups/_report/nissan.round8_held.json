@@ -115,8 +115,8 @@
  },
  "groups_by_reason": {
   "held_no_own_page": 276,
-  "held_plus_reading": 22,
-  "held_undated_siblings": 59,
+  "held_plus_reading": 20,
+  "held_undated_siblings": 55,
   "held_window_other_page": 153
  },
  "held": [
@@ -336,7 +336,7 @@
   },
   {
    "cat": "climate-control",
-   "group": "ships without these",
+   "group": "not shipped (held_undated_siblings)",
    "held": [
     {
      "claim_from": "product records",
@@ -391,7 +391,7 @@
   },
   {
    "cat": "climate-control",
-   "group": "ships without these",
+   "group": "not shipped (held_undated_siblings)",
    "held": [
     {
      "claim_from": "product records",
@@ -3739,7 +3739,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "group": "ships without these",
+   "group": "not shipped (held_undated_siblings)",
    "held": [
     {
      "reason": "held_undated_siblings",
@@ -3770,7 +3770,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "group": "ships without these",
+   "group": "not shipped (held_undated_siblings)",
    "held": [
     {
      "reason": "held_undated_siblings",
@@ -4067,7 +4067,7 @@
   },
   {
    "cat": "grille",
-   "group": "not shipped (held_exterior_cross_model)",
+   "group": "not shipped (held_window_note_cap)",
    "held": [
     {
      "claim_from": "product records",
@@ -4089,7 +4089,7 @@
   },
   {
    "cat": "grille",
-   "group": "not shipped (held_exterior_cross_model)",
+   "group": "not shipped (held_window_note_cap)",
    "held": [
     {
      "claim_from": "product records",
@@ -6837,7 +6837,7 @@
   },
   {
    "cat": "side-mirrors",
-   "group": "not shipped (held_starred_scope)",
+   "group": "not shipped (held_window_note_cap)",
    "held": [
     {
      "claim_from": "product records",
@@ -6850,31 +6850,6 @@
       "Infiniti",
       "QX60",
       2014
-     ]
-    },
-    {
-     "reason": "held_undated_siblings",
-     "siblings": [
-      "96301-3JA9A",
-      "96301-3JA9B",
-      "96301-3JN9B"
-     ],
-     "t": [
-      "Infiniti",
-      "JX35",
-      2013
-     ]
-    },
-    {
-     "reason": "held_undated_siblings",
-     "siblings": [
-      "96301-3JA9B",
-      "96301-3JN9B"
-     ],
-     "t": [
-      "Infiniti",
-      "QX60",
-      2015
      ]
     }
    ],
@@ -8424,7 +8399,7 @@
   },
   {
    "cat": "side-mirrors",
-   "group": "not shipped (held_starred_scope)",
+   "group": "not shipped (held_window_note_cap)",
    "held": [
     {
      "claim_from": "product records",
@@ -8437,31 +8412,6 @@
       "Infiniti",
       "QX60",
       2014
-     ]
-    },
-    {
-     "reason": "held_undated_siblings",
-     "siblings": [
-      "96302-3JA9A",
-      "96302-3JA9B",
-      "96302-3JN9B"
-     ],
-     "t": [
-      "Infiniti",
-      "JX35",
-      2013
-     ]
-    },
-    {
-     "reason": "held_undated_siblings",
-     "siblings": [
-      "96302-3JA9B",
-      "96302-3JN9B"
-     ],
-     "t": [
-      "Infiniti",
-      "QX60",
-      2015
      ]
     }
    ],
@@ -12467,7 +12417,7 @@
   },
   {
    "cat": "window-regulator",
-   "group": "ships without these",
+   "group": "not shipped (held_window_note_cap)",
    "held": [
     {
      "claim_from": "product records",
@@ -12646,35 +12596,6 @@
   },
   {
    "cat": "window-regulator",
-   "group": "not shipped (held_undated_siblings)",
-   "held": [
-    {
-     "listing": "the number is listed for this vehicle-year only through a '+' joining configurations of different engines or drives",
-     "reason": "held_plus_reading",
-     "t": [
-      "Infiniti",
-      "G25",
-      2012
-     ]
-    },
-    {
-     "reason": "held_undated_siblings",
-     "siblings": [
-      "80730-JK00C"
-     ],
-     "t": [
-      "Infiniti",
-      "Q40",
-      2015
-     ]
-    }
-   ],
-   "pn": [
-    "80730-JK60C"
-   ]
-  },
-  {
-   "cat": "window-regulator",
    "group": "not shipped (held_cross_position)",
    "held": [
     {
@@ -12835,35 +12756,6 @@
    ],
    "pn": [
     "80731-EA005"
-   ]
-  },
-  {
-   "cat": "window-regulator",
-   "group": "not shipped (held_undated_siblings)",
-   "held": [
-    {
-     "listing": "the number is listed for this vehicle-year only through a '+' joining configurations of different engines or drives",
-     "reason": "held_plus_reading",
-     "t": [
-      "Infiniti",
-      "G25",
-      2012
-     ]
-    },
-    {
-     "reason": "held_undated_siblings",
-     "siblings": [
-      "80731-JK00C"
-     ],
-     "t": [
-      "Infiniti",
-      "Q40",
-      2015
-     ]
-    }
-   ],
-   "pn": [
-    "80731-JK60C"
    ]
   },
   {
@@ -13435,7 +13327,7 @@
   },
   {
    "cat": "window-regulator",
-   "group": "not shipped (held_cross_position)",
+   "group": "not shipped (held_window_note_cap)",
    "held": [
     {
      "kind": "drop",
@@ -13454,7 +13346,7 @@
   },
   {
    "cat": "window-regulator",
-   "group": "ships without these",
+   "group": "not shipped (held_window_note_cap)",
    "held": [
     {
      "claim_from": "product records",
@@ -13677,7 +13569,7 @@
   },
   {
    "cat": "window-regulator",
-   "group": "not shipped (held_cross_position)",
+   "group": "not shipped (held_window_note_cap)",
    "held": [
     {
      "kind": "drop",
@@ -13696,7 +13588,7 @@
   },
   {
    "cat": "window-regulator",
-   "group": "ships without these",
+   "group": "not shipped (held_window_note_cap)",
    "held": [
     {
      "claim_from": "product records",
@@ -13873,8 +13765,8 @@
  "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
  "vehicle_years_by_reason": {
   "held_no_own_page": 276,
-  "held_plus_reading": 41,
-  "held_undated_siblings": 230,
+  "held_plus_reading": 39,
+  "held_undated_siblings": 224,
   "held_window_other_page": 330
  }
 }

@@ -194,9 +194,15 @@ check("candidate: the 1119g split vehicle-years (G12 Titan 2006, G24 Frontier 20
 r7 = json.loads((OEM / "groups" / "_report" / "nissan.round7_held.json").read_text())
 ids = {(e["cat"], e["pn"][0]) for e in r7["held"]}
 cross = [("window-regulator", p) for p in ("80730-8991A", "80730-JX30B", "80730-JX30C", "82730-3Z005", "82731-3Z005")]
-check("candidate: the 1119g cross-door groups are held (decision 4; 80730-89915 left earlier at the note cap)",
-      all(k in ids and k not in by for k in cross) and ("window-regulator", "80730-89915") not in by,
-      sorted(set(cross) - ids))
+# round9-1119: 82730/82731-3Z005 are motor numbers; with 'window motor only'
+# their built-window note passes the cap, so they leave there, before the
+# cross-position test (same outcome: not shipped)
+capped = {(r["cat"], r["pn"]) for r in json.loads((OEM / "groups" / "_report" / "nissan.json").read_text())["refusals"]
+          if r["reason"] == "held_window_note_cap"}
+check("candidate: the 1119g cross-door groups are held (decision 4; 80730-89915, and since round 9 82730/82731-3Z005, "
+      "left earlier at the note cap)",
+      all((k in ids or k in capped) and k not in by for k in cross) and ("window-regulator", "80730-89915") not in by,
+      sorted(set(cross) - ids - capped))
 check("held list (round 7): every entry names its models' positions, which differ",
       all(e["reason"] == "held_cross_position" and len({tuple(v) for v in e["positions"].values()}) > 1
           for e in r7["held"]))
