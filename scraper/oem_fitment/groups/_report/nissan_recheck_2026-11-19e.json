@@ -1,0 +1,1376 @@
+{
+ "report": "nissan_recheck_2026-11-19e",
+ "status": "builder's own re-check, NOT independent",
+ "of": "groups/_report/nissan_verify_2026-11-19e.json (seed 52941119): every WRONG and RISK item",
+ "candidate": "groups/_report/nissan.candidate.json on interchange/round5-1119",
+ "lot_counts": "groups: every app-year of the group; pairs: the donor vehicle-year (plain / unc / exc)",
+ "items": [
+  {
+   "item": "oem:nissan:gauge-cluster:C:a1e39cd715",
+   "kind": "groups",
+   "verdict_1119e": "RISK",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZD103"
+   ],
+   "seeker": null,
+   "donor": null,
+   "why_1119e": [
+    "missing own page",
+    "ambiguous clause ('*' prefix) with an overlapping drive/trans-specific number"
+   ],
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2003,
+      2004
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2003,
+      2004
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Frontier",
+      2003,
+      2004,
+      {
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2003,
+      2004,
+      {
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-ZD103 for both \u2014 option: fits some option packages; 3.3L only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2003,
+      2004
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2003,
+      2004
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Frontier",
+      2003,
+      2004,
+      {
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2003,
+      2004,
+      {
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-ZD103 for both \u2014 option: fits some option packages; 3.3L only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 270,
+    "unc": 36,
+    "exc": 45
+   },
+   "lot_after": {
+    "plain": 270,
+    "unc": 36,
+    "exc": 45
+   }
+  },
+  {
+   "item": "oem:nissan:gauge-cluster:C:b966a0f36b",
+   "kind": "groups",
+   "verdict_1119e": "RISK",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7S00E"
+   ],
+   "seeker": null,
+   "donor": null,
+   "why_1119e": [
+    "gate basis not found on the page",
+    "window edge inside/at the model-year start"
+   ],
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2006
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2006
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2005,
+      {
+       "drive": "4wd",
+       "drive_basis": "stated"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-7S00E for both \u2014 option: fits some option packages; Titan 2005: 4WD only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2006,
+      2006
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2006
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2005,
+      {
+       "drive": "4wd",
+       "drive_basis": "sibling",
+       "drive_sib": "2wd"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-7S00E for both \u2014 option: fits some option packages; Titan 2005: 4WD only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 418,
+    "unc": 21,
+    "exc": 80
+   },
+   "lot_after": {
+    "plain": 315,
+    "unc": 21,
+    "exc": 80
+   }
+  },
+  {
+   "item": "oem:nissan:gauge-cluster:C:94b77541fa",
+   "kind": "groups",
+   "verdict_1119e": "WRONG",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7Z809"
+   ],
+   "seeker": null,
+   "donor": null,
+   "why_1119e": "build window inside the model year, not gated",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2002,
+      2002
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2002,
+      2002
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Frontier",
+      2002,
+      2002,
+      {
+       "cab": [
+        "king cab",
+        "crew cab"
+       ],
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2002,
+      2002,
+      {
+       "eng": [
+        "3.3L"
+       ]
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-7Z809 for both \u2014 option: fits some option packages; Frontier: king cab/crew cab only; 3.3L only; verify the number on the part"
+   },
+   "after": null,
+   "refusals_after": [
+    {
+     "reason": "held_window_note_cap",
+     "detail": "3.3L, built 07/2001-04/2002 only"
+    }
+   ],
+   "lot_before": {
+    "plain": 131,
+    "unc": 76,
+    "exc": 22
+   },
+   "lot_after": null
+  },
+  {
+   "item": "oem:nissan:side-mirrors:R:18d0a73d38",
+   "kind": "groups",
+   "verdict_1119e": "RISK",
+   "cat": "side-mirrors",
+   "pn": [
+    "K6301-1PM0B"
+   ],
+   "seeker": null,
+   "donor": null,
+   "why_1119e": [
+    "ambiguous clause ('*' prefix) decides the drive scope"
+   ],
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014,
+      {
+       "fuel": "gas"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #K6301-1PM0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014,
+      {
+       "fuel": "gas"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #K6301-1PM0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 22,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 22,
+    "unc": 0,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:side-mirrors:R:af4981ab30",
+   "kind": "groups",
+   "verdict_1119e": "WRONG",
+   "cat": "side-mirrors",
+   "pn": [
+    "K6301-1MA0B"
+   ],
+   "seeker": null,
+   "donor": null,
+   "why_1119e": "build window inside the model year, not gated",
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014,
+      {
+       "fuel": "gas"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #K6301-1MA0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2012,
+      2012
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2012,
+      2012
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014,
+      {
+       "fuel": "gas"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #K6301-1MA0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 25,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 13,
+    "unc": 0,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:side-mirrors:R:c207bafd8e",
+   "kind": "groups",
+   "verdict_1119e": "RISK",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-3EV0B"
+   ],
+   "seeker": null,
+   "donor": null,
+   "why_1119e": [
+    "ambiguous clause ('*' prefix) decides the engine scope"
+   ],
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "FX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "FX50",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX70",
+      2014,
+      2017
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #96301-3EV0B for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Infiniti",
+      "FX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "FX50",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX70",
+      2014,
+      2017
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #96301-3EV0B for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 20,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 20,
+    "unc": 0,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:window-regulator:FL:8380ea4d2d",
+   "kind": "groups",
+   "verdict_1119e": "RISK",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-CL00A"
+   ],
+   "seeker": null,
+   "donor": null,
+   "why_1119e": [
+    "window edge at the model-year end"
+   ],
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2005,
+      2006
+     ],
+     [
+      "Infiniti",
+      "FX45",
+      2006,
+      2006
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "FX35",
+      2005,
+      2005,
+      {
+       "built": "2004-09..2006-06"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80721-CL00A for both \u2014 fits some configurations; FX35 2005: built 09/2004-06/2006 only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2005,
+      2006
+     ],
+     [
+      "Infiniti",
+      "FX45",
+      2006,
+      2006
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "FX35",
+      2005,
+      2005,
+      {
+       "built": "2004-09..2006-06"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80721-CL00A for both \u2014 fits some configurations; FX35 2005: built 09/2004-06/2006 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 37,
+    "unc": 50,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 37,
+    "unc": 50,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:window-regulator:FR+RR:9028a640d2",
+   "kind": "groups",
+   "verdict_1119e": "WRONG",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-3Z005"
+   ],
+   "seeker": null,
+   "donor": null,
+   "why_1119e": "build window inside the model year, not gated (Altima 2003, Sentra 2004)",
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      2003,
+      2004
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      2004,
+      2006
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #82730-3Z005 for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      2003,
+      2004
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      2005,
+      2006
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Altima",
+      2003,
+      2003,
+      {
+       "built": "2002-11..2004-01"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #82730-3Z005 for both \u2014 option: fits some option packages; Altima 2003: built 11/2002-01/2004 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 816,
+    "unc": 1,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 461,
+    "unc": 206,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:window-regulator:FR:b852d2abef",
+   "kind": "groups",
+   "verdict_1119e": "WRONG",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1MA0B"
+   ],
+   "seeker": null,
+   "donor": null,
+   "why_1119e": "build window inside the model year, not gated (Q70/Q70L 2015)",
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "Q70",
+      2015,
+      2018
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2015,
+      2016
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2018,
+      2018
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "Q70",
+      2015,
+      2018,
+      {
+       "fuel": "gas"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80720-1MA0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Infiniti",
+      "Q70",
+      2016,
+      2018
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2016,
+      2016
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2018,
+      2018
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "Q70",
+      2016,
+      2018,
+      {
+       "fuel": "gas"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80720-1MA0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 7,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 2,
+    "unc": 0,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:window-regulator:FL+RL:3467715347",
+   "kind": "pairs",
+   "verdict_1119e": "WRONG",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-3Z005"
+   ],
+   "seeker": [
+    "Nissan",
+    "Altima",
+    2004
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    2003
+   ],
+   "why_1119e": null,
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      2003,
+      2004
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      2004,
+      2006
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #82731-3Z005 for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      2003,
+      2004
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      2005,
+      2006
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Altima",
+      2003,
+      2003,
+      {
+       "built": "2002-11..2004-01"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #82731-3Z005 for both \u2014 option: fits some option packages; Altima 2003: built 11/2002-01/2004 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 205,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 0,
+    "unc": 205,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:window-regulator:FL:1410d4bbb7",
+   "kind": "pairs",
+   "verdict_1119e": "RISK",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-EA000"
+   ],
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2007
+   ],
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2008
+   ],
+   "why_1119e": null,
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2005,
+      2011
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2009,
+      2010
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005,
+      2009
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2010,
+      2010,
+      {
+       "built": "2008-07..2010-04"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80721-EA000 for both \u2014 option: fits some option packages; Pathfinder 2010: built 07/2008-04/2010 only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2005,
+      2011
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2009,
+      2010
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2009,
+      2009
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2010,
+      2010,
+      {
+       "built": "2008-07..2010-04"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80721-EA000 for both \u2014 option: fits some option packages; Pathfinder 2010: built 07/2008-04/2010 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 69,
+    "unc": 1,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 0,
+    "unc": 0,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:gauge-cluster:C:d8db3116fc",
+   "kind": "pairs",
+   "verdict_1119e": "RISK",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-3ZD0A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX56",
+    2013
+   ],
+   "donor": [
+    "Infiniti",
+    "QX80",
+    2014
+   ],
+   "why_1119e": null,
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "QX56",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX80",
+      2014,
+      2014
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "QX56",
+      2013,
+      2013,
+      {
+       "built": "2013-02..2014-08",
+       "drive": "2wd",
+       "drive_basis": "stated"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24820-3ZD0A for both \u2014 option: fits some option packages; QX56: 2WD, built 02/2013-08/2014 only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Infiniti",
+      "QX56",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX80",
+      2014,
+      2014
+     ]
+    ],
+    "gates": [
+     [
+      "Infiniti",
+      "QX56",
+      2013,
+      2013,
+      {
+       "built": "2013-02..2014-08",
+       "drive": "2wd",
+       "drive_basis": "sibling",
+       "drive_sib": "awd"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #24820-3ZD0A for both \u2014 option: fits some option packages; QX56: 2WD, built 02/2013-08/2014 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 14,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 14,
+    "unc": 0,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:side-mirrors:L:144cad3acc",
+   "kind": "pairs",
+   "verdict_1119e": "WRONG",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-ZC20A"
+   ],
+   "seeker": [
+    "Nissan",
+    "Armada",
+    2005
+   ],
+   "donor": [
+    "Nissan",
+    "Armada",
+    2010
+   ],
+   "why_1119e": null,
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2015
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2006,
+      2008
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Titan",
+      2006,
+      2006,
+      {
+       "built": "2005-08..2007-04"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #96302-ZC20A for both \u2014 option: fits some option packages; Titan 2006: built 08/2005-04/2007 only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2006,
+      2007
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2007,
+      2008
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Armada",
+      2006,
+      2006,
+      {
+       "built": "2005-08..2007-10"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #96302-ZC20A for both \u2014 option: fits some option packages; Armada 2006: built 08/2005-10/2007 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 59,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 0,
+    "unc": 0,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:window-regulator:FR+RR:db92e25ee7",
+   "kind": "pairs",
+   "verdict_1119e": "WRONG",
+   "cat": "window-regulator",
+   "pn": [
+    "80730-JX30B"
+   ],
+   "seeker": [
+    "Nissan",
+    "Juke",
+    2011
+   ],
+   "donor": [
+    "Nissan",
+    "Cube",
+    2011
+   ],
+   "why_1119e": null,
+   "before": {
+    "apps": [
+     [
+      "Nissan",
+      "Cube",
+      2009,
+      2011
+     ],
+     [
+      "Nissan",
+      "Juke",
+      2011,
+      2011
+     ],
+     [
+      "Nissan",
+      "Rogue",
+      2009,
+      2011
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Rogue",
+      2009,
+      2009,
+      {
+       "built": "2008-10..2010-06"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80730-JX30B for both \u2014 fits some configurations; Rogue 2009: built 10/2008-06/2010 only; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Nissan",
+      "Cube",
+      2009,
+      2011
+     ],
+     [
+      "Nissan",
+      "Rogue",
+      2010,
+      2010
+     ]
+    ],
+    "gates": [
+     [
+      "Nissan",
+      "Cube",
+      2011,
+      2011,
+      {
+       "built": "2009-02..2011-04"
+      }
+     ]
+    ],
+    "note": "Nissan catalog lists #80730-JX30B for both \u2014 fits some configurations; Cube 2011: built 02/2009-04/2011 only; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 37,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 0,
+    "unc": 37,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:window-regulator:FR:a6c50f650e",
+   "kind": "pairs",
+   "verdict_1119e": "RISK",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-CL00A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX45",
+    2006
+   ],
+   "donor": [
+    "Infiniti",
+    "FX35",
+    2005
+   ],
+   "why_1119e": null,
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2005,
+      2006
+     ],
+     [
+      "Infiniti",
+      "FX45",
+      2005,
+      2006
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #80720-CL00A for both \u2014 fits some configurations; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2005,
+      2006
+     ],
+     [
+      "Infiniti",
+      "FX45",
+      2005,
+      2006
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #80720-CL00A for both \u2014 fits some configurations; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 50,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 50,
+    "unc": 0,
+    "exc": 0
+   }
+  },
+  {
+   "item": "oem:nissan:side-mirrors:R:d1b6cdeea4",
+   "kind": "pairs",
+   "verdict_1119e": "RISK",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-1CA0B"
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX35",
+    2012
+   ],
+   "donor": [
+    "Infiniti",
+    "FX50",
+    2009
+   ],
+   "why_1119e": null,
+   "before": {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2009,
+      2012
+     ],
+     [
+      "Infiniti",
+      "FX50",
+      2009,
+      2013
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #96301-1CA0B for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "after": {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2009,
+      2012
+     ],
+     [
+      "Infiniti",
+      "FX50",
+      2009,
+      2013
+     ]
+    ],
+    "gates": null,
+    "note": "Nissan catalog lists #96301-1CA0B for both \u2014 option: fits some option packages; verify the number on the part"
+   },
+   "refusals_after": [],
+   "lot_before": {
+    "plain": 4,
+    "unc": 0,
+    "exc": 0
+   },
+   "lot_after": {
+    "plain": 4,
+    "unc": 0,
+    "exc": 0
+   }
+  }
+ ]
+}
