@@ -1,6 +1,6 @@
 {
  "report": "nissan_verify_2026-11-19d",
- "status": "PARTIAL (30 group verdicts done; pairs and census in progress)",
+ "status": "COMPLETE: verdicts for 30 groups and 30 pairs, census; agreement paragraph added after commit",
  "checker_session": "https://claude.ai/code/session_01LsgNuWEh1vdaDCtdP1jxMM",
  "candidate": "scraper/oem_fitment/groups/_report/nissan.candidate.json @ origin/main ac7a87aa",
  "pins": {
@@ -462,8 +462,10 @@
     ]
    ],
    "note": "Nissan catalog lists #24810-7S00E for both \u2014 option: fits some option packages; verify the number on the part",
-   "verdict": "RIGHT",
-   "reason": "24810-7S00E (FVO '*KC. (SE+ LE) + *CC. (SE+ LE)' Titan, 'W. SE' Armada; 'Production Date: 10/2004-08/2006'). Armada 2005 earlier builds: 24810-7S004 '08/2003-10/2004 ... Replaced By: 24810-7S00E' (this part is the successor). Titan's model year runs from 10/yyyy (7S204/7S205 10/2003-10/2004), so 10/2004-08/2006 spans MY2005-2006; the 2004 Titan page row (product record list_info) prints no date. XE trim / LE Armada use other numbers: trim, covered by the note. One plain 'Titan 2006' row has VIN JYARN15E... (a Yamaha VIN, decode 1.0L): a feed record error, noted, not counted.",
+   "verdict": "RISK",
+   "reason": "Feed identity: one plain row is lot record 'Nissan Titan 2006' whose VIN JYARN15E66A000358 decodes as a Yamaha (1.0L; scraper flag 'VIN decodes as Yamaha (listed Nissan)'); the product page's engine column says 5.6L VK56DE and the group has no eng gate, so the app shows it as a plain row. If the listing is right the fit holds; if the VIN is right it cannot. The fit claim for real Titans/Armadas is RIGHT (see below). 24810-7S00E (FVO '*KC. (SE+ LE) + *CC. (SE+ LE)' Titan, 'W. SE' Armada; 'Production Date: 10/2004-08/2006'). Armada 2005 earlier builds: 24810-7S004 '08/2003-10/2004 ... Replaced By: 24810-7S00E' (this part is the successor). Titan's model year runs from 10/yyyy (7S204/7S205 10/2003-10/2004), so 10/2004-08/2006 spans MY2005-2006; the 2004 Titan page row (product record list_info) prints no date. XE trim / LE Armada use other numbers: trim, covered by the note.",
+   "fitment_claim": "RIGHT",
+   "feed_identity": true,
    "evidence": {
     "product": [
      {
@@ -752,8 +754,10 @@
     ]
    ],
    "note": "Nissan catalog lists #24810-7S02E for both \u2014 option: fits some option packages; verify the number on the part",
-   "verdict": "RIGHT",
-   "reason": "24810-7S02E 'Meter Assy-Combined,Instrument-Mph', 'Production Date: 08/2005-08/2006' = MY2006; FVO '*W. SE' (Armada) and '*KC. (SE+ LE) + *CC. (SE+ LE)' (Titan). Other same-config numbers on the page are option variants (asterisk), covered by the note. 271 plain rows, all Armada/Titan 2006 5.6L (one feed record with a Yamaha VIN, noted).",
+   "verdict": "RISK",
+   "reason": "Feed identity: one plain row is lot record 'Nissan Titan 2006' whose VIN JYARN15E66A000358 decodes as a Yamaha (1.0L; scraper flag 'VIN decodes as Yamaha (listed Nissan)'); the product page's engine column says 5.6L VK56DE and the group has no eng gate, so the app shows it as a plain row. If the listing is right the fit holds; if the VIN is right it cannot. The fit claim for real Titans/Armadas is RIGHT (see below). 24810-7S02E 'Meter Assy-Combined,Instrument-Mph', 'Production Date: 08/2005-08/2006' = MY2006; FVO '*W. SE' (Armada) and '*KC. (SE+ LE) + *CC. (SE+ LE)' (Titan). Other same-config numbers on the page are option variants (asterisk), covered by the note. 271 plain rows, all Armada/Titan 2006 5.6L.",
+   "fitment_claim": "RIGHT",
+   "feed_identity": true,
    "evidence": {
     "product": [
      {
@@ -854,8 +858,8 @@
     ]
    ],
    "note": "Nissan catalog lists #24820-3ZD0A for both \u2014 option: fits some option packages; verify the number on the part",
-   "verdict": "RISK",
-   "reason": "Production split, not linked, not stated. 2013 QX56 page (infinitipartsdeal lists L793): 24820-3ZD0A 'Production Date: 02/2013-08/2014; FVO: *3ROW. PREMIUM'; 24820-1V90A and 24820-1V91A 'Production Date: 08/2012-02/2013; FVO: *3ROW. PREMIUM' (no supersession to or from 3ZD0A). MY2013 builds start 08/2012 (1ZS1A 07/2011-08/2012 is MY2012), so about half of 2013 QX56 builds are listed under another, unrelated number; the curation credits MY2013 at exactly 5 months of overlap. 8 QX56 2013 plain rows. QX80 2014 is fully in the window (RIGHT). Missing: a build-date note, or the catalog listing 3ZD0A for 08/2012-02/2013 builds. Under a strict reading this is WRONG.",
+   "verdict": "WRONG",
+   "reason": "Drive (AWD sibling), plus an unlinked production split. 2013 QX56 page (infinitipartsdeal lists L793): 24820-3ZD0A '*3ROW. PREMIUM', while 24820-1ZS0A is listed for '*3ROW. AWD. PREMIUM' and 24820-1ZS0C for '*3ROW. AWD. 7P. LE, *3ROW. AWD. LE, *3ROW. AWD. PREMIUM' (both dateless; 1ZS0A's product page: '2011-2013 Infiniti QX56 | Premium'). By the page's own wording an AWD 3-row Premium 2013 QX56 takes 1ZS0A, not 3ZD0A; the group has no drive gate, so 6 decoded-4WD QX56 2013 (JN8AZ2NE/NC) are plain rows. The QX80 2014 page lists no AWD number (QX80 2014 RIGHT). Also: 3ZD0A 'Production Date: 02/2013-08/2014' vs 24820-1V90A/1V91A '08/2012-02/2013' for the same '*3ROW. PREMIUM' (no supersession): about half of MY2013 builds carry another, unrelated number (RISK on its own).",
    "evidence": {
     "product": [
      {
@@ -885,6 +889,8 @@
         "rows": [
          "24820-1V90A | Speedometer Assy-Analog | rem='' | Production Date: 08/2012-02/2013; Fitting Vehicle Options: *3ROW. PREMIUM",
          "24820-1V91A | Speedometer Assy-Analog | rem='' | Production Date: 08/2012-02/2013; Fitting Vehicle Options: *3ROW. PREMIUM",
+         "24820-1ZS0A | Speedometer Assy-Analog | rem='' | Fitting Vehicle Options: *3ROW. AWD. PREMIUM",
+         "24820-1ZS0C | Speedometer Assy-Analog | rem='' | Fitting Vehicle Options: *3ROW. AWD. 7P. LE, *3ROW. AWD. LE, *3ROW. AWD. PREMIUM",
          "24820-1ZS1A | Speedometer Assy-Analog | rem='' | Production Date: 07/2011-08/2012; Fitting Vehicle Options: *3ROW. PREMIUM",
          "24820-3ZD0A | Speedometer Assy-Analog | rem='' | Production Date: 02/2013-08/2014; Fitting Vehicle Options: *3ROW. PREMIUM; Replaced By: 24820-3ZD5E"
         ]
@@ -1881,8 +1887,10 @@
     ]
    ],
    "note": "Nissan catalog lists #96301-ZC20A for both \u2014 option: fits some option packages; verify the number on the part",
-   "verdict": "RIGHT",
-   "reason": "96301-ZC20A, FVO 'W. SE' (2005-2008 Armada), 'W. SE/SV', '*W. LE/SL' (2009-2015), Titan '*KC. SE + *CC. SE, KC. SE + CC. SE' 2005-2008; earlier 96301-7S200 (10/2004-08/2005, 'POWER/CRO') 'Replaced By: 96301-ZC20A'. Titan 2008 window 08/2006-04/2008 covers MY2008. Asterisked 8S100/ZH40E variants are options, covered.",
+   "verdict": "RISK",
+   "reason": "Feed identity: one plain row is lot record 'Nissan Titan 2006' whose VIN JYARN15E66A000358 decodes as a Yamaha (1.0L; scraper flag 'VIN decodes as Yamaha (listed Nissan)'); the product page's engine column says 5.6L VK56DE and the group has no eng gate, so the app shows it as a plain row. If the listing is right the fit holds; if the VIN is right it cannot. The fit claim for real Titans/Armadas is RIGHT (see below). 96301-ZC20A, FVO 'W. SE' (2005-2008 Armada), 'W. SE/SV', '*W. LE/SL' (2009-2015), Titan '*KC. SE + *CC. SE, KC. SE + CC. SE' 2005-2008; earlier 96301-7S200 (10/2004-08/2005, 'POWER/CRO') 'Replaced By: 96301-ZC20A'. Titan 2008 window 08/2006-04/2008 covers MY2008. Asterisked 8S100/ZH40E variants are options, covered.",
+   "fitment_claim": "RIGHT",
+   "feed_identity": true,
    "evidence": {
     "product": [
      {
@@ -3720,8 +3728,10 @@
     ]
    ],
    "note": "Nissan catalog lists #80730-EA005 for both \u2014 option: fits some option packages; Pathfinder 2008: 4.0L only; verify the number on the part",
-   "verdict": "RIGHT",
-   "reason": "80730-EA005 front RH motor on every Frontier 2005-2019 and Xterra 2005-2015 page read (no FVO), Pathfinder 2005-2008 'W' (asterisked ZP80A is an option, covered). Product page lists Pathfinder 2005-2008 with VQ40DE only -> eng gate 4.0L on 2008: 4 V8 Pathfinders excluded, 11 unknown 'if equipped'. D40 Frontier had no regular cab. 1364 plain rows.",
+   "verdict": "RISK",
+   "reason": "Feed identity: one plain row is lot record 'Nissan Xterra 2005' whose VIN 5N1ED28T64C687084 decodes as a 2004 WD22 Xterra 3.3L (scraper flag 'VIN decodes as 2004 (listed 2005)'); the product page's engine column says 4.0L VQ40DE and there is no eng gate, so it shows as a plain row. If the VIN is right the car is the earlier generation and cannot take the part. The fit claim for real N50 Xterras is RIGHT (see below). 80730-EA005 front RH motor on every Frontier 2005-2019 and Xterra 2005-2015 page read (no FVO), Pathfinder 2005-2008 'W' (asterisked ZP80A is an option, covered). Product page lists Pathfinder 2005-2008 with VQ40DE only -> eng gate 4.0L on 2008: 4 V8 Pathfinders excluded, 11 unknown 'if equipped'. D40 Frontier had no regular cab. 1364 plain rows.",
+   "fitment_claim": "RIGHT",
+   "feed_identity": true,
    "evidence": {
     "product": [
      {
@@ -5277,7 +5287,60 @@
    ],
    "note": "Nissan catalog lists #80721-1MA0B for both \u2014 option: fits some option packages; Q70 2015-2018: gas only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "Q70L 2018 front-door page lists 80721-1MA0B (no FVO); product page 2015-2019 Q70L, record FVO 'SEDAN + LSEDAN'. No Q70L 2018 on the lot.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L2382",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-q70-gas/body_side_rear/front_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver Side",
+       "Fitting Vehicle Options: SEDAN + LSEDAN"
+      ],
+      "lines": [
+       "Part Number: 80721-1MA0B",
+       "Part Description: Regulator Assy-Door Window,LH",
+       "Position: Driver Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2015-infiniti-q70-gas/body_side_rear/front_door_window_regulator.html: Location: Driver Side",
+       "Replaces: 80721-1MA0A",
+       "2012-2013 Infiniti M35h | Base, P/PKG, Technology Package|6 Cyl 3.5L | VQ35HR",
+       "2011-2013 Infiniti M37 | Base, Premitec, Premium, Premium Touring Tech, SportPre, SportTec|6 Cyl 3.7L, 8 Cyl 5.6L | VK56VD, VQ37VHR",
+       "2011-2013 Infiniti M56 | Base, Premitec, Premium, Premium Touring Tech, SportPre, SportTec|6 Cyl 3.7L, 8 Cyl 5.6L | VK56VD, VQ37VHR",
+       "2014-2019 Infiniti Q70 | Base, P/PKG, Premitec, Premium, Premium Touring Tech, SportPre, SportTec, Technology Package|6 Cyl 3.5L, 6 Cyl 3.7L, 8 Cyl 5.6L | VK56VD, VQ35HR, VQ37VHR",
+       "2015-2019 Infiniti Q70L | Base, Premitec, Premium, Premium Touring Tech, SportPre, SportTec|6 Cyl 3.7L, 8 Cyl 5.6L | VK56VD, VQ37VHR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti Q70L 2018",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L1507",
+        "url": "2018-infiniti-q70l/body_side_rear/front_door_window_regulator.html",
+        "rows": [
+         "80721-1MA0B | Regulator Assy-Door Window, LH | rem='' | Location: Driver Side"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 0,
+     "by": {}
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:FL:fcb5d1a31a",
@@ -5312,7 +5375,64 @@
    ],
    "note": "Nissan catalog lists #80721-ZL90A for both \u2014 option: fits some option packages; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2012 Pathfinder front-door page lists 80721-ZL90A, dateless, 'Replaced By: 80721-9BF0A'; product page 2010-2012 Pathfinder 4.0L/5.6L. 49 plain 2012 Pathfinders.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L311",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/body_side_rear/front_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver side",
+       "Production Date: 04/2010-10/2013",
+       "Replaced By: 80721-9BF0A"
+      ],
+      "lines": [
+       "Part Number: 80721-ZL90A",
+       "Part Description: Window Regulator; Regulator Assembly - Door Window, Driver Side",
+       "Position: Driver Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/body_side_rear/front_door_window_regulator.html: Location: Driver side",
+       "Replaced By: 80721-9BF0A",
+       "Replaces: 80721-9BF0A",
+       "2020-2021, 2010-2014 Nissan Frontier | LE, Off-Road, PRO-4X, SE, SL, SV|4 Cyl 2.5L, 6 Cyl 4.0L | QR25DE, VQ40DE",
+       "2010-2012 Nissan Pathfinder | LE, S, SE, Silver Edition, SV|6 Cyl 4.0L, 8 Cyl 5.6L | VK56DE, VQ40DE",
+       "2010-2014 Nissan Xterra | Base Camp, Off-Road, PRO-4X, S, SE, X|6 Cyl 4.0L | VQ40DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Pathfinder 2012",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L521",
+        "url": "2012-nissan-pathfinder/body_side_rear/front_door_window_regulator.html",
+        "rows": [
+         "80721-ZL90A | Regulator Assy-Door Window, LH | rem='' | Location: Driver side; Replaced By: 80721-9BF0A"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 49,
+     "by": {
+      "Pathfinder 2012 body=? drive=? eng=? vin=?": 8,
+      "Pathfinder 2012 body=suv drive=4x2 eng=4.0L vin=5N1AR1NB": 25,
+      "Pathfinder 2012 body=suv drive=4x2 eng=4.0L vin=5N1AR1NN": 16
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:R:3d122f1ab9",
@@ -5354,7 +5474,75 @@
    ],
    "note": "Nissan catalog lists #96301-ZD000 for both \u2014 option: fits some option packages; Frontier: king cab only; 2.4L only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2004 Frontier page: 96301-ZD000 'from 10/2003; KC. KA24DE'; 96301-S3800 07/2001-10/2003 'Replaced By: 96301-ZD000'. Gates king cab + 2.4L: 28 2.4L/unknown Frontiers 'if equipped' (cab not decoded), 26 3.3L excluded. No plain rows.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L266",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "Location: Passenger Side",
+       "Production Date: from 10/2003",
+       "Fitting Vehicle Options: W. KA24DE"
+      ],
+      "lines": [
+       "Part Number: 96301-ZD000",
+       "Part Description: Door Mirror Assy-RH",
+       "Position: Passenger Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/miscellaneous/rear_view_mirror.html: Location: Passenger Side",
+       "Replaces: 96301-S3800",
+       "1998-2004 Nissan Frontier | STD, XE|4 Cyl 2.4L, 6 Cyl 3.3L | KA24DE, VG33E",
+       "1989-1994 Nissan Hardbody Pickup (D21) | Basic, DX, GST, SST, ST, STD|4 Cyl 2.4L, 4 Cyl 2.5L Diesel, 6 Cyl 3.0L | KA24E, SD25, VG30, VG30E, Z24",
+       "1995-1997 Nissan Hardbody Pickup (D21U) | Long Body SE, STD, XE|4 Cyl 2.4L, 6 Cyl 3.0L | KA24E, VG30E",
+       "1989-1993 Nissan Pathfinder | DX, SE, ST|4 Cyl 2.4L, 6 Cyl 3.0L | VG30E, VG30I, Z24I",
+       "2000-2004 Nissan Xterra | XE|4 Cyl 2.4L, 6 Cyl 3.3L | KA24DE, VG33E"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Frontier 2004",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L438",
+        "url": "2004-nissan-frontier/miscellaneous/rear_view_mirror.html",
+        "rows": [
+         "96301-S3800 | Door Mirror Assy-RH | rem='' | Location: Passenger Side; Production Date: 07/2001-10/2003; Fitting Vehicle Options: KC. KA24DE; Replaced By: 96301-ZD000",
+         "96301-ZD000 | Door Mirror Assy-RH | rem='' | Location: Passenger Side; Production Date: from 10/2003; Fitting Vehicle Options: KC. KA24DE"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 0,
+     "by": {}
+    },
+    "unc": {
+     "n": 28,
+     "by": {
+      "Frontier 2004 body=? drive=? eng=? vin=1N6ED29X": 1,
+      "Frontier 2004 body=? drive=? eng=? vin=1N6ED29Y": 1,
+      "Frontier 2004 body=? drive=? eng=? vin=?": 3,
+      "Frontier 2004 body=pickup drive=4x2 eng=2.4L 4-c vin=1N6DD26T": 23
+     }
+    },
+    "exc": {
+     "n": 26,
+     "by": {
+      "Frontier 2004 body=pickup drive=4WD eng=3.3L 6-c vin=1N6ED26Y": 4,
+      "Frontier 2004 body=pickup drive=4WD eng=3.3L 6-c vin=1N6ED29Y": 1,
+      "Frontier 2004 body=pickup drive=4WD eng=3.3L 6-c vin=1N6MD26Y": 1,
+      "Frontier 2004 body=pickup drive=4WD eng=3.3L 6-c vin=1N6MD29Y": 1,
+      "Frontier 2004 body=pickup drive=4x2 eng=3.3L 6-c vin=1N6ED26T": 3,
+      "Frontier 2004 body=pickup drive=4x2 eng=3.3L 6-c vin=1N6ED27T": 9,
+      "Frontier 2004 body=pickup drive=4x2 eng=3.3L 6-c vin=1N6ED29X": 7
+     }
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:L:1291e1794f",
@@ -5396,7 +5584,68 @@
    ],
    "note": "Nissan catalog lists #96302-ZD000 for both \u2014 option: fits some option packages; Frontier: king cab only; 2.4L only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2004 Xterra row (product record list_info; the 2004 Xterra page is not in the lists manifest): 96302-ZD000 'from 10/2003; FVO: W. KA24DE', 'Replaces: 96302-3B300, 96302-S3800, 96302-3B000'. eng gate 2.4L: 4 plain 2.4L, 128 3.3L excluded, 15 unknown 'if equipped'.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L262",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "Location: Driver Side",
+       "Production Date: from 10/2003",
+       "Fitting Vehicle Options: W. KA24DE"
+      ],
+      "lines": [
+       "Part Number: 96302-ZD000",
+       "Part Description: Door Mirror Assy-LH",
+       "Position: Driver Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/miscellaneous/rear_view_mirror.html: Location: Driver Side",
+       "Replaces: 96302-3B300, 96302-S3800, 96302-3B000",
+       "1998-2004 Nissan Frontier | STD, XE|4 Cyl 2.4L, 6 Cyl 3.3L | KA24DE, VG33E",
+       "1989-1994 Nissan Hardbody Pickup (D21) | Basic, DX, GST, SST, ST, STD|4 Cyl 2.4L, 4 Cyl 2.5L Diesel, 6 Cyl 3.0L | KA24E, SD25, VG30, VG30E, Z24",
+       "1995-1997 Nissan Hardbody Pickup (D21U) | Long Body SE, Long Body XE, Short Body XE, STD, XE|4 Cyl 2.4L, 6 Cyl 3.0L | KA24E, VG30E",
+       "1989-1993 Nissan Pathfinder | DX, SE, ST|4 Cyl 2.4L, 6 Cyl 3.0L | VG30E, VG30I, Z24I",
+       "2000-2004 Nissan Xterra | XE|4 Cyl 2.4L, 6 Cyl 3.3L | KA24DE, VG33E"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Xterra 2004",
+      "pages": [],
+      "note": "no own list page in the lists manifest (year pages: ['2004-nissan-xterra'], variants read [['']])"
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 4,
+     "by": {
+      "Xterra 2004 body=suv drive=4x2 eng=2.4L 4-c vin=5N1DD28T": 3,
+      "Xterra 2004 body=suv drive=4x2 eng=4cyl 2.4 vin=5N1DD28T": 1
+     }
+    },
+    "unc": {
+     "n": 15,
+     "by": {
+      "Xterra 2004 body=? drive=? eng=? vin=5N1ED287": 1,
+      "Xterra 2004 body=? drive=? eng=? vin=5N1ED28T": 1,
+      "Xterra 2004 body=? drive=? eng=? vin=?": 13
+     }
+    },
+    "exc": {
+     "n": 128,
+     "by": {
+      "Xterra 2004 body=? drive=? eng=3.3L 6cy vin=?": 5,
+      "Xterra 2004 body=suv drive=4WD eng=3.3L 6-c vin=5N1ED28Y": 34,
+      "Xterra 2004 body=suv drive=4WD eng=6cyl 3.3 vin=5N1ED28Y": 2,
+      "Xterra 2004 body=suv drive=4x2 eng=3.3L 6-c vin=5N1ED28T": 84,
+      "Xterra 2004 body=suv drive=4x2 eng=6cyl 3.3 vin=5N1ED28T": 2,
+      "Xterra 2004 body=suv drive=? eng=3.3L 6-c vin=5N1ED28C": 1
+     }
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:R:4bb386f38e",
@@ -5425,7 +5674,67 @@
    ],
    "note": "Nissan catalog lists #96301-ZC60A for both \u2014 option: fits some option packages; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RISK",
+   "reason": "Pages disagree. 2007 Armada page lists 96301-ZC60A 'W. LE' with no date, but its product record (2006 Armada page) says 'Production Date: 08/2005-08/2006' (MY2007 overlap about 2 months); the 2007 page also lists, for 'W. LE', 96301-ZC400 '10/2004-04/2007' and 96301-ZQ40A '04/2007-04/2008' (neither linked to ZC60A). 77 plain 2007 Armadas. Missing: whether ZC60A was fitted to, or fits, MY2007 LE builds.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L1010",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-armada/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "Location: Passenger Side",
+       "Production Date: 08/2005-08/2006",
+       "Fitting Vehicle Options: W. LE"
+      ],
+      "lines": [
+       "Part Number: 96301-ZC60A",
+       "Part Description: Mirror Assy-Outside,RH",
+       "Position: Passenger Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/2006-nissan-armada/miscellaneous/rear_view_mirror.html: Location: Passenger Side",
+       "Replaces: 96301-7S600",
+       "2004-2007 Nissan Armada | LE|8 Cyl 5.6L | VK56DE",
+       "2004-2007 Nissan Titan | LE|8 Cyl 5.6L | VK56DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Armada 2007",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L353",
+        "url": "2007-nissan-armada/miscellaneous/rear_view_mirror.html",
+        "rows": [
+         "96301-ZC400 | Mirror Assy-Outside, RH | rem='' | Location: Passenger Side; Production Date: 10/2004-04/2007; Fitting Vehicle Options: *W. LE, W. LE",
+         "96301-ZC60A | Mirror Assy-Outside, RH | rem='' | Location: Passenger Side; Fitting Vehicle Options: W. LE",
+         "96301-ZQ40A | Mirror Assy-Outside, RH | rem='' | Location: Passenger Side; Production Date: 04/2007-04/2008; Fitting Vehicle Options: *W. LE, W. LE"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 77,
+     "by": {
+      "Armada 2007 body=? drive=? eng=? vin=?": 9,
+      "Armada 2007 body=suv drive=4WD eng=5.6L Fle vin=5N1BA08C": 9,
+      "Armada 2007 body=suv drive=4WD eng=5.6L vin=5N1AA08C": 10,
+      "Armada 2007 body=suv drive=4WD eng=8cyl 5.6 vin=5N1BA08C": 1,
+      "Armada 2007 body=suv drive=4x2 eng=5.6L Fle vin=5N1BA08A": 26,
+      "Armada 2007 body=suv drive=4x2 eng=5.6L vin=5N1AA08A": 22
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:FL+RL:837f5d2b8f",
@@ -5454,7 +5763,66 @@
    ],
    "note": "Nissan catalog lists #82731-3Z005 for both \u2014 option: fits some option packages; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2005 Sentra front-door page: 82731-3Z005 'Motor Assy-Regulator, LH' 'from 04/2004' (MY2005 fully), 80731-4Z305 04/2003-04/2004 before it; product page 2004-2006 Sentra all trims. 156 plain 2005 Sentras.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L414",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-altima/body_side_rear/rear_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver side"
+      ],
+      "lines": [
+       "Part Number: 82731-3Z005",
+       "Part Description: Motor Assy-Regulator,LH",
+       "Position: Driver Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/2006-nissan-altima/body_side_rear/rear_door_window_regulator.html: Location: Driver side",
+       "Replaces: 82731-8J000, 82731-3Z000",
+       "2002-2006 Nissan Altima | Base, S, SE, SE-R, SL|4 Cyl 2.5L, 6 Cyl 3.5L | QR25DE, VQ35DE",
+       "2004-2006 Nissan Sentra | 1.8S, 2.5S, GXE, LE, SE-R, SE-R Spec V|4 Cyl 1.8L, 4 Cyl 2.5L | QG18DE, QR25DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Sentra 2005",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L612",
+        "url": "2005-nissan-sentra/body_side_rear/front_door_window_regulator.html",
+        "rows": [
+         "80731-4Z305 | Motor Assy-Regulator, LH | rem='' | Location: Driver side; Production Date: 04/2003-04/2004",
+         "82731-3Z005 | Motor Assy-Regulator, LH | rem='' | Location: Driver side; Production Date: from 04/2004"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 156,
+     "by": {
+      "Sentra 2005 body=? drive=? eng=1.8L 4cy vin=?": 2,
+      "Sentra 2005 body=? drive=? eng=? vin=3N1CB51D": 4,
+      "Sentra 2005 body=? drive=? eng=? vin=?": 12,
+      "Sentra 2005 body=sedan drive=4x2 eng=1.8L 4-c vin=3N1CB51A": 9,
+      "Sentra 2005 body=sedan drive=4x2 eng=1.8L 4-c vin=3N1CB51D": 114,
+      "Sentra 2005 body=sedan drive=4x2 eng=2.5L 4-c vin=3N1AB51A": 2,
+      "Sentra 2005 body=sedan drive=4x2 eng=2.5L 4-c vin=3N1AB51D": 7,
+      "Sentra 2005 body=sedan drive=4x2 eng=4cyl 1.8 vin=3N1CB51D": 6
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:FL:c7c1dab96d",
@@ -5483,7 +5851,62 @@
    ],
    "note": "Nissan catalog lists #80721-EH100 for both \u2014 fits some configurations; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2008 M45 page: 80721-EH100 'Production Date: 12/2004-06/2008' = MY2008; 80721-EH10A from 06/2008 is MY2009. 4 plain.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L302",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_side_rear/front_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver Side",
+       "Replaced By: 80721-EH11A"
+      ],
+      "lines": [
+       "Part Number: 80721-EH100",
+       "Part Description: Regulator Assy-Door Window,LH",
+       "Position: Driver Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_side_rear/front_door_window_regulator.html: Location: Driver Side",
+       "Replaced By: 80721-EH11A",
+       "2006-2009 Infiniti M35 | Advanced Technology, Base, Luxury, Premium, Sport, Sport Advanced Technology, Sportec, Technology|6 Cyl 3.5L, 8 Cyl 4.5L | VK45DE, VQ35DE",
+       "2006-2009 Infiniti M45 | Advanced Technology, Base, Luxury, Premium, Sport, Sport Advanced Technology, Sportec, Technology|6 Cyl 3.5L, 8 Cyl 4.5L | VK45DE, VQ35DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti M45 2008",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L984",
+        "url": "2008-infiniti-m45/body_side_rear/front_door_window_regulator.html",
+        "rows": [
+         "80721-EH100 | Regulator Assy-Door Window, LH | rem='' | Location: Driver Side; Production Date: 12/2004-06/2008; Replaced By: 80721-EH11A",
+         "80721-EH10A | Regulator Assy-Door Window, LH | rem='' | Location: Driver Side; Production Date: 06/2008-03/2009; Replaced By: 80721-EH11A"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 4,
+     "by": {
+      "M45 2008 body=? drive=? eng=? vin=?": 1,
+      "M45 2008 body=sedan drive=4WD eng=4.5L vin=JNKBY01F": 1,
+      "M45 2008 body=sedan drive=4x2 eng=4.5L vin=JNKBY01E": 2
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:FR:f7531ad609",
@@ -5512,7 +5935,60 @@
    ],
    "note": "Nissan catalog lists #80720-0E700 for both \u2014 fits some configurations; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "1993 Altima page: 80720-0E700 '06/1992-08/1993' = MY1993; 80720-0E715 from 08/1993 is MY1994; 80700-0E710 is the XE manual (trim). 6 plain 1993 Altimas.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L4820",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/1994-nissan-altima/body_side_rear/front_door_window_regulator.html",
+      "list_info": [
+       "Location: Passenger Side",
+       "Production Date: 06/1992-08/1993"
+      ],
+      "lines": [
+       "Part Number: 80720-0E700",
+       "Part Description: Regulator Assy-Door Window,Rh",
+       "Position: Passenger Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/1994-nissan-altima/body_side_rear/front_door_window_regulator.html: Location: Passenger Side",
+       "1993-1994 Nissan Altima | GLE, GXE, SE|4 Cyl 2.4L | KA24DE",
+       "1993-1994 Nissan Stanza | GLE, GXE, SE|4 Cyl 2.4L | KA24DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Altima 1993",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L673",
+        "url": "1993-nissan-altima/body_side_rear/front_door_window_regulator.html",
+        "rows": [
+         "80720-0E700 | Regulator Assy-Door Window, RH | rem='' | Location: Passenger Side; Production Date: 06/1992-08/1993",
+         "80720-0E715 | Regulator Assy-Door Window, RH | rem='' | Location: Passenger Side; Production Date: from 08/1993; Replaced By: 80720-0E717"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 6,
+     "by": {
+      "Altima 1993 body=sedan drive=4x2 eng=2.4L vin=1N4BU31F": 5,
+      "Altima 1993 body=sedan drive=4x2 eng=4cyl 2.4 vin=1N4BU31F": 1
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:RL:613aa019d9",
@@ -5541,7 +6017,63 @@
    ],
    "note": "Nissan catalog lists #82721-1LA0A for both \u2014 fits some configurations; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2014 QX80 rear-door page lists 82721-1LA0A dateless, 'Replaced By: 82721-1LA0B'; product page QX56 2011-2013, QX80 2014-2019. 14 plain QX80 2014. (A 'QX80 2017' lot record with a QX60 VIN shows plain in this group, but not in this pair's year.)",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L579",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-qx56/body_side_rear/rear_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver Side",
+       "Replaced By: 82721-1LA0B"
+      ],
+      "lines": [
+       "Part Number: 82721-1LA0A",
+       "Part Description: Regulator Assy-Rear Door Window,LH",
+       "Position: Driver Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2012-infiniti-qx56/body_side_rear/rear_door_window_regulator.html: Location: Driver Side",
+       "Replaced By: 82721-1LA0B",
+       "2011-2013 Infiniti QX56 | LE/High, Premium|8 Cyl 5.6L | VK56VD",
+       "2014-2019 Infiniti QX80 | LE/High, Premium|8 Cyl 5.6L | VK56VD"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti QX80 2014",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L787",
+        "url": "2014-infiniti-qx80/body_side_rear/rear_door_window_regulator.html",
+        "rows": [
+         "82721-1LA0A | Regulator Assy-Rear Door Window, LH | rem='' | Location: Driver Side; Replaced By: 82721-1LA0B"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 14,
+     "by": {
+      "QX80 2014 body=? drive=? eng=? vin=?": 1,
+      "QX80 2014 body=suv drive=4WD eng=5.6L vin=JN8AZ2NC": 2,
+      "QX80 2014 body=suv drive=4WD eng=5.6L vin=JN8AZ2NE": 6,
+      "QX80 2014 body=suv drive=4x2 eng=5.6L vin=JN8AZ2ND": 1,
+      "QX80 2014 body=suv drive=4x2 eng=5.6L vin=JN8AZ2NF": 4
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:FR:6f0276b8ac",
@@ -5592,7 +6124,62 @@
    ],
    "note": "Nissan catalog lists #80720-1MA0A for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2015 Q70L page: 80720-1MA0A 'FVO: SEDAN, SEDAN + LSEDAN; Replaced By: 80720-1MA0B'. 1 plain Q70L 2015.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L855",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-m37/body_side_rear/front_door_window_regulator.html",
+      "list_info": [
+       "Location: Passenger Side",
+       "Replaced By: 80720-1MA0B"
+      ],
+      "lines": [
+       "Part Number: 80720-1MA0A",
+       "Part Description: Regulator Assy-Door Window,Rh",
+       "Position: Passenger Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2011-infiniti-m37/body_side_rear/front_door_window_regulator.html: Location: Passenger Side",
+       "Replaced By: 80720-1MA0B",
+       "2012-2013 Infiniti M35h | Base, P/PKG, Technology Package|6 Cyl 3.5L | VQ35HR",
+       "2011-2013 Infiniti M37 | Base, Premitec, Premium, Premium Touring Tech, SportPre, SportTec|6 Cyl 3.7L, 8 Cyl 5.6L | VK56VD, VQ37VHR",
+       "2011-2013 Infiniti M56 | Base, Premitec, Premium, Premium Touring Tech, SportPre, SportTec|6 Cyl 3.7L, 8 Cyl 5.6L | VK56VD, VQ37VHR",
+       "2014-2016 Infiniti Q70 | Base, P/PKG, Premitec, Premium, Premium Touring Tech, SportPre, SportTec, Technology Package|6 Cyl 3.5L, 6 Cyl 3.7L, 8 Cyl 5.6L | VK56VD, VQ35HR, VQ37VHR",
+       "2015-2016 Infiniti Q70L | Base, Premitec, Premium, Premium Touring Tech, SportPre, SportTec|6 Cyl 3.7L, 8 Cyl 5.6L | VK56VD, VQ37VHR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti Q70L 2015",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L1318",
+        "url": "2015-infiniti-q70l/body_side_rear/front_door_window_regulator.html",
+        "rows": [
+         "80720-1MA0A | Regulator Assy-Door Window, RH | rem='' | Location: Passenger Side; Fitting Vehicle Options: SEDAN, SEDAN + LSEDAN; Replaced By: 80720-1MA0B"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 1,
+     "by": {
+      "Q70L 2015 body=sedan drive=FWD eng=3.7L vin=JN1BY1PP": 1
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:FL:0a6d4c77d8",
@@ -5631,7 +6218,60 @@
    ],
    "note": "Nissan catalog lists #80721-3JA0A for both \u2014 fits some configurations; QX60 2014-2017: gas only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2016 QX60 (gas) page lists 80721-3JA0A dateless; product page 2014-2020 QX60 incl. QR25DER (hybrid), so the gate's 'gas only' is narrower than the catalog but shows no wrong donor. 11 plain.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L383",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_side_rear/front_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver Side"
+      ],
+      "lines": [
+       "Part Number: 80721-3JA0A",
+       "Part Description: Regulator Assy-Door Window,LH",
+       "Position: Driver Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_side_rear/front_door_window_regulator.html: Location: Driver Side",
+       "2013 Infiniti JX35 | Base, Premium|6 Cyl 3.5L | VQ35DE",
+       "2014-2020 Infiniti QX60 | Base, Comfort, Mid, Premium|4 Cyl 2.5L, 6 Cyl 3.5L | QR25DER, VQ35DD, VQ35DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti QX60 2016",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L842",
+        "url": "2016-infiniti-qx60-gas/body_side_rear/front_door_window_regulator.html",
+        "rows": [
+         "80721-3JA0A | Regulator Assy-Door Window, LH | rem='' | Location: Driver Side"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 11,
+     "by": {
+      "QX60 2016 body=? drive=? eng=? vin=?": 1,
+      "QX60 2016 body=suv drive=4WD eng=3.5L 6-c vin=5N1AL0MM": 6,
+      "QX60 2016 body=suv drive=4WD eng=6cyl 3.5 vin=5N1AL0MM": 1,
+      "QX60 2016 body=suv drive=4x2 eng=3.5L 6-c vin=5N1AL0MN": 3
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:FL:8a8c3dabe5",
@@ -5660,7 +6300,62 @@
    ],
    "note": "Nissan catalog lists #80721-JK00A for both \u2014 fits some configurations; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2015 Q40 page lists 80721-JK00A dateless; product page 2011-2012 G25, 2009-2013 G37, 2015 Q40 (sedans). The '11/2009-08/2010' window is printed on the 2009 G37 sedan page only (G37 is not in the apps). 10 plain Q40 sedans.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L161",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2009-infiniti-g37-sedan/body_side_rear/front_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver Side",
+       "Production Date: 11/2009-08/2010"
+      ],
+      "lines": [
+       "Part Number: 80721-JK00A",
+       "Part Description: Regulator Assy-Door Window,LH",
+       "Position: Driver Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2009-infiniti-g37-sedan/body_side_rear/front_door_window_regulator.html: Location: Driver Side",
+       "2011-2012 Infiniti G25 | Journey, Leather, Premium, Sport Premium|6 Cyl 2.5L, 6 Cyl 3.7L | VQ25HR, VQ37VHR",
+       "2009-2013 Infiniti G37 | Journey, Leather, Premium, Sport Premium|6 Cyl 2.5L, 6 Cyl 3.7L | VQ25HR, VQ37VHR",
+       "2015 Infiniti Q40 | Journey, Leather, Premium, Sport Premium|6 Cyl 2.5L, 6 Cyl 3.7L | VQ25HR, VQ37VHR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti Q40 2015",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L830",
+        "url": "2015-infiniti-q40/body_side_rear/front_door_window_regulator.html",
+        "rows": [
+         "80721-JK00A | Regulator Assy-Door Window, LH | rem='' | Location: Driver Side"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 10,
+     "by": {
+      "Q40 2015 body=? drive=? eng=3.7L 0cy vin=?": 1,
+      "Q40 2015 body=? drive=? eng=? vin=?": 1,
+      "Q40 2015 body=sedan drive=AWD eng=3.7L vin=JN1CV6AR": 4,
+      "Q40 2015 body=sedan drive=FWD eng=3.7L vin=JN1CV6AP": 4
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:gauge-cluster:C:1c6c599444",
@@ -5702,7 +6397,61 @@
    ],
    "note": "Nissan catalog lists #24810-9BA5B for both \u2014 option: fits some option packages; Frontier: 2WD, 4.0L only; Xterra: 2WD only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RISK",
+   "reason": "Unlinked production split. 2011 Xterra page: 24810-9BA5B 'Production Date: 08/2010-04/2011; FVO: W. 2WD' (no supersession), then 24810-9CA5B '04/2011-08/2011; W. 2WD'; 24810-9BD5B 'W. 2WD + W. 4WD. X' dateless. Roughly the last third of MY2011 2WD builds is listed under 9CA5B. Drive gate 2wd right: 11 2WD plain, 8 4WD excluded. Missing: the catalog listing 9BA5B for builds from 04/2011.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L2182",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/body_electrical/instrument_meter_gauge.html",
+      "list_info": [
+       "Fitting Vehicle Options: W. 2WD"
+      ],
+      "lines": [
+       "Part Number: 24810-9BA5B",
+       "Part Description: Instrument Combination Meter Assembly; Combination Meter Assembly - Instrument",
+       "2010-2012 Nissan Frontier | S, SE, SV|6 Cyl 4.0L | VQ40DE",
+       "2010-2012 Nissan Xterra | Base Camp, S, X|6 Cyl 4.0L | VQ40DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Xterra 2011",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L506",
+        "url": "2011-nissan-xterra/body_electrical/instrument_meter_gauge.html",
+        "rows": [
+         "24810-9BA5B | Combination Meter Assy-Instrument | rem='' | Production Date: 08/2010-04/2011; Fitting Vehicle Options: W. 2WD",
+         "24810-9BD5B | Combination Meter Assy-Instrument | rem='' | Fitting Vehicle Options: W. 2WD + W. 4WD. X",
+         "24810-9CA5B | Combination Meter Assy-Instrument | rem='' | Production Date: 04/2011-08/2011; Fitting Vehicle Options: W. 2WD"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 11,
+     "by": {
+      "Xterra 2011 body=suv drive=4x2 eng=4.0L vin=5N1AN0NU": 11
+     }
+    },
+    "unc": {
+     "n": 1,
+     "by": {
+      "Xterra 2011 body=? drive=? eng=? vin=?": 1
+     }
+    },
+    "exc": {
+     "n": 8,
+     "by": {
+      "Xterra 2011 body=suv drive=4WD eng=4.0L vin=5N1AN0NW": 8
+     }
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:RR:6fa0b8f2c7",
@@ -5731,7 +6480,57 @@
    ],
    "note": "Nissan catalog lists #82720-0E700 for both \u2014 option: fits some option packages; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "1993 Stanza page: 82720-0E700 '06/1992-08/1993' (MY1993). No Stanza 1993 on the lot.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L4824",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/1994-nissan-altima/body_side_rear/rear_door_window_regulator.html",
+      "list_info": [
+       "Location: Passenger Side",
+       "Production Date: 06/1992-08/1993",
+       "Fitting Vehicle Options: FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+      ],
+      "lines": [
+       "Part Number: 82720-0E700",
+       "Part Description: Regulator Assembly-Rear Door Window,RH",
+       "Position: Passenger Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/1994-nissan-altima/body_side_rear/rear_door_window_regulator.html: Location: Passenger Side",
+       "1993-1994 Nissan Altima | GLE, GXE, SE|4 Cyl 2.4L | KA24DE",
+       "1993-1994 Nissan Stanza | GLE, GXE, SE|4 Cyl 2.4L | KA24DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Stanza 1993",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L825",
+        "url": "1993-nissan-stanza/body_side_rear/rear_door_window_regulator.html",
+        "rows": [
+         "82720-0E700 | Regulator Assy-Rear Door Window, RH | rem='' | Location: Passenger Side; Production Date: 06/1992-08/1993; Fitting Vehicle Options: FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 0,
+     "by": {}
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:L:36e8dc61d5",
@@ -5766,7 +6565,63 @@
    ],
    "note": "Nissan catalog lists #96302-1BA3E for both \u2014 option: fits some option packages; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2013 EX37 page: 96302-1BA3E '01/2011-07/2015; *WAG. LEATHER' (96302-1BA1E 'Replaced By: 96302-1BA3E'; 1BA3D same FVO: option variant, covered). 1 plain EX37 2013.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L656",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "Location: Driver Side",
+       "Production Date: 01/2011-07/2015",
+       "Fitting Vehicle Options: *WAG. LEATHER"
+      ],
+      "lines": [
+       "Part Number: 96302-1BA3E",
+       "Part Description: Door Mirror Assy-LH",
+       "Position: Driver Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html: Location: Driver Side",
+       "Replaces: 96302-1BA3B, 96302-1BA1B, 96302-1BA1E",
+       "2008-2012 Infiniti EX35 | Leather|6 Cyl 3.5L, 6 Cyl 3.7L | VQ35HR, VQ37VHR",
+       "2013 Infiniti EX37 | Leather|6 Cyl 3.5L, 6 Cyl 3.7L | VQ35HR, VQ37VHR",
+       "2014-2016 Infiniti QX50 | Leather|6 Cyl 3.7L | VQ37VHR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti EX37 2013",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L1274",
+        "url": "2013-infiniti-ex37/miscellaneous/rear_view_mirror.html",
+        "rows": [
+         "96302-1BA1E | Door Mirror Assy-LH | rem='' | Location: Driver Side; Production Date: 01/2011-07/2015; Fitting Vehicle Options: *WAG. LEATHER; Replaced By: 96302-1BA3E",
+         "96302-1BA3D | Door Mirror Assy-LH | rem='' | Location: Driver Side; Production Date: 01/2011-07/2015; Fitting Vehicle Options: *WAG. LEATHER",
+         "96302-1BA3E | Door Mirror Assy-LH | rem='' | Location: Driver Side; Production Date: 01/2011-07/2015; Fitting Vehicle Options: *WAG. LEATHER"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 1,
+     "by": {
+      "EX37 2013 body=wagon drive=4WD eng=3.7L 6-c vin=JN1BJ0HR": 1
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:RL:6201d377aa",
@@ -5795,7 +6650,57 @@
    ],
    "note": "Nissan catalog lists #82721-0E700 for both \u2014 option: fits some option packages; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "1993 Stanza page: 82721-0E700 '06/1992-08/1993'. No Stanza 1993 on the lot.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L4823",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/1994-nissan-altima/body_side_rear/rear_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver side",
+       "Production Date: 06/1992-08/1993",
+       "Fitting Vehicle Options: FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+      ],
+      "lines": [
+       "Part Number: 82721-0E700",
+       "Part Description: Regulator Assy-Rear Door Window,LH",
+       "Position: Driver Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/1994-nissan-altima/body_side_rear/rear_door_window_regulator.html: Location: Driver side",
+       "1993-1994 Nissan Altima | GLE, GXE, SE|4 Cyl 2.4L | KA24DE",
+       "1993-1994 Nissan Stanza | GLE, GXE, SE|4 Cyl 2.4L | KA24DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Stanza 1993",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L825",
+        "url": "1993-nissan-stanza/body_side_rear/rear_door_window_regulator.html",
+        "rows": [
+         "82721-0E700 | Regulator Assy-Rear Door Window, LH | rem='' | Location: Driver side; Production Date: 06/1992-08/1993; Fitting Vehicle Options: FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 0,
+     "by": {}
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:gauge-cluster:C:ac64e3f5f0",
@@ -5834,7 +6739,64 @@
    ],
    "note": "Nissan catalog lists #24810-EA67E for both \u2014 option: fits some option packages; 2WD only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RISK",
+   "reason": "Feed identity: one plain row is lot record 'Nissan Xterra 2005' whose VIN 5N1ED28T64C687084 decodes as a 2004 WD22 Xterra 3.3L (scraper flag 'VIN decodes as 2004 (listed 2005)'); the product page's engine column says 4.0L VQ40DE and there is no eng gate, so it shows as a plain row. If the VIN is right the car is the earlier generation and cannot take the part. The fit claim for real N50 Xterras is RIGHT (see below). Raw: 2005 Xterra page 24810-EA67E 'Production Date: 01/2005-09/2005; FVO: W. 2WD. SE' (N50 MY2005); drive gate 2wd: 47 2WD 4.0L plain, 37 4WD excluded; SE trim (S/Off-Road use EA2x/EA0x) covered by the note.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L2725",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-pathfinder/body_electrical/instrument_meter_gauge.html",
+      "list_info": [
+       "Production Date: 12/2004-09/2005",
+       "Fitting Vehicle Options: W. 2WD"
+      ],
+      "lines": [
+       "Part Number: 24810-EA67E",
+       "Part Description: Instrument Cluster; Combination Meter Assembly - Instrument. This item is non-returnable.",
+       "2005-2006 Nissan Pathfinder | LE, S, SE, XE|6 Cyl 4.0L | VQ40DE",
+       "2005-2006 Nissan Xterra | SE|6 Cyl 4.0L | VQ40DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Xterra 2005",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L290",
+        "url": "2005-nissan-xterra/body_electrical/instrument_meter_gauge.html",
+        "rows": [
+         "24810-EA67E | Combination Meter Assy-Instrument | rem='' | Production Date: 01/2005-09/2005; Fitting Vehicle Options: W. 2WD. SE"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 48,
+     "by": {
+      "Xterra 2005 body=suv drive=4x2 eng=3.3L 6-c vin=5N1ED28T": 1,
+      "Xterra 2005 body=suv drive=4x2 eng=4.0L vin=5N1AN08U": 47
+     }
+    },
+    "unc": {
+     "n": 8,
+     "by": {
+      "Xterra 2005 body=? drive=? eng=4.0L 0cy vin=?": 2,
+      "Xterra 2005 body=? drive=? eng=? vin=5N1AN08U": 1,
+      "Xterra 2005 body=? drive=? eng=? vin=?": 5
+     }
+    },
+    "exc": {
+     "n": 37,
+     "by": {
+      "Xterra 2005 body=suv drive=4WD eng=4.0L vin=5N1AN08V": 1,
+      "Xterra 2005 body=suv drive=4WD eng=4.0L vin=5N1AN08W": 36
+     }
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:R:b75fe309fd",
@@ -5863,7 +6825,63 @@
    ],
    "note": "Nissan catalog lists #96301-EV50A for both \u2014 fits some configurations; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2008 M35 page: 96301-EV50A 'from 01/2008; Replaced By: 96301-EH100'; 96301-EH100 '12/2004-01/2008'. Earlier MY2008 builds carry EV50A's own replacement (remark). 35 plain.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L905",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2010-infiniti-m35/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "Location: Passenger Side",
+       "Replaced By: 96301-EH100"
+      ],
+      "lines": [
+       "Part Number: 96301-EV50A",
+       "Part Description: Door Mirror Assy-RH",
+       "Position: Passenger Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2010-infiniti-m35/miscellaneous/rear_view_mirror.html: Location: Passenger Side",
+       "Replaced By: 96301-EH100",
+       "2008-2010 Infiniti M35 | Advanced Technology, Base, Premium, Sport, Sport Advanced Technology, Sportec, Technology|6 Cyl 3.5L, 8 Cyl 4.5L | VK45DE, VQ35DE, VQ35HR",
+       "2008-2010 Infiniti M45 | Advanced Technology, Base, Premium, Sport, Sport Advanced Technology, Sportec, Technology|6 Cyl 3.5L, 8 Cyl 4.5L | VK45DE, VQ35DE, VQ35HR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti M35 2008",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L552",
+        "url": "2008-infiniti-m35/miscellaneous/rear_view_mirror.html",
+        "rows": [
+         "96301-EH100 | Door Mirror Assy-RH | rem='' | Location: Passenger Side; Production Date: 12/2004-01/2008",
+         "96301-EV50A | Door Mirror Assy-RH | rem='' | Location: Passenger Side; Production Date: from 01/2008; Replaced By: 96301-EH100"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 35,
+     "by": {
+      "M35 2008 body=? drive=? eng=3.5L 0cy vin=?": 1,
+      "M35 2008 body=? drive=? eng=? vin=?": 4,
+      "M35 2008 body=sedan drive=4WD eng=3.5L vin=JNKAY01F": 10,
+      "M35 2008 body=sedan drive=4x2 eng=3.5L vin=JNKAY01E": 20
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:RR:4e683f9bc0",
@@ -5898,7 +6916,64 @@
    ],
    "note": "Nissan catalog lists #82730-3TA2A for both \u2014 fits some configurations; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2017 Altima sedan page lists 82730-3TA2A dateless; product page 2013-2018 Altima all trims (2017 has no coupe). 230 plain sedans.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L64",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2013-nissan-altima-sedan/body_side_rear/rear_door_window_regulator.html",
+      "list_info": [
+       "Location: Passenger Side"
+      ],
+      "lines": [
+       "Part Number: 82730-3TA2A",
+       "Part Description: Window Motor; Motor Assembly - Regulator, Passenger Side",
+       "Position: Passenger Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/2013-nissan-altima-sedan/body_side_rear/rear_door_window_regulator.html: Location: Passenger Side",
+       "Replaces: 82730-3TA1A",
+       "2013-2018 Nissan Altima | 25SL/Moon Roof, Base, Entry, S, S PDS, SL, SR, SV, SV Navigation, Tech|4 Cyl 2.5L, 6 Cyl 3.5L | QR25DE, VQ35DE",
+       "2016-2023 Nissan Maxima | Platinum, S, SL, SR, SV|6 Cyl 3.5L | VQ35DE",
+       "2013-2019 Nissan Sentra | FE, Nismo, S, SL, SR, SV|4 Cyl 1.6L, 4 Cyl 1.8L | MR16DDT, MRA8DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Altima 2017",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L555",
+        "url": "2017-nissan-altima-sedan/body_side_rear/rear_door_window_regulator.html",
+        "rows": [
+         "82730-3TA2A | Motor Assy-Regulator, RH | rem='' | Location: Passenger Side"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 230,
+     "by": {
+      "Altima 2017 body=? drive=? eng=2.5L 4cy vin=?": 2,
+      "Altima 2017 body=? drive=? eng=? vin=1N4AL3AP": 5,
+      "Altima 2017 body=? drive=? eng=? vin=?": 25,
+      "Altima 2017 body=sedan drive=4x2 eng=2.5L 4-c vin=1N4AL3AP": 185,
+      "Altima 2017 body=sedan drive=4x2 eng=3.5L vin=1N4BL3AP": 9,
+      "Altima 2017 body=sedan drive=4x2 eng=4cyl 2.5 vin=1N4AL3AP": 4
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:wiper-motor:F:856ae4a8fa",
@@ -5927,7 +7002,60 @@
    ],
    "note": "Nissan catalog lists #28800-1LA0A for both \u2014 windshield wiper motor with linkage; fits some configurations; verify the number on the part",
    "held": true,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "Held category (GROUP_HOLD_CATS wiper-motor; does not reach the payload). 2012 QX56 page lists 28800-1LA0A dateless; product page QX56 2011-2013 / QX80 2014-2019.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L2028",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-qx56/body_electrical/windshield_wiper.html",
+      "list_info": [
+       "Replaced By: 28800-6JK0A"
+      ],
+      "lines": [
+       "Part Number: 28800-1LA0A",
+       "Part Description: Drive Assy-Windshield Wiper",
+       "Replaced By: 28800-6JK0A",
+       "2011-2013 Infiniti QX56 | LE/High, Premium|8 Cyl 5.6L | VK56VD",
+       "2014-2019 Infiniti QX80 | LE/High, Premium|8 Cyl 5.6L | VK56VD"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti QX56 2012",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L84",
+        "url": "2012-infiniti-qx56/body_electrical/windshield_wiper.html",
+        "rows": [
+         "28800-1LA0A | Drive Assy-Windshield Wiper | rem='' | Replaced By: 28800-6JK0A"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 37,
+     "by": {
+      "QX56 2012 body=? drive=? eng=? vin=?": 4,
+      "QX56 2012 body=suv drive=4x2 eng=5.6L vin=JN8AZ2NC": 1,
+      "QX56 2012 body=suv drive=4x2 eng=5.6L vin=JN8AZ2ND": 4,
+      "QX56 2012 body=suv drive=4x2 eng=5.6L vin=JN8AZ2NE": 20,
+      "QX56 2012 body=suv drive=4x2 eng=5.6L vin=JN8AZ2NF": 8
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:RL:000ac2ae39",
@@ -5982,7 +7110,65 @@
    ],
    "note": "Nissan catalog lists #82731-4BA0A for both \u2014 fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2018 Rogue (t32u) page lists 82731-4BA0A; product page 2014-2020 Rogue incl. MR20DD (hybrid) and QR25DE. 65 plain T32 Rogues (KNMAT2/5N1AT2/JN8AT2); no Rogue Select (no 2014-15 in the apps).",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L1291",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2016-nissan-rogue-t32u/body_side_rear/rear_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver side"
+      ],
+      "lines": [
+       "Part Number: 82731-4BA0A",
+       "Part Description: Window Motor; Motor Assembly - Regulator, Driver Side",
+       "Position: Driver Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/2016-nissan-rogue-t32u/body_side_rear/rear_door_window_regulator.html: Location: Driver side",
+       "2015-2024 Nissan Murano | Platinum, S, SL, SV|4 Cyl 2.5L, 6 Cyl 3.5L | QR25DER, VQ35DE",
+       "2014-2020 Nissan Rogue | S, SL, SL/Premium, SV, SV Premium|4 Cyl 2.0L, 4 Cyl 2.5L | MR20DD, QR25DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Rogue 2018",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L668",
+        "url": "2018-nissan-rogue-t32u/body_side_rear/rear_door_window_regulator.html",
+        "rows": [
+         "82731-4BA0A | Motor Assy-Regulator, LH | rem='' | Location: Driver side"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 65,
+     "by": {
+      "Rogue 2018 body=? drive=? eng=? vin=5N1AT2MV": 1,
+      "Rogue 2018 body=? drive=? eng=? vin=?": 6,
+      "Rogue 2018 body=suv drive=4WD eng=2.5L 4-c vin=5N1AT2MV": 8,
+      "Rogue 2018 body=suv drive=4WD eng=2.5L 4-c vin=JN8AT2MV": 4,
+      "Rogue 2018 body=suv drive=4WD eng=2.5L 4-c vin=KNMAT2MV": 16,
+      "Rogue 2018 body=suv drive=4WD eng=4cyl 2.5 vin=5N1AT2MV": 1,
+      "Rogue 2018 body=suv drive=4x2 eng=2.5L 4-c vin=5N1AT2MT": 8,
+      "Rogue 2018 body=suv drive=4x2 eng=2.5L 4-c vin=JN8AT2MT": 5,
+      "Rogue 2018 body=suv drive=4x2 eng=2.5L 4-c vin=KNMAT2MT": 16
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:L:ef799f1000",
@@ -6011,7 +7197,67 @@
    ],
    "note": "Nissan catalog lists #96302-EA000 for both \u2014 option: fits some option packages; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RISK",
+   "reason": "Feed identity: one plain row is lot record 'Nissan Xterra 2005' whose VIN 5N1ED28T64C687084 decodes as a 2004 WD22 Xterra 3.3L (scraper flag 'VIN decodes as 2004 (listed 2005)'); the product page's engine column says 4.0L VQ40DE and there is no eng gate, so it shows as a plain row. If the VIN is right the car is the earlier generation and cannot take the part. The fit claim for real N50 Xterras is RIGHT (see below). Raw: 2005 Xterra page 96302-EA000 'FVO: W. 2WD. S + W. 4WD. S. 6MT + W. BASECAMP, W. S'; the asterisked 96302-EA005 ('*W. (S + BASECAMP), *W. S, W. (SE + OFFROAD), W. SE') is an option/trim sibling, covered by the note.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L304",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "Location: Driver side",
+       "Fitting Vehicle Options: W. BASECAMP, W. X",
+       "Replaced By: 96302-9BC9A"
+      ],
+      "lines": [
+       "Part Number: 96302-EA000",
+       "Part Description: Outside Driver Side Mirror Assembly; Mirror Assembly - Outside, Driver Side",
+       "Position: Driver side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/miscellaneous/rear_view_mirror.html: Location: Driver side",
+       "Replaced By: 96302-9BC9A",
+       "2005-2013 Nissan Frontier | LE, S, SE, SV, XE|4 Cyl 2.5L, 6 Cyl 4.0L | QR25DE, VQ40DE",
+       "2005-2013 Nissan Xterra | Base Camp, S, X|6 Cyl 4.0L | VQ40DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Xterra 2005",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L291",
+        "url": "2005-nissan-xterra/miscellaneous/rear_view_mirror.html",
+        "rows": [
+         "96302-EA005 | Mirror Assy-Outside, LH | rem='' | Location: Driver side; Fitting Vehicle Options: *W. (S + BASECAMP), *W. S, W. (SE + OFFROAD), W. SE; Replaced By: 96302-9BC9B",
+         "96302-EA000 | Mirror Assy-Outside, LH | rem='' | Location: Driver side; Fitting Vehicle Options: W. 2WD. S + W. 4WD. S. 6MT + W. BASECAMP, W. S; Replaced By: 96302-9BC9A"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 93,
+     "by": {
+      "Xterra 2005 body=? drive=? eng=4.0L 0cy vin=?": 2,
+      "Xterra 2005 body=? drive=? eng=? vin=5N1AN08U": 1,
+      "Xterra 2005 body=? drive=? eng=? vin=?": 5,
+      "Xterra 2005 body=suv drive=4WD eng=4.0L vin=5N1AN08V": 1,
+      "Xterra 2005 body=suv drive=4WD eng=4.0L vin=5N1AN08W": 36,
+      "Xterra 2005 body=suv drive=4x2 eng=3.3L 6-c vin=5N1ED28T": 1,
+      "Xterra 2005 body=suv drive=4x2 eng=4.0L vin=5N1AN08U": 47
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:L:33151185cc",
@@ -6040,7 +7286,62 @@
    ],
    "note": "Nissan catalog lists #96302-EH100 for both \u2014 fits some configurations; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2008 M35 page: 96302-EH100 '12/2004-01/2008'; later builds 96302-EV50A 'from 01/2008; Replaced By: 96302-EH100' (this part is the successor). 35 plain.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L300",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "Location: Driver Side"
+      ],
+      "lines": [
+       "Part Number: 96302-EH100",
+       "Part Description: Door Mirror Assy-LH",
+       "Position: Driver Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/miscellaneous/rear_view_mirror.html: Location: Driver Side",
+       "Replaces: 96302-EV50A",
+       "2006-2010 Infiniti M35 | Advanced Technology, Base, Luxury, Premium, Sport, Sport Advanced Technology, Sportec, Technology|6 Cyl 3.5L, 8 Cyl 4.5L | VK45DE, VQ35DE, VQ35HR",
+       "2006-2010 Infiniti M45 | Advanced Technology, Base, Luxury, Premium, Sport, Sport Advanced Technology, Sportec, Technology|6 Cyl 3.5L, 8 Cyl 4.5L | VK45DE, VQ35DE, VQ35HR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti M35 2008",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L552",
+        "url": "2008-infiniti-m35/miscellaneous/rear_view_mirror.html",
+        "rows": [
+         "96302-EH100 | Door Mirror Assy-LH | rem='' | Location: Driver Side; Production Date: 12/2004-01/2008",
+         "96302-EV50A | Door Mirror Assy-LH | rem='' | Location: Driver Side; Production Date: from 01/2008; Replaced By: 96302-EH100"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 35,
+     "by": {
+      "M35 2008 body=? drive=? eng=3.5L 0cy vin=?": 1,
+      "M35 2008 body=? drive=? eng=? vin=?": 4,
+      "M35 2008 body=sedan drive=4WD eng=3.5L vin=JNKAY01F": 10,
+      "M35 2008 body=sedan drive=4x2 eng=3.5L vin=JNKAY01E": 20
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:R:c207bafd8e",
@@ -6075,7 +7376,61 @@
    ],
    "note": "Nissan catalog lists #96301-3EV0B for both \u2014 option: fits some option packages; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2017 QX70 page: 96301-3EV0B '*W. PREMIUM' (1CA0A 'W. PREMIUM', 1CA1A 'W. BASE'): option, covered. No drive split. 3 plain.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L2326",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-fx37/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "Location: Passenger Side",
+       "Fitting Vehicle Options: *W. VK50VE, *W. VQ37HR. PREMIUM, *W. VQ37VHR. PREMIUM, W. VK50VE"
+      ],
+      "lines": [
+       "Part Number: 96301-3EV0B",
+       "Part Description: Door Mirror Assy-RH",
+       "Position: Passenger Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2013-infiniti-fx37/miscellaneous/rear_view_mirror.html: Location: Passenger Side",
+       "2012 Infiniti FX35 | Premium, Sport|6 Cyl 3.7L, 8 Cyl 5.0L | VK50VE, VQ37VHR",
+       "2013 Infiniti FX37 | Premium, Sport|6 Cyl 3.7L, 8 Cyl 5.0L | VK50VE, VQ37VHR",
+       "2012-2013 Infiniti FX50 | Premium, Sport|6 Cyl 3.7L, 8 Cyl 5.0L | VK50VE, VQ37VHR",
+       "2014-2017 Infiniti QX70 | Premium, Sport|6 Cyl 3.7L, 8 Cyl 5.0L | VK50VE, VQ37VHR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti QX70 2017",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L1258",
+        "url": "2017-infiniti-qx70/miscellaneous/rear_view_mirror.html",
+        "rows": [
+         "96301-3EV0B | Door Mirror Assy-RH | rem='' | Location: Passenger Side; Fitting Vehicle Options: *W. PREMIUM"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 3,
+     "by": {
+      "QX70 2017 body=suv drive=4WD eng=3.7L vin=JN8CS1MW": 1,
+      "QX70 2017 body=suv drive=4x2 eng=3.7L vin=JN8CS1MU": 2
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:R:92fd5159df",
@@ -6104,7 +7459,59 @@
    ],
    "note": "Nissan catalog lists #96301-EH100 for both \u2014 fits some configurations; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2007 M45 page lists 96301-EH100 dateless; product page 2006-2010 M35/M45. 11 plain.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L301",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "Location: Passenger Side"
+      ],
+      "lines": [
+       "Part Number: 96301-EH100",
+       "Part Description: Door Mirror Assy-RH",
+       "Position: Passenger Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/miscellaneous/rear_view_mirror.html: Location: Passenger Side",
+       "Replaces: 96301-EV50A",
+       "2006-2010 Infiniti M35 | Advanced Technology, Base, Luxury, Premium, Sport, Sport Advanced Technology, Sportec, Technology|6 Cyl 3.5L, 8 Cyl 4.5L | VK45DE, VQ35DE, VQ35HR",
+       "2006-2010 Infiniti M45 | Advanced Technology, Base, Luxury, Premium, Sport, Sport Advanced Technology, Sportec, Technology|6 Cyl 3.5L, 8 Cyl 4.5L | VK45DE, VQ35DE, VQ35HR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti M45 2007",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L768",
+        "url": "2007-infiniti-m45/miscellaneous/rear_view_mirror.html",
+        "rows": [
+         "96301-EH100 | Door Mirror Assy-RH | rem='' | Location: Passenger Side"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 11,
+     "by": {
+      "M45 2007 body=? drive=? eng=? vin=JNKBY01E": 1,
+      "M45 2007 body=sedan drive=4x2 eng=4.5L vin=JNKBY01E": 10
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:side-mirrors:R:e241aca37a",
@@ -6133,7 +7540,59 @@
    ],
    "note": "Nissan catalog lists #J6301-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "1993 Stanza page: J6301-1E400 'LESS PAINT; FED. S. GLE + CAL. S. GLE'. No Stanza 1993 on the lot.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L1552",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/miscellaneous/rear_view_mirror.html",
+      "list_info": [
+       "LESS PAINT",
+       "Location: Passenger Side",
+       "Fitting Vehicle Options: FED. S. GLE + CAL. S. GLE",
+       "Replaced By: J6301-2B500"
+      ],
+      "lines": [
+       "Part Number: J6301-1E400",
+       "Part Description: Door Right Hand Mirror Assembly; Door Mirror Assembly - Passenger Side",
+       "Position: Passenger Side",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/miscellaneous/rear_view_mirror.html: Location: Passenger Side",
+       "Replaced By: J6301-2B500",
+       "1993-1996 Nissan Altima | GLE|4 Cyl 2.4L | KA24DE",
+       "1993-1996 Nissan Stanza | GLE|4 Cyl 2.4L | KA24DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Stanza 1993",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L822",
+        "url": "1993-nissan-stanza/miscellaneous/rear_view_mirror.html",
+        "rows": [
+         "J6301-1E400 | Door Mirror Assy-RH | rem='' | : LESS PAINT; Location: Passenger Side; Fitting Vehicle Options: FED. S. GLE + CAL. S. GLE; Replaced By: J6301-2B500"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 0,
+     "by": {}
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:FL:fe9aac0699",
@@ -6188,7 +7647,64 @@
    ],
    "note": "Nissan catalog lists #80730-4BA1A for both \u2014 fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2018 Rogue (t32u) page lists 80730-4BA1A; product page Rogue 2014-2020 incl. MR20DD. 65 plain T32 Rogues.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.nissanpartsdeal.com:records:L1287",
+      "list_url": "https://www.nissanpartsdeal.com/parts-list/2016-nissan-rogue-t32u/body_side_rear/front_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver side"
+      ],
+      "lines": [
+       "Part Number: 80730-4BA1A",
+       "Part Description: Window Motor; Motor Assembly - Regulator, Left Hand",
+       "Parts list https://www.nissanpartsdeal.com/parts-list/2016-nissan-rogue-t32u/body_side_rear/front_door_window_regulator.html: Location: Driver side",
+       "2015-2024 Nissan Murano | Platinum, S, SL, SV|4 Cyl 2.5L, 6 Cyl 3.5L | QR25DER, VQ35DE",
+       "2014-2020 Nissan Rogue | S, SL, SL/Premium, SV, SV Premium|4 Cyl 2.0L, 4 Cyl 2.5L | MR20DD, QR25DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Nissan Rogue 2018",
+      "pages": [
+       {
+        "ref": "www.nissanpartsdeal.com:lists:L667",
+        "url": "2018-nissan-rogue-t32u/body_side_rear/front_door_window_regulator.html",
+        "rows": [
+         "80730-4BA1A | Motor Assy-Regulator, LH | rem='' | Location: Driver side"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 65,
+     "by": {
+      "Rogue 2018 body=? drive=? eng=? vin=5N1AT2MV": 1,
+      "Rogue 2018 body=? drive=? eng=? vin=?": 6,
+      "Rogue 2018 body=suv drive=4WD eng=2.5L 4-c vin=5N1AT2MV": 8,
+      "Rogue 2018 body=suv drive=4WD eng=2.5L 4-c vin=JN8AT2MV": 4,
+      "Rogue 2018 body=suv drive=4WD eng=2.5L 4-c vin=KNMAT2MV": 16,
+      "Rogue 2018 body=suv drive=4WD eng=4cyl 2.5 vin=5N1AT2MV": 1,
+      "Rogue 2018 body=suv drive=4x2 eng=2.5L 4-c vin=5N1AT2MT": 8,
+      "Rogue 2018 body=suv drive=4x2 eng=2.5L 4-c vin=JN8AT2MT": 5,
+      "Rogue 2018 body=suv drive=4x2 eng=2.5L 4-c vin=KNMAT2MT": 16
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:FL:5c393d96c0",
@@ -6229,7 +7745,55 @@
    ],
    "note": "Nissan catalog lists #80721-1CA0B for both \u2014 fits some configurations; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2011 FX35 front-door row via the product record (seed FX35 2011; the page is not in the lists manifest): 'Location: Driver Side; Replaced By: 80721-1CA0C', no FVO/date; product page FX35 2009-2012. 15 plain.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L255",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/body_side_rear/front_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver Side",
+       "Replaced By: 80721-1CA0C"
+      ],
+      "lines": [
+       "Part Number: 80721-1CA0B",
+       "Part Description: Regulator Assy-Door Window,LH",
+       "Position: Driver Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/body_side_rear/front_door_window_regulator.html: Location: Driver Side",
+       "Replaced By: 80721-1CA0C",
+       "2009-2012 Infiniti FX35 | Base, Premium, Sport|6 Cyl 3.5L, 6 Cyl 3.7L, 8 Cyl 5.0L | VK50VE, VQ35HR, VQ37VHR",
+       "2013 Infiniti FX37 | Base, Premium, Sport|6 Cyl 3.5L, 6 Cyl 3.7L, 8 Cyl 5.0L | VK50VE, VQ35HR, VQ37VHR",
+       "2009-2013 Infiniti FX50 | Base, Premium, Sport|6 Cyl 3.5L, 6 Cyl 3.7L, 8 Cyl 5.0L | VK50VE, VQ35HR, VQ37VHR",
+       "2014-2016 Infiniti QX70 | Base, Premium, Sport|6 Cyl 3.7L, 8 Cyl 5.0L | VK50VE, VQ37VHR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti FX35 2011",
+      "pages": [],
+      "note": "no own list page in the lists manifest (year pages: ['2011-infiniti-fx35', '2011-infiniti-fx35'], variants read [[''], ['']])"
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 15,
+     "by": {
+      "FX35 2011 body=suv drive=4WD eng=3.5L vin=JN8AS1MW": 10,
+      "FX35 2011 body=suv drive=4x2 eng=3.5L vin=JN8AS1MU": 5
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:window-regulator:RL:9c3158fe6c",
@@ -6268,7 +7832,56 @@
    ],
    "note": "Nissan catalog lists #82731-3KG0A for both \u2014 fits some configurations; QX60 2014-2017: gas only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2014 QX60 row via the product record (page not in the lists manifest): 82731-3KG0A 'Location: Driver Side'; product page 2014-2020 QX60 incl. QR25DER, so the 8 hybrid plain rows are supported. 79 plain.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L385",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_side_rear/rear_door_window_regulator.html",
+      "list_info": [
+       "Location: Driver Side"
+      ],
+      "lines": [
+       "Part Number: 82731-3KG0A",
+       "Part Description: Motor Assy-Regulator,LH",
+       "Position: Driver Side",
+       "Parts list https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_side_rear/rear_door_window_regulator.html: Location: Driver Side",
+       "2013 Infiniti JX35 | Base, Premium|6 Cyl 3.5L | VQ35DE",
+       "2014-2020 Infiniti QX60 | Base, Comfort, Mid, Premium|4 Cyl 2.5L, 6 Cyl 3.5L | QR25DER, VQ35DD, VQ35DE"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti QX60 2014",
+      "pages": [],
+      "note": "no own list page in the lists manifest (year pages: ['2014-infiniti-qx60-gas'], variants read [['gas']])"
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 79,
+     "by": {
+      "QX60 2014 body=? drive=? eng=3.5L 0cy vin=?": 1,
+      "QX60 2014 body=? drive=? eng=? vin=5N1AL0MN": 1,
+      "QX60 2014 body=? drive=? eng=? vin=?": 2,
+      "QX60 2014 body=suv drive=4WD eng=2.5L vin=5N1CL0MM": 4,
+      "QX60 2014 body=suv drive=4WD eng=3.5L vin=5N1AL0MM": 37,
+      "QX60 2014 body=suv drive=4x2 eng=2.5L vin=5N1CL0MN": 4,
+      "QX60 2014 body=suv drive=4x2 eng=3.5L vin=5N1AL0MN": 30
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 0,
+     "by": {}
+    }
+   }
   },
   {
    "id": "oem:nissan:gauge-cluster:C:cfc273851c",
@@ -6311,17 +7924,69 @@
    ],
    "note": "Nissan catalog lists #24820-1MK5A for both \u2014 option: fits some option packages; M37: 2WD only; Q70: 2WD, 3.7L, gas only; verify the number on the part",
    "held": false,
-   "verdict": null
+   "verdict": "RIGHT",
+   "reason": "2012 M37 page: 24820-1MK5A '*SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE'; drive gate 2wd: 4 2WD plain, 4 AWD excluded; trim (other 2WD trims use 1MK2A/1MA2x) covered by the note.",
+   "evidence": {
+    "product": [
+     {
+      "ref": "www.infinitipartsdeal.com:records:L2304",
+      "list_url": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-m37/body_electrical/instrument_meter_gauge.html",
+      "list_info": [
+       "Fitting Vehicle Options: *SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE"
+      ],
+      "lines": [
+       "Part Number: 24820-1MK5A",
+       "Part Description: SPEEDOMETER ASSY. This item is non-returnable.",
+       "2012-2013 Infiniti M37 | Base, Premium, SportPre|6 Cyl 3.7L | VQ37VHR",
+       "2012-2013 Infiniti M56 | Base, Premium, SportPre|6 Cyl 3.7L | VQ37VHR",
+       "2014 Infiniti Q70 | Base, Premium, SportPre|6 Cyl 3.7L | VQ37VHR"
+      ]
+     }
+    ],
+    "own_pages": [
+     {
+      "vy": "Infiniti M37 2012",
+      "pages": [
+       {
+        "ref": "www.infinitipartsdeal.com:lists:L910",
+        "url": "2012-infiniti-m37/body_electrical/instrument_meter_gauge.html",
+        "rows": [
+         "24820-1MK5A | Speedometer Assy | rem='' | Fitting Vehicle Options: *SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "lot_a85c654": {
+    "plain": {
+     "n": 4,
+     "by": {
+      "M37 2012 body=sedan drive=4x2 eng=3.7L 6-c vin=JN1BY1AP": 4
+     }
+    },
+    "unc": {
+     "n": 0,
+     "by": {}
+    },
+    "exc": {
+     "n": 4,
+     "by": {
+      "M37 2012 body=sedan drive=4WD eng=3.7L 6-c vin=JN1BY1AR": 4
+     }
+    }
+   }
   }
  ],
  "counts": {
   "groups": {
-   "RISK": 6,
-   "RIGHT": 23,
-   "WRONG": 1
+   "RISK": 9,
+   "RIGHT": 19,
+   "WRONG": 2
   },
   "pairs": {
-   "null": 30
+   "RIGHT": 26,
+   "RISK": 4
   }
  },
  "policy": {
@@ -6330,5 +7995,102 @@
   "sibling_specificity": "when the vehicle-year's own page lists, for the same part name and position and the same FVO wording, a separate number qualified by a decodable attribute (W. AWD, W. 4WD, KC/CC, an engine code), the unqualified number is read as not covering cars with that attribute; plain rows of such decoded cars are WRONG.",
   "production": "production windows are not decodable. A credited model year (MY taken as 07/(y-1)-06/y as the curation does, or the catalog's own changeover where the dated rows show it) whose remaining builds are listed under the part's own predecessor (that number 'Replaced By' this part) or under this part's own direct successor is RIGHT with a remark. Remaining builds listed under a number linked only through a common successor, or not linked, or pages of the same catalog that disagree (dateless on one MY page, a window outside that MY on another) are RISK: the catalog does not list the part for those builds and no lot car's build month is known. Under a strict reading of 'production date' in the WRONG list these RISK items would be WRONG; they are kept apart so the hub can decide.",
   "boundary": "1-2 uncovered months at a model-year edge are not counted (MY convention noise)."
- }
+ },
+ "census": {
+  "scope": "all 249 candidate groups (246 shippable + 3 held wiper-motor), lot a85c654 replayed through the app OEM-GATE code",
+  "engine_column_limits_without_gate": {
+   "engine_variant_leaks": 0,
+   "note": "no plain row of a real car whose decoded displacement is missing from the product-page engine column of an ungated app. The only hits are 3 lot records whose VIN decodes as another vehicle; they show as plain rows in 24 groups because those apps have no eng gate.",
+   "feed_identity_records": {
+    "JYARN15E66A000358": {
+     "listed_as": "Titan 2006",
+     "decode_engine": "1.0L 4-cyl",
+     "scraper_flag": "VIN decodes as Yamaha (listed Nissan)",
+     "groups": 11
+    },
+    "5N1ED28T64C687084": {
+     "listed_as": "Xterra 2005",
+     "decode_engine": "3.3L 6-cyl",
+     "scraper_flag": "VIN decodes as 2004 (listed 2005)",
+     "groups": 9
+    },
+    "5N1DL0MN0HC558063": {
+     "listed_as": "QX80 2017",
+     "decode_engine": "3.5L 6-cyl",
+     "scraper_flag": "",
+     "groups": 4
+    }
+   },
+   "groups_showing_them_plain": 24
+  },
+  "hybrids_under_gas_only_limit": {
+   "plain_hybrid_rows_all_groups": 108,
+   "under_a_gas_gate": 108,
+   "groups_with_gas_gate_and_hybrid_plain": 20,
+   "plain_hybrids_whose_product_page_lacks_the_hybrid_engine_code": 0,
+   "note": "all 108 plain hybrid rows (QX60 5N1CL0M*, Rogue, Murano, M35h/Q70) are mirrors or window regulators whose product page lists the hybrid's own engine code (QR25DER, MR20DD, VQ35HR). The gas gate passes them (app rule: 'gas' counts as met unless a decode/listing names another fuel), which is right here; the 'gas only' wording is narrower than the product page. No cluster or climate group shows a hybrid."
+  },
+  "joined_drive_codes": {
+   "own_page_rows_naming_two_drives": 44,
+   "groups": 16,
+   "groups_with_a_drive_gate": 0,
+   "note": "every row that joins 2WD and 4WD clauses belongs to an ungated app: no drive gate was cut from part of a joined code."
+  },
+  "4wd_vs_all_mode_w_auto_siblings": {
+   "vehicle_years": 1,
+   "groups": 1,
+   "without_drive_not": 0,
+   "plain_4wd_rows": 0,
+   "note": "only Pathfinder 2005 24810-EA48D (gate 4wd + drive_not a4wd, 4WD donors if equipped)."
+  },
+  "awd_4wd_sibling_numbers_NEW_CLASS": {
+   "definition": "the pn's own-page row names no drive while a same-name, same-position sibling row on that page has the same FVO clause plus 'AWD'/'4WD' (asterisk ignored)",
+   "vehicle_years": 17,
+   "groups": 7,
+   "wrong_groups": [
+    "oem:nissan:gauge-cluster:C:7407f22a0a",
+    "oem:nissan:gauge-cluster:C:d8db3116fc",
+    "oem:nissan:side-mirrors:L:8069643a0f",
+    "oem:nissan:side-mirrors:R:d5f882d545"
+   ],
+   "plain_awd_rows_in_wrong_groups": 94,
+   "note": "WRONG where the sibling clause matches including the asterisk: QX60 2015-2017 mirrors 96301-3JA9B / 96302-3JA9B ('*W. PREMIUM' vs 3JN9B '*W. AWD. PREMIUM'; 41 plain AWD rows each, 40 gas + 1 hybrid whose product page supports it) and QX56 2013 speedometers 24820-3ZD0A / 24820-3ZD1A ('*3ROW. PREMIUM' vs 1ZS0A '*3ROW. AWD. PREMIUM'; 6 plain AWD rows each). RISK where only the starred sibling is AWD (3JA9A/3JA9A-LH base mirrors 'W. BASE' vs '*W. AWD. BASE'). Not an issue for Titan 2005 7S00E (its 4WD siblings also carry 2WD clauses)."
+  },
+  "kph_clusters": {
+   "gauge_cluster_groups": 46,
+   "kph_marked": 0,
+   "mph_marked_in_description": 5
+  },
+  "rogue_2014_15_vs_rogue_select": {
+   "groups_with_rogue_2014_15_apps": 0,
+   "jn8as5_cars_shown": 0,
+   "jn8as5_rogue_2014_15_on_lot": 34
+  },
+  "regular_cab_listed_under_another_number": {
+   "vehicle_years": 14,
+   "groups": 9,
+   "without_cab_gate": 0,
+   "plain_regular_cab_rows": 0,
+   "note": "all 14 such vehicle-years (Frontier 2001-2002) carry a cab gate. 2003-2004 Frontier pages print no regular-cab ('T') row at all, so 80720/80721-2Z710 have no cab gate there; no regular-cab 2003-04 Frontier is on the lot."
+  },
+  "b14_200sx_body": {
+   "groups_with_200sx_apps": 2,
+   "rows_not_naming_the_coupe": 0,
+   "note": "both 200SX groups (24820-8B703 speedometer and its sibling) carry 'C.' (coupe) on the 200SX rows."
+  },
+  "production_windows_NEW_CLASS": {
+   "definition": "app vehicle-years where the pn's own-page production window covers less than the whole model year (07/(y-1)-06/y); approximate: other rows of the same part name and position covering the gap, any configuration",
+   "vehicle_year_rows": 166,
+   "groups": 111,
+   "gap_rows_by_link": {
+    "covered": 26,
+    "mixed": 43,
+    "no-other-row": 8,
+    "none": 61,
+    "succ": 28
+   },
+   "note": "pervasive (111 of 249 groups have at least one such vehicle-year, many only 1-2 boundary months). The curation credits a model year at 5 months of overlap. Sample items where same-configuration builds of a credited year carry a number not linked to the pn are RISK in this report."
+  }
+ },
+ "recommendation": "DO NOT SHIP. 2 WRONG groups in the sample (QX60 mirror 96301-3JA9B and QX56 2013 speedometer 24820-3ZD0A: AWD/4WD donors shown as plain rows although the vehicle-year page lists a separate AWD number for the same option clause); the census finds the same class in 2 more groups (96302-3JA9B, 24820-3ZD1A). Fix before release: a drive gate (or drive_not, 'if equipped') wherever the page lists an AWD/4WD sibling for the same clause; eng gates from the product-page engine column (costs no real donor) and/or keep cars with a VIN/listing mismatch flag out of OEM plain rows; and a hub decision on production windows that split a credited model year (note naming the build window, or require the window to cover most of the year)."
 }
