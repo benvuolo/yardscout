@@ -85,7 +85,16 @@ try {
   // to where that tab was left; a re-tap still goes to the top.
   await page.click(tabSel('live'));
   await page.waitForTimeout(300);
-  await page.evaluate(() => window.scrollTo(0, 1800));
+  // Far enough down that the alert card is above the screen: it sits after the
+  // first dozen cars, whose tiles vary in height with the day's cars, and the
+  // case below needs that full-row card above the car (2026-11-19: at a fixed
+  // 1800 px the card was still on screen with that day's list, here and on
+  // main alike, while the car itself came back in place).
+  await page.evaluate(() => {
+    const c = document.getElementById('alert-card');
+    const want = c ? Math.round(window.scrollY + c.getBoundingClientRect().bottom + 500) : 1800;
+    window.scrollTo(0, Math.max(1800, want));
+  });
   const liveY = await y();
   // The car at the top of the screen, and where it sits: coming back must
   // show the same car at the same place, not only the same scroll number

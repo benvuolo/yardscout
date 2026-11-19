@@ -67,6 +67,11 @@ async function open(browser, { forecastStub = false } = {}) {
       if (!ZIPS[z[1]]) return route.fulfill({ status: 404, body: '' });
       return route.fulfill({ json: { places: [{ latitude: ZIPS[z[1]][0], longitude: ZIPS[z[1]][1] }] }, headers: { 'access-control-allow-origin': '*' } });
     }
+    // The arrivals history is never served here: "forecast absent" is the app
+    // with no history published (the real files exist in docs/data since
+    // 2026-11-19, and with them the real module drew a real forecast). The
+    // card with the real module and data is pf_forecast_e2e's job.
+    if (u.hostname === 'yardscout.io' && /\/data\/arrivals\//.test(u.pathname)) return route.fulfill({ status: 404, body: '' });
     if (u.hostname === 'yardscout.io') {
       const f = fileFor(u.pathname);
       if (f) return route.fulfill({ path: f, contentType: TYPES[path.extname(f)] || 'application/octet-stream' });
