@@ -1120,6 +1120,43 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
     rx.rows['2006 Nissan Xterra'] && !rx.rows['2006 Nissan Xterra'].warn.includes('if equipped'), JSON.stringify(rx.rows['2006 Nissan Xterra']));
   lazyPreset = null;
 }
+/* ==== OEM-GATE round5-1119 (hub decisions 2026-11-19, after the 1119e check):
+ * a drive limit read from a same-option sibling number (drive_basis
+ * "sibling", drive_sib) says so in plain words; a linked build window (the
+ * rest of the year under the number's own predecessor) is a built gate like
+ * any other, never a plain row; the other lines are unchanged */
+{
+  const SIB = { drive: '2wd', drive_basis: 'sibling', drive_sib: 'awd' };
+  const D = (gate, v = {}, ex = null) => ctx.pfOemDonorGate([['Infiniti', 'QX56', 2013, 2013, null, gate]], { model: 'QX56', ...v }, ex);
+  const s1 = D(SIB);
+  check('r5 sibling basis: an undecoded donor gets the sibling line, not "listed for 2WD only"',
+    s1.verdict === 'unconfirmed' && s1.warn === "if equipped: the catalog lists a separate AWD number for this option, so this part is read as 2WD only — this donor's drivetrain isn't confirmed, check the car", s1.warn);
+  check('r5 sibling basis: same verdicts as a stated drive gate (AWD decode excluded, 2WD decode plain)',
+    D(SIB, { vpicDriveType: 'AWD/All-Wheel Drive' }).verdict === 'exclude' && D(SIB, { vpicDriveType: '4x2' }).verdict === 'confirm'
+    && D({ drive: '2wd', drive_basis: 'stated' }, { vpicDriveType: 'AWD/All-Wheel Drive' }).verdict === 'exclude');
+  const s2 = D({ ...SIB, built: '2013-02..2014-08', eng: ['5.6L'] }, {}, null);
+  check('r5 sibling + built + engine: the engine line names no drive, then the sibling line, then the door sticker',
+    s2.warn === "if equipped: this part is listed for 5.6L only — this donor's engine isn't confirmed, check the car; the catalog lists a separate AWD number for this option, so this part is read as 2WD only — this donor's drivetrain isn't confirmed, check the car; this part is listed for cars built 02/2013-08/2014 only — check the build date on the door sticker", s2.warn);
+  const s3 = D({ drive: '4wd', drive_basis: 'sibling', drive_sib: '2wd' }, { model: 'Titan' });
+  check('r5 sibling basis, the other way round: "a separate 2WD number ... read as 4WD only"',
+    s3.warn.includes('the catalog lists a separate 2WD number for this option, so this part is read as 4WD only'), s3.warn);
+  check('r5 stated basis unchanged: "listed for 2WD only"',
+    D({ drive: '2wd', drive_basis: 'stated' }).warn.startsWith("if equipped: this part is listed for 2WD only — this donor's drivetrain isn't confirmed"));
+  // a linked window: Stanza 1995 mirror 96301-2B500 from 02/1995 (1E400, its predecessor, before)
+  const gS = oemG({ id: 'oem:nissan:side-mirrors:R:r5s', ns: 'nissan', label: 'Nissan catalog', pn: ['96301-2B500'],
+    note: 'Nissan catalog lists #96301-2B500 for both — option: fits some option packages; Stanza 1995: built from 02/1995 only; verify the number on the part',
+    apps: [['Nissan', 'Altima', 1996, 1997], ['Nissan', 'Stanza', 1995, 1995, null, { built: '1995-02..' }], ['Nissan', 'Stanza', 1996, 1997]] });
+  const inv = [car(1, 1995, 'Nissan', 'Stanza', { vin: VIN_2012 }), car(2, 1995, 'Nissan', 'Stanza'), car(3, 1996, 'Nissan', 'Stanza'), car(4, 1996, 'Nissan', 'Altima')];
+  lazyPreset = { 'side-mirrors': { oemGroups: [gS], amGroups: [] } };
+  const r = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, { year: 1996, make: 'Nissan', model: 'Altima' }, cat());
+  const rows95 = r.html.split('<div class="pf-row-card ').slice(1).filter(ch => ch.includes('1995 Nissan Stanza'));
+  check('r5 linked window: no 1995 Stanza donor is a plain row; each says "check the build date on the door sticker"',
+    rows95.length === 2 && rows95.every(ch => ch.startsWith('pf-likely') && ch.includes('listed for cars built from 02/1995 only — check the build date on the door sticker')),
+    rows95.map(ch => ch.slice(0, 30)).join(' | '));
+  check('r5 linked window: the ungated years of the same group stay plain', r.rows['1996 Nissan Stanza'] && !r.rows['1996 Nissan Stanza'].warn.includes('if equipped')
+    && r.rows['1996 Nissan Altima'] && !r.rows['1996 Nissan Altima'].warn.includes('if equipped'));
+  lazyPreset = null;
+}
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);
