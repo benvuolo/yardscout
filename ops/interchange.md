@@ -6131,3 +6131,28 @@ wiper-motor 3 held category; gauge-cluster 0), 8 removed, 73 changed, 36 app-yea
   note change, hub's call); make "no engine decode" under a gas gate "if equipped" when the
   model-year has a hybrid (D: 24 nissan rows, all VIN-less); re-pin the live makes to oem-raw
   57e8b5b9 so the 37 census pages completion pass 1 already read count (live groups change).
+
+## 2026-11-19 — independent check: Nissan candidate names, labels, note length (branch interchange/verify-nissan-names-1119)
+
+Blind check of `nissan.candidate.json` @83496438 (103 `likely` groups, one number each) against
+`oem-raw@57e8b5b9` (nissanpartsdeal / infinitipartsdeal records + `.lists` manifests; no
+continuation parts exist). Own reading of every page name; curation code not used. Output:
+`scraper/oem_fitment/groups/_report/nissan_names_verify_2026-11-19.json` (file:line evidence per number).
+
+- Result: **PASS, 0 WRONG.**
+- Claim 1 (component wording): 102 RIGHT, 0 WRONG, 1 RISK. 30 groups say "window motor only"; all 30 are
+  named "Motor Assy-Regulator, RH/LH" on every page, and no Motor Assy number lacks the phrase. 49 regulator
+  groups ("Regulator Assy-(Rear) Door Window") carry no component wording. Mirrors (16, "Door Mirror Assy" /
+  "Mirror Assy-Outside"), climate (5, "Controller Assy-Air Conditiner"; the pages list case, cover, knob, lens
+  separately), rear wiper motor and windshield wiper motor: RIGHT.
+- RISK: wiper-motor 28800-1LA0A (QX56 2012 / QX80 2014), "Drive Assy-Windshield Wiper", note says
+  "windshield wiper motor with linkage". It is the whole drive (its pages list no separate motor or link),
+  but the page name does not say "linkage". Suggest "windshield wiper drive assembly" or keep and accept.
+- Claim 2 (label): 103 RIGHT. Every group is single-make; every claimed model has a page from its labelled
+  site; no number appears on the other site.
+- Claim 3 (length): 103 RIGHT, max 159 chars (80730-1MA0A, 80731-1MA0A: 1 char of headroom).
+- Post-push comparison with `round9_names_2026-11-19.json`: same names, references and classes for all 103.
+- Suggestions: (1) 80730-1LE0A is named "Motor Assy-Regulator, LH" and 80731-1LE0A "…, RH" on the Infiniti
+  pages, the reverse of the usual 80730=RH pattern. Side is out of scope here, but if notes or the app ever
+  state a side, read it from the name, not the number. (2) The 160-char limit is nearly reached; a longer build
+  window text would go over it, so a test on note length is worth having.

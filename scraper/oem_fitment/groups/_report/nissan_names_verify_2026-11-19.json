@@ -4659,5 +4659,19 @@
    "verdict_3_length": "RIGHT",
    "note_length": 109
   }
- ]
+ ],
+ "post_push_comparison": {
+  "read_after_verdicts_pushed_at": "cff56960",
+  "against": "scraper/oem_fitment/groups/_report/round9_names_2026-11-19.json",
+  "result": "Same catalog names, same per-number reference counts, same notes and labels for all 103 groups; class agrees for all 103 (regulator 49 = my assembly, motor 30 = my component, assembly 24 = my assembly).",
+  "differs": [
+   {
+    "pn": [
+     "28800-1LA0A"
+    ],
+    "cat": "wiper-motor",
+    "note": "round9 reads Drive Assy-Windshield Wiper as a plain assembly and lets the phrase \"windshield wiper motor with linkage\" stand; my reading agrees it is the assembly but keeps claim 1 at RISK because the word linkage is not in the page name (it is inferred: its two pages list no separate motor or link number). Not a disagreement on the name itself."
+   }
+  ]
+ }
 }
