@@ -72,7 +72,11 @@ const PREVIA = { make: 'Toyota', model: 'Previa', yrMin: null, yrMax: null, ...S
 
 const browser = await chromium.launch();
 async function open({ width = 390, dark = false, missing = false, dsf = 1 } = {}) {
-  const ctx = await browser.newContext({ viewport: { width, height: 820 }, deviceScaleFactor: dsf, colorScheme: dark ? 'dark' : 'light', reducedMotion: 'reduce' });
+  // Service workers blocked, as in the app's other e2e tests: once the app's
+  // worker takes the page over, its fetches no longer pass through the route
+  // below, so the fixture was served or not depending on timing (hub,
+  // 2026-11-19: the 390 px case read the real, missing files under load).
+  const ctx = await browser.newContext({ viewport: { width, height: 820 }, deviceScaleFactor: dsf, colorScheme: dark ? 'dark' : 'light', reducedMotion: 'reduce', serviceWorkers: 'block' });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', e => errors.push(String(e && e.message || e)));
