@@ -3083,3 +3083,41 @@ cars of these models are donors for this part" (cars = lot cars in range
 matching the spec set; donors = the rows the list shows among them). No
 scaled or estimated rate. The source fix (arrivals history split by
 decoded engine) is a later data task.
+
+## 2026-11-19 16:18 UTC catalog crawl started (owner "crawl"); builder B's re-match accepted, one addition asked
+
+- **Crawl run 44564564713** of `oem-fitment-crawl.yml`, dispatched 16:18
+  UTC on main 838b7f94 (merge of `interchange/crawl-own-pages-1119`
+  fba96a9d: worklist, four completion files, a plan report, a test; no
+  fetch, pacing, allowlist, robots or stop-rule code touched, checked by
+  diff). Six sites: infinitipartsdeal, nissanpartsdeal, jeeppartsdeal,
+  lexuspartsnow, toyotapartsnow, vwpartsgiant. 27 vehicle-year rows; 118
+  requests if every number on those pages is already known, 622 at most;
+  16 to 83 minutes at the crawler's own pacing.
+- **Not in the crawl, and why:**
+  - gmpartsgiant (57 pages), fordpartsgiant (15), subarupartsdeal (5):
+    these sites refused the crawler earlier (`.blocked` on oem-raw) and a
+    refusal is permanent (rule 2: no workaround). So the largest live class
+    with no page of its own (gm 173 vehicle-years, ford 47) cannot be
+    closed by crawling. Also blocked: moparpartsgiant, mbpartsgiant,
+    bmwpartsdeal.
+  - 37 of the census pages were already read on oem-raw after the pin the
+    live makes ship from. They count only when the live makes are curated
+    on the newer raw: a re-pin that can add claims, so it needs an
+    independent check. After nissan.
+  - Rogue 2017 (t32j, t32d) and Sentra 1995-96 (b14x) variant pages: the
+    site rules read one variant per year; no new fetch path was written.
+    Those vehicle-years stay held.
+- Check-in set for about 17:45 UTC (conclusion, `.c2.done` per site, any
+  refusal, request counts).
+- **Builder B, `data/vin-rematch-1119` head 19b511ef: accepted.** 120 cars
+  on the b22c3640 lot are matched on the VIN's vehicle (`different` class
+  only); 112 lists change (rows 889 -> 838; 14 cars gain a list, 6 lose
+  every row); listing fields unchanged; test 73 checks, quick regression
+  75/0/0. "Parts only" watches: the answer changes for 20 cars; hub's call:
+  that is match logic improving (rule 6), no stored watch is touched.
+  Chevrolet "10 Van" / "G-Series" sorted `same`.
+  Asked for one addition before merge: when the listing's and the VIN's
+  makes are in different maker groups (77 cars; a Titan with a Yamaha VIN),
+  the VIN is another vehicle's, so the match uses the listing's year too
+  and no VIN-derived confirmation applies; the flag stays.
