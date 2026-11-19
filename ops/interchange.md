@@ -5078,3 +5078,10 @@ The census misses the Sentra 2004 kind, where an unrelated sibling number is dat
 4. Make notes name the option when the page states it, for example "without A/C" on 27515-1E400.
 
 I changed only `scraper/oem_fitment/groups/_report/nissan_verify_2026-11-19e.json` and this section. My tools stayed in my scratchpad; they are not committed.
+
+**Compared with earlier reports** (I read these only after pushing my verdicts at 45d89f52):
+- Earlier checks were 1118 (9/2 WRONG), 1119d (2 WRONG, 13 RISK) and round 4. None of my WRONG items repeats an earlier class. They all fall under a choice round 4 made on purpose. Decision 2 says "Rest carried by a linked number: unchanged". Decision 3 says a supersession listing (the 2005 Armada page lists 7S200 "Replaced By" ZC20A) is not narrowed.
+- My check disagrees with that choice. "Replaced By" says the newer number serves the older car. It does not say the older part fits a car built with the newer number. So a plain row for a vehicle-year split by a linked number is unsupported for some seeker/donor pairs.
+- One WRONG is not a linked number: Sentra 2004. The rows on the 2004 page carry an option clause, but the 2005 page's dated rows have no clause, so decision 3's word-for-word match never reads the 2005 window.
+- Round 4's note says it applied the same exemption to the shipped makes (Part A). I did not check those. **Suggestion:** have the hub decide whether the linked-number exemption stands; if it goes, re-curate the shipped makes as well.
+- The 1119d QX56 2013 3ZD0A fix (2WD + built) is in place. I still mark the drive part RISK, because the QX80 2014 page lists no AWD sibling.
