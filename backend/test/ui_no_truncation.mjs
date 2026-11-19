@@ -1329,6 +1329,22 @@ const SCREENS = [
       pfPlanView = { key: '', order: 'most', yard: '', all: false };
     });
   }]),
+  // Donor models (2026-11-19): the card's forecast for a 2004 4Runner
+  // alternator (2UZ family: Toyota and Lexus models), with real arrivals;
+  // "-open" has "and N more" opened.
+  ...['', '-open'].map((suffix) => [`pf-donor-forecast${suffix}`, async (page) => {
+    await tab(page, 'parts');
+    await page.selectOption('#pf-year', '2004');
+    await page.selectOption('#pf-make', 'Toyota');
+    await page.waitForFunction(() => [...document.getElementById('pf-model').options].some(o => o.value === '4Runner'), null, { timeout: 8000 });
+    await page.selectOption('#pf-model', '4Runner');
+    await page.evaluate(() => { pfCat = interchangeData.categories.find(c => c.id === 'alternator'); pfPartInput.value = pfCat.label; pfChosenFam = 'toyota-2uz'; pfRunSearch(); });
+    await page.waitForFunction(() => document.querySelector('#pf-results .pf-forecast [data-ysf-kind="donor-models"]'), null, { timeout: 20000 })
+      .catch(() => { throw new Error('no donor-models forecast in the card'); });
+    if (suffix) await page.evaluate(() => { const d = document.querySelector('#pf-results .ysf-models-more'); if (!d) throw new Error('no "and N more"'); d.open = true; });
+    await settle(page, 300);
+    await page.evaluate(() => { const c = document.querySelector('#pf-results .pf-forecast'); c.scrollIntoView({ block: 'start' }); window.scrollBy(0, -70); });
+  }]),
   // Aftermarket donor cards (hub 2026-11-10): GSP CV axle for a 2021 GMC
   // Terrain. Only the checks to make at the car sit on the card; the listing's
   // provenance is behind "Why it fits". No card shows more than 7 lines of
