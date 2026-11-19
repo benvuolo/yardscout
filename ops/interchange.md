@@ -4696,7 +4696,26 @@ a new independent checker decides.
   eng_not checks are new here, the rest came with the recovered work).
 - curation_tests 23/23 files pass (Phase 2 parity SKIP unchanged);
   oem_fitment/tests 42/42; test_interchange, test_am_gates, pf_guards_unit pass.
-- Full regression: running at the time of this commit; result in the next commit.
+- Full regression, `tools/regress.sh` on bf5fe452 (code and groups final;
+  only this ops text follows): **101 passed, 3 failed, 0 skipped**.
+  - FAIL `backend/test/cars_feed_e2e.mjs` (1 of 139: "the token rides along:
+    on at once, no confirmation email..."; the alert strip's text was empty
+    after the click). Re-run alone under the test lock: **139 passed, 0
+    failed**. A flake in the free-alert strip, not this branch's code.
+  - FAIL `backend/test/ui_no_truncation.mjs` both halves, the same single
+    failure at all six widths: `[cards-mixed] setup-error: no real-photo card
+    with three cards after it` (1,320 checks run, no other failure).
+    Reproduced alone (`SCREENS=cards-mixed WIDTHS=390`). It is a setup error
+    from the cars-feed data near the test zip: this branch changes app.js only
+    inside the OEM-GATE block (9666-9835), whose only callers are in
+    `pfRunSearch`, and does not touch the inventory or photo data (the
+    9e19285b auto-scan does). Not verified on main: the privacy hook refused
+    swapping main's app.js in. For the hub: run that screen on main before
+    merging anything.
+  - Everything else passed, including pf_guards_unit, test_am_gates,
+    test_interchange, interchange_e2e, part_finder_e2e, pf_ux_e2e and
+    photo_layout_e2e. backend/node_modules was a symlink for the run; removed,
+    not committed.
 
 ### Noticed, not fixed
 
