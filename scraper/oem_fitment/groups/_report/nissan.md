@@ -3,7 +3,7 @@
 Raw: `57e8b5b99de0` @ `57e8b5b99de0`; as of 2026-11-14T11:38:15Z.
 
 - records 7778, classes 7552, list rows 75222, year manifests 457, cells 9944
-- Verified groups 0, engine vg groups 0, Likely groups 226
+- Verified groups 0, engine vg groups 0, Likely groups 217
 - blocked sites: none
 
 ## Gates standing for the whole namespace
@@ -372,6 +372,7 @@ Raw: `57e8b5b99de0` @ `57e8b5b99de0`; as of 2026-11-14T11:38:15Z.
 - held_engine_conflict: 47
 - held_exterior_cross_model: 279
 - held_market_kph: 62
+- held_starred_scope: 9
 - held_window_note_cap: 26
 - strict_note: 1
 - strict_slot_split: 9

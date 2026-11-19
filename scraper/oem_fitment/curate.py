@@ -20,11 +20,12 @@ merge per namespace waits for the owner's review of _report/<ns>.md (§11.5).
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import re
 import sys
-from collections import Counter, defaultdict
+from collections import ChainMap, Counter, defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -1408,6 +1409,9 @@ class Curation:
         self.likely_window_note_cap = Counter()   # cat -> vehicle-years left out: the window's note would pass the cap
         self.likely_drive_sibling = Counter()     # cat -> vehicle-years limited by a same-option drive sibling
         self.likely_drive_sibling_dropped = Counter()   # cat -> vehicle-years whose siblings contradict
+        # round5b-1119: vehicle-years a starred configuration decides (STARRED_SCOPE_NS)
+        self.likely_starred_scope = Counter()
+        self.starred_held = []
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
         self.release_notes = policy.release_notes()
         self.released_exterior = []
@@ -1627,6 +1631,7 @@ class Curation:
                 self.refuse(lim["status"], cat=cat, pn=sorted(c.pns)[0],
                             evidence=[r.pointer for r in c.records], detail=lim["detail"])
                 continue
+            base_text = text
             text, drv, gate_by_T = lim["text"], lim["drv"], lim["gates"]
             for T in Ts:
                 if T in win_by_T:
@@ -1664,6 +1669,39 @@ class Curation:
                     self.refuse(why_w[0], cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
                                 detail=why_w[1])
                     continue
+            if self.ns in STARRED_SCOPE_NS:
+                # round5b-1119 (hub decision 1): a vehicle-year whose drive or
+                # engine limit a starred configuration decides is held. Read on
+                # the group round 5 ships, after every hold that depends on its
+                # vehicle-years (exterior cross-model, wheels, a release), so it
+                # only narrows: nothing round 5 held or left out comes back
+                held = {}
+                for T in Ts:
+                    sc = self.starred_scope(c, cat, T, slots, gas_only=(gate_by_T.get(T, {}).get("fuel") == "gas"))
+                    if sc:
+                        held[T] = sc
+                if held:
+                    Ts0 = list(Ts)
+                    Ts = [T for T in Ts if T not in held]
+                    self.likely_starred_scope[cat] += len(held)
+                    unit, lim2 = "group", None
+                    if not released and len({(T[0], T[1]) for T in Ts}) >= 2:
+                        lim2 = self._likely_limits(c, cat, Ts, slots, drive_by_T, sib_T, dnot_by_T, win_by_T,
+                                                   base_text, brand)
+                        if lim2["status"] == "ok" and not (cat == "wheels" and self.wheel_group_refusal(Ts, cat, c)):
+                            unit = "vehicle-year"
+                    self.starred_held.append(self._starred_entry(c, cat, Ts0, held, unit))
+                    if unit == "group":
+                        # fewer than two models left, the rest's note no longer
+                        # fits, or an owner release of the exact apps: held whole
+                        self.refuse("held_starred_scope", cat=cat, pn=pns[0],
+                                    evidence=[r.pointer for r in c.records],
+                                    detail="starred clause decides scope: " + "; ".join(
+                                        f"{T[0]} {T[1]} {T[2]} {'/'.join(sorted(sc))}"
+                                        for T, sc in sorted(held.items()))[:400])
+                        continue
+                    text, drv, gate_by_T = lim2["text"], lim2["drv"], lim2["gates"]
+                    apps = _runs(Ts)
             slot = "+".join(sorted(slots)) or "C"
             note = _likely_note(brand, pns[0], text, _pack_text(cat, c.packaging, slot))
             # its own evidence date: build-time expiry drops a Likely group
@@ -2881,6 +2919,217 @@ class Curation:
         t4 = sysT & _FOUR
         return "drive", (frozenset(t4) if t4 else frozenset({"4wd", "awd"}))
 
+    # ------------------------------ round5b-1119: starred clauses (hub 2026-11-19)
+    # caches filled from catalog rows; a starred view starts its own
+    _ROW_CACHES = ("_longer_cache", "_suspect_cache", "_gm_letters", "_seed_keys", "_fit_engines_cache",
+                   "_rear_cabs", "_page_cabs", "_pn_rows", "_cat_ctx")
+
+    def _own_starred_only(self, c, cat, T) -> bool:
+        """The number is listed for T only through starred configurations: no
+        own row on T's page keeps an unstarred configuration that still lists
+        it for T (note_excludes; 96301-1CA0B FX35 2009 '*W. VQ35HR. PREMIUM +
+        *W. VK50VE, W. VK50VE': the unstarred 'W. VK50VE' names the FX50's
+        engine only). Leaving the starred configurations out would remove
+        the claim, not narrow its scope."""
+        rows = self.t_list_rows.get((T, cat))
+        if rows:
+            own = [(lr.notes, lr.site) for lr in rows if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched
+                   and not self.note_excludes(lr.notes, T)]
+        else:
+            own = [(r.note_texts, r.site) for r in self.t_seed_records.get((T, cat), [])
+                   if r.key == c.key and not self.note_excludes(r.note_texts, T)]
+        left = [n2 for n, st in own for n2 in [_unstar_notes(n, st)] if n2 is not None]
+        return bool(own) and not any(not self.note_excludes(n2, T) for n2 in left)
+
+    def _star_view(self, c, cat, T, siblings=True):
+        """This curation with T's page rows in cat (the only rows T's drive and
+        engine limits read) re-read for STARRED_SCOPE_NS: starred
+        configurations are left out (_unstar_notes; a row with nothing
+        unstarred left is gone), the other numbers' only when siblings is
+        True. Where the number is listed for T only through starred
+        configurations (_own_starred_only), leaving them out would remove the
+        claim itself, not its scope, so there its own starred configurations
+        stay, with their drive and engine words unread (_unstate_notes); a
+        number those words alone list for T is then not listed (_UNLISTED,
+        _scopes). What the model-year comes in (the drive
+        systems, engines and transmissions T's pages name in every category)
+        is read from every row as printed: it describes the car, not what this
+        number fits."""
+        v = copy.copy(self)
+        for k in self._ROW_CACHES:
+            v.__dict__.pop(k, None)
+        v._t_drive_systems, v._t_engines, v._t_trans_seen = self._t_drive_systems, self._t_engines, \
+            self._t_trans_seen
+        unstate = self._own_starred_only(c, cat, T)
+
+        def re_read(o, attr, own):
+            notes = getattr(o, attr)
+            if own:
+                n2 = _unstate_notes(notes, o.site) if unstate else _unstar_notes(notes, o.site)
+            elif siblings:
+                n2 = _unstar_notes(notes, o.site)
+            else:
+                return o
+            if n2 is None:
+                return None
+            if n2 == list(notes or []):
+                return o
+            o2 = copy.copy(o)
+            setattr(o2, attr, n2)
+            return o2
+        k = (T, cat)
+        lrs = [re_read(lr, "notes", policy.pn_key(self.ns, lr.pn) == c.key) for lr in self.t_list_rows.get(k) or []]
+        recs = [re_read(r, "note_texts", r.key == c.key) for r in self.t_seed_records.get(k) or []]
+        v.t_list_rows = ChainMap({k: [x for x in lrs if x is not None]}, self.t_list_rows)
+        v.t_seed_records = ChainMap({k: [x for x in recs if x is not None]}, self.t_seed_records)
+        return v
+
+    def drive_scope(self, c, cat, T, slots):
+        """The drive limit likely_groups gives class c on T, as one value:
+        (drive classes or None, drive_not classes or None, part-time 4WD), or
+        DRIVE_AMBIGUOUS when T is left out (the drive rule, drive_material and
+        the same-option drive sibling rule, in likely_groups' order)."""
+        d = None
+        if policy.LIKELY_DRIVE_RULE:
+            d = self.drive_of(c, cat, T)
+            if d and d != DRIVE_AMBIGUOUS:
+                mat = self.drive_material(T, d)
+                if mat is False:
+                    d = None
+                elif mat == DRIVE_AMBIGUOUS:
+                    d = DRIVE_AMBIGUOUS
+            if d == DRIVE_AMBIGUOUS:
+                return DRIVE_AMBIGUOUS
+        dnot = None
+        sl = self.drive_sibling_limit(c, cat, T) if policy.LIKELY_DRIVE_RULE else None
+        if sl and sl[0] == "drive":
+            mat = self.drive_material(T, sl[1])
+            if mat is False:
+                sl = None
+            elif mat == DRIVE_AMBIGUOUS:
+                sl = (DRIVE_AMBIGUOUS, None)
+        if sl and sl[0] == DRIVE_AMBIGUOUS:
+            return DRIVE_AMBIGUOUS
+        if sl:
+            if sl[0] == "drive":
+                fam = _FOUR if set(sl[1]) <= _FOUR else _TWO
+                if d and not set(d) <= fam:
+                    return DRIVE_AMBIGUOUS
+                if not d:
+                    d = frozenset(sl[1])
+            elif d:
+                d = frozenset(set(d) - set(sl[1]))
+                if not d:
+                    return DRIVE_AMBIGUOUS
+            else:
+                dnot = frozenset(sl[1])
+        pt = bool(d) and set(d) == {"4wd"} and self._auto_sibling(c, cat, T, slots)
+        return (frozenset(d) if d else None, dnot, pt)
+
+    def _scopes(self, c, cat, T, slots, gas_only, base=None):
+        out = {"drive": self.drive_scope(c, cat, T, slots), "engine": self.engine_trans_of(c, cat, T, gas_only)[0]}
+        if base is not None and base._own_starred_only(c, cat, T) and not self._own_rows(c, cat, T):
+            # the number is no longer listed for T once its starred
+            # configurations' drive and engine words are unread: those words
+            # are what list it (96301-1CA0B FX35 '*W. VQ35HR. PREMIUM')
+            for k in _starred_dims(base._own_rows(c, cat, T)):
+                out[k] = _UNLISTED
+        return out
+
+    def starred_scope(self, c, cat, T, slots, gas_only=False):
+        """STARRED_SCOPE_NS: {dimension: (as curated, re-read, via)} for
+        'drive' and 'engine' where re-reading T's page without the starred
+        configurations (_star_view) changes T's limit (DRIVE_AMBIGUOUS: T would
+        be left out; _UNLISTED: no longer listed for T); via 'own' when
+        re-reading the number's own rows alone changes it, else 'sibling'
+        (only another number's starred configuration decides). {} when no
+        starred configuration decides either."""
+        full = self._scopes(c, cat, T, slots, gas_only)
+        alt = self._star_view(c, cat, T)._scopes(c, cat, T, slots, gas_only, base=self)
+        dims = [k for k in full if full[k] != alt[k]]
+        if not dims:
+            return {}
+        own = self._star_view(c, cat, T, siblings=False)._scopes(c, cat, T, slots, gas_only, base=self)
+        return {k: (full[k], alt[k], "own" if own[k] != full[k] else "sibling") for k in dims}
+
+    @staticmethod
+    def _scope_text(dim, v):
+        if v == _UNLISTED:
+            return "not listed (only a starred configuration's " + dim + " words list the number)"
+        if v == DRIVE_AMBIGUOUS:
+            return "left out (contradicts itself)"
+        if dim == "engine":
+            return v or "no limit"
+        d, dnot, pt = v
+        if d:
+            return ("part-time 4WD" if pt else _drive_label(d)) + " only"
+        return f"not {_drive_label(dnot)}" if dnot else "no limit"
+
+    def _starred_entry(self, c, cat, Ts0, held, unit) -> dict:
+        """One group's line of the held list (groups/_report/<ns>.starred_held.json).
+        kinds: a = a drive gate a starred configuration decides, b = an engine
+        gate, c_drive / c_engine = no gate, and re-reading without the starred
+        configurations would add one (or leave the vehicle-year out)."""
+        yrs = []
+        for T, sc in sorted(held.items()):
+            kinds = []
+            if "drive" in sc:
+                fd = sc["drive"][0]
+                kinds.append("a" if fd != DRIVE_AMBIGUOUS and (fd[0] or fd[1]) else "c_drive")
+            if "engine" in sc:
+                kinds.append("b" if sc["engine"][0] else "c_engine")
+            yrs.append({"t": list(T), "kinds": kinds,
+                        "listed_only_starred": self._own_starred_only(c, cat, T),
+                        **{dim: {"as_curated": self._scope_text(dim, f), "without_starred": self._scope_text(dim, u),
+                                 "via": via}
+                           for dim, (f, u, via) in sorted(sc.items())},
+                        "clauses": self._starred_evidence(c, cat, T, set(sc))})
+        return {"cat": cat, "pn": sorted(c.pns), "unit": unit, "reason": "held_starred_scope",
+                "reason_text": "starred clause decides scope", "round5_apps": _runs(Ts0),
+                "kept_apps": [] if unit == "group" else _runs([T for T in Ts0 if T not in held]),
+                "held": yrs}
+
+    def _starred_evidence(self, c, cat, T, dims=()) -> list:
+        """The number's own option notes on T's page (with its starred
+        configurations), and, for the dimensions decided (dims), the sibling
+        rows the drive / engine sibling rules read, as printed and re-read."""
+        k = (T, cat)
+        rows = list(self.t_list_rows.get(k) or []) or list(self.t_seed_records.get(k) or [])
+
+        def pn_of(o):
+            return getattr(o, "pn", None) or sorted(c.pns)[0]
+
+        def notes_of(o):
+            return o.notes if isinstance(o, A.ListRow) else o.note_texts
+
+        def key_of(o):
+            return o.key if not isinstance(o, A.ListRow) else policy.pn_key(self.ns, o.pn)
+        out = [{"pn": pn_of(o), "role": "own", "page": o.list_url,
+                "notes": [n for n in notes_of(o) if _FVO_BODY_RE.match(n or "")],
+                "starred": _starred_cfgs(notes_of(o), o.site)}
+               for o in rows if key_of(o) == c.key and getattr(o, "matched", True)
+               and not self.note_excludes(notes_of(o), T)]
+        keys = set()
+        for view in (self, self._star_view(c, cat, T)):
+            if "drive" in dims:
+                keys |= {(h[1].list_url, h[1].pn) for h in view.drive_sibling(c, cat, T)[1]}
+            if "engine" in dims:
+                members = (view.cells_info.get(k) or {}).get("members") or {}
+                me = members.get(c.key)
+                for k2, m in members.items():
+                    if not me or k2 == c.key or not (set(m["slot"].slots) & set(me["slot"].slots)) or \
+                            view.comparable(cat, c.key, k2):
+                        continue
+                    for o in list(view.t_list_rows.get(k) or []) or list(view.t_seed_records.get(k) or []):
+                        if key_of(o) == k2 and getattr(o, "matched", True) and \
+                                _row_engine_trans(notes_of(o), o.site)[0]:
+                            keys.add((o.list_url, pn_of(o)))
+        out += [{"pn": pn_of(o), "role": "sibling", "page": o.list_url,
+                 "notes": [n for n in notes_of(o) if _FVO_BODY_RE.match(n or "")],
+                 "starred": _starred_cfgs(notes_of(o), o.site)}
+                for o in rows if key_of(o) != c.key and (o.list_url, pn_of(o)) in keys]
+        return out
+
     def build_window(self, c, cat, T):
         """policy.LIKELY_BUILD_WINDOW_RULE (hub decisions 2 and 3,
         2026-11-19). None when this number's own rows on T's pages print no
@@ -3068,6 +3317,9 @@ class Curation:
                             getattr(self, "likely_drive_dropped", Counter()).items())),
                         "likely_groups_drive_noted": dict(sorted(
                             getattr(self, "likely_drive_noted", Counter()).items())),
+                        # round5b-1119: only where a starred configuration decided one
+                        **({"likely_app_years_starred_scope": dict(sorted(self.likely_starred_scope.items()))}
+                           if getattr(self, "likely_starred_scope", None) else {}),
                         "blocked_sites": sorted(self.blocked),
                         "why_no_verified": _why_none(self), "gates": global_gates(self)},
             "funnel_cars": fz(funnel),
@@ -4538,6 +4790,121 @@ def _row_clauses_star(notes, site: str) -> list:
     return out
 
 
+# round5b-1119 (hub decision 1, 2026-11-19): the leading "*" of a Nissan
+# option clause has no legend in the raw (census of oem-raw@57e8b5b9 and
+# @dca9cd84: no text names what it marks), so a vehicle-year whose drive or
+# engine limit a starred configuration decides is not a claim the catalog
+# states (rule 3) and is held, reason "held_starred_scope", until the mark is
+# explained. "Decides": re-reading T's page without the starred
+# configurations (the number's own and its siblings') changes the vehicle-
+# year's drive limit (drive / drive_not / part-time) or its engine limit, or
+# leaves it out. Where the number is listed for T only through starred
+# configurations (leaving them out would remove the claim, not its scope),
+# they are kept with their drive and engine words unread instead, and held
+# when the number is then no longer listed for T (Curation._star_view).
+# A starred configuration that changes neither stays as it is. Namespaces it
+# applies to: kept here, not in policy.py, so policy_sha256 and every shipped
+# namespace's claims stay as they are (hub decision 3); move it to policy.py
+# with the next policy edit.
+STARRED_SCOPE_NS = frozenset({"nissan"})
+
+
+def _starred(cfg: str) -> bool:
+    return str(cfg or "").lstrip().startswith("*")
+
+
+def _unstar_notes(notes, site: str):
+    """notes with the starred configurations of each "Fitting Vehicle Options"
+    note left out (each "," alternative; on the config-tuple sites,
+    policy.DRIVE_CONFIG_FVO_SITES, each "+" part, as _row_clauses_star reads
+    them); None when such a note lists configurations and every one is
+    starred (nothing unstarred is left of the row)."""
+    out = []
+    for n in notes or []:
+        m = _FVO_BODY_RE.match(n or "")
+        if not m:
+            out.append(n)
+            continue
+        alts, had = [], False
+        for alt in _split_top_plus(m.group(1), ","):
+            had = True
+            if site in policy.DRIVE_CONFIG_FVO_SITES:
+                parts = [p for p in _split_top_plus(alt, "+") if not _starred(p)]
+                if parts:
+                    alts.append(" + ".join(parts))
+            elif not _starred(alt):
+                alts.append(alt)
+        if not had:
+            out.append(n)
+            continue
+        if not alts:
+            return None
+        out.append(n[:m.start(1)] + ", ".join(alts))
+    return out
+
+
+_ENGINE_WORD_RE = re.compile(_ENGINE_CODE_RE.pattern, re.I)
+
+
+def _unstate_cfg(cfg: str) -> str:
+    """A starred configuration with its drive words (and the Nissan AUTO
+    field) and engine words blanked: the configuration stays, what it says
+    about drive and engine is not read."""
+    _p, _n, left = _drive_terms(cfg)
+    left = re.sub(r"(?:(?<=\.)|^)\s*\*?AUTO\s*(?=\.|$)", " ", left)
+    left = _LITRE_RE.sub(" ", _ENGINE_WORD_RE.sub(" ", left))
+    return left if _starred(left) else "*" + left.lstrip()
+
+
+def _unstate_notes(notes, site: str) -> list:
+    """notes with each starred configuration's drive and engine words unread
+    (_unstate_cfg); the configurations themselves stay."""
+    out = []
+    for n in notes or []:
+        m = _FVO_BODY_RE.match(n or "")
+        if not m:
+            out.append(n)
+            continue
+        alts = []
+        for alt in _split_top_plus(m.group(1), ","):
+            if site in policy.DRIVE_CONFIG_FVO_SITES:
+                alts.append(" + ".join(_unstate_cfg(p) if _starred(p) else p for p in _split_top_plus(alt, "+")))
+            else:
+                alts.append(_unstate_cfg(alt) if _starred(alt) else alt)
+        out.append(n[:m.start(1)] + ", ".join(alts) if alts else n)
+    return out
+
+
+_UNLISTED = "unlisted"
+
+
+def _starred_dims(rows) -> set:
+    """'drive' / 'engine' when a starred configuration of these own rows
+    [(notes, site, variant, url)] names a drive (or the AUTO field) / an
+    engine."""
+    out = set()
+    for notes, site, _v, _u in rows:
+        for cfg in _starred_cfgs(notes, site):
+            p, n, _left = _drive_terms(cfg)
+            if p or n or _NISSAN_AUTO_RE.search(cfg):
+                out.add("drive")
+            if _engine_terms(cfg):
+                out.add("engine")
+    return out
+
+
+def _starred_cfgs(notes, site: str) -> list:
+    """The starred configurations of a row's option notes, as printed."""
+    out = []
+    for n in notes or []:
+        m = _FVO_BODY_RE.match(n or "")
+        if m:
+            for alt in _split_top_plus(m.group(1), ","):
+                parts = _split_top_plus(alt, "+") if site in policy.DRIVE_CONFIG_FVO_SITES else [alt]
+                out += [p for p in parts if _starred(p)]
+    return out
+
+
 # Lexus chassis codes (2026-11-10 live audit: lexuspartsnow rows carry the
 # chassis a number is for, e.g. 'GRS19#' = V6 GS, 'MCU3#.. JPP' = RX 330, and
 # curation credited them to other engines: GS 430 2006 from GRS19# headlamp rows,
@@ -4949,6 +5316,24 @@ def main(argv=None) -> int:
             "note": "Likely groups held by the exterior cross-model rule (policy.EXTERIOR_HOLD_CATS, owner "
                     "decision 2026-11-06); not shipped. Owner checklist: each needs a visual check before release.",
             "namespaces": sorted(results), "count": len(held), "groups": held})
+    for ns in sorted(results):
+        sh = getattr(results[ns], "starred_held", None)
+        if ns in STARRED_SCOPE_NS and sh is not None:
+            vy = Counter(k for g in sh for h in g["held"] for k in h["kinds"])
+            write_json(out / "_report" / f"{ns}.starred_held.json", {
+                "note": "round5b-1119 (hub decision 1, 2026-11-19): vehicle-years held because a starred ('*') "
+                        "option configuration decides their drive or engine limit; the mark has no legend in the "
+                        "raw. reason held_starred_scope ('starred clause decides scope'). unit vehicle-year: the "
+                        "group ships without them (kept_apps); unit group: the whole group is held. kinds: a = "
+                        "drive gate, b = engine gate, c_drive / c_engine = no gate, the starred configuration "
+                        "widens it. Not shipped; they come back when the mark is explained.",
+                "ns": ns, "raw": results[ns].src.commit or "fixtures",
+                "groups": len(sh), "groups_held_whole": sum(g["unit"] == "group" for g in sh),
+                "vehicle_years": sum(len(g["held"]) for g in sh),
+                "vehicle_years_by_kind": dict(sorted(vy.items())),
+                "groups_by_kind": {k: sum(any(k in h["kinds"] for h in g["held"]) for g in sh)
+                                   for k in ("a", "b", "c_drive", "c_engine")},
+                "held": sh})
     coll = cross_ns_collisions(results)
     if coll:
         write_json(out / "_report" / "cross_ns_string_collisions.json", coll)
