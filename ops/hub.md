@@ -2096,3 +2096,4 @@ payload shape unchanged.
   groups (suggestion: once a limit is a gate, the note may say "engine-limited,
   see each car"); YL3Z-10849-DA removed on a strict "KPH/MPH" reading;
   JK61C/JK61D left the nissan candidate with no refusal recorded.
+- 02:45 UTC confirmed live: sw jh-v213; page loads with no page errors (Xterra strip and a San Jose Cars list).
