@@ -180876,6 +180876,16 @@
   },
   {
    "cat": "climate-control",
+   "detail": "Frontier: 4.0L, built 08/2009-08/2010 only; Xterra: built 08/2009-08/2010 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L325"
+   ],
+   "pn": "27510-ZL00B",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
    "detail": "Frontier: 4.0L, built 10/2013-05/2016 only; Xterra 2013: 4WD only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L4888"
@@ -180937,12 +180947,42 @@
   },
   {
    "cat": "door-front",
+   "detail": "Armada: built 09/2007-08/2011 only; Titan: built 09/2007-08/2010 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4393"
+   ],
+   "pn": "H0101-ZQ3MA",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Armada: built 09/2007-08/2011 only; Titan: built 09/2007-08/2010 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4396"
+   ],
+   "pn": "H0100-ZQ3MA",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "door-front",
    "detail": "Frontier 2001-2002: king cab/crew cab only; Xterra 2000: 3.3L only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3351"
    ],
    "pn": "H0100-9Z432",
    "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Frontier: 4.0L, built 01/2006-05/2006 only; Xterra: built 01/2006-05/2006 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4327"
+   ],
+   "pn": "H0101-EA031",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -180962,6 +181002,16 @@
     "www.nissanpartsdeal.com:records:L4695"
    ],
    "pn": "HMA00-9BEBA",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Frontier: built 09/1999-07/2000 only; Xterra: 2.4L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3349"
+   ],
+   "pn": "H0100-3S530",
    "reason": "held_window_note_cap",
    "t": null
   },
@@ -181267,7 +181317,7 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Armada 2006-2007;Nissan Titan 2007-2008",
+   "detail": "Nissan Armada 2006-2007;Nissan Titan 2007-2007",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3028"
    ],
@@ -181277,7 +181327,7 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Armada 2006-2007;Nissan Titan 2007-2008",
+   "detail": "Nissan Armada 2006-2007;Nissan Titan 2007-2007",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3029"
    ],
@@ -181287,27 +181337,7 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Armada 2008-2008;Nissan Titan 2008-2008",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4393"
-   ],
-   "pn": "H0101-ZQ3MA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "door-front",
-   "detail": "Nissan Armada 2008-2008;Nissan Titan 2008-2008",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4396"
-   ],
-   "pn": "H0100-ZQ3MA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "door-front",
-   "detail": "Nissan Frontier 1999-2000;Nissan Xterra 2000-2000",
+   "detail": "Nissan Frontier 2000-2000;Nissan Xterra 2000-2000",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3345"
    ],
@@ -181317,31 +181347,11 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Frontier 1999-2000;Nissan Xterra 2000-2000",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L3349"
-   ],
-   "pn": "H0100-3S530",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "door-front",
-   "detail": "Nissan Frontier 2001-2001;Nissan Xterra 2001-2002",
+   "detail": "Nissan Frontier 2001-2001;Nissan Xterra 2001-2001",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3350"
    ],
    "pn": "H0100-9Z431",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "door-front",
-   "detail": "Nissan Frontier 2001-2002;Nissan Xterra 2002-2002",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4267"
-   ],
-   "pn": "H0100-7Z831",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -181377,7 +181387,7 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Frontier 2005-2006;Nissan Pathfinder 2005-2007;Nissan Xterra 2005-2007",
+   "detail": "Nissan Frontier 2005-2006;Nissan Pathfinder 2005-2005;Nissan Xterra 2005-2007",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2735"
    ],
@@ -181387,7 +181397,7 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Frontier 2005-2006;Nissan Pathfinder 2005-2007;Nissan Xterra 2005-2007",
+   "detail": "Nissan Frontier 2005-2006;Nissan Pathfinder 2005-2005;Nissan Xterra 2005-2007",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2736"
    ],
@@ -181397,27 +181407,7 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Frontier 2006-2006;Nissan Pathfinder 2007-2007;Nissan Xterra 2006-2006",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L2737"
-   ],
-   "pn": "H0100-EA031",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "door-front",
-   "detail": "Nissan Frontier 2006-2006;Nissan Xterra 2006-2006",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4327"
-   ],
-   "pn": "H0101-EA031",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "door-front",
-   "detail": "Nissan Frontier 2007-2008;Nissan Frontier 2011-2011;Nissan Pathfinder 2007-2012;Nissan Xterra 2007-2012",
+   "detail": "Nissan Frontier 2007-2008;Nissan Frontier 2011-2011;Nissan Pathfinder 2007-2007;Nissan Xterra 2007-2008",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2210"
    ],
@@ -181427,7 +181417,7 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Frontier 2007-2008;Nissan Frontier 2011-2011;Nissan Pathfinder 2007-2012;Nissan Xterra 2007-2012",
+   "detail": "Nissan Frontier 2007-2008;Nissan Frontier 2011-2011;Nissan Pathfinder 2007-2007;Nissan Xterra 2007-2008",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2212"
    ],
@@ -181437,7 +181427,7 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Frontier 2007-2010;Nissan Pathfinder 2007-2012;Nissan Xterra 2006-2011",
+   "detail": "Nissan Frontier 2007-2010;Nissan Pathfinder 2007-2007;Nissan Xterra 2011-2011",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2211"
    ],
@@ -181447,11 +181437,21 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Frontier 2007-2010;Nissan Pathfinder 2007-2012;Nissan Xterra 2006-2011",
+   "detail": "Nissan Frontier 2007-2010;Nissan Pathfinder 2007-2007;Nissan Xterra 2011-2011",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2213"
    ],
    "pn": "HMA00-EA0MB",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Nissan Pathfinder 2006-2006;Nissan Xterra 2006-2006",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2737"
+   ],
+   "pn": "H0100-EA031",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -181804,7 +181804,7 @@
   },
   {
    "cat": "fender",
-   "detail": "Infiniti FX35 2003-2007;Infiniti FX45 2003-2007",
+   "detail": "Infiniti FX35 2003-2007;Infiniti FX45 2003-2006",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1133"
    ],
@@ -181814,7 +181814,7 @@
   },
   {
    "cat": "fender",
-   "detail": "Infiniti FX35 2003-2007;Infiniti FX45 2003-2007",
+   "detail": "Infiniti FX35 2003-2007;Infiniti FX45 2003-2006",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1134"
    ],
@@ -182165,6 +182165,26 @@
   },
   {
    "cat": "gauge-cluster",
+   "detail": "3.3L, built 07/2001-04/2002 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4270"
+   ],
+   "pn": "24810-7Z803",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "3.3L, built 07/2001-04/2002 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4271"
+   ],
+   "pn": "24810-7Z809",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
    "detail": "Armada: built 08/2006-04/2007 only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3025"
@@ -182445,7 +182465,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier: 4WD, 4.0L, built 08/2010-04/2011 only; Xterra: 4WD only",
+   "detail": "Frontier: 4WD, 4.0L, built 08/2010-04/2011 only; Xterra: 4WD, built 08/2010-04/2011 only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2181"
    ],
@@ -184603,7 +184623,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti FX35 2004-2005;Infiniti FX45 2004-2005",
+   "detail": "Infiniti FX35 2004-2005;Infiniti FX45 2005-2005",
    "evidence": [
     "www.infinitipartsdeal.com:records:L174"
    ],
@@ -184613,7 +184633,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti FX35 2004-2005;Infiniti FX45 2004-2005",
+   "detail": "Infiniti FX35 2004-2005;Infiniti FX45 2005-2005",
    "evidence": [
     "www.infinitipartsdeal.com:records:L178"
    ],
@@ -184723,7 +184743,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti FX35 2010-2012;Infiniti FX37 2013-2013;Infiniti FX50 2010-2013;Infiniti QX70 2014-2016",
+   "detail": "Infiniti FX35 2010-2012;Infiniti FX37 2013-2013;Infiniti FX50 2010-2013;Infiniti QX70 2015-2016",
    "evidence": [
     "www.infinitipartsdeal.com:records:L230"
    ],
@@ -184733,7 +184753,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti FX35 2010-2012;Infiniti FX37 2013-2013;Infiniti FX50 2010-2013;Infiniti QX70 2014-2016",
+   "detail": "Infiniti FX35 2010-2012;Infiniti FX37 2013-2013;Infiniti FX50 2010-2013;Infiniti QX70 2015-2016",
    "evidence": [
     "www.infinitipartsdeal.com:records:L237"
    ],
@@ -184833,7 +184853,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2014-2015",
+   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L365"
    ],
@@ -184963,7 +184983,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2012-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2012-2012;Infiniti M56 2012-2012;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L822"
    ],
@@ -184973,7 +184993,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2012-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2012-2012;Infiniti M56 2012-2012;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L831"
    ],
@@ -184983,7 +185003,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2012-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2012-2012;Infiniti M56 2012-2012;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L834"
    ],
@@ -184993,7 +185013,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2012-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2012-2012;Infiniti M56 2012-2012;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L843"
    ],
@@ -185003,7 +185023,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M37 2012-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M37 2012-2012;Infiniti M56 2012-2012;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L824"
    ],
@@ -185013,7 +185033,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M37 2012-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M37 2012-2012;Infiniti M56 2012-2012;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L829"
    ],
@@ -185023,7 +185043,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M37 2012-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M37 2012-2012;Infiniti M56 2012-2012;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L835"
    ],
@@ -185033,7 +185053,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M37 2012-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M37 2012-2012;Infiniti M56 2012-2012;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L841"
    ],
@@ -186348,6 +186368,26 @@
   },
   {
    "cat": "side-mirrors",
+   "detail": "2.4L, built from 10/2003 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L262"
+   ],
+   "pn": "96302-ZD000",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "2.4L, built from 10/2003 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L266"
+   ],
+   "pn": "96301-ZD000",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
    "detail": "Frontier 2002: king cab/crew cab only; Frontier 2003-2004: 3.3L only; Xterra: 3.3L only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L265"
@@ -186424,26 +186464,6 @@
    ],
    "pn": "96301-EA19E",
    "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "Frontier: 2.4L only; Xterra: 2.4L, built from 10/2003 only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L262"
-   ],
-   "pn": "96302-ZD000",
-   "reason": "held_window_note_cap",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "Frontier: 2.4L only; Xterra: 2.4L, built from 10/2003 only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L266"
-   ],
-   "pn": "96301-ZD000",
-   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -186568,26 +186588,6 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "JX35: 2WD only; QX60 2014: gas only; QX60 2015-2017: 2WD, gas only",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L370"
-   ],
-   "pn": "96302-3JA9B",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "JX35: 2WD only; QX60 2014: gas only; QX60 2015-2017: 2WD, gas only",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L375"
-   ],
-   "pn": "96301-3JA9B",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
    "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L, gas only; QX60 2016-2017: AWD, gas only",
    "evidence": [
     "www.infinitipartsdeal.com:records:L372"
@@ -186648,21 +186648,21 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "QX60 2014: gas only; QX60 2015: 2WD, gas only; QX60 2016: 2WD, gas, built 08/2013-01/2016 only",
+   "detail": "QX60 2014: gas only; QX60 2015-2017: 2WD, gas only",
    "evidence": [
-    "www.infinitipartsdeal.com:records:L369"
+    "www.infinitipartsdeal.com:records:L370"
    ],
-   "pn": "96302-3JA9A",
+   "pn": "96302-3JA9B",
    "reason": "held_drive_qualifier",
    "t": null
   },
   {
    "cat": "side-mirrors",
-   "detail": "QX60 2014: gas only; QX60 2015: 2WD, gas only; QX60 2016: 2WD, gas, built 08/2013-01/2016 only",
+   "detail": "QX60 2014: gas only; QX60 2015-2017: 2WD, gas only",
    "evidence": [
-    "www.infinitipartsdeal.com:records:L374"
+    "www.infinitipartsdeal.com:records:L375"
    ],
-   "pn": "96301-3JA9A",
+   "pn": "96301-3JA9B",
    "reason": "held_drive_qualifier",
    "t": null
   },
@@ -187386,7 +187386,7 @@
   },
   {
    "cat": "tail-lights",
-   "detail": "Infiniti EX35 2008-2012;Infiniti EX37 2013-2013;Infiniti QX50 2014-2015",
+   "detail": "Infiniti EX35 2008-2012;Infiniti EX37 2013-2013;Infiniti QX50 2014-2014",
    "evidence": [
     "www.infinitipartsdeal.com:records:L535"
    ],
@@ -187396,7 +187396,7 @@
   },
   {
    "cat": "tail-lights",
-   "detail": "Infiniti EX35 2008-2012;Infiniti EX37 2013-2013;Infiniti QX50 2014-2015",
+   "detail": "Infiniti EX35 2008-2012;Infiniti EX37 2013-2013;Infiniti QX50 2014-2014",
    "evidence": [
     "www.infinitipartsdeal.com:records:L538"
    ],
@@ -187606,7 +187606,7 @@
   },
   {
    "cat": "tail-lights",
-   "detail": "Infiniti M35 2008-2009;Infiniti M45 2008-2009",
+   "detail": "Infiniti M35 2008-2009;Infiniti M45 2008-2008",
    "evidence": [
     "www.infinitipartsdeal.com:records:L899"
    ],
@@ -187616,7 +187616,7 @@
   },
   {
    "cat": "tail-lights",
-   "detail": "Infiniti M35 2008-2009;Infiniti M45 2009-2009",
+   "detail": "Infiniti M35 2008-2009;Infiniti M45 2008-2009",
    "evidence": [
     "www.infinitipartsdeal.com:records:L902"
    ],
@@ -187636,7 +187636,7 @@
   },
   {
    "cat": "tail-lights",
-   "detail": "Infiniti M35 2009-2010;Infiniti M45 2009-2010",
+   "detail": "Infiniti M35 2009-2010;Infiniti M45 2010-2010",
    "evidence": [
     "www.infinitipartsdeal.com:records:L900"
    ],
@@ -187646,7 +187646,7 @@
   },
   {
    "cat": "tail-lights",
-   "detail": "Infiniti M35 2009-2010;Infiniti M45 2009-2010",
+   "detail": "Infiniti M35 2009-2010;Infiniti M45 2010-2010",
    "evidence": [
     "www.infinitipartsdeal.com:records:L903"
    ],
@@ -188025,7 +188025,7 @@
   },
   {
    "cat": "trunk-lid",
-   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2012-2013;Infiniti M56 2012-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M35h 2013-2013;Infiniti M37 2013-2013;Infiniti M56 2013-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1665"
    ],
@@ -188075,6 +188075,16 @@
   },
   {
    "cat": "window-regulator",
+   "detail": "Cube 2011: built 02/2009-04/2011 only; Juke: built 07/2010-04/2011 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1416"
+   ],
+   "pn": "80731-JX30B",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
    "detail": "Frontier 2002: king cab/crew cab only; Xterra 2004: 3.3L only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L269"
@@ -188090,26 +188100,6 @@
     "www.nissanpartsdeal.com:records:L271"
    ],
    "pn": "80720-3S500",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
-   "detail": "Frontier: 3.3L only; Xterra 2000: 2.4L only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L1338"
-   ],
-   "pn": "82731-7Z005",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
-   "detail": "Frontier: 3.3L only; Xterra 2000: 2.4L only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L1340"
-   ],
-   "pn": "82730-7Z005",
    "reason": "held_drive_qualifier",
    "t": null
   },
@@ -189030,23 +189020,23 @@
    "window-regulator": 1950,
    "wiper-motor": 799
   },
-  "likely_groups": 228,
+  "likely_groups": 226,
   "likely_groups_drive_noted": {
    "bumper-front": 6,
    "bumper-rear": 5,
    "climate-control": 12,
    "door-front": 31,
    "door-rear": 10,
-   "fender": 4,
-   "gauge-cluster": 62,
-   "grille": 11,
-   "headlights": 28,
-   "hood": 4,
+   "fender": 7,
+   "gauge-cluster": 61,
+   "grille": 12,
+   "headlights": 34,
+   "hood": 5,
    "liftgate": 7,
-   "side-mirrors": 42,
-   "tail-lights": 21,
+   "side-mirrors": 50,
+   "tail-lights": 26,
    "trunk-lid": 5,
-   "window-regulator": 57
+   "window-regulator": 65
   },
   "list_rows": 75222,
   "records": 7778,

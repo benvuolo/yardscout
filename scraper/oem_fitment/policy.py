@@ -171,8 +171,11 @@ LIKELY_AUTO_SIBLING_RULE = True
 # PREMIUM" beside 96301-3JN9B "*W. AWD. PREMIUM", QX56 2013 speedometer
 # 24820-3ZD0A "*3ROW. PREMIUM" beside 24820-1ZS0A "*3ROW. AWD. PREMIUM"): where
 # T's page lists another number of the same part and position for the same
-# option clause plus a drive word (asterisks ignored), this number does not
-# fit that drive. A drive gate (decoded donors of the other drive ruled out,
+# option clause plus a drive word (round5-1119, hub decision 3: the leading
+# "*" the same on both; an asterisk alone is no drive split), this number does
+# not fit that drive. The gate's basis is "sibling" (round5, decision 4:
+# "stated" only when the number's own row names the drive) and drive_sib names
+# the sibling's drive for the app's line. A drive gate (decoded donors of the other drive ruled out,
 # undecoded ones "if equipped"); drive_not where the excluded class has a
 # sibling system of its family on T's pages (4WD beside AUTO). Only narrows.
 LIKELY_DRIVE_SIBLING_RULE = True
@@ -187,8 +190,14 @@ LIKELY_DRIVE_SIBLING_RULE = True
 # where T's page prints no date for the number and another model-year page
 # of the same catalog model prints a window, the window is read (the
 # narrower reading): under _PROD_MIN_MONTHS of T's model year leaves T out.
-# Supersession windows (the rest carried by the number's own predecessor or
-# successor) are unchanged. Only narrows or removes claims.
+# Round5-1119 (hub, after the independent check nissan_verify_2026-11-19e:
+# 7 WRONG, all linked windows): "Replaced By" runs one way (the newer number
+# serves the older car, not the reverse), so a year split with the number's
+# own predecessor or successor is a window like any other; the window from
+# another model-year page is read from the number's dated rows there whatever
+# their option clause, and a predecessor on T's page no longer exempts it.
+# A window no other dated number carries (launch or end of production) stays
+# unchanged. Only narrows or removes claims.
 LIKELY_BUILD_WINDOW_RULE = True
 # Feed model-years that hold two catalog models (round3-1119, item 6): yards
 # list the 2014-2015 S35 Rogue Select (VIN JN8AS5) as plain "Rogue", while the

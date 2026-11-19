@@ -72627,9 +72627,20 @@
    ],
    "cars": 327,
    "cat": "door-front",
+   "gates": [
+    [
+     "Hyundai",
+     "Sonata",
+     2015,
+     2015,
+     {
+      "built": "2014-04..2014-12"
+     }
+    ]
+   ],
    "id": "oem:hmg:door-front:L:c8d2e4aeb7",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #76003-C1000 for both — fits some configurations; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #76003-C1000 for both — fits some configurations; Sonata: built 04/2014-12/2014 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T21:05:45Z",
    "pn": [
     "76003-C1000"
@@ -72899,7 +72910,7 @@
   }
  ],
  "ns": "hmg",
- "policy_sha256": "4efb25d23b58524b41a2e71c90f3fd1c2eb888f87216a37eea39e71ac7acb84b",
+ "policy_sha256": "71024c85add3c7194e0b5ca1eddeedda566bbf0b554ed3161316222f19289440",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

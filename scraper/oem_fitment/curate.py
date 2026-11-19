@@ -1537,7 +1537,7 @@ class Curation:
             # it refuses stays refused (round4 only narrows; no group comes back
             # because a vehicle-year whose words were too long left)
             Ts_r3, drive_r3 = list(Ts), dict(drive_by_T)
-            win_by_T, sib_T, dnot_by_T, keep = {}, set(), {}, []
+            win_by_T, sib_T, dnot_by_T, keep = {}, {}, {}, []
             for T in Ts:
                 w = self.build_window(c, cat, T)
                 if w and w["kind"] == "drop":
@@ -1562,7 +1562,8 @@ class Curation:
                             continue        # the row's own drive and the siblings disagree
                         if not d:
                             drive_by_T[T] = frozenset(sl[1])
-                            sib_T.add(T)
+                            # the sibling's own drive words (round5: basis "sibling")
+                            sib_T[T] = frozenset().union(*[h[2] for h in self.drive_sibling(c, cat, T)[1]])
                     elif d:
                         d2 = frozenset(set(d) - set(sl[1]))
                         if not d2:
@@ -1572,7 +1573,9 @@ class Curation:
                     else:
                         dnot_by_T[T] = frozenset(sl[1])
                     self.likely_drive_sibling[cat] += 1
-                if w and w["kind"] in ("unlinked", "no_page"):
+                # round5-1119 (hub decision 1): a window split with the number's own
+                # predecessor or successor is a window like any other
+                if w and w["kind"] in ("unlinked", "no_page", "linked"):
                     win_by_T[T] = w
                 keep.append(T)
             if len(keep) != len(Ts):
@@ -1726,19 +1729,23 @@ class Curation:
                 gate["body"] = b[0] if len(b) == 1 else list(b)
             if drive_by_T.get(T):
                 d = drive_by_T[T]
-                # round4-1119: a limit read from same-option drive siblings is
-                # the page's own statement
-                basis = "stated" if T in sib_T else self.drive_basis(c, cat, T, d)
+                # a limit read from a same-option drive sibling (round4) is the
+                # catalog's own words about ANOTHER number: basis "sibling"
+                # (round5-1119, hub decision 4: "stated" only when the
+                # number's own row names the drive), with the sibling's drive
+                basis = "sibling" if T in sib_T else self.drive_basis(c, cat, T, d)
                 # round3-1119 item 4: "4WD" beside an All-Mode "AUTO" number
                 pt = set(d) == {"4wd"} and self._auto_sibling(c, cat, T, slots)
                 lab = "part-time 4WD" if pt else _drive_label(d)
-                if basis == "stated":
+                if basis in ("stated", "sibling"):
                     labs.append(lab)
                 else:
                     # hub 2026-11-18: same gate, honest words (checked drive only)
                     unchecked_by_T[T] = lab
                 gate["drive"] = _drive_gate(d)
                 gate["drive_basis"] = basis
+                if basis == "sibling" and sib_T.get(T):
+                    gate["drive_sib"] = _drive_gate(sib_T[T])
                 if pt:
                     gate["drive_not"] = "a4wd"
             elif dnot_by_T.get(T):
@@ -2779,7 +2786,9 @@ class Curation:
         """policy.LIKELY_DRIVE_SIBLING_RULE (hub decision 1, 2026-11-19): T's
         page lists, for the same part and position, another number whose
         option clause is one of this number's own clauses plus a drive word
-        ("*W. AWD. PREMIUM" beside "*W. PREMIUM", asterisks ignored): the
+        ("*W. AWD. PREMIUM" beside "*W. PREMIUM", the "*" mark the same on
+        both: round5-1119, hub decision 3, reverting round 4's "starred or
+        not"): the
         configuration of that drive takes the other number, so this number's
         clause does not cover it. Not read as a drive split: a sibling that
         also lists the bare clause, or lists the clause for both drive
@@ -2816,19 +2825,29 @@ class Curation:
                     sw = _row_windows(s.notes)
                     if rw and sw and not any(_win_overlap(sw, a, b) for a, b in rw):
                         continue
-                    sibs.append((s, _row_clauses(s.notes, s.site)))
+                    sibs.append((s, _row_clauses_star(s.notes, s.site)))
                 row_ok = set()
-                for toks, pos, neg in _row_clauses(r.notes, r.site):
+                for toks, pos, neg, star in _row_clauses_star(r.notes, r.site):
                     if pos or neg:
                         row_ok |= set(_DRIVE_ALL)       # stated drive: drive_of reads it
                         continue
                     excl = set()
                     for s, cls in sibs:
-                        if any(t2 == toks and not p2 and not n2 for t2, p2, n2 in cls):
+                        # round5-1119 (hub decision 3): no drive split may rest on
+                        # a "*" difference alone. The drive word must sit on the
+                        # same clause with the same mark (7S006 'KC. 2WD' does not
+                        # split 7S00E '*KC'); and a sibling that lists the clause
+                        # bare or for the other drive family under either mark
+                        # (7S002 '*KC. 2WD' + 'KC. 4WD') shows drive is not what
+                        # separates the two numbers
+                        anym = [(p2, n2) for t2, p2, n2, _st in cls if t2 == toks]
+                        if any(not p2 and not n2 for p2, n2 in anym):
                             continue        # the sibling lists this configuration bare too
-                        named = set().union(*[p2 for t2, p2, _n2 in cls if t2 == toks and p2] or [set()])
-                        if not named or (named & _FOUR and named & _TWO):
-                            continue        # no drive word, or both families: not a drive split
+                        named = set().union(*[p2 for t2, p2, _n2, st2 in cls if t2 == toks and st2 == star and p2]
+                                            or [set()])
+                        every = set().union(*[p2 for p2, _n2 in anym if p2] or [set()])
+                        if not named or (every & _FOUR and every & _TWO):
+                            continue        # no same-mark drive word, or both families: no split
                         excl |= named
                         hits.append((r, s, frozenset(named)))
                     row_ok |= set(_DRIVE_ALL) - excl
@@ -2875,11 +2894,13 @@ class Curation:
                  _PROD_MIN_MONTHS of the model year: not listed, as if T's page
                  printed it) | 'no_other_row' (no dated row of the same part
                  carries the gap) | 'linked' (every row that does is this
-                 number's predecessor or successor) | 'unlinked' | 'no_page'
-                 (T's page is not in the raw: the rest of the year unknown)
+                 number's predecessor or successor; gated since round5) |
+                 'unlinked' | 'no_page' (T's page is not in the raw: the rest
+                 of the year unknown)
           others [(pn, wins, linked)] the dated rows carrying the gap
           edge   the gap is 1-2 months at a model-year edge
-        'unlinked' and 'no_page' become a window limit; 'drop' leaves T out."""
+        'linked', 'unlinked' and 'no_page' become a window limit (round5:
+        "Replaced By" runs one way); 'drop' leaves T out."""
         if not policy.LIKELY_BUILD_WINDOW_RULE or cat in PROD_RULE_SKIP_CATS:
             return None
         self._cat_ctx = cat
@@ -2904,32 +2925,23 @@ class Curation:
             sites = {lr.site for _n, lr in items if lr is not None} or {r.site for r in c.records}
             models = {(lr.seed[0], lr.seed[1]) for _n, lr in items if lr is not None and lr.seed} or \
                 set(self.t_sources.get(T, set()))
-            if rows and any(policy.pn_key(self.ns, lr.pn) != c.key
-                            and self.comparable(cat, c.key, policy.pn_key(self.ns, lr.pn)) for lr in rows):
-                return None         # the page lists a predecessor/successor: a supersession listing
-            # per configuration: every option clause of this number on T's
-            # page must be printed with a window on another page of the same
-            # catalog model (the same clause, word for word); a clause no
-            # other page dates keeps the whole year (another trim or era:
-            # 96301-ZC20A is dated 'W. SE' on the 2006 Armada page and listed
-            # undated for 'W. LE/SL' on the 2009-2015 pages)
-            def ckeys(notes, site):
-                return {(t, frozenset(p), frozenset(n2)) for t, p, n2 in _row_clauses(notes, site)}
-            mine = set()
-            for n, lr0 in items:
-                mine |= ckeys(n, lr0.site if lr0 is not None else next(iter(sites), ""))
-            dated = defaultdict(list)
+            # round5-1119 (hub decisions 1-2): the window is read from the
+            # NUMBER's dated rows on the catalog model's other model-year
+            # pages, whatever their option clause (Sentra 2004 82730-3Z005:
+            # the 2004 rows carry a clause, the 2005 dated rows none), and a
+            # predecessor / successor on T's page no longer exempts it
+            # ("Replaced By" runs one way). Pages within _OTHER_PAGE_SPAN
+            # model years of T (None: every year of the model).
+            other = []
             srcs = [(lr.site, lr.seed, lr.notes) for lr in self._pn_list_rows(c.key, cat)] + \
                 [(r.site, r.seed, r.note_texts) for r in c.records]
             for site, seed, notes in srcs:
-                if site in sites and seed and (seed[0], seed[1]) in models and seed[2] != T[2]:
-                    ws = _row_windows(notes)
-                    if ws:
-                        for k in ckeys(notes, site) & mine:
-                            dated[k] += ws
-            if not mine or any(not dated.get(k) for k in mine):
+                if site in sites and seed and (seed[0], seed[1]) in models and seed[2] != T[2] \
+                        and (_OTHER_PAGE_SPAN is None or abs(seed[2] - T[2]) <= _OTHER_PAGE_SPAN):
+                    other += _row_windows(notes)
+            if not other:
                 return None
-            wins, src = _win_merge([w for k in mine for w in dated[k]]), "other_page"
+            wins, src = _win_merge(other), "other_page"
         lo, hi = _my_range(T[2])
         out = {"wins": wins, "src": src, "gap": _win_gap(wins, T[2]), "others": [], "edge": False}
         if src == "other_page" and _win_overlap(wins, lo, hi) < _PROD_MIN_MONTHS:
@@ -4370,6 +4382,9 @@ def _production_excludes(notes, year: int) -> bool:
 # lists of those, and subarupartsdeal's "200409 - 200608". A bare "05/2012"
 # (hyundai/kia/lexus, 138 rows) says neither start nor end and is not read.
 _WIN_OPEN = 10 ** 6
+# round5-1119: other model-year pages whose dated rows of a number narrow an
+# undated listing on T's page (decision 3): within this many model years of T
+_OTHER_PAGE_SPAN = None
 _WIN_RANGE_RE = re.compile(r"(?<![0-9/])(\d{1,2})/(\d{4})\s*-\s*(\d{1,2})/(\d{4})(?![0-9/])")
 _WIN_FROM_RE = re.compile(r"(?:^|[\s,:])from\s+(\d{1,2})/(\d{4})(?![0-9/])", re.I)
 _WIN_TILL_RE = re.compile(r"(?:^|[\s,:])(?:till|until|up\s+to)\s+(\d{1,2})/(\d{4})(?![0-9/])", re.I)
@@ -4483,6 +4498,13 @@ def _row_clauses(notes, site: str) -> list:
     (on the config-tuple sites, policy.DRIVE_CONFIG_FVO_SITES, each "+" part
     too, as _fvo_drive reads them), joined with the row's other condition
     notes; [((), set(), set())] for a row with no option text."""
+    return [c[:3] for c in _row_clauses_star(notes, site)]
+
+
+def _row_clauses_star(notes, site: str) -> list:
+    """_row_clauses with a 4th field: True when the configuration carries the
+    catalog's leading "*" (round5-1119, hub decision 3: an asterisk alone is
+    not a drive split, so a sibling clause must carry the same mark)."""
     fvo, other = [], []
     for n in notes or []:
         if _CLAUSE_SKIP_RE.match(n or ""):
@@ -4501,7 +4523,7 @@ def _row_clauses(notes, site: str) -> list:
         if site in _NISSAN_SITES and _NISSAN_AUTO_RE.search(alt):
             pos = set(pos) | {"a4wd"}       # the Nissan drive field: 2WD / 4WD / AUTO
             left = re.sub(r"(?:(?<=\.)|^)\s*\*?AUTO\s*(?=\.|$)", " ", left)
-        out.append((_clause_tokens(left), set(pos), set(neg)))
+        out.append((_clause_tokens(left), set(pos), set(neg), alt.lstrip().startswith("*")))
     return out
 
 

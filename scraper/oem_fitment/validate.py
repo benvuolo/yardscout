@@ -160,7 +160,7 @@ def _app_ok(app, ns_makes, year_cap, targets, ns, verified=False) -> str | None:
 #   trans  MT | AT (the aftermarket group's trans codes)
 GATE_DRIVES_TWO = ("2wd", "fwd", "rwd")
 GATE_DRIVES_FOUR = ("4wd", "awd", "a4wd")
-GATE_DRIVE_BASES = ("stated", "unchecked")
+GATE_DRIVE_BASES = ("stated", "unchecked", "sibling")   # round5-1119: "sibling"
 GATE_BODIES = ("sedan", "coupe", "hatchback", "wagon", "suv", "pickup", "van", "convertible")
 GATE_CABS = ("crew cab", "king cab", "extended cab", "regular cab", "supercab", "supercrew",
              "double cab", "quad cab", "crewmax", "access cab", "club cab")
@@ -177,7 +177,7 @@ def gate_problem(gate) -> str | None:
     if not isinstance(gate, dict) or not gate:
         return f"gate is not a non-empty object: {gate!r}"
     extra = set(gate) - {"drive", "drive_basis", "drive_not", "body", "cab", "eng", "eng_not", "fuel", "trans",
-                         "built"}
+                         "built", "drive_sib"}
     if extra:
         return f"gate keys {sorted(extra)}"
     if "drive_not" in gate and "drive" in gate:
@@ -208,6 +208,15 @@ def gate_problem(gate) -> str | None:
             return f"gate drive {d!r} (classes of one drive family)"
     if "drive_basis" in gate and ("drive" not in gate or gate["drive_basis"] not in GATE_DRIVE_BASES):
         return f"gate drive_basis {gate['drive_basis']!r}"
+    if "drive_sib" in gate:
+        # round5-1119: the drive a same-option sibling number is listed for,
+        # beside a drive gate read from it (basis "sibling"), the other family
+        ds, d = gate["drive_sib"], gate.get("drive")
+        cl = ds.split("/") if isinstance(ds, str) else []
+        fam = (lambda xs: "two" if xs <= set(GATE_DRIVES_TWO) else "four" if xs <= set(GATE_DRIVES_FOUR) else None)
+        if gate.get("drive_basis") != "sibling" or not cl or len(set(cl)) != len(cl) or fam(set(cl)) is None \
+                or not isinstance(d, str) or fam(set(d.split("/"))) in (None, fam(set(cl))):
+            return f"gate drive_sib {ds!r} with drive {d!r}"
     if "body" in gate:
         b = gate["body"]
         bs = [b] if isinstance(b, str) else b if isinstance(b, list) else None

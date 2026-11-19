@@ -9687,6 +9687,10 @@ function pfAmSplitNote(note) {
  *   build date on the door sticker". A donor whose VIN decode names another
  *   make or model year than its listing (v.vpicMismatch) is never a plain
  *   row either: "this car's listing and VIN disagree, check the car".
+ * Round 5 (2026-11-19): drive_basis "sibling" with drive_sib (the drive the
+ *   page lists a separate number for, same option): the drive is inferred,
+ *   so the line says "the catalog lists a separate AWD number for this
+ *   option, so this part is read as 2WD only"; same gate verdicts as before.
  * Same honesty as the aftermarket gate above and the car-card parts table
  * (match_vehicle's drive, body and manual gates): the donor's own VIN decode
  * or listing naming the limit confirms it; one naming something else rules
@@ -9857,15 +9861,30 @@ function pfOemGateText(gate) {
 }
 /* The gate without its build window: the limits a car's own data can confirm. */
 function pfOemGateNoBuilt(gate) {
+  return pfOemGateWithout(gate, ['built']);
+}
+function pfOemGateWithout(gate, drop) {
   const g = pfOemGateParse(gate);
-  if (!g || !g.built) return g;
-  const { built, ...rest } = g;
+  if (!g) return g;
+  const rest = {};
+  for (const k of Object.keys(g)) if (!drop.includes(k)) rest[k] = g[k];
+  if (drop.includes('drive')) { delete rest.drive_basis; delete rest.drive_sib; delete rest.drive_not; }
   return pfOemGateParse(rest);
+}
+/* drive_sib (round 5): the drive a same-option sibling number is listed for */
+function pfOemDriveWords(d) {
+  const a = pfOemDriveSet(d);
+  if (!a.size) return '';
+  if ([...a].every(c => PF_OEM_TWO.includes(c))) return a.size === 1 && a.has('fwd') ? 'FWD' : a.size === 1 && a.has('rwd') ? 'RWD' : '2WD';
+  return ['4wd', 'awd', 'a4wd'].filter(c => a.has(c)).map(c => (c === 'a4wd' ? '4WD AUTO' : c.toUpperCase())).join('/');
 }
 /* A donor against the apps of one group that match it: an ungated or
  * confirmed app keeps it as a plain row; else an "if equipped" app keeps it
  * with a line naming the limit; when every matching app is ruled out by the
- * car's own decode or listing, the donor is not offered for this group. */
+ * car's own decode or listing, the donor is not offered for this group.
+ * Round 5: a drive limit read from a same-option sibling number (drive_basis
+ * "sibling") says so in plain words; an app older than round 5 reads that
+ * basis as "listed" (only "unchecked" changes its verb). */
 const PF_OEM_VIN_MISMATCH = "if equipped: this car's listing and VIN disagree, check the car";
 function pfOemDonorGate(apps, v, ex) {
   // round 4: a car whose VIN decode names another make or model year than
@@ -9878,17 +9897,23 @@ function pfOemDonorGate(apps, v, ex) {
     if (r.verdict === 'unconfirmed' && !unc) unc = { r, a };
   }
   if (!unc) return { verdict: 'exclude', warn: '' };
+  const g = unc.a[5];
+  const sib = g.drive_basis === 'sibling';
   const lines = [];
-  const keys = unc.r.keys.filter(k => k !== 'built');
+  const keys = unc.r.keys.filter(k => k !== 'built' && !(sib && k === 'drive'));
   if (keys.length) {
     const nouns = keys.map(k => PF_OEM_GATE_NOUN[k]);
     // a drive limit from the one drive page read ("only 2WD checked") is not
     // the catalog's own statement: say "checked", as the note does
-    const verb = unc.a[5].drive_basis === 'unchecked' ? 'checked' : 'listed';
-    lines.push(`this part is ${verb} for ${pfOemGateText(pfOemGateNoBuilt(unc.a[5]))} only — this donor's ${nouns.join(' and ')} ${nouns.length > 1 ? "aren't" : "isn't"} confirmed, check the car`);
+    const verb = g.drive_basis === 'unchecked' ? 'checked' : 'listed';
+    lines.push(`this part is ${verb} for ${pfOemGateText(pfOemGateWithout(g, sib ? ['built', 'drive'] : ['built']))} only — this donor's ${nouns.join(' and ')} ${nouns.length > 1 ? "aren't" : "isn't"} confirmed, check the car`);
+  }
+  if (sib && unc.r.keys.includes('drive')) {
+    const other = pfOemDriveWords(g.drive_sib) || 'other-drivetrain';
+    lines.push(`the catalog lists a separate ${other} number for this option, so this part is read as ${pfOemDriveWords(g.drive)} only — this donor's drivetrain isn't confirmed, check the car`);
   }
   if (unc.r.keys.includes('built')) {
-    lines.push(`this part is listed for cars built ${pfOemBuiltText(unc.a[5].built)} only — check the build date on the door sticker`);
+    lines.push(`this part is listed for cars built ${pfOemBuiltText(g.built)} only — check the build date on the door sticker`);
   }
   if (mism) lines.push("this car's listing and VIN disagree, check the car");
   return { verdict: 'unconfirmed', warn: `if equipped: ${lines.join('; ')}` };

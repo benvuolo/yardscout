@@ -92,8 +92,9 @@ qx_page = [lr("96301-3JA9A", [F + "W. BASE"]), lr("96301-3JA9B", [F + "*W. PREMI
 cq = _Cur("nissan", [(T15, "side-mirrors", qx_page)])
 check("decision 1: 3JA9B '*W. PREMIUM' beside 3JN9B '*W. AWD. PREMIUM' on the 2015 QX60 page -> 2WD only",
       cq.drive_sibling_limit(_K("96301-3JA9B"), "side-mirrors", T15) == ("drive", frozenset({"2wd"})))
-check("decision 1, starred or not: 3JA9A 'W. BASE' beside '*W. AWD. BASE' -> 2WD only",
-      cq.drive_sibling_limit(_K("96301-3JA9A"), "side-mirrors", T15) == ("drive", frozenset({"2wd"})))
+# round5-1119 (hub decision 3) reverted round 4's "starred or not": an asterisk alone is no split
+check("decision 1 (round 5): 3JA9A 'W. BASE' beside '*W. AWD. BASE' (another mark) -> no limit",
+      cq.drive_sibling_limit(_K("96301-3JA9A"), "side-mirrors", T15) is None)
 check("decision 1: the other side's mirror is another part (LH vs RH): the RH AWD numbers do not limit the LH one",
       cq.drive_sibling_limit(_K("96302-3JA9B"), "side-mirrors", T15) is None)
 check("decision 1: an AWD number itself is not limited by the rule (its clause names the drive)",
@@ -112,9 +113,8 @@ check("decision 1: a sibling that also lists the bare clause (7S005) or lists it
 ct2 = _Cur("nissan", [(T05, "gauge-cluster", ti[:1] + [lr("24810-7S006", [F + "KC. 2WD. (SE+ LE) + CC. 2WD. (SE+ LE)"],
                                                           main="Combination Meter Assy-Instrument", loc=(), seed=T05, site=NPD,
                                                           cat="gauge-cluster")])])
-check("decision 1: a 2WD-only sibling for the same clause (7S006) leaves 7S00E the 4WD family",
-      ct2.drive_sibling_limit(_K("24810-7S00E"), "gauge-cluster", T05)[0] == "drive"
-      and ct2.drive_sibling_limit(_K("24810-7S00E"), "gauge-cluster", T05)[1] <= C._FOUR)
+check("decision 1 (round 5): an unstarred 2WD sibling (7S006) does not split the starred 7S00E clause",
+      ct2.drive_sibling_limit(_K("24810-7S00E"), "gauge-cluster", T05) is None)
 check("decision 1: a sibling linked to the number by supersession is no split",
       _Cur("nissan", [(T15, "side-mirrors", qx_page)], links=[("96301-3JA9B", "96301-3JN9B")])
       .drive_sibling_limit(_K("96301-3JA9B"), "side-mirrors", T15) is None)
@@ -142,7 +142,8 @@ check("decision 2: EA00A 08/2009-01/2010, the rest carried by 9BH0A (only a comm
       and C._win_gate(w["wins"]) == "2009-08..2010-01" and not w["edge"])
 wl = _Cur("nissan", [(P10, "climate-control", pp)], links=[("27510-EA00A", "27510-9BH0A"), ("27510-EA00A", "27510-EA000")]) \
     .build_window(_K("27510-EA00A"), "climate-control", P10)
-check("decision 2: the rest carried by the number's own predecessor / successor: linked, unchanged", wl["kind"] == "linked")
+check("decision 2: the rest carried by the number's own predecessor / successor: kind linked (gated since round 5)",
+      wl["kind"] == "linked")
 wn = _Cur("nissan", [(P10, "climate-control", pp[:1])]).build_window(_K("27510-EA00A"), "climate-control", P10)
 check("decision 2: no dated row carries the rest: no_other_row, unchanged", wn["kind"] == "no_other_row")
 pe = [lr("X1", ["Production Date: 08/2009-08/2010"], main=CM, loc=(), seed=P10, site=NPD, cat="climate-control"),
@@ -167,12 +168,13 @@ w3 = c3.build_window(_K("24810-7Z803"), "gauge-cluster", X01)
 check("decision 3: 7Z803 undated on the 2001 Xterra page, 07/2001-04/2002 on the 2002 page: the narrower reading leaves 2001 out",
       w3["src"] == "other_page" and w3["kind"] == "drop")
 p02b = [lr("24810-7Z803", ["Production Date: 07/2001-04/2002", F + "W. XE. AT"], main=MT, loc=(), seed=X02, site=NPD, cat="gauge-cluster")]
-check("decision 3: the other page dates another clause only: no narrowing",
-      _Cur("nissan", [(X01, "gauge-cluster", p01), (X02, "gauge-cluster", p02b)]).build_window(_K("24810-7Z803"), "gauge-cluster", X01) is None)
+check("decision 3 (round 5: matched on the number): the other page's window narrows whatever its clause",
+      _Cur("nissan", [(X01, "gauge-cluster", p01), (X02, "gauge-cluster", p02b)]).build_window(_K("24810-7Z803"), "gauge-cluster", X01)["kind"]
+      == "drop")
 p01l = p01 + [lr("24810-7Z800", [F + "W. (VG33E + VG33ER). XE"], main=MT, loc=(), seed=X01, site=NPD, repl="24810-7Z803", cat="gauge-cluster")]
-check("decision 3: T's page lists the number's predecessor (Replaced By it): a supersession listing, unchanged",
+check("decision 3 (round 5): a predecessor on T's page no longer exempts the undated listing",
       _Cur("nissan", [(X01, "gauge-cluster", p01l), (X02, "gauge-cluster", p02)], links=[("24810-7Z800", "24810-7Z803")])
-      .build_window(_K("24810-7Z803"), "gauge-cluster", X01) is None)
+      .build_window(_K("24810-7Z803"), "gauge-cluster", X01)["kind"] == "drop")
 
 # ------------------------------------------------------------ gate vocabulary, live_diff
 check("gate built: ranges, open ends, runs; malformed refused",
