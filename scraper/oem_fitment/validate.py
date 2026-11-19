@@ -167,21 +167,39 @@ GATE_CABS = ("crew cab", "king cab", "extended cab", "regular cab", "supercab", 
 GATE_FUELS = ("gas", "hybrid", "diesel")
 GATE_TRANS = ("MT", "AT")
 _GATE_ENG_RE = re.compile(r"^\d{1,2}\.\dL$")
+# round4-1119 (hub decision 2): "built" = the build window(s) the number is
+# listed for, "YYYY-MM..YYYY-MM" (an open end left empty), runs joined by ","
+_GATE_BUILT_RUN_RE = re.compile(r"^((?:19|20)\d{2}-(?:0[1-9]|1[0-2]))?\.\.((?:19|20)\d{2}-(?:0[1-9]|1[0-2]))?$")
 
 
 def gate_problem(gate) -> str | None:
     """Why one app gate is malformed, or None."""
     if not isinstance(gate, dict) or not gate:
         return f"gate is not a non-empty object: {gate!r}"
-    extra = set(gate) - {"drive", "drive_basis", "drive_not", "body", "cab", "eng", "eng_not", "fuel", "trans"}
+    extra = set(gate) - {"drive", "drive_basis", "drive_not", "body", "cab", "eng", "eng_not", "fuel", "trans",
+                         "built"}
     if extra:
         return f"gate keys {sorted(extra)}"
-    if "drive_not" in gate:
+    if "drive_not" in gate and "drive" in gate:
         # round3-1119: "4wd" beside an All-Mode AUTO number ("drive_not": "a4wd")
         dn, d = gate["drive_not"], gate.get("drive")
         if dn not in GATE_DRIVES_FOUR or not isinstance(d, str) or dn in d.split("/") \
                 or not set(d.split("/")) <= set(GATE_DRIVES_FOUR):
             return f"gate drive_not {dn!r} with drive {d!r}"
+    elif "drive_not" in gate:
+        # round4-1119 (hub decision 1): no drive gate, the classes of one
+        # family a same-option sibling takes ("4wd" beside an AUTO system)
+        dn = gate["drive_not"]
+        cl = dn.split("/") if isinstance(dn, str) else []
+        if not cl or len(set(cl)) != len(cl) or not (set(cl) <= set(GATE_DRIVES_TWO)
+                                                    or set(cl) <= set(GATE_DRIVES_FOUR)):
+            return f"gate drive_not {dn!r} (classes of one drive family)"
+    if "built" in gate:
+        b = gate["built"]
+        runs = b.split(",") if isinstance(b, str) and b else []
+        if not runs or any(not (m := _GATE_BUILT_RUN_RE.match(x)) or not (m.group(1) or m.group(2))
+                           or (m.group(1) and m.group(2) and m.group(1) > m.group(2)) for x in runs):
+            return f"gate built {b!r}"
     if "drive" in gate:
         d = gate["drive"]
         cl = d.split("/") if isinstance(d, str) else []

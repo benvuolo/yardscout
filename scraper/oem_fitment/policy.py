@@ -166,6 +166,30 @@ LIKELY_CAB_LIST_RULE = True
 # vPIC decode never says which 4WD system a car has, so the gate carries
 # "drive_not": "a4wd" and the app shows 4WD decodes "if equipped". Only narrows.
 LIKELY_AUTO_SIBLING_RULE = True
+# round4-1119, hub decision 1 (2026-11-19 independent nissan check, groups/
+# _report/nissan_verify_2026-11-19d.json: QX60 mirror 96301-3JA9B "*W.
+# PREMIUM" beside 96301-3JN9B "*W. AWD. PREMIUM", QX56 2013 speedometer
+# 24820-3ZD0A "*3ROW. PREMIUM" beside 24820-1ZS0A "*3ROW. AWD. PREMIUM"): where
+# T's page lists another number of the same part and position for the same
+# option clause plus a drive word (asterisks ignored), this number does not
+# fit that drive. A drive gate (decoded donors of the other drive ruled out,
+# undecoded ones "if equipped"); drive_not where the excluded class has a
+# sibling system of its family on T's pages (4WD beside AUTO). Only narrows.
+LIKELY_DRIVE_SIBLING_RULE = True
+# round4-1119, hub decisions 2 and 3: a number whose own rows on T's page
+# print a production window that leaves part of T's model year (07/(y-1) -
+# 06/y) out, where a dated row of the same part and position that is not its
+# predecessor or successor carries the rest, is listed for those builds only.
+# The vehicle-year stays only with the window named in the note ("Pathfinder
+# 2010: built 08/2009-01/2010 only") and a "built" gate, which no VIN decode
+# confirms: every donor is "if equipped" ("check the build date on the door
+# sticker"). A note over the cap leaves that vehicle-year out. Decision 3:
+# where T's page prints no date for the number and another model-year page
+# of the same catalog model prints a window, the window is read (the
+# narrower reading): under _PROD_MIN_MONTHS of T's model year leaves T out.
+# Supersession windows (the rest carried by the number's own predecessor or
+# successor) are unchanged. Only narrows or removes claims.
+LIKELY_BUILD_WINDOW_RULE = True
 # Feed model-years that hold two catalog models (round3-1119, item 6): yards
 # list the 2014-2015 S35 Rogue Select (VIN JN8AS5) as plain "Rogue", while the
 # catalog files it as its own model. A number for such a T joins a Likely

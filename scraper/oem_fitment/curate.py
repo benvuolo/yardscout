@@ -1401,6 +1401,13 @@ class Curation:
         self.likely_fit_hybrid_dropped = Counter()   # cat -> Hybrid-named vehicle-years on a gas-only engine column
         self.likely_fit_engine_dropped = Counter()   # cat -> vehicle-years whose engine column names none of T's engines
         self.likely_ambiguous_feed_dropped = Counter()   # cat -> vehicle-years of a two-model feed year (Rogue 2014-15)
+        # round4-1119 (hub decisions 1-3)
+        self.likely_window_dropped = Counter()    # cat -> vehicle-years another page's window leaves out (decision 3)
+        self.likely_window_gated = Counter()      # cat -> vehicle-years kept with a build window (decision 2)
+        self.likely_window_edge = Counter()       # cat -> of those, 1-2 months at a model-year edge
+        self.likely_window_note_cap = Counter()   # cat -> vehicle-years left out: the window's note would pass the cap
+        self.likely_drive_sibling = Counter()     # cat -> vehicle-years limited by a same-option drive sibling
+        self.likely_drive_sibling_dropped = Counter()   # cat -> vehicle-years whose siblings contradict
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
         self.release_notes = policy.release_notes()
         self.released_exterior = []
@@ -1522,8 +1529,59 @@ class Curation:
                 drive_by_T = {T: d for T, d in drive_by_T.items() if T in set(Ts)}
                 if len({(T[0], T[1]) for T in Ts}) < 2:
                     continue
+            # round4-1119, hub decisions 1-3 (2026-11-19): another model-year
+            # page's window that leaves T out (3); a same-option drive sibling
+            # that limits T's drive (1); a build window inside T's model year
+            # whose other builds carry an unlinked number (2). Only narrows.
+            # the vehicle-years and drive limits round 3 would have used: a group
+            # it refuses stays refused (round4 only narrows; no group comes back
+            # because a vehicle-year whose words were too long left)
+            Ts_r3, drive_r3 = list(Ts), dict(drive_by_T)
+            win_by_T, sib_T, dnot_by_T, keep = {}, set(), {}, []
+            for T in Ts:
+                w = self.build_window(c, cat, T)
+                if w and w["kind"] == "drop":
+                    self.likely_window_dropped[cat] += 1
+                    continue
+                sl = self.drive_sibling_limit(c, cat, T) if policy.LIKELY_DRIVE_RULE else None
+                if sl and sl[0] == "drive":
+                    mat = self.drive_material(T, sl[1])
+                    if mat is False:
+                        sl = None           # built in one drive only (policy.SINGLE_DRIVE_TABLE)
+                    elif mat == DRIVE_AMBIGUOUS:
+                        sl = (DRIVE_AMBIGUOUS, None)
+                if sl and sl[0] == DRIVE_AMBIGUOUS:
+                    self.likely_drive_sibling_dropped[cat] += 1
+                    continue
+                if sl:
+                    d = drive_by_T.get(T)
+                    if sl[0] == "drive":
+                        fam = _FOUR if set(sl[1]) <= _FOUR else _TWO
+                        if d and not set(d) <= fam:
+                            self.likely_drive_sibling_dropped[cat] += 1
+                            continue        # the row's own drive and the siblings disagree
+                        if not d:
+                            drive_by_T[T] = frozenset(sl[1])
+                            sib_T.add(T)
+                    elif d:
+                        d2 = frozenset(set(d) - set(sl[1]))
+                        if not d2:
+                            self.likely_drive_sibling_dropped[cat] += 1
+                            continue
+                        drive_by_T[T] = d2
+                    else:
+                        dnot_by_T[T] = frozenset(sl[1])
+                    self.likely_drive_sibling[cat] += 1
+                if w and w["kind"] == "unlinked":
+                    win_by_T[T] = w
+                keep.append(T)
+            if len(keep) != len(Ts):
+                Ts = keep
+                drive_by_T = {T: d for T, d in drive_by_T.items() if T in set(Ts)}
+                if len({(T[0], T[1]) for T in Ts}) < 2:
+                    continue
             if cat in policy.STRICT_NOTE_CATS:
-                why_s = self._strict_refusal(c, cat, [(T, m) for T, m in cand if T in set(Ts)], slots)
+                why_s = self._strict_refusal(c, cat, [(T, m) for T, m in cand if T in set(Ts_r3)], slots)
                 if why_s:
                     self.refuse(why_s[0], cat=cat, pn=sorted(c.pns)[0],
                                 evidence=[r.pointer for r in c.records], detail=why_s[1])
@@ -1531,118 +1589,44 @@ class Curation:
             reason, text = _likely_reason(whys)
             text = policy.GROUP_NOTES.get((self.ns, cat, sorted(c.pns)[0]), text)
             slot = "+".join(sorted(slots)) or "C"
-            cab_map = self._cab_only_map(c, cat, Ts)
-            cab = "; ".join(f"{md}: {cb} only" for (_mk, md), cb in cab_map.items())
-            # round3-1119: cab / body lists the page splits by number, per
-            # model-year (labels and gates below; a model already limited to
-            # one cab by _cab_only_map keeps that)
-            cab_list_T = {T: v for T, v in self._cab_list_by_T(c, cat, Ts, slots).items()
-                          if not cab_map.get((T[0], T[1]))}
-            body_list_T = self._body_list_by_T(c, cat, Ts, slots)
-            # a model whose every vehicle-year carries the same list is named
-            # once ("Frontier: king cab/crew cab only"); otherwise per year
-            cab_model, body_model = {}, {}
-            for lst_T, out_m in ((cab_list_T, cab_model), (body_list_T, body_model)):
-                for mk, md in sorted({(T[0], T[1]) for T in Ts}):
-                    vals = [tuple(lst_T[T]) if T in lst_T else None for T in Ts if (T[0], T[1]) == (mk, md)]
-                    if vals and vals[0] is not None and all(v == vals[0] for v in vals):
-                        out_m[(mk, md)] = list(vals[0])
-            extra = [f"{md}: {'/'.join(v)} only" for (_mk, md), v in sorted(cab_model.items())] + \
-                    [f"{md}: {' or '.join(v)} only" for (_mk, md), v in sorted(body_model.items())]
-            if extra:
-                cab = "; ".join(x for x in [cab] + extra if x)
-            # §5.16 limits per vehicle-year: rear-door crew cab, drive, engine,
-            # transmission, fuel (2026-11-18); ambiguous fuel leaves T out.
-            # The same limits become the vehicle-year's gate (gates-1118): the
-            # app hides a donor whose own decode or listing contradicts one.
-            label_by_T, gate_by_T, unchecked_by_T, fuel_drop = {}, {}, {}, False
-            for T in Ts:
-                labs, gate = [], {}
-                rc = self.rear_cab_of(c, cat, T, slots)
-                if rc and f"{T[1]}: crew cab only" not in cab:
-                    labs.append(rc)
-                if cab_map.get((T[0], T[1])) or rc:
-                    gate["cab"] = _cab_gate(cab_map.get((T[0], T[1])) or rc)
-                elif cab_list_T.get(T):
-                    cl = cab_list_T[T]
-                    if (T[0], T[1]) not in cab_model:
-                        labs.append("/".join(cl))
-                    gate["cab"] = _cab_gate(cl[0]) if len(cl) == 1 else [_cab_gate(x) for x in cl]
-                if body_list_T.get(T):
-                    b = body_list_T[T]
-                    if (T[0], T[1]) not in body_model:
-                        labs.append(" or ".join(b))
-                    gate["body"] = b[0] if len(b) == 1 else list(b)
-                if drive_by_T.get(T):
-                    d = drive_by_T[T]
-                    basis = self.drive_basis(c, cat, T, d)
-                    # round3-1119 item 4: "4WD" beside an All-Mode "AUTO" number
-                    pt = set(d) == {"4wd"} and self._auto_sibling(c, cat, T, slots)
-                    lab = "part-time 4WD" if pt else _drive_label(d)
-                    if basis == "stated":
-                        labs.append(lab)
-                    else:
-                        # hub 2026-11-18: same gate, honest words (checked drive only)
-                        unchecked_by_T[T] = lab
-                    gate["drive"] = _drive_gate(d)
-                    gate["drive_basis"] = basis
-                    if pt:
-                        gate["drive_not"] = "a4wd"
-                fu = self.fuel_of(c, cat, T)
-                if fu == DRIVE_AMBIGUOUS:
-                    fuel_drop = True
+            # round4-1119 (hub decision 2): a build window whose words take the
+            # note past the cap leaves that vehicle-year out (never cut), one at
+            # a time, the longest label first; other limits refuse as before
+            lim = self._likely_limits(c, cat, Ts_r3, slots, drive_r3, set(), {}, {}, text, brand)
+            while lim["status"] == "ok" or lim.get("retry"):
+                lim = self._likely_limits(c, cat, Ts, slots, drive_by_T, sib_T, dnot_by_T, win_by_T, text, brand)
+                wTs = [T for T in Ts if T in win_by_T]
+                if lim["status"] != "held_drive_qualifier" or not wTs or \
+                        self._likely_limits(c, cat, Ts, slots, drive_by_T, sib_T, dnot_by_T, {}, text,
+                                            brand)["status"] != "ok":
+                    break           # not the window's words: refused as before
+                drop = max(wTs, key=lambda T: (len(lim["labels"].get(T, "")), T))
+                Ts = [T for T in Ts if T != drop]
+                self.likely_window_note_cap[cat] += 1
+                if len({(T[0], T[1]) for T in Ts}) < 2:
+                    lim = {"status": "skip"}
                     break
-                # the engine column's fuel (round3-1119): 'hybrid' / 'gas' for a
-                # feed name that does not say Hybrid (a Hybrid name on a gas
-                # column left T out above; on a hybrid column it says it)
-                ffu = self.fit_engine_limit(c, cat, T)[1]
-                if ffu and not re.search(r"hybrid", T[1], re.I):
-                    if fu and fu != ffu:
-                        fuel_drop = True
-                        break
-                    fu = ffu
-                eng, tr = self.engine_trans_of(c, cat, T, gas_only=(fu == "gas"))
-                if eng == DRIVE_AMBIGUOUS:
-                    fuel_drop = "engine"
-                    break
-                labs += [x for x in (eng, tr) if x]
-                if eng:
-                    gate["eng"] = eng.split("/")
-                if tr:
-                    gate["trans"] = _TRANS_GATE[tr]
-                if fu:
-                    labs.append(fu)
-                    gate["fuel"] = fu
-                if fu == "gas" and not eng:
-                    # the fuel gate reads the decode too (round3-1119): an
-                    # attested displacement the engine column leaves out
-                    nots = self.fit_engine_not(c, cat, T)
-                    if nots:
-                        gate["eng_not"] = [f"{x:.1f}L" for x in nots]
-                label_by_T[T] = ", ".join(labs)
-                if gate:
-                    gate_by_T[T] = gate
-            if fuel_drop:
-                self.refuse("held_engine_conflict" if fuel_drop == "engine" else "held_fuel_conflict",
-                            cat=cat, pn=sorted(c.pns)[0], evidence=[r.pointer for r in c.records],
-                            detail=f"{T[0]} {T[1]} {T[2]}: " + ("engine limit excludes the model's only engine"
-                                                                  if fuel_drop == "engine" else
-                                                                  "hybrid feed name, gas page only"))
+                lim["retry"] = True
+            if lim["status"] == "skip":
                 continue
-            if cab:
-                text = f"{text}; {cab}"
-                if not _likely_note_fits(brand, sorted(c.pns)[0], text, _pack_text(cat, c.packaging, slot)):
-                    self.refuse("held_cab_qualifier", cat=cat, pn=sorted(c.pns)[0],
-                                evidence=[r.pointer for r in c.records], detail=cab)
-                    continue
-            drv = "; ".join(x for x in (self._limit_note(label_by_T), self._unchecked_note(unchecked_by_T, Ts)) if x)
-            if drv:
-                text = f"{text}; {drv}"
+            if lim["status"] in ("held_engine_conflict", "held_fuel_conflict"):
+                T = lim["T"]
+                self.refuse(lim["status"], cat=cat, pn=sorted(c.pns)[0], evidence=[r.pointer for r in c.records],
+                            detail=f"{T[0]} {T[1]} {T[2]}: " + ("engine limit excludes the model's only engine"
+                                                              if lim["status"] == "held_engine_conflict" else
+                                                              "hybrid feed name, gas page only"))
+                continue
+            if lim["drv"]:
                 self.likely_drive_noted[cat] += 1
-                if not _likely_note_fits(brand, sorted(c.pns)[0], text, _pack_text(cat, c.packaging, slot)):
-                    self.refuse("held_drive_qualifier", cat=cat, pn=sorted(c.pns)[0],
-                                evidence=[r.pointer for r in c.records], detail=drv)
-                    continue
+            if lim["status"] != "ok":
+                self.refuse(lim["status"], cat=cat, pn=sorted(c.pns)[0],
+                            evidence=[r.pointer for r in c.records], detail=lim["detail"])
+                continue
+            text, drv, gate_by_T = lim["text"], lim["drv"], lim["gates"]
+            for T in Ts:
+                if T in win_by_T:
+                    self.likely_window_gated[cat] += 1
+                    self.likely_window_edge[cat] += bool(win_by_T[T].get("edge"))
             pns = sorted(c.pns)
             apps = _runs(Ts)
             if (self.ns, cat, pns[0]) in policy.GROUP_HOLDS:
@@ -1687,6 +1671,126 @@ class Curation:
                         "oldest_retrieved": stamps[0] if stamps else None,
                         **({"gates": gates} if gates else {})})
         return out
+
+    def _likely_limits(self, c, cat, Ts, slots, drive_by_T, sib_T, dnot_by_T, win_by_T, text, brand) -> dict:
+        """§5.16 limits of a Likely group's vehicle-years, their note text and
+        gates (moved out of likely_groups in round4-1119 so a build window
+        that takes the note past the cap can leave its vehicle-year out and
+        the rest be tried again). status 'ok' | 'held_cab_qualifier' |
+        'held_drive_qualifier' | 'held_engine_conflict' | 'held_fuel_conflict'."""
+        slot = "+".join(sorted(slots)) or "C"
+        pack = _pack_text(cat, c.packaging, slot)
+        cab_map = self._cab_only_map(c, cat, Ts)
+        cab = "; ".join(f"{md}: {cb} only" for (_mk, md), cb in cab_map.items())
+        # round3-1119: cab / body lists the page splits by number, per
+        # model-year (labels and gates below; a model already limited to
+        # one cab by _cab_only_map keeps that)
+        cab_list_T = {T: v for T, v in self._cab_list_by_T(c, cat, Ts, slots).items()
+                      if not cab_map.get((T[0], T[1]))}
+        body_list_T = self._body_list_by_T(c, cat, Ts, slots)
+        # a model whose every vehicle-year carries the same list is named
+        # once ("Frontier: king cab/crew cab only"); otherwise per year
+        cab_model, body_model = {}, {}
+        for lst_T, out_m in ((cab_list_T, cab_model), (body_list_T, body_model)):
+            for mk, md in sorted({(T[0], T[1]) for T in Ts}):
+                vals = [tuple(lst_T[T]) if T in lst_T else None for T in Ts if (T[0], T[1]) == (mk, md)]
+                if vals and vals[0] is not None and all(v == vals[0] for v in vals):
+                    out_m[(mk, md)] = list(vals[0])
+        extra = [f"{md}: {'/'.join(v)} only" for (_mk, md), v in sorted(cab_model.items())] + \
+                [f"{md}: {' or '.join(v)} only" for (_mk, md), v in sorted(body_model.items())]
+        if extra:
+            cab = "; ".join(x for x in [cab] + extra if x)
+        # §5.16 limits per vehicle-year: rear-door crew cab, drive, engine,
+        # transmission, fuel (2026-11-18); ambiguous fuel leaves T out.
+        # The same limits become the vehicle-year's gate (gates-1118): the
+        # app hides a donor whose own decode or listing contradicts one.
+        label_by_T, gate_by_T, unchecked_by_T = {}, {}, {}
+        for T in Ts:
+            labs, gate = [], {}
+            rc = self.rear_cab_of(c, cat, T, slots)
+            if rc and f"{T[1]}: crew cab only" not in cab:
+                labs.append(rc)
+            if cab_map.get((T[0], T[1])) or rc:
+                gate["cab"] = _cab_gate(cab_map.get((T[0], T[1])) or rc)
+            elif cab_list_T.get(T):
+                cl = cab_list_T[T]
+                if (T[0], T[1]) not in cab_model:
+                    labs.append("/".join(cl))
+                gate["cab"] = _cab_gate(cl[0]) if len(cl) == 1 else [_cab_gate(x) for x in cl]
+            if body_list_T.get(T):
+                b = body_list_T[T]
+                if (T[0], T[1]) not in body_model:
+                    labs.append(" or ".join(b))
+                gate["body"] = b[0] if len(b) == 1 else list(b)
+            if drive_by_T.get(T):
+                d = drive_by_T[T]
+                # round4-1119: a limit read from same-option drive siblings is
+                # the page's own statement
+                basis = "stated" if T in sib_T else self.drive_basis(c, cat, T, d)
+                # round3-1119 item 4: "4WD" beside an All-Mode "AUTO" number
+                pt = set(d) == {"4wd"} and self._auto_sibling(c, cat, T, slots)
+                lab = "part-time 4WD" if pt else _drive_label(d)
+                if basis == "stated":
+                    labs.append(lab)
+                else:
+                    # hub 2026-11-18: same gate, honest words (checked drive only)
+                    unchecked_by_T[T] = lab
+                gate["drive"] = _drive_gate(d)
+                gate["drive_basis"] = basis
+                if pt:
+                    gate["drive_not"] = "a4wd"
+            elif dnot_by_T.get(T):
+                # round4-1119: the siblings rule out one system of a family
+                # whose other system the page also names (4WD beside AUTO)
+                labs.append("not " + _drive_label(dnot_by_T[T]))
+                gate["drive_not"] = _drive_gate(dnot_by_T[T])
+            fu = self.fuel_of(c, cat, T)
+            if fu == DRIVE_AMBIGUOUS:
+                return {"status": "held_fuel_conflict", "T": T, "drv": ""}
+            # the engine column's fuel (round3-1119): 'hybrid' / 'gas' for a
+            # feed name that does not say Hybrid (a Hybrid name on a gas
+            # column left T out above; on a hybrid column it says it)
+            ffu = self.fit_engine_limit(c, cat, T)[1]
+            if ffu and not re.search(r"hybrid", T[1], re.I):
+                if fu and fu != ffu:
+                    return {"status": "held_fuel_conflict", "T": T, "drv": ""}
+                fu = ffu
+            eng, tr = self.engine_trans_of(c, cat, T, gas_only=(fu == "gas"))
+            if eng == DRIVE_AMBIGUOUS:
+                return {"status": "held_engine_conflict", "T": T, "drv": ""}
+            labs += [x for x in (eng, tr) if x]
+            if eng:
+                gate["eng"] = eng.split("/")
+            if tr:
+                gate["trans"] = _TRANS_GATE[tr]
+            if fu:
+                labs.append(fu)
+                gate["fuel"] = fu
+            if fu == "gas" and not eng:
+                # the fuel gate reads the decode too (round3-1119): an
+                # attested displacement the engine column leaves out
+                nots = self.fit_engine_not(c, cat, T)
+                if nots:
+                    gate["eng_not"] = [f"{x:.1f}L" for x in nots]
+            if T in win_by_T:
+                # round4-1119 (hub decision 2): listed for these builds only;
+                # no VIN decode gives the build month, so the app never
+                # confirms it ("check the build date on the door sticker")
+                labs.append(_win_label(win_by_T[T]["wins"]))
+                gate["built"] = _win_gate(win_by_T[T]["wins"])
+            label_by_T[T] = ", ".join(labs)
+            if gate:
+                gate_by_T[T] = gate
+        if cab:
+            text = f"{text}; {cab}"
+            if not _likely_note_fits(brand, sorted(c.pns)[0], text, pack):
+                return {"status": "held_cab_qualifier", "detail": cab, "drv": "", "labels": label_by_T}
+        drv = "; ".join(x for x in (self._limit_note(label_by_T), self._unchecked_note(unchecked_by_T, Ts)) if x)
+        if drv:
+            text = f"{text}; {drv}"
+            if not _likely_note_fits(brand, sorted(c.pns)[0], text, pack):
+                return {"status": "held_drive_qualifier", "detail": drv, "drv": drv, "labels": label_by_T}
+        return {"status": "ok", "text": text, "drv": drv, "gates": gate_by_T, "labels": label_by_T}
 
     def _strict_refusal(self, c, cat, cand, slots):
         """(code, detail) for a strict-note category (policy.STRICT_NOTE_CATS,
@@ -2646,6 +2750,227 @@ class Curation:
                              for alt in _split_top_plus(m.group(1), ",") for part in _split_top_plus(alt, "+")):
                     return True
         return False
+
+    # ------------------------- round4-1119: hub decisions 1-3 (2026-11-19)
+    @staticmethod
+    def _same_part(a, b) -> bool:
+        """Two list rows of one page name the same part in the same position."""
+        def nm(s):
+            return re.sub(r"\s+", " ", str(s or "").strip().lower())
+        return nm(a.main) == nm(b.main) and sorted(nm(x) for x in a.locations) == sorted(nm(x) for x in b.locations)
+
+    def _t_drive_systems(self, T) -> frozenset:
+        """Drive classes any own-page row of T names (all categories): the
+        option columns' words, the Nissan AUTO field, free notes."""
+        cache = self.__dict__.setdefault("_t_drives", {})
+        if T not in cache:
+            seen = set()
+            for (t, _cat), rows in self.t_list_rows.items():
+                if t == T:
+                    for lr in rows:
+                        for _tk, pos, _neg in _row_clauses(lr.notes, lr.site):
+                            seen |= pos
+            cache[T] = frozenset(seen)
+        return cache[T]
+
+    def drive_sibling(self, c, cat, T):
+        """policy.LIKELY_DRIVE_SIBLING_RULE (hub decision 1, 2026-11-19): T's
+        page lists, for the same part and position, another number whose
+        option clause is one of this number's own clauses plus a drive word
+        ("*W. AWD. PREMIUM" beside "*W. PREMIUM", asterisks ignored): the
+        configuration of that drive takes the other number, so this number's
+        clause does not cover it. Not read as a drive split: a sibling that
+        also lists the bare clause, or lists the clause for both drive
+        families (the Titan clusters: drive is not what separates the two
+        numbers); a sibling linked to this number by supersession; one not
+        listed for T itself (note_excludes: another model, a production
+        window under 5 months of T's year) or whose build window does not
+        overlap this row's. A clause that names a drive itself is the drive
+        rule's (drive_of) and allows every drive here. Returns (allowed
+        classes or None, [(row, sibling, classes)]): the union over this
+        number's own rows and clauses of what each clause allows; None when
+        that is every drive."""
+        if not policy.LIKELY_DRIVE_SIBLING_RULE:
+            return None, []
+        rows = self.t_list_rows.get((T, cat)) or []
+        if not rows:
+            return None, []
+        by_url = defaultdict(list)
+        for lr in rows:
+            by_url[lr.list_url].append(lr)
+        allowed, hits = [], []
+        for _url, page in sorted(by_url.items()):
+            own = [lr for lr in page if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched
+                   and not self.note_excludes(lr.notes, T)]
+            for r in own:
+                rw = _row_windows(r.notes)
+                sibs = []
+                for s in page:
+                    k2 = policy.pn_key(self.ns, s.pn)
+                    if k2 == c.key or not self._same_part(r, s) or self.comparable(cat, c.key, k2):
+                        continue
+                    if self.note_excludes(s.notes, T):
+                        continue
+                    sw = _row_windows(s.notes)
+                    if rw and sw and not any(_win_overlap(sw, a, b) for a, b in rw):
+                        continue
+                    sibs.append((s, _row_clauses(s.notes, s.site)))
+                row_ok = set()
+                for toks, pos, neg in _row_clauses(r.notes, r.site):
+                    if pos or neg:
+                        row_ok |= set(_DRIVE_ALL)       # stated drive: drive_of reads it
+                        continue
+                    excl = set()
+                    for s, cls in sibs:
+                        if any(t2 == toks and not p2 and not n2 for t2, p2, n2 in cls):
+                            continue        # the sibling lists this configuration bare too
+                        named = set().union(*[p2 for t2, p2, _n2 in cls if t2 == toks and p2] or [set()])
+                        if not named or (named & _FOUR and named & _TWO):
+                            continue        # no drive word, or both families: not a drive split
+                        excl |= named
+                        hits.append((r, s, frozenset(named)))
+                    row_ok |= set(_DRIVE_ALL) - excl
+                allowed.append(row_ok)
+        if not allowed:
+            return None, hits
+        u = frozenset(set().union(*allowed))
+        return (None if u >= _DRIVE_ALL else u), hits
+
+    def drive_sibling_limit(self, c, cat, T):
+        """Decision 1 as a limit on T: ('drive', classes) when the siblings
+        leave this number one drive family of T's (the drive words T's pages
+        use: a QX60 page names AWD only, so excluding AWD leaves 2WD);
+        ('drive_not', classes) when they leave both families (the excluded
+        class beside another system of its family, e.g. 4WD beside AUTO);
+        (DRIVE_AMBIGUOUS, None) when they exclude something of both
+        families; None when nothing is excluded."""
+        u, hits = self.drive_sibling(c, cat, T)
+        if u is None:
+            return None
+        excl = _DRIVE_ALL - u
+        e4, e2 = excl & _FOUR, excl & _TWO
+        if e4 and e2:
+            return DRIVE_AMBIGUOUS, None
+        sysT = self._t_drive_systems(T)
+        if e4:
+            t4 = sysT & _FOUR
+            if not t4 or t4 <= e4:
+                return "drive", frozenset({"2wd"})
+            return "drive_not", frozenset(e4 & t4)
+        t4 = sysT & _FOUR
+        return "drive", (frozenset(t4) if t4 else frozenset({"4wd", "awd"}))
+
+    def build_window(self, c, cat, T):
+        """policy.LIKELY_BUILD_WINDOW_RULE (hub decisions 2 and 3,
+        2026-11-19). None when this number's own rows on T's pages print no
+        window inside T's model year, else a dict:
+          wins   the window(s) (months), merged
+          src    'page' (T's own rows) or 'other_page' (decision 3: T's page
+                 prints no date, another model-year page of the same catalog
+                 model prints a window for the number; the narrower reading)
+          gap    [(a, b)] months of the model year outside the window
+          kind   'full' (no gap) | 'drop' (src other_page and under
+                 _PROD_MIN_MONTHS of the model year: not listed, as if T's page
+                 printed it) | 'no_other_row' (no dated row of the same part
+                 carries the gap) | 'linked' (every row that does is this
+                 number's predecessor or successor) | 'unlinked'
+          others [(pn, wins, linked)] the dated rows carrying the gap
+          edge   the gap is 1-2 months at a model-year edge
+        Only 'unlinked' becomes a window limit; 'drop' leaves T out."""
+        if not policy.LIKELY_BUILD_WINDOW_RULE or cat in PROD_RULE_SKIP_CATS:
+            return None
+        self._cat_ctx = cat
+        rows = self.t_list_rows.get((T, cat)) or []
+        if rows:
+            own = [lr for lr in rows if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched
+                   and not self.note_excludes(lr.notes, T)]
+            items = [(lr.notes, lr) for lr in own]
+        else:
+            items = [(r.note_texts, None) for r in self.t_seed_records.get((T, cat), [])
+                     if r.key == c.key and not self.note_excludes(r.note_texts, T)]
+        if not items:
+            return None
+        per = [_row_windows(n) for n, _lr in items]
+        src = "page"
+        if all(per):
+            wins = _win_merge([w for ws in per for w in ws])
+        elif any(per):
+            return None             # a dateless own row: listed for the whole year
+        else:
+            # decision 3: the same catalog model's other model-year pages
+            sites = {lr.site for _n, lr in items if lr is not None} or {r.site for r in c.records}
+            models = {(lr.seed[0], lr.seed[1]) for _n, lr in items if lr is not None and lr.seed} or \
+                set(self.t_sources.get(T, set()))
+            if rows and any(policy.pn_key(self.ns, lr.pn) != c.key and _row_windows(lr.notes)
+                            and self.comparable(cat, c.key, policy.pn_key(self.ns, lr.pn)) for lr in rows):
+                return None         # the page lists a dated predecessor/successor: a supersession listing
+            # per configuration: every option clause of this number on T's
+            # page must be printed with a window on another page of the same
+            # catalog model (the same clause, word for word); a clause no
+            # other page dates keeps the whole year (another trim or era:
+            # 96301-ZC20A is dated 'W. SE' on the 2006 Armada page and listed
+            # undated for 'W. LE/SL' on the 2009-2015 pages)
+            def ckeys(notes, site):
+                return {(t, frozenset(p), frozenset(n2)) for t, p, n2 in _row_clauses(notes, site)}
+            mine = set()
+            for n, lr0 in items:
+                mine |= ckeys(n, lr0.site if lr0 is not None else next(iter(sites), ""))
+            dated = defaultdict(list)
+            srcs = [(lr.site, lr.seed, lr.notes) for lr in self._pn_list_rows(c.key, cat)] + \
+                [(r.site, r.seed, r.note_texts) for r in c.records]
+            for site, seed, notes in srcs:
+                if site in sites and seed and (seed[0], seed[1]) in models and seed[2] != T[2]:
+                    ws = _row_windows(notes)
+                    if ws:
+                        for k in ckeys(notes, site) & mine:
+                            dated[k] += ws
+            if not mine or any(not dated.get(k) for k in mine):
+                return None
+            wins, src = _win_merge([w for k in mine for w in dated[k]]), "other_page"
+        lo, hi = _my_range(T[2])
+        out = {"wins": wins, "src": src, "gap": _win_gap(wins, T[2]), "others": [], "edge": False}
+        if src == "other_page" and _win_overlap(wins, lo, hi) < _PROD_MIN_MONTHS:
+            out["kind"] = "drop"
+            return out
+        if not out["gap"]:
+            out["kind"] = "full"
+            return out
+        months = sum(b - a + 1 for a, b in out["gap"])
+        out["edge"] = months <= 2 and all(a == lo or b == hi for a, b in out["gap"])
+        # the rest of the year's builds of the SAME configuration: a dated row
+        # of the same part and position whose option clause is one of ours
+        # (drive words and asterisks aside; a row with no option text covers
+        # every configuration). Another colour or package is another car.
+        mine = {t for n, lr0 in items if lr0 is not None for t, _p, _n2 in _row_clauses(n, lr0.site)}
+        others = []
+        for lr in rows:
+            k2 = policy.pn_key(self.ns, lr.pn)
+            if k2 == c.key or not any(lr0 is not None and lr0.list_url == lr.list_url and self._same_part(lr0, lr)
+                                      for _n, lr0 in items):
+                continue
+            theirs = {t for t, _p, _n2 in _row_clauses(lr.notes, lr.site)}
+            if not (mine & theirs or () in mine or () in theirs):
+                continue
+            ow = _row_windows(lr.notes)
+            if ow and any(_win_overlap(ow, a, b) for a, b in out["gap"]):
+                others.append((lr.pn, _win_merge(ow), self.comparable(cat, c.key, k2)))
+        out["others"] = sorted(set((p, tuple(w), lk) for p, w, lk in others))
+        if not others:
+            out["kind"] = "no_other_row"
+        elif all(lk for _p, _w, lk in others):
+            out["kind"] = "linked"
+        else:
+            out["kind"] = "unlinked"
+        return out
+
+    def _pn_list_rows(self, key, cat):
+        idx = self.__dict__.get("_pn_rows")
+        if idx is None:
+            idx = defaultdict(list)
+            for lr in self.list_rows:
+                idx[(policy.pn_key(self.ns, lr.pn), lr.cat)].append(lr)
+            self._pn_rows = idx
+        return idx.get((key, cat), [])
 
     # ------------------------------------------------------------ report
     def report(self, doc, inv_counts: Counter):
@@ -4027,6 +4352,149 @@ def _production_excludes(notes, year: int) -> bool:
         if not ok:
             return True
     return False
+
+
+# ------------------------------------------- round4-1119 (hub decisions 1-3)
+# Build windows (policy.LIKELY_BUILD_WINDOW_RULE). Months are year*12+month;
+# an open end is _WIN_OPEN. The forms the catalogs print in a "Production
+# Date" field (census of oem-raw@dca9cd84 and @57e8b5b9): "08/2009-01/2010",
+# "from 01/2010" (nissan/infiniti/lexus/ford), "till 05/2012" (hyundai), comma
+# lists of those, and subarupartsdeal's "200409 - 200608". A bare "05/2012"
+# (hyundai/kia/lexus, 138 rows) says neither start nor end and is not read.
+_WIN_OPEN = 10 ** 6
+_WIN_RANGE_RE = re.compile(r"(?<![0-9/])(\d{1,2})/(\d{4})\s*-\s*(\d{1,2})/(\d{4})(?![0-9/])")
+_WIN_FROM_RE = re.compile(r"(?:^|[\s,:])from\s+(\d{1,2})/(\d{4})(?![0-9/])", re.I)
+_WIN_TILL_RE = re.compile(r"(?:^|[\s,:])(?:till|until|up\s+to)\s+(\d{1,2})/(\d{4})(?![0-9/])", re.I)
+_WIN_SUBARU_RE = re.compile(r"(?<![0-9])((?:19|20)\d{2})(0[1-9]|1[0-2])\s*-\s*((?:19|20)\d{2})(0[1-9]|1[0-2])(?![0-9])")
+_PROD_FIELD_RE = re.compile(r"^\s*production\s+date\s*:\s*(.*)$", re.I)
+
+
+def _row_windows(notes) -> list:
+    """[(a, b)] month windows a row's "Production Date" field prints, [] when
+    it prints none (the row is listed for the whole model year)."""
+    out = []
+    for n in notes or []:
+        m = _PROD_FIELD_RE.match(n or "")
+        if not m:
+            continue
+        body = m.group(1)
+        for m1, y1, m2, y2 in _WIN_RANGE_RE.findall(body):
+            out.append((int(y1) * 12 + int(m1), int(y2) * 12 + int(m2)))
+        for m1, y1 in _WIN_FROM_RE.findall(body):
+            out.append((int(y1) * 12 + int(m1), _WIN_OPEN))
+        for m1, y1 in _WIN_TILL_RE.findall(body):
+            out.append((0, int(y1) * 12 + int(m1)))
+        for y1, m1, y2, m2 in _WIN_SUBARU_RE.findall(body):
+            out.append((int(y1) * 12 + int(m1), int(y2) * 12 + int(m2)))
+    return out
+
+
+def _my_range(year: int) -> tuple:
+    """The model year as the production-date rule takes it: 07/(year-1) - 06/year."""
+    return (year - 1) * 12 + 7, year * 12 + 6
+
+
+def _win_merge(wins) -> list:
+    out = []
+    for a, b in sorted(wins):
+        if out and a <= out[-1][1] + 1:
+            out[-1] = (out[-1][0], max(out[-1][1], b))
+        else:
+            out.append((a, b))
+    return out
+
+
+def _win_gap(wins, year: int) -> list:
+    """Months of the model year the windows leave out, as [(a, b)] runs."""
+    lo, hi = _my_range(year)
+    gaps, cur = [], lo
+    for a, b in _win_merge(wins):
+        if b < cur or a > hi:
+            continue
+        if a > cur:
+            gaps.append((cur, min(a - 1, hi)))
+        cur = max(cur, b + 1)
+        if cur > hi:
+            break
+    if cur <= hi:
+        gaps.append((cur, hi))
+    return gaps
+
+
+def _win_overlap(wins, a: int, b: int) -> int:
+    return sum(max(0, min(y, b) - max(x, a) + 1) for x, y in _win_merge(wins))
+
+
+def _mm(m: int) -> str:
+    return f"{(m - 1) % 12 + 1:02d}/{(m - 1) // 12}"
+
+
+def _ym(m: int) -> str:
+    return f"{(m - 1) // 12}-{(m - 1) % 12 + 1:02d}"
+
+
+def _win_label(wins) -> str:
+    """'built 08/2009-01/2010' / 'built from 01/2010' / 'built to 12/2005' (the
+    window as the catalog prints it)."""
+    parts = []
+    for a, b in _win_merge(wins):
+        if b >= _WIN_OPEN:
+            parts.append(f"from {_mm(a)}")
+        elif a <= 0:
+            parts.append(f"to {_mm(b)}")
+        else:
+            parts.append(f"{_mm(a)}-{_mm(b)}")
+    return "built " + ", ".join(parts)
+
+
+def _win_gate(wins) -> str:
+    """The app gate value: '2009-08..2010-01', '2010-01..', '..2005-12'; runs
+    joined by ','."""
+    parts = []
+    for a, b in _win_merge(wins):
+        parts.append(f"{_ym(a) if a > 0 else ''}..{_ym(b) if b < _WIN_OPEN else ''}")
+    return ",".join(parts)
+
+
+# Same-option drive siblings (policy.LIKELY_DRIVE_SIBLING_RULE): the option
+# clauses of a row (each "Fitting Vehicle Options" alternative, with the
+# row's other condition notes), compared with a sibling's after its drive
+# words are taken out; asterisks (Nissan option markers) are ignored.
+_CLAUSE_SKIP_RE = re.compile(r"^\s*(?:production\s+date|require\s+quantity|package\s+quantity|callout\s+name|"
+                             r"location|replaced\s+by|replaces)\s*:", re.I)
+_NISSAN_AUTO_RE = re.compile(r"(?:^|\.)\s*\*?AUTO\s*(?:\.|$)")
+
+
+def _clause_tokens(text: str) -> tuple:
+    return tuple(re.findall(r"[A-Z0-9#/]+", str(text or "").upper().replace("*", "")))
+
+
+def _row_clauses(notes, site: str) -> list:
+    """[(tokens without drive words, positive drive classes, negated classes)]
+    per configuration of one row: each "Fitting Vehicle Options" alternative
+    (on the config-tuple sites, policy.DRIVE_CONFIG_FVO_SITES, each "+" part
+    too, as _fvo_drive reads them), joined with the row's other condition
+    notes; [((), set(), set())] for a row with no option text."""
+    fvo, other = [], []
+    for n in notes or []:
+        if _CLAUSE_SKIP_RE.match(n or ""):
+            continue
+        m = _FVO_BODY_RE.match(n or "")
+        if m:
+            for alt in _split_top_plus(m.group(1), ","):
+                fvo += _split_top_plus(alt, "+") if site in policy.DRIVE_CONFIG_FVO_SITES else [alt]
+        else:
+            other.append(n)
+    rest = " | ".join(other)
+    out = []
+    for alt in fvo or [""]:
+        text = f"{alt} | {rest}" if rest else alt
+        pos, neg, left = _drive_terms(text)
+        if site in _NISSAN_SITES and _NISSAN_AUTO_RE.search(alt):
+            pos = set(pos) | {"a4wd"}       # the Nissan drive field: 2WD / 4WD / AUTO
+            left = re.sub(r"(?:(?<=\.)|^)\s*\*?AUTO\s*(?=\.|$)", " ", left)
+        out.append((_clause_tokens(left), set(pos), set(neg)))
+    return out
 
 
 # Lexus chassis codes (2026-11-10 live audit: lexuspartsnow rows carry the
