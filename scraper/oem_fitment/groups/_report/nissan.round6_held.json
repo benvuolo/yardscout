@@ -1,10 +1,10 @@
 {
- "groups": 6,
+ "groups": 4,
  "groups_by_reason": {
-  "held_cab_inferred": 4,
+  "held_cab_inferred": 2,
   "held_option_tie": 2
  },
- "groups_held_whole": 6,
+ "groups_held_whole": 4,
  "held": [
   {
    "cat": "window-regulator",
@@ -102,106 +102,6 @@
      "Titan",
      2005,
      2005
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "window-regulator",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "cab_gate": "crew cab",
-     "cab_source": "rear_cab_of (rear-door part read as crew cab from the page's cab split)",
-     "own_rows": [
-      {
-       "notes": [
-        "Production Date: 08/2011-11/2014"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2012-nissan-titan/body_side_rear/rear_door_window_regulator.html",
-       "pn": "82730-9FJ0A"
-      }
-     ],
-     "reasons": [
-      "held_cab_inferred"
-     ],
-     "t": [
-      "Nissan",
-      "Titan",
-      2012
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "82730-9FJ0A"
-   ],
-   "reason_text": "cab limit not on the number's own row",
-   "reasons": [
-    "held_cab_inferred"
-   ],
-   "round5_apps": [
-    [
-     "Nissan",
-     "Armada",
-     2009,
-     2009
-    ],
-    [
-     "Nissan",
-     "Titan",
-     2012,
-     2012
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "window-regulator",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "cab_gate": "crew cab",
-     "cab_source": "rear_cab_of (rear-door part read as crew cab from the page's cab split)",
-     "own_rows": [
-      {
-       "notes": [
-        "Production Date: 08/2011-11/2014"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2012-nissan-titan/body_side_rear/rear_door_window_regulator.html",
-       "pn": "82731-9FJ0A"
-      }
-     ],
-     "reasons": [
-      "held_cab_inferred"
-     ],
-     "t": [
-      "Nissan",
-      "Titan",
-      2012
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "82731-9FJ0A"
-   ],
-   "reason_text": "cab limit not on the number's own row",
-   "reasons": [
-    "held_cab_inferred"
-   ],
-   "round5_apps": [
-    [
-     "Nissan",
-     "Armada",
-     2009,
-     2009
-    ],
-    [
-     "Nissan",
-     "Titan",
-     2012,
-     2012
     ]
    ],
    "unit": "group"
@@ -385,7 +285,7 @@
  "ns": "nissan",
  "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
  "vehicle_years_by_reason": {
-  "held_cab_inferred": 4,
+  "held_cab_inferred": 2,
   "held_option_tie": 2
  }
 }

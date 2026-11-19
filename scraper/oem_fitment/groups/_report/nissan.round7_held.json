@@ -1,5 +1,5 @@
 {
- "groups": 5,
+ "groups": 3,
  "held": [
   {
    "apps": [
@@ -97,68 +97,6 @@
     ],
     "Nissan Rogue": [
      "RR"
-    ]
-   },
-   "reason": "held_cross_position",
-   "reason_text": "the number sits in another door or position on another model; the note names no door",
-   "unit": "group"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Altima",
-     2003,
-     2003
-    ],
-    [
-     "Nissan",
-     "Sentra",
-     2005,
-     2006
-    ]
-   ],
-   "cat": "window-regulator",
-   "pn": [
-    "82730-3Z005"
-   ],
-   "positions": {
-    "Nissan Altima": [
-     "RR"
-    ],
-    "Nissan Sentra": [
-     "FR"
-    ]
-   },
-   "reason": "held_cross_position",
-   "reason_text": "the number sits in another door or position on another model; the note names no door",
-   "unit": "group"
-  },
-  {
-   "apps": [
-    [
-     "Nissan",
-     "Altima",
-     2003,
-     2003
-    ],
-    [
-     "Nissan",
-     "Sentra",
-     2005,
-     2006
-    ]
-   ],
-   "cat": "window-regulator",
-   "pn": [
-    "82731-3Z005"
-   ],
-   "positions": {
-    "Nissan Altima": [
-     "RL"
-    ],
-    "Nissan Sentra": [
-     "FL"
     ]
    },
    "reason": "held_cross_position",
