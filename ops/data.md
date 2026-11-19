@@ -802,3 +802,55 @@ index does not list renders nothing. Styles: end of `docs/styles.css`
   exact; `listReadAt` only keeps the latest.
 - A yard that re-keys its whole list outside the flush/jump rules (under
   35% / 25%) still counts the re-keyed cars whose dates are within 10 days.
+
+## 2026-11-19 ~11:25 UTC arrivals history: first real build, and rules 2 (bulk week) (hub)
+
+First real build, scan 44500938468 (dispatched by hand on 8c48be12):
+`[arrivals] window 2026-09-24..2026-11-18: 196802 arrivals, 144520 rows, 76
+makes, 307 yards (4 stale), 3872816 bytes total, 6.9 s; not counted: cold
+start 158580, flush scan 9889, no make/model 5, outside coverage 6181,
+outside window 6661, relist 5239, yard not in this scan 2940 (of 386297
+history rows)`. 77 files, 3.87 MB raw (ford 537 KB the largest).
+
+What the files say:
+- Covered weeks per yard: 8 weeks 161 yards, 4 weeks 40, 3 weeks 95, 2 weeks
+  6, 5 weeks 1, none 4. The many 3-week yards are the late-October re-keys
+  (coverage restarts after a flush) and yards first scanned in the window.
+  The history database itself is young: 158,580 of the rows are a yard's
+  first scan inside the window.
+- Stale (frozen list): Utah Pic-A-Part Orem (Premium), Wrench-A-Part
+  Holland, UAPI Alexandria, Colorado Auto & Parts Englewood.
+- A big steady yard reads steady: Pick-n-Pull San Jose North 249 to 273 a
+  week over all 8 weeks; Stockton 136 to 204; Newark 85 to 139.
+- Near zip 95112 (17 yards within 100 mi, all counted): 2003-2009 4Runner
+  5 in 8 weeks (0.62 a week); 4Runner any year 36 (4.6 a week); 2007-2011
+  Camry 108 (13.75 a week); Tacoma any year 30.
+
+Rules 2, added by the hub the same hour (`ARRIVALS_RULES = 2`):
+- **Bulk week.** Three yards showed one week far above their others with no
+  single scan being a flush: Pick Ur Part Auto Salvage 0 / 245 / 0,
+  Youngstown U-Pull-It 102 / 0 / 0, M&M U-Pull-It Buffalo 0 / 64 / 0. That
+  is a list loaded in a batch, not a week's arrivals, and it would have
+  put "about N a week" far too high near those yards. Rule: a covered week
+  with at least 60 cars and more than 4 x the yard's median covered week
+  (lower median, at least 1) restarts coverage after the latest such week,
+  like a flush; a yard needs 3 covered weeks to be judged. On the first
+  build's numbers it restarts 5 yards (those three, Budget U-Pull-It Bartow
+  97 / 0 / 29 / 0 and RTP Pick-A-Part Maiden 0 / 102 / 43 / 1) and drops
+  610 of 196,802 arrivals.
+- **Rules version.** `index.json` carries `rules`; an index written under
+  another version is rebuilt at the next scan whatever its age (the
+  20-hour rule still holds between builds of one version). So the next
+  scan rebuilds once with rules 2; no extra scan was dispatched for it.
+- Tests: `scraper/test_arrivals.py` 63 checks (bulk week, a steady big
+  yard untouched, the rules-version rebuild); quick regression 74/0/0.
+
+Open, from the builder and the hub:
+- Coverage does not know the days a yard could not be read.
+- A list jump at a healthy yard restarts its coverage too (conservative).
+- The client calls every yard with under 2 covered weeks "new to
+  YardScout"; a yard reset by a flush or a bulk week is not new. Wording
+  only; a shell change, so it waits for the next app-side batch.
+- The Parts card's forecast counts the seeker's own model and generation,
+  not every donor model the interchange finds. A donor-model forecast is
+  the natural next step.

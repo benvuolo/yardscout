@@ -110,6 +110,32 @@ car("Yard N - New", scan("11-13"), "2026-11-13")
 # Yard X: in the DB but not in this scan's inventory: not written.
 car("Yard X - Gone", scan("09-01"), "2026-08-01")
 car("Yard X - Gone", scan("10-10"), "2026-10-10")
+# Yard B: a batch-loaded list (rules 2). 100 on the lot from 09-01; a few real
+# arrivals, then 70 cars over two scans in week 4 (35 each: no single scan is a
+# flush). Weeks [0, 0, 2, 70, 1, 3, 2, 2]: week 4 holds >= 60 and more than
+# 4 x the median week (2) -> a bulk load: coverage restarts at week 5 (4
+# covered weeks) and weeks 1-4 are not written.
+for _ in range(100):
+    car("Yard B - Bulk", scan("09-01"), "2026-08-01")
+for d in ("10-08", "10-09"):                                      # w3
+    car("Yard B - Bulk", scan(d), f"2026-{d}", md="Element")
+for d in ("10-15", "10-16"):                                      # w4: 35 + 35
+    for _ in range(35):
+        car("Yard B - Bulk", scan(d), f"2026-{d}", md="Element")
+car("Yard B - Bulk", scan("10-23"), "2026-10-23", md="Element")   # w5
+for d in ("10-29", "10-30", "10-31"):                             # w6
+    car("Yard B - Bulk", scan(d), f"2026-{d}", md="Element")
+for d in ("11-05", "11-06"):                                      # w7
+    car("Yard B - Bulk", scan(d), f"2026-{d}", md="Element")
+for d in ("11-12", "11-13"):                                      # w8
+    car("Yard B - Bulk", scan(d), f"2026-{d}", md="Element")
+# Yard S: a big steady yard, 65 a week in one scan each (list 300+: 65 is
+# under 35% of it, so no flush). No week is over 4 x the median: nothing dropped.
+for _ in range(300):
+    car("Yard S - Steady", scan("09-01"), "2026-08-01")
+for d in ("09-25", "10-02", "10-09", "10-16", "10-23", "10-30", "11-06", "11-13"):
+    for _ in range(65):
+        car("Yard S - Steady", scan(d), f"2026-{d}", md="Ridgeline")
 
 YF = ["location", "city", "state", "lat", "lng", "avgLifespanDays", "lifespanBasis",
       "listChangedAt", "listState", "listReadAt", "listFlushAt"]
@@ -128,6 +154,8 @@ payload = {"scrapedAt": NOW, "yardFields": YF, "yards": [
     yard("Yard J - Jump", 41.3, -112.0, flush=scan("11-10")),
     yard("Yard N - New", 41.4, -112.0),
     yard("Yard Q - No history", None, None),
+    yard("Yard B - Bulk", 41.5, -112.0),
+    yard("Yard S - Steady", 41.6, -112.0),
 ]}
 
 with tempfile.TemporaryDirectory() as td:
@@ -206,6 +234,13 @@ with tempfile.TemporaryDirectory() as td:
     check("listFlushAt scan excluded, w7 car outside restarted coverage, w8 counted", j.get(2005) == [0, 0, 0, 0, 0, 0, 0, 1], str(j))
     n = rowsof(honda, "Civic", "Yard N - New")
     check("new yard: first-scan car out, week-8 car in", n.get(2005) == [0, 0, 0, 0, 0, 0, 0, 1], str(n))
+    b = rowsof(honda, "Element", "Yard B - Bulk")
+    check("bulk week: coverage restarts after it (weeks 5-8)", Y["Yard B - Bulk"][1][3] == 4, str(Y["Yard B - Bulk"]))
+    check("bulk week: the load and the weeks before it are not written", b.get(2005) == [0, 0, 0, 0, 1, 3, 2, 2], str(b))
+    check("bulk week: counted in the summary", info["stats"].get("bulk week") == 72, str(info["stats"]))
+    st = rowsof(honda, "Ridgeline", "Yard S - Steady")
+    check("steady big yard: nothing dropped, 8 covered weeks", Y["Yard S - Steady"][1][3] == 8 and st.get(2005) == [65] * 8, str(st))
+    check("index carries the rules version", idx.get("rules") == js.ARRIVALS_RULES, str(idx.get("rules")))
     t = rowsof(ford, "Taurus", "Yard A - Town")
     check("normalization: FORD / Taurus. fold into Ford|Taurus", "FORD" not in idx["makes"] and set(ford["models"]) == {"Taurus"}, str(ford["models"].keys()))
     check("model year kept; departed car counts", t.get(2001) == [0] * 7 + [2] and t.get(2003) == [0] * 7 + [2], str(t))
@@ -224,6 +259,22 @@ with tempfile.TemporaryDirectory() as td:
     check("20-hour rule: 21 h later rebuilds", r21 is not None and idx2["builtAt"] == "2026-11-20T04:00:00Z"
           and idx2["windowEnd"] == "2026-11-19", str(idx2.get("windowEnd")))
     check("rebuild: 11-19 arrival now counted in w8", rowsof(json.loads((out / "honda.json").read_text()), "Civic", "Yard A - Town").get(2005)[-1] == 3)
+
+    # ---- rules version: files written under older rules are rebuilt at once ----
+    p_idx = out / "index.json"
+    old = json.loads(p_idx.read_text())
+    old["rules"] = js.ARRIVALS_RULES - 1
+    p_idx.write_text(json.dumps(old))
+    rr = js._write_arrivals_json(payload, now=old["builtAt"])   # 0 h later
+    check("rules version: an older index is rebuilt at once",
+          rr is not None and json.loads(p_idx.read_text()).get("rules") == js.ARRIVALS_RULES)
+    old = json.loads(p_idx.read_text())
+    old.pop("rules")
+    p_idx.write_text(json.dumps(old))
+    check("rules version: an index with no version is rebuilt at once",
+          js._write_arrivals_json(payload, now=old["builtAt"]) is not None)
+    check("rules version: the same rules and under 20 h keeps the files",
+          js._write_arrivals_json(payload, now=old["builtAt"]) is None)
 
     # stale make file removed when the make has no arrival anymore
     (out / "oldmake.json").write_text("{}")

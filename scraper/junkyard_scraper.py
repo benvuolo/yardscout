@@ -28534,6 +28534,9 @@ ARRIVALS_REBUILD_HOURS = 20     # rewrite at most this often (repo churn)
 ARRIVALS_RELIST_DAYS = 10       # date_added this far before first_seen = relist
 ARRIVALS_FLUSH_MIN = 40         # a scan's new cars at one yard above
 ARRIVALS_FLUSH_SHARE = 0.35     # max(MIN, SHARE x list) = flush, none count
+ARRIVALS_BULK_MIN = 60          # a covered week with at least this many cars
+ARRIVALS_BULK_RATIO = 4         # and over RATIO x the yard's median week = a batch load
+ARRIVALS_RULES = 2              # bump when a rule changes: the next scan rebuilds at once
 
 
 def _arrival_day(date_added, first_seen: str):
@@ -28589,6 +28592,11 @@ def _write_arrivals_json(payload: dict, now: str | None = None, force: bool = Fa
       * Stale: a yard whose list state is "frozen" (yard_freshness, 10+
         business days without a change) is written with stale = 1; the
         client leaves it out of the rate and says so.
+      * Bulk week (rules 2): a covered week with at least ARRIVALS_BULK_MIN
+        cars and more than ARRIVALS_BULK_RATIO x the yard's median covered
+        week is a batch load of the list, not a week's arrivals. Coverage
+        restarts after the latest such week (as after a flush). A yard needs
+        3 covered weeks to be judged.
       * Make/model: every history row goes through the scan's own
         normalization (_lifespan_canon_factory, as the lifespan writer), so
         keys equal what the live inventory carries. Model year kept.
@@ -28614,9 +28622,12 @@ def _write_arrivals_json(payload: dict, now: str | None = None, force: bool = Fa
     idx_file = out_dir / "index.json"
     if not force and idx_file.exists():
         try:
-            built = json.loads(idx_file.read_text()).get("builtAt")
+            prev = json.loads(idx_file.read_text())
+            built = prev.get("builtAt")
             t_b = datetime.fromisoformat(str(built).replace("Z", "+00:00"))
-            if timedelta(0) <= t_now - t_b < timedelta(hours=ARRIVALS_REBUILD_HOURS):
+            # Files written under older rules are rebuilt at once (ARRIVALS_RULES).
+            if prev.get("rules") == ARRIVALS_RULES \
+                    and timedelta(0) <= t_now - t_b < timedelta(hours=ARRIVALS_REBUILD_HOURS):
                 return None
         except Exception:  # noqa: BLE001 — unreadable index: rebuild
             pass
@@ -28678,6 +28689,8 @@ def _write_arrivals_json(payload: dict, now: str | None = None, force: bool = Fa
     canon = _lifespan_canon_factory(_db)
     stats = collections.Counter()
     makes: dict[str, dict[str, dict[tuple, list]]] = {}
+    acc: list[tuple] = []                 # (yard index, week, make, model, year) per arrival
+    ytot: dict[int, list[int]] = {}       # yard index -> arrivals per week, all models
     for loc, mk, md, vin, year, date_added, first_seen in hist["rows"]:
         stats["rows"] += 1
         i = yard_ix.get(loc)
@@ -28709,6 +28722,37 @@ def _write_arrivals_json(payload: dict, now: str | None = None, force: bool = Fa
         if not mk or not md or not str(md).strip():
             stats["no make/model"] += 1
             continue
+        acc.append((i, w, mk, md, yr))
+        ytot.setdefault(i, [0] * ARRIVALS_WEEKS)[w - 1] += 1
+
+    # Bulk week (rules 2, hub 2026-11-19, from the first real build): a yard
+    # that loads its list in one batch shows one week far above its others
+    # (Pick Ur Part Auto Salvage 0 / 245 / 0, Youngstown 102 / 0 / 0) without
+    # any single scan being a flush. Such a week is a load, not a week's
+    # arrivals: where a covered week holds at least ARRIVALS_BULK_MIN cars
+    # and more than ARRIVALS_BULK_RATIO x the yard's median covered week
+    # (the lower median, at least 1), coverage restarts after the latest
+    # such week, exactly like a flush: that week and the ones before it are
+    # not covered and their arrivals are not written. Needs 3 covered weeks.
+    bulk_from: dict[int, int] = {}
+    for i, t in ytot.items():
+        fw = first_cov[i]
+        ws = t[fw - 1:]
+        if len(ws) < 3:
+            continue
+        med = max(sorted(ws)[(len(ws) - 1) // 2], 1)
+        last = 0
+        for k, n in enumerate(ws):
+            if n >= ARRIVALS_BULK_MIN and n > ARRIVALS_BULK_RATIO * med:
+                last = fw + k
+        if last:
+            bulk_from[i] = last + 1
+            first_cov[i] = last + 1
+            yard_rows[i][3] = ARRIVALS_WEEKS - last
+    for i, w, mk, md, yr in acc:
+        if w < bulk_from.get(i, 0):
+            stats["bulk week"] += 1
+            continue
         row = makes.setdefault(mk, {}).setdefault(md, {}).setdefault((i, yr), [0] * ARRIVALS_WEEKS)
         row[w - 1] += 1
         stats["arrivals"] += 1
@@ -28729,7 +28773,7 @@ def _write_arrivals_json(payload: dict, now: str | None = None, force: bool = Fa
         index_makes[mk] = [slug, sum(sum(r[2:]) for rs in models.values() for r in rs)]
     files["index.json"] = json.dumps(
         {"builtAt": built, "windowStart": win_start.isoformat(), "windowEnd": win_end.isoformat(),
-         "weeks": ARRIVALS_WEEKS,
+         "weeks": ARRIVALS_WEEKS, "rules": ARRIVALS_RULES,
          "basis": "cars first listed at each yard per week, by the yard's set-out date",
          "yardFields": ["location", "lat", "lng", "coveredWeeks", "stale"],
          "yards": yard_rows, "makes": index_makes}, separators=(",", ":"))
