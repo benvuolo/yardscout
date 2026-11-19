@@ -165,6 +165,9 @@ function freeDeliveryNote() { return ''; }
 function proBoxHtml() { return ''; }
 function cardPhotoHtml() { return ''; }
 var PRO_PUSH_LINE = '';
+// Best yards card (2026-11-19): tested in pf_plan_unit.mjs and pf_plan_e2e.mjs.
+function pfPlanStart() { return ''; }
+function pfPlanAfterRender() {}
 `;
 const ctx = vm.createContext({ console, Promise, Map, Set, Math, String, Number, JSON, Infinity });
 vm.runInContext(prelude + code, ctx, { filename: 'app.js-extract' });

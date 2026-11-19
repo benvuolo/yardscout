@@ -5461,6 +5461,7 @@ function renderLive() {
     document.getElementById('live-grid').innerHTML = (activeZipCoords ? watchStripHtml(0) : '')
       + `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;
     stripAskCount();
+    stripForecastMount();
     return;
   }
 
@@ -5524,6 +5525,7 @@ function renderLive() {
   feedPlaceStrip();   // after the note, so the strip ends up ahead of it
   feedPlaceAlertCard();
   stripAskCount();
+  stripForecastMount();
   if (_feed.shown) appPromoListRendered();
 }
 /* On a phone the watch strip follows the first row of tiles (hub,
@@ -9300,6 +9302,8 @@ document.getElementById('pf-results').addEventListener('change', e => {
   // the results container inherited nowrap into every line — the header grew
   // past the viewport and iOS zoomed the whole page out to fit it.
   document.getElementById('pf-results').classList.toggle('pf-vonly-on', pfVerifiedOnly);
+  // The yards card counts only the rows the list shows: count again.
+  pfPlanRefresh();
   track(pfVerifiedOnly ? 'pf-verified-only-on' : 'pf-verified-only-off');
 });
 
@@ -10114,6 +10118,7 @@ function pfRevealResults() {
   if (top > innerHeight * 0.6) window.scrollTo({ top: window.scrollY + top - 80, behavior: 'smooth' });
 }
 document.getElementById('pf-results').addEventListener('click', e => {
+  if (pfPlanClick(e)) return;
   const sort = e.target.closest('.pf-sort-btn');
   if (sort) { pfSort = sort.dataset.sort; track('pf-sort/' + pfSort); pfRunSearch(); return; }
   const watch = e.target.closest('.pf-watch-btn');
@@ -10135,6 +10140,248 @@ document.getElementById('pf-tiles').addEventListener('click', e => {
   pfRevealResults();
 });
 ['pf-year', 'pf-make', 'pf-model'].forEach(id => document.getElementById(id).addEventListener('change', () => pfSaveState()));
+
+/* ===== BEST YARDS FOR THIS PART (game plan, 2026-11-19) ==================
+ * A card above the fit search's donor list that says which yard to drive
+ * to. It counts ONLY the donor rows the list below shows (the same rows, the
+ * same radius and gates: the first CAP (120) rows, and only Verified rows while
+ * "Verified fits only" is on), grouped by yard. Facts only, per yard:
+ *   - "N donor cars", and "M to check first" for rows that carry the list's
+ *     own "if equipped" line;
+ *   - the newest set-out among the yard's donors (nothing when unknown);
+ *   - the yard's own published price for this part (yardPartQuote, the same
+ *     lookup the rows use; nothing when the list has none, never estimated);
+ *   - "leaves fast here" when lifespanFor says so for one of its donors.
+ * Order: Most donor cars (ties: closer yard), or a chip: Closest, Newest
+ * arrival, Lowest price (no published price last). A yard whose list has
+ * stopped changing (yardListStale: stale or frozen, the app's "List unchanged
+ * since" badge) goes after every other yard in every order; its donors stay
+ * in the list. Tapping a yard filters the list below to it ("Showing <yard>
+ * only · All yards", with the car screen's maps link). No paywall, no Pro
+ * gate. Counters (aggregate, no ids): pf-yards/shown once per search,
+ * pf-yards/tap, pf-yards/chip-<order>, pf-yards/all.
+ * The forecast (docs/forecast.js, another builder) mounts into .pf-forecast
+ * inside the card when window.YSForecast exists; otherwise it stays empty
+ * and takes no space. */
+const PF_PLAN_ORDERS = ['most', 'near', 'new', 'price'];
+const PF_PLAN_TOP = 3;
+/** Pure: group donor items by yard and order the yards.
+ * items: [{yard, d, dateMs (0 = unknown), check, price (number|null), fast,
+ * fastNote, held}] -> [{yard, n, nCheck, d, newestMs, price, fast, fastNote,
+ * held}] sorted by `order` (PF_PLAN_ORDERS), held yards last. */
+function pfPlanYards(items, order) {
+  const by = new Map();
+  for (const it of items || []) {
+    if (!it || !it.yard) continue;
+    let y = by.get(it.yard);
+    if (!y) { y = { yard: it.yard, n: 0, nCheck: 0, d: null, newestMs: 0, price: null, fast: false, fastNote: '', held: false }; by.set(it.yard, y); }
+    y.n++;
+    if (it.check) y.nCheck++;
+    if (it.d != null && Number.isFinite(it.d) && (y.d == null || it.d < y.d)) y.d = it.d;
+    if (it.dateMs > y.newestMs) y.newestMs = it.dateMs;
+    if (it.price != null && Number.isFinite(it.price) && (y.price == null || it.price < y.price)) y.price = it.price;
+    if (it.fast && !y.fast) { y.fast = true; y.fastNote = it.fastNote || ''; }
+    if (it.held) y.held = true;
+  }
+  const near = (a, b) => (a.d ?? 1e9) - (b.d ?? 1e9);
+  const most = (a, b) => (b.n - a.n) || near(a, b);
+  const cmp = {
+    most,
+    near: (a, b) => near(a, b) || (b.n - a.n),
+    new: (a, b) => (b.newestMs - a.newestMs) || near(a, b),
+    price: (a, b) => ((a.price == null) - (b.price == null)) || ((a.price ?? 0) - (b.price ?? 0)) || near(a, b),
+  }[order] || most;
+  return [...by.values()].sort((a, b) => ((a.held ? 1 : 0) - (b.held ? 1 : 0)) || cmp(a, b) || (a.yard < b.yard ? -1 : a.yard > b.yard ? 1 : 0));
+}
+/** Pure: the line under the title, saying how the yards are ordered. */
+function pfPlanRuleText(order, anyHeld) {
+  const rule = {
+    near: 'Closest yard first.',
+    new: 'Yard with the newest donor set out first; yards with no set-out dates last.',
+    price: 'Lowest published yard price for this part first; yards that publish no price last.',
+  }[order] || 'Yard with the most donor cars first; ties go to the closer yard.';
+  return rule + (anyHeld ? ' Yards whose list has stopped changing go last.' : '');
+}
+/** Pure: "newest set out today / yesterday / 3 days ago / Nov 2"; '' when unknown. */
+function pfPlanSetOutText(ms, nowMs) {
+  if (!ms) return '';
+  const t = new Date(nowMs); t.setHours(0, 0, 0, 0);
+  const days = Math.max(0, Math.round((t.getTime() - ms) / 86400000));
+  if (days === 0) return 'newest set out today';
+  if (days === 1) return 'newest set out yesterday';
+  if (days < 14) return `newest set out ${days} days ago`;
+  const d = new Date(ms);
+  return 'newest set out ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', ...(d.getFullYear() !== t.getFullYear() ? { year: 'numeric' } : {}) });
+}
+// The live card: the rows it was built from and the view state. view resets
+// when the search changes (part, car, engine, radius).
+let pfPlan = null;
+let pfPlanView = { key: '', order: 'most', yard: '', all: false };
+const _pfPlanShown = new Set();
+function pfPlanCount(name) {
+  try { sendEvent('pf-yards/' + name); } catch (e) { /* analytics must never break the app */ }
+}
+/** The donor rows the list below shows right now (the card counts these only). */
+function pfPlanShownRows() {
+  if (!pfPlan) return [];
+  return pfVerifiedOnly ? pfPlan.rows.filter(r => r.tier === 'verified') : pfPlan.rows;
+}
+function pfPlanItems(rows) {
+  return rows.map(r => {
+    const v = r.v;
+    const q = yardPartQuote(v.location, pfPlan.variants);
+    const ls = lifespanFor(v);
+    return {
+      yard: v.location, d: r.d, dateMs: yardDateMs(v.dateAdded),
+      check: (r.warns || []).some(w => /if equipped/i.test(String(w))),
+      price: q && q.status === 'priced' ? q.price : null,
+      fast: !!(ls && ls.fast),
+      fastNote: ls && ls.fast ? `${v.make} ${v.model}s leave this yard in ~${ls.avg} days against ~${ls.typical} for the yard as a whole: they get picked over and pulled fast. Get there early.` : '',
+      held: !!yardListStale(v.location),
+    };
+  });
+}
+/** Start a card for this render: rows = exactly the rows the list renders. */
+function pfPlanStart(rows, s, radius, variants, famId, total) {
+  const key = [pfCat && pfCat.id, s.year, s.make, s.model, famId || '', radius || ''].join('|');
+  if (pfPlanView.key !== key) pfPlanView = { key, order: 'most', yard: '', all: false };
+  const w = pfGenWindow(s.make, s.model, s.year);
+  pfPlan = {
+    rows, variants, radius, total: Math.max(total || 0, rows.length), perEach: !!(pfCat && pfCat.perEach),
+    ctx: { make: s.make, model: s.model, year: s.year, yrMin: w ? w[0] : null, yrMax: w ? w[1] : null,
+      lat: activeZipCoords ? activeZipCoords.lat : null, lng: activeZipCoords ? activeZipCoords.lng : null,
+      radiusMi: radius || null, where: 'parts' },
+  };
+  return `<section class="pf-plan" aria-label="Best yards for this part"><div class="pf-plan-body">${pfPlanBodyHtml()}</div><div class="pf-forecast"></div></section>`;
+}
+function pfPlanBodyHtml() {
+  const shown = pfPlanShownRows();
+  const yards = pfPlanYards(pfPlanItems(shown), pfPlanView.order);
+  if (pfPlanView.yard && !yards.some(y => y.yard === pfPlanView.yard)) pfPlanView.yard = '';
+  const title = '<h3 class="pf-plan-title">Best yards for this part</h3>';
+  if (!yards.length) {
+    return title + `<p class="pf-plan-rule">No donor cars within ${pfPlan.radius ? pfPlan.radius + ' mi' : 'range'} right now.</p>`;
+  }
+  const anyHeld = yards.some(y => y.held);
+  const chips = yards.length > 1
+    ? `<div class="pf-plan-chips" role="group" aria-label="Order yards by">${[['most', 'Most donor cars'], ['near', 'Closest'], ['new', 'Newest arrival'], ['price', 'Lowest price']]
+      .map(([k, l]) => `<button type="button" class="pf-plan-chip" data-order="${k}" aria-pressed="${pfPlanView.order === k}">${l}</button>`).join('')}</div>`
+    : '';
+  const now = Date.now();
+  const row = (y, i) => {
+    const facts = [y.d != null ? `${Math.round(y.d)} mi` : '', `${y.n.toLocaleString()} donor car${y.n === 1 ? '' : 's'}`,
+      y.nCheck ? `<span title="These donors carry an “if equipped” line: check the car has it before you pull">${y.nCheck.toLocaleString()} to check first</span>` : ''].filter(Boolean);
+    const set = pfPlanSetOutText(y.newestMs, now);
+    const price = y.price != null ? `yard price${pfPlan.perEach ? ' from' : ''} $${y.price.toFixed(2)}${pfPlan.perEach ? ' each' : ''}` : '';
+    const more = [set, price ? `<span title="From the yard’s own published price list">${price}</span>` : '',
+      y.fast ? `<span class="lot-fast" title="${escapeHtml(y.fastNote)}">leaves fast here</span>` : ''].filter(Boolean);
+    const held = y.held ? yardListChipHtml(y.yard) : '';
+    return `<li><button type="button" class="pf-plan-yard${y.held ? ' pf-plan-held' : ''}" data-yard="${escapeHtml(y.yard)}" aria-pressed="${pfPlanView.yard === y.yard}">`
+      + `<span class="pf-plan-rank" aria-hidden="true">${i + 1}</span><span class="pf-plan-main">`
+      + `<span class="pf-plan-name">${escapeHtml(y.yard)}</span>`
+      + `<span class="pf-plan-facts">${facts.join(' &middot; ')}</span>`
+      + (more.length ? `<span class="pf-plan-facts pf-plan-more">${more.join(' &middot; ')}</span>` : '')
+      + (held ? `<span class="pf-plan-badge">${held}</span>` : '')
+      + '</span></button></li>';
+  };
+  // The at-a-glance line: the same shown rows. At the list's row cap it says
+  // so in the list's own words (N is then not every donor in range).
+  const nRows = shown.length;
+  const capNote = pfPlan.total > pfPlan.rows.length
+    ? ` <span class="pf-plan-cap">Showing the first ${pfPlan.rows.length} of ${pfPlan.total.toLocaleString()} donors — tighten the radius to narrow.</span>` : '';
+  const headline = `<p class="pf-plan-headline">${nRows.toLocaleString()} donor car${nRows === 1 ? '' : 's'} at ${yards.length.toLocaleString()} yard${yards.length === 1 ? '' : 's'} ${pfPlan.radius ? `within ${pfPlan.radius} mi` : 'in range'}.${capNote}</p>`;
+  const list = pfPlanView.all ? yards : yards.slice(0, PF_PLAN_TOP);
+  const toggle = yards.length > PF_PLAN_TOP
+    ? `<button type="button" class="linklike pf-plan-all">${pfPlanView.all ? `Show the top ${PF_PLAN_TOP}` : `Show all ${yards.length.toLocaleString()} yards`}</button>`
+    : '';
+  return title + headline + `<p class="pf-plan-rule">${escapeHtml(pfPlanRuleText(pfPlanView.order, anyHeld))}</p>` + chips
+    + `<ol class="pf-plan-yards">${list.map(row).join('')}</ol>` + toggle;
+}
+/** The "Showing <yard> only" bar above the rows, and which rows show. */
+function pfPlanApplyFilter() {
+  const out = document.getElementById('pf-results');
+  if (!out || !pfPlan) return;
+  const yard = pfPlanView.yard;
+  const locOf = new Map(pfPlan.rows.map(r => [vehicleKey(r.v), r.v.location]));
+  out.querySelectorAll('.pf-row-card[data-vkey]').forEach(c => {
+    c.classList.toggle('pf-yard-out', !!yard && locOf.get(c.dataset.vkey) !== yard);
+  });
+  const bar = out.querySelector('.pf-yard-only');
+  if (!bar) return;
+  if (!yard) { bar.hidden = true; bar.innerHTML = ''; return; }
+  const v = (pfPlan.rows.find(r => r.v.location === yard) || {}).v || {};
+  // The car screen's maps link: the yard by name (hours, phone, directions),
+  // else directions to its pin.
+  const hours = yardMapsUrl(yard, v.city, v.state);
+  const dir = hours ? '' : carDirectionsUrl(v);
+  bar.hidden = false;
+  bar.innerHTML = `<span class="pf-yard-only-text">Showing <strong>${escapeHtml(yard)}</strong> only</span>`
+    + '<button type="button" class="linklike pf-plan-reset">All yards</button>'
+    + (hours ? `<a class="locator-link pf-plan-dir" href="${escapeHtml(hours)}" target="_blank" rel="noopener" title="Opens this yard in Maps, which shows today’s hours, the phone number and directions">${ICON.pin} Hours and directions</a>`
+      : dir ? `<a class="locator-link pf-plan-dir" href="${escapeHtml(dir)}" target="_blank" rel="noopener">${ICON.pin} Directions</a>` : '');
+}
+function pfPlanRefresh() {
+  const body = document.querySelector('#pf-results .pf-plan-body');
+  if (!body || !pfPlan) return;
+  body.innerHTML = pfPlanBodyHtml();
+  pfPlanApplyFilter();
+}
+/** After the results render: filter, count the card once per search, mount the forecast. */
+function pfPlanAfterRender() {
+  const out = document.getElementById('pf-results');
+  const card = out && out.querySelector('.pf-plan');
+  if (!card || !pfPlan) return;
+  pfPlanApplyFilter();
+  if (!_pfPlanShown.has(pfPlanView.key)) { _pfPlanShown.add(pfPlanView.key); pfPlanCount('shown'); }
+  ysForecastMount(card.querySelector('.pf-forecast'), pfPlan.ctx);
+}
+/** The forecast hook: docs/forecast.js defines window.YSForecast. Absent, the
+ * mount point stays empty (CSS :empty hides it). */
+function ysForecastMount(el, ctx) {
+  if (!el) return;
+  try {
+    if (window.YSForecast && typeof window.YSForecast.mount === 'function') window.YSForecast.mount(el, ctx);
+  } catch (e) { /* the forecast must never break the list */ }
+}
+/** Clicks inside the card and the yard bar; true when handled. */
+function pfPlanClick(e) {
+  const chip = e.target.closest('.pf-plan-chip');
+  if (chip) {
+    if (PF_PLAN_ORDERS.includes(chip.dataset.order) && chip.dataset.order !== pfPlanView.order) {
+      pfPlanView.order = chip.dataset.order;
+      pfPlanCount('chip-' + chip.dataset.order);
+      pfPlanRefresh();
+    }
+    return true;
+  }
+  const yb = e.target.closest('.pf-plan-yard');
+  if (yb) {
+    const y = yb.dataset.yard;
+    pfPlanView.yard = pfPlanView.yard === y ? '' : y;
+    if (pfPlanView.yard) pfPlanCount('tap');
+    pfPlanRefresh();
+    const bar = document.querySelector('#pf-results .pf-yard-only');
+    if (pfPlanView.yard && bar) {
+      const top = bar.getBoundingClientRect().top;
+      window.scrollTo({ top: Math.max(0, window.scrollY + top - 80), behavior: 'smooth' });
+    }
+    return true;
+  }
+  if (e.target.closest('.pf-plan-all')) {
+    pfPlanView.all = !pfPlanView.all;
+    if (pfPlanView.all) pfPlanCount('all');
+    pfPlanRefresh();
+    return true;
+  }
+  if (e.target.closest('.pf-plan-reset')) {
+    pfPlanView.yard = '';
+    pfPlanRefresh();
+    const card = document.querySelector('#pf-results .pf-plan');
+    if (card) { const top = card.getBoundingClientRect().top; if (top < 0) window.scrollTo({ top: Math.max(0, window.scrollY + top - 80), behavior: 'smooth' }); }
+    return true;
+  }
+  return false;
+}
 
 function pfRunSearch() {
   const out = document.getElementById('pf-results');
@@ -10484,14 +10731,24 @@ function pfRunSearch() {
   const nVer = rows.filter(r => r.tier === 'verified').length;
   const nSame = rows.filter(r => r.src === 'same-engine').length;
   if (!rows.length) {
-    out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly &mdash; widen the search area, or watch for one below.</div>${pfWatchHtml(s)}`;
+    out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly &mdash; widen the search area, or watch for one below.</div>${pfPlanStart([], s, radius, [], pfChosenFam)}${pfWatchHtml(s)}`;
+    pfPlanAfterRender();
     pfRenderTiles(); pfRevealResults();
     return;
   }
   const CAP = 120;
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
+  // Engine-assembly rows on most yard lists are cylinder-tiered — quote the
+  // row matching the chosen family's cylinder count ahead of the generics.
+  let quoteVariants = pfCat.priceTokens.map(t => t.toLowerCase());
+  if (pfCat.id === 'engine-assembly' && pfChosenFam) {
+    const qFam = interchangeData.engineFamilies.find(f => f.id === pfChosenFam);
+    if (qFam) quoteVariants = pfEngineQuoteVariants(qFam.cyl).concat(quoteVariants);
+  }
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'} in range</strong> ${rows.length === 1 ? 'It carries' : 'They carry'} ${/s$/.test(pfCat.label) ? '' : 'a '}fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)}. ${pfSort === 'new' ? 'Newest arrivals first' : 'Nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
+    // Best yards for this part: the rows rendered below, by yard.
+    + pfPlanStart(rows.slice(0, CAP), s, radius, quoteVariants, pfChosenFam, rows.length)
     + pfWatchHtml(s, true)
     + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit', nSame)
@@ -10501,14 +10758,8 @@ function pfRunSearch() {
     + groupNotes.map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('')
     // Category-level honesty notes always show (spec: engine long-block
     // caveat, unknown mileage, pull logistics, VIN-lock, airbag handling…).
-    + (pfCat.notes || []).map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('');
-  // Engine-assembly rows on most yard lists are cylinder-tiered — quote the
-  // row matching the chosen family's cylinder count ahead of the generics.
-  let quoteVariants = pfCat.priceTokens.map(t => t.toLowerCase());
-  if (pfCat.id === 'engine-assembly' && pfChosenFam) {
-    const qFam = interchangeData.engineFamilies.find(f => f.id === pfChosenFam);
-    if (qFam) quoteVariants = pfEngineQuoteVariants(qFam.cyl).concat(quoteVariants);
-  }
+    + (pfCat.notes || []).map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('')
+    + '<div class="pf-yard-only" role="status" hidden></div>';
   out.innerHTML = head + rows.slice(0, CAP).map(r => {
     const v = r.v;
     const quote = yardPartQuote(v.location, quoteVariants);
@@ -10534,6 +10785,7 @@ function pfRunSearch() {
   }).join('') + (rows.length > CAP
     ? `<div class="pf-more">Showing the first ${CAP} of ${rows.length.toLocaleString()} donors — tighten the radius to narrow.</div>`
     : '');
+  pfPlanAfterRender();
   pfRenderTiles(); pfRevealResults();
 }
 
@@ -11507,8 +11759,28 @@ function liveWatchScope() {
   return { make, models, yrMin, yrMax, label, watched };
 }
 
-/** Strip above the Live grid while a make is filtered: one tap watches it. */
+/** Strip above the Live grid while a make is filtered: one tap watches it.
+ * Narrowed to exactly one model, it carries the forecast's mount point
+ * (.strip-forecast, filled by stripForecastMount when docs/forecast.js has
+ * defined window.YSForecast; empty and hidden otherwise). */
 function watchStripHtml(nCars) {
+  const html = watchStripBodyHtml(nCars);
+  const sc = html ? liveWatchScope() : null;
+  if (!sc || sc.models.length !== 1) return html;
+  return html.replace(/<\/div>\s*$/, '<div class="strip-forecast"></div></div>');
+}
+/** The forecast for the Cars tab's one-model scope (where: 'cars'). */
+function stripForecastMount() {
+  const el = document.querySelector('#live-grid .strip-forecast');
+  if (!el) return;
+  const sc = liveWatchScope();
+  if (!sc || sc.models.length !== 1) return;
+  const r = activeZipCoords ? effectiveRadiusMi() : null;
+  ysForecastMount(el, { make: sc.make, model: sc.models[0], year: null, yrMin: sc.yrMin || null, yrMax: sc.yrMax || null,
+    lat: activeZipCoords ? activeZipCoords.lat : null, lng: activeZipCoords ? activeZipCoords.lng : null,
+    radiusMi: r || null, where: 'cars' });
+}
+function watchStripBodyHtml(nCars) {
   if (focusedCarKey) return '';
   const sc = liveWatchScope();
   if (!sc) return '';

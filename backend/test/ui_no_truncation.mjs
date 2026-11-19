@@ -1266,6 +1266,69 @@ const SCREENS = [
     await page.evaluate(() => { pfCat = interchangeData.categories.find(c => c.id === 'side-mirrors'); pfPartInput.value = pfCat.label; pfRunSearch(); });
     await settle(page, 600);
   }],
+  // Best yards for this part (2026-11-19): the game-plan card over the donor
+  // list. many = every yard of the model most yards near the zip carry,
+  // expanded; long = a long yard name with the held-list badge, tapped (the
+  // "Showing <yard> only" bar); one = a single yard (no chips); none = no
+  // donors (the card's own empty line, the forecast mount point).
+  ...['many', 'long', 'one', 'none'].map((kind) => [`pf-plan-${kind}`, async (page) => {
+    await tab(page, 'parts');
+    const s = await page.evaluate(() => {
+      const r = effectiveRadiusMi(), by = new Map();
+      for (const v of liveInventory) {
+        const d = vehicleDistanceMi(v); if (d == null || (r && d > r)) continue;
+        const mk = canonicalMake(v.make), md = canonicalModel(v.make, v.model), w = pfGenWindow(mk, md, v.year);
+        if (!w) continue;
+        const k = `${mk}|${md}|${w[0]}`, e = by.get(k) || { s: [String(v.year), mk, md], yards: new Set() };
+        e.yards.add(v.location); by.set(k, e);
+      }
+      const best = [...by.values()].sort((a, b) => b.yards.size - a.yards.size)[0];
+      return best ? best.s : null;
+    });
+    if (!s) throw new Error('no model with a generation window near the test zip');
+    await page.selectOption('#pf-year', s[0]);
+    await page.selectOption('#pf-make', s[1]);
+    await page.waitForFunction((md) => [...document.getElementById('pf-model').options].some(o => o.value === md), s[2], { timeout: 8000 });
+    await page.selectOption('#pf-model', s[2]);
+    await page.evaluate((kind) => {
+      window.__planInv = liveInventory;
+      pfCat = interchangeData.categories.find(c => c.id === 'side-mirrors'); pfPartInput.value = pfCat.label;
+      pfRunSearch();
+      const first = pfPlan && pfPlan.rows[0] && pfPlan.rows[0].v.location;
+      if (kind === 'one') liveInventory = liveInventory.filter(v => v.location === first);
+      if (kind === 'none') liveInventory = [];
+      if (kind === 'long') {
+        // the cars of one yard under a long name (copies; the real list is put back)
+        const LONG = 'Pick-n-Pull Self Service Auto Dismantlers and Used Parts Superstore - Sacramento Metro North (Premium)';
+        liveInventory = liveInventory.map(v => (v.location === first ? { ...v, location: LONG } : v));
+        window.__ylOrig = yardLists;
+        yardLists = { ...(yardLists || {}), [LONG]: { state: 'frozen', changedAt: '2026-10-02T12:00:00Z', readAt: '2026-11-18T12:00:00Z', flushAt: null } };
+      }
+      pfPlanView.all = kind !== 'one';
+      pfRunSearch();
+      if (kind === 'long') {
+        const LONG = 'Pick-n-Pull Self Service Auto Dismantlers and Used Parts Superstore - Sacramento Metro North (Premium)';
+        const b = [...document.querySelectorAll('#pf-results .pf-plan-yard')].find(x => x.dataset.yard === LONG);
+        if (!b) throw new Error('long-named yard not on the card');
+        b.click();
+      }
+    }, kind);
+    await page.waitForSelector('#pf-results .pf-plan', { timeout: 15000 });
+    if (kind !== 'none' && !(await page.$('#pf-results .pf-plan-yard'))) throw new Error('no yard rows on the card');
+    // headline ("N donor cars at Y yards within R mi") and rank numerals
+    if (kind !== 'none' && !(await page.evaluate(() => /^\d[\d,]* donor cars? at \d+ yards? /.test((document.querySelector('#pf-results .pf-plan-headline') || {}).textContent || '')
+      && [...document.querySelectorAll('#pf-results .pf-plan-rank')].every((e, i) => e.textContent.trim() === String(i + 1))))) throw new Error('card headline or rank numerals missing');
+    if (kind === 'none' && !(await page.evaluate(() => /^No donor cars within/.test(document.querySelector('#pf-results .pf-plan-rule').textContent)))) throw new Error('empty card line missing');
+    if (kind === 'one' && (await page.$('#pf-results .pf-plan-chip'))) throw new Error('chips shown for one yard');
+    await settle(page, 300);
+    await page.evaluate(() => { const c = document.querySelector('#pf-results .pf-plan'); c.scrollIntoView({ block: 'start' }); window.scrollBy(0, -70); });
+  }, async (page) => {
+    await page.evaluate(() => {
+      if (window.__planInv) { liveInventory = window.__planInv; window.__planInv = null; }
+      if (window.__ylOrig !== undefined) { yardLists = window.__ylOrig; window.__ylOrig = undefined; }
+      pfPlanView = { key: '', order: 'most', yard: '', all: false };
+    });
+  }]),
   // Aftermarket donor cards (hub 2026-11-10): GSP CV axle for a 2021 GMC
   // Terrain. Only the checks to make at the car sit on the card; the listing's
   // provenance is behind "Why it fits". No card shows more than 7 lines of
