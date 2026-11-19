@@ -3285,3 +3285,68 @@ number is written here.
   app does not link out today). No web addresses in the draft. The owner
   needs the operator's contact address from one of the sites' contact
   pages (the hub does not machine-read sites that refused it).
+
+## 2026-11-19 18:23 UTC forecast on main (jh-v219); scan confirmed the re-match; nissan candidate rc5 in full regression
+
+- **`hub/rc4-1119` full regression: 113 passed, 0 failed, 0 skipped**
+  (finished 17:57; both layout halves 1,742 s). Pushed to main 18:21 UTC
+  as e166f63c after merging scan commit bffdb032. sw `jh-v219`. Live
+  load to follow about ten minutes after the pages deploy.
+  (The session's worker restarted about 17:55 to 18:18; nothing was lost,
+  the run had finished and its log was on disk.)
+- **Scan 44571879073** (GitHub's own cron, started 16:57, the 16:00 slot
+  57 minutes late; finished 18:21, success): "[vin model] 119 car(s)
+  flagged ... (119 matched on the VIN's model); 73 VIN(s) of another
+  maker's vehicle ignored for matching and specs; ... unclassified 0".
+  No WARNING, no traceback. Task 82 closed.
+- **Round 9 handed back** (interchange builder): `interchange/round9-1119`
+  0f8494df, `interchange/payload-field2-reader` 4611cd7c,
+  `interchange/nissan-ship-1119` 5733f99a.
+  - A: cause of the missing wording: the name "Motor Assy-Regulator" was
+    read as a regulator. Now from every part name the raw prints: 30
+    window-regulator groups say "window motor only", 49 are regulator
+    assemblies, mirrors 16 and climate 5 are assemblies. 0 held by name.
+  - B: four hold rules with census: variant pages unread (9 vehicle-years
+    / 5 groups), twin changeover inside the year (22 / 8), body mark (5 /
+    3), drive left open (1 / 1). 8 groups left the candidate (all three
+    gauge-cluster groups among them).
+  - C: label names the site: Infiniti catalog 55, Nissan catalog 48.
+  - D (measure): plain rows under a gas-only limit with no engine decode:
+    nissan 24 of 180 (all QX60 2015-17 with no VIN), gm 63 of 819 (no
+    hybrid in those model years).
+  - E/G: nissan groups are published only in `oemGroups2`, which shells
+    from jh-v220 on read; older store apps show no nissan rows. On the
+    b22c3640 lot: 100 groups (window-regulator 79, side-mirrors 16,
+    climate-control 5), 546 app-years, 14,026 plain / 1,108 if equipped /
+    2 hidden pairs. Wiper-motor (3) stays held.
+  - Live makes, measured only: motor-named groups WITHOUT "window motor
+    only": mopar 21, subaru 8 (gm, toyota, ford 0). To fix next (a note
+    that says less; hub check plus a short independent check).
+- **Hub's own checks on the ship branch:** candidate byte-identical to
+  the one both independent checks read (blob b14442cf); against the
+  1119i candidate 0 added groups, 0 gained vehicle-years, 0 widened
+  gates, 8 groups and 36 vehicle-years removed; the eight live groups
+  files identical to main; payload old fields (`oemGroups`, `amGroups`
+  in all 29 lazy files; the main file except `builtAt`, `oemLazy`,
+  `oemStatus`) identical to main; nissan only in `oemGroups2`.
+- **Independent check of the new wording** (fresh agent, blind, branch
+  `interchange/verify-nissan-names-1119` head 4f885f46): 103 groups;
+  component wording 102 RIGHT / 0 WRONG / 1 RISK, label 103 RIGHT, length
+  103 RIGHT (longest 159). The RISK is held wiper group 28800-1LA0A
+  ("motor with linkage" where the page says "Drive Assy").
+- **`hub/rc5-1119`** = main e166f63c + the ship branch (payload conflicts
+  taken from main and rebuilt: old fields identical, 100 groups in the new
+  field, `test_ship_1119` 16 checks) + the wording-check report; sw
+  `jh-v220`. Full regression started 18:23 UTC.
+- **Blocked:** `deploy-workers.yml` (api) for the ops-email line was
+  refused by the session's permission check at 18:21. Not worked around.
+  The owner can run it from the Actions page, or allow the hub to.
+- **Scheduled crawl: no pause needed** (question to the owner withdrawn).
+  Its plan step finds nothing pending on any open site, so the crawl job
+  is skipped and no request is sent (07:40 run: plan success, crawl
+  skipped; the six sites of pass 2 are done or blocked).
+- **Drafts** (owner 17:47 UTC: "I only want drafts if they have
+  recepients"): the two recipient-less drafts (catalog operator, 1A Auto)
+  removed from Gmail, texts in `ops/yard-outreach-drafts.md`, rule in
+  CLAUDE.md. Remaining draft: Budget U-Pull-It follow-up (has its
+  recipient). Web search found no address confirmed by either company.
