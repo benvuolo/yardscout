@@ -1110,6 +1110,59 @@ on it would be wrong for most. Today their parts use the VIN's model year
 Recommendation (not built, a different rule): when the makes cross maker
 groups (`_trans_make_conflict`, already used to drop transmission claims
 for the same reason), match on the listing year too, and keep the flag.
+**Built after hub review, see "Addition" below.**
+
+### Hub decisions (review of 19b511ef)
+
+Accepted as built. "Parts only" watches: whether a car has parts is match
+logic (rule 6 allows it to improve); no change. Chip wording "…; parts
+matched on the VIN": not now (no layout test for a longer chip in released
+shells); `vinRematch` is enough for a later app line. The E-350 7.3L Power
+Stroke row goes to `ops/parts.md`; the table is left alone.
+
+### Addition: a VIN of another maker group steers nothing
+
+When `_trans_make_conflict(v, vin_dec)` is true (the listing's make and the
+VIN's make are in different maker groups), `enrich_vehicles._apply_match`
+marks the car `_vin_other_vehicle` and drops the decode for matching:
+- **Changed:** match year = the listing's year (was the VIN's);
+  `_spanYear` / `spanYear` = the listing's year (modelYears spans);
+  `match_vehicle(..., vin_decode=None)`, so no decode gate (trim, drive,
+  body, transmission, hybrid) confirms or rules out a row and no row is
+  "VIN-confirmed" (gated rows are "if equipped", as for a car with no
+  decode). In `output_json` the decode is not read: no `vpicTrim`,
+  `vpicTrimQuality`, `vpicDecodeWell`, `vpicSeries`, `vpicDriveType`, no
+  engine or body from the decode, and the transmission resolves from the
+  listing only (the decode's own transmission used to be applied; only the
+  rule claims were skipped). The payload's vpic side table therefore
+  carries only the flag for these cars, so watch trim/drive filters,
+  landed drive and notable-trim hits no longer read the other vehicle.
+- **Kept:** `vpicMismatch` (the year and make messages, from the real
+  decode); `_vpic` itself (the decode cache and the decode-well count).
+- **Already safe, unchanged:** `resolve_model_blob` and `_scion_by_vin` run
+  before the check and only use a decode whose make agrees; the
+  foreign-make resolution changes the listing's make to the VIN's when it
+  applies, after which the makes no longer conflict.
+- One maker group (GMC / Chevrolet, Chrysler / Dodge / Ram): unchanged.
+- Log line adds "K VIN(s) of another maker's vehicle ignored for matching
+  and specs".
+
+On b22c3640 (`crossMakeGroup` in `scraper/vin_rematch_2026-11-19.json`;
+"before" equals the published list for every car): 105 make mismatches,
+28 in one group (unchanged), 77 across groups. 21 had a parts list; 12
+had a VIN year different from the listing's (the earlier 15 counted all
+105; 3 are one-group cars and keep the VIN year). 7 lists change, rows
+169 -> 198 (rows the other vehicle's decode had ruled out come back as
+"if equipped"); 0 VIN-confirmed rows dropped. Example: a 1994 Ford F-150
+with a 2002 Nissan Sentra VIN was matched as a 2002 F-150 (Headlights,
+Tailgate); now as a 1994 (OBS Grille + Headlight Bezels, Tailgate
+straight, rust-free, Bench Seat).
+
+Tests: `test_vin_model_mismatch.py` 87 checks (+14: cross-group flag kept,
+listing year, parts with no decode, no VIN-confirmed row, no re-match,
+output without decode specs / engine / body / VIN transmission, listing
+fields and spanYear; one-group car keeps the VIN year, decode gates and
+specs; log line). `tools/regress.sh --quick` on 3634d957: 75 passed, 0 failed, 0 skipped.
 
 ### Tests
 
