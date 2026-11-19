@@ -633,3 +633,172 @@ test_model_lifespan, test_junkyards_json, test_landed_models.
   model, other name" and "different model"; flag only the second kind, with
   the same wording as the year/make flag. Size: a few hundred cars. Tests:
   no false flag on the naming pairs above.
+
+## 2026-11-19 — arrivals history and the arrival forecast (branch feat/arrival-forecast-1119)
+
+Owner ask (11-19, "something that differentiates us"), hub's pick: answer
+"How often does my car land near me?" from the months of history only
+YardScout has. Two parts: the scan publishes an arrivals history; a small
+client module (`docs/forecast.js`, global `YSForecast`) turns it into one
+line, a facts line and eight weekly bars. The Parts "Best yards for this
+part" card (another builder, `docs/app.js`) calls it through a hook.
+
+### What the scan publishes (`docs/data/arrivals/`)
+
+Writer `_write_arrivals_json` / `_write_arrivals_safe` in
+`scraper/junkyard_scraper.py`, query `db.arrival_history` in `scraper/db.py`.
+Called right AFTER `_record_scan_to_db` (both `--save` paths), so the DB
+already holds this scan. Rewritten at most every 20 h
+(`ARRIVALS_REBUILD_HOURS`, compared with the index's own `builtAt`), i.e.
+about once a day; the other scans log `[arrivals] kept`. Any exception logs
+`[arrivals] WARNING: not written (...)` and leaves the previous files
+(everything is built in memory, then written as temp + rename, index last).
+The scan's commit step already stages all of `docs/data/`
+(`git add docs/data/`), so scan.yml is unchanged.
+
+Definitions (as built; also in the writer's docstring):
+- **Window**: the 8 full weeks (56 days) ending the day before the scan's
+  UTC date; week 1 oldest, week 8 newest.
+- **Coverage**: a yard's coverage starts the day after the first scan that
+  ever saw it (earliest `first_seen` at that `location`). Only weeks wholly
+  inside coverage count (`coveredWeeks` 0..8, always the newest weeks);
+  arrivals in other weeks are not written. Stricter than asked: the cars of
+  that first scan are never arrivals (cold start), even when one is dated
+  the day after.
+- **Arrival day**: the yard's `date_added` when it is a real ISO date no
+  later than `first_seen` + 1 day and no more than 10 days before
+  `first_seen`; otherwise (missing, malformed, impossible, or later than
+  first_seen + 1) the `first_seen` date. `date_added` more than 10 days
+  before `first_seen` = a relist: not counted.
+- **Flush scan**: when the cars first seen at one yard in one scan exceed
+  max(40, 35% of the yard's list right after that scan), none of them
+  count. "Current count" is read as the list at that scan (cars first seen
+  at or before it, not departed by then), not today's list, so a yard that
+  has grown since does not make an old flush look normal. Reused from the
+  list freshness work: cars first seen in the very scan a yard's
+  `listFlushAt` names (a flush after a freeze, or a list jump / re-key,
+  `yard_freshness.py`) also do not count. Not reused: the lifespan writer's
+  `yard_departure_reliability` (it judges departures, not arrivals) and
+  `arrival_held` by date (it holds every car dated before a flush for 8
+  days, which over a 56-day history would drop a yard's real earlier
+  arrivals).
+- **Coverage restarts after a flush** (hub review, 11-19): what landed
+  before a flush is not known (a frozen list's real arrivals are the flush
+  scan we drop), so a yard's coverage starts the day after its latest flush
+  scan dated inside the window (a flush-scan group above, or its
+  `listFlushAt`) when that is later than its cold-start coverage. Weeks not
+  wholly after it are not covered and their arrivals are not written. Cost:
+  a list jump / re-key at a healthy yard (also a `listFlushAt`) drops that
+  yard's earlier weeks too, until they leave the window.
+- **Carried yards** (read 0 this scan, list kept by stale-keep): the
+  freshness state keeps the previous `listChangedAt` and computes
+  `listState` from it against now, so one failed read changes nothing; the
+  yard turns stale (in arrivals: frozen) only after 10 full business days
+  without an observed change, unread days included. The history DB does
+  not mark a carried yard's cars departed (`record_scan` only touches yards
+  present in the scan); cars that arrive while it is unread get
+  `first_seen` at the next read and keep their own `date_added` under the
+  10-day rule.
+- **Stale**: a yard whose `listState` is "frozen" (10+ business days
+  without a change) is written with `stale` 1; its rows are still written,
+  the client leaves the yard out of the rate and says so.
+- **Make/model**: every history row goes through `_lifespan_canon_factory`
+  (normalize_make incl. General Motors resolution, normalize_model,
+  resolve_model_blob by cached VIN decode), as `model_lifespan_stats`
+  does, so keys equal the live inventory's. Model year kept (0 when the
+  row has none).
+- **Yards**: every yard in this scan's inventory, in payload order; a yard
+  the DB knows but this scan does not carry is not written (its rows are
+  dropped, logged as "yard not in this scan").
+
+Format (compact JSON):
+- `index.json`: `{builtAt, windowStart, windowEnd, weeks: 8, basis,
+  yardFields: [location, lat, lng, coveredWeeks, stale], yards: [[...]],
+  makes: {make: [slug, arrivals]}}`.
+- `<make-slug>.json` (slug = `landed_slug`, as /landed): `{builtAt,
+  windowEnd, make, slug, models: {model: [[yardIndex, year, c1..c8], ...]}}`,
+  only (yard, year) pairs with at least one arrival. Yard indices are per
+  build; the client reads a make file only against the index with the same
+  `builtAt` (on a mismatch it fetches the index once more, else shows
+  nothing).
+
+Log line (one per rebuild): `[arrivals] window A..B: N arrivals, R rows, M
+makes, Y yards (S stale), BYTES bytes total, T s; not counted: cold start
+.., flush scan .., no make/model .., outside coverage .., outside window
+.., relist .., yard not in this scan .. (of H history rows)`.
+
+Size estimate (the real DB is not reachable here): the 11-19 07:02
+inventory has 208,313 cars dated inside the window across 155,490 distinct
+make/model/yard/year keys (75 makes, 307 yards); written as rows that is
+~4.1 MB raw before cars that already left are added. A synthetic history
+of 300,000 arrivals spread over the same cars gave 200,128 rows, 5.4 MB raw
+in 80 files (Ford 0.76 MB raw / 111 KB gzipped, Chevrolet 0.72 MB, index
+7 KB gzipped) and took 4.8 s to build. Expect 4-6 MB raw, rewritten about
+once a day; a visitor loads the index plus one make file.
+
+### What a visitor sees (`docs/forecast.js`)
+
+`YSForecast.mount(el, {make, model, year, yrMin, yrMax, lat, lng, radiusMi,
+where})`. Data from `DATA_BASE + 'data/arrivals/...'` (app.js's global:
+empty on the web, the site's origin in the native shells); index loaded
+once, make files on demand, kept in memory; the service worker is
+network-first for them. A missing or failed file, a make not in the index,
+or no place renders nothing and throws nothing. `summary()` (pure) counts
+yards within the radius, skipping stale yards and yards with fewer than 2
+covered weeks; rate = sum over counted yards of arrivals / covered weeks.
+`year` is used as a one-year span only when yrMin and yrMax are both left
+out; null means any year.
+
+Words: "About N a week land within R mi" (rate >= 1.5), "About one a week
+lands within R mi" (0.75 to 1.5), "About one every N weeks lands within R
+mi" (below 0.75 with 2+ arrivals; N = round(1/rate) but never less than 2:
+rates just under 0.75 round to 1 and are said as 2, the rarer side), "Rare
+here: 1 landed within R mi in the last 8 weeks", "None landed within R mi
+in the last 8 weeks", "Not enough history near you yet" (no counted yard);
+"of <where>" follows "R mi" when given. Then the facts line "T in the last
+8 weeks at Y yards (K yards not counted: lists not updating / new to
+YardScout)" (only the reasons that apply, singular when one), the subject
+("2003-2009 4Runner" / "Civic, any year"), "Most land at: A (9), B (7)"
+when the total is 3+, the label "From set-out dates YardScout has recorded.
+Past weeks, not a promise.", and eight bars (oldest to newest, `role="img"`
+labelled with the numbers). A model the make file does not list reads as
+zero arrivals (keys equal the live inventory by construction); a make the
+index does not list renders nothing. Styles: end of `docs/styles.css`
+("Arrival forecast"), page tokens only.
+
+### Tests
+
+- `python3 scraper/test_arrivals.py` (synthetic DB): 55 checks pass, incl. freeze then flush in week 5
+- `node backend/test/forecast_unit.mjs`: 71 pass
+- `node backend/test/forecast_e2e.mjs` (Playwright, fixture by routing,
+  320/390/1280, dark, missing files, page errors): 70 pass; `SHOTS=1` writes the two owner screenshots (`ops/screens/arrival-forecast-1119-{1,2}.png`, fixture data)
+- Re-run unchanged, all pass: test_model_lifespan (32), test_yard_freshness (86), test_landed_models, test_junkyards_json, test_inventory_shards, test_make_normalization, test_model_normalization
+- `tools/regress.sh --quick` on 2323047f: 73 passed, 0 failed, 0 skipped (picks up both new tests). Full regression not run (hub runs it on the merged tree).
+
+### For the hub: first real scan after merge
+
+- The log line `[arrivals] window 2026-..: N arrivals ...`: N should be in
+  the low hundreds of thousands (the inventory turns over in ~60 days);
+  "flush scan" should name thousands (the 10-26..10-31 re-keys at Ryan's,
+  U-Pull-It, Prestige and Pull-N-Save fall inside the 8 weeks); "relist"
+  tens of thousands is expected (Pick-n-Pull's old-dated re-lists). Bytes
+  total should be 4-6 MB; seconds under ~30.
+- `docs/data/arrivals/index.json`: 300+ yards, almost all `coveredWeeks`
+  8; Wrench-A-Part Holland / UAPI Alexandria / Colorado Auto & Parts / Utah
+  Pic-A-Part Orem (Premium) stale if still frozen.
+- Spot check: a Pick-n-Pull yard's Civic or F-150 counts per week should be
+  steady (no week ten times the others); Ryan's Detroit and U-Pull-It Omaha
+  must not show the re-key weeks as a spike.
+- The next scan within 20 h must log `[arrivals] kept` and leave the files
+  unchanged.
+
+### Open / suggestions (not done)
+
+- Wire-up: the Parts card hook (other builder). Nothing in `docs/app.js`
+  calls `YSForecast` yet.
+- Unread scans: a yard that could not be read for days counts those weeks
+  as covered (arrivals then land on the next read's `first_seen`, which is
+  inside the 10-day rule). A per-yard "read" history would make coverage
+  exact; `listReadAt` only keeps the latest.
+- A yard that re-keys its whole list outside the flush/jump rules (under
+  35% / 25%) still counts the re-keyed cars whose dates are within 10 days.

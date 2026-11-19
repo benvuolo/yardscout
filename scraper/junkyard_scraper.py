@@ -28527,6 +28527,253 @@ def _write_model_lifespan_json(scraped_at: str | None) -> None:
           f"{len(unreliable)} yard(s) excluded as unreliable", file=sys.stderr)
 
 
+# ---------- arrivals history: "how often does my car land near me?" ----------
+ARRIVALS_DIR = "arrivals"
+ARRIVALS_WEEKS = 8
+ARRIVALS_REBUILD_HOURS = 20     # rewrite at most this often (repo churn)
+ARRIVALS_RELIST_DAYS = 10       # date_added this far before first_seen = relist
+ARRIVALS_FLUSH_MIN = 40         # a scan's new cars at one yard above
+ARRIVALS_FLUSH_SHARE = 0.35     # max(MIN, SHARE x list) = flush, none count
+
+
+def _arrival_day(date_added, first_seen: str):
+    """The day a car landed, or None for a relist. date_added is the yard's
+    own set-out date: used when it is a real ISO date no later than the day
+    after first_seen (feeds date in local time, we scan in UTC) and no more
+    than ARRIVALS_RELIST_DAYS before it. Further back is a relist (an old car
+    the feed listed late or again): None. Missing, malformed or later than
+    first_seen + 1 day: the first_seen date."""
+    from datetime import date as _date, timedelta as _td
+    fs = _date.fromisoformat(str(first_seen)[:10])
+    s = str(date_added or "").strip()[:10]
+    try:
+        d = _date.fromisoformat(s) if len(s) == 10 else None
+    except ValueError:
+        d = None
+    if d is None or d > fs + _td(days=1):
+        return fs
+    if d < fs - _td(days=ARRIVALS_RELIST_DAYS):
+        return None
+    return d
+
+
+def _write_arrivals_json(payload: dict, now: str | None = None, force: bool = False) -> dict | None:
+    """docs/data/arrivals/ — how many cars of each model landed at each yard
+    in each of the last ARRIVALS_WEEKS weeks, from the history DB. The app's
+    docs/forecast.js turns it into "About N a week land within R mi".
+
+    Definitions (also in ops/data.md, 2026-11-19 arrivals history):
+      * Window: the 8 full weeks (56 days) ending the day before the scan's
+        UTC date; week 1 is the oldest, week 8 the newest.
+      * Coverage: a yard's coverage starts the day after the first scan that
+        ever saw it (db.arrival_history first_scan). Only weeks that lie
+        wholly inside coverage count for that yard ("coveredWeeks", 0..8,
+        always the newest weeks); arrivals in other weeks are not written.
+        The cars of that first scan are a cold start, never arrivals.
+      * Arrival day: _arrival_day() — the yard's date_added when it is a
+        real date no later than first_seen + 1 day and no more than
+        ARRIVALS_RELIST_DAYS before first_seen; else first_seen's date. A
+        date_added more than 10 days before first_seen is a relist: not
+        counted.
+      * Flush scan: when the cars first seen at one yard in one scan exceed
+        max(ARRIVALS_FLUSH_MIN, ARRIVALS_FLUSH_SHARE x the yard's list right
+        after that scan), none of them count. Also reused from the list
+        freshness work (yard_freshness.py): cars first seen in the very scan
+        a yard's listFlushAt names (a flush after a freeze, or a list jump /
+        re-key) do not count. Coverage restarts after a flush (hub review
+        2026-11-19): what landed before it is not known, so the yard's
+        coverage starts the day after its latest flush scan dated inside
+        the window (a flush_scans entry or its listFlushAt) when that is
+        later than the cold-start coverage; weeks not wholly after it are
+        not covered and their arrivals are not written.
+      * Stale: a yard whose list state is "frozen" (yard_freshness, 10+
+        business days without a change) is written with stale = 1; the
+        client leaves it out of the rate and says so.
+      * Make/model: every history row goes through the scan's own
+        normalization (_lifespan_canon_factory, as the lifespan writer), so
+        keys equal what the live inventory carries. Model year kept.
+
+    Files (compact JSON):
+      index.json   {builtAt, windowStart, windowEnd, weeks: 8,
+                    yardFields: [location, lat, lng, coveredWeeks, stale],
+                    yards: [[location, lat, lng, coveredWeeks, stale], ...],
+                    makes: {make: [slug, arrivals]}}
+                   yards = every yard in this scan's inventory, in payload
+                   order (a yard with no arrival still counts as a yard).
+      <slug>.json  {builtAt, windowEnd, make, slug,
+                    models: {model: [[yardIndex, year, c1, ..., c8], ...]}}
+                   only (yard, year) pairs with at least one arrival.
+
+    Rewritten at most every ARRIVALS_REBUILD_HOURS (index builtAt), so the
+    4-hourly scan commits it about once a day. Returns a summary for the log,
+    or None when it kept the previous files."""
+    from datetime import date as _date, timedelta as _td
+    now = now or payload.get("scrapedAt") or _iso_utc_z()
+    t_now = datetime.fromisoformat(str(now).replace("Z", "+00:00"))
+    out_dir = DATA_DIR / ARRIVALS_DIR
+    idx_file = out_dir / "index.json"
+    if not force and idx_file.exists():
+        try:
+            built = json.loads(idx_file.read_text()).get("builtAt")
+            t_b = datetime.fromisoformat(str(built).replace("Z", "+00:00"))
+            if timedelta(0) <= t_now - t_b < timedelta(hours=ARRIVALS_REBUILD_HOURS):
+                return None
+        except Exception:  # noqa: BLE001 — unreadable index: rebuild
+            pass
+    t0 = time.time()
+    try:
+        import db as _db
+    except ImportError:  # pragma: no cover
+        from scraper import db as _db
+    win_end = t_now.date() - _td(days=1)
+    win_start = win_end - _td(days=7 * ARRIVALS_WEEKS - 1)
+    hist = _db.arrival_history((win_start - _td(days=1)).isoformat(), scan_group_floor=ARRIVALS_FLUSH_MIN)
+
+    yf = payload.get("yardFields") or []
+    yi = {n: i for i, n in enumerate(yf)}
+    cols = {}
+    try:
+        cols = _yard_freshness_mod().yard_list_columns(payload)
+    except Exception:  # noqa: BLE001
+        cols = {}
+    flush_scans = {k for k, (n, listed) in hist["scan_groups"].items()
+                   if n > max(ARRIVALS_FLUSH_MIN, ARRIVALS_FLUSH_SHARE * listed)}
+    # Latest flush per yard inside the window: what landed before it is not
+    # known (a frozen list's real arrivals are the flush we drop), so the
+    # yard's coverage restarts the day after it.
+    last_flush: dict[str, str] = {}
+    for loc, t in flush_scans:
+        if str(t)[:10] <= win_end.isoformat() and t > last_flush.get(loc, ""):
+            last_flush[loc] = t
+    yard_rows = []
+    yard_ix: dict[str, int] = {}
+    flush_at: dict[str, str] = {}
+    first_cov: dict[str, int] = {}   # yard index -> first covered week (1..9)
+    for n, y in enumerate(payload.get("yards") or []):
+        loc = y[yi["location"]] if "location" in yi else None
+        if not loc or loc in yard_ix:
+            continue
+        lat = y[yi["lat"]] if "lat" in yi and yi["lat"] < len(y) else None
+        lng = y[yi["lng"]] if "lng" in yi and yi["lng"] < len(y) else None
+        c = cols.get(n) or (None, "", None, None)
+        if c[3]:
+            flush_at[loc] = str(c[3])
+        fs = hist["first_scan"].get(loc)
+        covered = 0
+        first_w = ARRIVALS_WEEKS + 1
+        if fs:
+            cov_start = _date.fromisoformat(str(fs)[:10]) + _td(days=1)
+            fl = max(last_flush.get(loc, ""),
+                     flush_at[loc] if loc in flush_at and flush_at[loc][:10] <= win_end.isoformat() else "")
+            if fl:
+                cov_start = max(cov_start, _date.fromisoformat(fl[:10]) + _td(days=1))
+            for w in range(1, ARRIVALS_WEEKS + 1):
+                if win_start + _td(days=7 * (w - 1)) >= cov_start:
+                    covered += 1
+                    first_w = min(first_w, w)
+        yard_ix[loc] = len(yard_rows)
+        first_cov[len(yard_rows)] = first_w
+        yard_rows.append([loc, lat, lng, covered, 1 if c[1] == "frozen" else 0])
+
+    canon = _lifespan_canon_factory(_db)
+    stats = collections.Counter()
+    makes: dict[str, dict[str, dict[tuple, list]]] = {}
+    for loc, mk, md, vin, year, date_added, first_seen in hist["rows"]:
+        stats["rows"] += 1
+        i = yard_ix.get(loc)
+        if i is None:
+            stats["yard not in this scan"] += 1
+            continue
+        if first_seen == hist["first_scan"].get(loc):
+            stats["cold start"] += 1
+            continue
+        if (loc, first_seen) in flush_scans or flush_at.get(loc) == first_seen:
+            stats["flush scan"] += 1
+            continue
+        day = _arrival_day(date_added, first_seen)
+        if day is None:
+            stats["relist"] += 1
+            continue
+        if not (win_start <= day <= win_end):
+            stats["outside window"] += 1
+            continue
+        w = (day - win_start).days // 7 + 1
+        if w < first_cov[i]:
+            stats["outside coverage"] += 1
+            continue
+        try:
+            yr = int(year or 0)
+        except (TypeError, ValueError):
+            yr = 0
+        mk, md = canon(mk or "", md or "", vin or "", yr)
+        if not mk or not md or not str(md).strip():
+            stats["no make/model"] += 1
+            continue
+        row = makes.setdefault(mk, {}).setdefault(md, {}).setdefault((i, yr), [0] * ARRIVALS_WEEKS)
+        row[w - 1] += 1
+        stats["arrivals"] += 1
+
+    built = str(now)
+    files: dict[str, str] = {}
+    index_makes: dict[str, list] = {}
+    for mk in sorted(makes):
+        slug = landed_slug(mk)
+        if not slug or f"{slug}.json" in files:
+            print(f"  [arrivals] skipped make {mk!r}: slug {slug!r} empty or already used", file=sys.stderr)
+            continue
+        models = {md: [[i, yr] + c for (i, yr), c in sorted(rows.items())]
+                  for md, rows in sorted(makes[mk].items())}
+        files[f"{slug}.json"] = json.dumps(
+            {"builtAt": built, "windowEnd": win_end.isoformat(), "make": mk, "slug": slug,
+             "models": models}, separators=(",", ":"))
+        index_makes[mk] = [slug, sum(sum(r[2:]) for rs in models.values() for r in rs)]
+    files["index.json"] = json.dumps(
+        {"builtAt": built, "windowStart": win_start.isoformat(), "windowEnd": win_end.isoformat(),
+         "weeks": ARRIVALS_WEEKS,
+         "basis": "cars first listed at each yard per week, by the yard's set-out date",
+         "yardFields": ["location", "lat", "lng", "coveredWeeks", "stale"],
+         "yards": yard_rows, "makes": index_makes}, separators=(",", ":"))
+    # Everything is built in memory first; files go down as temp + rename,
+    # index last, so a failure above leaves the previous set untouched.
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for name, text in files.items():
+        if name == "index.json":
+            continue
+        tmp = out_dir / (name + ".tmp")
+        tmp.write_text(text)
+        os.replace(tmp, out_dir / name)
+    tmp = out_dir / "index.json.tmp"
+    tmp.write_text(files["index.json"])
+    os.replace(tmp, idx_file)
+    for old in out_dir.glob("*.json"):
+        if old.name not in files:
+            old.unlink()
+    return {"makes": len(index_makes), "yards": len(yard_rows),
+            "stale": sum(1 for y in yard_rows if y[4]),
+            "rows": sum(len(rs) for m in makes.values() for rs in m.values()),
+            "bytes": sum(len(t.encode()) for t in files.values()),
+            "secs": round(time.time() - t0, 1), "stats": dict(stats),
+            "window": f"{win_start.isoformat()}..{win_end.isoformat()}"}
+
+
+def _write_arrivals_safe(payload: dict) -> None:
+    """Never fatal to a scan: any failure logs a warning and the previous
+    docs/data/arrivals/ files stay as they were."""
+    try:
+        info = _write_arrivals_json(payload)
+        if info is None:
+            print(f"  [arrivals] kept: built less than {ARRIVALS_REBUILD_HOURS} h ago", file=sys.stderr)
+            return
+        s = info["stats"]
+        print(f"  [arrivals] window {info['window']}: {s.get('arrivals', 0)} arrivals, {info['rows']} rows, "
+              f"{info['makes']} makes, {info['yards']} yards ({info['stale']} stale), "
+              f"{info['bytes']} bytes total, {info['secs']} s; not counted: "
+              + ", ".join(f"{k} {v}" for k, v in sorted(s.items()) if k not in ("rows", "arrivals"))
+              + f" (of {s.get('rows', 0)} history rows)", file=sys.stderr)
+    except Exception as e:  # noqa: BLE001
+        print(f"  [arrivals] WARNING: not written ({type(e).__name__}: {e}); previous files kept", file=sys.stderr)
+
+
 def _write_yards_added(payload: dict) -> None:
     """docs/data/yards_added.json — yards first seen by the history DB in the
     last 90 days (the public /yards page's "recently added" feed, which is
@@ -29674,6 +29921,8 @@ def main():
                     write_interchange_payload()
                     _update_yard_health(payload)
                     _record_scan_to_db(vehicles, payload["scrapedAt"])
+                    # After the DB has this scan; at most once per ARRIVALS_REBUILD_HOURS.
+                    _write_arrivals_safe(payload)
                 if args.json:
                     print(json.dumps(payload, separators=(",", ":")))
             elif HAS_RICH:
@@ -29721,6 +29970,8 @@ def main():
                 write_interchange_payload()
                 _update_yard_health(payload)
                 _record_scan_to_db(vehicles, payload["scrapedAt"])
+                # After the DB has this scan; at most once per ARRIVALS_REBUILD_HOURS.
+                _write_arrivals_safe(payload)
             if args.json:
                 print(json.dumps(payload, separators=(",", ":")))
         elif HAS_RICH:

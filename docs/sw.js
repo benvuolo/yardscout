@@ -12,6 +12,7 @@ const SHELL = [
   './assets/badge-app-store.svg',
   './assets/badge-google-play.png',
   './app.js',
+  './forecast.js',
   './api.js',
   './privacy.html',
   './terms.html',
