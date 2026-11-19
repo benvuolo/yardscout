@@ -616,3 +616,20 @@ test_model_lifespan, test_junkyards_json, test_landed_models.
   `listFlushAt` from this or the previous scan; for a flush after a long
   freeze, say "off the yard's list after N weeks without updates" rather
   than "pulled or crushed".
+
+## 2026-11-19 need noted by the hub: model mismatches are not flagged
+
+- `_vpic_mismatch_msg` (scraper/junkyard_scraper.py) compares year and make
+  only, on purpose (model names vary by feed). Found by the interchange round
+  4 builder: a car listed "QX80 2017" with a QX60 VIN is not flagged, so it
+  matches as a QX80 everywhere.
+- Hub census on the live inventory (338,999 cars; 282,657 with a decoded
+  model): 3,143 cars where the listed and decoded model share no token, in
+  316 distinct pairs. Most are naming, not mislabels (K1500 / GMT-400,
+  Outback / Legacy, CC / Passat, ML350 / M-Class, Ram 1500 / Dodge Ram).
+  Likely real ones are few: Silverado 1500 with an S-10 VIN (30), Outback
+  with an Impreza VIN (31), Genesis with an Equus VIN (10), and a tail.
+- Suggested fix (not started): classify the 316 pairs by hand into "same
+  model, other name" and "different model"; flag only the second kind, with
+  the same wording as the year/make flag. Size: a few hundred cars. Tests:
+  no false flag on the naming pairs above.
