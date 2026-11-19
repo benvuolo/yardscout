@@ -6379,3 +6379,8 @@ Checker session, branch `interchange/verify-round10b-names-1119` (from 6449ee7e)
   ("Regulator & Motor Assembly-…") — notes make no packaging claim (RIGHT); plus the two mopar RISK above.
 - Suggestion: a "regulator with motor" wording for the five Subaru groups would tell pickers the motor
   comes along; the two Mopar RISK groups need a source that settles packaging before any wording.
+- After push, compared with `round10_names_2026-11-19.json`: motor-only sets agree exactly (mopar 20,
+  subaru 8, nissan 30). One difference: mopar 68079286AA / 68079287AA — curator left them as plain
+  regulators and its report does not mention their other_names value "Power Window Motor and Regulator
+  Assembly"; I read RISK (regulator vs regulator-with-motor). Neither note says "window motor only", so
+  this does not block the wording change.

@@ -23687,5 +23687,29 @@
     }
    ]
   }
- ]
+ ],
+ "comparison_after_push": {
+  "read_after_verdicts_pushed": "groups/_report/round10_names_2026-11-19.json (verdict commit a028db9e)",
+  "agree": "the 20 mopar and 8 subaru groups that gained \"window motor only\" are exactly the groups I read as motor alone; nissan 30 motor-only notes agree; the 3 groups the curator held (68037296AA, 68037297AA, 68079283AB) are not in the shipped groups file, so I did not see them",
+  "differ": [
+   {
+    "ns": "mopar",
+    "pn": [
+     "68079286AA"
+    ],
+    "mine": "RISK",
+    "curator": "regulator, unchanged (not held, not mentioned)",
+    "why": "jeeppartsdeal record other_names includes \"Power Window Motor and Regulator Assembly, Front Right\" beside regulator-only names; the curator report does not mention this value"
+   },
+   {
+    "ns": "mopar",
+    "pn": [
+     "68079287AA"
+    ],
+    "mine": "RISK",
+    "curator": "regulator, unchanged (not held, not mentioned)",
+    "why": "other_names includes \"Power Window Motor and Regulator Assembly, Front Left\""
+   }
+  ]
+ }
 }
