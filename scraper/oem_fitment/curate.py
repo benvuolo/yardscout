@@ -1604,6 +1604,8 @@ class Curation:
                 Ts = [T for T in Ts if T != drop]
                 self.likely_window_note_cap[cat] += 1
                 if len({(T[0], T[1]) for T in Ts}) < 2:
+                    self.refuse("held_window_note_cap", cat=cat, pn=sorted(c.pns)[0],
+                                evidence=[r.pointer for r in c.records], detail=lim["detail"])
                     lim = {"status": "skip"}
                     break
                 lim["retry"] = True

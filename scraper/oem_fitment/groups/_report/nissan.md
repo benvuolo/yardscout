@@ -372,6 +372,7 @@ Raw: `57e8b5b99de0` @ `57e8b5b99de0`; as of 2026-11-14T11:38:15Z.
 - held_engine_conflict: 47
 - held_exterior_cross_model: 284
 - held_market_kph: 62
+- held_window_note_cap: 18
 - strict_note: 1
 - strict_slot_split: 9
 - universal_part_suspect: 15

@@ -180906,6 +180906,26 @@
   },
   {
    "cat": "climate-control",
+   "detail": "Pathfinder: 4.0L only; Xterra: built 01/2010-08/2010 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L320"
+   ],
+   "pn": "27510-9BH0A",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "detail": "Pathfinder: 4.0L, built 08/2009-01/2010 only; Xterra: built 08/2009-01/2010 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L319"
+   ],
+   "pn": "27510-EA00A",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
    "detail": "records disagree on fitment",
    "evidence": [
     "www.infinitipartsdeal.com:records:L467",
@@ -180923,6 +180943,26 @@
    ],
    "pn": "H0100-9Z432",
    "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Frontier: built 08/2011-12/2012 only; Pathfinder: 4WD AUTO, built 09/2011-07/2013 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4692"
+   ],
+   "pn": "HMA01-9BEBA",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Frontier: built 08/2011-12/2012 only; Pathfinder: 4WD AUTO, built 09/2011-07/2013 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4695"
+   ],
+   "pn": "HMA00-9BEBA",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -182115,6 +182155,26 @@
   },
   {
    "cat": "gauge-cluster",
+   "detail": "2WD, 4.0L, built 08/2010-04/2011 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4704"
+   ],
+   "pn": "24810-9BA7D",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Armada: built 08/2006-04/2007 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3025"
+   ],
+   "pn": "24810-7S84E",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
    "detail": "Frontier 1999: 3.3L only; Frontier 2001: 3.3L only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3337"
@@ -182211,6 +182271,16 @@
    ],
    "pn": "24810-EA21E",
    "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L, built 08/2010-04/2011 only; Xterra: 2WD, built 08/2010-04/2011 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2182"
+   ],
+   "pn": "24810-9BA5B",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -182355,6 +182425,36 @@
   },
   {
    "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, automatic, built 01/2010-08/2010 only; Xterra: built 01/2010-08/2010 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2191"
+   ],
+   "pn": "24810-ZL96B",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, automatic, built 08/2009-01/2010 only; Xterra: built 08/2009-01/2010 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2185"
+   ],
+   "pn": "24810-ZL80C",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, built 08/2010-04/2011 only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2181"
+   ],
+   "pn": "24810-9BA5A",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
    "detail": "Frontier: 4WD, 4.0L, manual only; Xterra: 4WD, automatic only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L4796"
@@ -182405,6 +182505,26 @@
   },
   {
    "cat": "gauge-cluster",
+   "detail": "G35: manual, built 08/2007-08/2008 only; G37: manual only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1034"
+   ],
+   "pn": "24820-JK61A",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "G35: manual, built 08/2007-08/2008 only; G37: manual only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1044"
+   ],
+   "pn": "24820-JK61B",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
    "detail": "Infiniti M35 2008: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1154"
@@ -182441,6 +182561,16 @@
    ],
    "pn": "24820-EJ70B",
    "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "JX35: AWD only; QX60: AWD, 3.5L, gas, built 11/2013-03/2014 only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1218"
+   ],
+   "pn": "24810-9NA5C",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -182511,6 +182641,36 @@
    ],
    "pn": "24810-ZS44D",
    "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Pathfinder: 2WD, built 12/2004-09/2005 only; Xterra: 2WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2725"
+   ],
+   "pn": "24810-EA67E",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Pathfinder: 4WD AUTO, built 09/2006-04/2007 only; Xterra: 4WD, built 09/2006-08/2007 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2732"
+   ],
+   "pn": "24810-ZP93A",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Pathfinder: part-time 4WD, built 12/2004-09/2005 only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2721"
+   ],
+   "pn": "24810-EA48D",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -186264,6 +186424,26 @@
    ],
    "pn": "96301-EA19E",
    "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier: 2.4L only; Xterra: 2.4L, built from 10/2003 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L262"
+   ],
+   "pn": "96302-ZD000",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier: 2.4L only; Xterra: 2.4L, built from 10/2003 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L266"
+   ],
+   "pn": "96301-ZD000",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
