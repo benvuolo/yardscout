@@ -6278,3 +6278,36 @@ re-pinned). Census: `groups/_report/round10_names_2026-11-19.json`; per make
 - Suggestion: the bumper rows could say "bumper cover (fascia) only, not the reinforcement", and
   the Toyota tail lamps could name the catalog's "lens & body" unit. Both are live note changes,
   the hub's call.
+
+## 2026-11-19 — independent check: round-10 window-regulator wording (verify-round10-names-1119)
+
+Blind check of every `window-regulator` group (`likely[]`; `groups[]` is empty) in
+`groups/mopar.json` and `groups/subaru.json` at 4e0bac45, against raw names at
+oem-raw dca9cd84 (moparpartsgiant + jeeppartsdeal records and lists; subarupartsdeal
+records and lists; no continuation parts exist). Output:
+`scraper/oem_fitment/groups/_report/round10_names_verify_2026-11-19.json`.
+
+**Result: FAIL (1 WRONG).**
+
+| make | groups | RIGHT | WRONG | RISK | "window motor only" notes | notes > 160 chars |
+|---|---|---|---|---|---|---|
+| mopar | 54 | 51 | 1 | 2 | 21 | 0 (max 146) |
+| subaru | 17 | 17 | 0 | 0 | 8 | 0 (max 118) |
+
+- WRONG mopar 68079283AB (note: "window motor only"): name "Motor - Window Regulator",
+  aux "Window Motor", alias "Power Window Motor, Front Left", but the record description
+  (raw/www.jeeppartsdeal.com.jsonl L282) says "Window Regulator, Front Driver Side". Names
+  disagree in kind and the note asserts motor. Probably a catalog description slip (its mate
+  68079282AB reads "Window Motor, Front Passenger Side"), but by the stated rule it is WRONG.
+  Fix options: drop "window motor only" for this number, or record an owner-approved basis
+  for treating that description as a slip.
+- RISK mopar 68037296AA / 68037297AA (notes say nothing about the motor): name "Regulator
+  Assembly - Front Door Window"; every diagram lists each twice, aux "Regulator" and aux
+  "Motor"; aliases "Power Window Motor; Window Motor". Probably a regulator with the motor
+  included, but the names do not settle it.
+- Regulator-with-motor names (all notes leave out "window motor only" and say nothing about
+  the motor): subaru 61041AL00A, 61041AL01A, 61041AL02A, 61042AL00A, 61042AL01A ("Regulator &
+  Motor Assembly-..."); mopar 68079286AA / 68079287AA (alias "Power Window Motor and
+  Regulator Assembly, Front Right/Left").
+- Suggestion: say "includes motor" for the five Subaru "Regulator & Motor Assembly" numbers
+  (and maybe the two Mopar ones). A picker would then know the motor comes with it.
