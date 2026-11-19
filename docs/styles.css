@@ -3847,3 +3847,4 @@ select { white-space: normal; height: auto; }
 .ysf-models-more[open] .ysf-more { text-decoration: none; }
 .ysf .ysf-models-rest { margin: 0 0 var(--s1); font-size: var(--t-sm); line-height: 1.4; color: var(--text-dim); overflow-wrap: anywhere; }
 .ysf .ysf-caveat { margin-top: var(--s2); font-size: var(--t-sm); line-height: 1.4; color: var(--text-dim); overflow-wrap: anywhere; }
+.ysf .ysf-lot { margin-top: var(--s1); font-size: var(--t-sm); line-height: 1.4; color: var(--text); font-weight: 600; overflow-wrap: anywhere; }

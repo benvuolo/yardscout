@@ -10247,13 +10247,14 @@ function pfPlanItems(rows) {
   });
 }
 /** Start a card for this render: rows = exactly the rows the list renders. */
-function pfPlanStart(rows, s, radius, variants, famId, total, specs) {
+function pfPlanStart(rows, s, radius, variants, famId, total, specs, allRows) {
   const key = [pfCat && pfCat.id, s.year, s.make, s.model, famId || '', radius || ''].join('|');
   if (pfPlanView.key !== key) pfPlanView = { key, order: 'most', yard: '', all: false };
   const w = pfGenWindow(s.make, s.model, s.year);
   pfPlan = {
     rows, variants, radius, total: Math.max(total || 0, rows.length), perEach: !!(pfCat && pfCat.perEach),
     specs: Array.isArray(specs) ? specs : [],
+    allRows: Array.isArray(allRows) ? allRows : rows,   // every row before the 120 cap (the lot line)
     ctx: { make: s.make, model: s.model, year: s.year, yrMin: w ? w[0] : null, yrMax: w ? w[1] : null,
       lat: activeZipCoords ? activeZipCoords.lat : null, lng: activeZipCoords ? activeZipCoords.lng : null,
       radiusMi: radius || null, where: 'parts' },
@@ -10362,7 +10363,24 @@ function pfSpecPush(specs, app, years, tier) {
 function pfPlanForecastCtx() {
   const specs = (pfPlan.specs || []).filter(sp => !pfVerifiedOnly || sp.tier === 'verified')
     .map(sp => ({ make: sp.make, model: sp.model, yrMin: sp.yrMin, yrMax: sp.yrMax }));
-  return specs.length ? { ...pfPlan.ctx, specs } : { ...pfPlan.ctx };
+  return specs.length ? { ...pfPlan.ctx, specs, lotNow: pfPlanLotNow(specs) } : { ...pfPlan.ctx };
+}
+/** Today's lot for the calibration line: cars = lot cars in range matching
+ * any spec in use (the rows' own application matching), each once; donors =
+ * the rows the list shows (all of them, before the 120 cap; Verified-only
+ * applied) among THOSE cars, so donors can never exceed cars. */
+function pfPlanLotNow(specs) {
+  const radius = pfPlan.radius;
+  const ids = new Set();
+  for (const v of liveInventory) {
+    const d = vehicleDistanceMi(v);
+    if (radius && (d == null || d > radius)) continue;
+    const mk = canonicalMake(v.make);
+    if (specs.some(sp => pfAppMatches([sp.make, sp.model, sp.yrMin, sp.yrMax], v.year, mk, v.model))) ids.add(v.id);
+  }
+  const shown = (pfPlan.allRows || []).filter(r => !pfVerifiedOnly || r.tier === 'verified');
+  const donors = new Set(shown.filter(r => ids.has(r.v.id)).map(r => r.v.id)).size;
+  return { donors, cars: ids.size };
 }
 const _pfDonorCounted = new Set();
 function pfPlanForecastMount() {
@@ -10816,7 +10834,7 @@ function pfRunSearch() {
   }
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'} in range</strong> ${rows.length === 1 ? 'It carries' : 'They carry'} ${/s$/.test(pfCat.label) ? '' : 'a '}fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)}. ${pfSort === 'new' ? 'Newest arrivals first' : 'Nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
     // Best yards for this part: the rows rendered below, by yard.
-    + pfPlanStart(rows.slice(0, CAP), s, radius, quoteVariants, pfChosenFam, rows.length, specs)
+    + pfPlanStart(rows.slice(0, CAP), s, radius, quoteVariants, pfChosenFam, rows.length, specs, rows)
     + pfWatchHtml(s, true)
     + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit', nSame)

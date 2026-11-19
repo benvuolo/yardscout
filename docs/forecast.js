@@ -239,7 +239,19 @@
     return yrs + ' ' + sp.model.replace(/\s*\*$/, '');
   }
   var MODELS_SHOWN = 3;
-  var CAVEAT = 'Counts every car of these models and years. The list shows, car by car, which have the right engine and options.';
+  var CAVEAT = 'The 8-week counts include every car of these models and years, whatever its engine or options.';
+  /* The calibration line (hub, 2026-11-19): today's lot, counted by the app
+   * with its own matching. lot = { donors, cars }: cars = lot cars in range
+   * of the specs in use, each once; donors = the rows the list shows among
+   * them. Nothing when cars is 0, a number is missing, or donors > cars. */
+  function lotLine(lot, within) {
+    if (!lot) return '';
+    var d = lot.donors, c = lot.cars;
+    if (typeof d !== 'number' || typeof c !== 'number' || !isFinite(d) || !isFinite(c)) return '';
+    if (c < 1 || d < 0 || d > c || Math.floor(d) !== d || Math.floor(c) !== c) return '';
+    return 'On lots ' + within + ' now: ' + d + ' of ' + c + ' ' + plural(c, 'car', 'cars') +
+      ' of these models ' + (d === 1 ? 'is a donor' : 'are donors') + ' for this part.';
+  }
 
   function plural(n, one, many) { return n === 1 ? one : many; }
 
@@ -284,7 +296,8 @@
         var la = specLabel(a), lb = specLabel(b);
         return b.n - a.n || (la < lb ? -1 : la > lb ? 1 : 0);
       }).map(specLabel);
-      w.subject = 'Donor models';
+      w.subject = 'Cars of the donor models';
+      w.lot = lotLine(q.lotNow, r !== null && r !== undefined ? within : 'in range');
       w.models = ord.slice(0, MODELS_SHOWN);
       w.modelsMore = ord.slice(MODELS_SHOWN);
       w.caveat = CAVEAT;
@@ -327,6 +340,7 @@
       (s.specs ? ' data-ysf-kind="donor-models"' : '') + '>' +
       '<div class="ysf-subject">' + esc(w.subject) + '</div>' +
       '<p class="ysf-headline">' + esc(w.headline) + '</p>' +
+      (w.lot ? '<p class="ysf-lot">' + esc(w.lot) + '</p>' : '') +
       (w.models ? modelsHtml(w) : '') +
       bars +
       '<p class="ysf-facts">' + esc(w.facts) + '</p>' +

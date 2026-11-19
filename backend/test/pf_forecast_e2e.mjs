@@ -183,14 +183,30 @@ try {
     const f = await readForecast(page, '#pf-results .pf-plan .pf-forecast');
     const kind = await page.evaluate(() => !!document.querySelector('#pf-results .pf-forecast [data-ysf-kind="donor-models"]'));
     check('the donor set comes from the family\'s applications (Toyota and Lexus, not the lot)', specs.some(x => /^Lexus GX 470/.test(x)) && specs.some(x => /^Toyota Tundra/.test(x)), specs.join('; '));
-    check('subject "Donor models"', kind && /^Donor models/i.test(f.text), f && f.text);
+    check('subject "Cars of the donor models"', kind && /^Cars of the donor models/i.test(f.text), f && f.text);
+    // the calibration line: today's lot, the app's own matching
+    const lot = await page.evaluate(() => {
+      const specs = pfPlanForecastCtx().specs;
+      const head = (document.querySelector('#pf-results .pf-results-head strong') || {}).textContent || '';
+      let cars = 0;
+      for (const v of liveInventory) {
+        const d = vehicleDistanceMi(v); if (pfPlan.radius && (d == null || d > pfPlan.radius)) continue;
+        if (specs.some(sp => pfAppMatches([sp.make, sp.model, sp.yrMin, sp.yrMax], v.year, canonicalMake(v.make), v.model))) cars++;
+      }
+      return { listed: parseInt(head.replace(/,/g, ''), 10), cars, lotNow: pfPlanForecastCtx().lotNow, line: (document.querySelector('#pf-results .ysf-lot') || {}).textContent || '' };
+    });
+    console.log('  lot: ' + JSON.stringify(lot));
+    check('lot line: donors = the donor rows the list shows (its head count), cars = lot cars of these models in range', lot.lotNow.donors === lot.listed && lot.lotNow.cars === lot.cars && lot.lotNow.donors <= lot.lotNow.cars,
+      JSON.stringify(lot));
+    check('lot line: printed directly under the headline with those numbers', lot.line === `On lots within 100 mi now: ${lot.lotNow.donors} of ${lot.lotNow.cars} ${lot.lotNow.cars === 1 ? 'car' : 'cars'} of these models ${lot.lotNow.donors === 1 ? 'is a donor' : 'are donors'} for this part.`
+      && /^Cars of the donor models About .* within 100 mi On lots within 100 mi now:/i.test(f.text), lot.line + ' | ' + f.text);
     // fixture, 2 counted yards: Tundra 8 + 4 = 12, 4Runner (2003-09) 4, Sequoia 3, GX 470 1, Land Cruiser 1 -> 21
-    check('headline and facts: the existing rules over the summed models', /in the last 8 weeks at 2 yards/.test(f.text) && /^Donor models About (one|\d+) (a week|every \d+ weeks) lands? within 100 mi/i.test(f.text) && /21 in the last 8 weeks/.test(f.text), f && f.text);
+    check('headline and facts: the existing rules over the summed models', /in the last 8 weeks at 2 yards/.test(f.text) && /^Cars of the donor models About (one|\d+) (a week|every \d+ weeks) lands? within 100 mi/i.test(f.text) && /21 in the last 8 weeks/.test(f.text), f && f.text);
     check('models line: three, most arrivals first, then "and 3 more"', /2000-09 Tundra, 2003-09 4Runner, 2001-09 Sequoia and 3 more/.test(f.text), f && f.text);
     const more = await page.evaluate(() => { const d = document.querySelector('#pf-results .ysf-models-more'); const t = d.querySelector('summary').title; d.querySelector('summary').click(); return { t, rest: d.querySelector('.ysf-models-rest').innerText, open: d.open }; });
     check('"and 3 more" opens the rest (and names them in its title)', more.open && /GX 470/.test(more.rest) && /LX 470/.test(more.rest) && /Land Cruiser/.test(more.t), JSON.stringify(more));
-    check('the caveat and the "not a promise" label', /Counts every car of these models and years\. The list shows, car by car, which have the right engine and options\./.test(f.text) && /Past weeks, not a promise\./.test(f.text), f && f.text);
-    check('never "donor cars", "carry", "have the part", "first", "only", "largest" in the forecast', !/donor car|carr(y|ies)|have the part|\bfirst\b|\bonly\b|largest/i.test(f.text.replace(/^Donor models/i, '')), f && f.text);
+    check('the caveat and the "not a promise" label', /The 8-week counts include every car of these models and years, whatever its engine or options\./.test(f.text) && /Past weeks, not a promise\./.test(f.text), f && f.text);
+    check('never "donor cars", "carry", "have the part", "first", "only", "largest" in the forecast', !/donor car|carr(y|ies)|have the part|\bfirst\b|\bonly\b|largest/i.test(f.text.replace(/^Cars of the donor models/i, '').replace(/ (is a donor|are donors) for this part\./, '')), f && f.text);
     check('no horizontal overflow', f.right <= f.vw + 1 && f.scrollW <= f.vw + 1, JSON.stringify(f));
     const ev = await page.evaluate(() => window.__ev.filter(e => e === 'pf-forecast/donor-models').length);
     await page.evaluate(() => pfRunSearch());   // a re-render of the same search
@@ -202,17 +218,48 @@ try {
     await page.check('#pf-vonly-cb');
     await page.waitForFunction(() => !document.querySelector('#pf-results .pf-forecast [data-ysf-kind="donor-models"]') && /4RUNNER/i.test((document.querySelector('#pf-results .pf-forecast') || {}).innerText || ''), null, { timeout: 10000 }).catch(() => {});
     const fv = await readForecast(page, '#pf-results .pf-plan .pf-forecast');
-    check('verified only on: redraws with the narrower set (' + vSpecs + ' Verified specs: the own model)', vSpecs === 0 && /^2003-2009 4Runner/i.test(fv.text) && !/Donor models/i.test(fv.text), fv && fv.text);
+    check('verified only on: redraws with the narrower set (' + vSpecs + ' Verified specs: the own model)', vSpecs === 0 && /^2003-2009 4Runner/i.test(fv.text) && !/donor models/i.test(fv.text) && !/On lots/.test(fv.text), fv && fv.text);
     await page.uncheck('#pf-vonly-cb');
     await donorText(page);
     await page.waitForTimeout(300);
     const fb = await readForecast(page, '#pf-results .pf-plan .pf-forecast');
-    check('verified only off: the donor models again', /^Donor models/i.test(fb.text), fb && fb.text);
+    check('verified only off: the donor models and the same lot line again', /^Cars of the donor models/i.test(fb.text) && fb.text.includes(lot.line), fb && fb.text);
     check('no page error', errors.length === 0, errors.join(' | '));
     if (process.env.SHOT_DONOR) {
       await page.evaluate(() => document.querySelector('#pf-results .pf-plan .pf-forecast').scrollIntoView({ block: 'start' }));
       await page.locator('#pf-results .pf-plan .pf-forecast').screenshot({ path: process.env.SHOT_DONOR });
     }
+    await ctx.close();
+  }
+
+  console.log('6. "Verified fits only" redraws both lot numbers (a verified platform group search on the checked-in lots)');
+  {
+    const { ctx, page, errors } = await open(browser);
+    let found = null;
+    // seekers of verified platform groups with a car near 95112 (checked-in data, 2026-11-19)
+    const CANDS = [[2003, 'Chevrolet', 'Tahoe', 'third-row-seat'], [2011, 'Chevrolet', 'Tahoe', 'third-row-seat'], [2010, 'Chevrolet', 'Silverado', 'tailgate'],
+      [2013, 'Chevrolet', 'Traverse', 'third-row-seat'], [2004, 'Ford', 'Explorer', 'third-row-seat'], [2012, 'Ford', 'F-250', 'tailgate'],
+      [2006, 'Ford', 'Escape', 'side-mirrors'], [2000, 'Ford', 'F-150', 'headlights'], [2006, 'Subaru', 'Legacy', 'headlights'], [2010, 'Nissan', 'Titan', 'tow-mirrors']];
+    for (const [y, mk, md, cat] of CANDS) {
+      await partsSearch(page, [y, mk, md], cat).catch(() => {});
+      const c = await page.evaluate(() => pfPlan && { ver: pfPlan.allRows.filter(r => r.tier === 'verified').length, all: pfPlan.allRows.length, vs: pfPlan.specs.filter(s => s.tier === 'verified').length });
+      if (c && c.ver > 0 && c.all > c.ver && c.vs > 0) { found = { y, mk, md, cat, ...c }; break; }
+    }
+    check('setup: a Tahoe search with Verified and Likely rows on the checked-in lots', !!found, JSON.stringify(found));
+    if (found) {
+      const lineOf = () => page.evaluate(() => ({ lot: pfPlanForecastCtx().lotNow, line: (document.querySelector('#pf-results .ysf-lot') || {}).textContent || '' }));
+      await page.waitForFunction(() => document.querySelector('#pf-results .ysf-lot'), null, { timeout: 15000 }).catch(() => {});
+      const a = await lineOf();
+      await page.check('#pf-vonly-cb');
+      await page.waitForFunction((t) => { const e = document.querySelector('#pf-results .ysf-lot'); return e && e.textContent !== t; }, a.line, { timeout: 15000 }).catch(() => {});
+      const b = await lineOf();
+      console.log(`  ${found.y} ${found.mk} ${found.md} ${found.cat}: all "${a.line}" | verified only "${b.line}"`);
+      check('verified only: donors = the Verified rows the list shows; the line redrawn', b.lot.donors === found.ver && a.lot.donors === found.all && b.line.includes(` ${found.ver} of ${b.lot.cars} `) && b.line !== a.line && b.lot.donors <= b.lot.cars, JSON.stringify({ a, b, found }));
+      await page.uncheck('#pf-vonly-cb');
+      await page.waitForFunction((t) => (document.querySelector('#pf-results .ysf-lot') || {}).textContent === t, a.line, { timeout: 15000 }).catch(() => {});
+      check('verified only off: the first numbers again', (await lineOf()).line === a.line);
+    }
+    check('no page error', errors.length === 0, errors.join(' | '));
     await ctx.close();
   }
 
@@ -223,7 +270,7 @@ try {
     await donorText(page);
     await page.waitForTimeout(500);
     const f = await readForecast(page, '#pf-results .pf-plan .pf-forecast');
-    check('falls back to the own model, today\'s wording (no models line, no caveat)', /^2003-2009 4Runner/i.test(f.text) && !/Donor models|Counts every car/.test(f.text) && /4 in the last 8 weeks at 2 yards/.test(f.text), f && f.text);
+    check('falls back to the own model, today\'s wording (no models line, no caveat)', /^2003-2009 4Runner/i.test(f.text) && !/donor models|whatever its engine|On lots/i.test(f.text) && /4 in the last 8 weeks at 2 yards/.test(f.text), f && f.text);
     const ev = await page.evaluate(() => window.__ev.filter(e => e === 'pf-forecast/donor-models').length);
     check('no donor-models counter for the fallback', ev === 0, String(ev));
     check('no page error', errors.length === 0, errors.join(' | '));
