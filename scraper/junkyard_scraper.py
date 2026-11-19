@@ -28580,7 +28580,12 @@ def _write_arrivals_json(payload: dict, now: str | None = None, force: bool = Fa
         after that scan), none of them count. Also reused from the list
         freshness work (yard_freshness.py): cars first seen in the very scan
         a yard's listFlushAt names (a flush after a freeze, or a list jump /
-        re-key) do not count.
+        re-key) do not count. Coverage restarts after a flush (hub review
+        2026-11-19): what landed before it is not known, so the yard's
+        coverage starts the day after its latest flush scan dated inside
+        the window (a flush_scans entry or its listFlushAt) when that is
+        later than the cold-start coverage; weeks not wholly after it are
+        not covered and their arrivals are not written.
       * Stale: a yard whose list state is "frozen" (yard_freshness, 10+
         business days without a change) is written with stale = 1; the
         client leaves it out of the rate and says so.
@@ -28631,6 +28636,15 @@ def _write_arrivals_json(payload: dict, now: str | None = None, force: bool = Fa
         cols = _yard_freshness_mod().yard_list_columns(payload)
     except Exception:  # noqa: BLE001
         cols = {}
+    flush_scans = {k for k, (n, listed) in hist["scan_groups"].items()
+                   if n > max(ARRIVALS_FLUSH_MIN, ARRIVALS_FLUSH_SHARE * listed)}
+    # Latest flush per yard inside the window: what landed before it is not
+    # known (a frozen list's real arrivals are the flush we drop), so the
+    # yard's coverage restarts the day after it.
+    last_flush: dict[str, str] = {}
+    for loc, t in flush_scans:
+        if str(t)[:10] <= win_end.isoformat() and t > last_flush.get(loc, ""):
+            last_flush[loc] = t
     yard_rows = []
     yard_ix: dict[str, int] = {}
     flush_at: dict[str, str] = {}
@@ -28642,23 +28656,25 @@ def _write_arrivals_json(payload: dict, now: str | None = None, force: bool = Fa
         lat = y[yi["lat"]] if "lat" in yi and yi["lat"] < len(y) else None
         lng = y[yi["lng"]] if "lng" in yi and yi["lng"] < len(y) else None
         c = cols.get(n) or (None, "", None, None)
+        if c[3]:
+            flush_at[loc] = str(c[3])
         fs = hist["first_scan"].get(loc)
         covered = 0
         first_w = ARRIVALS_WEEKS + 1
         if fs:
             cov_start = _date.fromisoformat(str(fs)[:10]) + _td(days=1)
+            fl = max(last_flush.get(loc, ""),
+                     flush_at[loc] if loc in flush_at and flush_at[loc][:10] <= win_end.isoformat() else "")
+            if fl:
+                cov_start = max(cov_start, _date.fromisoformat(fl[:10]) + _td(days=1))
             for w in range(1, ARRIVALS_WEEKS + 1):
                 if win_start + _td(days=7 * (w - 1)) >= cov_start:
                     covered += 1
                     first_w = min(first_w, w)
         yard_ix[loc] = len(yard_rows)
         first_cov[len(yard_rows)] = first_w
-        if c[3]:
-            flush_at[loc] = str(c[3])
         yard_rows.append([loc, lat, lng, covered, 1 if c[1] == "frozen" else 0])
 
-    flush_scans = {k for k, (n, listed) in hist["scan_groups"].items()
-                   if n > max(ARRIVALS_FLUSH_MIN, ARRIVALS_FLUSH_SHARE * listed)}
     canon = _lifespan_canon_factory(_db)
     stats = collections.Counter()
     makes: dict[str, dict[str, dict[tuple, list]]] = {}

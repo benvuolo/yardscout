@@ -74,12 +74,17 @@ car("Yard P - Partial", scan("10-23"), "2026-10-23")              # w5, inside c
 car("Yard P - Partial", scan("10-23"), "2026-10-15")              # arrival 10-15 is w4: outside coverage
 car("Yard P - Partial", scan("11-12"), "2026-11-12")              # w8
 
-# Yard F: 100 on the lot from 09-01; a 60-car scan on 11-05 (list after = 160,
-# 35% = 56 -> flush, none count); a 45-car scan on 11-06 (list 205 -> 71.75: counts).
+# Yard F: 100 on the lot from 09-01; one real arrival in w2, then the list
+# freezes; a 60-car scan on 10-25 (week 5; list after = 161, 35% = 56.35 ->
+# flush, none count) restarts coverage on 10-26: weeks 1-5 not covered, 6-8
+# counted. A 45-car scan on 11-06 (list 206 -> 72.1: counts, w7).
 for _ in range(100):
     car("Yard F - Flush", scan("09-01"), "2026-08-01")
+car("Yard F - Flush", scan("10-03"), "2026-10-03", md="Insight")     # w2, before the flush: not written
 for _ in range(60):
-    car("Yard F - Flush", scan("11-05"), "2026-11-05", md="Accord")
+    car("Yard F - Flush", scan("10-25"), "2026-10-25", md="Accord")
+car("Yard F - Flush", scan("10-27"), "2026-10-27", md="Insight")     # w5, after the flush, week not wholly after: not written
+car("Yard F - Flush", scan("10-30"), "2026-10-30", md="Insight")     # w6: counted
 for _ in range(45):
     car("Yard F - Flush", scan("11-06"), "2026-11-06", md="Fit")
 # Small yard: 41 new cars on a list of 10 -> 41 > max(40, 17.9): flush.
@@ -97,7 +102,8 @@ car("Yard Z - Frozen", scan("10-05"), "2026-10-05")
 # Yard J: listFlushAt names the 11-10 scan (a list jump): those cars do not count.
 car("Yard J - Jump", scan("09-01"), "2026-08-01")
 car("Yard J - Jump", scan("11-10"), "2026-11-10", md="CR-V")
-car("Yard J - Jump", scan("11-11"), "2026-11-11", md="CR-V")
+car("Yard J - Jump", scan("11-11"), "2026-11-11", md="CR-V")      # w7: before coverage restarts (11-11)
+car("Yard J - Jump", scan("11-12"), "2026-11-12", md="CR-V")      # w8: counted
 # Yard N: first seen 11-10 -> coverage 11-11 -> only week 8.
 car("Yard N - New", scan("11-10"), "2026-11-10")
 car("Yard N - New", scan("11-13"), "2026-11-13")
@@ -151,9 +157,9 @@ with tempfile.TemporaryDirectory() as td:
     check("history: first scan per yard", h["first_scan"]["Yard P - Partial"] == scan("10-21")
           and h["first_scan"]["Yard A - Town"] == scan("09-01"), str(h["first_scan"]))
     check("history: rows start at first_seen_from", all(r[6] >= "2026-09-23" for r in h["rows"]))
-    check("history: flush group sized (60 new, 160 listed)", h["scan_groups"].get(("Yard F - Flush", scan("11-05"))) == (60, 160),
+    check("history: flush group sized (60 new, 161 listed)", h["scan_groups"].get(("Yard F - Flush", scan("10-25"))) == (60, 161),
           str(h["scan_groups"]))
-    check("history: 45-car group sized (listed 205)", h["scan_groups"].get(("Yard F - Flush", scan("11-06"))) == (45, 205))
+    check("history: 45-car group sized (listed 208)", h["scan_groups"].get(("Yard F - Flush", scan("11-06"))) == (45, 208), str(h["scan_groups"]))
     check("history: groups at or under the floor are not sized", ("Yard G - Small", scan("10-09")) not in h["scan_groups"])
 
     # ---- full writer ----
@@ -188,10 +194,16 @@ with tempfile.TemporaryDirectory() as td:
     check("non-flush big scan counted (45 Fits, w7)", rowsof(honda, "Fit", "Yard F - Flush").get(2005) == [0, 0, 0, 0, 0, 0, 45, 0])
     check("small list: 41 new on 10 is a flush", not rowsof(honda, "Pilot", "Yard G - Small"))
     check("small list: exactly 40 new counts (floor)", rowsof(honda, "Odyssey", "Yard G - Small").get(2005) == [0, 0, 40, 0, 0, 0, 0, 0])
+    check("flush in week 5: coverage restarts, weeks 6-8 covered", Y["Yard F - Flush"][1][3] == 3, str(Y["Yard F - Flush"]))
+    check("flush in week 5: arrivals before and in week 5 not written, week 6 counted",
+          rowsof(honda, "Insight", "Yard F - Flush").get(2005) == [0, 0, 0, 0, 0, 1, 0, 0], str(rowsof(honda, "Insight", "Yard F - Flush")))
+    check("flush in week 2 at a small yard: weeks 3-8 covered", Y["Yard G - Small"][1][3] == 6, str(Y["Yard G - Small"]))
+    check("listFlushAt 11-10 restarts coverage too: week 8 only", Y["Yard J - Jump"][1][3] == 1, str(Y["Yard J - Jump"]))
+    check("yard with no flush keeps full coverage", Y["Yard Z - Frozen"][1][3] == 8)
     check("cold-start cars never count", sum(sum(v) for v in rowsof(honda, "Civic", "Yard F - Flush").values()) == 0)
     check("frozen yard's rows still written (client skips)", rowsof(honda, "Civic", "Yard Z - Frozen").get(2005) == [0, 1, 0, 0, 0, 0, 0, 0])
     j = rowsof(honda, "CR-V", "Yard J - Jump")
-    check("listFlushAt scan excluded, next scan counted (w7)", j.get(2005) == [0, 0, 0, 0, 0, 0, 1, 0], str(j))
+    check("listFlushAt scan excluded, w7 car outside restarted coverage, w8 counted", j.get(2005) == [0, 0, 0, 0, 0, 0, 0, 1], str(j))
     n = rowsof(honda, "Civic", "Yard N - New")
     check("new yard: first-scan car out, week-8 car in", n.get(2005) == [0, 0, 0, 0, 0, 0, 0, 1], str(n))
     t = rowsof(ford, "Taurus", "Yard A - Town")
