@@ -2315,7 +2315,7 @@ ben@yardscout.io can be used.
   1.13.2 build 43 with `submit_only=true` when 1.13.1 is READY_FOR_SALE, and
   must not run it while 1.13.1 is still in the queue.
 
-## 2026-11-19 ~08:05 UTC round 5b on main (candidate only); sixth nissan check started
+## 2026-11-19 ~07:50 UTC round 5b on main (candidate only); sixth nissan check started
 
 - Round 5b (builder, branch `interchange/round5b-1119`, head 43bca593):
   nissan candidate only. 22 groups / 59 vehicle-years held as "starred
@@ -2333,7 +2333,7 @@ ben@yardscout.io can be used.
   held only because a SIBLING's starred clause decides stay held. Not
   decided: transmission scope from a starred clause (the candidate has one
   transmission-gated group, 24810-9BD4C); left for the check to judge.
-- Sixth independent nissan check started 08:05 UTC: fresh agent, blind,
+- Sixth independent nissan check started 07:50 UTC: fresh agent, blind,
   seed 27641119, candidate at 29e5fe96, branch
   `interchange/verify-nissan-1119f`, report
   `groups/_report/nissan_verify_2026-11-19f.json`. Used seeds now:
