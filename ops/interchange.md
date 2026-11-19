@@ -5251,3 +5251,161 @@ Every 1119e WRONG / RISK item (`groups/_report/nissan_recheck_2026-11-19e.json`;
 2. Confirm "every page of the model" for number-matched windows (vs adjacent
    years only), and "stated" for the GM page-filed limits.
 3. Nissan: 223 shippable, not shipped; the next independent check decides.
+
+## 2026-11-19 Round 5b: starred clauses that decide drive or engine scope are held (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round5b-1119` from origin/main 982adbf3)
+
+Hub decisions 2026-11-19 ~07:05 UTC. Nissan candidate only; nothing ships.
+No fetch, dispatch or email. origin/main moved on to 9944c8e5 during the
+round (auto-scan, 1.13.2 release, ops); none of those commits touch
+`scraper/oem_fitment`, `docs/app.js`, `docs/sw.js` or this file, so the branch
+was not re-merged.
+
+### Rule (curate.py only; `policy.py` untouched, so `policy_sha256` did not move)
+
+- `curate.STARRED_SCOPE_NS = {"nissan"}`. A vehicle-year is held (reason
+  `held_starred_scope`, "starred clause decides scope") when re-reading T's
+  page without the starred configurations (the number's own and its
+  siblings') changes T's drive limit (drive / drive_not / part-time) or its
+  engine limit, or leaves T out.
+- Where the number is listed for T only through starred configurations,
+  leaving them out would remove the claim, not narrow its scope. There they
+  are kept with their drive and engine words unread instead. This keeps
+  e.g. 96301-3S500 Frontier 2004: every own clause is starred, and its 3.3L
+  gate comes from the unstarred KA24DE siblings.
+- A starred configuration that changes neither drive nor engine stays as it
+  is.
+- Unit: the vehicle-year; the group is held whole when fewer than two
+  models stay, or when the rest's note no longer fits. The hold is read on the
+  group round 5 ships, after every hold that depends on its vehicle-years
+  (exterior cross-model, wheels, releases), so it only narrows.
+- Each held vehicle-year records `via`: `own` when the number's own starred
+  configuration decides, `sibling` when only another number's does.
+- Check: on the full reading the new drive/engine helpers reproduce every
+  round-5 gate. All 1,304 round-5 vehicle-years were checked, 0 mismatches.
+- What if: with the rule switched on for subaru (live; 4 groups with a
+  starred clause), 0 would be held.
+
+### Item 2, Titan 24810-7S00E
+
+The 4WD gate's basis, sibling **7S007**, is a starred clause: "*KC. 2WD. (SE+
+LE) + *CC. 2WD. (SE+ LE)" (the own row is "*KC. (SE+ LE) + *CC. (SE+ LE)").
+Titan 2005 is held (kind a, via sibling). The group keeps Armada 2006 and
+Titan 2006.
+
+### Held list (`groups/_report/nissan.starred_held.json`)
+
+Each entry gives the group, its held vehicle-years, the kind, the limit as
+curated and without the starred configurations, `via`, and the clause text
+(own rows, plus the sibling rows the drive / engine sibling rules read).
+
+- 22 groups and 59 vehicle-years. 9 groups are held whole and 13 are narrowed.
+- A vehicle-year can carry two kinds: M37 2012-2013 is a + c_engine, Q70 2014
+  is a + b.
+
+| kind | vehicle-years / groups | via own | via sibling |
+|---|---|---|---|
+| a: drive gate | 11 / 7 | 8 / 4 | 3 / 3 (Titan 2005 7S00E, QX56 2013 3ZD0A / 3ZD1A) |
+| b: engine gate | 6 / 5 | 6 / 5 | 0 |
+| c drive: ungated | 4 / 2 | 4 / 2 (K6301/K6302-1PM0B M37, M56 2012) | 0 |
+| c engine: ungated | 43 / 14 | 27 / 8 | 16 / 6 |
+
+The 9 groups held whole are 24810-7S005, 24810-EA101, 24810-ZD016,
+24820-1MK5A, 24820-3ZD0A, 24820-3ZD1A, 24820-6AH2A, 96301-1CA0B and
+96302-1CA0B.
+
+Against the round-5 census the hub quoted (a 4, b 6, c 2 + 12 groups):
+
+- **a:** all 4 census groups are held. 3 more come from item 2's class: the
+  sibling-basis gates, whose sibling clause carries the same mark.
+- **b:** 5 of 6 are held. 24810-ZD103 (Frontier / Xterra 2003-2004, 3.3L) is
+  kept, because the product page's engine column states 3.3L by itself.
+- **c drive:** 2 of 2 are held.
+- **c engine:** 8 of 12 are held (96301/96302 -1CA0A, -3EV0B, -3S500,
+  -1CA0B).
+  - 4 are kept: 80720/80721-2Z700 Xterra 2002-2003 and 80720/80721-EA010
+    Frontier 2007-2009. In both, every starred configuration repeats an
+    unstarred one word for word, so the engines are the same either way.
+  - 6 more are held that the census did not count, all via a sibling's
+    starred configuration:
+    - 96301/96302-1CA1A (FX35 2011-2012, FX37 2013, QX70 2014-2015). With
+      its starred clauses left out, 3EV0B or 1CA0B lists one engine only.
+    - 80730/80731-7B400 Xterra 2001. With its bare "*W" left out, sibling
+      80720-3S500 lists only 3.3L configurations.
+- **96301/96302-1CA0B** were first kept by my rule and then fixed. Their FX35
+  2009-2012 vehicle-years are listed only by "*W. VQ35HR. PREMIUM"; the
+  unstarred "W. VK50VE" is the FX50's engine. So both groups are held whole
+  (FX50 alone is one model).
+
+The 1119e "*" RISK items now:
+
+| item | now |
+|---|---|
+| 24810-ZD103 | kept: the engine column states 3.3L |
+| K6301-1PM0B M37 / M56 2012 | held |
+| 96301-3EV0B QX70 2014-2015 | held |
+| pair 96301-1CA0B FX50 2009 | group held |
+
+### Candidate before -> after (`groups/_report/nissan.candidate.json`)
+
+| | round 5 (main) | round 5b |
+|---|---|---|
+| Likely / shippable groups | 226 / **223** | 217 / **214** |
+| gauge-cluster / side-mirrors / window-regulator / climate-control | 32 / 62 / 112 / 17 | 25 / 60 / 112 / 17 |
+| shippable app-years | 1,295 | 1,220 |
+| gated groups (built) | 136 (84) | 128 (82) |
+| pairs plain | 40,326 | **38,357** |
+| pairs if equipped | 5,590 | **5,424** |
+| pairs excluded | 801 | **297** |
+| donor cars with a plain pair | 12,340 | 12,338 |
+
+Pairs come from `audit11_4/lot_replay.mjs` on the pinned lot (main@a85c654),
+using this tree's app (unchanged). Most of the drop in excluded pairs comes
+from the held gated vehicle-years: those gates are what excluded donors.
+
+### Live diff (`groups/_report/live_diff_2026-11-19_round5b.txt`, `audit11_4/live_diff.py` against origin/main)
+
+- **8 live makes:** I re-curated them with this code. All 8 groups files are
+  byte-identical to origin/main, the hash included: 0 groups changed, 0
+  added claims. No payload rebuild was needed.
+- **nissan candidate:** 9 groups removed, 13 changed, 39 app-years lost in
+  the changed groups. 0 gained, 0 gates widened, 0 added claims.
+
+### Tests
+
+- New `curation_tests/test_round5b_1119.py`, 28 checks:
+  - the two note filters;
+  - the rule on synthetic pages: Titan 7S00E + 7S007 held via sibling,
+    7S006 no gate, (a) own, kept when an unstarred clause states the same
+    drive, (c), all-starred without a gate kept, a starred clause naming
+    nothing kept, (b) Xterra 2000 3S500;
+  - the committed files: no held vehicle-year claimed, kept_apps exact, one
+    refusal per whole-group hold, the RISK items and 1CA0B held, 2Z700
+    kept, no shipped namespace touched.
+- curation_tests: 26/26 files pass (Phase 2 parity SKIP unchanged).
+- pf_guards_unit: ALL PASS.
+- test_interchange and test_am_gates: pass.
+- `tools/regress.sh --quick`: **71 passed, 0 failed, 0 skipped**, both
+  before the 1CA0B fix and on the final code (ee252c7c).
+- No full regression: `docs/app.js` is unchanged, so sw stays `jh-v215`.
+
+### Not done / open (hub decision 6)
+
+- The 160-character cap and the "name models once" note form are untouched;
+  both stay open for the owner.
+- The `_UNLISTED` guard (a number that only a starred configuration's drive
+  or engine words list for T) is not reached on this raw.
+- Transmission was not part of the decision and is not held. Starred clauses
+  can decide it the same way; I did not count those cases.
+
+### For the hub
+
+1. Merge `interchange/round5b-1119`? It changes no live claim, and
+   `policy_sha256` is unchanged.
+2. The rule is broader than the census in one direction: 9 groups (19
+   vehicle-years) are held only via a sibling's starred clause, 7 of them
+   outside the census. If you would hold only the number's own starred
+   clauses, those 19 vehicle-years come back. 3 of the groups are item 2's
+   class (Titan 7S00E, QX56 3ZD0A / 3ZD1A). The other 6 are engine-sibling
+   cases: 96301/96302-1CA0A and -1CA1A QX70 / FX35 / FX37, and
+   80730/80731-7B400 Xterra 2001.
+3. Nissan: 214 shippable, not shipped; the sixth independent check decides.
