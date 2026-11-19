@@ -768,12 +768,12 @@ index does not list renders nothing. Styles: end of `docs/styles.css`
 
 ### Tests
 
-- `python3 scraper/test_arrivals.py` (synthetic DB): RESULT_ARRIVALS
-- `node backend/test/forecast_unit.mjs`: RESULT_UNIT
+- `python3 scraper/test_arrivals.py` (synthetic DB): 55 checks pass, incl. freeze then flush in week 5
+- `node backend/test/forecast_unit.mjs`: 71 pass
 - `node backend/test/forecast_e2e.mjs` (Playwright, fixture by routing,
-  320/390/1280, dark, missing files, page errors): RESULT_E2E
-- Re-run unchanged: RESULT_OTHERS
-- `tools/regress.sh --quick`: RESULT_QUICK
+  320/390/1280, dark, missing files, page errors): 70 pass; `SHOTS=1` writes the two owner screenshots (`ops/screens/arrival-forecast-1119-{1,2}.png`, fixture data)
+- Re-run unchanged, all pass: test_model_lifespan (32), test_yard_freshness (86), test_landed_models, test_junkyards_json, test_inventory_shards, test_make_normalization, test_model_normalization
+- `tools/regress.sh --quick` on 2323047f: 73 passed, 0 failed, 0 skipped (picks up both new tests). Full regression not run (hub runs it on the merged tree).
 
 ### For the hub: first real scan after merge
 
