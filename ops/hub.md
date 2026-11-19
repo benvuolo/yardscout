@@ -2971,3 +2971,54 @@ on main until the hub has reviewed it and run the full regression.
   gains one line with the card's counters (`pf-yards/*`,
   `watch-forecast/shown`, new `pf-forecast/donor-models`). The Worker
   deploy for that line is the hub's step after merge.
+
+## 2026-11-19 ~16:10 UTC ninth independent nissan check: PASS (0 WRONG); round 9 started before shipping
+
+Check 1119i (seed 60231119, candidate and lot at b22c3640, branch
+`interchange/verify-nissan-1119i` head 093bcaef, merged to main at
+bbd9591b; report `groups/_report/nissan_verify_2026-11-19i.json`).
+Groups 20 RIGHT / 0 WRONG / 10 RISK; pairs 26 / 0 / 4. Lot 337,838 cars
+(33,433 Nissan/Infiniti); replay 108 groups: 15,001 plain, 1,150 if
+equipped, 31 hidden. No verdict moves with a one-month-different build
+span; every build gate matches its pages; door and side match on every
+claimed page across the whole candidate. First pass in nine checks.
+
+Hub's decision: the pass criterion is met, but nissan does not go live on
+this candidate as it stands, because of one thing the checker raised as a
+suggestion:
+
+- **33 of 82 window-regulator groups are motor-only numbers** by the
+  catalog's own part name ("Motor Assy-Regulator"), 12,269 lot rows, some
+  across platforms whose regulators differ (M37 with QX56, Murano with
+  Rogue). The row does not say "motor". Live makes do ("window motor
+  only" in the note). A user after a regulator would be sent to a car for
+  its motor. The pages are read right; the row says less than it must.
+
+Round 9 (interchange builder, branch `interchange/round9-1119`), nissan
+may only shrink or say less, live makes byte-identical:
+- A. "window motor only" on every motor-named number, from the page's
+  name; mixed or unreadable names held; the same check for component
+  numbers in the other categories; a census of names; a measure of the
+  same on the live makes (no change).
+- B. Holds, each as a rule with a census: model years whose variant pages
+  were not all read (Rogue 2017 in 3 groups: 102 lot cars plain, most not
+  the variant that was read; Sentra 1995-96 gauge); an undated number
+  whose same-option twin changes inside the year (Altima 1994, 1995-96,
+  Stanza 1995: 5 groups); unexplained body marks (QX50 2016 mirrors, 2
+  groups); QX56 2013 gauge, an undated AWD-only sibling.
+- C. Infiniti-site rows say "Nissan catalog": name the site the pages
+  came from.
+- D. Measure only: plain rows under a gas-only limit on cars with no
+  engine decode, where the model has a hybrid that year (the documented
+  app exception; 4 RISK items here). Hub decides after the numbers.
+- E. Ship preparation on `interchange/nissan-ship-1119` (not merged): the
+  namespace turned on, payload rebuilt, no cache-name bump.
+
+Then: hub's own subset check (0 added groups, 0 gained vehicle-years, 0
+widened gates against the checked candidate), a short independent check of
+the new "motor only" wording against the page names, full regression, go
+live, one live load.
+
+Not acted on from 1119i: EX37 listed / EX35 decoded (one model, already
+`same` in `scraper/vin_model_names.json`); "for both" in notes means the
+searcher's car and the donor, not two models.
