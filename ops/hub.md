@@ -2314,3 +2314,32 @@ ben@yardscout.io can be used.
 - 09:10 UTC check-in (trig_01JcAHSWqZ1rxaB5VAPHXG34) now also submits iOS
   1.13.2 build 43 with `submit_only=true` when 1.13.1 is READY_FOR_SALE, and
   must not run it while 1.13.1 is still in the queue.
+
+## 2026-11-19 ~08:05 UTC round 5b on main (candidate only); sixth nissan check started
+
+- Round 5b (builder, branch `interchange/round5b-1119`, head 43bca593):
+  nissan candidate only. 22 groups / 59 vehicle-years held as "starred
+  clause decides scope" (`groups/_report/nissan.starred_held.json`): drive
+  gates 7 groups, engine gates 5, ungated drive 2, ungated engine 14; 9
+  groups held whole, 13 narrowed. Titan 24810-7S00E 2005 is held (its 4WD
+  basis 7S007 is a starred clause). Shippable 223 -> 214; plain pairs
+  40,326 -> 38,357. The rule is in `curate.py` (`STARRED_SCOPE_NS`), not in
+  policy.py, so no hash moved and no payload was rebuilt.
+- Hub review: the 8 live groups files are byte-identical to main; hub's
+  `live_diff.py` 0 changed groups on all 8; `test_round5b_1119` 28 checks
+  pass; quick regression on the merged tree 71/0/0. Merged to main at
+  29e5fe96. `docs/` untouched (sw stays `jh-v215`).
+- Hub decision on the builder's question: the 9 groups (19 vehicle-years)
+  held only because a SIBLING's starred clause decides stay held. Not
+  decided: transmission scope from a starred clause (the candidate has one
+  transmission-gated group, 24810-9BD4C); left for the check to judge.
+- Sixth independent nissan check started 08:05 UTC: fresh agent, blind,
+  seed 27641119, candidate at 29e5fe96, branch
+  `interchange/verify-nissan-1119f`, report
+  `groups/_report/nissan_verify_2026-11-19f.json`. Used seeds now:
+  46021118, 61181118, 73901118, 38271119, 52941119, 27641119. Ship nissan
+  only on 0 WRONG; then payload + sw bump + full regression + live check.
+- Still open for the owner from the builder: the 160-character note cap now
+  refuses 88 nissan groups; naming models that share a label once would
+  keep many. Windows no other number carries stay plain by design (ford 5,
+  toyota 4, nissan 49 app-years).
