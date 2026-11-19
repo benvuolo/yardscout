@@ -67,6 +67,10 @@ def gate_cmp(old, new):
         elif k in ("cab", "body"):
             if not _as_set(w) <= _as_set(v):
                 return "widened"
+        elif k == "eng_not":
+            # a list of displacements ruled out: the new one must rule out at least as many
+            if not _as_set(v) <= _as_set(w):
+                return "widened"
         elif v != w:
             return "widened"
     return "narrowed"

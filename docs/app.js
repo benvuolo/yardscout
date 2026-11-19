@@ -9673,7 +9673,10 @@ function pfAmSplitNote(note) {
  *   eng ["3.7L", ...]; fuel "gas" | "hybrid" | "diesel"; trans "MT" | "AT";
  *   drive_not "a4wd" beside drive "4wd" (round3-1119: the page lists the
  *   All-Mode AUTO system under another number; a 4WD decode stays "if
- *   equipped").
+ *   equipped"); eng_not ["2.5L", ...] beside fuel "gas" (round3-1119: the
+ *   displacements the part's engine column leaves out, the hybrid's own
+ *   among them; a decode naming one rules the donor out, nothing else
+ *   changes).
  * Same honesty as the aftermarket gate above and the car-card parts table
  * (match_vehicle's drive, body and manual gates): the donor's own VIN decode
  * or listing naming the limit confirms it; one naming something else rules
@@ -9740,6 +9743,13 @@ function pfOemEngVerdict(eng, carEng) {
   if (l == null) return 'unconfirmed';
   return (Array.isArray(eng) ? eng : [eng]).some(x => Math.abs(parseFloat(x) - l) < 0.05) ? 'confirm' : 'exclude';
 }
+/* eng_not (round3-1119): a decode naming a listed displacement rules the
+ * donor out; anything else (another displacement, no decode) says nothing. */
+function pfOemEngNotVerdict(engNot, carEng) {
+  const l = pfAmParseEngine(carEng).l;
+  if (l == null) return 'confirm';
+  return (Array.isArray(engNot) ? engNot : [engNot]).some(x => Math.abs(parseFloat(x) - l) < 0.05) ? 'exclude' : 'confirm';
+}
 /* pfAmCarTrans, except that an automated manual (AMT) is an automatic, as in
  * the parts table's manual gate. */
 function pfOemCarTrans(s) {
@@ -9777,6 +9787,7 @@ function pfOemGate(gate, v, ex) {
   if (g.cab) vs.cab = pfOemCabVerdict(g.cab, v);
   if (g.eng) vs.eng = pfOemEngVerdict(g.eng, ex ? ex[extraIdx.engine] : '');
   if (g.fuel) vs.fuel = pfOemFuelVerdict(g.fuel, v, ex);
+  if (g.eng_not && pfOemEngNotVerdict(g.eng_not, ex ? ex[extraIdx.engine] : '') === 'exclude') vs.fuel = 'exclude';
   if (g.trans) vs.trans = pfOemTransVerdict(g.trans, ex ? ex[extraIdx.trans] : '');
   const keys = Object.keys(vs);
   if (keys.some(k => vs[k] === 'exclude')) return { verdict: 'exclude', keys: keys.filter(k => vs[k] === 'exclude') };

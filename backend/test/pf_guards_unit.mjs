@@ -987,6 +987,16 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
     && G(H, { model: 'Camry' }, ex({ engine: '2.4L 4-cyl' })) === 'unconfirmed'
     && G(H, { model: 'Camry', vpicTrim: 'Hybrid', vpicTrimQuality: 'usable' }, ex({ engine: '2.4L 4-cyl' })) === 'confirm');
   check('r3 gate text: "2.4L, hybrid"', ctx.pfOemGateText(H) === '2.4L, hybrid');
+  // a "gas" gate that also reads the decode (eng_not): QX60 2016 mirror whose
+  // engine column lists 3.5L only; the 2.5L hybrid listed as plain "QX60"
+  const GN = { fuel: 'gas', eng_not: ['2.5L'] };
+  check('r3 eng_not: a QX60 decoded 2.5L with nothing saying hybrid is excluded',
+    G(GN, { model: 'QX60' }, ex({ engine: '2.5L 4-cyl' })) === 'exclude');
+  check('r3 eng_not: a 3.5L QX60 confirms; an undecoded QX60 still confirms (as the gas gate alone)',
+    G(GN, { model: 'QX60' }, ex({ engine: '3.5L 6-cyl' })) === 'confirm' && G(GN, { model: 'QX60' }, null) === 'confirm');
+  check('r3 eng_not: a hybrid named in the listing is still excluded', G(GN, { model: 'QX60 Hybrid' }, ex({ engine: '3.5L 6-cyl' })) === 'exclude');
+  check('r3 eng_not: the gate text stays "gas"', ctx.pfOemGateText(GN) === 'gas');
+  check('r3 gas gate without eng_not unchanged: a 2.5L decode confirms', G({ fuel: 'gas' }, { model: 'QX60' }, ex({ engine: '2.5L 4-cyl' })) === 'confirm');
 }
 {
   // pfRunSearch with a cab-list app (2002 Frontier power regulator) beside an ungated twin

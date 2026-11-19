@@ -173,7 +173,7 @@ def gate_problem(gate) -> str | None:
     """Why one app gate is malformed, or None."""
     if not isinstance(gate, dict) or not gate:
         return f"gate is not a non-empty object: {gate!r}"
-    extra = set(gate) - {"drive", "drive_basis", "drive_not", "body", "cab", "eng", "fuel", "trans"}
+    extra = set(gate) - {"drive", "drive_basis", "drive_not", "body", "cab", "eng", "eng_not", "fuel", "trans"}
     if extra:
         return f"gate keys {sorted(extra)}"
     if "drive_not" in gate:
@@ -202,6 +202,13 @@ def gate_problem(gate) -> str | None:
             isinstance(cb, list) and len(cb) >= 2 and len(set(cb)) == len(cb) and all(x in GATE_CABS for x in cb))
         if not ok:
             return f"gate cab {cb!r}"
+    if "eng_not" in gate:
+        # round3-1119: a "gas" gate that also rules out the decoded
+        # displacements the engine column leaves out (the hybrid's own)
+        e = gate["eng_not"]
+        if gate.get("fuel") != "gas" or "eng" in gate or not isinstance(e, list) or not e \
+                or any(not isinstance(x, str) or not _GATE_ENG_RE.match(x) for x in e) or len(set(e)) != len(e):
+            return f"gate eng_not {e!r} with fuel {gate.get('fuel')!r}"
     if "eng" in gate:
         e = gate["eng"]
         if not isinstance(e, list) or not e or any(not isinstance(x, str) or not _GATE_ENG_RE.match(x) for x in e):

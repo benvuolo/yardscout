@@ -203,6 +203,7 @@ def main(argv):
                 # lot side: displacements only the lot's hybrid cars of T carry
                 hy |= {x for x in LH_.get(tuple(T), set()) if not has(LG_.get(tuple(T), set()), x)}
                 pcs = plain_cars(g, T) if pcs is None else pcs
+                hy = {x for x in hy if not has([float(e[:-1]) for e in gate.get("eng_not") or []], x)}
                 bad = [cr for cr in pcs if cr["lit"] is not None and has(hy, cr["lit"])]
                 found["fuel"].append({"id": g["id"], "cat": g["cat"], "pn": g["pn"], "T": T, "gate": gate,
                                       "hybrid_only_disp": sorted(hy), "gas_disp": sorted(UG.get(T, set())),

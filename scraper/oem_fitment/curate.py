@@ -1539,6 +1539,18 @@ class Curation:
             cab_list_T = {T: v for T, v in self._cab_list_by_T(c, cat, Ts, slots).items()
                           if not cab_map.get((T[0], T[1]))}
             body_list_T = self._body_list_by_T(c, cat, Ts, slots)
+            # a model whose every vehicle-year carries the same list is named
+            # once ("Frontier: king cab/crew cab only"); otherwise per year
+            cab_model, body_model = {}, {}
+            for lst_T, out_m in ((cab_list_T, cab_model), (body_list_T, body_model)):
+                for mk, md in sorted({(T[0], T[1]) for T in Ts}):
+                    vals = [tuple(lst_T[T]) if T in lst_T else None for T in Ts if (T[0], T[1]) == (mk, md)]
+                    if vals and vals[0] is not None and all(v == vals[0] for v in vals):
+                        out_m[(mk, md)] = list(vals[0])
+            extra = [f"{md}: {'/'.join(v)} only" for (_mk, md), v in sorted(cab_model.items())] + \
+                    [f"{md}: {' or '.join(v)} only" for (_mk, md), v in sorted(body_model.items())]
+            if extra:
+                cab = "; ".join(x for x in [cab] + extra if x)
             # §5.16 limits per vehicle-year: rear-door crew cab, drive, engine,
             # transmission, fuel (2026-11-18); ambiguous fuel leaves T out.
             # The same limits become the vehicle-year's gate (gates-1118): the
@@ -1553,11 +1565,13 @@ class Curation:
                     gate["cab"] = _cab_gate(cab_map.get((T[0], T[1])) or rc)
                 elif cab_list_T.get(T):
                     cl = cab_list_T[T]
-                    labs.append("/".join(cl))
+                    if (T[0], T[1]) not in cab_model:
+                        labs.append("/".join(cl))
                     gate["cab"] = _cab_gate(cl[0]) if len(cl) == 1 else [_cab_gate(x) for x in cl]
                 if body_list_T.get(T):
                     b = body_list_T[T]
-                    labs.append(" or ".join(b))
+                    if (T[0], T[1]) not in body_model:
+                        labs.append(" or ".join(b))
                     gate["body"] = b[0] if len(b) == 1 else list(b)
                 if drive_by_T.get(T):
                     d = drive_by_T[T]
@@ -1599,6 +1613,12 @@ class Curation:
                 if fu:
                     labs.append(fu)
                     gate["fuel"] = fu
+                if fu == "gas" and not eng:
+                    # the fuel gate reads the decode too (round3-1119): an
+                    # attested displacement the engine column leaves out
+                    nots = self.fit_engine_not(c, cat, T)
+                    if nots:
+                        gate["eng_not"] = [f"{x:.1f}L" for x in nots]
                 label_by_T[T] = ", ".join(labs)
                 if gate:
                     gate_by_T[T] = gate
@@ -2286,7 +2306,22 @@ class Curation:
         offers = [u for u in U if _lit_in(YP, u) or _lit_in(lot, u)]
         return bool(offers) and not any(_lit_in(L, u) for u in offers)
 
-    def fit_engine_limit(self, c, cat, T, fuel_gas=False):
+    def fit_engine_not(self, c, cat, T) -> list:
+        """The displacements a "gas only" vehicle-year's fuel gate also rules
+        out by the decode (gate "eng_not", round3-1119, class 2 of the
+        2026-11-18c check): every displacement the catalog attests for T that
+        the number's engine column leaves out (QX60 2016 2.5L, Murano 2016
+        2.5L, Rogue 2017 2.0L: the hybrids, listed and decoded as plain
+        "QX60" with nothing saying hybrid). [] without an engine column."""
+        if not policy.LIKELY_FIT_ENGINE_RULE:
+            return []
+        col = self._fit_engine_column(c, cat, T)
+        if col is None:
+            return []
+        U = self._t_fit_engines(T)[0]
+        return sorted(u for u in U if not _lit_in(col[0], u))
+
+    def fit_engine_limit(self, c, cat, T):
         """(displacements, fuel) the product page's engine column limits class
         c to on T (policy.LIKELY_FIT_ENGINE_RULE): every fitment row of c for
         T prints at least one displacement, and their union leaves out one T's
@@ -2305,12 +2340,7 @@ class Curation:
         Likewise a fuel limit needs T's year page offering a hybrid catalog or
         a hybrid (gas) car of T on the lot. Without the lot input (lot_engines
         None) every displacement the catalog attests for T counts: more limits.
-        fuel_gas (T is limited to gas by fuel_of or the column itself): every
-        attested displacement the column leaves out counts, lot or not, so the
-        hybrid's own displacement (QX60 2016 2.5L, Murano 2016 2.5L, Rogue
-        2017 2.0L) is ruled out by the decode even before such a car reaches
-        the lot (class 2 of the 2026-11-18c check: the "gas" gate alone counts
-        as met for a hybrid listed and decoded as plain "QX60")."""
+        A "gas only" year also gets fit_engine_not (no label)."""
         if not policy.LIKELY_FIT_ENGINE_RULE:
             return None, ""
         col = self._fit_engine_column(c, cat, T)
@@ -2321,7 +2351,7 @@ class Curation:
         lots = self.o.lot_engines
         lot = None if lots is None else (lots.get(T) or {"lits": frozenset(), "hybrid": False, "gas": False})
         missing = [u for u in U if not _lit_in(L, u)]
-        if lot is not None and not fuel_gas:
+        if lot is not None:
             # offered: the catalog attests it for T and T's year page lists it
             # or a lot car of T is decoded with it. A lot decode the catalog
             # never attests for T (a "2000 F-150" decoded 7.3L: a Super Duty
@@ -2344,7 +2374,7 @@ class Curation:
         DRIVE_AMBIGUOUS. Transmission: every configuration names one class
         and T's own pages show the other class (config-tuple columns only)."""
         rows = self._own_rows(c, cat, T)
-        E_fit = self.fit_engine_limit(c, cat, T, fuel_gas=gas_only)[0]
+        E_fit = self.fit_engine_limit(c, cat, T)[0]
         if not policy.LIKELY_ENGINE_TRANS_RULE:
             return "", ""
         xs = [_row_engine_trans(n, st)[1] for n, st, _v, _u in rows]
@@ -2500,7 +2530,11 @@ class Curation:
         pages lists a cab it leaves out under another number of the same slot.
         Per model-year: the 2002 Frontier page lists power regulator 80721-3S500
         for KC + CC only beside 3S510 'T + KC + CC', while 1998-2001 list 3S500
-        for T, KC and CC too, so only 2002 is limited."""
+        for T, KC and CC too, so only 2002 is limited. The cabs the model-year
+        comes in are read from T's pages in every category (_t_page_cabs): the
+        2003-2004 Frontier pages code 80721-2Z700 KC / CC only and print no
+        regular-cab regulator in that slot, while other categories there code
+        T."""
         if not policy.LIKELY_CAB_LIST_RULE:
             return {}
         out = {}
@@ -2536,9 +2570,32 @@ class Curation:
                 for lr in self.t_list_rows.get((T, cat), []):
                     if policy.pn_key(self.ns, lr.pn) != c.key and policy.pn_key(self.ns, lr.pn) in mates:
                         page |= {self._NISSAN_CAB3[x] for x in (_fvo_cab_heads(lr.notes) or ())}
+            page |= self._t_page_cabs(T, fitment=bool(fall and fcabs))
             if ours and page - ours:
                 out[T] = self._cab_order(ours)
         return out
+
+    def _t_page_cabs(self, T, fitment: bool) -> set:
+        """Every cab T's own pages name in any category: Nissan option-column
+        cab codes (T / KC / CC) on the manifest rows, or (fitment) the cab
+        words of T's product-page fitment trims (rows_by_T)."""
+        cache = self.__dict__.setdefault("_page_cabs", {})
+        key = (T, fitment)
+        if key not in cache:
+            cabs = set()
+            if fitment:
+                for (_cat, _c, _r, f, _t) in getattr(self, "rows_by_T", {}).get(T, []):
+                    for tr in (f.trims or []):
+                        m = self._CAB_RE.search(tr)
+                        if m:
+                            cabs.add(re.sub(r"\s+", " ", m.group(1).lower()))
+            elif self.ns == "nissan":
+                for (t, _cat), rows in self.t_list_rows.items():
+                    if t == T:
+                        for lr in rows:
+                            cabs |= {self._NISSAN_CAB3[x] for x in (_fvo_cab_heads(lr.notes) or ())}
+            cache[key] = frozenset(cabs)
+        return set(cache[key])
 
     _BODY_WORDS = {"coupe": "coupe", "sedan": "sedan", "notchback": "sedan", "wagon": "wagon",
                    "hatchback": "hatchback", "liftback": "hatchback", "convertible": "convertible"}
