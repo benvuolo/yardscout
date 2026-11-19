@@ -10272,7 +10272,7 @@ function pfPlanBodyHtml() {
     const facts = [y.d != null ? `${Math.round(y.d)} mi` : '', `${y.n.toLocaleString()} donor car${y.n === 1 ? '' : 's'}`,
       y.nCheck ? `<span title="These donors carry an “if equipped” line: check the car has it before you pull">${y.nCheck.toLocaleString()} to check first</span>` : ''].filter(Boolean);
     const set = pfPlanSetOutText(y.newestMs, now);
-    const price = y.price != null ? `yard price${pfPlan.perEach ? ' from' : ''} $${y.price.toFixed(2)}${pfPlan.perEach ? ' each' : ''}` : '';
+    const price = y.price != null ? `yard price${pfPlan.perEach ? ' from' : ''} $${y.price.toFixed(2)}${pfPlan.perEach ? ' each' : ''}` : '';
     const more = [set, price ? `<span title="From the yard’s own published price list">${price}</span>` : '',
       y.fast ? `<span class="lot-fast" title="${escapeHtml(y.fastNote)}">leaves fast here</span>` : ''].filter(Boolean);
     const held = y.held ? yardListChipHtml(y.yard) : '';
