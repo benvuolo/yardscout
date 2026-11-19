@@ -528,6 +528,63 @@ def model_lifespan_stats(min_days: float = 0.5, max_days: float = 400.0,
     }
 
 
+def arrival_history(first_seen_from: str, scan_group_floor: int = 40) -> dict:
+    """Raw material for the arrivals history (junkyard_scraper
+    _write_arrivals_json, docs/data/arrivals/). Three reads of `vehicles`:
+
+      rows         [(location, make, model, vin, year, date_added, first_seen)]
+                   for every car first seen at or after `first_seen_from`
+                   (an ISO string; the caller passes the window start minus
+                   one day, the earliest first_seen whose car can still land
+                   in the window), location non-empty.
+      first_scan   {location: earliest first_seen of any car there}: the
+                   first scan that ever saw the yard (coverage starts the day
+                   after it).
+      scan_groups  {(location, first_seen): (n, listed)} for every scan that
+                   first saw MORE than `scan_group_floor` cars at one yard
+                   (a flush candidate): n = those cars, listed = the yard's
+                   list right after that scan (cars first seen at or before
+                   it and not departed by then). Smaller groups cannot be a
+                   flush under max(floor, share x list), so they are not
+                   sized.
+
+    `departed_at` is cleared when a car reappears, so `listed` is the list as
+    the DB knows it today; for a yard that flips between lists it can count a
+    car that was briefly gone. Read-only."""
+    conn = _connect()
+    try:
+        rows = conn.execute(
+            """SELECT location, make, model, vin, year, date_added, first_seen
+               FROM vehicles
+               WHERE first_seen >= ? AND COALESCE(location, '') != ''""",
+            (first_seen_from,)).fetchall()
+        first_scan = {loc: fs for loc, fs in conn.execute(
+            """SELECT location, MIN(first_seen) FROM vehicles
+               WHERE COALESCE(location, '') != '' GROUP BY location""")}
+        counts: dict[tuple, int] = {}
+        for r in rows:
+            k = (r[0], r[6])
+            counts[k] = counts.get(k, 0) + 1
+        big = {k: n for k, n in counts.items() if n > scan_group_floor}
+        scan_groups: dict[tuple, tuple[int, int]] = {}
+        locs = sorted({k[0] for k in big})
+        if locs:
+            by_loc: dict[str, list[tuple[str, str | None]]] = {}
+            for k in range(0, len(locs), 500):
+                chunk = locs[k:k + 500]
+                q = (f"SELECT location, first_seen, departed_at FROM vehicles "
+                     f"WHERE location IN ({','.join('?' * len(chunk))})")
+                for loc, fs, dep in conn.execute(q, chunk):
+                    by_loc.setdefault(loc, []).append((fs, dep))
+            for (loc, t), n in big.items():
+                listed = sum(1 for fs, dep in by_loc.get(loc, ())
+                             if fs <= t and (dep is None or dep > t))
+                scan_groups[(loc, t)] = (n, listed)
+    finally:
+        conn.close()
+    return {"rows": rows, "first_scan": first_scan, "scan_groups": scan_groups}
+
+
 def summary() -> str:
     """Quick human-readable DB status."""
     conn = _connect()
