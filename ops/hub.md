@@ -2927,7 +2927,7 @@ Can I have a png of the logo I can use as my google profile pic?"
   slot is 16:00 UTC; if it does not start by about 17:40 (4 h after the
   last scan began) the hub dispatches the regular scan by hand again.
 
-## 2026-11-19 ~15:35 UTC correction: the backup scan trigger exists and works (hub was wrong to call it "not built")
+## 2026-11-19 15:21 UTC correction: the backup scan trigger exists and works (hub was wrong to call it "not built")
 
 The 13:40 and 15:20 entries (and `ops/data.md`) said a backup trigger for
 skipped scans was "recommended, not built". Wrong: two exist, and the hub
@@ -2952,7 +2952,7 @@ had not looked.
 - Observed delay of GitHub's scan cron over the last two days when it did
   run: 30 min to 2 h 47 min after the slot.
 
-## 2026-11-19 ~15:45 UTC web builder (A) started: donor-model forecast on the part card
+## 2026-11-19 15:22 UTC web builder (A) started: donor-model forecast on the part card
 
 Branch `feat/donor-forecast-1119` (from fca57105; next sw `jh-v219`). Not
 on main until the hub has reviewed it and run the full regression.
@@ -2972,7 +2972,7 @@ on main until the hub has reviewed it and run the full regression.
   `watch-forecast/shown`, new `pf-forecast/donor-models`). The Worker
   deploy for that line is the hub's step after merge.
 
-## 2026-11-19 ~16:10 UTC ninth independent nissan check: PASS (0 WRONG); round 9 started before shipping
+## 2026-11-19 15:40 UTC ninth independent nissan check: PASS (0 WRONG); round 9 started before shipping
 
 Check 1119i (seed 60231119, candidate and lot at b22c3640, branch
 `interchange/verify-nissan-1119i` head 093bcaef, merged to main at
@@ -3023,9 +3023,9 @@ Not acted on from 1119i: EX37 listed / EX35 decoded (one model, already
 `same` in `scraper/vin_model_names.json`); "for both" in notes means the
 searcher's car and the donor, not two models.
 
-## 2026-11-19 ~16:40 UTC owner: "Great, ship and crawl and do whatever els[e]"
+## 2026-11-19 16:02 UTC owner: "Great, ship and crawl and do whatever els[e]"
 
-Owner (16:20 UTC), in reply to the nissan result. Hub's reading, stated to
+Owner (about 15:55 UTC), in reply to the nissan result. Hub's reading, stated to
 the owner: "ship" = the 1.13.3 app release and "crawl" = the 226 catalog
 list pages, the two decisions the hub had put to them under those words
 (14:00 and 14:30 UTC entries); "whatever else" = the hub goes on with what
@@ -3057,3 +3057,12 @@ queued 1.13.1 at Apple stays in the queue).
   listing fields untouched (rule 6); also sorts the one unclassified pair.
 - Not started, on purpose: Subaru Legacy / Outback stays `unsure`; the
   note-cap relaxation and the readers' user-agent names stay as they are.
+
+## 2026-11-19 16:12 UTC time labels corrected
+
+The four entries above were first labelled 15:35, 15:45, 16:10 and 16:40
+UTC: the hub had estimated the time instead of reading the clock. The
+headings now carry the commit times (15:21, 15:22, 15:40, 16:02); the
+owner's "ship and crawl" came at about 15:55 UTC, not 16:20 (the briefs to
+the two builders say 16:20; same message). No 16:00 scheduled scan has
+started by 16:10 UTC; the Cloudflare watchdog covers it from 18:39.
