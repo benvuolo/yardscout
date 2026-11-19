@@ -2872,3 +2872,29 @@ one-month-wider or narrower build span.
   pinned lot the QX80 / QX60 car would be plain again and the check would
   fail on a thing already fixed). New seed; used: 46021118, 61181118,
   73901118, 38271119, 52941119, 27641119, 91371119, 15841119.
+
+## 2026-11-19 ~14:30 UTC owner up: status asked; Play listing pushed; profile picture made
+
+Owner (14:20 UTC): "update? What did we push? Did we ship things? Are apps
+the same color that we chose including the logo color change and what not?
+Can I have a png of the logo I can use as my google profile pic?"
+
+- Stores at 14:26 UTC: Play production 1.13.2 (42), completed (play-status
+  44543563592). Apple: 1.13.1 build 42 still WAITING_FOR_REVIEW (submitted
+  11-18 15:03; asc-status 44543558819); the live iPhone app is 1.13.0, the
+  last build with the old colours and icon; 1.13.2 build 43 is in internal
+  TestFlight.
+- **Google Play listing pushed 14:28 UTC**: `store-listing.yml`
+  (44543912651: icon, feature graphic, six phone screenshots and text in
+  the petrol look, as prepared 11-17) and `play-subscription-listing.yml`
+  (44543917581: the four benefit lines). Both succeeded; Google reviews
+  listing edits like a release. They were covered by the owner's "Ship" of
+  11-17 for 1.13.1 "in the apps and store listings"; the hub had held them
+  for "after both stores accept" (`ops/release.md`), which made the Play
+  store page show the old icon and screenshots beside an app that has had
+  the new look since 11-18. Nothing on the Play side depends on Apple, so
+  the hold was the hub's own and is dropped. Nothing was submitted to
+  Apple.
+- Profile picture for the owner: `ops/brand/yardscout-profile-dark-1024.png`
+  and `-light-1024.png` (1024 px square, the mark at 64% width so a round
+  crop keeps all of it; from `docs/brand/yardscout-mark-on-*.svg`).

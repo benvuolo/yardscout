@@ -124,3 +124,11 @@ What's New (both stores):
 Still to do: submit iOS build 43 once 1.13.1 is live (see the table row);
 then `store-listing.yml` and `play-subscription-listing.yml` as planned for
 1.13.1.
+
+## Google Play listing in the petrol look: pushed 2026-11-19 14:28 UTC
+
+`store-listing.yml` run 44543912651 (icon, feature graphic, six phone
+screenshots, text) and `play-subscription-listing.yml` run 44543917581 (the
+four benefit lines), both success. Covered by the 11-17 "Ship" for 1.13.1.
+Not waiting for Apple any more: the Play page has nothing to do with the App
+Store review. iOS screenshots still go up with the iOS submission.
