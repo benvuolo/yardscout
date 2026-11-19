@@ -837,6 +837,24 @@ heated splits remain. It is deferred.
   that depends on its vehicle-years: only narrows. The held list is
   `groups/_report/nissan.starred_held.json`. Kept out of `policy.py`, so the
   shipped namespaces' `policy_sha256` is unchanged.
+- **Round 6 (hub 2026-11-19 ~10:10 UTC, after the 1119f check; curate.py,
+  not `policy.py`).** Vehicle-years held, read on the group round 5 ships
+  (only narrows): a cab gate the number's own row or fitment trims for that
+  year do not carry (`held_cab_inferred`; `rear_cab_of` is never a basis); a
+  nissan claim listed only through starred configurations
+  (`held_starred_only`); a transmission tie on a config-tuple option column
+  that the gates do not enforce (`held_option_tie`: (drive family,
+  transmission) pairs the gate lets through that no configuration covers,
+  where a configuration naming no transmission loses the one a same-part,
+  same-mark sibling lists for the same or a broader configuration; a trans
+  gate from a sibling is not added, the app would word it "listed for").
+  Every build window cutting 07/(y-1)-06/y is gated (`no_other_row` too) or
+  leaves at the note cap; when T's page is undated, the other model-year
+  pages of the same model are intersected (the narrower window). A nissan
+  gas-only gate also gets `eng_not` for the hybrid's displacement
+  (`hybrid_only_disps`). The note cap runs on the round-5b window reading
+  too, and a vehicle-year it leaves out stays out. Held lists:
+  `groups/_report/<ns>.round6_held.json` and `nissan.starred_held.json`.
 - **Skips and refusals.** Single-model classes are skipped, because the
   same-model generation loop already covers them. Classes over the 12-model
   cap are refused.

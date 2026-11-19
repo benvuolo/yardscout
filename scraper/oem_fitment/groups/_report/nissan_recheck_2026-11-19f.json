@@ -1,0 +1,649 @@
+{
+ "report": "nissan_recheck_2026-11-19f",
+ "status": "builder's own re-check, NOT independent",
+ "of": "groups/_report/nissan_verify_2026-11-19f.json (branch interchange/verify-nissan-1119f, bad522d4)",
+ "candidate": "groups/_report/nissan.candidate.json on interchange/round6-1119",
+ "items": [
+  {
+   "item": "WRONG group",
+   "cat": "window-regulator",
+   "pn": "82720-7S000",
+   "t": [
+    "Nissan",
+    "Titan",
+    2005
+   ],
+   "main": "gate {\"cab\": \"crew cab\"}",
+   "round6": "group not shipped",
+   "held": [
+    "held_cab_inferred"
+   ],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "WRONG group",
+   "cat": "window-regulator",
+   "pn": "82720-7S000",
+   "t": [
+    "Nissan",
+    "Armada",
+    2005
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "WRONG pair",
+   "cat": "window-regulator",
+   "pn": "82730-9FJ0A",
+   "t": [
+    "Nissan",
+    "Titan",
+    2012
+   ],
+   "main": "gate {\"built\": \"2011-08..2014-11\", \"cab\": \"crew cab\"}",
+   "round6": "group not shipped",
+   "held": [
+    "held_cab_inferred"
+   ],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "WRONG pair",
+   "cat": "window-regulator",
+   "pn": "82730-9FJ0A",
+   "t": [
+    "Nissan",
+    "Armada",
+    2009
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "census d1",
+   "cat": "window-regulator",
+   "pn": "82721-7S000",
+   "t": [
+    "Nissan",
+    "Titan",
+    2005
+   ],
+   "main": "gate {\"cab\": \"crew cab\"}",
+   "round6": "group not shipped",
+   "held": [
+    "held_cab_inferred"
+   ],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "census d1",
+   "cat": "window-regulator",
+   "pn": "82730-7S000",
+   "t": [
+    "Nissan",
+    "Titan",
+    2010
+   ],
+   "main": "gate {\"cab\": \"crew cab\"}",
+   "round6": "group not shipped",
+   "held": [],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "census d1",
+   "cat": "window-regulator",
+   "pn": "82730-7S000",
+   "t": [
+    "Nissan",
+    "Titan",
+    2011
+   ],
+   "main": "gate {\"cab\": \"crew cab\"}",
+   "round6": "group not shipped",
+   "held": [
+    "held_cab_inferred"
+   ],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "census d1",
+   "cat": "window-regulator",
+   "pn": "82731-7S000",
+   "t": [
+    "Nissan",
+    "Titan",
+    2010
+   ],
+   "main": "gate {\"cab\": \"crew cab\"}",
+   "round6": "group not shipped",
+   "held": [],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "census d1",
+   "cat": "window-regulator",
+   "pn": "82731-7S000",
+   "t": [
+    "Nissan",
+    "Titan",
+    2011
+   ],
+   "main": "gate {\"cab\": \"crew cab\"}",
+   "round6": "group not shipped",
+   "held": [
+    "held_cab_inferred"
+   ],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "census d1",
+   "cat": "window-regulator",
+   "pn": "82731-9FJ0A",
+   "t": [
+    "Nissan",
+    "Titan",
+    2012
+   ],
+   "main": "gate {\"built\": \"2011-08..2014-11\", \"cab\": \"crew cab\"}",
+   "round6": "group not shipped",
+   "held": [
+    "held_cab_inferred"
+   ],
+   "group_refusal": "held_cab_inferred"
+  },
+  {
+   "item": "RISK group",
+   "cat": "gauge-cluster",
+   "pn": "24820-JK61D",
+   "t": [
+    "Infiniti",
+    "G35",
+    2008
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [
+    "held_option_tie"
+   ],
+   "group_refusal": "held_option_tie"
+  },
+  {
+   "item": "RISK group",
+   "cat": "gauge-cluster",
+   "pn": "24820-JK61D",
+   "t": [
+    "Infiniti",
+    "G37",
+    2008
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [
+    "held_option_tie"
+   ],
+   "group_refusal": "held_option_tie"
+  },
+  {
+   "item": "RISK group",
+   "cat": "gauge-cluster",
+   "pn": "24820-JK61C",
+   "t": [
+    "Infiniti",
+    "G35",
+    2008
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [
+    "held_starred_only",
+    "held_option_tie"
+   ],
+   "group_refusal": "held_starred_only"
+  },
+  {
+   "item": "RISK group",
+   "cat": "gauge-cluster",
+   "pn": "24820-JK61C",
+   "t": [
+    "Infiniti",
+    "G37",
+    2008
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [
+    "held_starred_only"
+   ],
+   "group_refusal": "held_starred_only"
+  },
+  {
+   "item": "RISK group",
+   "cat": "side-mirrors",
+   "pn": "96301-3EV0B",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2016
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [
+    "held_starred_only"
+   ],
+   "group_refusal": "held_starred_only"
+  },
+  {
+   "item": "RISK group",
+   "cat": "side-mirrors",
+   "pn": "96301-3EV0B",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2017
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [
+    "held_starred_only"
+   ],
+   "group_refusal": "held_starred_only"
+  },
+  {
+   "item": "RISK group",
+   "cat": "side-mirrors",
+   "pn": "96301-3EV0B",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2012
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [],
+   "group_refusal": "held_starred_only"
+  },
+  {
+   "item": "RISK group",
+   "cat": "side-mirrors",
+   "pn": "96302-EA000",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2007
+   ],
+   "main": "plain",
+   "round6": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK group",
+   "cat": "side-mirrors",
+   "pn": "96302-EA000",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2013
+   ],
+   "main": "plain",
+   "round6": "not claimed",
+   "held": [
+    "held_option_tie"
+   ],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK group",
+   "cat": "side-mirrors",
+   "pn": "96302-EA000",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2012
+   ],
+   "main": "gate {\"built\": \"2010-08..2012-04\"}",
+   "round6": "gate {\"built\": \"2010-08..2012-04\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK group",
+   "cat": "window-regulator",
+   "pn": "80730-7B400",
+   "t": [
+    "Nissan",
+    "Frontier",
+    1999
+   ],
+   "main": "plain",
+   "round6": "not claimed",
+   "held": [
+    "held_starred_only"
+   ],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK group",
+   "cat": "window-regulator",
+   "pn": "80730-7B400",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2000
+   ],
+   "main": "plain",
+   "round6": "not claimed",
+   "held": [
+    "held_starred_only"
+   ],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK group",
+   "cat": "window-regulator",
+   "pn": "80730-7B400",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2001
+   ],
+   "main": "plain",
+   "round6": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK group",
+   "cat": "window-regulator",
+   "pn": "82720-3JA0A",
+   "t": [
+    "Infiniti",
+    "QX60",
+    2014
+   ],
+   "main": "gate {\"fuel\": \"gas\"}",
+   "round6": "gate {\"eng_not\": [\"2.5L\"], \"fuel\": \"gas\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK group",
+   "cat": "window-regulator",
+   "pn": "82720-3JA0A",
+   "t": [
+    "Infiniti",
+    "JX35",
+    2013
+   ],
+   "main": "plain",
+   "round6": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "window-regulator",
+   "pn": "80720-3JA0A",
+   "t": [
+    "Infiniti",
+    "QX60",
+    2014
+   ],
+   "main": "gate {\"fuel\": \"gas\"}",
+   "round6": "gate {\"eng_not\": [\"2.5L\"], \"fuel\": \"gas\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "window-regulator",
+   "pn": "80720-3JA0A",
+   "t": [
+    "Infiniti",
+    "QX60",
+    2015
+   ],
+   "main": "gate {\"fuel\": \"gas\"}",
+   "round6": "gate {\"eng_not\": [\"2.5L\"], \"fuel\": \"gas\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "gauge-cluster",
+   "pn": "24810-7S02E",
+   "t": [
+    "Nissan",
+    "Titan",
+    2006
+   ],
+   "main": "gate {\"built\": \"2005-08..2006-08\"}",
+   "round6": "group not shipped",
+   "held": [
+    "held_starred_only"
+   ],
+   "group_refusal": "held_starred_only"
+  },
+  {
+   "item": "RISK pair",
+   "cat": "gauge-cluster",
+   "pn": "24810-7S02E",
+   "t": [
+    "Nissan",
+    "Armada",
+    2006
+   ],
+   "main": "gate {\"built\": \"2005-08..2006-08\"}",
+   "round6": "group not shipped",
+   "held": [
+    "held_starred_only"
+   ],
+   "group_refusal": "held_starred_only"
+  },
+  {
+   "item": "RISK pair",
+   "cat": "window-regulator",
+   "pn": "82730-3KG0A",
+   "t": [
+    "Infiniti",
+    "JX35",
+    2013
+   ],
+   "main": "plain",
+   "round6": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "window-regulator",
+   "pn": "82730-3KG0A",
+   "t": [
+    "Infiniti",
+    "QX60",
+    2016
+   ],
+   "main": "gate {\"fuel\": \"gas\"}",
+   "round6": "gate {\"eng_not\": [\"2.5L\"], \"fuel\": \"gas\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "gauge-cluster",
+   "pn": "24810-7S00E",
+   "t": [
+    "Nissan",
+    "Titan",
+    2006
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [
+    "held_starred_only"
+   ],
+   "group_refusal": "held_starred_only"
+  },
+  {
+   "item": "RISK pair",
+   "cat": "gauge-cluster",
+   "pn": "24810-7S00E",
+   "t": [
+    "Nissan",
+    "Armada",
+    2006
+   ],
+   "main": "plain",
+   "round6": "group not shipped",
+   "held": [],
+   "group_refusal": "held_starred_only"
+  },
+  {
+   "item": "RISK pair",
+   "cat": "side-mirrors",
+   "pn": "96302-7S600",
+   "t": [
+    "Nissan",
+    "Titan",
+    2005
+   ],
+   "main": "gate {\"built\": \"2004-10..2006-08\"}",
+   "round6": "not claimed",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "side-mirrors",
+   "pn": "96302-7S600",
+   "t": [
+    "Nissan",
+    "Armada",
+    2005
+   ],
+   "main": "plain",
+   "round6": "gate {\"built\": \"2004-10..2005-08\"}",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "side-mirrors",
+   "pn": "96302-7S600",
+   "t": [
+    "Nissan",
+    "Titan",
+    2006
+   ],
+   "main": "plain",
+   "round6": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "window-regulator",
+   "pn": "80721-EH100",
+   "t": [
+    "Infiniti",
+    "M35",
+    2008
+   ],
+   "main": "plain",
+   "round6": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "window-regulator",
+   "pn": "80721-EH100",
+   "t": [
+    "Infiniti",
+    "M45",
+    2008
+   ],
+   "main": "plain",
+   "round6": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "window-regulator",
+   "pn": "82721-0E715",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1996
+   ],
+   "main": "plain",
+   "round6": "not claimed",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "window-regulator",
+   "pn": "82721-0E715",
+   "t": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "main": "plain",
+   "round6": "not claimed",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "side-mirrors",
+   "pn": "96301-EA000",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2011
+   ],
+   "main": "plain",
+   "round6": "not claimed",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "side-mirrors",
+   "pn": "96301-EA000",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2007
+   ],
+   "main": "plain",
+   "round6": "plain",
+   "held": [],
+   "group_refusal": null
+  },
+  {
+   "item": "RISK pair",
+   "cat": "side-mirrors",
+   "pn": "96301-EA000",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2013
+   ],
+   "main": "plain",
+   "round6": "not claimed",
+   "held": [
+    "held_option_tie"
+   ],
+   "group_refusal": null
+  }
+ ]
+}

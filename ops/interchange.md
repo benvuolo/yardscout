@@ -5409,3 +5409,205 @@ from the held gated vehicle-years: those gates are what excluded donors.
    cases: 96301/96302-1CA0A and -1CA1A QX70 / FX35 / FX37, and
    80730/80731-7B400 Xterra 2001.
 3. Nissan: 214 shippable, not shipped; the sixth independent check decides.
+
+## 2026-11-19 Round 6: cab basis, starred-only, hybrid eng_not, every cutting window, transmission ties, narrower page windows (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round6-1119` from origin/main 8c48be12)
+
+Hub decisions 2026-11-19 ~10:10 UTC after check 1119f (2 WRONG, one class:
+an inferred Titan rear-door "crew cab" gate). No fetch, dispatch or email.
+`docs/app.js` unchanged; sw left as main has it. `policy.py` untouched (rules
+in curate.py), so `policy_sha256` did not move; the 8 live makes were
+re-curated and the payload rebuilt (oemStatus ok x8).
+
+### Rules (curate.py)
+
+1. **Cab basis.** A cab gate is kept only when the number's own evidence for
+   that vehicle-year carries the cab (`cab_stated`). That means one of:
+   - own-row KC/CC/T codes;
+   - cab words on the own rows;
+   - every fitment trim of the number for that year naming the cab.
+   Otherwise the vehicle-year is held (`held_cab_inferred`). `rear_cab_of`
+   (rear-door part read as crew cab from the page's KC/CC split) is never a
+   basis.
+2. **Starred-only** (nissan): `held_starred_only`, when the number is listed
+   for the year only through starred configurations. It shares
+   `nissan.starred_held.json` with round 5b, kind `starred_only`.
+3. **Hybrid displacement** (nissan): a gas-only gate also gets `eng_not` for
+   the displacements the model year offers that no gas-catalog page of the
+   model names (`hybrid_only_disps`).
+   - Result: every QX60 gas gate now has `eng_not` 2.5L.
+   - The same rule also gives Murano 2.5L, Rogue 2.0L and Q70 3.5L (the Q70
+     hybrid's VQ35HR).
+4. **Every cutting window gated.** `no_other_row` windows are now gated, or
+   their vehicle-year leaves at the note cap. The span is the code's
+   07/(y-1)-06/y.
+5. **Transmission ties** (config-tuple option columns). The year is held
+   (`held_option_tie`) when the gates let through a (drive family,
+   transmission) pair that no configuration of the number covers.
+   - A configuration naming no transmission loses the transmission a
+     same-part, same-mark sibling lists for the same or a broader
+     configuration. Example: JK61B "S. 6MT" takes every 6MT sedan from
+     JK61D.
+   - A trans gate read from a sibling is **not** added: the app would word it
+     "this part is listed for automatic only", a basis the row does not
+     carry (the decision-1 class). Held instead; the held list records
+     `a_gate_would_fit`.
+6. **Narrower page windows.** When T's page is undated, the other model-year
+   pages of the same model are intersected (the narrower window). I did not
+   use cross-model pages: 96302-7S600's Armada page would then drop Titan
+   2006 on an Armada window.
+
+**Only narrows.** A round-5b reading of the windows (union, no
+`no_other_row`) runs beside the new one through the note cap:
+- a group it refuses stays refused;
+- a year it leaves out stays out.
+
+Without this guard, ford F87Z-7823394-AA would have come back, and 4 nissan
+app-years, because the cap's "longest label first" drop picked other years.
+All holds read the group round 5 ships, after the exterior, wheels and
+release holds.
+
+### Part A, live makes (`groups/_report/round6_census_2026-11-19.json`)
+
+Census on the groups origin/main ships, lot rows = car x group rows of the
+vehicle-year on main:
+
+| ns | d1 cab not on own row | d4 cutting window ungated | d5 transmission tie | d6 pages disagree |
+|---|---|---|---|---|
+| gm | 0 (its 3 cab gates are stated by fitment trims) | 0 | 0 | 0 |
+| ford | 0 | 5 vy / 5 groups / 303 plain | 0 | 0 |
+| toyota | 0 | 4 / 2 / 46 plain | 0 | 0 |
+| subaru | 0 | 0 | 4 / 2 / 154 plain | 0 |
+| hmg, mb, mopar, vag | 0 | 0 | 0 | 0 |
+
+The live changes:
+- **toyota:** 67003/67004-30550 GS 300 and GS 400 1998 are now
+  `built 1997-08..1998-08`.
+- **ford, gated (3 groups):**
+  - 8G1Z-19980-F Taurus X 2008;
+  - 1L2Z-7823395-BB Explorer Sport 2001;
+  - 5F9Z-14529-BAC Montego 2005.
+- **ford, held at the note cap (2 groups):** 8G1Z-19980-C (Taurus and Taurus
+  X 2008) and 1L2Z-7823394-BB (Explorer Sport and Sport Trac 2001). Both
+  windows' words pass 160, so one model is left.
+- **subaru:** 61041AL04A and 61041AL05A Legacy/Outback 2015 are held
+  (`held_option_tie`, via sibling).
+  - The own row lists Limited trims with no transmission, and 61041AL00A
+    lists "(S+OBK).6MT".
+  - A trans AT gate would fit, but it is not added: the app would state a
+    basis the row does not carry.
+  - `groups/_report/subaru.round6_held.json`.
+
+`live_diff.py` against origin/main
+(`groups/_report/live_diff_2026-11-19_round6.txt`): **0 added groups, 0
+gained app-years, 0 widened gates** in all 9; gm, mopar, hmg, vag and mb are
+byte-identical.
+
+Shipped pairs (8 makes, pinned lot):
+
+| | Before | After |
+|---|---|---|
+| Plain | 290,592 | 290,089 |
+| If equipped | 14,285 | 14,264 |
+| Excluded | 12,034 | 12,034 |
+| Payload groups | 1,166 | 1,162 |
+
+Per make:
+- **ford:** plain 23,826 -> 23,523; if equipped 1,117 -> 1,050 (the 2
+  groups held whole carried gated pairs).
+- **toyota:** plain 96,596 -> 96,550; if equipped 8,390 -> 8,436.
+- **subaru:** plain 3,992 -> 3,838.
+
+### Part B, nissan candidate (NOT shipped)
+
+| | Round 5b (main) | Round 6 |
+|---|---|---|
+| Likely / shippable | 217 / 214 | 174 / **171** |
+| climate / gauge / mirrors / regulators | 17 / 25 / 60 / 112 | 16 / 8 / 43 / 104 |
+| Shippable app-years | 1,220 | 1,000 |
+| Gated groups (built) | 128 (82) | 98 (64) |
+| Pairs plain / if equipped / excluded | 38,357 / 5,424 / 297 | **30,048 / 3,268 / 246** |
+
+Census on main's candidate:
+- **d1** 8 vy / 6 groups / 454 if-equipped rows. Same as the check.
+- **d2** 91 / 33 / 3,180 plain + 999 if equipped. Same as the check.
+- **d4** 90 / 48, made up of:
+  - 57 "drop": the decision-6 narrower window leaves under 5 months of the
+    year. One example is 80720-EH100 M35/M45 2006-2007, dated 12/2004-06/2008
+    on the 2008 page and 09/2007-06/2008 on the 2009 page.
+  - 27 other-page and 6 own-page `no_other_row` windows. The check found 12
+    vy under its 08-07 span.
+- **d5** 9 / 7.
+- **d6** 62 / 33.
+
+Held lists:
+- **`nissan.starred_held.json`:** 45 groups (35 whole), 150 vehicle-years.
+  - By kind: starred_only 120 (= the check's 91 + 29 in groups round 5b
+    already held), a 8, b 6, c_drive 4, c_engine 43.
+- **`nissan.round6_held.json`:** 14 groups (12 whole).
+  - `held_cab_inferred`: 6 vehicle-years / 6 groups.
+  - `held_option_tie`: 10 / 8 (JK61D, JK61C, Xterra 2011-2012 9BD5A,
+    Frontier 2012 9BD5B, Xterra 2013 EA000 ...).
+
+Every 1119f item (`groups/_report/nissan_recheck_2026-11-19f.json`; my own
+re-check, not independent):
+
+| item | now |
+|---|---|
+| WRONG 82720-7S000 Titan 2005 cab | held (`held_cab_inferred`); group held whole |
+| WRONG pair 82730-9FJ0A Titan 2012 cab | held; group held whole |
+| census: 82721-7S000, 82730/82731-7S000 (Titan 2010-2011), 82731-9FJ0A | all held whole; no rear-door regulator keeps a cab gate |
+| RISK 24820-JK61D G35/G37 2008 (no trans gate) | both held (`held_option_tie`, via sibling JK61B "S. 6MT"; a trans AT gate would fit, not added) |
+| RISK 24820-JK61C (starred only) | held (`held_starred_only`) |
+| RISK 96301-3EV0B QX70 2016-2017 (starred only) | held; group held whole |
+| RISK 96302-EA000 Xterra drive/trans words | Xterra 2013 held (tie: no 4WD automatic); Xterra 2005-2012 kept, "W. BASECAMP" / "W. X" cover every pair; Frontier 2011 dropped (decision-6 window) |
+| RISK 80730-7B400 Frontier 1999-2000 (starred only) | held; Frontier 2001-2004 plain |
+| RISK QX60 gas gates without eng_not (82720-3JA0A, 80720-3JA0A, 82730-3KG0A, ...) | all `eng_not` 2.5L |
+| RISK pairs 24810-7S02E, 24810-7S00E Titan / Armada 2006 (starred only) | both groups held whole |
+| RISK pair 96302-7S600 (pages disagree) | Armada 2005 `built 2004-10..2005-08` (decision 4); Titan 2005 left at the note cap; Titan 2006 plain |
+| RISK pair 80721-EH100 M35/M45 2008 | plain: 12/2004-06/2008 covers 07/2007-06/2008 (the check used 08-07) |
+| RISK pair 82721-0E715 Altima/Stanza 1996 | left out (window, note cap) |
+| RISK pair 96301-EA000 Frontier 2011 / Xterra 2007 / 2013 | Frontier 2011 dropped; Xterra 2007 plain (Basecamp covers 4WD AT); Xterra 2013 held |
+| census windows: Q70 2014 1MA5A; Titan 2008 96302-ZC20A | Q70 2014 `built 2013-01..2013-11`; ZC20A held whole (Titan 2007 starred only, the rest over the cap) |
+
+### Tests
+
+- **New `curation_tests/test_round6_1119.py`, 26 checks:**
+  - the cab basis (7S000 not stated, CC stated, KC+CC is no "crew cab");
+  - the tie: Xterra 2013 via own, Basecamp covers, one transmission no tie,
+    JK61D via sibling, a trans gate enforced, a bare sibling configuration
+    no split;
+  - narrowing and the round-5b union;
+  - the hybrid displacement;
+  - the committed files: the 8 cab vehicle-years, rear-door regulators,
+    QX60 eng_not, Xterra 2013, JK61D, the starred items, Q70 2014,
+    Armada 2005, the held lists, the live diff zeros, payload oemStatus.
+- `test_round3_1119.py` and `test_round5b_1119.py` were updated to the
+  round-6 meaning (a held 24810-3JA1B; the starred_only kind and the round-6
+  refusal codes).
+- curation_tests: 27/27 files pass (Phase 2 parity SKIP unchanged).
+- pf_guards_unit: ALL PASS.
+- test_interchange and test_am_gates: pass.
+
+### Stricter or looser than the brief
+
+- **Stricter (5):** sibling-inferred single-transmission ties are held,
+  not gated. These are JK61D and subaru 61041AL04A/05A. The gate would fit,
+  but the app's trans line would state a basis the row does not carry.
+- **Stricter (6):** narrowing withdraws years whose own page lists the
+  number undated (EH100 M35/M45 2006-2007, EA000 Frontier 2011), 57 in all.
+- **Looser (6):** pages of the same model only, not other models (the
+  7S600 Armada window would drop Titan 2006).
+- **Decision 5 reading:** a tie exists only where no configuration covers a
+  (drive, transmission) pair. Xterra 2005-2012 EA000 stay, since Basecamp
+  or X configurations name neither.
+
+### Suggestions
+
+- An app basis for transmission gates, like drive_basis "sibling" ("the
+  catalog lists a separate 6MT number for this option, so this part is read
+  as automatic only"). It would let JK61D and the two subaru groups ship
+  gated instead of held. That needs an app change and the hub's OK.
+- Decision 3 as a live rule: the same hybrid-displacement read on toyota /
+  ford / gm gas-only gates was not measured; worth a census.
+- The 160 cap now costs ford 2 live groups (decision 4's windows on both
+  models).
