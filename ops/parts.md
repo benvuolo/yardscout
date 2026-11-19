@@ -492,3 +492,13 @@ compatibility." Basis and numbers per model: PARTS_GAPS §26.
 - **Not done: sensors (Next item 1).** No source at hand names a sensor:
   the crawl has no sensor category and the editorial hosts are unreachable.
 - Tests: every `scraper/test_*.py` passes (33 files).
+
+## 2026-11-19 16:15 UTC (hub) one row to check, found by the data workstream
+
+Not changed by the hub. While re-matching mislabeled cars on the VIN's
+vehicle (`data/vin-rematch-1119`), a 1993 E-350 gained the existing E-350
+row "7.3L Powerstroke Parts (verify engine)". The Power Stroke began with
+the 1994.5 model year (1993 and early 1994 7.3L diesels are the IDI
+engine), so that row's year window looks one to two years too wide. Check
+the row's stated basis in `scraper/PARTS_GAPS_2026-11.md` and narrow the
+window if the basis agrees (rule 3: only with a stated basis).
