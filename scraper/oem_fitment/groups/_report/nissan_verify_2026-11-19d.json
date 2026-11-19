@@ -1,6 +1,6 @@
 {
  "report": "nissan_verify_2026-11-19d",
- "status": "COMPLETE: verdicts for 30 groups and 30 pairs, census; agreement paragraph added after commit",
+ "status": "COMPLETE",
  "checker_session": "https://claude.ai/code/session_01LsgNuWEh1vdaDCtdP1jxMM",
  "candidate": "scraper/oem_fitment/groups/_report/nissan.candidate.json @ origin/main ac7a87aa",
  "pins": {
@@ -8025,8 +8025,8 @@
   },
   "hybrids_under_gas_only_limit": {
    "plain_hybrid_rows_all_groups": 108,
-   "under_a_gas_gate": 108,
-   "groups_with_gas_gate_and_hybrid_plain": 20,
+   "under_a_gas_gate": 88,
+   "groups_with_gas_gate_and_hybrid_plain": 10,
    "plain_hybrids_whose_product_page_lacks_the_hybrid_engine_code": 0,
    "note": "all 108 plain hybrid rows (QX60 5N1CL0M*, Rogue, Murano, M35h/Q70) are mirrors or window regulators whose product page lists the hybrid's own engine code (QR25DER, MR20DD, VQ35HR). The gas gate passes them (app rule: 'gas' counts as met unless a decode/listing names another fuel), which is right here; the 'gas only' wording is narrower than the product page. No cluster or climate group shows a hybrid."
   },
@@ -8092,5 +8092,60 @@
    "note": "pervasive (111 of 249 groups have at least one such vehicle-year, many only 1-2 boundary months). The curation credits a model year at 5 months of overlap. Sample items where same-configuration builds of a credited year carry a number not linked to the pn are RISK in this report."
   }
  },
- "recommendation": "DO NOT SHIP. 2 WRONG groups in the sample (QX60 mirror 96301-3JA9B and QX56 2013 speedometer 24820-3ZD0A: AWD/4WD donors shown as plain rows although the vehicle-year page lists a separate AWD number for the same option clause); the census finds the same class in 2 more groups (96302-3JA9B, 24820-3ZD1A). Fix before release: a drive gate (or drive_not, 'if equipped') wherever the page lists an AWD/4WD sibling for the same clause; eng gates from the product-page engine column (costs no real donor) and/or keep cars with a VIN/listing mismatch flag out of OEM plain rows; and a hub decision on production windows that split a credited model year (note naming the build window, or require the window to cover most of the year)."
+ "recommendation": "DO NOT SHIP. 2 WRONG groups in the sample (QX60 mirror 96301-3JA9B and QX56 2013 speedometer 24820-3ZD0A: AWD/4WD donors shown as plain rows although the vehicle-year page lists a separate AWD number for the same option clause); the census finds the same class in 2 more groups (96302-3JA9B, 24820-3ZD1A). Fix before release: a drive gate (or drive_not, 'if equipped') wherever the page lists an AWD/4WD sibling for the same clause; eng gates from the product-page engine column (costs no real donor) and/or keep cars with a VIN/listing mismatch flag out of OEM plain rows; and a hub decision on production windows that split a credited model year (note naming the build window, or require the window to cover most of the year).",
+ "agreement": {
+  "read_after": "245a2faf (verdicts committed first)",
+  "read": [
+   "nissan_verify_2026-11-18.json",
+   "nissan_verify_2026-11-18c.json",
+   "nissan_recheck_2026-11-19.json",
+   "ops/interchange.md 2026-11-18c verify and 2026-11-19 round-3 builder sections"
+  ],
+  "agree": [
+   "round 3 closed the classes it targeted: 0 engine-variant leaks, 0 km/h, 0 Rogue Select, 0 ungated regular cab / joined drive, drive_not on the one AUTO sibling",
+   "the builder's reading that the raw engine leftovers (1.0L Titan etc.) are listing/VIN mismatches, not class 1",
+   "hybrids now pass only where the product page lists their engine code",
+   "1118c's EA48D, 7Z809/8Z315 and hybrid findings are fixed in this candidate"
+  ],
+  "disagree": [
+   "1118c judged 96301-3JA9B (d5f882d545) RIGHT on the hybrid question; it did not read the AWD sibling 96301-3JN9B on the same pages. WRONG here for AWD gas QX60 2015-2017.",
+   "no earlier report or census covers AWD/4WD sibling numbers when this part's row names no drive (new class: 4 WRONG groups)",
+   "1118c treated production-date splits inside a credited model year as carried by the note (27510-EA00A, 82720-7S000); the note names option packages / configurations, not a build window: RISK here",
+   "the 1118c census's 286 engine-contradiction cars are gone after round 3; the 3 feed records left are a feed problem the app could still guard against"
+  ]
+ },
+ "risk_kinds": {
+  "production_split_unlinked_or_common_successor": [
+   "oem:nissan:climate-control:C:75527baaaa",
+   "oem:nissan:window-regulator:RR:43fd8a971d",
+   "P:oem:nissan:gauge-cluster:C:1c6c599444",
+   "oem:nissan:side-mirrors:R:da7775231b (with AWD ambiguity)"
+  ],
+  "pages_of_one_catalog_disagree": [
+   "oem:nissan:gauge-cluster:C:639ae7b7a3",
+   "oem:nissan:window-regulator:FR:cdc8f04746",
+   "P:oem:nissan:side-mirrors:R:4bb386f38e"
+  ],
+  "feed_identity_fit_claim_right": [
+   "oem:nissan:gauge-cluster:C:41e9a3d6fc",
+   "oem:nissan:gauge-cluster:C:8fda9acbc5",
+   "oem:nissan:side-mirrors:R:7a4166c9a0",
+   "oem:nissan:window-regulator:FR:2acad14646",
+   "P:oem:nissan:gauge-cluster:C:ac64e3f5f0",
+   "P:oem:nissan:side-mirrors:L:ef799f1000"
+  ],
+  "strict_reading_note": "under a strict reading of production date as a WRONG basis, the 4 production RISK items (and the production part of the WRONG 24820-3ZD0A) would count as WRONG; the 3 page-disagreement items would stay RISK."
+ },
+ "counts_excluding_feed_identity": {
+  "groups": {
+   "RIGHT": 23,
+   "WRONG": 2,
+   "RISK": 5
+  },
+  "pairs": {
+   "RIGHT": 28,
+   "WRONG": 0,
+   "RISK": 2
+  }
+ }
 }

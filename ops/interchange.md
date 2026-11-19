@@ -4749,3 +4749,123 @@ a new independent checker decides.
 2. Nissan: 246 shippable, not shipped; needs a new independent sample.
 3. Decide the note-cap suggestion above before the next round; it is the
    largest remaining coverage cost.
+
+## 2026-11-19 Independent release check of the round-3 nissan candidate (verifier subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/verify-nissan-1119d`)
+
+Hub brief: an independent release sample of `groups/_report/nissan.candidate.json`
+(origin/main ac7a87aa; the candidate, docs/app.js, the payload builder and
+lot_replay.mjs are unchanged at 921e708b). Check only: no rule, policy, group
+or payload file changed. Raw from git (oem-raw@57e8b5b9, all six nissan and
+infiniti files sha256-checked against the candidate's `raw` block). Lot, decodes
+and extras from main@a85c654 (inventory 1a9cfa73..., vin_decodes 1357625b...,
+vehicle_extras 6ff3d44b...). No fetch, crawl, dispatch, email, web search or
+main push. My own reader and draw (not `audit11_4/sample.py`). The lot was
+replayed with `audit11_4/lot_replay.mjs`, read first: it extracts the app's
+OEM-GATE and AM-GATE blocks, pfAppMatches, canonicalMake and expandV2Row
+unchanged and calls pfOemDonorGate as `pfRunSearch` does. Payload rows came
+from `junkyard_scraper._oem_gated_apps`. Earlier reports and builders' notes
+were read only after the verdicts were committed (245a2faf).
+
+### Seed 38271119: FAILED (2 WRONG). Do not ship nissan.
+
+- Draw: 30 groups by largest remainder on the candidate's categories
+  (window-regulator 14, side-mirrors 8, gauge-cluster 6, climate-control 2,
+  wiper-motor 0). Then 30 pairs: 30 other groups, one vehicle-year each.
+- Verdicts with the raw record lines (product page and own-page rows with
+  file:line refs) and the lot replay per item:
+  `groups/_report/nissan_verify_2026-11-19d.json`.
+- **Groups: 19 RIGHT / 2 WRONG / 9 RISK. Pairs: 26 RIGHT / 0 WRONG / 4 RISK.**
+- **WRONG, a new class: an AWD sibling number for the same option clause.**
+  The car's page lists a separate AWD number for the same option clause. The
+  group has no drive gate, so decoded-AWD donors show as plain rows.
+  1. 96301-3JA9B, QX60 RH mirror. The 2015-17 pages list it for "*W. PREMIUM"
+     and list 96301-3JN9B for "*W. AWD. PREMIUM". An AWD car without the
+     option takes 3JA9C ("W. PREMIUM"), so no AWD gas QX60 is listed for
+     3JA9B. 40 decoded-4WD QX60s (2015-17, 3.5L) get plain rows. The 3JN9B
+     and 3JN9C product pages list only the VQ35DE.
+  2. 24820-3ZD0A, QX56 2013 speedometer. The page lists it for "*3ROW.
+     PREMIUM" and lists 24820-1ZS0A for "*3ROW. AWD. PREMIUM". The 1ZS0A
+     product page reads "2011-2013 QX56 Premium". 6 decoded-4WD 2013 QX56s get
+     plain rows. QX80 2014 is fine: its page lists no AWD number.
+- **The census finds the same class in 2 more groups:** 96302-3JA9B (LH
+  mirror) and 24820-3ZD1A.
+- **RISK, by kind:**
+  - **Production window split, not linked or linked only through a common
+    successor (5).**
+    - 27510-EA00A, Pathfinder 2010: built 08/2009-01/2010; 9BH0A from 01/2010.
+    - 82720-7S000, 2006 Armada/Titan: built to 12/2005, then ZC30A.
+    - 24820-3ZD0A, the QX56 2013 production split, which is also part of the
+      WRONG above: from 02/2013, after 1V90A/1V91A 08/2012-02/2013.
+    - P13 24810-9BA5B, Xterra 2011: 08/2010-04/2011, then 9CA5B.
+    - 96301-3JA9A, 2016: built to 01/2016, then 9NF9A. This item also
+      carries the AWD ambiguity below.
+  - **Pages of one catalog disagree (3).**
+    - 24810-7Z803: dateless on the 2001 pages, 07/2001-04/2002 on the 2002
+      pages. 84 Xterras 2001 get plain rows.
+    - 80720-2Z710: dateless on the 2002 pages, "from 10/2002" on 2003, while
+      3S510 covers 07/2001-09/2002.
+    - P5 96301-ZC60A, Armada 2007: dateless on 2007, 08/2005-08/2006 on 2006.
+  - **AWD sibling, only in starred form (1): 96301-3JA9A "W. BASE" vs
+    3JN9B/3JN9C "*W. AWD. BASE".**
+  - **Feed identity (6 items, from 3 lot records).** The fit claim is RIGHT,
+    but a plain row is a car whose VIN decodes as another vehicle. There is
+    no eng gate, so the app shows it.
+    - "Titan 2006" with a Yamaha VIN JYARN15E...: items 7S00E, 7S02E and
+      ZC20A.
+    - "Xterra 2005" whose VIN decodes 2004 WD22 3.3L (5N1ED28T64...): items
+      EA005, P17 and P22.
+- Rule used for production windows: covered when the other builds' number is
+  replaced by this part, or is its direct successor. Otherwise RISK, because
+  build month cannot be decoded. On a strict reading of "production date" in
+  the WRONG list, those RISK items would count as WRONG; the hub decides.
+
+### Census of all 249 candidate groups (counts in the report's `census`)
+
+| Class | Result |
+|---|---|
+| Engine column limit with no gate | 0 engine-variant leaks. Leftover: 3 feed records whose VIN is another vehicle, plain in 24 groups. They are the two above, plus a "QX80 2017" with a QX60 VIN, 5N1DL0MN... |
+| Hybrids under a gas-only limit | 108 hybrid rows (88 gated). All are mirrors or regulators whose product page lists the hybrid's own engine code: 0 wrong. No cluster or climate group shows a hybrid. |
+| Joined drive codes | 16 groups. None has a drive gate; every joined row covers both drives. |
+| 4wd vs All-Mode "W. AUTO" | 1 vehicle-year (EA48D Pathfinder 2005). It has drive_not; 4WD is "if equipped", 0 plain. |
+| AWD/4WD sibling for the same clause (new class) | 17 vehicle-years in 7 groups. WRONG in 4 groups (94 plain AWD rows). RISK in 2 (3JA9A both sides, starred sibling only). Not an issue for Titan 7S00E: its 4WD siblings also carry 2WD clauses. |
+| Kph clusters | 0 of 46 cluster groups (5 say "Mph" in the description). |
+| Rogue 2014-15 vs Rogue Select | 0 groups with Rogue 2014-15 apps; none of the lot's 34 JN8AS5 cars are shown. |
+| Regular cab listed under another number | 14 vehicle-years (Frontier 2001-02), all cab-gated. 2003-04 pages list no regular cab at all; none is on the lot. |
+| B14 200SX body | 2 groups, both naming the coupe ("C."). |
+| Production windows that split a credited model year (new) | 166 vehicle-year rows in 111 groups. Many are 1-2 boundary months. The 5-month overlap rule credits years where the builds of the other half carry a number with no link to this one. |
+
+### Agreement / disagreement (read after 245a2faf)
+
+- **Agree.**
+  - Round 3 closed the classes it targeted. This census finds 0 engine
+    leaks, 0 km/h, 0 Rogue Select, 0 ungated regular-cab or joined-drive
+    rows, and drive_not where an AUTO sibling exists.
+  - The builder's note matches mine: the raw engine leftovers are
+    listing/VIN mismatches, not class 1.
+  - Hybrids now pass only where the product page lists their engine.
+  - 1118c's EA48D, 7Z809/8Z315 and hybrid findings are fixed in this
+    candidate.
+- **Disagree.**
+  - 1118c judged 96301-3JA9B RIGHT. It read the hybrid, not the AWD sibling
+    3JN9B on the same pages. I find it WRONG for AWD gas QX60s.
+  - No earlier report or census looks at AWD siblings without a drive word.
+  - 1118c treated production splits as "carried by the note" (EA00A,
+    82720-7S000). The note says "fits some option packages / configurations"
+    and names no build window, so I keep them RISK.
+  - The 1118c census counted engine contradictions (286 cars) that the
+    round-3 rules have since removed. The 3 feed records left are a feed
+    problem the app could also guard against.
+
+### Suggested before another sample (for the hub; nothing changed here)
+
+1. Gate drive (or set drive_not, so the car stays "if equipped") wherever the
+   car's page lists an AWD/4WD number for the same clause and this part's
+   row names no drive. That covers 3JA9B both sides and 3ZD0A/3ZD1A, and
+   decides 3JA9A.
+2. Keep cars flagged with a VIN/listing mismatch (`vpicMismatch`) out of OEM
+   plain rows, or demote them to "if equipped". Or give an eng gate to every
+   app whose engine column is a single displacement; no real donor is lost.
+3. Production windows: decide whether a model year credited at 5 months of
+   overlap needs a note naming the build window when the other builds carry
+   a number with no link to this one.
+
