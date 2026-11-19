@@ -5804,3 +5804,194 @@ The app would need to show the line on the donor row; that is an app change.
 - **G05 class:** decide whether "two same-option numbers, both undated" should
   be held. The census sizes it per make in `round7_census_2026-11-19.json`
   (class x).
+
+## 2026-11-19 Round 8: own pages only (nissan candidate); live census only (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round8-1119` from origin/main bb2ace4b)
+
+Hub decisions after check 1119h (its WRONG is a lot car whose VIN decodes
+another model; not curation). No fetch, dispatch or email. `docs/app.js`
+unchanged; `policy.py` untouched. Rules in curate.py, `ROUND8_NS = {nissan}`.
+
+**Live files:** after re-curation with this code, all 8 shipped groups files
+are byte-identical to origin/main (cmp). `live_diff_2026-11-19_round8.txt`
+shows 0 changes for all 8. The payload was not rebuilt (nothing live changed).
+
+### Rules (nissan)
+
+1. **`held_no_own_page`.** No list row of the number's own for that
+   vehicle-year in the raw; the claim rests on a product record or other
+   pages. The row names the page to crawl (the record's list URL).
+2. **`held_window_other_page`.** The build window comes from another model
+   year's page (gate, split or drop). It is held, not gated on the borrowed
+   window.
+3. **`held_undated_siblings`.** Same-option numbers on the year's page, none
+   dated. A configuration counts as the same option when its words sit inside
+   the other's: 6WJ0A "S" beside 1NC3A "S. JOURNEY". The number's own
+   predecessors and successors are not counted.
+4. **Xterra 96302-EA000 (decision 4).** Re-read; see below.
+5. **Gas wording.** Where the hybrid's pages were never read (the year page
+   offers a hybrid catalog, no hybrid page is in the raw), the gate stays and
+   the note says "<model>: checked on gas-model pages" instead of "gas only".
+   If the words do not fit 160, gas-checked years leave one at a time at the
+   cap, not the group: 82731-4BA0A keeps Murano 2015-2019 + Rogue 2017.
+6. **`held_plus_reading`.** The claim depends on reading "+" as "or" between
+   configurations naming different engines or drive families. The test
+   re-reads T's page with those alternatives unread. FX50 2009-2010 1CA0A
+   "W. VQ35HR. PREMIUM + W. VK50VE" is held. KC / CC / T stay cab codes, and
+   "+" joining them is kept; 8 vy / 6 groups of the round-7 candidate have
+   cab gates resting on them.
+
+**Only narrows.** The round-7 reading (without the round-8 holds) now runs
+through the note cap beside the round-6 and round-5b ones. A year one of them
+drops stays out.
+
+### Part A, live makes, census only (`groups/_report/round8_census_2026-11-19.json`)
+
+Lot rows are car x group rows of the vehicle-year on main.
+
+| ns | no own page | window from another page | undated same-option siblings | crawl pages |
+|---|---|---|---|---|
+| toyota | 600 vy / 439 groups / 94,567 rows | 0 | 239 / 176 / 7,798 | 122 |
+| gm | 173 / 173 / 37,555 | 0 | 212 / 132 / 15,598 | 57 |
+| ford | 47 / 47 / 9,731 | 0 | 2 / 2 / 279 | 15 |
+| subaru | 23 / 23 / 1,571 | 0 | 9 / 9 / 252 | 5 |
+| mopar | 12 / 12 / 2,106 | 0 | 96 / 44 / 16,129 | 4 |
+| vag | 4 / 4 / 832 | 0 | 0 | 1 |
+| mb | 0 | 0 | 18 / 6 / 122 | 0 |
+| hmg | 0 | 0 | 4 / 4 / 16 | 0 |
+
+How to read it:
+- No live build gate borrows a window from another page.
+- "No own page" on the live makes is mostly claims resting on product
+  records whose list page was never crawled. Example: toyota 2007 Camry
+  bumper-components-front.
+
+### Part B, nissan candidate (NOT shipped)
+
+| | Round 7 (main) | Round 8 |
+|---|---|---|
+| Shippable groups | 153 | **108** |
+| climate / gauge / mirrors / regulators | 13 / 7 / 39 / 94 | 7 / 3 / 16 / 82 |
+| App-years | 915 | 617 |
+| Pairs plain / if equipped / excluded | 24,198 / 2,464 / 178 | **14,890 / 1,198 / 32** |
+
+What each 1119h kind became (census on the round-7 candidate, then round 8):
+
+| 1119h kind | census | round 8 |
+|---|---|---|
+| missing_page | 61 vy / 61 groups / 3,081 rows (the check: 61 / 61 / 3,029 plain + if equipped) | all 61 held (`held_no_own_page`) |
+| window_from_other_page | 17 vy / 17 groups (the check's 24 include 7 without an own page) | all 17 held |
+| same_option_sibling_undated | 155 vy / 48 groups | all held: 127 undated siblings, 14 also "+", 7 window, 7 other holds |
+| gas_only_wording | 56 vy / 22 groups (the check: 56 / 22) | 37 still claimed and reworded; 19 held for other reasons |
+| "+" reading | 29 vy / 17 groups | all held (10 "+" alone, 14 also undated siblings, 5 no own page) |
+| unexplained_mark, cab codes | 8 vy / 6 groups | kept as cab codes; 4 held by undated siblings, 4 by other holds |
+| unexplained_mark, "*" (ZH10A, EA010/EA000, 1CA0A) | | dated or starred siblings, not changed this round |
+| window_edge (K6301-1MA0A M37 2011) | | held, no own page |
+| window_disagrees_across_pages (80720-1CA0B QX70 2015) | | FX35 2011 held (no own page); QX70 2015's gate is its own row, kept |
+| drive_trans_tie_ungated (Xterra 2005-08 EA000) | | 2005, 2006 and 2009 held (undated siblings); 2007-2008 held ("+" and undated siblings) |
+
+Held lists by reason:
+- **`nissan.round8_held.json`** (vehicle-years of every group the rules
+  read, shipped or not):
+  - `held_no_own_page` 276;
+  - `held_window_other_page` 330;
+  - `held_undated_siblings` 230;
+  - `held_plus_reading` 41.
+- **Refusals (groups held whole):**
+  - `held_no_own_page` 46, `held_window_other_page` 37,
+    `held_undated_siblings` 22, `held_plus_reading` 1;
+  - `held_window_note_cap` 49 (round 7: 61).
+- **The earlier lists:**
+  - starred: 42 groups, 125 vy, starred_only 91;
+  - round 6: cab_inferred 4, option_tie 2;
+  - round 7: cross_position 5.
+
+Re-check of every 1119h item (my own, not independent):
+`groups/_report/nissan_recheck_2026-11-19h.json`.
+
+### Decision 4, Xterra 96302-EA000
+
+The rows:
+
+| years | row |
+|---|---|
+| 2005-2006 | "W. 2WD. S + W. 4WD. S. 6MT + W. BASECAMP, W. S" |
+| 2007-2008 | "W. 2WD. S + W. 4WD. S. 6MT + W. BASECAMP" |
+| 2009 | "W. BASECAMP" |
+
+The sibling EA005 lists "*W. S" (2005-2006) and a bare "W" (2007-2009).
+
+- **The hub's test:** "a combination a plain donor can have not covered by a
+  configuration of this number". 4WD automatic is covered by "W. S" in
+  2005-2006 and by "W. BASECAMP" in 2007-2008.
+- **My reading:** read with "+" as "or", the round-6 reading was right. Not
+  holding them was consistent with how every trim limit is treated: a 2WD SE
+  donor is equally uncovered, and the app's "fits some option packages" note
+  says so.
+- **Under round 8 the years are held anyway.** 2005, 2006 and 2009 are held
+  by undated siblings (EA005 for the same configuration). 2007-2008 are held
+  by the "+" rule, since their only alternative joins a 2WD and a 4WD
+  configuration.
+
+The two readings no longer change the outcome.
+
+### Targeted crawl to bring the held years back (no own page)
+
+22 nissan / infiniti list pages over 12 vehicle-years. Listed in the census,
+`nissan_crawl`.
+
+| vehicle-year | pages |
+|---|---|
+| Altima 1995 | 4 (control_unit, front and rear door regulator, rear_view_mirror) |
+| Xterra 2004 | 2 |
+| Xterra 2010 | 2 |
+| QX60 2014 (gas) | 2 |
+| FX35 2011 | 2 |
+| I30 2000 | 2 |
+| M35 2006 | 2 |
+| Rogue 2016 (T32U) | 2 |
+| EX35 2008 | 1 |
+| EX35 2012 | 1 |
+| M37 2011 | 1 |
+| Frontier 2000 | 1 |
+
+They bring back the 61 vehicle-years of the round-7 candidate (3,081 rows),
+provided each page lists the number without other problems. The live makes'
+equivalent lists are in the census (`part_a_crawl_lists`): toyota 122 pages,
+gm 57, ford 15, subaru 5, mopar 4, vag 1.
+
+### Tests
+
+- **New `curation_tests/test_round8_1119.py`, 24 checks:**
+  - the "+" filter (engine, drive, cab codes kept);
+  - undated siblings (Q40 1NC3A / 6WJ0A, dated, another option,
+    predecessor);
+  - no own page and the crawl page;
+  - the borrowed window and the own window;
+  - the gas words;
+  - the committed candidate: no round-7 vehicle-year of the four classes
+    still claimed, the census sizes, no "gas only", FX50 and Xterra
+    2007-2008, notes within 160, the held list, the crawl list, live diff
+    zeros for the 8, rules nissan only.
+- **Updated:** `test_round3_1119` (24810-3JA1B) and `test_round5b_1119`
+  (80720-2Z700 Xterra 2002) accept a round-8 hold.
+- curation_tests: 29/29 files pass (Phase 2 parity SKIP unchanged).
+- pf_guards_unit: ALL PASS.
+- test_interchange and test_am_gates: pass.
+- `tools/regress.sh --quick` (on 264a240e): **74 passed, 0 failed, 0
+  skipped**.
+- No full regression: no app change.
+
+### Stricter or looser than the brief
+
+- **Decision 2:** a gate whose window is on the vehicle-year's own row is
+  kept even when other years' pages date the number differently (80720-1CA0B
+  QX70 2015). "Pages disagree" is held only where the year's own row is
+  undated.
+- **Decision 3:** "same option" includes one configuration's words inside the
+  other's (wider than an exact match). That matches the check's Q40 example.
+- **Decision 5:** a gas-checked year leaves at the cap one at a time, rather
+  than the whole group.
+- **Decision 6:** "+" is tested for engine and drive conflicts only. Cab
+  conflicts are not tested: "KC. SE + CC. SE" would contradict itself under
+  an "and" reading, which is strong evidence that "+" means "or".
+

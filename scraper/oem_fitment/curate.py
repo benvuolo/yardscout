@@ -1416,6 +1416,7 @@ class Curation:
         self.likely_round6_held = Counter()
         self.round6_held = []
         self.round7_held = []       # round7-1119 decision 4: cross-position groups
+        self.round8_rows = []       # round8-1119: vehicle-years held, one row each
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
         self.release_notes = policy.release_notes()
         self.released_exterior = []
@@ -1554,6 +1555,7 @@ class Curation:
             # on both and the group keeps only what both keep (only narrows)
             win_old, keep_old = {}, []
             win_6, keep_6 = {}, []          # round7-1119: the round-6 reading too
+            keep7, pre8 = [], {}            # round8-1119: the round-7 reading; vehicle-years held before the cap
             for T in Ts:
                 w = self.build_window(c, cat, T)
                 self._r7 = False
@@ -1611,14 +1613,29 @@ class Curation:
                         win_6[T] = w6
                 if w and w["kind"] == "drop":
                     self.likely_window_dropped[cat] += 1
+                    if self.ns in ROUND8_NS and w.get("src") == "other_page":
+                        pre8[T] = ("held_window_other_page", {"window": _win_label(w["wins"]), "kind": "drop"})
                     continue
                 if w and w["kind"] in ROUND7_WINDOW_KINDS:
                     win_by_T[T] = w
+                keep7.append(T)
+                r8 = self._round8_pre(c, cat, T, w) if self.ns in ROUND8_NS else None
+                if r8:
+                    pre8[T] = r8
+                    continue
                 keep.append(T)
+            for T, (r8, d8) in pre8.items():
+                self.round8_rows.append({"cat": cat, "pn": sorted(c.pns), "t": list(T), "reason": r8, **d8})
+                self.likely_round6_held[(r8, cat)] += 1
             if len(keep) != len(Ts):
                 Ts = keep
                 drive_by_T = {T: d for T, d in drive_by_T.items() if T in set(keep_old) | set(keep_6)}
                 if len({(T[0], T[1]) for T in Ts}) < 2:
+                    if pre8 and len({(T[0], T[1]) for T in keep7}) >= 2:
+                        code = "held_no_own_page" if any(v[0] == "held_no_own_page" for v in pre8.values()) \
+                            else "held_window_other_page"
+                        self.refuse(code, cat=cat, pn=sorted(c.pns)[0], evidence=[r.pointer for r in c.records],
+                                    detail="; ".join(f"{T[1]} {T[2]} {v[0]}" for T, v in sorted(pre8.items()))[:400])
                     continue
             if cat in policy.STRICT_NOTE_CATS:
                 why_s = self._strict_refusal(c, cat, [(T, m) for T, m in cand if T in set(Ts_r3)], slots)
@@ -1633,15 +1650,30 @@ class Curation:
             # note past the cap leaves that vehicle-year out (never cut), one at
             # a time, the longest label first; other limits refuse as before
             def cap_loop(Ts_l, win, record):
+                # the round-3 test reads the round-3 words (round8: not the
+                # 'checked on gas-model pages' phrase, which the loop below fits)
+                self._gas_note_off = True
                 lim_l = self._likely_limits(c, cat, Ts_r3, slots, drive_r3, set(), {}, {}, text, brand)
+                self._gas_note_off = False
                 while lim_l["status"] == "ok" or lim_l.get("retry"):
                     lim_l = self._likely_limits(c, cat, Ts_l, slots, drive_by_T, sib_T, dnot_by_T, win, text, brand)
                     wTs = [T for T in Ts_l if T in win]
-                    if lim_l["status"] != "held_drive_qualifier" or not wTs or \
-                            self._likely_limits(c, cat, Ts_l, slots, drive_by_T, sib_T, dnot_by_T, {}, text,
-                                                brand)["status"] != "ok":
-                        break           # not the window's words: refused as before
-                    drop = max(wTs, key=lambda T: (len(lim_l["labels"].get(T, "")), T))
+                    gTs = [T for T in Ts_l if T in set(lim_l.get("gas") or ())]
+                    if lim_l["status"] != "held_drive_qualifier":
+                        break
+                    if wTs and self._likely_limits(c, cat, Ts_l, slots, drive_by_T, sib_T, dnot_by_T, {}, text,
+                                                   brand)["status"] == "ok":
+                        drop = max(wTs, key=lambda T: (len(lim_l["labels"].get(T, "")), T))
+                    else:
+                        # round8-1119 decision 5: the 'checked on gas-model pages'
+                        # words do not fit: a gas-checked year leaves, not the group
+                        self._gas_note_off = True
+                        fits = gTs and self._likely_limits(c, cat, Ts_l, slots, drive_by_T, sib_T, dnot_by_T, win,
+                                                           text, brand)["status"] == "ok"
+                        self._gas_note_off = False
+                        if not fits:
+                            break           # not the window's or the gas words: refused as before
+                        drop = max(gTs)
                     Ts_l = [T for T in Ts_l if T != drop]
                     if record:
                         self.likely_window_note_cap[cat] += 1
@@ -1659,13 +1691,17 @@ class Curation:
             # cap that drops another year brings nothing round 5b dropped back
             lim_old, Ts_old = cap_loop(list(keep_old), win_old, False)
             lim_6, Ts_6 = cap_loop(list(keep_6), win_6, False) if lim_old["status"] == "ok" else (lim_old, [])
+            lim_7, Ts_7 = cap_loop(list(keep7), win_by_T, False) if pre8 and lim_6["status"] == "ok" \
+                else (lim_6, list(keep7))
             if lim_old["status"] != "ok":
                 lim, Ts = cap_loop(list(keep_old), win_old, True)
             elif lim_6["status"] != "ok":
                 lim, Ts = cap_loop(list(keep_6), win_6, True)     # refused as round 6 refused it
+            elif lim_7["status"] != "ok":
+                lim, Ts = cap_loop(list(keep7), win_by_T, True)   # refused as round 7 refused it
             else:
                 lim, Ts = cap_loop(Ts, win_by_T, True)
-                both = set(Ts_old) & set(Ts_6)
+                both = set(Ts_old) & set(Ts_6) & set(Ts_7)
                 if lim["status"] == "ok" and [T for T in Ts if T not in both]:
                     self.likely_round6_held[("earlier_cap_kept_out", cat)] += sum(T not in both for T in Ts)
                     Ts = [T for T in Ts if T in both]
@@ -1767,6 +1803,13 @@ class Curation:
                 tie = self.option_tie(c, cat, T, g)
                 if tie:
                     rs.append(("held_option_tie", tie))
+                if self.ns in ROUND8_NS:
+                    us = self.undated_siblings(c, cat, T)
+                    if us:
+                        rs.append(("held_undated_siblings", {"siblings": us}))
+                    pl = self.plus_dependent(c, cat, T, slots, gas_only=(g.get("fuel") == "gas"))
+                    if pl:
+                        rs.append(("held_plus_reading", pl))
                 if rs:
                     why6[T] = rs
             if held or why6:
@@ -1790,6 +1833,10 @@ class Curation:
                 only_T = {T for T, rs in why6.items() if any(r6 == "held_starred_only" for r6, _d in rs)}
                 if star_T or only_T:
                     self.starred_held.append(self._starred_entry(c, cat, Ts0, star_T, unit, only_T, kept=Ts))
+                for T, rs in why6.items():
+                    for r6, d6 in rs:
+                        if r6 in ("held_undated_siblings", "held_plus_reading"):
+                            self.round8_rows.append({"cat": cat, "pn": pns, "t": list(T), "reason": r6, **d6})
                 r6_T = {T: [x for x in rs if x[0] in ("held_cab_inferred", "held_option_tie")]
                         for T, rs in why6.items()}
                 r6_T = {T: rs for T, rs in r6_T.items() if rs}
@@ -1800,7 +1847,8 @@ class Curation:
                     # fits, or an owner release of the exact apps: held whole
                     reasons = {r6 for rs in why6.values() for r6, _d in rs} | ({"held_starred_scope"} if held else set())
                     code = next(r for r in ("held_cab_inferred", "held_starred_only", "held_starred_scope",
-                                            "held_option_tie") if r in reasons)
+                                            "held_option_tie", "held_undated_siblings", "held_plus_reading")
+                                if r in reasons)
                     self.refuse(code, cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
                                 detail="; ".join(
                                     f"{T[0]} {T[1]} {T[2]} " + "/".join(sorted(
@@ -1821,6 +1869,7 @@ class Curation:
                         "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts),
                         "oldest_retrieved": stamps[0] if stamps else None,
                         **({"gates": gates} if gates else {})})
+        self._likely_out = out
         return out
 
     def _likely_limits(self, c, cat, Ts, slots, drive_by_T, sib_T, dnot_by_T, win_by_T, text, brand) -> dict:
@@ -1856,6 +1905,7 @@ class Curation:
         # The same limits become the vehicle-year's gate (gates-1118): the
         # app hides a donor whose own decode or listing contradicts one.
         label_by_T, gate_by_T, unchecked_by_T = {}, {}, {}
+        gas_checked = set()     # round8-1119 decision 5: gas pages read, the hybrid's never
         for T in Ts:
             labs, gate = [], {}
             rc = self.rear_cab_of(c, cat, T, slots)
@@ -1919,7 +1969,10 @@ class Curation:
             if tr:
                 gate["trans"] = _TRANS_GATE[tr]
             if fu:
-                labs.append(fu)
+                if fu == "gas" and self.ns in ROUND8_NS and self._hybrid_unread(T):
+                    gas_checked.add(T)      # the gate stays; the note says what was checked
+                else:
+                    labs.append(fu)
                 gate["fuel"] = fu
             if fu == "gas" and not eng:
                 # the fuel gate reads the decode too (round3-1119): an
@@ -1946,12 +1999,15 @@ class Curation:
             text = f"{text}; {cab}"
             if not _likely_note_fits(brand, sorted(c.pns)[0], text, pack):
                 return {"status": "held_cab_qualifier", "detail": cab, "drv": "", "labels": label_by_T}
-        drv = "; ".join(x for x in (self._limit_note(label_by_T), self._unchecked_note(unchecked_by_T, Ts)) if x)
+        drv = "; ".join(x for x in (self._limit_note(label_by_T), self._unchecked_note(unchecked_by_T, Ts),
+                                    self._gas_checked_note(gas_checked, Ts)) if x)
         if drv:
             text = f"{text}; {drv}"
             if not _likely_note_fits(brand, sorted(c.pns)[0], text, pack):
-                return {"status": "held_drive_qualifier", "detail": drv, "drv": drv, "labels": label_by_T}
-        return {"status": "ok", "text": text, "drv": drv, "gates": gate_by_T, "labels": label_by_T}
+                return {"status": "held_drive_qualifier", "detail": drv, "drv": drv, "labels": label_by_T,
+                        "gas": sorted(gas_checked)}
+        return {"status": "ok", "text": text, "drv": drv, "gates": gate_by_T, "labels": label_by_T,
+                "gas": sorted(gas_checked)}
 
     def _strict_refusal(self, c, cat, cand, slots):
         """(code, detail) for a strict-note category (policy.STRICT_NOTE_CATS,
@@ -2299,6 +2355,30 @@ class Curation:
             if fd not in (None, DRIVE_AMBIGUOUS) and fd <= other:
                 return "stated"
         return "unchecked"
+
+    def _hybrid_unread(self, T) -> bool:
+        """T's year page offers a hybrid catalog and no list page of T in the
+        raw is a hybrid variant page (round8 decision 5)."""
+        vs = {str(v).lower() for ym in self.t_years.get(T, []) for v in [ym.variant] + list(ym.variants or []) if v}
+        if not any("hybrid" in v for v in vs):
+            return False
+        return not any("hybrid" in f"{lr.variant} {lr.list_url}".lower()
+                       for (t, _cat), rows in self.t_list_rows.items() if t == T for lr in rows)
+
+    def _gas_checked_note(self, gas_checked, Ts) -> str:
+        """'checked on gas-model pages' (every vehicle-year), else '<model>[
+        years]: checked on gas-model pages'; '' for none (round8 decision 5)."""
+        if not gas_checked or getattr(self, "_gas_note_off", False):
+            return ""
+        if set(gas_checked) == set(Ts):
+            return "checked on gas-model pages"
+        names = []
+        for mk, md in sorted({(T[0], T[1]) for T in gas_checked}):
+            ys = sorted(T[2] for T in gas_checked if (T[0], T[1]) == (mk, md))
+            alls = sorted(T[2] for T in Ts if (T[0], T[1]) == (mk, md))
+            names.append(md if ys == alls else f"{md} " + ", ".join(
+                f"{a}-{b}" if b != a else f"{a}" for a, b in ((r[0], r[-1]) for r in _year_runs(ys))))
+        return ", ".join(names) + ": checked on gas-model pages"
 
     def _unchecked_note(self, unchecked_by_T, Ts) -> str:
         """'<model>: only 2WD checked' for vehicle-years whose drive limit is
@@ -3204,6 +3284,63 @@ class Curation:
             fit = {"drive": sorted(fs) if fs != Gd else None, "trans": sorted(ts) if ts != Gt else None}
         return {"uncovered": sorted(G - A), "via": "own" if not G <= A_own else "sibling", "fit": fit}
 
+    # ------------------------------ round8-1119: own pages only (hub 2026-11-19 after 1119h)
+    def _round8_pre(self, c, cat, T, w):
+        """(reason, detail) for a vehicle-year held before the note cap, else
+        None: no list row of its own for the number in the raw (decision 1;
+        the page the claim was seen on, from the records, for the crawl), or
+        a build window read from another model year's page (decision 2)."""
+        rows = self.t_list_rows.get((T, cat)) or []
+        own = [lr for lr in rows if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched]
+        if not own:
+            seen = sorted({r.list_url for r in self.t_seed_records.get((T, cat), []) if r.key == c.key and r.list_url})
+            return "held_no_own_page", {"page_in_raw": bool(rows), "missing_pages": seen,
+                                        "claim_from": "product records" if seen else "other pages"}
+        if w and w.get("src") == "other_page" and w.get("kind") != "full":
+            return "held_window_other_page", {"window": _win_label(w["wins"]), "kind": w["kind"]}
+        return None
+
+    def undated_siblings(self, c, cat, T) -> list:
+        """Decision 3: the other numbers T's page lists, undated, for the same
+        part, position and configuration (one configuration's words inside the
+        other's: 96302-6WJ0A 'S' beside 1NC3A 'S. JOURNEY'), when the number's
+        own rows there are undated too; its predecessors and successors aside."""
+        rows = self.t_list_rows.get((T, cat)) or []
+        own = [lr for lr in rows if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched
+               and not self.note_excludes(lr.notes, T)]
+        if not own or any(_row_windows(lr.notes) for lr in own):
+            return []
+        mine = [set(t) for lr in own for t, _p, _n in _row_clauses(lr.notes, lr.site)]
+        out = set()
+        for sr in rows:
+            k2 = policy.pn_key(self.ns, sr.pn)
+            if k2 == c.key or _row_windows(sr.notes) or self.comparable(cat, c.key, k2) or \
+                    self.note_excludes(sr.notes, T) or \
+                    not any(lr.list_url == sr.list_url and self._same_part(lr, sr) for lr in own):
+                continue
+            theirs = [set(t) for t, _p, _n in _row_clauses(sr.notes, sr.site)]
+            if any(a <= b or b <= a for a in mine for b in theirs):
+                out.add(sr.pn)
+        return sorted(out)
+
+    def plus_dependent(self, c, cat, T, slots, gas_only=False) -> dict | None:
+        """Decision 6: {dims} when the claim depends on reading '+' as 'or'
+        between configurations that name different engines or drive families
+        (FX50 2009 96302-1CA0A 'W. VQ35HR. PREMIUM, W. VQ35HR. PREMIUM + W.
+        VK50VE': the VK50VE car is listed only through the '+'). Re-read T's
+        page with every such alternative unread: the number no longer listed
+        for T, or its drive / engine limit changed."""
+        own = self._own_rows(c, cat, T)
+        if not own or not any(st in policy.DRIVE_CONFIG_FVO_SITES for _n, st, _v, _u in own):
+            return None
+        v = self._star_view(c, cat, T, plus=True)
+        if not v._own_rows(c, cat, T):
+            return {"listing": "the number is listed for this vehicle-year only through a '+' joining "
+                               "configurations of different engines or drives"}
+        full, alt = self._scopes(c, cat, T, slots, gas_only), v._scopes(c, cat, T, slots, gas_only)
+        dims = {k: (self._scope_text(k, full[k]), self._scope_text(k, alt[k])) for k in full if full[k] != alt[k]}
+        return {"scope": dims} if dims else None
+
     # ------------------------------ round5b-1119: starred clauses (hub 2026-11-19)
     # caches filled from catalog rows; a starred view starts its own
     _ROW_CACHES = ("_longer_cache", "_suspect_cache", "_gm_letters", "_seed_keys", "_fit_engines_cache",
@@ -3226,7 +3363,7 @@ class Curation:
         left = [n2 for n, st in own for n2 in [_unstar_notes(n, st)] if n2 is not None]
         return bool(own) and not any(not self.note_excludes(n2, T) for n2 in left)
 
-    def _star_view(self, c, cat, T, siblings=True, blind=False):
+    def _star_view(self, c, cat, T, siblings=True, blind=False, plus=False):
         """This curation with T's page rows in cat (the only rows T's drive and
         engine limits read) re-read for STARRED_SCOPE_NS: starred
         configurations are left out (_unstar_notes; a row with nothing
@@ -3246,14 +3383,17 @@ class Curation:
         v._t_drive_systems, v._t_engines, v._t_trans_seen = self._t_drive_systems, self._t_engines, \
             self._t_trans_seen
         unstate = self._own_starred_only(c, cat, T)
-        if blind:
+        if blind or plus:
             # round7-1119 (hub decision 5): every configuration read without
-            # its mark (as round 4 read them), own and siblings'
+            # its mark (as round 4 read them), own and siblings'; round8:
+            # every '+' joining different engines or drives unread
             unstate = None
 
         def re_read(o, attr, own):
             notes = getattr(o, attr)
-            if blind:
+            if plus:
+                n2 = _plus_strict_notes(notes, o.site)     # round8 decision 6
+            elif blind:
                 n2 = _blind_notes(notes, o.site)
             elif own:
                 n2 = _unstate_notes(notes, o.site) if unstate else _unstar_notes(notes, o.site)
@@ -5350,6 +5490,16 @@ ROUND6_WINDOW_KINDS = ("unlinked", "no_page", "linked", "no_other_row")
 # other pages (3); cross-position groups held (4); the star-blind reading in
 # starred_scope (5).
 ROUND7_WINDOW_KINDS = ROUND6_WINDOW_KINDS + ("changeover", "split")
+# round8-1119 (hub 2026-11-19 after check 1119h): the nissan candidate claims
+# only what a vehicle-year's own pages carry. Vehicle-years held:
+#   held_no_own_page        no list page of its own in the raw for the number (1)
+#   held_window_other_page  its build window read from another model year's page (2)
+#   held_undated_siblings   same-option numbers on its page, none dated (3)
+#   held_plus_reading       the claim depends on reading "+" as "or" between
+#                           configurations naming different engines or drives (6)
+# "gas only" where the hybrid's pages were never read is worded "checked on
+# gas-model pages" (5). Shipped namespaces: census only (round8_census).
+ROUND8_NS = frozenset({"nissan"})
 
 
 def _starred(cfg: str) -> bool:
@@ -5436,6 +5586,41 @@ def _starred_dims(rows) -> set:
     return out
 
 
+def _plus_strict_notes(notes, site: str):
+    """Round8 decision 6: notes with every option alternative unread whose
+    '+' parts name different engines or different drive families (read as one
+    configuration, it would contradict itself); None when a note had
+    alternatives and none is left."""
+    if site not in policy.DRIVE_CONFIG_FVO_SITES:
+        return list(notes or [])
+    out = []
+    for n in notes or []:
+        m = _FVO_BODY_RE.match(n or "")
+        if not m:
+            out.append(n)
+            continue
+        alts, had = [], False
+        for alt in _split_top_plus(m.group(1), ","):
+            had = True
+            parts = _split_top_plus(alt, "+")
+            engs = {frozenset(e) for e in (_engine_terms(x) for x in parts) if e}
+            fams = set()
+            for x in parts:
+                pos, neg, _l = _drive_terms(x)
+                if _NISSAN_AUTO_RE.search(x):
+                    pos = set(pos) | {"a4wd"}
+                d = _drive_allowed(pos, neg)
+                if d:
+                    fams.add("4" if set(d) <= _FOUR else "2")
+            if len(engs) > 1 or len(fams) > 1:
+                continue
+            alts.append(alt)
+        if had and not alts:
+            return None
+        out.append(n[:m.start(1)] + ", ".join(alts) if alts else n)
+    return out
+
+
 def _blind_notes(notes, site: str) -> list:
     """notes with the leading '*' of every option configuration taken off."""
     out = []
@@ -5451,6 +5636,16 @@ def _blind_notes(notes, site: str) -> list:
             else:
                 alts.append(alt.lstrip().lstrip("*").strip())
         out.append(n[:m.start(1)] + ", ".join(alts) if alts else n)
+    return out
+
+
+def _year_runs(ys) -> list:
+    out = []
+    for y in sorted(ys):
+        if out and y == out[-1][-1] + 1:
+            out[-1].append(y)
+        else:
+            out.append([y])
     return out
 
 
@@ -5914,6 +6109,39 @@ def main(argv=None) -> int:
                 "vehicle_years_by_reason": dict(sorted(rv.items())),
                 "groups_by_reason": {k: sum(any(k in h["reasons"] for h in g["held"]) for g in r6) for k in sorted(rv)},
                 "held": r6})
+        r8 = getattr(results[ns], "round8_rows", None)
+        if ns in ROUND8_NS and r8 is not None:
+            cur8 = results[ns]
+            shipped = {(g["cat"], tuple(g["pn"])) for g in getattr(cur8, "_likely_out", [])}
+            refs = {}
+            for x in cur8.refusals:
+                if x.get("pn"):
+                    refs.setdefault((x["cat"], x["pn"]), x["reason"])
+            groups = defaultdict(list)
+            for row in r8:
+                groups[(row["cat"], tuple(row["pn"]))].append({k: v for k, v in row.items() if k not in ("cat", "pn")})
+            held8 = [{"cat": cat8, "pn": list(pn8),
+                      "group": "ships without these" if (cat8, pn8) in shipped else
+                      f"not shipped ({refs.get((cat8, pn8[0]), 'other')})", "held": rows8}
+                     for (cat8, pn8), rows8 in sorted(groups.items())]
+            byr = Counter(row["reason"] for row in r8)
+            pages = sorted({u for row in r8 if row["reason"] == "held_no_own_page" for u in row["missing_pages"]})
+            by_model = Counter(re_m.group(1) for u in pages for re_m in [re.search(r"/(\d{4}-[a-z0-9-]+?)/", u)] if re_m)
+            write_json(out / "_report" / f"{ns}.round8_held.json", {
+                "note": "round8-1119 (hub decisions 2026-11-19 after check 1119h): the candidate claims only what "
+                        "a vehicle-year's own pages carry. held_no_own_page: no list row of its own for the number "
+                        "in the raw (missing_pages: the page the claim was seen on, from the product records, for "
+                        "a targeted crawl); held_window_other_page: its build window read from another model "
+                        "year's page (kind drop: under 5 months of the year); held_undated_siblings: same-option "
+                        "numbers on its page, none dated; held_plus_reading: the claim depends on reading '+' as "
+                        "'or' between configurations of different engines or drives. Rows are recorded where the "
+                        "rule held them; 'group' says whether the group still ships.",
+                "ns": ns, "raw": cur8.src.commit or "fixtures", "vehicle_years_by_reason": dict(sorted(byr.items())),
+                "groups_by_reason": {k: len({(g["cat"], tuple(g["pn"])) for g in held8 for h in g["held"]
+                                             if h["reason"] == k}) for k in sorted(byr)},
+                "crawl": {"pages": len(pages), "pages_by_model_year": dict(sorted(by_model.items())),
+                          "list": pages},
+                "held": held8})
         r7 = getattr(results[ns], "round7_held", None)
         if r7:
             write_json(out / "_report" / f"{ns}.round7_held.json", {

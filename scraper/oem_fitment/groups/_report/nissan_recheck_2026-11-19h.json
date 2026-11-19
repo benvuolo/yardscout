@@ -1,0 +1,3530 @@
+{
+ "report": "nissan_recheck_2026-11-19h",
+ "status": "builder's own re-check, NOT independent",
+ "of": "groups/_report/nissan_verify_2026-11-19h.json (branch interchange/verify-nissan-1119h, 86b211a3)",
+ "candidate": "groups/_report/nissan.candidate.json on interchange/round8-1119",
+ "items": [
+  {
+   "item": "group",
+   "pn": "27510-ZD000",
+   "cat": "climate-control",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Xterra 2004 (143 cars)"
+    ],
+    "unexplained_mark": [
+     "Frontier 2004 CC./SB./XB. (31 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2004
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "24820-89Y00",
+   "cat": "gauge-cluster",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "200SX 1997-98 (11 cars)",
+     "Sentra 1998-99 (49 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "200SX",
+      1995
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "200SX",
+      1996
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "200SX",
+      1997
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "200SX",
+      1998
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Sentra",
+      1995
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Sentra",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Sentra",
+      1997
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Sentra",
+      1998
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Sentra",
+      1999
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "96302-1NC3A",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Q40 2015 (10 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "G25",
+      2011
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "G25",
+      2012
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q40",
+      2015
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "K6301-1MA0A",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "M37 2011 (25 cars)"
+    ],
+    "window_edge": [
+     "12/2010 in both runs (28 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2011
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M56",
+      2011
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "J6301-2B500",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1995
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "96301-1NC4A",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Q40 2015 (10 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "G25",
+      2011
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "G25",
+      2012
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q40",
+      2015
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "K6302-1MA0B",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "window_from_other_page": [
+     "M37 2012 (8 cars)"
+    ],
+    "unexplained_mark": [
+     "Q70 2014 (2 cars)"
+    ],
+    "gas_only_wording": [
+     "Q70 2014"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "M35h",
+      2012
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M35h",
+      2013
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2012
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_window_other_page"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70",
+      2014
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_plus_reading",
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "96302-EA000",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Xterra 2010 (30 cars)"
+    ],
+    "drive_trans_tie_ungated": [
+     "Xterra 2005-2008 4WD automatic donors"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2012
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2005
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2006
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2007
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_plus_reading",
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2008
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_plus_reading",
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2009
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2010
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2011
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "96302-1NC4A",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Q40 2015 (10 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "G25",
+      2011
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "G25",
+      2012
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q40",
+      2015
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "96301-7S600",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "window_from_other_page": [
+     "Armada 2005 (103 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Armada",
+      2005
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_window_other_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Titan",
+      2005
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "80730-7B400",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Xterra 2004 (147 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2001
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2003
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2000
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2002
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_plus_reading"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2003
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_plus_reading"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2004
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "80731-1MA0A",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "gas_only_wording": [
+     "Q70 2014-2018 (0 lot cars excluded)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "M35h",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M35h",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2011
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M56",
+      2011
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M56",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M56",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70",
+      2014
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70",
+      2015
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70",
+      2016
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70",
+      2017
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70",
+      2018
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70",
+      2019
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2015
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2016
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2018
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2019
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "80720-0E715",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1994
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1997
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1997
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "82731-1MA0A",
+   "cat": "window-regulator",
+   "verdict": "WRONG",
+   "risk_kinds": {
+    "wrong": [
+     "QX80 2017 decode QX60 (1 car, plain)"
+    ],
+    "window_from_other_page": [
+     "Q70L 2016 (1 car)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "M35h",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M35h",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2011
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M56",
+      2011
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M56",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M56",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2016
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_window_other_page"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2017
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX56",
+      2011
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX56",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX56",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX80",
+      2014
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX80",
+      2015
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX80",
+      2016
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX80",
+      2017
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "82730-D9000",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1994
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1995
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "82720-1BA0A",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "EX35 2008 (48 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "EX35",
+      2008
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "EX35",
+      2009
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "EX35",
+      2010
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX50",
+      2016
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX50",
+      2017
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "80720-1CA0B",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "FX35 2011 (15 cars)"
+    ],
+    "window_disagrees_across_pages": [
+     "QX70 2015 (2 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2010
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2011
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX37",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX50",
+      2010
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX50",
+      2011
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX50",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX70",
+      2015
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "82731-1MA0B",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "gas_only_wording": [
+     "Q70 2018"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "Q70",
+      2018
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2018
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX80",
+      2018
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX80",
+      2019
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "80721-AR000",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "window_from_other_page": [
+     "FX35 2003 (22 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2003
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_window_other_page"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2004
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX45",
+      2004
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q45",
+      2002
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q45",
+      2003
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q45",
+      2004
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q45",
+      2005
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "82731-4BA0A",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Rogue 2016 (191 cars)"
+    ],
+    "gas_only_wording": [
+     "Murano 2016-17, Rogue 2017-19"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2015
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2016
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2017
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2018
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2019
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2016
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2017
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2018
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2019
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "80731-EA005",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Xterra 2010 (30 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2005
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2006
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2007
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2008
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2009
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2014
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2015
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2016
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2017
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2018
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2019
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2005
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2006
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2007
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2008
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2009
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2010
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2011
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2012
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2014
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2015
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "80731-1E400",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1993
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1994
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1993
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1994
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1995
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "group",
+   "pn": "80700-0E710",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15 cars)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1993
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1994
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1997
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1993
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1994
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1997
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "82720-0E715",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1994
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1995
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "96301-2B500",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "96301-ZH10A",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "unexplained_mark": [
+     "Titan 2006 (152)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Armada",
+      2013
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Armada",
+      2014
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Armada",
+      2015
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "82730-4BA0A",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Rogue 2016 (191)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2015
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2016
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2017
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2018
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2019
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2016
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2017
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2018
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2019
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "24820-1MA5B",
+   "cat": "gauge-cluster",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Q70 2014 seeker"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2012
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2013
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q70",
+      2014
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "24820-8B703",
+   "cat": "gauge-cluster",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "200SX 1997 (2)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "200SX",
+      1997
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "200SX",
+      1999
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Sentra",
+      1999
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "27510-8Z310",
+   "cat": "climate-control",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "unexplained_mark": [
+     "Frontier 2002 (51)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2002
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_plus_reading"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "80720-AR000",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "window_from_other_page": [
+     "FX35 2003 seeker"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2003
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_window_other_page"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2004
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q45",
+      2002
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q45",
+      2003
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q45",
+      2004
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "Q45",
+      2005
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "96302-2B500",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 seeker"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "27515-2B001",
+   "cat": "climate-control",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Altima 1994 (12)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1994
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1994
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1995
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1997
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "27515-7Z100",
+   "cat": "climate-control",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "same_option_sibling_undated": [
+     "Frontier 2001 (52)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      1999
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2001
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2000
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_plus_reading"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "80720-EA010",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "unexplained_mark": [
+     "Frontier 2005 (58)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2005
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2006
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2007
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2008
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2009
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2012
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2013
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2014
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2015
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2016
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2017
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2018
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2019
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2005
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2006
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2007
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2008
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "80730-4BA1A",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "gas_only_wording": [
+     "Murano 2016 seeker"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2015
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2016
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2017
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2018
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Murano",
+      2019
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2016
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2017
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2018
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2019
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "82731-3KG0A",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "gas_only_wording": [
+     "QX60 2015 (1 excluded)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "JX35",
+      2013
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX60",
+      2014
+     ],
+     "main": "gated",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX60",
+      2015
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX60",
+      2016
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX60",
+      2017
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX60",
+      2018
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX60",
+      2019
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "96302-1CA0A",
+   "cat": "side-mirrors",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "unexplained_mark": [
+     "QX70 2016 (3)",
+     "FX50 2009 (4)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2009
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2010
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2011
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2012
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX37",
+      2013
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX50",
+      2009
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_plus_reading",
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX50",
+      2010
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_plus_reading",
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX70",
+      2016
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX70",
+      2017
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_undated_siblings"
+     ]
+    }
+   ]
+  },
+  {
+   "item": "pair",
+   "pn": "82731-D9000",
+   "cat": "window-regulator",
+   "verdict": "RISK",
+   "risk_kinds": {
+    "missing_page": [
+     "Altima 1995 (15)"
+    ]
+   },
+   "years": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1994
+     ],
+     "main": "gated",
+     "round8": "gated",
+     "round8_reasons": []
+    },
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "main": "plain",
+     "round8": "not claimed",
+     "round8_reasons": [
+      "held_no_own_page"
+     ]
+    },
+    {
+     "t": [
+      "Nissan",
+      "Stanza",
+      1995
+     ],
+     "main": "plain",
+     "round8": "plain",
+     "round8_reasons": []
+    }
+   ]
+  }
+ ]
+}

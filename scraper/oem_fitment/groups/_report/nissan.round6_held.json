@@ -1,656 +1,11 @@
 {
- "groups": 13,
+ "groups": 6,
  "groups_by_reason": {
-  "held_cab_inferred": 6,
-  "held_option_tie": 7
+  "held_cab_inferred": 4,
+  "held_option_tie": 2
  },
- "groups_held_whole": 11,
+ "groups_held_whole": 6,
  "held": [
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "own_rows": [
-      {
-       "notes": [
-        "Production Date: 08/2011-12/2012",
-        "Fitting Vehicle Options: KC. 2WD. VQ40DE. SV. AT + KC. QR25DE. SV. AT + CC. 2WD. STD/BED. SV. AT + CC. 2WD. LONG/BED. SV + CC. 2WD. S. AT"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2012-nissan-frontier/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-9BD5B"
-      }
-     ],
-     "reasons": [
-      "held_option_tie"
-     ],
-     "siblings": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. SV. 5MT"
-       ],
-       "pn": "24810-9BA0A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. QR25DE. SV. AT"
-       ],
-       "pn": "24810-9BA0B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. 4WD. OFFROAD. AT + CC. 4WD. OFFROAD. AT"
-       ],
-       "pn": "24810-9BA1B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. OFFROAD. 6MT + CC. OFFROAD. 6MT"
-       ],
-       "pn": "24810-9BA4C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. 4WD. SV. 6MT + CC. 4WD. (S+ SV). 6MT"
-       ],
-       "pn": "24810-9BA4D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. 2WD. 6MT + CC. 2WD. 6MT"
-       ],
-       "pn": "24810-9BA4E"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. 4WD. SV. AT + CC. 4WD. STD/BED. SV. AT + CC. 4WD. LONG/BED. SV + CC. 4WD. S. AT"
-       ],
-       "pn": "24810-9BA5A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. 2WD. VQ40DE. SV. AT + CC. 2WD. STD/BED. SV. AT + CC. 2WD. LONG/BED. SV + CC. 2WD. S. AT"
-       ],
-       "pn": "24810-9BA5B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. S. 5MT"
-       ],
-       "pn": "24810-9BA5E"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: KC. S. AT"
-       ],
-       "pn": "24810-9BA6A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *KC. 4WD. SV. AT + *CC. 4WD. STD/BED. SV. AT, KC. 4WD. PRO-4X. AT + CC. 4WD. PRO-4X. AT"
-       ],
-       "pn": "24810-9BD1B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *KC. 2WD. VQ40DE. SV. AT + *CC. 2WD. STD/BED. SV. AT, KC. 2WD. PRO-4X + CC. 2WD. PRO-4X"
-       ],
-       "pn": "24810-9BD1C"
-      }
-     ],
-     "t": [
-      "Nissan",
-      "Frontier",
-      2012
-     ],
-     "tie": {
-      "a_gate_would_fit": {
-       "drive": null,
-       "trans": [
-        "auto"
-       ]
-      },
-      "uncovered": [
-       "2WD manual",
-       "4WD/AWD manual"
-      ],
-      "via": "own"
-     }
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24810-9BD5B"
-   ],
-   "reason_text": "option text ties the part to a transmission the gates do not enforce",
-   "reasons": [
-    "held_option_tie"
-   ],
-   "round5_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2012,
-     2012
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2012,
-     2012
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "own_rows": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. KA24DE"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-ZD016"
-      }
-     ],
-     "reasons": [
-      "held_option_tie"
-     ],
-     "siblings": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. 4WD. AT"
-       ],
-       "pn": "24810-2Z710"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. 4WD. VG33E. AT + *W. 4WD. VG33ER. SE. AT"
-       ],
-       "pn": "24810-ZD210"
-      }
-     ],
-     "t": [
-      "Nissan",
-      "Xterra",
-      2004
-     ],
-     "tie": {
-      "a_gate_would_fit": null,
-      "uncovered": [
-       "4WD/AWD automatic"
-      ],
-      "via": "sibling"
-     }
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24810-ZD016"
-   ],
-   "reason_text": "option text ties the part to a transmission the gates do not enforce",
-   "reasons": [
-    "held_option_tie"
-   ],
-   "round5_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2003,
-     2004
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2003,
-     2004
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "own_rows": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. VG33E + *W. VG33ER. SE"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-ZD103"
-      }
-     ],
-     "reasons": [
-      "held_option_tie"
-     ],
-     "siblings": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. 4WD. AT"
-       ],
-       "pn": "24810-2Z710"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. 4WD. VG33E. AT + *W. 4WD. VG33ER. SE. AT"
-       ],
-       "pn": "24810-ZD210"
-      }
-     ],
-     "t": [
-      "Nissan",
-      "Xterra",
-      2004
-     ],
-     "tie": {
-      "a_gate_would_fit": null,
-      "uncovered": [
-       "4WD/AWD automatic"
-      ],
-      "via": "sibling"
-     }
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24810-ZD103"
-   ],
-   "reason_text": "option text ties the part to a transmission the gates do not enforce",
-   "reasons": [
-    "held_option_tie"
-   ],
-   "round5_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2003,
-     2004
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2003,
-     2004
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "own_rows": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. (2WD+ 2WD/HI). SPORT/P. 5AT + *S. AWD. SPORT/P + *S. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g35-sedan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-JK61C"
-      }
-     ],
-     "reasons": [
-      "held_option_tie"
-     ],
-     "siblings": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD/STD. (JOURNEY+ PREMIUM) + S. 2WD/STD. (SPORT+ SPORT/P). 7AT + S. AWD + S. 2WD/4WAS. 7AT + S. LEATHER"
-       ],
-       "pn": "24820-1NC1A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. (2WD/STD+ 2WD/4WAS). SPORT/P. 7AT + *S. AWD. SPORT/P + *S. PREMIUM"
-       ],
-       "pn": "24820-1NC1B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 6MT"
-       ],
-       "pn": "24820-1NC1C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. SPORT/P. 6MT"
-       ],
-       "pn": "24820-1NC1D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. 6MT"
-       ],
-       "pn": "24820-JK60A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 6MT"
-       ],
-       "pn": "24820-JK60B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. 2WD. LEATHER + *S. AWD + *S. SPORT. 5AT"
-       ],
-       "pn": "24820-JK60C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD. LEATHER + S. AWD + S. SPORT. 5AT"
-       ],
-       "pn": "24820-JK60D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. SPORT/P. 6MT"
-       ],
-       "pn": "24820-JK61A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 6MT"
-       ],
-       "pn": "24820-JK61B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD. (JOURNEY+ PREMIUM) + S. 2WD. (SPORT+ SPORT/P). 5AT + S. AWD + S. 2WD/HI. 5AT + S. LEATHER"
-       ],
-       "pn": "24820-JK61D"
-      }
-     ],
-     "t": [
-      "Infiniti",
-      "G35",
-      2008
-     ],
-     "tie": {
-      "a_gate_would_fit": {
-       "drive": null,
-       "trans": [
-        "auto"
-       ]
-      },
-      "uncovered": [
-       "2WD manual",
-       "4WD/AWD manual"
-      ],
-      "via": "sibling"
-     }
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24820-JK61C"
-   ],
-   "reason_text": "option text ties the part to a transmission the gates do not enforce",
-   "reasons": [
-    "held_option_tie"
-   ],
-   "round5_apps": [
-    [
-     "Infiniti",
-     "G35",
-     2008,
-     2008
-    ],
-    [
-     "Infiniti",
-     "G37",
-     2008,
-     2008
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "own_rows": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD. (JOURNEY+ PREMIUM) + S. 2WD. (SPORT+ SPORT/P). 5AT + S. AWD + S. 2WD/HI. 5AT + S. LEATHER"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g35-sedan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-JK61D"
-      }
-     ],
-     "reasons": [
-      "held_option_tie"
-     ],
-     "siblings": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD/STD. (JOURNEY+ PREMIUM) + S. 2WD/STD. (SPORT+ SPORT/P). 7AT + S. AWD + S. 2WD/4WAS. 7AT + S. LEATHER"
-       ],
-       "pn": "24820-1NC1A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. (2WD/STD+ 2WD/4WAS). SPORT/P. 7AT + *S. AWD. SPORT/P + *S. PREMIUM"
-       ],
-       "pn": "24820-1NC1B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 6MT"
-       ],
-       "pn": "24820-1NC1C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. SPORT/P. 6MT"
-       ],
-       "pn": "24820-1NC1D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. 6MT"
-       ],
-       "pn": "24820-JK60A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 6MT"
-       ],
-       "pn": "24820-JK60B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. 2WD. LEATHER + *S. AWD + *S. SPORT. 5AT"
-       ],
-       "pn": "24820-JK60C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD. LEATHER + S. AWD + S. SPORT. 5AT"
-       ],
-       "pn": "24820-JK60D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. SPORT/P. 6MT"
-       ],
-       "pn": "24820-JK61A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 6MT"
-       ],
-       "pn": "24820-JK61B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. (2WD+ 2WD/HI). SPORT/P. 5AT + *S. AWD. SPORT/P + *S. PREMIUM"
-       ],
-       "pn": "24820-JK61C"
-      }
-     ],
-     "t": [
-      "Infiniti",
-      "G35",
-      2008
-     ],
-     "tie": {
-      "a_gate_would_fit": {
-       "drive": null,
-       "trans": [
-        "auto"
-       ]
-      },
-      "uncovered": [
-       "2WD manual",
-       "4WD/AWD manual"
-      ],
-      "via": "sibling"
-     }
-    },
-    {
-     "own_rows": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD. (JOURNEY+ PREMIUM) + S. 2WD. (SPORT+ SPORT/P). 5AT + S. AWD + S. 2WD/HI. 5AT + S. LEATHER"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g37-sedan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-JK61D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: C. 2WD/STD. (SPORT+ SPORT/P). 5AT + C. 2WD/4WAS. 5AT + C. (LEATHER+ JOURNEY+ PREMIUM)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g37-coupe/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-JK61D"
-      }
-     ],
-     "reasons": [
-      "held_option_tie"
-     ],
-     "siblings": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD/STD. (JOURNEY+ PREMIUM) + S. 2WD/STD. (SPORT+ SPORT/P). 7AT + S. AWD + S. 2WD/4WAS. 7AT + S. LEATHER"
-       ],
-       "pn": "24820-1NC1A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. (2WD/STD+ 2WD/4WAS). SPORT/P. 7AT + *S. AWD. SPORT/P + *S. PREMIUM"
-       ],
-       "pn": "24820-1NC1B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 6MT"
-       ],
-       "pn": "24820-1NC1C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. SPORT/P. 6MT"
-       ],
-       "pn": "24820-1NC1D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. 6MT"
-       ],
-       "pn": "24820-JK60A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 6MT"
-       ],
-       "pn": "24820-JK60B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. 2WD. LEATHER + *S. AWD + *S. SPORT. 5AT"
-       ],
-       "pn": "24820-JK60C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD. LEATHER + S. AWD + S. SPORT. 5AT"
-       ],
-       "pn": "24820-JK60D"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. SPORT/P. 6MT"
-       ],
-       "pn": "24820-JK61A"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 6MT"
-       ],
-       "pn": "24820-JK61B"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. (2WD+ 2WD/HI). SPORT/P. 5AT + *S. AWD. SPORT/P + *S. PREMIUM"
-       ],
-       "pn": "24820-JK61C"
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: S. 2WD. (JOURNEY+ PREMIUM) + S. 2WD. (SPORT+ SPORT/P). 5AT + S. AWD + S. 2WD/HI. 5AT + S. LEATHER, S. 2WD. LEATHER + S. AWD + S. SPORT. 5AT, S. 2WD/STD. (JOURNEY+ PREMIUM) + S. 2WD/STD. (SPORT+ SPORT/P). 7AT + S. AWD + S. 2WD/4WAS. 7AT + S. LEATHER"
-       ],
-       "pn": "25273-JK60B"
-      }
-     ],
-     "t": [
-      "Infiniti",
-      "G37",
-      2008
-     ],
-     "tie": {
-      "a_gate_would_fit": {
-       "drive": null,
-       "trans": [
-        "auto"
-       ]
-      },
-      "uncovered": [
-       "2WD manual",
-       "4WD/AWD manual"
-      ],
-      "via": "sibling"
-     }
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24820-JK61D"
-   ],
-   "reason_text": "option text ties the part to a transmission the gates do not enforce",
-   "reasons": [
-    "held_option_tie"
-   ],
-   "round5_apps": [
-    [
-     "Infiniti",
-     "G35",
-     2008,
-     2008
-    ],
-    [
-     "Infiniti",
-     "G37",
-     2008,
-     2008
-    ]
-   ],
-   "unit": "group"
-  },
   {
    "cat": "window-regulator",
    "group_reason": "fewer than two models left",
@@ -761,56 +116,6 @@
      "own_rows": [
       {
        "notes": [
-        "Production Date: 09/2009-08/2011"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2011-nissan-titan/body_side_rear/rear_door_window_regulator.html",
-       "pn": "82730-7S000"
-      }
-     ],
-     "reasons": [
-      "held_cab_inferred"
-     ],
-     "t": [
-      "Nissan",
-      "Titan",
-      2011
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "82730-7S000"
-   ],
-   "reason_text": "cab limit not on the number's own row",
-   "reasons": [
-    "held_cab_inferred"
-   ],
-   "round5_apps": [
-    [
-     "Nissan",
-     "Armada",
-     2007,
-     2007
-    ],
-    [
-     "Nissan",
-     "Titan",
-     2011,
-     2011
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "window-regulator",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "cab_gate": "crew cab",
-     "cab_source": "rear_cab_of (rear-door part read as crew cab from the page's cab split)",
-     "own_rows": [
-      {
-       "notes": [
         "Production Date: 08/2011-11/2014"
        ],
        "page": "https://www.nissanpartsdeal.com/parts-list/2012-nissan-titan/body_side_rear/rear_door_window_regulator.html",
@@ -847,56 +152,6 @@
      "Titan",
      2012,
      2012
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "window-regulator",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "cab_gate": "crew cab",
-     "cab_source": "rear_cab_of (rear-door part read as crew cab from the page's cab split)",
-     "own_rows": [
-      {
-       "notes": [
-        "Production Date: 09/2009-08/2011"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2011-nissan-titan/body_side_rear/rear_door_window_regulator.html",
-       "pn": "82731-7S000"
-      }
-     ],
-     "reasons": [
-      "held_cab_inferred"
-     ],
-     "t": [
-      "Nissan",
-      "Titan",
-      2011
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "82731-7S000"
-   ],
-   "reason_text": "cab limit not on the number's own row",
-   "reasons": [
-    "held_cab_inferred"
-   ],
-   "round5_apps": [
-    [
-     "Nissan",
-     "Armada",
-     2007,
-     2007
-    ],
-    [
-     "Nissan",
-     "Titan",
-     2011,
-     2011
     ]
    ],
    "unit": "group"
@@ -953,6 +208,7 @@
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "own_rows": [
@@ -1001,20 +257,7 @@
      }
     }
    ],
-   "kept_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2012,
-     2012
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2005,
-     2011
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "96301-EA000"
    ],
@@ -1033,6 +276,12 @@
      "Nissan",
      "Xterra",
      2005,
+     2009
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2011,
      2011
     ],
     [
@@ -1042,10 +291,11 @@
      2013
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "own_rows": [
@@ -1094,20 +344,7 @@
      }
     }
    ],
-   "kept_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2012,
-     2012
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2005,
-     2011
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "96302-EA000"
    ],
@@ -1126,6 +363,12 @@
      "Nissan",
      "Xterra",
      2005,
+     2009
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2011,
      2011
     ],
     [
@@ -1135,14 +378,14 @@
      2013
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   }
  ],
  "note": "round6-1119 (hub decisions 2026-11-19 ~10:10 UTC): vehicle-years held out. held_cab_inferred (decision 1): a cab gate the number's own row for that vehicle-year does not carry (read from page structure or another year); not reworded, held. held_option_tie (decision 5): the option text ties the part to a transmission (or to a drive for one transmission) that no gate the app has can state from the row itself (uncovered = what the gates would let through that no configuration covers; via sibling = only a same-part sibling's transmission makes the tie). unit vehicle-year: the group ships without them (kept_apps, after every hold); unit group: held whole.",
  "ns": "nissan",
  "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
  "vehicle_years_by_reason": {
-  "held_cab_inferred": 6,
-  "held_option_tie": 8
+  "held_cab_inferred": 4,
+  "held_option_tie": 2
  }
 }
