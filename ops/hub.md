@@ -3489,3 +3489,18 @@ served with a four-hour browser cache (`max-age=14400`), so a returning
 visitor can see the older notes for up to four hours after the deploy; the
 older notes say less, nothing wrong is shown in the meantime. Re-check
 after the next deploy.
+
+## 2026-11-19 21:02 UTC round 10 confirmed live; owner asked "are we pending ships?"
+
+- Pages build for df7fe10a succeeded (started 20:41). One live load at
+  21:02 UTC (2003 Subaru Legacy, window regulator, zip 80201): 22 donor
+  cars, notes read "Subaru catalog lists #61188AE00A for both — window
+  motor only; fits some configurations; …", no page errors. Task 84
+  closed.
+- The scheduled catalog crawl ran at 20:50 (run 44612687937): plan
+  success, crawl skipped, oem-raw head unchanged (d867a65a). No request was
+  sent, as the hub told the owner at 18:25.
+- Answer given to the owner: nothing is waiting for a "ship". Android
+  1.13.3 is on Play production; iPhone 1.13.3 build 44 is in Apple's queue
+  (WAITING_FOR_REVIEW since 19:55); the website carries everything built
+  today. The next wording round is data only and needs no store release.
