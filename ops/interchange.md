@@ -6060,3 +6060,74 @@ earlier report (independence kept; the comparison note further down was added af
   "*" marks are listed there as known and unchanged.
 - The VIN-identity cases match 1119h's class: the flagged ones now show "if equipped"; the
   EX37-listed / EX35-decoded car is not flagged (model pair not hand-sorted "different").
+
+## 2026-11-19 Round 9: the number says what it is, the last 1119i holds, site label (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round9-1119`, rebased on origin/main e97adab6)
+
+Nissan candidate only; the eight live groups files are byte-identical (re-curated on their pins,
+`cmp`), live diff 0 on all eight. Rules in `curate.py` under `ROUND9_NS = {nissan}` (nothing in
+`policy.py`). Pins: nissan oem-raw@57e8b5b9, shipped oem-raw@dca9cd84, lot main@a85c654.
+Reports: `groups/_report/round9_names_2026-11-19.json` (A), `round9_census_2026-11-19.json`
+(B, C, D), `nissan.round9_held.json`, `live_diff_2026-11-19_round9.txt`.
+
+**Candidate: 111 -> 103 groups** (window-regulator 79, side-mirrors 16, climate-control 5,
+wiper-motor 3 held category; gauge-cluster 0), 8 removed, 73 changed, 36 app-years held,
+**0 added, 0 gained, 0 widened**. Removed: 27510-2B000, 27510-2B001, 24820-89Y00, 24820-8B703,
+24820-3ZD1C, 80730-4BA1A, 82730-4BA0A, 82731-4BA0A.
+
+- **A (what the number is).** Cause: `positions.packaging()` reads "Motor Assy-Regulator, RH" as
+  `reg?` (its head holds "Regulator") and `PACK_TEXT` has no words for `reg?`, so no nissan note
+  said "window motor only". `positions.py` is a policy input, so the class is read in curate.py
+  (`_name_class`, `_note_pack`) from every catalog name the raw prints for the number (list rows
+  on every page, product records; each with `site:lists|records:L<line>`). window-regulator:
+  **motor 30** ("window motor only"), **regulator 49** (no packaging words: "Regulator
+  Assy-Door Window" does not say whether the motor comes with it). side-mirrors 16, climate 5,
+  wiper-motor 3: assemblies by name (no glass, cover, lens, bezel or knob numbers); gauge-cluster:
+  none left. Held by name (mixed, component, missing): **0**. Cap effects of the new words
+  (vehicle-years leave at the cap, no limit dropped): 80730/80731-1MA0A Q70 2015-2018,
+  82730/82731-3KG0A QX60 2015-2017, 82730/82731-CV01B Juke 2016; 82730/82731-3Z005 now leave at
+  the cap (they were held cross-position before; test_round7 reads either).
+  **A5, live makes (measure only):** motor-named groups without the phrase: **mopar 21** ("Motor -
+  Window Regulator", "MOTOR Window Regulator"; e.g. 68004590AC, 68004591AB, 5012545AA), **subaru 8**
+  ("Motor Assembly-Regulator", the nissan pattern; 61188AE00A, 61188AE00B, 61188AE01A); gm 0 of 24,
+  toyota 0 of 15, ford 0 of 11. Regulator-named groups with the phrase: 0 on every make.
+- **B (holds), each a rule; census on every vehicle-year of the 1119i candidate:**
+  - B1 `held_variant_unread` (the year index offers variant pages, hybrid aside, that no list page
+    of the vehicle-year comes from, read by `variant` or the page slug): 9 vy / 5 groups, lot 377
+    plain, 10 if-equipped, 27 hidden. Rogue 2017 in 80730-4BA1A, 82730-4BA0A, 82731-4BA0A (t32d,
+    t32j unread; 90 plain rows each). In curation these three already leave at the note cap
+    ("window motor only" plus the gas words; Rogue 2017 the gas year that leaves, then one model
+    is left). Sentra 1995-99 in 24820-89Y00 (b14x unread) and Sentra 1999 in 24820-8B703.
+  - B2 `held_twin_changeover` (undated number; a same-part twin for our configuration or a broader
+    one changes over inside the model year, also when its overlap is under the 5-month listing
+    rule; or the number's own predecessor/successor is listed undated for an overlapping
+    configuration): 22 vy / 8 groups, 106 plain. 27510-2B000 Altima/Stanza 1994 (2B001 from
+    04/1994); J6301/J6302-1E400 and -2B500 Altima 1996, Stanza 1995-96 (each other); 27510-2B001
+    Altima/Stanza 1996-97 (28525-1E504/1E505 "Controller Assy-Air Conditiner" for GLE change
+    02/1996 and the 1996 page lists 2B001 for GLE too); 80700/80701-0E710 Altima/Stanza 1994.
+    Altima 1995 was already held (no own page, round 8).
+  - B3 `held_body_mark` (both undated; the same configuration under another leading body mark
+    only, the sibling listed for none of ours; FED/CAL and KC/CC/T are not body marks): 5 vy /
+    3 groups, 35 plain, 2 if-equipped. QX50 2015-2016 both mirror groups (WAG beside LWB);
+    Sentra 1998 24820-89Y00 (4S beside C).
+  - B4 `held_drive_open` (our row names no drive and no gate reads one; a same-part number of our
+    configuration or a narrower one names a drive): 1 vy / 1 group, 8 if-equipped. QX56 2013
+    24820-3ZD1C. The existing sibling wording (round 5 `drive_sib`) needs a sibling whose clause is
+    ours plus a drive word with the same "*"; 1ZS0A/0C read "*3ROW. AWD. PREMIUM" / "... LE", so
+    the pages do not support it: held. 3ZD0C ("*3ROW") and 3ZD1C ("3ROW") differ only by "*";
+    the star is not a drive, both are held the same way (3ZD0C was not shippable before).
+  - In curation the four rules hold 81 vehicle-years (body_mark 6, drive_open 21, twin 48,
+    variant 6), many also held by earlier rules.
+- **C (label).** A group names the site its records came from: "Infiniti catalog" 55, "Nissan
+  catalog" 48, mixed none (rule: "Infiniti/Nissan catalog"). `_oem_entries` ships `g["label"]`
+  when present (nissan only), else "<brand> catalog" as before. Longest note 159 (cap 160); no
+  note was shortened by dropping a limit.
+- **D (measure, every make; pinned lot):** plain rows under a fuel "gas" gate with no engine
+  decode on the donor: gm 63 of 819 (model-year with a hybrid on the lot or in the catalog: 0),
+  nissan 24 of 180, **all 24 in a hybrid model-year (QX60 2015-2017, catalog), all 24 without a
+  VIN**; the other makes have no plain rows under a gas gate.
+- **F (own-page crawl)** is on main (838b7f94); plan `round9_crawl_plan_2026-11-19.json`.
+- Tests: test_round9_1119 38/0; every curation test passes (run_all); crawler tests 34/34.
+- Suggestions: give mopar and subaru the same name-read motor words (21 + 8 live groups, a live
+  note change, hub's call); make "no engine decode" under a gas gate "if equipped" when the
+  model-year has a hybrid (D: 24 nissan rows, all VIN-less); re-pin the live makes to oem-raw
+  57e8b5b9 so the 37 census pages completion pass 1 already read count (live groups change).
