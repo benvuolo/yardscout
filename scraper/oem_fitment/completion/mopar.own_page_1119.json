@@ -1,0 +1,37 @@
+{
+ "as_of": "2026-11-19",
+ "kind": "own_page",
+ "note": "R3 input, round 9 F (owner 'crawl' 2026-11-19 16:20 UTC, relayed by the hub): the own pages the round-8 census (groups/_report/round8_census_2026-11-19.json part_a_crawl_lists, nissan_crawl) found unread, less the pages oem-raw@57e8b5b99de0 already holds as read for that category, on sites with no .blocked or .paused marker. crawl.py --complete reads each row's year page and the categories' list pages, then product() for numbers not yet seen; the curator re-checks them. Never shipped. Plan and request counts: groups/_report/round9_crawl_plan_2026-11-19.json.",
+ "ns": "mopar",
+ "raw": "oem-raw@57e8b5b99de0",
+ "rows": [
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "census_pages": {
+    "climate-control": [
+     "https://www.jeeppartsdeal.com/parts-list/2007-jeep-compass/a-c-heating/a-c-heater-control-units"
+    ]
+   },
+   "make": "Jeep",
+   "model": "Compass",
+   "site": "www.jeeppartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "window-regulator"
+   ],
+   "census_pages": {
+    "window-regulator": [
+     "https://www.jeeppartsdeal.com/parts-list/2008-jeep-liberty/body-hardware/front-door"
+    ]
+   },
+   "make": "Jeep",
+   "model": "Liberty",
+   "site": "www.jeeppartsdeal.com",
+   "year": 2008
+  }
+ ]
+}

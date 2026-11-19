@@ -1,0 +1,1389 @@
+{
+ "report": "round9_crawl_plan_2026-11-19",
+ "raw": "oem-raw@57e8b5b99de0",
+ "files": {
+  "mopar": "completion/mopar.own_page_1119.json",
+  "nissan": "completion/nissan.own_page_1119.json",
+  "toyota": "completion/toyota.own_page_1119.json",
+  "vag": "completion/vag.own_page_1119.json"
+ },
+ "worklist_sites": [
+  "www.infinitipartsdeal.com",
+  "www.jeeppartsdeal.com",
+  "www.lexuspartsnow.com",
+  "www.nissanpartsdeal.com",
+  "www.toyotapartsnow.com",
+  "www.vwpartsgiant.com"
+ ],
+ "complete_version": 2,
+ "pacing": "fetch.py: 8 s between requests to a domain (PER_DOMAIN_GAP) and 8 s per platform (the job crawls the SimplePart platform's sites one at a time), or a site's robots.txt Crawl-delay if longer; minutes below at 8 s",
+ "pickup": "the scheduled run (oem-fitment-crawl.yml cron '23 */6 * * *', plan step markers.mode) starts the pass on main without a dispatch; one manual dispatch starts it sooner. One run fits: the ceiling is under the job's 350-minute timeout",
+ "sites": {
+  "www.fordpartsgiant.com": {
+   "blocked": true,
+   "census_pages": 15,
+   "census_vehicle_years": 8,
+   "note": "raw/<site>.blocked on oem-raw: stays out (standing rule 2)"
+  },
+  "www.gmpartsgiant.com": {
+   "blocked": true,
+   "census_pages": 57,
+   "census_vehicle_years": 24,
+   "note": "raw/<site>.blocked on oem-raw: stays out (standing rule 2)"
+  },
+  "www.infinitipartsdeal.com": {
+   "blocked": false,
+   "rows": 7,
+   "rows_detail": [
+    {
+     "t": [
+      "Infiniti",
+      "EX35",
+      2008
+     ],
+     "cats": [
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-ex35/body_side_rear/front_door_window_regulator.html",
+      "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-ex35/body_side_rear/rear_door_window_regulator.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 10,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "cats": [
+      "side-mirrors"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 16,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Infiniti",
+      "FX35",
+      2011
+     ],
+     "cats": [
+      "side-mirrors",
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/body_side_rear/front_door_window_regulator.html",
+      "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/body_side_rear/rear_door_window_regulator.html",
+      "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 18,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Infiniti",
+      "I30",
+      2000
+     ],
+     "cats": [
+      "side-mirrors",
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.infinitipartsdeal.com/parts-list/2000-infiniti-i30/body_side_rear/front_door_window_regulator.html",
+      "https://www.infinitipartsdeal.com/parts-list/2000-infiniti-i30/body_side_rear/rear_door_window_regulator.html",
+      "https://www.infinitipartsdeal.com/parts-list/2000-infiniti-i30/miscellaneous/rear_view_mirror.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 12,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "cats": [
+      "gauge-cluster",
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_electrical/instrument_meter_gauge.html",
+      "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_side_rear/front_door_window_regulator.html",
+      "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_side_rear/rear_door_window_regulator.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 15,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Infiniti",
+      "M37",
+      2011
+     ],
+     "cats": [
+      "side-mirrors"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-m37/miscellaneous/rear_view_mirror.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 4,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Infiniti",
+      "QX60",
+      2014
+     ],
+     "cats": [
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_side_rear/front_door_window_regulator.html",
+      "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_side_rear/rear_door_window_regulator.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 10,
+     "product_unseen_on_nearest_year_page": 0
+    }
+   ],
+   "already_read_on_raw_head": [],
+   "done_key_skipped": [],
+   "requests": {
+    "year_navigation": 14,
+    "list_pages": 15,
+    "product_pages_floor": 0,
+    "product_pages_ceiling": 85,
+    "product_note": "numbers not yet seen: 0 on the nearest read year of every page (all already records); the ceiling counts every matched row the nearest year prints as new",
+    "chain_hops_ceiling": 0,
+    "chain_ratio_on_site": 0.0,
+    "total_floor": 29,
+    "total_ceiling": 114,
+    "minutes_floor": 3.9,
+    "minutes_ceiling": 15.2
+   }
+  },
+  "www.jeeppartsdeal.com": {
+   "blocked": false,
+   "rows": 2,
+   "rows_detail": [
+    {
+     "t": [
+      "Jeep",
+      "Compass",
+      2007
+     ],
+     "cats": [
+      "climate-control"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.jeeppartsdeal.com/parts-list/2007-jeep-compass/a-c-heating/a-c-heater-control-units"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 2,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Jeep",
+      "Liberty",
+      2008
+     ],
+     "cats": [
+      "window-regulator"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.jeeppartsdeal.com/parts-list/2008-jeep-liberty/body-hardware/front-door",
+      "https://www.jeeppartsdeal.com/parts-list/2008-jeep-liberty/body-hardware/rear-door"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 12,
+     "product_unseen_on_nearest_year_page": 0
+    }
+   ],
+   "already_read_on_raw_head": [
+    {
+     "t": [
+      "Jeep",
+      "Grand Cherokee",
+      2011
+     ],
+     "cat": "window-regulator",
+     "pages": [
+      "https://www.jeeppartsdeal.com/parts-list/2011-jeep-grand-cherokee/body-hardware/front-door",
+      "https://www.jeeppartsdeal.com/parts-list/2011-jeep-grand-cherokee/body-hardware/rear-door"
+     ]
+    }
+   ],
+   "done_key_skipped": [],
+   "requests": {
+    "year_navigation": 2,
+    "list_pages": 3,
+    "product_pages_floor": 0,
+    "product_pages_ceiling": 14,
+    "product_note": "numbers not yet seen: 0 on the nearest read year of every page (all already records); the ceiling counts every matched row the nearest year prints as new",
+    "chain_hops_ceiling": 1,
+    "chain_ratio_on_site": 0.02,
+    "total_floor": 5,
+    "total_ceiling": 20,
+    "minutes_floor": 0.7,
+    "minutes_ceiling": 2.7
+   }
+  },
+  "www.lexuspartsnow.com": {
+   "blocked": false,
+   "rows": 4,
+   "rows_detail": [
+    {
+     "t": [
+      "Lexus",
+      "GS 300",
+      2006
+     ],
+     "cats": [
+      "side-mirrors",
+      "tail-lights"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/electrical/rear_combination_lamp.html",
+      "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/electrical/mirror.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 44,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Lexus",
+      "IS 250",
+      2007
+     ],
+     "cats": [
+      "tail-lights",
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_door_window_regulator_hinge.html",
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/rear_door_window_regulator_hinge.html",
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/electrical/rear_combination_lamp.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 16,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Lexus",
+      "IS 250",
+      2013
+     ],
+     "cats": [
+      "tail-lights"
+     ],
+     "nav_requests": 3,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.lexuspartsnow.com/parts-list/2013-lexus-is250-base/electrical/rear_combination_lamp.html",
+      "https://www.lexuspartsnow.com/parts-list/2013-lexus-is250-c/electrical/rear_combination_lamp.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 4,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Lexus",
+      "RX 350",
+      2007
+     ],
+     "cats": [
+      "tail-lights"
+     ],
+     "nav_requests": 3,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/electrical/rear_combination_lamp.html",
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/electrical/rear_combination_lamp.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 6,
+     "product_unseen_on_nearest_year_page": 0
+    }
+   ],
+   "already_read_on_raw_head": [
+    {
+     "t": [
+      "Lexus",
+      "ES 300",
+      2002
+     ],
+     "cat": "window-regulator",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2002-lexus-es300/body/front_door_window_regulator_hinge.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "GS 300",
+      2006
+     ],
+     "cat": "headlights",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/electrical/headlamp.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "GS 300",
+      2006
+     ],
+     "cat": "window-regulator",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/front_door_window_regulator_hinge.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "IS 250",
+      2007
+     ],
+     "cat": "headlights",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/electrical/headlamp.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "IS 250",
+      2007
+     ],
+     "cat": "side-mirrors",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/electrical/mirror.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "IS 250",
+      2013
+     ],
+     "cat": "window-regulator",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2013-lexus-is250-c/body/front_door_window_regulator_hinge.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "IS 250",
+      2013
+     ],
+     "cat": "headlights",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2013-lexus-is250-base/electrical/headlamp.html",
+      "https://www.lexuspartsnow.com/parts-list/2013-lexus-is250-c/electrical/headlamp.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "IS 250",
+      2013
+     ],
+     "cat": "side-mirrors",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2013-lexus-is250-base/electrical/mirror.html",
+      "https://www.lexuspartsnow.com/parts-list/2013-lexus-is250-c/electrical/mirror.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "RX 350",
+      2007
+     ],
+     "cat": "window-regulator",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/body/front_door_window_regulator_hinge.html",
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/front_door_window_regulator_hinge.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "RX 350",
+      2007
+     ],
+     "cat": "headlights",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/electrical/headlamp.html",
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/electrical/headlamp.html"
+     ]
+    },
+    {
+     "t": [
+      "Lexus",
+      "RX 350",
+      2007
+     ],
+     "cat": "side-mirrors",
+     "pages": [
+      "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/electrical/mirror.html"
+     ]
+    }
+   ],
+   "done_key_skipped": [],
+   "requests": {
+    "year_navigation": 10,
+    "list_pages": 9,
+    "product_pages_floor": 0,
+    "product_pages_ceiling": 70,
+    "product_note": "numbers not yet seen: 0 on the nearest read year of every page (all already records); the ceiling counts every matched row the nearest year prints as new",
+    "chain_hops_ceiling": 1,
+    "chain_ratio_on_site": 0.0019,
+    "total_floor": 19,
+    "total_ceiling": 90,
+    "minutes_floor": 2.5,
+    "minutes_ceiling": 12.0
+   }
+  },
+  "www.nissanpartsdeal.com": {
+   "blocked": false,
+   "rows": 5,
+   "rows_detail": [
+    {
+     "t": [
+      "Nissan",
+      "Altima",
+      1995
+     ],
+     "cats": [
+      "climate-control",
+      "side-mirrors",
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": "1994 catalog",
+     "list_pages": [
+      "https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/body_electrical/control_unit.html",
+      "https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/body_side_rear/front_door_window_regulator.html",
+      "https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/body_side_rear/rear_door_window_regulator.html",
+      "https://www.nissanpartsdeal.com/parts-list/1995-nissan-altima/miscellaneous/rear_view_mirror.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 30,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ],
+     "cats": [
+      "climate-control"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.nissanpartsdeal.com/parts-list/2000-nissan-frontier/body_electrical/control_unit.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 9,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Nissan",
+      "Rogue",
+      2016
+     ],
+     "cats": [
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.nissanpartsdeal.com/parts-list/2016-nissan-rogue-t32u/body_side_rear/front_door_window_regulator.html",
+      "https://www.nissanpartsdeal.com/parts-list/2016-nissan-rogue-t32u/body_side_rear/rear_door_window_regulator.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 10,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2004
+     ],
+     "cats": [
+      "climate-control",
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_electrical/control_unit.html",
+      "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_side_rear/front_door_window_regulator.html",
+      "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_side_rear/rear_door_window_regulator.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 22,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Nissan",
+      "Xterra",
+      2010
+     ],
+     "cats": [
+      "side-mirrors",
+      "window-regulator"
+     ],
+     "nav_requests": 2,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/body_side_rear/front_door_window_regulator.html",
+      "https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/body_side_rear/rear_door_window_regulator.html",
+      "https://www.nissanpartsdeal.com/parts-list/2010-nissan-xterra/miscellaneous/rear_view_mirror.html"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 16,
+     "product_unseen_on_nearest_year_page": 0
+    }
+   ],
+   "already_read_on_raw_head": [],
+   "done_key_skipped": [],
+   "requests": {
+    "year_navigation": 10,
+    "list_pages": 13,
+    "product_pages_floor": 0,
+    "product_pages_ceiling": 87,
+    "product_note": "numbers not yet seen: 0 on the nearest read year of every page (all already records); the ceiling counts every matched row the nearest year prints as new",
+    "chain_hops_ceiling": 0,
+    "chain_ratio_on_site": 0.0,
+    "total_floor": 23,
+    "total_ceiling": 110,
+    "minutes_floor": 3.1,
+    "minutes_ceiling": 14.7
+   }
+  },
+  "www.subarupartsdeal.com": {
+   "blocked": true,
+   "census_pages": 5,
+   "census_vehicle_years": 3,
+   "note": "raw/<site>.blocked on oem-raw: stays out (standing rule 2)"
+  },
+  "www.toyotapartsnow.com": {
+   "blocked": false,
+   "rows": 8,
+   "rows_detail": [
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2007
+     ],
+     "cats": [
+      "bumper-front",
+      "bumper-rear",
+      "climate-control",
+      "door-rear",
+      "fender",
+      "grille",
+      "headlights",
+      "hood",
+      "window-regulator",
+      "window-switch"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/bumper-components-front",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/bumper-components-rear",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/grille-components",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/hood-components",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/fender-components",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/a-c-heating/a-c-heater-control-units",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/door-components",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/front-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/rear-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/headlights-lighting/headlamp-components-headlights",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/headlights-lighting/headlamps",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/electrical/front-door",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/electrical/switches-electrical"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 73,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2011
+     ],
+     "cats": [
+      "climate-control",
+      "gauge-cluster",
+      "grille",
+      "headlights",
+      "tail-lights",
+      "window-switch"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/grille-components",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/a-c-heating/a-c-heater-control-units",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/headlamp-components-headlights",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/headlamps",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/combination-lamps",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/gauges",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/instruments-gauges",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/front-door",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/switches-electrical"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 88,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2012
+     ],
+     "cats": [
+      "climate-control",
+      "door-front",
+      "door-rear",
+      "grille",
+      "hood",
+      "tail-lights",
+      "window-regulator"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/grille-components",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/hood-components",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/a-c-heating/a-c-heater-control-units",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/door-components",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/front-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/rear-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/headlights-lighting/combination-lamps"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 37,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2015
+     ],
+     "cats": [
+      "climate-control",
+      "door-front",
+      "door-rear",
+      "grille",
+      "hood",
+      "tail-lights",
+      "window-switch"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/grille-components",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/hood-components",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/a-c-heating/a-c-heater-control-units",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/door-components",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/headlights-lighting/tail-lamps-headlights",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/electrical/front-door",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/electrical/switches-electrical"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 38,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2007
+     ],
+     "cats": [
+      "bumper-front",
+      "bumper-rear",
+      "climate-control",
+      "door-rear",
+      "fender",
+      "grille",
+      "headlights",
+      "hood",
+      "window-regulator",
+      "window-switch"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/bumper-components-front",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/bumper-components-rear",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/grille-components",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/hood-components",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/fender-components",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/a-c-heating/a-c-heater-control-units",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/door-components",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/front-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/rear-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/headlights-lighting/headlamp-components-headlights",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/headlights-lighting/headlamps",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/electrical/front-door",
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/electrical/switches-electrical"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 73,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2011
+     ],
+     "cats": [
+      "climate-control",
+      "gauge-cluster",
+      "grille",
+      "headlights",
+      "tail-lights",
+      "window-switch"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/grille-components",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/a-c-heating/a-c-heater-control-units",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/headlamp-components-headlights",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/headlamps",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/headlights-lighting/combination-lamps",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/gauges",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/instruments-gauges",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/front-door",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/electrical/switches-electrical"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 88,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2012
+     ],
+     "cats": [
+      "climate-control",
+      "door-front",
+      "door-rear",
+      "grille",
+      "hood",
+      "tail-lights",
+      "window-regulator"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/grille-components",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/hood-components",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/a-c-heating/a-c-heater-control-units",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/door-components",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/front-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/rear-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/headlights-lighting/combination-lamps"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 37,
+     "product_unseen_on_nearest_year_page": 0
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2015
+     ],
+     "cats": [
+      "climate-control",
+      "door-front",
+      "door-rear",
+      "grille",
+      "hood",
+      "tail-lights",
+      "window-switch"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/grille-components",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/hood-components",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/a-c-heating/a-c-heater-control-units",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/door-components",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/headlights-lighting/tail-lamps-headlights",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/electrical/front-door",
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/electrical/switches-electrical"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 38,
+     "product_unseen_on_nearest_year_page": 0
+    }
+   ],
+   "already_read_on_raw_head": [
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2007
+     ],
+     "cat": "trunk-lid",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/trunk-lid-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2007
+     ],
+     "cat": "door-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/door-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2007
+     ],
+     "cat": "gauge-cluster",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/electrical/gauges"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2007
+     ],
+     "cat": "side-mirrors",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/outside-mirrors"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2011
+     ],
+     "cat": "bumper-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/bumper-components-front"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2011
+     ],
+     "cat": "hood",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/hood-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2011
+     ],
+     "cat": "fender",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/fender-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2011
+     ],
+     "cat": "trunk-lid",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/trunk-lid-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2011
+     ],
+     "cat": "door-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/door-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2011
+     ],
+     "cat": "window-regulator",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/front-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/rear-door-body"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2011
+     ],
+     "cat": "side-mirrors",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/outside-mirrors"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2012
+     ],
+     "cat": "bumper-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/bumper-components-front"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2012
+     ],
+     "cat": "bumper-rear",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/bumper-components-rear"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2012
+     ],
+     "cat": "headlights",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/headlights-lighting/headlamp-components-headlights",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/headlights-lighting/headlamps"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2015
+     ],
+     "cat": "bumper-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/bumper-components-front"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2015
+     ],
+     "cat": "bumper-rear",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/bumper-components-rear"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2015
+     ],
+     "cat": "headlights",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/headlights-lighting/headlamp-components-headlights"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry",
+      2015
+     ],
+     "cat": "window-regulator",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/front-door-body"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2007
+     ],
+     "cat": "trunk-lid",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/trunk-lid-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2007
+     ],
+     "cat": "door-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/door-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2007
+     ],
+     "cat": "gauge-cluster",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/electrical/gauges"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2007
+     ],
+     "cat": "side-mirrors",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/body-hardware/outside-mirrors"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2011
+     ],
+     "cat": "bumper-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/bumper-components-front"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2011
+     ],
+     "cat": "hood",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/hood-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2011
+     ],
+     "cat": "fender",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/fender-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2011
+     ],
+     "cat": "trunk-lid",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/trunk-lid-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2011
+     ],
+     "cat": "door-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/door-components"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2011
+     ],
+     "cat": "window-regulator",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/front-door-body",
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/rear-door-body"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2011
+     ],
+     "cat": "side-mirrors",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2011-toyota-camry/body-hardware/outside-mirrors"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2012
+     ],
+     "cat": "bumper-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/bumper-components-front"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2012
+     ],
+     "cat": "bumper-rear",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/body-hardware/bumper-components-rear"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2012
+     ],
+     "cat": "headlights",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/headlights-lighting/headlamp-components-headlights",
+      "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/headlights-lighting/headlamps"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2015
+     ],
+     "cat": "bumper-front",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/bumper-components-front"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2015
+     ],
+     "cat": "bumper-rear",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/bumper-components-rear"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2015
+     ],
+     "cat": "headlights",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/headlights-lighting/headlamp-components-headlights"
+     ]
+    },
+    {
+     "t": [
+      "Toyota",
+      "Camry Hybrid",
+      2015
+     ],
+     "cat": "window-regulator",
+     "pages": [
+      "https://www.toyotapartsnow.com/parts-list/2015-toyota-camry/body-hardware/front-door-body"
+     ]
+    }
+   ],
+   "done_key_skipped": [],
+   "requests": {
+    "year_navigation": 4,
+    "list_pages": 36,
+    "product_pages_floor": 0,
+    "product_pages_ceiling": 236,
+    "product_note": "numbers not yet seen: 0 on the nearest read year of every page (all already records); the ceiling counts every matched row the nearest year prints as new",
+    "chain_hops_ceiling": 2,
+    "chain_ratio_on_site": 0.0075,
+    "total_floor": 40,
+    "total_ceiling": 278,
+    "minutes_floor": 5.3,
+    "minutes_ceiling": 37.1
+   }
+  },
+  "www.vwpartsgiant.com": {
+   "blocked": false,
+   "rows": 1,
+   "rows_detail": [
+    {
+     "t": [
+      "Volkswagen",
+      "Jetta",
+      2006
+     ],
+     "cats": [
+      "headlights"
+     ],
+     "nav_requests": 1,
+     "nav_from": null,
+     "list_pages": [
+      "https://www.vwpartsgiant.com/parts-list/2006-volkswagen-jetta/headlights-lighting/headlamps"
+     ],
+     "census_pages_reached": true,
+     "product_ceiling": 7,
+     "product_unseen_on_nearest_year_page": 0
+    }
+   ],
+   "already_read_on_raw_head": [],
+   "done_key_skipped": [],
+   "requests": {
+    "year_navigation": 1,
+    "list_pages": 1,
+    "product_pages_floor": 0,
+    "product_pages_ceiling": 7,
+    "product_note": "numbers not yet seen: 0 on the nearest read year of every page (all already records); the ceiling counts every matched row the nearest year prints as new",
+    "chain_hops_ceiling": 1,
+    "chain_ratio_on_site": 0.0011,
+    "total_floor": 2,
+    "total_ceiling": 10,
+    "minutes_floor": 0.3,
+    "minutes_ceiling": 1.3
+   }
+  }
+ },
+ "totals": {
+  "rows": 27,
+  "nav": 41,
+  "list": 77,
+  "prod_ceiling": 499,
+  "chain_ceiling": 5,
+  "requests_floor": 118,
+  "requests_ceiling": 622,
+  "minutes_floor": 15.7,
+  "minutes_ceiling": 82.9
+ },
+ "census_pages_by_outcome": {
+  "blocked_site": 77,
+  "already_read_on_raw_head_pages": 37,
+  "already_read_on_raw_head_vehicle_year_cats": 48,
+  "in_completion_rows_pages": 64,
+  "note": "a page can be read for one category and owed for another (Camry door-components: read for door-front, owed for door-rear), and Camry / Camry Hybrid share one catalog, so the page counts overlap"
+ },
+ "variant_pages_not_reachable": [
+  {
+   "t": [
+    "Nissan",
+    "Rogue",
+    2017
+   ],
+   "pages": "t32j, t32d (offered: hybrid, t32j, t32d, t32u)",
+   "why": "sites/nissanpartsdeal.py MODELS Rogue inc=^(t32u)?$ (and _partsgiant MAX_CATALOGS 2): a completion row for Rogue 2017 reads t32u only, already read",
+   "groups": [
+    "82731-4BA0A",
+    "82730-4BA0A",
+    "80730-4BA1A"
+   ],
+   "kept": "held (round 9 B1)"
+  },
+  {
+   "t": [
+    "Nissan",
+    "Sentra",
+    "1995-1996"
+   ],
+   "pages": "b14x",
+   "why": "sites/nissanpartsdeal.py MODELS Sentra inc=^(b14u)?$: a completion row reads b14u only",
+   "groups": [
+    "24820-89Y00"
+   ],
+   "kept": "held (round 9 B1)"
+  }
+ ],
+ "not_in_this_pass": "pages already read on oem-raw head count for curation only when the live makes are curated on that raw (today they curate on oem-raw@dca9cd845f26)"
+}
