@@ -2417,3 +2417,46 @@ route planner (too large to finish tested in one night).
 - Running alongside: the list-order full regression (task #74), the sixth
   nissan check (task #72), Apple check-in 09:10 UTC (task #75), Cloudflare
   check-in 11:25 UTC.
+
+## 2026-11-19 ~08:25 UTC sixth independent nissan check: FAIL (2 WRONG, one class); nissan stays off
+
+Check 1119f (seed 27641119, candidate at 29e5fe96, branch
+`interchange/verify-nissan-1119f`, head bad522d4, report
+`groups/_report/nissan_verify_2026-11-19f.json` on that branch).
+Groups 23 RIGHT / 1 WRONG / 6 RISK; pairs 21 / 1 / 8.
+
+- **WRONG (both the same):** a `cab: "crew cab"` gate on Titan rear-door
+  regulators (82720-7S000 Titan 2005, 145 lot donors; 82730-9FJ0A Titan
+  2012, 20). The part's own row has no cab clause, and "crew cab" appears
+  nowhere in the raw; the gate was inferred from page structure. The app
+  then says "this part is listed for crew cab only" and the note "Titan:
+  crew cab only": a stated basis the pages do not carry. No donor is
+  wrongly shown as plain (cab is never decoded, all are "if equipped").
+  Census: 6 groups, 8 vehicle-years, 227 Titan donors; the other 9 cab
+  gates have KC/CC/T clauses on their own rows.
+- **RISK kinds:** claims that rest ONLY on starred clauses (33 groups / 91
+  vehicle-years; round 5b held only those where the star decides drive or
+  engine scope); QX60 "gas only" gates with no `eng_not` 2.5L, so decoded
+  2.5L hybrids are plain (8 groups, 54 cars; the fix reached the gauge
+  clusters but not regulators or mirrors); transmission or drive words on
+  the page with no gate (G35/G37 2008 JK61D, Xterra 96302-EA000 "4WD. S.
+  6MT"); production windows that end inside the model year and are not
+  gated (7 groups / 12 vehicle-years / 264 plain); pages that date one
+  number differently (96302-7S600).
+- Hub's reading: round 5's fixes held (no linked-window WRONG, no drive
+  basis WRONG). The new class is the cab twin of the drive-basis class
+  fixed in round 5. Six checks, each finding the next thinner class.
+- **Round 6, NOT started** (the overnight build has the builders; a third
+  agent risks the 5-hour usage limit, as on 11-17). Decisions ready for it:
+  1. cab gates get a basis like drive (`stated` only when the number's own
+     row carries the cab code); an inferred cab limit is held out of the
+     candidate (the 6 groups' Titan years), not reworded;
+  2. hold every vehicle-year whose claim rests only on starred clauses;
+  3. `eng_not` 2.5L on every QX60/JX gas-only gate, all categories;
+  4. a census of every production window against the model-year span, and
+     gate or drop the ones that end inside it;
+  5. a page that ties the part to a transmission or drive in the option
+     text gets the gate or is held;
+  6. where two pages date a number differently, the narrower window.
+  Then a seventh independent check, new seed (used: 46021118, 61181118,
+  73901118, 38271119, 52941119, 27641119).
