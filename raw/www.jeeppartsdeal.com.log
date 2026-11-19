@@ -9713,3 +9713,6 @@
 19:20:10 seg done tier=D Dodge Ram Van 1500 [1986, 2003] seeds=[2001, 1994] records=6987 errors=159
 19:22:34 seg done tier=D Dodge Sprinter 2500 [2002, 2008] seeds=[2004, 2006, 2005] records=6987 errors=159
 19:22:34 finished records=6987 errors=159 chain_records=140 chain_unlinked=11454 chain_failed=3 chain_given_up=0
+16:26:47 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6987 list_lines=7514 year_lines=1314 url_index=43465
+16:26:47 completion worklist completion/mopar.own_page_1119.json: 2 rows
+16:27:00 STOPPED: www.jeeppartsdeal.com refused or challenged (HTTP 403); domain stopped for this program
