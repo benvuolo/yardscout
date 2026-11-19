@@ -4389,3 +4389,116 @@ committed. sw stays jh-v212.
    for both kinds; no body gates that add claims back this round.
 3. Nissan: the candidate now carries 106 gated groups. The independent §11.4
    sample WITH the gates is the next step in the hub's order.
+
+## 2026-11-18 Independent check of the gated nissan candidate (verifier subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/verify-nissan-1118c`)
+
+Hub brief: an independent §11.4 release sample of
+`groups/_report/nissan.candidate.json` (origin/main ac29b2a5; unchanged at
+4548edd0 and 9e19285b) with the per-app gates. Check only: no rule, policy,
+group or payload file changed. Raw read from git (oem-raw@57e8b5b9); lot,
+decodes and extras from main@a85c654, sha256 checked. No fetch, crawl,
+dispatch, email or main push. One web search (result text only, one part
+number, 24810-ZP93A, no page opened). My own draw and reader were used, not
+`audit11_4/sample.py`. The app's OEM-GATE code was ported line by line to
+Python to replay the pinned lot. An earlier attempt was lost to a container
+restart, so this one started fresh. Builders' notes and the earlier reports
+were read only after the verdicts were committed (64b60076).
+
+### Seed 73901118: FAILED (11 WRONG). Do not ship nissan.
+
+- The draw: 30 groups out of the 283 shippable (window-regulator 13,
+  side-mirrors 8, gauge-cluster 6, climate-control 3; the 3 wiper-motor groups
+  are held), plus 30 pairs taken from other groups.
+- Per-item verdicts, with the raw record lines and the lot replay:
+  `groups/_report/nissan_verify_2026-11-18c.json`.
+- **Groups 21 RIGHT / 9 WRONG / 0 RISK. Pairs 27 RIGHT / 2 WRONG / 1 RISK.**
+- WRONG by class (item numbers are the report's):
+  1. **Engine limit with no gate, and the car's own decode contradicts it (4).**
+     - Items 3 (27510-8Z315) and 5 (24810-7Z809): SE/SC, 3.3L only. The
+       Xterra app has no gate, so 3 and 7 lot Xterras decoded 2.4L get plain
+       rows.
+     - Item 7 (24810-ZP77A): the 2008 Pathfinder V8 has its own VK56DE
+       clusters. 2 plain rows.
+     - Item 29 (80730-JK00C): the number is listed for the 2.5L "Leather".
+       All 9 US Q40s (3.7L) and 2 G25x AWD get plain rows; JK60C is the number
+       for "S. AWD. VQ25HR + S. VQ37VHR".
+  2. **The "gas" gate lets the QX60 Hybrid through (2): item 12 (96302-3JA9C)
+     and item 38 (24810-3JA1B).**
+     - The product page lists 3.5L only.
+     - 9 and 8 lot QX60s with 5N1CL0 VINs (decoded 2.5L, listed as plain
+       "QX60") get plain rows, because nothing on them says "hybrid".
+  3. **km/h cluster (1): item 4, 24810-EC44C ("Instrument-Kph").** The US twins
+     split differently: the Pathfinder AUTO takes EA47C and the Xterra 4WD SE
+     takes EA48C.
+  4. **Rogue / Rogue Select mix (1): item 30, 80730-4BA1A (T32 Rogue).** 34 lot
+     cars listed "Rogue" for 2014-15 are S35 Rogue Selects (JN8AS5M VINs). The
+     catalog files that body as its own model.
+  5. **4wd gate where an All-Mode sibling exists (1): item 43, 24810-EA48D,
+     Pathfinder 2005.** "W. 4WD" here is a different number from EA47D "*W.
+     AUTO". 89 Pathfinders decoded 4WD get plain rows, All-Mode cars included.
+  6. **Regular cab not listed, no gate (2, borderline): items 25 (80721-3S500)
+     and 27 (80721-2Z700).** The 2002 Frontier page lists these power
+     regulators for KC/CC only and lists the regular cab under 3S510. If the
+     hub reads this as the power-window option carried by the note, the two
+     are RIGHT and groups come to 7 WRONG.
+- RISK (1): item 48, 24810-ZP93A. It pairs Pathfinder AUTO with the Xterra
+  4WD SE exactly as the km/h EC44C does, and no unit is printed.
+
+### Census of all 283 shippable groups
+
+- **Class 1, a drive-limited part shown plain for both drive families.**
+  - 48 drive-limited app-years: 43 gated, 5 not.
+  - The 5 ungated app-years are in 2 groups, 24820-1MK5A and 24820-6AH2A (M37
+    2012-13 and Q70 2014 speedometers). Their rows read "*SEDAN. 2WDSTD ..."
+    and "2WDHICAS", joined tokens. 6 M37x AWD lot cars get plain rows.
+  - A related subclass, a 4wd gate next to an AUTO sibling: 2 app-years
+    (EA48D Pathfinder 2005, and 9BA7C Pathfinder 2011, which has no 4WD car on
+    the lot).
+- **Class 2, B14 200SX / sedan-coupe mix: 0 failures.**
+  - 2 B14 groups. Both list "4S" and "C" rows on both models' pages.
+  - 0 variant-page body splits among the candidate's apps.
+- **Other classes:**
+  - Engine contradictions with no gate: 20 groups, 286 plain lot cars. The
+    largest are 27510-7Z416 (78 cars) and 96301-/96302-EA18E (54 each).
+  - km/h clusters: 1 group.
+  - Rogue / Rogue Select: 3 groups, 34 cars each.
+  - JK61C/JK61D are AT-only speedometers with no gate. No car on the lot is
+    decoded manual.
+
+### Agreement / disagreement (read after 64b60076)
+
+- **Agree.**
+  - The gates that exist name limits the catalog prints, and the app hides
+    the decodes that contradict them.
+  - Of the earlier census's 43 DRIVE groups, 25 are no longer in the
+    candidate, 16 carry a drive gate and 2 are ungated. The B14 sedan rows
+    are gone. The Titan rear-door motors (82730-9FJ0A) are now crew cab and
+    read RIGHT.
+- **Disagree.**
+  - The selfcheck reports 0 WRONG and 0 unexplained suspects. The engine
+    column of the product page is not used as a limit, and that is most of
+    the gap.
+  - The earlier verifier judged 27510-8Z315 (P14) RIGHT. It is WRONG once the
+    lot is replayed.
+  - The "gas" gate does not catch QX60 Hybrids. This choice is stated in the
+    gates section.
+  - Two of the earlier census's DRIVE groups are still ungated (joined tokens).
+  - The AUTO fix covers only the a4wd side, not the 4wd side.
+  - Neither earlier report raised the km/h cluster or the Rogue Select mix.
+
+### Suggested before another independent sample (for the hub; rules untouched here)
+
+1. Gate on engine from the product page's engine column when it leaves out an
+   engine that the model-year offers.
+2. For gas-only numbers where the hybrid has its own displacement (QX60 2.5L),
+   add an engine gate, or have the fuel gate read the decoded engine.
+3. Parse joined drive tokens such as 2WDSTD and 2WDHICAS.
+4. Leave 4WD decodes "if equipped" under a 4wd gate when the page lists a "W.
+   AUTO" number.
+5. Refuse "Kph" clusters, as policy already does for Subaru gauge clusters.
+6. Treat feed "Rogue" 2014-15 as ambiguous with Rogue Select (VIN JN8AS5), or
+   refuse those years.
+7. Add a cab-list gate, or refuse the years where the catalog shows a regular
+   cab that is not listed.
+8. Coverage, not a wrong row: the awd gate hides 4WD-decoded QX60/JX35 cars,
+   which are AWD.
