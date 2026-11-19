@@ -390,8 +390,16 @@ try {
     const last = cc.calls[cc.calls.length - 1];
     check('forecast stub: the Cars watch strip mounts it for one model', cc.el && last && last.cls === 'strip-forecast' && last.ctx.make === sk[1] && last.ctx.model === sk[2] && last.ctx.where === 'cars', JSON.stringify(cc));
     // two models: no mount point
-    await f.page.evaluate(() => { selectedModels.add('__other__'); renderLive(); });
-    check('forecast stub: no strip mount point for two models', await f.page.evaluate(() => !document.querySelector('#live-grid .strip-forecast')));
+    // (a real second model of the make: a made-up name can be pruned by a
+    // later list refresh, which made this check flaky under load)
+    const two = await f.page.evaluate((s) => {
+      const other = liveInventory.map(v => canonicalModel(v.make, v.model)).find(m => canonicalMake(liveInventory.find(v => canonicalModel(v.make, v.model) === m).make) === s[1] && m !== s[2]);
+      if (other) selectedModels.add(other);
+      renderLive();
+      return other || null;
+    }, sk);
+    await f.page.waitForTimeout(500);
+    check('forecast stub: no strip mount point for two models', await f.page.evaluate(() => selectedModels.size === 2 && !document.querySelector('#live-grid .strip-forecast')), String(two));
     check('forecast stub: no page error', !f.errors.length, f.errors.join(' | '));
     await f.ctx.close();
 
