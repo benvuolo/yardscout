@@ -25797,18 +25797,101 @@ def fetch_independent_inventory() -> list[dict]:
     return vehicles
 
 
-def _vpic_mismatch_msg(v: dict, vin_dec: dict | None) -> str | None:
+# ---------- model mismatch (VIN decodes as another model), 2026-11-19 ----------
+# Listed and decoded model names that share no word are mostly naming (K1500 /
+# GMT-400, CC / Passat, ML350 / M-Class). scraper/vin_model_names.json sorts
+# every such pair seen on the lots BY HAND into same / different / unsure /
+# decode_wrong, each with its basis; only "different" pairs are flagged. A
+# pair in no list is not flagged (counted and logged so the table can grow).
+VIN_MODEL_NAMES_FILE = SCRIPT_DIR / "vin_model_names.json"
+_VIN_MODEL_TABLE: dict | None = None
+MODEL_MISMATCH_STATS: collections.Counter = collections.Counter()
+MODEL_MISMATCH_UNCLASSIFIED: collections.Counter = collections.Counter()
+
+
+def _vin_model_key(make: str, listed: str, decoded: str) -> tuple[str, str, str]:
+    return (_make_key(make), _squash_model_key(listed), _squash_model_key(decoded))
+
+
+def _vin_model_table() -> dict:
+    """{(make key, listed key, decoded key): (bucket, decoded display name)},
+    loaded once. Any problem with the file (missing, not JSON, a malformed
+    entry) logs one warning and yields {}: no model flags, i.e. exactly the
+    year/make-only behaviour from before the table existed."""
+    global _VIN_MODEL_TABLE
+    if _VIN_MODEL_TABLE is not None:
+        return _VIN_MODEL_TABLE
+    table: dict = {}
+    try:
+        data = json.loads(VIN_MODEL_NAMES_FILE.read_text())
+        for bucket in ("same", "different", "unsure", "decode_wrong"):
+            rows = data.get(bucket)
+            if not isinstance(rows, list):
+                raise ValueError(f"'{bucket}' is not a list")
+            for e in rows:
+                mk, li, de = e["make"], e["listed"], e["decoded"]
+                if not all(isinstance(s, str) and s.strip() for s in (mk, li, de)):
+                    raise ValueError(f"bad entry in '{bucket}': {e!r}")
+                table[_vin_model_key(mk, li, de)] = (bucket, de)
+    except Exception as exc:  # noqa: BLE001 — never fail a scan over the table
+        print(f"  WARNING: {VIN_MODEL_NAMES_FILE.name} unusable ({type(exc).__name__}: {exc}); "
+              f"model mismatches are not flagged this scan (year and make checks unchanged)", file=sys.stderr)
+        table = {}
+    _VIN_MODEL_TABLE = table
+    return table
+
+
+def _model_words_disjoint(listed: str, decoded: str) -> bool:
+    """True when the two model names share no word (letters/digits runs) and
+    are not the same name once spaces and punctuation are dropped."""
+    a = {t for t in re.split(r"[^a-z0-9]+", (listed or "").lower()) if t}
+    b = {t for t in re.split(r"[^a-z0-9]+", (decoded or "").lower()) if t}
+    if not a or not b or a & b:
+        return False
+    return _squash_model_key(listed) != _squash_model_key(decoded)
+
+
+def _vpic_model_mismatch(v: dict, vin_dec: dict, stats: bool = False) -> str | None:
+    """'VIN decodes as <Make> <Model> (listed <model>)' when the listed and
+    decoded models share no word AND the pair is hand-sorted 'different'."""
+    dec_raw = (vin_dec.get("model") or "").strip()
+    listed = (v.get("model") or "").strip()
+    make = (v.get("make") or "").strip()
+    if not dec_raw or not listed or not make:
+        return None
+    decoded = normalize_model(dec_raw, make)
+    if not _model_words_disjoint(listed, decoded):
+        return None
+    hit = _vin_model_table().get(_vin_model_key(make, listed, decoded))
+    if stats:
+        MODEL_MISMATCH_STATS[hit[0] if hit else "unclassified"] += 1
+        if not hit:
+            MODEL_MISMATCH_UNCLASSIFIED[(make, listed, decoded)] += 1
+    if hit and hit[0] == "different":
+        return f"VIN decodes as {make} {hit[1]} (listed {listed})"
+    return None
+
+
+def _vpic_mismatch_msg(v: dict, vin_dec: dict | None, check_model: bool = True,
+                       stats: bool = False) -> str | None:
     """Cross-check the VIN's factory decode against the yard listing.
 
     The yard listing is what a visitor sees on the lot sign, so we never
-    silently override it — but when the VIN clearly disagrees, the VIN wins
-    for matching and the discrepancy is flagged in the data. Conservative on
-    purpose: only year (exact int compare) and make (no substring relation
-    either way) are checked; model strings vary too much across feeds to
-    compare without false alarms."""
+    silently override it — but when the VIN clearly disagrees, the
+    discrepancy is flagged in the data (and the VIN's model year is used for
+    matching, in enrich_vehicles). Year: exact int compare. Make: no
+    substring relation either way, brand families excepted. Model (since
+    2026-11-19, only when the makes agree): the two names
+    share no word and the pair is hand-sorted 'different' in
+    scraper/vin_model_names.json (_vpic_model_mismatch); naming pairs,
+    unsure pairs and pairs not in the table are never flagged.
+    check_model=False keeps the year/make-only check (used by callers that
+    ask "does the make disagree?"); stats=True counts the model verdicts for
+    the scan log (enrich_vehicles only)."""
     if not vin_dec:
         return None
     msgs = []
+    make_bad = False
     try:
         vin_year = int(vin_dec.get("modelYear") or 0)
     except (TypeError, ValueError):
@@ -25829,7 +25912,12 @@ def _vpic_mismatch_msg(v: dict, vin_dec: dict | None) -> str | None:
         ]
         same_family = any(vin_make in fam and listed_make in fam for fam in _BRAND_FAMILIES)
         if not same_family:
+            make_bad = True
             msgs.append(f"VIN decodes as {(vin_dec.get('make') or '').title()} (listed {v.get('make')})")
+    if check_model and not make_bad:
+        model_msg = _vpic_model_mismatch(v, vin_dec, stats=stats)
+        if model_msg:
+            msgs.append(model_msg)
     return "; ".join(msgs) or None
 
 
@@ -27092,6 +27180,8 @@ def enrich_vehicles(
     # no foreign make in front) — the "known model" basis for stripping a
     # foreign-make word from an undecoded row.
     FOREIGN_MAKE_STATS.clear()
+    MODEL_MISMATCH_STATS.clear()
+    MODEL_MISMATCH_UNCLASSIFIED.clear()
     _known_cnt: dict[tuple[str, str], int] = {}
     _known_disp: dict[tuple[str, str], str] = {}
     for v in vehicles:
@@ -27153,7 +27243,7 @@ def enrich_vehicles(
         if scion:
             v["make"] = scion
             FOREIGN_MAKE_STATS["scion_vin"] = FOREIGN_MAKE_STATS.get("scion_vin", 0) + 1
-        mismatch = _vpic_mismatch_msg(v, vin_dec)
+        mismatch = _vpic_mismatch_msg(v, vin_dec, stats=True)
         if mismatch:
             v["_vpic_mismatch"] = mismatch
         match_year = v.get("year", 0)
@@ -27355,7 +27445,23 @@ def enrich_vehicles(
         )
     if FOREIGN_MAKE_STATS:
         print(f"  [models] other-make model rows by rule: {dict(sorted(FOREIGN_MAKE_STATS.items()))}", file=sys.stderr)
+    _log_model_mismatch_stats()
     return vehicles
+
+
+def _log_model_mismatch_stats() -> None:
+    """One scan-log line: cars flagged by model, the other verdicts, and the
+    largest pairs the table does not know yet (to grow vin_model_names.json)."""
+    try:
+        s = MODEL_MISMATCH_STATS
+        top = ", ".join(f"{mk} {li} / {de} {n}" for (mk, li, de), n in MODEL_MISMATCH_UNCLASSIFIED.most_common(10))
+        print(f"  [vin model] {s.get('different', 0)} car(s) flagged: VIN decodes as another model; "
+              f"not flagged: same name {s.get('same', 0)}, unsure {s.get('unsure', 0)}, "
+              f"decode wrong {s.get('decode_wrong', 0)}, unclassified {s.get('unclassified', 0)} "
+              f"in {len(MODEL_MISMATCH_UNCLASSIFIED)} pair(s)" + (f"; top unclassified: {top}" if top else ""),
+              file=sys.stderr)
+    except Exception as exc:  # noqa: BLE001
+        print(f"  [vin model] log failed ({exc})", file=sys.stderr)
 
 
 def vehicle_hash(v: dict) -> str:
@@ -27427,7 +27533,7 @@ def _trans_make_conflict(v: dict, vp: dict | None) -> bool:
     """True when the VIN's decoded make contradicts the yard's make across
     maker groups (the VIN may belong to another car, e.g. an "Acura ILX"
     whose VIN decodes as a Chevrolet Cruze)."""
-    if not vp or not _vpic_mismatch_msg({**v, "year": 0}, vp):
+    if not vp or not _vpic_mismatch_msg({**v, "year": 0}, vp, check_model=False):
         return False
     a = (vp.get("make") or "").strip().lower()
     b = (v.get("make") or "").strip().lower()

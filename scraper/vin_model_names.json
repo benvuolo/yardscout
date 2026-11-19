@@ -1,0 +1,3557 @@
+{
+ "_doc": "Hand-sorted (make, listed model, decoded model) pairs that share no word after the scan's normalization (scraper/junkyard_scraper.py _vpic_mismatch_msg). 'different': the VIN is another vehicle -> flagged 'VIN decodes as <Make> <Model> (listed <model>)'. 'same': another name for the same vehicle. 'unsure': not settled from the names and the decode fields; not flagged. 'decode_wrong': the VIN's own series/engine show the listing is right and vPIC's model name is wrong; not flagged. Keys compare lowercase letters and digits only. 'cars' = cars on the lots in the census.",
+ "census": {
+  "scrapedAt": "2026-11-19T11:13:44Z",
+  "decodesExportedAt": "2026-11-18T23:30:38Z",
+  "cars": 338426,
+  "decoded": 280551,
+  "compared": 280070,
+  "no model": 390,
+  "no shared word": 6036,
+  "make mismatch (already flagged)": 91,
+  "pairs": 505
+ },
+ "same": [
+  {
+   "make": "Subaru",
+   "listed": "Outback",
+   "decoded": "Legacy",
+   "cars": 317,
+   "basis": "Outback was the Legacy Outback until 2004; vPIC files it as Legacy with trim OUTBACK"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "K1500",
+   "decoded": "GMT-400",
+   "cars": 277,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (K1500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C/K 1500",
+   "decoded": "GMT-400",
+   "cars": 266,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C/K 1500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C1500",
+   "decoded": "GMT-400",
+   "cars": 252,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C1500)"
+  },
+  {
+   "make": "Volkswagen",
+   "listed": "CC",
+   "decoded": "Passat",
+   "cars": 211,
+   "basis": "the CC is the Passat CC; vPIC files it under Passat"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C300",
+   "decoded": "C-Class",
+   "cars": 183,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C300 under the C-Class"
+  },
+  {
+   "make": "Chrysler",
+   "listed": "300",
+   "decoded": "300C",
+   "cars": 176,
+   "basis": "Chrysler 300 line: 300 and 300C are badges of the same LX/LH car"
+  },
+  {
+   "make": "MINI",
+   "listed": "Cooper",
+   "decoded": "Hardtop",
+   "cars": 137,
+   "basis": "MINI: 'Cooper' is the trim every MINI body carries; Hardtop is the body"
+  },
+  {
+   "make": "Ram",
+   "listed": "1500",
+   "decoded": "Ram",
+   "cars": 131,
+   "basis": "Ram 1500 is vPIC's Ram pickup/van (Ram)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "E350",
+   "decoded": "E-Class",
+   "cars": 124,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the E350 under the E-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "E320",
+   "decoded": "E-Class",
+   "cars": 119,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the E320 under the E-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C230",
+   "decoded": "C-Class",
+   "cars": 108,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C230 under the C-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C250",
+   "decoded": "C-Class",
+   "cars": 95,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C250 under the C-Class"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C/K 2500",
+   "decoded": "GMT-400",
+   "cars": 91,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C/K 2500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Aveo5",
+   "decoded": "Aveo",
+   "cars": 86,
+   "basis": "Aveo5 is the hatchback of the Aveo (same model line)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "K2500",
+   "decoded": "GMT-400",
+   "cars": 85,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (K2500)"
+  },
+  {
+   "make": "MINI",
+   "listed": "Cooper",
+   "decoded": "Convertible",
+   "cars": 85,
+   "basis": "MINI: 'Cooper' is the trim every MINI body carries; Convertible is the body"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "ML350",
+   "decoded": "M-Class",
+   "cars": 85,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the ML350 under the M-Class"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C2500",
+   "decoded": "GMT-400",
+   "cars": 77,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C2500)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "GL450",
+   "decoded": "GL-Class",
+   "cars": 74,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the GL450 under the GL-Class"
+  },
+  {
+   "make": "Kia",
+   "listed": "Rio5",
+   "decoded": "Rio",
+   "cars": 70,
+   "basis": "Rio5 is the hatchback of the Rio (same model line)"
+  },
+  {
+   "make": "Chrysler",
+   "listed": "300M",
+   "decoded": "300",
+   "cars": 69,
+   "basis": "Chrysler 300 line: 300M and 300 are badges of the same LX/LH car"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "ML320",
+   "decoded": "M-Class",
+   "cars": 55,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the ML320 under the M-Class"
+  },
+  {
+   "make": "Ford",
+   "listed": "Police Interceptor Utility",
+   "decoded": "Explorer",
+   "cars": 50,
+   "basis": "Ford Police Interceptor is the police Explorer"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C240",
+   "decoded": "C-Class",
+   "cars": 49,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C240 under the C-Class"
+  },
+  {
+   "make": "GMC",
+   "listed": "C1500",
+   "decoded": "Sierra",
+   "cars": 47,
+   "basis": "GMC C1500 is the Sierra pickup"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "FX",
+   "decoded": "FX35",
+   "cars": 44,
+   "basis": "Infiniti FX and FX35: one model, engine/drive badge"
+  },
+  {
+   "make": "Kia",
+   "listed": "Forte5",
+   "decoded": "Forte",
+   "cars": 44,
+   "basis": "Forte5 is the hatchback of the Forte (same model line)"
+  },
+  {
+   "make": "Mazda",
+   "listed": "Protege5",
+   "decoded": "Protege",
+   "cars": 44,
+   "basis": "Protege5 is the hatchback of the Protege (same model line)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C/K 3500",
+   "decoded": "GMT-400",
+   "cars": 43,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C/K 3500)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S550",
+   "decoded": "S-Class",
+   "cars": 43,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S550 under the S-Class"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "G Sedan",
+   "decoded": "G37",
+   "cars": 42,
+   "basis": "Infiniti G Sedan and G37: one model, engine/drive badge"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "G20",
+   "decoded": "G-Series",
+   "cars": 41,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G20)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CLK320",
+   "decoded": "CLK-Class",
+   "cars": 41,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CLK320 under the CLK-Class"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "S10/S15/Sonoma",
+   "decoded": "S-10",
+   "cars": 40,
+   "basis": "S10/S15/Sonoma is the feed's family label for the S-10 pickup"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C3500",
+   "decoded": "GMT-400",
+   "cars": 37,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C3500)"
+  },
+  {
+   "make": "Ford",
+   "listed": "Escort",
+   "decoded": "ZX2",
+   "cars": 36,
+   "basis": "the ZX2 was sold as the Escort ZX2"
+  },
+  {
+   "make": "MINI",
+   "listed": "Cooper",
+   "decoded": "Clubman",
+   "cars": 36,
+   "basis": "MINI: 'Cooper' is the trim every MINI body carries; Clubman is the body"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S500",
+   "decoded": "S-Class",
+   "cars": 36,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S500 under the S-Class"
+  },
+  {
+   "make": "Mazda",
+   "listed": "B2200",
+   "decoded": "B-Series",
+   "cars": 30,
+   "basis": "B-Series is vPIC's name for the Mazda pickup (B2200 is its badge)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C350",
+   "decoded": "C-Class",
+   "cars": 30,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C350 under the C-Class"
+  },
+  {
+   "make": "Saturn",
+   "listed": "SL",
+   "decoded": "SL2",
+   "cars": 29,
+   "basis": "Saturn S-/L-Series: SL and SL2 are trims of one line"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "GLK350",
+   "decoded": "GLK-Class",
+   "cars": 28,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the GLK350 under the GLK-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "E500",
+   "decoded": "E-Class",
+   "cars": 26,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the E500 under the E-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "R350",
+   "decoded": "R-Class",
+   "cars": 26,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the R350 under the R-Class"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "M",
+   "decoded": "M35",
+   "cars": 25,
+   "basis": "Infiniti M and M35: one model, engine/drive badge"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C320",
+   "decoded": "C-Class",
+   "cars": 25,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C320 under the C-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "ML500",
+   "decoded": "M-Class",
+   "cars": 24,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the ML500 under the M-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S430",
+   "decoded": "S-Class",
+   "cars": 24,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S430 under the S-Class"
+  },
+  {
+   "make": "Nissan",
+   "listed": "D21",
+   "decoded": "Pickup",
+   "cars": 24,
+   "basis": "Nissan/Datsun compact pickup: D21 is the feed's name for the Pickup"
+  },
+  {
+   "make": "Volvo",
+   "listed": "XC70",
+   "decoded": "V70",
+   "cars": 24,
+   "basis": "the XC70 is the V70 Cross Country (V70 XC); same car"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C10",
+   "decoded": "C/K Pickup",
+   "cars": 23,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (C10)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CLA250",
+   "decoded": "CLA-Class",
+   "cars": 23,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CLA250 under the CLA-Class"
+  },
+  {
+   "make": "Dodge",
+   "listed": "D150",
+   "decoded": "D-Series",
+   "cars": 22,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (D150)"
+  },
+  {
+   "make": "Saturn",
+   "listed": "SL",
+   "decoded": "SL1",
+   "cars": 22,
+   "basis": "Saturn S-/L-Series: SL and SL1 are trims of one line"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Sportvan",
+   "decoded": "G-Series",
+   "cars": 21,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Sportvan)"
+  },
+  {
+   "make": "GMC",
+   "listed": "Envoy",
+   "decoded": "Jimmy",
+   "cars": 21,
+   "basis": "the 1998-2000 Envoy was the top trim of the GMC Jimmy"
+  },
+  {
+   "make": "Kia",
+   "listed": "Spectra5",
+   "decoded": "Spectra",
+   "cars": 21,
+   "basis": "Spectra5 is the hatchback of the Spectra (same model line)"
+  },
+  {
+   "make": "Nissan",
+   "listed": "NV2500",
+   "decoded": "NV",
+   "cars": 21,
+   "basis": "Nissan NV NV2500 is a weight rating of the NV van"
+  },
+  {
+   "make": "Mazda",
+   "listed": "B2000",
+   "decoded": "B-Series",
+   "cars": 20,
+   "basis": "B-Series is vPIC's name for the Mazda pickup (B2000 is its badge)"
+  },
+  {
+   "make": "Mazda",
+   "listed": "B2300",
+   "decoded": "B-Series",
+   "cars": 20,
+   "basis": "B-Series is vPIC's name for the Mazda pickup (B2300 is its badge)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C280",
+   "decoded": "C-Class",
+   "cars": 19,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C280 under the C-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CLK430",
+   "decoded": "CLK-Class",
+   "cars": 19,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CLK430 under the CLK-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CLS550",
+   "decoded": "CLS-Class",
+   "cars": 19,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CLS550 under the CLS-Class"
+  },
+  {
+   "make": "Ram",
+   "listed": "C/V",
+   "decoded": "Cargo Van",
+   "cars": 19,
+   "basis": "the Ram C/V / Cargo Van is the cargo version of the Grand Caravan"
+  },
+  {
+   "make": "Ford",
+   "listed": "Police Interceptor Sedan",
+   "decoded": "Taurus",
+   "cars": 18,
+   "basis": "Ford Police Interceptor is the police Taurus"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "G35X",
+   "decoded": "G35",
+   "cars": 18,
+   "basis": "Infiniti G35X and G35: one model, engine/drive badge"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CLS500",
+   "decoded": "CLS-Class",
+   "cars": 18,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CLS500 under the CLS-Class"
+  },
+  {
+   "make": "Nissan",
+   "listed": "Truck",
+   "decoded": "Pickup",
+   "cars": 18,
+   "basis": "Nissan/Datsun compact pickup: Truck is the feed's name for the Pickup"
+  },
+  {
+   "make": "Mazda",
+   "listed": "Truck",
+   "decoded": "B-Series",
+   "cars": 17,
+   "basis": "B-Series is vPIC's name for the Mazda pickup (Truck is its badge)"
+  },
+  {
+   "make": "Saturn",
+   "listed": "LS",
+   "decoded": "LS1",
+   "cars": 17,
+   "basis": "Saturn S-/L-Series: LS and LS1 are trims of one line"
+  },
+  {
+   "make": "Saturn",
+   "listed": "SC",
+   "decoded": "SC2",
+   "cars": 17,
+   "basis": "Saturn S-/L-Series: SC and SC2 are trims of one line"
+  },
+  {
+   "make": "Mazda",
+   "listed": "B3000",
+   "decoded": "B-Series",
+   "cars": 16,
+   "basis": "B-Series is vPIC's name for the Mazda pickup (B3000 is its badge)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CLK350",
+   "decoded": "CLK-Class",
+   "cars": 16,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CLK350 under the CLK-Class"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "K3500",
+   "decoded": "GMT-400",
+   "cars": 15,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (K3500)"
+  },
+  {
+   "make": "Chrysler",
+   "listed": "300C",
+   "decoded": "300",
+   "cars": 15,
+   "basis": "Chrysler 300 line: 300C and 300 are badges of the same LX/LH car"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "G37X",
+   "decoded": "G37",
+   "cars": 15,
+   "basis": "Infiniti G37X and G37: one model, engine/drive badge"
+  },
+  {
+   "make": "BMW",
+   "listed": "325i",
+   "decoded": "325ci",
+   "cars": 14,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "323i",
+   "decoded": "328i",
+   "cars": 13,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Chevy Van",
+   "decoded": "G-Series",
+   "cars": 13,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Chevy Van)"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "XJ8",
+   "decoded": "XJ",
+   "cars": 13,
+   "basis": "Jaguar XJ family: XJ8 and XJ are badges of the XJ"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "SL500",
+   "decoded": "SL-Class",
+   "cars": 13,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the SL500 under the SL-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "SLK230",
+   "decoded": "SLK-Class",
+   "cars": 13,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the SLK230 under the SLK-Class"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "EX",
+   "decoded": "EX35",
+   "cars": 12,
+   "basis": "Infiniti EX and EX35: one model, engine/drive badge"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CL500",
+   "decoded": "CL-Class",
+   "cars": 12,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CL500 under the CL-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CLK500",
+   "decoded": "CLK-Class",
+   "cars": 12,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CLK500 under the CLK-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "GL550",
+   "decoded": "GL-Class",
+   "cars": 12,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the GL550 under the GL-Class"
+  },
+  {
+   "make": "Oldsmobile",
+   "listed": "88",
+   "decoded": "Eighty-Eight",
+   "cars": 12,
+   "basis": "88 is the Eighty-Eight"
+  },
+  {
+   "make": "BMW",
+   "listed": "528i",
+   "decoded": "528xi",
+   "cars": 11,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Chrysler",
+   "listed": "300S",
+   "decoded": "300",
+   "cars": 11,
+   "basis": "Chrysler 300 line: 300S and 300 are badges of the same LX/LH car"
+  },
+  {
+   "make": "GMC",
+   "listed": "Vandura",
+   "decoded": "Rally",
+   "cars": 11,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Vandura)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "E550",
+   "decoded": "E-Class",
+   "cars": 11,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the E550 under the E-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "ML430",
+   "decoded": "M-Class",
+   "cars": 11,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the ML430 under the M-Class"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "JX",
+   "decoded": "JX35",
+   "cars": 10,
+   "basis": "Infiniti JX and JX35: one model, engine/drive badge"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300E",
+   "decoded": "300",
+   "cars": 10,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300E under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "E430",
+   "decoded": "E-Class",
+   "cars": 10,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the E430 under the E-Class"
+  },
+  {
+   "make": "Volkswagen",
+   "listed": "Golf",
+   "decoded": "GTI",
+   "cars": 10,
+   "basis": "the GTI is the Golf GTI"
+  },
+  {
+   "make": "BMW",
+   "listed": "325xi",
+   "decoded": "325i",
+   "cars": 9,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "MINI",
+   "listed": "Hardtop",
+   "decoded": "Cooper",
+   "cars": 9,
+   "basis": "MINI: 'Cooper' is the trim every MINI body carries; Cooper is the body"
+  },
+  {
+   "make": "Mazda",
+   "listed": "B4000",
+   "decoded": "B-Series",
+   "cars": 9,
+   "basis": "B-Series is vPIC's name for the Mazda pickup (B4000 is its badge)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "SLK320",
+   "decoded": "SLK-Class",
+   "cars": 9,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the SLK320 under the SLK-Class"
+  },
+  {
+   "make": "Saturn",
+   "listed": "SW",
+   "decoded": "SW2",
+   "cars": 9,
+   "basis": "Saturn S-/L-Series: SW and SW2 are trims of one line"
+  },
+  {
+   "make": "BMW",
+   "listed": "323ci",
+   "decoded": "325ci",
+   "cars": 8,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "750i",
+   "decoded": "750Li",
+   "cars": 8,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "G30",
+   "decoded": "G-Series",
+   "cars": 8,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G30)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "B3500",
+   "decoded": "Ram Wagon",
+   "cars": 8,
+   "basis": "Dodge B-van: B3500 is the Ram Van/Wagon"
+  },
+  {
+   "make": "Dodge",
+   "listed": "D250",
+   "decoded": "D-Series",
+   "cars": 8,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (D250)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "GL320",
+   "decoded": "GL-Class",
+   "cars": 8,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the GL320 under the GL-Class"
+  },
+  {
+   "make": "Nissan",
+   "listed": "NV3500",
+   "decoded": "NV",
+   "cars": 8,
+   "basis": "Nissan NV NV3500 is a weight rating of the NV van"
+  },
+  {
+   "make": "Pontiac",
+   "listed": "Pursuit",
+   "decoded": "G5",
+   "cars": 8,
+   "basis": "the Pursuit is the Canadian/US twin of the G5 (same car)"
+  },
+  {
+   "make": "Ram",
+   "listed": "2500",
+   "decoded": "Ram",
+   "cars": 8,
+   "basis": "Ram 2500 is vPIC's Ram pickup/van (Ram)"
+  },
+  {
+   "make": "Saturn",
+   "listed": "SC",
+   "decoded": "SC1",
+   "cars": 8,
+   "basis": "Saturn S-/L-Series: SC and SC1 are trims of one line"
+  },
+  {
+   "make": "Suzuki",
+   "listed": "Vitara",
+   "decoded": "XL-7",
+   "cars": 8,
+   "basis": "the XL-7 is the Grand Vitara XL-7 (Vitara line)"
+  },
+  {
+   "make": "BMW",
+   "listed": "330i",
+   "decoded": "330xi",
+   "cars": 7,
+   "basis": "both 3 Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "G10",
+   "decoded": "G-Series",
+   "cars": 7,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G10)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "B250",
+   "decoded": "Ram Van",
+   "cars": 7,
+   "basis": "Dodge B-van: B250 is the Ram Van/Wagon"
+  },
+  {
+   "make": "GMC",
+   "listed": "C/K 1500",
+   "decoded": "GMT-400",
+   "cars": 7,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C/K 1500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "C2500",
+   "decoded": "Sierra",
+   "cars": 7,
+   "basis": "GMC C2500 is the Sierra pickup"
+  },
+  {
+   "make": "GMC",
+   "listed": "G2500 Vandura",
+   "decoded": "Rally",
+   "cars": 7,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G2500 Vandura)"
+  },
+  {
+   "make": "GMC",
+   "listed": "K1500",
+   "decoded": "Sierra",
+   "cars": 7,
+   "basis": "GMC K1500 is the Sierra pickup"
+  },
+  {
+   "make": "GMC",
+   "listed": "Sierra 2500",
+   "decoded": "GMT-400",
+   "cars": 7,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (Sierra 2500)"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "FX",
+   "decoded": "FX45",
+   "cars": 7,
+   "basis": "Infiniti FX and FX45: one model, engine/drive badge"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "M",
+   "decoded": "M37",
+   "cars": 7,
+   "basis": "Infiniti M and M37: one model, engine/drive badge"
+  },
+  {
+   "make": "Mazda",
+   "listed": "Mazdaspeed3",
+   "decoded": "Mazda3",
+   "cars": 7,
+   "basis": "Mazdaspeed3 is the hatchback of the Mazda3 (same model line)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S320",
+   "decoded": "S-Class",
+   "cars": 7,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S320 under the S-Class"
+  },
+  {
+   "make": "BMW",
+   "listed": "528i xDrive",
+   "decoded": "528xi",
+   "cars": 6,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "530i",
+   "decoded": "530xi",
+   "cars": 6,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "7 Series",
+   "decoded": "750Li, Alpina B7",
+   "cars": 6,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Dodge",
+   "listed": "D250 Pickup",
+   "decoded": "D-Series",
+   "cars": 6,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (D250 Pickup)"
+  },
+  {
+   "make": "Fiat",
+   "listed": "500C",
+   "decoded": "500",
+   "cars": 6,
+   "basis": "the 500C is a version (convertible / electric) of the Fiat 500"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "G Coupe",
+   "decoded": "G37",
+   "cars": 6,
+   "basis": "Infiniti G Coupe and G37: one model, engine/drive badge"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "XJ6",
+   "decoded": "Vanden Plas",
+   "cars": 6,
+   "basis": "Jaguar XJ family: XJ6 and Vanden Plas are badges of the XJ"
+  },
+  {
+   "make": "Mazda",
+   "listed": "B2500",
+   "decoded": "B-Series",
+   "cars": 6,
+   "basis": "B-Series is vPIC's name for the Mazda pickup (B2500 is its badge)"
+  },
+  {
+   "make": "Mazda",
+   "listed": "Mazdaspeed6",
+   "decoded": "Mazda6",
+   "cars": 6,
+   "basis": "Mazdaspeed6 is the hatchback of the Mazda6 (same model line)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300D",
+   "decoded": "300",
+   "cars": 6,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300D under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "GL350",
+   "decoded": "GL-Class",
+   "cars": 6,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the GL350 under the GL-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "R500",
+   "decoded": "R-Class",
+   "cars": 6,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the R500 under the R-Class"
+  },
+  {
+   "make": "Nissan",
+   "listed": "Nispu",
+   "decoded": "Pickup",
+   "cars": 6,
+   "basis": "Nissan/Datsun compact pickup: Nispu is the feed's name for the Pickup"
+  },
+  {
+   "make": "BMW",
+   "listed": "328i",
+   "decoded": "328xi",
+   "cars": 5,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "330ci",
+   "decoded": "330i",
+   "cars": 5,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "745i",
+   "decoded": "745Li",
+   "cars": 5,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C20",
+   "decoded": "C/K Pickup",
+   "cars": 5,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (C20)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Chevy Van",
+   "decoded": "Express",
+   "cars": 5,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Chevy Van)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "G1500",
+   "decoded": "Express",
+   "cars": 5,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G1500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "G2500",
+   "decoded": "Express",
+   "cars": 5,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G2500)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "150 Pickup",
+   "decoded": "D-Series",
+   "cars": 5,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (150 Pickup)"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "Vanden Plas",
+   "decoded": "XJ",
+   "cars": 5,
+   "basis": "Jaguar XJ family: Vanden Plas and XJ are badges of the XJ"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "XJ8",
+   "decoded": "Vanden Plas",
+   "cars": 5,
+   "basis": "Jaguar XJ family: XJ8 and Vanden Plas are badges of the XJ"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300SD",
+   "decoded": "300",
+   "cars": 5,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300SD under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "420SEL",
+   "decoded": "420",
+   "cars": 5,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 420SEL under the 420"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S420",
+   "decoded": "S-Class",
+   "cars": 5,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S420 under the S-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S600",
+   "decoded": "S-Class",
+   "cars": 5,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S600 under the S-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "SLK350",
+   "decoded": "SLK-Class",
+   "cars": 5,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the SLK350 under the SLK-Class"
+  },
+  {
+   "make": "Oldsmobile",
+   "listed": "98",
+   "decoded": "Ninety-Eight",
+   "cars": 5,
+   "basis": "98 is the Ninety-Eight"
+  },
+  {
+   "make": "Oldsmobile",
+   "listed": "Royale",
+   "decoded": "Eighty-Eight",
+   "cars": 5,
+   "basis": "Oldsmobile Eighty-Eight family: Royale is a trim/version of it"
+  },
+  {
+   "make": "Saturn",
+   "listed": "LS",
+   "decoded": "LS2",
+   "cars": 5,
+   "basis": "Saturn S-/L-Series: LS and LS2 are trims of one line"
+  },
+  {
+   "make": "Suzuki",
+   "listed": "XL-7",
+   "decoded": "Grand Vitara",
+   "cars": 5,
+   "basis": "the XL-7 is the Grand Vitara XL-7 (Vitara line)"
+  },
+  {
+   "make": "BMW",
+   "listed": "323i",
+   "decoded": "323iC",
+   "cars": 4,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "7 Series",
+   "decoded": "750i, Alpina B7",
+   "cars": 4,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Dodge",
+   "listed": "B2500",
+   "decoded": "Ram Van",
+   "cars": 4,
+   "basis": "Dodge B-van: B2500 is the Ram Van/Wagon"
+  },
+  {
+   "make": "Dodge",
+   "listed": "D100",
+   "decoded": "D-Series",
+   "cars": 4,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (D100)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Ram 150",
+   "decoded": "D-Series",
+   "cars": 4,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (Ram 150)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "W150",
+   "decoded": "W-Series",
+   "cars": 4,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (W150)"
+  },
+  {
+   "make": "Ford",
+   "listed": "ZX2",
+   "decoded": "Escort",
+   "cars": 4,
+   "basis": "the ZX2 was sold as the Escort ZX2"
+  },
+  {
+   "make": "GMC",
+   "listed": "C1500",
+   "decoded": "GMT-400",
+   "cars": 4,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C1500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "Sierra 1500",
+   "decoded": "GMT-400",
+   "cars": 4,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (Sierra 1500)"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "M",
+   "decoded": "M45",
+   "cars": 4,
+   "basis": "Infiniti M and M45: one model, engine/drive badge"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "XJ",
+   "decoded": "XJ6",
+   "cars": 4,
+   "basis": "Jaguar XJ family: XJ and XJ6 are badges of the XJ"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "500SL",
+   "decoded": "500",
+   "cars": 4,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 500SL under the 500"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C220",
+   "decoded": "C-Class",
+   "cars": 4,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C220 under the C-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "E300",
+   "decoded": "E-Class",
+   "cars": 4,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the E300 under the E-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "ML55 AMG",
+   "decoded": "M-Class",
+   "cars": 4,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the ML55 AMG under the M-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "ML550",
+   "decoded": "M-Class",
+   "cars": 4,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the ML550 under the M-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "R320",
+   "decoded": "R-Class",
+   "cars": 4,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the R320 under the R-Class"
+  },
+  {
+   "make": "Nissan",
+   "listed": "NV1500",
+   "decoded": "NV",
+   "cars": 4,
+   "basis": "Nissan NV NV1500 is a weight rating of the NV van"
+  },
+  {
+   "make": "Ram",
+   "listed": "C/V",
+   "decoded": "Ram",
+   "cars": 4,
+   "basis": "Ram C/V is vPIC's Ram pickup/van (Ram)"
+  },
+  {
+   "make": "Saturn",
+   "listed": "L200",
+   "decoded": "LS1",
+   "cars": 4,
+   "basis": "Saturn S-/L-Series: L200 and LS1 are trims of one line"
+  },
+  {
+   "make": "Volvo",
+   "listed": "244",
+   "decoded": "240",
+   "cars": 4,
+   "basis": "the 244 is the 240 sedan"
+  },
+  {
+   "make": "BMW",
+   "listed": "3 Series",
+   "decoded": "325/325eS",
+   "cars": 3,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "3-Series Sport Wagon",
+   "decoded": "325i",
+   "cars": 3,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "3-Series Sport Wagon",
+   "decoded": "328xi",
+   "cars": 3,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "325i",
+   "decoded": "325iC",
+   "cars": 3,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "328i",
+   "decoded": "328iC",
+   "cars": 3,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "335i",
+   "decoded": "335xi",
+   "cars": 3,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "525i",
+   "decoded": "530i",
+   "cars": 3,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "535i",
+   "decoded": "535xi",
+   "cars": 3,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "645i",
+   "decoded": "645ci",
+   "cars": 3,
+   "basis": "both 6-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "740i",
+   "decoded": "740iL",
+   "cars": 3,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C3500HD",
+   "decoded": "GMT-400",
+   "cars": 3,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C3500HD)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "G30 Sportvan",
+   "decoded": "G-Series",
+   "cars": 3,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G30 Sportvan)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "K2500",
+   "decoded": "C/K Pickup",
+   "cars": 3,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (K2500)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "3500 Pickup",
+   "decoded": "Ram",
+   "cars": 3,
+   "basis": "Dodge Ram 3500 pickup"
+  },
+  {
+   "make": "Dodge",
+   "listed": "B350",
+   "decoded": "Ram Wagon",
+   "cars": 3,
+   "basis": "Dodge B-van: B350 is the Ram Van/Wagon"
+  },
+  {
+   "make": "Fiat",
+   "listed": "500E",
+   "decoded": "500",
+   "cars": 3,
+   "basis": "the 500E is a version (convertible / electric) of the Fiat 500"
+  },
+  {
+   "make": "GMC",
+   "listed": "C1500",
+   "decoded": "C/K Pickup",
+   "cars": 3,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (C1500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "C2500",
+   "decoded": "C/K Pickup",
+   "cars": 3,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (C2500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "G2500",
+   "decoded": "Rally",
+   "cars": 3,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G2500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "K1500",
+   "decoded": "GMT-400",
+   "cars": 3,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (K1500)"
+  },
+  {
+   "make": "Honda",
+   "listed": "CRX",
+   "decoded": "Civic",
+   "cars": 3,
+   "basis": "the CRX was the Civic CRX"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "G Convertible",
+   "decoded": "G37",
+   "cars": 3,
+   "basis": "Infiniti G Convertible and G37: one model, engine/drive badge"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "G Sedan",
+   "decoded": "G25",
+   "cars": 3,
+   "basis": "Infiniti G Sedan and G25: one model, engine/drive badge"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "XJ",
+   "decoded": "XJ8",
+   "cars": 3,
+   "basis": "Jaguar XJ family: XJ and XJ8 are badges of the XJ"
+  },
+  {
+   "make": "Mazda",
+   "listed": "3 Htbk",
+   "decoded": "Mazda3",
+   "cars": 3,
+   "basis": "3 Htbk is the hatchback of the Mazda3 (same model line)"
+  },
+  {
+   "make": "Mazda",
+   "listed": "B2600",
+   "decoded": "B-Series",
+   "cars": 3,
+   "basis": "B-Series is vPIC's name for the Mazda pickup (B2600 is its badge)"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "190E",
+   "decoded": "190",
+   "cars": 3,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 190E under the 190"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "240D",
+   "decoded": "240",
+   "cars": 3,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 240D under the 240"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300SE",
+   "decoded": "300",
+   "cars": 3,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300SE under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300SEL",
+   "decoded": "300",
+   "cars": 3,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300SEL under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CL600",
+   "decoded": "CL-Class",
+   "cars": 3,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CL600 under the CL-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "SLK280",
+   "decoded": "SLK-Class",
+   "cars": 3,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the SLK280 under the SLK-Class"
+  },
+  {
+   "make": "Mitsubishi",
+   "listed": "Pickup",
+   "decoded": "Mighty Max",
+   "cars": 3,
+   "basis": "the Mitsubishi pickup was sold as the Mighty Max"
+  },
+  {
+   "make": "Nissan",
+   "listed": "NV2500 HD",
+   "decoded": "NV",
+   "cars": 3,
+   "basis": "Nissan NV NV2500 HD is a weight rating of the NV van"
+  },
+  {
+   "make": "Saturn",
+   "listed": "L300",
+   "decoded": "LS2",
+   "cars": 3,
+   "basis": "Saturn S-/L-Series: L300 and LS2 are trims of one line"
+  },
+  {
+   "make": "Saturn",
+   "listed": "LW200",
+   "decoded": "LW1",
+   "cars": 3,
+   "basis": "Saturn S-/L-Series: LW200 and LW1 are trims of one line"
+  },
+  {
+   "make": "Toyota",
+   "listed": "Celica",
+   "decoded": "Supra",
+   "cars": 3,
+   "basis": "the 1982-85 Supra was the Celica Supra (decode trim 'GT (SUPRA)')"
+  },
+  {
+   "make": "Volkswagen",
+   "listed": "Rabbit",
+   "decoded": "CABRIOLET",
+   "cars": 3,
+   "basis": "the VW Cabriolet is the Rabbit/Golf convertible"
+  },
+  {
+   "make": "Audi",
+   "listed": "A3 Quattro",
+   "decoded": "S3",
+   "cars": 2,
+   "basis": "Audi S models are the performance trim of the A model (A3 Quattro / S3)"
+  },
+  {
+   "make": "BMW",
+   "listed": "3-Series Sport Wagon",
+   "decoded": "325xi",
+   "cars": 2,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "320i",
+   "decoded": "325ci",
+   "cars": 2,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "320i",
+   "decoded": "325i",
+   "cars": 2,
+   "basis": "both 3 Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "320i",
+   "decoded": "328i",
+   "cars": 2,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "325i",
+   "decoded": "325xi",
+   "cars": 2,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "328i",
+   "decoded": "320i",
+   "cars": 2,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "328i",
+   "decoded": "328d",
+   "cars": 2,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "5-Series Sport Wagon",
+   "decoded": "525i",
+   "cars": 2,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "5-Series Sport Wagon",
+   "decoded": "530xi",
+   "cars": 2,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "750i",
+   "decoded": "750Li, Alpina B7",
+   "cars": 2,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Buick",
+   "listed": "Allure",
+   "decoded": "LaCrosse",
+   "cars": 2,
+   "basis": "the Allure is the Canadian name of the LaCrosse"
+  },
+  {
+   "make": "Cadillac",
+   "listed": "DTS",
+   "decoded": "Limousine",
+   "cars": 2,
+   "basis": "the DTS limousine is a DTS conversion"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Impala",
+   "decoded": "Caprice",
+   "cars": 2,
+   "basis": "the 1994-96 Impala SS was built on the Caprice (B-body); vPIC files it as Caprice"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "K10",
+   "decoded": "C/K Pickup",
+   "cars": 2,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (K10)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "R/V 20",
+   "decoded": "G-Series",
+   "cars": 2,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (R/V 20)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "R30",
+   "decoded": "R Conventional",
+   "cars": 2,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (R30)"
+  },
+  {
+   "make": "Chrysler",
+   "listed": "New Yorker",
+   "decoded": "SALON",
+   "cars": 2,
+   "basis": "the Salon was the New Yorker Salon"
+  },
+  {
+   "make": "Dodge",
+   "listed": "150 Pickup",
+   "decoded": "W-Series",
+   "cars": 2,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (150 Pickup)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "B250",
+   "decoded": "Ram Wagon",
+   "cars": 2,
+   "basis": "Dodge B-van: B250 is the Ram Van/Wagon"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Caravan",
+   "decoded": "Cargo Van",
+   "cars": 2,
+   "basis": "the Ram C/V / Cargo Van is the cargo version of the Grand Caravan"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Caravan",
+   "decoded": "Ram",
+   "cars": 2,
+   "basis": "the Ram C/V is the cargo version of the (Grand) Caravan"
+  },
+  {
+   "make": "Dodge",
+   "listed": "W350",
+   "decoded": "W-Series",
+   "cars": 2,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (W350)"
+  },
+  {
+   "make": "Ford",
+   "listed": "Box Tr",
+   "decoded": "F-550",
+   "cars": 2,
+   "basis": "listing 'Box Tr' is a generic body/category word, the decode names the vehicle"
+  },
+  {
+   "make": "GMC",
+   "listed": "C/K 2500",
+   "decoded": "GMT-400",
+   "cars": 2,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (C/K 2500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "C3500",
+   "decoded": "Sierra",
+   "cars": 2,
+   "basis": "GMC C3500 is the Sierra pickup"
+  },
+  {
+   "make": "GMC",
+   "listed": "G3500 Vandura",
+   "decoded": "Cutaway Van",
+   "cars": 2,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G3500 Vandura)"
+  },
+  {
+   "make": "GMC",
+   "listed": "K1500",
+   "decoded": "C/K Pickup",
+   "cars": 2,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (K1500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "K3500",
+   "decoded": "Sierra",
+   "cars": 2,
+   "basis": "GMC K3500 is the Sierra pickup"
+  },
+  {
+   "make": "GMC",
+   "listed": "Vandura",
+   "decoded": "Cutaway Van",
+   "cars": 2,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Vandura)"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "G25X",
+   "decoded": "G25",
+   "cars": 2,
+   "basis": "Infiniti G25X and G25: one model, engine/drive badge"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "M37X",
+   "decoded": "M37",
+   "cars": 2,
+   "basis": "Infiniti M37X and M37: one model, engine/drive badge"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "M56X",
+   "decoded": "M56",
+   "cars": 2,
+   "basis": "Infiniti M56X and M56: one model, engine/drive badge"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "XJ",
+   "decoded": "Vanden Plas",
+   "cars": 2,
+   "basis": "Jaguar XJ family: XJ and Vanden Plas are badges of the XJ"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "XJL",
+   "decoded": "XJ",
+   "cars": 2,
+   "basis": "Jaguar XJ family: XJL and XJ are badges of the XJ"
+  },
+  {
+   "make": "MINI",
+   "listed": "Cooper",
+   "decoded": "Countryman",
+   "cars": 2,
+   "basis": "MINI: 'Cooper' is the trim every MINI body carries; Countryman is the body"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "260E",
+   "decoded": "260",
+   "cars": 2,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 260E under the 260"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300SL",
+   "decoded": "300",
+   "cars": 2,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300SL under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300TD",
+   "decoded": "300",
+   "cars": 2,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300TD under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "560SL",
+   "decoded": "560",
+   "cars": 2,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 560SL under the 560"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CL550",
+   "decoded": "CL-Class",
+   "cars": 2,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CL550 under the CL-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CLK55 AMG",
+   "decoded": "CLK-Class",
+   "cars": 2,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CLK55 AMG under the CLK-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "CLK550",
+   "decoded": "CLK-Class",
+   "cars": 2,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the CLK550 under the CLK-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "E55 AMG",
+   "decoded": "E-Class",
+   "cars": 2,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the E55 AMG under the E-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "SL320",
+   "decoded": "SL-Class",
+   "cars": 2,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the SL320 under the SL-Class"
+  },
+  {
+   "make": "Mitsubishi",
+   "listed": "Mitpu",
+   "decoded": "Mighty Max",
+   "cars": 2,
+   "basis": "the Mitsubishi pickup was sold as the Mighty Max"
+  },
+  {
+   "make": "Oldsmobile",
+   "listed": "Eighty-Eight",
+   "decoded": "LSS",
+   "cars": 2,
+   "basis": "Oldsmobile Eighty-Eight family: Eighty-Eight is a trim/version of it"
+  },
+  {
+   "make": "Saturn",
+   "listed": "L300",
+   "decoded": "LW300",
+   "cars": 2,
+   "basis": "Saturn S-/L-Series: L300 and LW300 are trims of one line"
+  },
+  {
+   "make": "Volkswagen",
+   "listed": "GTI",
+   "decoded": "Golf",
+   "cars": 2,
+   "basis": "the GTI is the Golf GTI"
+  },
+  {
+   "make": "Volvo",
+   "listed": "60",
+   "decoded": "S60",
+   "cars": 2,
+   "basis": "Volvo 60 is the S60 (feed drops the letter / variant name)"
+  },
+  {
+   "make": "Volvo",
+   "listed": "80",
+   "decoded": "S80",
+   "cars": 2,
+   "basis": "Volvo 80 is the S80 (feed drops the letter / variant name)"
+  },
+  {
+   "make": "Volvo",
+   "listed": "V60 Cross Country",
+   "decoded": "V60CC",
+   "cars": 2,
+   "basis": "the Cross Country is a variant of the V60 Cross Country"
+  },
+  {
+   "make": "Audi",
+   "listed": "A3",
+   "decoded": "S3",
+   "cars": 1,
+   "basis": "Audi S models are the performance trim of the A model (A3 / S3)"
+  },
+  {
+   "make": "Audi",
+   "listed": "A6",
+   "decoded": "S6",
+   "cars": 1,
+   "basis": "Audi S models are the performance trim of the A model (A6 / S6)"
+  },
+  {
+   "make": "Audi",
+   "listed": "S4",
+   "decoded": "A4",
+   "cars": 1,
+   "basis": "Audi S models are the performance trim of the A model (S4 / A4)"
+  },
+  {
+   "make": "BMW",
+   "listed": "3 Series",
+   "decoded": "325/325e",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "3-Series Sport Wagon",
+   "decoded": "328i",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "318i",
+   "decoded": "318iC",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "318i",
+   "decoded": "318is",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "318i",
+   "decoded": "318ti",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "320i",
+   "decoded": "328d",
+   "cars": 1,
+   "basis": "both 3 Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "320i",
+   "decoded": "330ci",
+   "cars": 1,
+   "basis": "both 3 Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "323i",
+   "decoded": "325i",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "323i",
+   "decoded": "325xi",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "323i",
+   "decoded": "330i",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "323i",
+   "decoded": "335xi",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "325i",
+   "decoded": "318ti",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "325i",
+   "decoded": "325is",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "328i",
+   "decoded": "318i",
+   "cars": 1,
+   "basis": "both 3 Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "328i",
+   "decoded": "335i",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "328i",
+   "decoded": "335xi",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "328xi",
+   "decoded": "328i",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "330i",
+   "decoded": "325ci",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "330xi",
+   "decoded": "330i",
+   "cars": 1,
+   "basis": "both 3 Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "335i",
+   "decoded": "328i",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "5 Series",
+   "decoded": "535i/535is",
+   "cars": 1,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "525i",
+   "decoded": "530xi",
+   "cars": 1,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "525i",
+   "decoded": "535xi",
+   "cars": 1,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "525i",
+   "decoded": "545i",
+   "cars": 1,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "528i",
+   "decoded": "535i",
+   "cars": 1,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "540i",
+   "decoded": "530i",
+   "cars": 1,
+   "basis": "both 5-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "645ci",
+   "decoded": "645i",
+   "cars": 1,
+   "basis": "both 6-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "650i",
+   "decoded": "650xi",
+   "cars": 1,
+   "basis": "both 6-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "740I (I&Il)",
+   "decoded": "740iL",
+   "cars": 1,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "740i",
+   "decoded": "740Li",
+   "cars": 1,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "740i",
+   "decoded": "750Li",
+   "cars": 1,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "740i",
+   "decoded": "750i, Alpina B7",
+   "cars": 1,
+   "basis": "both 7-series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "745i",
+   "decoded": "760Li",
+   "cars": 1,
+   "basis": "both 7 Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "750Li xDrive",
+   "decoded": "750Lxi",
+   "cars": 1,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "750i",
+   "decoded": "750Lxi, Alpina B7",
+   "cars": 1,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "750i",
+   "decoded": "750xi",
+   "cars": 1,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "750i",
+   "decoded": "750xi, Alpina B7",
+   "cars": 1,
+   "basis": "both 7-series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "750iL",
+   "decoded": "740Li",
+   "cars": 1,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "ActiveHybrid 3",
+   "decoded": "335i",
+   "cars": 1,
+   "basis": "both 3-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "Alpina B7 xDrive",
+   "decoded": "750xi",
+   "cars": 1,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "BMW",
+   "listed": "Alpina B7L xDrive",
+   "decoded": "750Lxi",
+   "cars": 1,
+   "basis": "both 7-Series badges: one model line, engine/body trim differs"
+  },
+  {
+   "make": "Buick",
+   "listed": "Park Avenue",
+   "decoded": "Electra",
+   "cars": 1,
+   "basis": "the Park Avenue was the Electra Park Avenue"
+  },
+  {
+   "make": "Buick",
+   "listed": "Skylark",
+   "decoded": "Somerset",
+   "cars": 1,
+   "basis": "the Skylark coupe was the Somerset (N-body)"
+  },
+  {
+   "make": "Cadillac",
+   "listed": "DeVille",
+   "decoded": "Commercial Chassis",
+   "cars": 1,
+   "basis": "a coachbuilt car on Cadillac's commercial chassis (DeVille based)"
+  },
+  {
+   "make": "Cadillac",
+   "listed": "Escalaext",
+   "decoded": "Escalade",
+   "cars": 1,
+   "basis": "the Escalade EXT"
+  },
+  {
+   "make": "Cadillac",
+   "listed": "Fleetwood",
+   "decoded": "60 Special",
+   "cars": 1,
+   "basis": "the Sixty Special was the Fleetwood Sixty Special"
+  },
+  {
+   "make": "Cadillac",
+   "listed": "Krystal Koach",
+   "decoded": "Commercial Chassis",
+   "cars": 1,
+   "basis": "a coachbuilt car on Cadillac's commercial chassis"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "10 Pickup",
+   "decoded": "R Conventional",
+   "cars": 1,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (10 Pickup)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "30 Van",
+   "decoded": "G-Series",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (30 Van)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Blazer",
+   "decoded": "Military Truck",
+   "cars": 1,
+   "basis": "the military CUCV (M1009) is a K5 Blazer"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C10",
+   "decoded": "R Conventional",
+   "cars": 1,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (C10)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C30",
+   "decoded": "R Conventional",
+   "cars": 1,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (C30)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "C3500",
+   "decoded": "C/K Pickup",
+   "cars": 1,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (C3500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Express 1500",
+   "decoded": "G-Series",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Express 1500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "G20 Sportvan",
+   "decoded": "G-Series",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G20 Sportvan)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "G30",
+   "decoded": "Express",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G30)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "G3500",
+   "decoded": "Express",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G3500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "K1500",
+   "decoded": "C/K Pickup",
+   "cars": 1,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (K1500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "K20",
+   "decoded": "C/K Pickup",
+   "cars": 1,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (K20)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "K3500",
+   "decoded": "C/K Pickup",
+   "cars": 1,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (K3500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Optra5",
+   "decoded": "Optra",
+   "cars": 1,
+   "basis": "Optra5 is the hatchback of the Optra (same model line)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "P.U. 1500",
+   "decoded": "GMT-400",
+   "cars": 1,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (P.U. 1500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "P.U. 2500",
+   "decoded": "GMT-400",
+   "cars": 1,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (P.U. 2500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "P30",
+   "decoded": "P - Series",
+   "cars": 1,
+   "basis": "the P30 is the GM P-Series chassis"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "R10",
+   "decoded": "R Conventional",
+   "cars": 1,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (R10)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "R3500",
+   "decoded": "R Conventional",
+   "cars": 1,
+   "basis": "C/K Pickup / R Conventional is vPIC's name for the pre-1988 GM full-size pickup (R3500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Silverado 2500",
+   "decoded": "GMT-400",
+   "cars": 1,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (Silverado 2500)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Sportvan",
+   "decoded": "Express",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Sportvan)"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "TR",
+   "decoded": "C7",
+   "cars": 1,
+   "basis": "listing 'TR' is a generic body/category word, the decode names the vehicle"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Tr Utility",
+   "decoded": "W4",
+   "cars": 1,
+   "basis": "listing 'Tr Utility' is a generic body/category word, the decode names the vehicle"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Trail Blazer (129 W.B.)",
+   "decoded": "Trailblazer",
+   "cars": 1,
+   "basis": "the long-wheelbase TrailBlazer"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Van 30",
+   "decoded": "G-Series",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Van 30)"
+  },
+  {
+   "make": "Chrysler",
+   "listed": "Sebring",
+   "decoded": "200",
+   "cars": 1,
+   "basis": "the 2008 Sebring (JS) became the 200; same car"
+  },
+  {
+   "make": "Chrysler",
+   "listed": "Ux200",
+   "decoded": "200",
+   "cars": 1,
+   "basis": "Ux200 is the feed's code for the Chrysler 200"
+  },
+  {
+   "make": "Datsun",
+   "listed": "720",
+   "decoded": "Pickup",
+   "cars": 1,
+   "basis": "Nissan/Datsun compact pickup: 720 is the feed's name for the Pickup"
+  },
+  {
+   "make": "Dodge",
+   "listed": "250 Pickup",
+   "decoded": "D-Series",
+   "cars": 1,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (250 Pickup)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "250 Pickup",
+   "decoded": "W-Series",
+   "cars": 1,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (250 Pickup)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "B150",
+   "decoded": "Ram Van",
+   "cars": 1,
+   "basis": "Dodge B-van: B150 is the Ram Van/Wagon"
+  },
+  {
+   "make": "Dodge",
+   "listed": "B2500",
+   "decoded": "Ram Wagon",
+   "cars": 1,
+   "basis": "Dodge B-van: B2500 is the Ram Van/Wagon"
+  },
+  {
+   "make": "Dodge",
+   "listed": "B350",
+   "decoded": "Ram Van",
+   "cars": 1,
+   "basis": "Dodge B-van: B350 is the Ram Van/Wagon"
+  },
+  {
+   "make": "Dodge",
+   "listed": "D150",
+   "decoded": "Ram",
+   "cars": 1,
+   "basis": "the 1998 D150 listing is the Ram 1500 pickup"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Grand Caravan",
+   "decoded": "Cargo Van",
+   "cars": 1,
+   "basis": "the Ram C/V / Cargo Van is the cargo version of the Grand Caravan"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Grand Caravan",
+   "decoded": "Ram",
+   "cars": 1,
+   "basis": "the Ram C/V is the cargo version of the (Grand) Caravan"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Ram 100",
+   "decoded": "D-Series",
+   "cars": 1,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (Ram 100)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Ram 150",
+   "decoded": "W-Series",
+   "cars": 1,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (Ram 150)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Vista",
+   "decoded": "Colt",
+   "cars": 1,
+   "basis": "the Vista was the Colt Vista"
+  },
+  {
+   "make": "Dodge",
+   "listed": "W100",
+   "decoded": "W-Series",
+   "cars": 1,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (W100)"
+  },
+  {
+   "make": "Dodge",
+   "listed": "W150",
+   "decoded": "D-Series",
+   "cars": 1,
+   "basis": "D-Series / W-Series (4WD) is vPIC's name for the Dodge full-size pickup (W150)"
+  },
+  {
+   "make": "Ford",
+   "listed": "F150 Raptor",
+   "decoded": "F-150",
+   "cars": 1,
+   "basis": "the Raptor is the F-150 Raptor"
+  },
+  {
+   "make": "Ford",
+   "listed": "Van E150",
+   "decoded": "E-150",
+   "cars": 1,
+   "basis": "the E-150 van"
+  },
+  {
+   "make": "GMC",
+   "listed": "3500",
+   "decoded": "Sierra",
+   "cars": 1,
+   "basis": "GMC 3500 is the Sierra pickup"
+  },
+  {
+   "make": "GMC",
+   "listed": "C/K 3500",
+   "decoded": "Sierra",
+   "cars": 1,
+   "basis": "GMC C/K 3500 is the Sierra pickup"
+  },
+  {
+   "make": "GMC",
+   "listed": "Express Van",
+   "decoded": "Savana",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Express Van)"
+  },
+  {
+   "make": "GMC",
+   "listed": "Express25",
+   "decoded": "Savana",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Express25)"
+  },
+  {
+   "make": "GMC",
+   "listed": "G1500",
+   "decoded": "Rally",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (G1500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "Savana",
+   "decoded": "Rally",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Savana)"
+  },
+  {
+   "make": "GMC",
+   "listed": "Sierra 3500",
+   "decoded": "GMT-400",
+   "cars": 1,
+   "basis": "GMT-400 is vPIC's platform name for the 1988-2000 GM full-size pickup (Sierra 3500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "Silverado 1500 Pickup",
+   "decoded": "Sierra",
+   "cars": 1,
+   "basis": "GMC Silverado 1500 Pickup is the Sierra pickup"
+  },
+  {
+   "make": "GMC",
+   "listed": "Tahoe",
+   "decoded": "Yukon",
+   "cars": 1,
+   "basis": "the Yukon is GMC's Tahoe"
+  },
+  {
+   "make": "GMC",
+   "listed": "Van 1500",
+   "decoded": "Vandura",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Van 1500)"
+  },
+  {
+   "make": "GMC",
+   "listed": "Vandura",
+   "decoded": "Savana",
+   "cars": 1,
+   "basis": "G-Series / Express / Savana / Rally / Vandura are vPIC's names for the GM full-size van (Vandura)"
+  },
+  {
+   "make": "GMC",
+   "listed": "W4500 Forward",
+   "decoded": "W4",
+   "cars": 1,
+   "basis": "the W4500 Forward is the W4"
+  },
+  {
+   "make": "Honda",
+   "listed": "CRX",
+   "decoded": "Civic Si",
+   "cars": 1,
+   "basis": "the CRX was the Civic CRX"
+  },
+  {
+   "make": "Honda",
+   "listed": "Motorcycle",
+   "decoded": "VT1100 (Shadow Ace)",
+   "cars": 1,
+   "basis": "listing 'Motorcycle' is a generic body/category word, the decode names the vehicle"
+  },
+  {
+   "make": "Hyundai",
+   "listed": "Scoupe",
+   "decoded": "Excel",
+   "cars": 1,
+   "basis": "the Scoupe was Hyundai's Excel-based coupe; vPIC files it under Excel"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "EX37",
+   "decoded": "EX35",
+   "cars": 1,
+   "basis": "Infiniti EX37 and EX35: one model, engine/drive badge"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "M Hybrid",
+   "decoded": "M35h",
+   "cars": 1,
+   "basis": "Infiniti M Hybrid and M35h: one model, engine/drive badge"
+  },
+  {
+   "make": "International",
+   "listed": "TR",
+   "decoded": "9100i",
+   "cars": 1,
+   "basis": "listing 'TR' is a generic body/category word, the decode names the vehicle"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "XJ",
+   "decoded": "XJR",
+   "cars": 1,
+   "basis": "Jaguar XJ family: XJ and XJR are badges of the XJ"
+  },
+  {
+   "make": "Jaguar",
+   "listed": "XK8",
+   "decoded": "XK",
+   "cars": 1,
+   "basis": "Jaguar XJ family: XK8 and XK are badges of the XJ"
+  },
+  {
+   "make": "Jeep",
+   "listed": "CJ Series",
+   "decoded": "CJ5",
+   "cars": 1,
+   "basis": "the CJ5 is a CJ"
+  },
+  {
+   "make": "Jeep",
+   "listed": "Cherokee",
+   "decoded": "Wagoneer",
+   "cars": 1,
+   "basis": "the 1984-90 Wagoneer was the XJ Cherokee body"
+  },
+  {
+   "make": "Land Rover",
+   "listed": "Disco Spt",
+   "decoded": "Discovery Sport",
+   "cars": 1,
+   "basis": "Disco Spt is the Discovery Sport"
+  },
+  {
+   "make": "Maserati",
+   "listed": "425",
+   "decoded": "430",
+   "cars": 1,
+   "basis": "Maserati Biturbo family: 425 and 430 are its sedans"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300CE",
+   "decoded": "300",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300CE under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300D",
+   "decoded": "240",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300D under the 240"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "300Sdl",
+   "decoded": "300",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 300Sdl under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "400SE",
+   "decoded": "400",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 400SE under the 400"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "560SEC",
+   "decoded": "560",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 560SEC under the 560"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "560SEL",
+   "decoded": "560",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the 560SEL under the 560"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C32 AMG",
+   "decoded": "C-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C32 AMG under the C-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "C43 AMG",
+   "decoded": "C-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the C43 AMG under the C-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "E-Class",
+   "decoded": "300",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the E-Class under the 300"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "E420",
+   "decoded": "E-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the E420 under the E-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "GLA250",
+   "decoded": "GLA-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the GLA250 under the GLA-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "GLC300",
+   "decoded": "GLC-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the GLC300 under the GLC-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "ML",
+   "decoded": "M-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the ML under the M-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "ML63 AMG",
+   "decoded": "M-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the ML63 AMG under the M-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "R350 Bluetec",
+   "decoded": "R-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the R350 Bluetec under the R-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S350",
+   "decoded": "S-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S350 under the S-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S400",
+   "decoded": "S-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S400 under the S-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S55 AMG",
+   "decoded": "S-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S55 AMG under the S-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "S63 AMG",
+   "decoded": "S-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the S63 AMG under the S-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "SL550",
+   "decoded": "SL-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the SL550 under the SL-Class"
+  },
+  {
+   "make": "Mercedes-Benz",
+   "listed": "SLK300",
+   "decoded": "SLK-Class",
+   "cars": 1,
+   "basis": "Mercedes-Benz names the car by its badge; vPIC files the SLK300 under the SLK-Class"
+  },
+  {
+   "make": "Merkur",
+   "listed": "XR4",
+   "decoded": "XR4Ti",
+   "cars": 1,
+   "basis": "the XR4Ti is the Merkur XR4"
+  },
+  {
+   "make": "Nissan",
+   "listed": "Z",
+   "decoded": "370Z",
+   "cars": 1,
+   "basis": "the 370Z is the Nissan Z"
+  },
+  {
+   "make": "Oldsmobile",
+   "listed": "Delta 88",
+   "decoded": "Eighty-Eight",
+   "cars": 1,
+   "basis": "Oldsmobile Eighty-Eight family: Delta 88 is a trim/version of it"
+  },
+  {
+   "make": "Oldsmobile",
+   "listed": "Eighty-Eight",
+   "decoded": "Regency",
+   "cars": 1,
+   "basis": "Oldsmobile Eighty-Eight family: Eighty-Eight is a trim/version of it"
+  },
+  {
+   "make": "Pontiac",
+   "listed": "G3",
+   "decoded": "Wave",
+   "cars": 1,
+   "basis": "the G3 is the Canadian/US twin of the Wave (same car)"
+  },
+  {
+   "make": "Ram",
+   "listed": "3500",
+   "decoded": "Ram",
+   "cars": 1,
+   "basis": "Ram 3500 is vPIC's Ram pickup/van (Ram)"
+  },
+  {
+   "make": "Ram",
+   "listed": "Caravan",
+   "decoded": "Cargo Van",
+   "cars": 1,
+   "basis": "the Ram C/V / Cargo Van is the cargo version of the Grand Caravan"
+  },
+  {
+   "make": "Saturn",
+   "listed": "L300",
+   "decoded": "LS1",
+   "cars": 1,
+   "basis": "Saturn S-/L-Series: L300 and LS1 are trims of one line"
+  },
+  {
+   "make": "Saturn",
+   "listed": "LW",
+   "decoded": "LW1",
+   "cars": 1,
+   "basis": "Saturn S-/L-Series: LW and LW1 are trims of one line"
+  },
+  {
+   "make": "Saturn",
+   "listed": "LW",
+   "decoded": "LW2",
+   "cars": 1,
+   "basis": "Saturn S-/L-Series: LW and LW2 are trims of one line"
+  },
+  {
+   "make": "Saturn",
+   "listed": "LW300",
+   "decoded": "LW2",
+   "cars": 1,
+   "basis": "Saturn S-/L-Series: LW300 and LW2 are trims of one line"
+  },
+  {
+   "make": "Saturn",
+   "listed": "SC",
+   "decoded": "SL2",
+   "cars": 1,
+   "basis": "Saturn S-/L-Series: SC and SL2 are trims of one line"
+  },
+  {
+   "make": "Saturn",
+   "listed": "Sl Wagon",
+   "decoded": "SW2",
+   "cars": 1,
+   "basis": "Saturn S-/L-Series: Sl Wagon and SW2 are trims of one line"
+  },
+  {
+   "make": "Sprinter (Dodge Or Freightliner)",
+   "listed": "Sprintv25",
+   "decoded": "Sprinter",
+   "cars": 1,
+   "basis": "Sprintv25 is the Sprinter 2500"
+  },
+  {
+   "make": "Subaru",
+   "listed": "L Line",
+   "decoded": "GL",
+   "cars": 1,
+   "basis": "the L-series GL"
+  },
+  {
+   "make": "Suzuki",
+   "listed": "XL-7",
+   "decoded": "Vitara",
+   "cars": 1,
+   "basis": "the XL-7 is the Grand Vitara XL-7 (Vitara line)"
+  },
+  {
+   "make": "Volkswagen",
+   "listed": "Golf",
+   "decoded": "CABRIOLET",
+   "cars": 1,
+   "basis": "the VW Cabriolet is the Rabbit/Golf convertible"
+  },
+  {
+   "make": "Volkswagen",
+   "listed": "Pickup",
+   "decoded": "Rabbit",
+   "cars": 1,
+   "basis": "the Rabbit Pickup is the Rabbit"
+  },
+  {
+   "make": "Volvo",
+   "listed": "40",
+   "decoded": "S40",
+   "cars": 1,
+   "basis": "Volvo 40 is the S40 (feed drops the letter / variant name)"
+  },
+  {
+   "make": "Volvo",
+   "listed": "70",
+   "decoded": "V70",
+   "cars": 1,
+   "basis": "the XC70 is the V70 Cross Country (V70 XC); same car"
+  },
+  {
+   "make": "Volvo",
+   "listed": "S60",
+   "decoded": "S60CC",
+   "cars": 1,
+   "basis": "the Cross Country is a variant of the S60"
+  },
+  {
+   "make": "Volvo",
+   "listed": "S90",
+   "decoded": "960",
+   "cars": 1,
+   "basis": "the 1997 S90 is the renamed 960"
+  }
+ ],
+ "different": [
+  {
+   "make": "Subaru",
+   "listed": "Outback",
+   "decoded": "Impreza",
+   "cars": 30,
+   "basis": "the VIN is an Impreza (GG body, trim 'Outback' = Impreza Outback Sport), not the Legacy-based Outback the listing names; their parts differ"
+  },
+  {
+   "make": "Fiat",
+   "listed": "500",
+   "decoded": "500L",
+   "cars": 12,
+   "basis": "different vehicle: the 500L is a separate, larger Fiat (4-door MPV), not the 500"
+  },
+  {
+   "make": "Fiat",
+   "listed": "500",
+   "decoded": "500X",
+   "cars": 10,
+   "basis": "different vehicle: the 500X is a separate Fiat crossover, not the 500"
+  },
+  {
+   "make": "Subaru",
+   "listed": "Forester",
+   "decoded": "Outback",
+   "cars": 5,
+   "basis": "different vehicle: the VIN is a Legacy Outback / Outback, not a Forester"
+  },
+  {
+   "make": "Subaru",
+   "listed": "Forester",
+   "decoded": "Legacy",
+   "cars": 4,
+   "basis": "different vehicle: the VIN is a Legacy Outback / Outback, not a Forester"
+  },
+  {
+   "make": "Ram",
+   "listed": "2500",
+   "decoded": "ProMaster City",
+   "cars": 3,
+   "basis": "different vehicle: the ProMaster City is a small van, not a Ram 2500 pickup"
+  },
+  {
+   "make": "Volvo",
+   "listed": "S40",
+   "decoded": "S60",
+   "cars": 3,
+   "basis": "different vehicle: the S40 ended in 2011; a 2013 car is the S60 the VIN names"
+  },
+  {
+   "make": "BMW",
+   "listed": "X3",
+   "decoded": "325i",
+   "cars": 2,
+   "basis": "different vehicle: the VIN is a 3 Series, not an X3"
+  },
+  {
+   "make": "BMW",
+   "listed": "X5",
+   "decoded": "528i",
+   "cars": 2,
+   "basis": "different vehicle: the VIN is a 5 Series sedan, not an X5"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Blazer",
+   "decoded": "Trailblazer",
+   "cars": 2,
+   "basis": "different vehicle: the VIN is a TrailBlazer (GMT360), not the S-10 Blazer still sold in 2004-05"
+  },
+  {
+   "make": "GMC",
+   "listed": "C3500",
+   "decoded": "W4",
+   "cars": 2,
+   "basis": "different vehicle: the VIN is a W4 medium-duty truck, not a C3500 pickup"
+  },
+  {
+   "make": "Lexus",
+   "listed": "GS 300",
+   "decoded": "RX",
+   "cars": 2,
+   "basis": "different vehicle: the VIN is an RX (chassis MCU), not a GS sedan"
+  },
+  {
+   "make": "Audi",
+   "listed": "A6",
+   "decoded": "A5",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an A5 convertible, not an A6"
+  },
+  {
+   "make": "BMW",
+   "listed": "528i",
+   "decoded": "328i",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a 3 Series, not a 5 Series (528i)"
+  },
+  {
+   "make": "BMW",
+   "listed": "X3",
+   "decoded": "328i",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a 3 Series, not an X3"
+  },
+  {
+   "make": "BMW",
+   "listed": "X5",
+   "decoded": "530i",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a 5 Series sedan, not an X5"
+  },
+  {
+   "make": "Buick",
+   "listed": "LeSabre",
+   "decoded": "Lucerne",
+   "cars": 1,
+   "basis": "different vehicle: the LeSabre ended in 2005; a 2008 car is the Lucerne the VIN names"
+  },
+  {
+   "make": "Buick",
+   "listed": "Lucerne",
+   "decoded": "LaCrosse",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a LaCrosse, not a Lucerne"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "10 Van",
+   "decoded": "P - Series",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a P-Series step van, not a G10 van"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Astro",
+   "decoded": "G-Series",
+   "cars": 1,
+   "basis": "different vehicle: the Astro is a compact van, the VIN a full-size G-Series van"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Express 2500",
+   "decoded": "Silverado",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Silverado 2500 chassis, not an Express van"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Silverado 1500",
+   "decoded": "Suburban",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Suburban (1GN, SUV body), not a Silverado pickup"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Sonic",
+   "decoded": "Cavalier",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Cavalier, not a Sonic"
+  },
+  {
+   "make": "Dodge",
+   "listed": "150 Pickup",
+   "decoded": "Ram Van",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Ram Van (B250), not a pickup"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Caliber",
+   "decoded": "Grand Caravan",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Grand Caravan, not a Caliber"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Caravan",
+   "decoded": "Dakota",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Dakota pickup, not a Caravan"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Journey",
+   "decoded": "Grand Caravan",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Grand Caravan, not a Journey"
+  },
+  {
+   "make": "Dodge",
+   "listed": "Rampage",
+   "decoded": "D50",
+   "cars": 1,
+   "basis": "different vehicle: the Rampage is an Omni-based car-pickup; the VIN is a D50"
+  },
+  {
+   "make": "Fiat",
+   "listed": "500L",
+   "decoded": "500",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a 500 (convertible), not the 500L"
+  },
+  {
+   "make": "Ford",
+   "listed": "Expedition",
+   "decoded": "Explorer",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an Explorer, not an Expedition"
+  },
+  {
+   "make": "Ford",
+   "listed": "F-150",
+   "decoded": "Ranger",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Ranger, not an F-150"
+  },
+  {
+   "make": "Ford",
+   "listed": "F-350 Super Duty",
+   "decoded": "E-450",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an E-450 cutaway, not an F-350 Super Duty"
+  },
+  {
+   "make": "Ford",
+   "listed": "F-450 Super Duty",
+   "decoded": "E-350",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an E-350 cutaway, not an F-450 Super Duty"
+  },
+  {
+   "make": "Ford",
+   "listed": "Ranger",
+   "decoded": "Bronco II",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Bronco II, not a Ranger"
+  },
+  {
+   "make": "Hyundai",
+   "listed": "Elantra",
+   "decoded": "Sonata",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Sonata, not an Elantra"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "G20",
+   "decoded": "M35",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an M35, not a G20"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "QX80",
+   "decoded": "QX60",
+   "cars": 1,
+   "basis": "different vehicle: the QX60 (Pathfinder based) is not the QX80 (Armada based)"
+  },
+  {
+   "make": "Isuzu",
+   "listed": "Ascender",
+   "decoded": "NQR",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an NQR medium-duty truck, not an Ascender"
+  },
+  {
+   "make": "Jeep",
+   "listed": "Patriot",
+   "decoded": "Grand Cherokee",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Grand Cherokee, not a Patriot"
+  },
+  {
+   "make": "Lexus",
+   "listed": "ES 250",
+   "decoded": "IS",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an IS (chassis USE20), not an ES"
+  },
+  {
+   "make": "Lexus",
+   "listed": "GS 350",
+   "decoded": "IS",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an IS (chassis GSE20), not a GS"
+  },
+  {
+   "make": "Lexus",
+   "listed": "GS 430",
+   "decoded": "LS",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an LS 430 (chassis UCF30), not a GS"
+  },
+  {
+   "make": "Lexus",
+   "listed": "IS 350",
+   "decoded": "ES",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an ES (chassis GSV40/AVV60), not an IS"
+  },
+  {
+   "make": "Lincoln",
+   "listed": "MKZ",
+   "decoded": "MKC",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an MKC, not an MKZ"
+  },
+  {
+   "make": "MINI",
+   "listed": "Clubman",
+   "decoded": "Hardtop",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a MINI Hardtop, not a Clubman"
+  },
+  {
+   "make": "Mazda",
+   "listed": "MX-3",
+   "decoded": "Mazda2",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Mazda2, not an MX-3"
+  },
+  {
+   "make": "Mazda",
+   "listed": "Mazda3",
+   "decoded": "CX-3",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a CX-3, not a Mazda3"
+  },
+  {
+   "make": "Mazda",
+   "listed": "Mazda3",
+   "decoded": "Mazda6",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Mazda6, not a Mazda3"
+  },
+  {
+   "make": "Mitsubishi",
+   "listed": "Outlander",
+   "decoded": "RVR",
+   "cars": 1,
+   "basis": "different vehicle: the RVR is the Outlander Sport, not the Outlander"
+  },
+  {
+   "make": "Nissan",
+   "listed": "210",
+   "decoded": "Pickup",
+   "cars": 1,
+   "basis": "different vehicle: the 210 is a Datsun car; the VIN is a pickup"
+  },
+  {
+   "make": "Nissan",
+   "listed": "Pathfinder",
+   "decoded": "Quest",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Quest minivan, not a Pathfinder"
+  },
+  {
+   "make": "Saturn",
+   "listed": "L-Series",
+   "decoded": "Malibu",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is a Malibu, not a Saturn L-Series"
+  },
+  {
+   "make": "Subaru",
+   "listed": "Impreza",
+   "decoded": "Outback",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an Outback, not an Impreza"
+  },
+  {
+   "make": "Suzuki",
+   "listed": "SX4",
+   "decoded": "XL-7",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an XL-7, not an SX4"
+  },
+  {
+   "make": "Volkswagen",
+   "listed": "Beetle",
+   "decoded": "Cabrio",
+   "cars": 1,
+   "basis": "different vehicle: the 1999 Cabrio is the Golf-based convertible, not a Beetle"
+  },
+  {
+   "make": "Volvo",
+   "listed": "XC90",
+   "decoded": "XC70",
+   "cars": 1,
+   "basis": "different vehicle: the VIN is an XC70 wagon, not an XC90"
+  }
+ ],
+ "unsure": [
+  {
+   "make": "Subaru",
+   "listed": "Legacy",
+   "decoded": "Outback",
+   "cars": 96,
+   "basis": "Outback is the Legacy-based wagon sold as its own line since 2005; whether a 'Legacy' listing should match Outback parts is not settled by the names"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Blazer S10/Jimmy S15",
+   "decoded": "S-10",
+   "cars": 11,
+   "basis": "the feed's 'Blazer S10/Jimmy S15' is a family label; the VIN is an S-10 pickup, which shares the front end with the S-10 Blazer; cannot tell what the yard meant"
+  },
+  {
+   "make": "Cadillac",
+   "listed": "DTS",
+   "decoded": "CT4",
+   "cars": 1,
+   "basis": "a 2006 car decoded as a CT4 (made from 2020): the decode is inconsistent"
+  },
+  {
+   "make": "Cadillac",
+   "listed": "DeVille",
+   "decoded": "ATS",
+   "cars": 1,
+   "basis": "a 1983 car decoded as an ATS (made from 2013): the decode is inconsistent"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Trailblazer",
+   "decoded": "Blazer",
+   "cars": 1,
+   "basis": "the TrailBlazer was a Blazer trim through 2001 and its own line from 2002; a 2002 'Blazer' decode with a TrailBlazer listing cannot be settled from the names"
+  },
+  {
+   "make": "Chrysler",
+   "listed": "Concorde",
+   "decoded": "Sebring",
+   "cars": 1,
+   "basis": "a 1994 car decoded as a Sebring with series JR (a 2001+ code): the decode is inconsistent"
+  },
+  {
+   "make": "Datsun",
+   "listed": "200SX",
+   "decoded": "280ZX",
+   "cars": 1,
+   "basis": "a 1977 car decoded as a 280ZX (made from 1979): the decode is inconsistent"
+  },
+  {
+   "make": "Datsun",
+   "listed": "Sakura",
+   "decoded": "280ZX",
+   "cars": 1,
+   "basis": "'Sakura' is not a model name we can place; the listing names no vehicle"
+  },
+  {
+   "make": "Ford",
+   "listed": "Crown Victoria",
+   "decoded": "Thunderbird",
+   "cars": 1,
+   "basis": "a 1982 'Crown Victoria' (named from 1983) decoded as a Thunderbird: not settled"
+  },
+  {
+   "make": "Freightliner",
+   "listed": "Sprinter 2500",
+   "decoded": "Med. Conv",
+   "cars": 1,
+   "basis": "a Sprinter listing decoded as a 1996 truck-tractor: the VIN or decode is unusable"
+  },
+  {
+   "make": "Isuzu",
+   "listed": "Amigo",
+   "decoded": "Rodeo",
+   "cars": 1,
+   "basis": "the Amigo and the Rodeo share a platform and vPIC may file the Amigo under Rodeo; not settled"
+  },
+  {
+   "make": "MINI",
+   "listed": "1",
+   "decoded": "Cooper",
+   "cars": 1,
+   "basis": "the listing '1' names no model"
+  },
+  {
+   "make": "Mercury",
+   "listed": "LTD",
+   "decoded": "Grand Marquis",
+   "cars": 1,
+   "basis": "a 2001 'LTD' (ended 1986) decoded as a Grand Marquis: the listing is a yard quirk; not settled"
+  },
+  {
+   "make": "Mitsubishi",
+   "listed": "Pickup",
+   "decoded": "FE85D",
+   "cars": 1,
+   "basis": "decode year 1901 and a Fuso chassis code: the decode is unusable"
+  },
+  {
+   "make": "Pontiac",
+   "listed": "Sunfire",
+   "decoded": "Sunbird",
+   "cars": 1,
+   "basis": "the Sunfire replaced the Sunbird on the J-body in 1995; a 1995 car decoded as Sunbird is not settled"
+  }
+ ],
+ "decode_wrong": [
+  {
+   "make": "Chevrolet",
+   "listed": "Silverado 1500",
+   "decoded": "S-10",
+   "cars": 30,
+   "basis": "VIN series code C14/C24/K24 is the full-size C/K (Silverado) and the decode's own series (1500/2500) and engines (6.0L V8, 6.6L diesel) are Silverado; S-10 never had them. vPIC's 2001 model name is wrong; the listing is right"
+  },
+  {
+   "make": "Hyundai",
+   "listed": "Genesis",
+   "decoded": "Equus",
+   "cars": 10,
+   "basis": "VIN KMHGC4DD is the Genesis sedan and the decode's own trim (GLS 3.8) and engine (3.8L V6) are Genesis; the Equus had only a V8. vPIC's model name is wrong"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "FX35",
+   "decoded": "FX50",
+   "cars": 10,
+   "basis": "VIN JN8AS1M is the FX35 (the FX50 is JN8BS1M) and the decode's own engine is 3.5L: vPIC's FX50 model name is wrong; FX35 and FX50 share the S51 body"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Silverado 2500",
+   "decoded": "S-10",
+   "cars": 5,
+   "basis": "VIN series code C14/C24/K24 is the full-size C/K (Silverado) and the decode's own series (1500/2500) and engines (6.0L V8, 6.6L diesel) are Silverado; S-10 never had them. vPIC's 2001 model name is wrong; the listing is right"
+  },
+  {
+   "make": "Infiniti",
+   "listed": "FX",
+   "decoded": "FX50",
+   "cars": 2,
+   "basis": "VIN JN8AS1M is the FX35 (the FX50 is JN8BS1M) and the decode's own engine is 3.5L: vPIC's FX50 model name is wrong; FX35 and FX50 share the S51 body"
+  },
+  {
+   "make": "Chevrolet",
+   "listed": "Silverado 2500HD",
+   "decoded": "S-10",
+   "cars": 1,
+   "basis": "VIN series code C14/C24/K24 is the full-size C/K (Silverado) and the decode's own series (1500/2500) and engines (6.0L V8, 6.6L diesel) are Silverado; S-10 never had them. vPIC's 2001 model name is wrong; the listing is right"
+  }
+ ]
+}
