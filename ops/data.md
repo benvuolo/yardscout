@@ -992,3 +992,21 @@ year flag, so cars with any VIN flag go 265 -> 381.
   flagged.
 - Legacy / Outback (96 cars) is the one large unsure pair; an owner call on
   whether an Outback is "another vehicle" for parts would settle it.
+
+## 2026-11-19 ~15:20 UTC (hub) first scan with the model flag and arrivals rules 2: confirmed
+
+Scan 44535632042 (commit b22c3640):
+- `[vin model] 118 car(s) flagged`; not flagged: same name 5,751, unsure
+  122, decode wrong 57; 1 unclassified car in 1 pair, Chevrolet "10 Van" /
+  "G-Series" (to sort into `scraper/vin_model_names.json` with a basis;
+  not flagged until then).
+- `[arrivals]` rebuilt under rules 2 (`index.json` `rules: 2`): 196,272
+  arrivals, 307 yards (4 stale); 610 arrivals left out under the bulk-week
+  rule; covered weeks now Pick Ur Part 1, M&M Buffalo 1, Youngstown 2, RTP
+  Maiden 2, Budget Bartow 3.
+- Live load 15:15 UTC: forecasts draw on Parts, Cars and Alerts with the
+  new files; no page errors.
+- Still open here: re-match the flagged cars' parts on the VIN's model
+  (owner's decision; 113 lists would change); Subaru Legacy / Outback (96
+  cars, `unsure`); the scheduler gap (no cron scan since 05:13 UTC; a
+  backup trigger is recommended, not built).

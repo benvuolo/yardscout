@@ -2898,3 +2898,31 @@ Can I have a png of the logo I can use as my google profile pic?"
 - Profile picture for the owner: `ops/brand/yardscout-profile-dark-1024.png`
   and `-light-1024.png` (1024 px square, the mark at 64% width so a round
   crop keeps all of it; from `docs/brand/yardscout-mark-on-*.svg`).
+
+## 2026-11-19 ~15:20 UTC scan 44535632042 verified (model flag, arrivals rules 2); ninth nissan check started
+
+- **Scan 44535632042** (dispatched by hand 13:39 UTC on a0a467eb, finished
+  15:03, commit b22c3640). Log warnings are Node deprecation notices only.
+  - `[vin model] 118 car(s) flagged` (the table expected 121; the lot
+    moved), 1 unclassified car in 1 pair (Chevrolet "10 Van" / "G-Series").
+  - `[arrivals]` rebuilt under rules 2: 196,272 arrivals; `index.json`
+    carries `rules: 2`; 610 arrivals left out under the bulk-week rule;
+    covered weeks went down for Pick Ur Part (1), M&M Buffalo (1),
+    Youngstown (2), RTP Maiden (2), Budget Bartow (3). 307 yards, 4 stale.
+- **One live load 15:15 UTC** (2004 4Runner alternator near 95112): the
+  card reads "42 donor cars at 12 yards within 100 mi"; the forecast draws
+  in Parts, on the Cars strip and under the watch on Alerts; no page
+  errors. A second load for the offline cache: `jh-v218` (15 entries),
+  `jh-data-v1` (42), no failed requests.
+- Apple at 15:10 UTC (asc-status 44552469720): 1.13.1 build 42 still
+  WAITING_FOR_REVIEW (24 h in the queue). Next check 21:15 UTC.
+- **Ninth independent nissan check started 15:17 UTC**: fresh agent,
+  blind, seed 60231119, candidate at b22c3640, lot replay on b22c3640 (the
+  first lot with the model flag), branch `interchange/verify-nissan-1119i`,
+  report `nissan_verify_2026-11-19i.json`. New in the brief: item (h),
+  every lot donor whose VIN decode names a different model than its
+  listing. Used seeds: 46021118, 61181118, 73901118, 38271119, 52941119,
+  27641119, 91371119, 15841119, 60231119.
+- GitHub's scheduler: no `scan.yml` cron run since 05:13 UTC. The next
+  slot is 16:00 UTC; if it does not start by about 17:40 (4 h after the
+  last scan began) the hub dispatches the regular scan by hand again.
