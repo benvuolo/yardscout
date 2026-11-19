@@ -2097,3 +2097,11 @@ payload shape unchanged.
   see each car"); YL3Z-10849-DA removed on a strict "KPH/MPH" reading;
   JK61C/JK61D left the nissan candidate with no refusal recorded.
 - 02:45 UTC confirmed live: sw jh-v213; page loads with no page errors (Xterra strip and a San Jose Cars list).
+- Layout check fix (test only): the cards-mixed screen failed on main with
+  the 11-19 data (first 40 cards near San Jose were new iPull-uPull Sacramento
+  cars, photos not up yet). It now narrows the list to one yard when the first
+  page has no photo card. Full layout check 1,332 + 1,332 checks PASS,
+  cars_feed_e2e PASS.
+- Owner-facing observation, not changed: near San Jose the newest-first list
+  opens with 82-mi-away Sacramento arrivals without photos. A possible tweak:
+  within the same day, nearer yards first (photo-first stays within a day).
