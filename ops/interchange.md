@@ -5778,6 +5778,9 @@ The app would need to show the line on the donor row; that is an app change.
 - curation_tests: 28/28 files pass (Phase 2 parity SKIP unchanged).
 - pf_guards_unit: ALL PASS.
 - test_interchange and test_am_gates: pass.
+- `tools/regress.sh --quick` (on 6dbbd6e9 code; it queued behind another
+  session's lock): **74 passed, 0 failed, 0 skipped**.
+- No full regression: `docs/app.js` is unchanged.
 
 ### Stricter or looser than the brief
 
