@@ -2343,3 +2343,42 @@ ben@yardscout.io can be used.
   refuses 88 nissan groups; naming models that share a label once would
   keep many. Windows no other number carries stay plain by design (ford 5,
   toyota 4, nissan 49 app-years).
+
+## 2026-11-19 ~08:00 UTC owner: list order "Yes"; Ario left as it is; trial on hold; ben@ rule added
+
+Owner, answering the 07:35 summary by number: 1 list order "Yes"; 2 the new
+Apple vendor number "I'll do this tmrw" (task #76 waits); 3 Ario "I'll email
+when we stop reading them into the app" (hub's reading, told to the owner:
+leave the Ario reader as it is and send nothing now; the owner emails Ario
+if the feed ever stops; rule 2 still applies then, no workaround); 4 free
+trial on hold "Ok" (look again about 11-26). No "swap": iOS 1.13.2 build 43
+still waits for 1.13.1's approval. Also: "I added the cloud flare rule, am
+I good to put it in my sig" (ben@yardscout.io).
+
+- **List order (task #74), branch `hub/list-two-day-1119` (d3540acc, sw
+  `jh-v216`).** Newest arrivals: the newest day in the list (never a day
+  after today) and the day before it sort as ONE group: nearest yard, then
+  the newer day, then the car whose photo shows. Older days unchanged
+  (day, photo, nearest). Held cars last, as before.
+  - Why "the newest day in the list" and not the calendar's today: before
+    a yard publishes today's cars the calendar reading would put one far
+    yard's yesterday cars over a near yard's cars of the day before, which
+    is the complaint again.
+  - The 2026-11-16 rule ("new arrivals should not be buried by a day
+    because they don't have a picture") is why photos cannot come first
+    across the two days: inside the group distance decides between yards,
+    and a photo only orders cars of the same yard and day. So in the top
+    group a nearer car without a photo now sits above a farther car with
+    one. Told to the owner.
+  - The "set out before your last visit" divider assumed the new cars
+    lead; it is now drawn only where they all do (the count line and "Show
+    just those" are unchanged).
+  - `cars_feed_e2e` section 1b rewritten: 142 passed, 0 failed (group of
+    478 cars over 2 days in the test view; both divider cases exercised).
+    Full regression running; then main, live check.
+  - Apps: web only until the next store build. Android 1.13.2 (42) and iOS
+    build 43 do not have it. A 1.13.3 needs the owner's "ship".
+- **ben@yardscout.io:** no mail has arrived for it yet (searched 08:00
+  UTC). The hub does not send mail, so the test is the owner's: one message
+  from a different account (Gmail hides a message an account sends to its
+  own forwarding address).
