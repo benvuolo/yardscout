@@ -2123,3 +2123,24 @@ groups); lot cars whose VIN decodes as another vehicle shown plain.
   mismatch car is never a plain OEM donor ("if equipped").
 - Round 4 builder on `interchange/round4-1119` (sw jh-v214): live makes
   first, then nissan; another independent check follows.
+
+## 2026-11-19 ~03:50 UTC owner check-in: list order, Glenn, status
+
+- Glenn replied 11-18 22:35 (ops/yards.md, "Glenn ... replied"). Reply
+  drafted in Gmail (thread 1a1b2b1b2f24f262), owner sends.
+- Correction to the hub's 11-18 note: the Pull-N-Save email was SENT by the
+  owner on 2026-11-02 (info@pullnsave.com, no reply); it is not a waiting
+  draft. Pull-N-Save read fully in the 22:09 and 22:47 scans (11,310 cars);
+  the check page was seen in 2 scans on 11-18 only.
+- LKQ after the retry fix: 71,998 and 72,140 cars, 0 failed pages, 0
+  STALE-KEEP in the 22:09 and 22:47 scans. No WARNING lines in either scan.
+- Apple 1.13.1 build 42: still WAITING_FOR_REVIEW at 03:37.
+- Cars list order: owner said yes to "nearer yards first within the same
+  day". Hub then found the list ALREADY does that (day, then list photo,
+  then nearest; sort code in docs/app.js, 'date-desc'). The San Jose case
+  (48 Sacramento cars, 82 mi, first) is a different thing: they were the
+  only cars within 100 mi dated 11-18; Pick-n-Pull's newest set-out date at
+  that scan was 11-17 (52 cars 1 mi away, all with photos). Changing it
+  means relaxing the owner's 11-16 rule "strictly by set-out day", so the
+  hub asked instead of changing it: option = treat today and yesterday as
+  one group, nearest yard first, older days as now.

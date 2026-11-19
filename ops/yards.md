@@ -1102,3 +1102,17 @@ the home pages of hansers.com, wfselfservice.com (and /yard-vehicles),
 samsriverside.com and ario.autorecycler.io. One slip: brandywineparts.com's
 home page was fetched once before its robots.txt (which names AI agents, as
 Davie's does) had been read; nothing more was requested there.
+
+### 2026-11-18 22:35 UTC — Glenn (U-Pull-R / aaa auto parts) replied
+
+To the owner's correction email of 11-18. No objection to it. Not discussed
+with their exec team yet (he was at a conference); he has told two in-house
+developers "we should do something"; it may be a while. He mentioned
+YardScout to other yards there, "wrench a part, Nevada pick and pull, and
+Pull N Save", who "seemed open to an API or something as well", and offered
+to "talk through things with them and help". We list all three today from
+their public pages (Wrench-A-Part 7 yards, Pull-N-Save 8, Nevada Pic-A-Part
+2 if that is who he meant). Reply drafted in Gmail for the owner to send
+(no web addresses in it): no rush, thanks, we would take the same feed
+format from the others, an intro would be welcome, our reader stays off.
+The U-Pull-R reader stays switched off (`UPULLR_READER_ENABLED = False`).
