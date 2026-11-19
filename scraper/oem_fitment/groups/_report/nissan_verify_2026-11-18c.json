@@ -2634,6 +2634,23 @@
   "census.py (scratch, not committed; sha256 above)"
  ],
  "recommendation": "Do not ship: the sample found 9 WRONG groups (7 if the two regular-cab items are treated as option limits) and 2 WRONG pairs, and the census still finds both earlier classes' kind of failure (2 ungated RWD-only speedometer groups showing M37x AWD cars plain) plus a systemic ungated-engine class (20 groups, 286 plain lot cars).",
+ "agreement_disagreement": {
+  "read_after": "verdicts committed at 64b60076; then read ops/interchange.md sections 'Rules after the independent check' and 'Per-app gates on OEM groups', groups/_report/nissan_selfcheck_2026-11-18.json and groups/_report/nissan_verify_2026-11-18.json",
+  "agree": [
+   "The gates that exist read right against the raw rows: every drive (2wd/4wd/a4wd), cab, eng, fuel and trans line I saw names a limit the catalog prints, and the app port hides contradicting decodes as the section 'How the app applies it' says (4x2 decodes hidden for 4WD-only clusters, 1.6L hidden for the SR20DE speedometer, the 5.6L Pathfinder hidden for the 4.0L A/C controller).",
+   "The earlier check's two classes are largely fixed: of its census's 43 DRIVE groups, 25 are no longer in the candidate, 16 carry a drive gate and 2 are ungated, and the B14 200SX sedan rows are gone (G03/G05 removed, G06 lost 1999). The earlier RISK on Titan rear-door motors (G23 82730-9FJ0A, in my sample too) is now a crew-cab gate, which I judged RIGHT.",
+   "Overlap with the earlier verifier's items: G16/G25/G26/G28/P04/P07/P16 RIGHT in both checks."
+  ],
+  "disagree": [
+   "Selfcheck census '0 unexplained suspects' and seeded sample '0 WRONG': I find 11 WRONG in 60 items. The main gap is that engine limits printed only in the product page's engine column (they follow a trim: Frontier/Xterra SE/SC 3.3L, PRO-4X/LE 4.0L, Pathfinder V8 clusters, the 2.5L-only Q40 rows) are not gated, so cars whose own decode names the other engine get plain rows (census: 20 groups, 286 lot cars).",
+   "The earlier verifier judged P14 27510-8Z315 RIGHT from an Xterra/Frontier seeker-donor pair; with the lot replayed, 3 2.4L Xterra 2002 donors are plain rows for this SE-only, 3.3L-only number (my item 3, WRONG).",
+   "The fix for the earlier P08 (QX60 2014 cluster from the gas page only) was a 'gas' fuel gate. Per the gates section that gate follows the parts table and counts as met when nothing says hybrid, so the 8 lot QX60 Hybrids (5N1CL0 VINs, decode 2.5L, listed as plain 'QX60') are still plain rows (my P38 and G12). The design choice is stated; I disagree that it is safe where the hybrid has its own displacement.",
+   "Two of the earlier census's DRIVE groups are still ungated: 24820-1MK5A and 24820-6AH2A, coded '2WDSTD' / '2WDHICAS' (joined tokens), so M37x AWD cars are plain rows.",
+   "The Pathfinder AUTO fix gates the AUTO numbers (a4wd), but the part-time '4WD' numbers of the same model-years are gated '4wd', which confirms All-Mode cars too (P43 24810-EA48D).",
+   "Not raised by either earlier report: the km/h cluster 24810-EC44C (policy.py already holds Subaru gauge clusters for this reason), and the Rogue / Rogue Select 2014-2015 mix (3 groups, 34 S35 cars each)."
+  ]
+ },
+ "web_search": "one search, result text only, no page opened, pullscout.com blocked: '\"24810-ZP93A\" Nissan instrument cluster' (item 48); it gave no unit (mph/km/h).",
  "groups": [
   {
    "n": 1,
