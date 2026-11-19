@@ -2951,3 +2951,23 @@ had not looked.
   the watchdog (19:23 UTC at the latest) starts the next scan.
 - Observed delay of GitHub's scan cron over the last two days when it did
   run: 30 min to 2 h 47 min after the slot.
+
+## 2026-11-19 ~15:45 UTC web builder (A) started: donor-model forecast on the part card
+
+Branch `feat/donor-forecast-1119` (from fca57105; next sw `jh-v219`). Not
+on main until the hub has reviewed it and run the full regression.
+
+- The part card's forecast today counts only the searcher's own model
+  generation. It will count the donor models the list's own matching
+  accepts (parts-table fits and catalog groups), following "Verified
+  only". The arrivals history knows make, model and year only, so the
+  counted cars are never called donors: subject "Donor models", a models
+  line, and a caveat that the list shows car by car which have the right
+  engine and options. At most 4 make files; more, or a missing file, falls
+  back to today's own-model forecast (no partial sums).
+- Cars strip and Alerts watch rows stay on the own model.
+- Same branch, own commits: the car-card tooltip stops saying "The VIN is
+  used for matching" (true for a year mismatch only); the daily ops email
+  gains one line with the card's counters (`pf-yards/*`,
+  `watch-forecast/shown`, new `pf-forecast/donor-models`). The Worker
+  deploy for that line is the hub's step after merge.
