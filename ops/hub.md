@@ -3400,3 +3400,15 @@ submitted.
   When every row's basis is a motor-only number the head should say so.
 - Next: "window motor only" on the 21 mopar and 8 subaru live groups that
   lack it; the re-pin of live makes to the newer raw (independent check).
+
+## 2026-11-19 19:56 UTC 1.13.3 is in Apple's review queue
+
+`release-ios.yml` run 44598878122 succeeded 19:55 UTC. asc-status
+44603351280: version 1.13.3, WAITING_FOR_REVIEW, build 44, review
+submission of 19:55; the queued 1.13.1 was replaced. The live iPhone app
+is still 1.13.0 (build 41). Android: production 1.13.3 (43). The 21:15 UTC
+check-in (`trig_01KrXdPRjWH6DnaHYspZKvsS`) now reads: check 1.13.3 build
+44, submit nothing. Interchange builder resumed 19:42 UTC on round 10
+(`interchange/round10-1119`): "window motor only" on the mopar 21 and
+subaru 8 live groups, a measure of component-named numbers in the other
+categories, live claims may only say less (task 83).
