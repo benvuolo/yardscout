@@ -3185,7 +3185,9 @@ Run 16:18 to about 16:28 UTC, conclusion success; oem-raw head d867a65a.
   permission or a data arrangement (hub drafts, owner sends); (2) whether
   the scheduled crawl should pause on the remaining open sites until an
   answer comes, so they are not lost the same way.
-- Check-in `trig_014D4eJ7LVizMXhBBto8jp6C` deleted (done here).
+- Check-in `trig_014D4eJ7LVizMXhBBto8jp6C` (17:44 UTC) could not be deleted
+  (the session's permission check refused it); when it fires it is already
+  answered by this entry.
 - Owner's email question (16:49 UTC): the Cloudflare "Missing email?"
   notice is not a failure. The owner's test went from the same Gmail
   account the alias forwards to; Gmail hides the forwarded copy of a
