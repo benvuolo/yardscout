@@ -1499,6 +1499,26 @@ const SCREENS = [
     await settle(page, 600);
     await page.evaluate(() => { const g = document.getElementById('alert-watchlist'); if (g) g.scrollIntoView(); });
   }],
+  // Compact arrival forecast under watch rows (2026-11-19), real arrivals
+  // data: a 2003-2009 4Runner and a long name (Sprinter 2500, any year).
+  ['alerts-forecast', async (page) => {
+    await page.evaluate(() => {
+      window.__wlWas2 = localStorage.getItem('yardscout_watchlist');
+      const c = { lat: 37.35, lng: -121.89 };
+      const w = (make, model, yrMin, yrMax, i) => ({ make, model, yrMin, yrMax, matchOnly: false, radiusMi: 100, ...c, driveFilter: '', trimFilter: '', addedAt: `2026-11-0${i}T10:00:00.000Z~wfc0${i}` });
+      localStorage.setItem('yardscout_watchlist', JSON.stringify([w('Toyota', '4Runner', 2003, 2009, 1), w('Mercedes-Benz', 'Sprinter 2500', null, null, 2)]));
+      document.querySelector('.tab[data-tab="alerts"]').click();
+      renderAlerts();
+    });
+    await page.waitForFunction(() => document.querySelectorAll('#alert-watchlist .ysf-compact').length >= 1, null, { timeout: 15000 })
+      .catch(() => { throw new Error('no compact forecast under the watch rows (arrivals data missing?)'); });
+    await settle(page, 300);
+    await page.evaluate(() => { const g = document.getElementById('alert-watchlist'); g.scrollIntoView(); window.scrollBy(0, -90); });
+  }, async (page) => { await page.evaluate(() => {
+    if (window.__wlWas2 != null) localStorage.setItem('yardscout_watchlist', window.__wlWas2); else localStorage.removeItem('yardscout_watchlist');
+    window.__wlWas2 = undefined;
+    renderAlerts();
+  }); }],
   // Free instant alert (apps, 2026-11-16): the marked watch and the one-tap
   // move on the others. The app-shell state is forced (freeInstantOn) because
   // this guard runs the web build; the markup is the apps' own.
