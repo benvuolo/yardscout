@@ -2069,3 +2069,4 @@ under another number (borderline).
   on the 8 LIVE makes first, fixed claims-only-down on live; then the 8 fixes
   on the nissan candidate. A new independent check follows before nissan
   ships.
+- 00:40 UTC container restart stopped the round 3 builder after its first push (894bde7b: lot replay + census tools); a new builder continues on the same branch, pushing every 20-30 min.
