@@ -595,3 +595,46 @@ forecast half (`docs/forecast.js`, `YSForecast`) is another builder's.
 - Counter `watch-forecast/shown`, once per visit, when one renders.
 - Screenshot `ops/screens/watch-forecast-1119-1.png` (real data, 4Runner
   2003-2009 within 100 mi of 95112).
+
+## 2026-11-19 Donor models in the Parts card's forecast (branch `feat/donor-forecast-1119`, sw `jh-v219`)
+
+- **Donor set** (`pfRunSearch`, the app's main script, comments "DONOR
+  MODELS"): beside the rows, the search collects the vehicle specs its own
+  matching accepts, from the definitions (never from today's lot):
+  - engine kinds: the chosen family's `apps` clipped to the part's years
+    (Likely; engine assemblies: Verified-tier for unambiguous apps), plus
+    the vg / oemVg number-list entries that name the seeker, intersected
+    with the family apps (Verified-tier);
+  - body kinds: the platform groups and OEM catalog groups (main and lazy
+    file) that name the seeker, every app (Verified-tier only for a
+    verified group and an ungated app, as the rows);
+  - aftermarket units that list the seeker (`pfAmRows(..., specs)`), Likely;
+  - the seeker's own generation (`pfGenWindow`), Likely.
+  `pfSpecPush` skips empty ranges. `pfPlanForecastCtx` passes the specs
+  (only Verified-tier with "Verified fits only" on); the toggle redraws.
+- **forecast.js**: `q.specs` -> `summarySpecs`: makes split on "|",
+  overlapping/touching ranges merged per make+model, every history row
+  counted once (first matching spec), per-yard coverage rules unchanged; a
+  "*" model matches by its letters-and-digits stem (the app's own rule for
+  those rows), others as `modelRows` (same name, any case). At most 4 make
+  files; more, a missing/failed file or another build -> today's own-model
+  block. A make the index does not list counts 0. Specs equal to the own
+  generation -> today's output byte for byte. Compact (watch rows) ignores
+  specs.
+- **Strings**: subject "Donor models"; existing headline/facts rules; the
+  models line ("2003-09 4Runner, ..." most arrivals first, then "and N more"
+  opening the rest, also in its title); caveat "Counts every car of these
+  models and years. The list shows, car by car, which have the right engine
+  and options."; the existing "not a promise" label.
+- **Counter** `pf-forecast/donor-models` once per search when drawn. Ops
+  email: "Parts card (7 d): shown, yard taps, order changes, show all,
+  donor-model forecasts" and "Alert forecasts shown (7 d): N", printed at 0.
+- **Fixes**: car-card mismatch tooltip now ends "...the lot sign may be
+  mislabeled. Verify at the yard before you pull."
+- **Gaps**: the arrivals history names models as yards list them, so a spec
+  "ES 300" misses cars listed as plain "ES"; a seeker with no generation
+  window whose rows come only from donors' own part-row fits gets no spec
+  (the forecast stays the own model, any year). Counting every car of an
+  engine family's models overstates where the model had other engines
+  (2002 ES 300 alternator: every 1997-2003 Camry, 4-cyl included); the
+  caveat says so, but a decoded-engine split in the arrivals data would fix it.
