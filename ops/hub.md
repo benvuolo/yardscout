@@ -3121,3 +3121,28 @@ decoded engine) is a later data task.
   makes are in different maker groups (77 cars; a Titan with a Yamaha VIN),
   the VIN is another vehicle's, so the match uses the listing's year too
   and no VIN-derived confirmation applies; the flag stays.
+
+## 2026-11-19 16:20 UTC VIN re-match on main (21c10ba8); live with the next scan
+
+`data/vin-rematch-1119` head 46385712 merged. Scraper only, no app
+change.
+- Hand-sorted mislabels (`different` class): parts matched on the VIN's
+  make, model and year. On the b22c3640 lot 120 cars, 112 lists change.
+- New, from the builder's own recommendation: when the listing's and the
+  VIN's makes are in different maker groups (77 cars; the test is the
+  existing `_trans_make_conflict`), the VIN is treated as another
+  vehicle's: listing year for the match and for `spanYear`, no decode
+  gates, no "VIN-confirmed" mark, no decode specs in the payload (trim,
+  series, drive, engine, body, transmission); the flag stays. 21 of them
+  have a parts list; 7 lists change (rows 169 -> 198, rows a wrong decode
+  had ruled out come back as "if equipped"). One-maker-group pairs (GMC /
+  Chevrolet, Chrysler / Dodge / Ram) unchanged.
+- Hub on the merged tree: `test_vin_model_mismatch` 87, `test_arrivals`
+  63, `test_vpic_fixes`, `test_interchange`, `test_model_normalization`
+  all pass; the builder's quick regression 75/0/0 on its head. The full
+  regression runs on the combined batch before the 1.13.3 build.
+- To confirm in the next scan's log: "[vin model] N car(s) flagged ... (M
+  matched on the VIN's model)" with M about 120, and "K VIN(s) of another
+  maker's vehicle ignored" with K about 77.
+- Report: `scraper/vin_rematch_2026-11-19.json`. Parts-table row to check
+  noted in `ops/parts.md` (E-350 7.3L Power Stroke year window).
