@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YardScout email signature</title>
+<style>
+  body { margin: 0; padding: 24px 16px; background: #f4f1ea; color: #1c1c1c;
+         font: 15px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 560px; margin: 0 auto; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  p.how { margin: 0 0 16px; color: #555; }
+  .card { background: #ffffff; border: 1px solid #ddd6c8; border-radius: 10px; padding: 20px; }
+  button { margin-top: 16px; font: inherit; font-weight: 600; padding: 10px 16px; border-radius: 8px;
+           border: 0; background: #0B6477; color: #fff; cursor: pointer; }
+  #done { margin-left: 10px; color: #0B6477; font-weight: 600; }
+  ol { padding-left: 20px; color: #333; }
+  code { background: #ece7db; padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Your signature</h1>
+  <p class="how">Press the button, then paste into Gmail's signature box.</p>
+
+  <div class="card">
+    <!-- SIGNATURE START: everything inside #sig is what gets copied. Inline
+         styles and a table on purpose: mail programs ignore style sheets. -->
+    <div id="sig">
+      <table cellpadding="0" cellspacing="0" border="0" role="presentation"
+             style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#1c1c1c;">
+        <tr>
+          <td style="padding:0 14px 0 0;vertical-align:middle;">
+            <a href="https://yardscout.io/" style="text-decoration:none;">
+              <img src="https://yardscout.io/icon-192.png" width="56" height="56" alt="YardScout"
+                   style="display:block;width:56px;height:56px;border:0;border-radius:12px;">
+            </a>
+          </td>
+          <td style="padding:0 0 0 14px;vertical-align:middle;border-left:2px solid #1095AF;">
+            <div style="font-size:15px;line-height:20px;font-weight:bold;color:#1c1c1c;">Ben Vuolo</div>
+            <div style="font-size:13px;line-height:18px;color:#555555;">YardScout &middot; live inventory for self-service junkyards</div>
+            <div style="font-size:13px;line-height:18px;">
+              <a href="https://yardscout.io/" style="color:#0B6477;text-decoration:none;font-weight:bold;">yardscout.io</a>
+              <span style="color:#999999;">&nbsp;|&nbsp;</span>
+              <a href="mailto:hello@yardscout.io" style="color:#0B6477;text-decoration:none;">hello@yardscout.io</a>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- SIGNATURE END -->
+  </div>
+
+  <button type="button" id="copy">Copy signature</button><span id="done" aria-live="polite"></span>
+
+  <ol>
+    <li>In Gmail on a computer: gear icon &rarr; <b>See all settings</b> &rarr; <b>General</b> &rarr; <b>Signature</b> &rarr; <b>Create new</b>.</li>
+    <li>Click in the signature box and paste.</li>
+    <li>Under <b>Signature defaults</b> pick it for new emails and for replies, then <b>Save Changes</b> at the bottom.</li>
+  </ol>
+  <p class="how">If the logo does not come across when you paste: in the signature box click the picture icon,
+  choose <b>Web address (URL)</b>, and enter <code>https://yardscout.io/icon-192.png</code>, then set its size to Small.</p>
+</div>
+<script>
+  document.getElementById('copy').addEventListener('click', function () {
+    var sig = document.getElementById('sig');
+    var done = document.getElementById('done');
+    var sel = window.getSelection();
+    var range = document.createRange();
+    range.selectNodeContents(sig);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    done.textContent = ok ? 'Copied' : 'Selected: now press Ctrl+C or Cmd+C';
+  });
+</script>
+</body>
+</html>
