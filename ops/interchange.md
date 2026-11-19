@@ -5026,3 +5026,55 @@ main checkout's for the run; removed, not committed. origin/main moved to
    "starred or not" applied to the Titan 7S00E / 7S006 pair (the verifier
    read that pair as no split).
 3. Nissan: 225 shippable, not shipped; a new independent sample decides.
+
+
+## 2026-11-19 — Nissan/Infiniti candidate, independent blind check "1119e" (branch `interchange/verify-nissan-1119e`)
+
+**Verdict: FAIL, do not ship.** The sample has 7 WRONG items. A ship needs 0.
+
+- Pins: candidate `scraper/oem_fitment/groups/_report/nissan.candidate.json` @ df0bdc0a. Raw oem-raw @ 57e8b5b9: all six nissan/infiniti file sha256s match the candidate's `raw` block. Lot from main @ a85c654: inventory_live.json 1a9cfa73…, vin_decodes.json.gz 1357625b…, vehicle_extras.json 6ff3d44b…. docs/app.js @ df0bdc0a.
+- Replay: I used a copy of `audit11_4/lot_replay.mjs` that only adds per-car output. The app code it runs is extracted from `docs/app.js` unchanged. Payload apps came from `junkyard_scraper._oem_gated_apps`. I read the raw rows with my own reader (not `adapters.RawSource`, not `sample.py`).
+- Draw: seed 52941119. The candidate has 228 Likely groups; 225 are shippable (3 wiper-motor groups are held). I drew 30 groups by largest remainder: climate 2, gauge 5, mirrors 8, window regulators 15. I then drew 30 pairs from the other 195 groups. The method is in the JSON.
+- Groups: 21 RIGHT / 4 WRONG / 5 RISK. Pairs: 23 RIGHT / 3 WRONG / 4 RISK.
+
+**WRONG: every one is the same flaw.** The catalog dates the claimed number to only part of a model year. Another listed number covers the rest of that year. The app still shows plain rows, with no "check the build date" line. "Replaced By" only works one way, so a car built with one number gets offered the other.
+1. 24810-7Z809 (cluster), Xterra/Frontier 2002: listed for 07/2001-04/2002 (nissan.lists:173/:331), then 7Z909 for 04/2002-09/2002 (:276/:410). 131 Xterra rows are plain. 51 Frontier rows are if-equipped but name only cab/engine.
+2. K6301-1MA0B (RH mirror), M56 2011: 1MA0A 01/2010-12/2010, then 1MA0B from 12/2010 (infiniti.lists:1013). 3 rows are plain.
+3. 82730-3Z005 (RH motor): Altima 2003 has 3Z000 for 08-11/2002 (nissan.lists:570). Sentra 2004 has 4Z305 until 04/2004 and 3Z005 only from 04/2004 (:612/:621). 355 rows are plain.
+4. 80720-1MA0B (FR regulator), Q70/Q70L 2015: 1MA0A 07/2014-02/2015, then 1MA0B (infiniti.lists:1492/:1358; the 2015 pages :1125/:1318 list both). 5 rows are plain.
+5. Pair 82731-3Z005: Altima 2004 seeker, Altima 2003 donor. Same as item 3; 205 rows are plain.
+6. Pair 96302-ZC20A (LH mirror): Armada 2010 seeker, Armada 2005 donor. ZC20A starts 08/2005; before that, 7S200 for 10/2004-08/2005 (nissan.lists:308). 103 rows are plain.
+7. Pair 80730-JX30B (RH motor): Juke 2011 seeker, Cube 2011 donor. JX30C takes over from 04/2011 on both pages (nissan.lists:665/:655). 133 rows are plain.
+
+**Census of that flaw over the whole candidate.** This is a mechanical pass and approximate. It flags 76 vehicle-years in 50 groups: about 2,917 plain rows and 162 if-equipped rows that have no build-date line. The biggest are:
+- Murano/Versa 2007 motors
+- Altima 2003 motors
+- Titan 2005-06 7S01A cluster
+- Xterra 2002 clusters
+- Armada 2005 ZC20A/ZC60A mirrors
+- Juke/Cube/Leaf 2011 motors
+- M35/M45 2008 mirrors
+
+The census misses the Sentra 2004 kind, where an unrelated sibling number is dated only on another year's page. The rows are in the JSON under `census`.
+
+**RISK, by kind:**
+- **The leading "*" is unexplained and decides drive or engine scope:** K6301-1PM0B, 96301-3EV0B, 24810-ZD103, the Frontier 2007 EA000 pair, and the FX35 2012 1CA0B pair. No page in the raw says what "*" means.
+- **A gate basis is not on the page:**
+  - The Titan 2005 4WD gate on 24810-7S00E is labelled "stated", but nissan.lists:198 has no drive word.
+  - The QX56 2013 2WD gate on 3ZD0A is in the same position, and the QX80 2014 page disagrees.
+  - The census finds 7 stated drive gates with no drive word on the row. Each only hides donors.
+- **Model-year edge, one or two months:** FX 2006 CL00A (both groups).
+
+**Gates I checked against the pages:**
+- Right and enough: built gates on EX35 2011, Juke 2016, Q45 2006, FX35 2005, Armada/Titan 2006, and Altima 1995. M37 2013 2WDSTD is also right.
+- Not right: the Titan 2005 4WD gate, which has no basis on the page.
+- Not enough: Stanza 1995 has the same 02/1995 split as Altima 1995 but is ungated (no cars in the lot).
+- Not checked: Pathfinder 2010, Rogue 2009, and the Titan 2006 ZC20A windows.
+
+**Suggestions for the owner:**
+1. Gate every vehicle-year where the claimed number does not cover the whole model year. Use the dates from all pages of the same model, not only the vehicle-year's own page. Include predecessors that are "Replaced By" the claimed number.
+2. Find out what the leading "*" in "Fitting Vehicle Options" means before shipping any claim whose drive or engine scope depends on it.
+3. Make OEM rows for window regulators and mirrors show the door or position for each donor. For example, 80730-JX30C sits in the front door on a Cube/Juke and the rear door on a Rogue, and the row does not say so.
+4. Make notes name the option when the page states it, for example "without A/C" on 27515-1E400.
+
+I changed only `scraper/oem_fitment/groups/_report/nissan_verify_2026-11-19e.json` and this section. My tools stayed in my scratchpad; they are not committed.
