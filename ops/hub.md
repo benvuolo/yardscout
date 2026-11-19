@@ -2382,3 +2382,38 @@ I good to put it in my sig" (ben@yardscout.io).
   UTC). The hub does not send mail, so the test is the owner's: one message
   from a different account (Gmail hides a message an account sends to its
   own forwarding address).
+
+## 2026-11-19 ~08:20 UTC owner asleep until ~15:00 UTC: "build something meaningful ... jaw dropping"
+
+Owner (08:05 UTC): "Going to bed, I'll be up around 7ish. Until then build
+something meaningful and useful. Something that differentiates us from any
+competitor. I want to wake up to something jaw dropping."
+
+Hub's choice, and why: a **game plan in the Parts results**. Today the
+Parts tab lists donor cars. Tonight it also says (1) which yard to drive
+to: donors by yard with distance, newest set-out and the yard's own price,
+and (2) how often the seeker's model lands near them, from the history
+database only a tracker has (252,356 recorded departures as of the 05:14
+scan). Facts only: counts and past weeks, no percentages, no promise, no
+"first" or "only" claims. Considered and not chosen tonight: a rare-finds
+feed (fun, less useful to someone fixing their own car), a multi-yard
+route planner (too large to finish tested in one night).
+
+- Builder A, branch `feat/where-to-go-1119` (from
+  `origin/hub/list-two-day-1119`): "Best yards for this part" card, chips,
+  tap-to-filter, the count-equals-list proof, mount points for the
+  forecast in the card and in the Cars watch strip; sw `jh-v217`.
+- Builder B, branch `feat/arrival-forecast-1119` (same base): the scan
+  writes `docs/data/arrivals/` (8 full weeks, per yard coverage, relists
+  and flush scans excluded, frozen yards marked stale, at most once per 20
+  hours, never fails the scan); `docs/forecast.js` with
+  `YSForecast.summary` and `.mount`; offline tests on a synthetic DB.
+- Hub: review both (the scan writer is on the scan's critical path), merge
+  list order -> A -> B, ONE full regression on the combined tree, main,
+  then a real scan for real arrivals data (dispatch `scan.yml` or the
+  13:14 UTC cron), read its log and file sizes, one live load, screenshots
+  in `ops/screens/` for the owner. Web only; the apps need a "ship"
+  (1.13.3). Task #77.
+- Running alongside: the list-order full regression (task #74), the sixth
+  nissan check (task #72), Apple check-in 09:10 UTC (task #75), Cloudflare
+  check-in 11:25 UTC.
