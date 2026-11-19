@@ -311,7 +311,10 @@ check("candidate: no Rogue 2014-2015 app (Rogue Select pages list none of its nu
 check("candidate: every gate passes the vocabulary", all(V.gate_problem(x[4]) is None
                                                        for g in cand["likely"] for x in g.get("gates") or []))
 q = next((g for g in cand["likely"] if "24810-3JA1B" in g["pn"]), None)
-check("candidate: 24810-3JA1B's QX60 gate rules out the 2.5L hybrid by engine",
-      q is not None and any(x[1] == "QX60" and x[4].get("eng") == ["3.5L"] for x in q.get("gates") or []),
+# round6-1119: the group is held when its claim rests on starred clauses only
+held6 = json.loads((OEM / "groups" / "_report" / "nissan.starred_held.json").read_text())["held"]
+check("candidate: 24810-3JA1B's QX60 gate rules out the 2.5L hybrid by engine (or the group is held, round 6)",
+      (q is not None and any(x[1] == "QX60" and x[4].get("eng") == ["3.5L"] for x in q.get("gates") or []))
+      or (q is None and any("24810-3JA1B" in e["pn"] for e in held6)),
       json.dumps(q and q.get("gates")))
 done("test_round3_1119")

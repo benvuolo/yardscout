@@ -16957,34 +16957,6 @@
    ],
    "reman": false
   },
-  "subaru:61041AL04A": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L983"
-   ],
-   "names": [
-    "Regulator & Motor Assembly-Front Right"
-   ],
-   "pns": [
-    "61041AL04A"
-   ],
-   "reman": false
-  },
-  "subaru:61041AL05A": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L979"
-   ],
-   "names": [
-    "Regulator & Motor Assembly-Front Left"
-   ],
-   "pns": [
-    "61041AL05A"
-   ],
-   "reman": false
-  },
   "subaru:61042AL00A": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -20955,60 +20927,6 @@
    "oldest_retrieved": "2026-11-05T10:23:41Z",
    "pn": [
     "61041AL02A"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Legacy",
-     2015,
-     2015
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2015,
-     2015
-    ]
-   ],
-   "cars": 77,
-   "cat": "window-regulator",
-   "id": "oem:subaru:window-regulator:FR:f9ddc89e61",
-   "kind": "body",
-   "note": "Subaru catalog lists #61041AL04A for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T10:23:49Z",
-   "pn": [
-    "61041AL04A"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Legacy",
-     2015,
-     2015
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2015,
-     2015
-    ]
-   ],
-   "cars": 77,
-   "cat": "window-regulator",
-   "id": "oem:subaru:window-regulator:FL:fb3a85b9c2",
-   "kind": "body",
-   "note": "Subaru catalog lists #61041AL05A for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T10:23:17Z",
-   "pn": [
-    "61041AL05A"
    ],
    "reason": "option",
    "tier": "likely"

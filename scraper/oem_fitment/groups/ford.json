@@ -87398,20 +87398,6 @@
   ]
  ],
  "classes": {
-  "ford:1L2Z7823394BB": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1797"
-   ],
-   "names": [
-    "Motor Assy - Window Operating"
-   ],
-   "pns": [
-    "1L2Z-7823394-BB"
-   ],
-   "reman": false
-  },
   "ford:1L2Z7823395BB": {
    "cat": "window-regulator",
    "comp": "motor",
@@ -87857,20 +87843,6 @@
    ],
    "pns": [
     "8A8Z-17757-A"
-   ],
-   "reman": false
-  },
-  "ford:8G1Z19980C": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L2735"
-   ],
-   "names": [
-    "Control"
-   ],
-   "pns": [
-    "8G1Z-19980-C"
    ],
    "reman": false
   },
@@ -99272,44 +99244,17 @@
    "gates": [
     [
      "Ford",
-     "Explorer Sport Trac",
+     "Explorer Sport",
      2001,
      2001,
      {
-      "built": "2001-01..2005-06"
+      "built": "2001-01..2003-05"
      }
     ]
    ],
-   "id": "oem:ford:window-regulator:FR:4c526d5ba9",
-   "kind": "body",
-   "note": "Ford catalog lists #1L2Z-7823394-BB for both — window motor only; trim-limited; Explorer Sport Trac: built 01/2001-06/2005 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T06:57:40Z",
-   "pn": [
-    "1L2Z-7823394-BB"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Explorer Sport",
-     2001,
-     2001
-    ],
-    [
-     "Ford",
-     "Explorer Sport Trac",
-     2001,
-     2001
-    ]
-   ],
-   "cars": 141,
-   "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL:c97c297ec1",
    "kind": "body",
-   "note": "Ford catalog lists #1L2Z-7823395-BB for both — window motor only; trim-limited; verify the number on the part",
+   "note": "Ford catalog lists #1L2Z-7823395-BB for both — window motor only; trim-limited; Explorer Sport: built 01/2001-05/2003 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:57:48Z",
    "pn": [
     "1L2Z-7823395-BB"
@@ -99532,11 +99477,20 @@
      {
       "built": "2004-07..2005-03"
      }
+    ],
+    [
+     "Mercury",
+     "Montego",
+     2005,
+     2005,
+     {
+      "built": "2004-07..2005-03"
+     }
     ]
    ],
    "id": "oem:ford:window-switch:DM:bca0897258",
    "kind": "body",
-   "note": "Ford catalog lists #5F9Z-14529-BAC for both — fits some configurations; Five Hundred: built 07/2004-03/2005 only; verify the number on the part",
+   "note": "Ford catalog lists #5F9Z-14529-BAC for both — fits some configurations; built 07/2004-03/2005 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:25:33Z",
    "pn": [
     "5F9Z-14529-BAC"
@@ -100207,41 +100161,12 @@
      2008,
      2008,
      {
-      "built": "2007-04..2007-12"
+      "built": "2007-12..2009-06"
      }
-    ]
-   ],
-   "id": "oem:ford:climate-control:C:a484f27b2c",
-   "kind": "body",
-   "note": "Ford catalog lists #8G1Z-19980-C for both — fits some configurations; Taurus: built 04/2007-12/2007 only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T11:20:36Z",
-   "pn": [
-    "8G1Z-19980-C"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Taurus",
-     2008,
-     2008
     ],
     [
      "Ford",
      "Taurus X",
-     2008,
-     2008
-    ]
-   ],
-   "cars": 229,
-   "cat": "climate-control",
-   "gates": [
-    [
-     "Ford",
-     "Taurus",
      2008,
      2008,
      {
@@ -100251,7 +100176,7 @@
    ],
    "id": "oem:ford:climate-control:C:0ff36dd140",
    "kind": "body",
-   "note": "Ford catalog lists #8G1Z-19980-F for both — trim-limited; Taurus: built 12/2007-06/2009 only; verify the number on the part",
+   "note": "Ford catalog lists #8G1Z-19980-F for both — trim-limited; built 12/2007-06/2009 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T11:21:16Z",
    "pn": [
     "8G1Z-19980-F"

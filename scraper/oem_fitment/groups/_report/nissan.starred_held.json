@@ -1,15 +1,98 @@
 {
- "groups": 22,
+ "groups": 45,
  "groups_by_kind": {
-  "a": 7,
+  "a": 5,
   "b": 5,
   "c_drive": 2,
-  "c_engine": 14
+  "c_engine": 14,
+  "starred_only": 41
  },
- "groups_held_whole": 9,
+ "groups_held_whole": 35,
  "held": [
   {
    "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-jx35/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-3JA1B",
+       "role": "own",
+       "starred": [
+        "*W. PREMIUM"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "JX35",
+      2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-3JA1B",
+       "role": "own",
+       "starred": [
+        "*W. PREMIUM"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX60",
+      2014
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24810-3JA1B"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "JX35",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX60",
+     2014,
+     2014
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -32,9 +115,14 @@
       "without_starred": "no limit"
      },
      "kinds": [
-      "a"
+      "a",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Titan",
@@ -66,6 +154,7 @@
   },
   {
    "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -73,62 +162,35 @@
        "notes": [
         "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE)"
        ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2005-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "page": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-titan/body_electrical/instrument_meter_gauge.html",
        "pn": "24810-7S00E",
        "role": "own",
        "starred": [
         "*KC. (SE+ LE)",
         "*CC. (SE+ LE)"
        ]
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *KC. 2WD. (SE+ LE) + *CC. 2WD. (SE+ LE)"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2005-nissan-titan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-7S007",
-       "role": "sibling",
-       "starred": [
-        "*KC. 2WD. (SE+ LE)",
-        "*CC. 2WD. (SE+ LE)"
-       ]
       }
      ],
-     "drive": {
-      "as_curated": "4WD only",
-      "via": "sibling",
-      "without_starred": "no limit"
-     },
      "kinds": [
-      "a"
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Titan",
-      2005
+      2006
      ]
     }
    ],
-   "kept_apps": [
-    [
-     "Nissan",
-     "Armada",
-     2006,
-     2006
-    ],
-    [
-     "Nissan",
-     "Titan",
-     2006,
-     2006
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "24810-7S00E"
    ],
-   "reason": "held_starred_scope",
-   "reason_text": "starred clause decides scope",
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
    "round5_apps": [
     [
      "Nissan",
@@ -139,44 +201,73 @@
     [
      "Nissan",
      "Titan",
-     2005,
+     2006,
      2006
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   },
   {
    "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
       {
        "notes": [
-        "Fitting Vehicle Options: *KC. 4WD. LE + *CC. 4WD. LE, *KC. 4WD. SE. AT + *CC. 4WD. SE. AT"
+        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE), *KC. 2WD. SE + *CC. 2WD. SE"
        ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2005-nissan-frontier/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-EA101",
+       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S01A",
        "role": "own",
        "starred": [
-        "*KC. 4WD. LE",
-        "*CC. 4WD. LE",
-        "*KC. 4WD. SE. AT",
-        "*CC. 4WD. SE. AT"
+        "*KC. (SE+ LE)",
+        "*CC. (SE+ LE)",
+        "*KC. 2WD. SE",
+        "*CC. 2WD. SE"
        ]
       }
      ],
-     "drive": {
-      "as_curated": "4WD only",
-      "via": "own",
-      "without_starred": "no limit"
-     },
      "kinds": [
-      "a"
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
-      "Frontier",
+      "Titan",
+      2004
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE), *KC. 2WD. SE + *CC. 2WD. SE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2005-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S01A",
+       "role": "own",
+       "starred": [
+        "*KC. (SE+ LE)",
+        "*CC. (SE+ LE)",
+        "*KC. 2WD. SE",
+        "*CC. 2WD. SE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
       2005
      ]
     },
@@ -184,56 +275,363 @@
      "clauses": [
       {
        "notes": [
-        "Fitting Vehicle Options: *W. 4WD. SE"
+        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE), *KC. 2WD. SE + *CC. 2WD. SE"
        ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2005-nissan-xterra/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-EA101",
+       "page": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S01A",
        "role": "own",
        "starred": [
-        "*W. 4WD. SE"
+        "*KC. (SE+ LE)",
+        "*CC. (SE+ LE)",
+        "*KC. 2WD. SE",
+        "*CC. 2WD. SE"
        ]
       }
      ],
-     "drive": {
-      "as_curated": "4WD only",
-      "via": "own",
-      "without_starred": "no limit"
-     },
      "kinds": [
-      "a"
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
-      "Xterra",
-      2005
+      "Titan",
+      2006
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE), *KC. 2WD. SE + *CC. 2WD. SE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2007-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S01A",
+       "role": "own",
+       "starred": [
+        "*KC. (SE+ LE)",
+        "*CC. (SE+ LE)",
+        "*KC. 2WD. SE",
+        "*CC. 2WD. SE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
      ]
     }
    ],
    "kept_apps": [],
    "pn": [
-    "24810-EA101"
+    "24810-7S01A"
    ],
-   "reason": "held_starred_scope",
-   "reason_text": "starred clause decides scope",
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
    "round5_apps": [
     [
      "Nissan",
-     "Frontier",
+     "Armada",
      2005,
-     2005
+     2006
     ],
     [
      "Nissan",
-     "Xterra",
-     2005,
-     2005
+     "Titan",
+     2004,
+     2007
     ]
    ],
    "unit": "group"
   },
   {
    "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. SE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-armada/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S02E",
+       "role": "own",
+       "starred": [
+        "*W. SE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2006
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE)"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S02E",
+       "role": "own",
+       "starred": [
+        "*KC. (SE+ LE)",
+        "*CC. (SE+ LE)"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2006
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24810-7S02E"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Armada",
+     2006,
+     2006
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2006,
+     2006
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. LE, *W. SE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-armada/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S03A",
+       "role": "own",
+       "starred": [
+        "*W. LE",
+        "*W. SE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2006
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE)"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2006-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S03A",
+       "role": "own",
+       "starred": [
+        "*KC. (SE+ LE)",
+        "*CC. (SE+ LE)"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2006
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24810-7S03A"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Armada",
+     2006,
+     2006
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2006,
+     2006
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE)"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2007-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S04E",
+       "role": "own",
+       "starred": [
+        "*KC. (SE+ LE)",
+        "*CC. (SE+ LE)"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24810-7S04E"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Armada",
+     2007,
+     2007
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2007,
+     2007
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE)"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2007-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-7S05A",
+       "role": "own",
+       "starred": [
+        "*KC. (SE+ LE)",
+        "*CC. (SE+ LE)"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24810-7S05A"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Armada",
+     2007,
+     2007
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2007,
+     2007
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -282,9 +680,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "b"
+      "b",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Frontier",
@@ -320,12 +723,71 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "b"
+      "b",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Frontier",
+      2004
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. KA24DE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2003-nissan-xterra/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-ZD016",
+       "role": "own",
+       "starred": [
+        "*W. KA24DE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2003
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. KA24DE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-ZD016",
+       "role": "own",
+       "starred": [
+        "*W. KA24DE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
       2004
      ]
     }
@@ -354,6 +816,208 @@
   },
   {
    "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. 4WD. SC + *KC. VG33E. XE + *CC. SB. (XE+ SC) + *CC. XB. (XE+ SC)"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2003-nissan-frontier/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-ZD103",
+       "role": "own",
+       "starred": [
+        "*KC. 4WD. SC",
+        "*KC. VG33E. XE",
+        "*CC. SB. (XE+ SC)",
+        "*CC. XB. (XE+ SC)"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2003
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. 4WD. SC + *KC. VG33E. XE + *CC. SB. (XE+ SC) + *CC. XB. (XE+ SC), *KC. VG33E + *CC. SB + *CC. XB"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-frontier/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-ZD103",
+       "role": "own",
+       "starred": [
+        "*KC. 4WD. SC",
+        "*KC. VG33E. XE",
+        "*CC. SB. (XE+ SC)",
+        "*CC. XB. (XE+ SC)",
+        "*KC. VG33E",
+        "*CC. SB",
+        "*CC. XB"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. VG33E + *W. VG33ER. SE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2003-nissan-xterra/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-ZD103",
+       "role": "own",
+       "starred": [
+        "*W. VG33E",
+        "*W. VG33ER. SE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2003
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. VG33E + *W. VG33ER. SE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-ZD103",
+       "role": "own",
+       "starred": [
+        "*W. VG33E",
+        "*W. VG33ER. SE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2004
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24810-ZD103"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2003,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2003,
+     2004
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. (2WD/SB+ 4WD/SB). LE + *CC. (2WD/SB+ 4WD/SB). LE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2008-nissan-titan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24810-ZR29A",
+       "role": "own",
+       "starred": [
+        "*KC. (2WD/SB+ 4WD/SB). LE",
+        "*CC. (2WD/SB+ 4WD/SB). LE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2008
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24810-ZR29A"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Armada",
+     2007,
+     2008
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2008,
+     2008
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -410,9 +1074,14 @@
      },
      "kinds": [
       "a",
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "M37",
@@ -528,9 +1197,14 @@
      },
      "kinds": [
       "a",
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "M37",
@@ -655,9 +1329,14 @@
      },
      "kinds": [
       "a",
-      "b"
+      "b",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "Q70",
@@ -689,6 +1368,7 @@
   },
   {
    "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -734,13 +1414,45 @@
       "without_starred": "no limit"
      },
      "kinds": [
-      "a"
+      "a",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "QX56",
       2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *3ROW. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx80/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-3ZD0A",
+       "role": "own",
+       "starred": [
+        "*3ROW. PREMIUM"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX80",
+      2014
      ]
     }
    ],
@@ -768,6 +1480,88 @@
   },
   {
    "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *3ROW"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-qx56/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-3ZD0C",
+       "role": "own",
+       "starred": [
+        "*3ROW"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX56",
+      2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *3ROW"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx80/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-3ZD0C",
+       "role": "own",
+       "starred": [
+        "*3ROW"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX80",
+      2014
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24820-3ZD0C"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "QX56",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -813,13 +1607,45 @@
       "without_starred": "no limit"
      },
      "kinds": [
-      "a"
+      "a",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "QX56",
       2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *3ROW. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx80/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-3ZD1A",
+       "role": "own",
+       "starred": [
+        "*3ROW. PREMIUM"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX80",
+      2014
      ]
     }
    ],
@@ -847,6 +1673,7 @@
   },
   {
    "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -957,9 +1784,14 @@
      },
      "kinds": [
       "a",
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "M37",
@@ -1084,9 +1916,14 @@
      },
      "kinds": [
       "a",
-      "b"
+      "b",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "Q70",
@@ -1117,8 +1954,636 @@
    "unit": "group"
   },
   {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S, *S. 2WD. VQ35DE + *S. VK45DE"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-EH101",
+       "role": "own",
+       "starred": [
+        "*S",
+        "*S. 2WD. VQ35DE",
+        "*S. VK45DE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S, *S. 2WD. VQ35DE + *S. VK45DE"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2007-infiniti-m35/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-EH101",
+       "role": "own",
+       "starred": [
+        "*S",
+        "*S. 2WD. VQ35DE",
+        "*S. VK45DE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S, *S. 2WD. VQ35DE + *S. VK45DE"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m45/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-EH101",
+       "role": "own",
+       "starred": [
+        "*S",
+        "*S. 2WD. VQ35DE",
+        "*S. VK45DE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S, *S. 2WD. VQ35DE + *S. VK45DE"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2007-infiniti-m45/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-EH101",
+       "role": "own",
+       "starred": [
+        "*S",
+        "*S. 2WD. VQ35DE",
+        "*S. VK45DE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24820-EH101"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "M35",
+     2006,
+     2007
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2006,
+     2007
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-EH11B",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m45/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-EH11B",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24820-EH11B"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "M35",
+     2006,
+     2006
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2006,
+     2006
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "gauge-cluster",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S. (2WD+ 2WD/HI). SPORT/P. 5AT + *S. AWD. SPORT/P + *S. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g35-sedan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-JK61C",
+       "role": "own",
+       "starred": [
+        "*S. (2WD+ 2WD/HI). SPORT/P. 5AT",
+        "*S. AWD. SPORT/P",
+        "*S. PREMIUM"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "G35",
+      2008
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S. (2WD+ 2WD/HI). SPORT/P. 5AT + *S. AWD. SPORT/P + *S. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g37-sedan/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-JK61C",
+       "role": "own",
+       "starred": [
+        "*S. (2WD+ 2WD/HI). SPORT/P. 5AT",
+        "*S. AWD. SPORT/P",
+        "*S. PREMIUM"
+       ]
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *C. PREMIUM + *C. SPORT/P. 5AT"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g37-coupe/body_electrical/instrument_meter_gauge.html",
+       "pn": "24820-JK61C",
+       "role": "own",
+       "starred": [
+        "*C. PREMIUM",
+        "*C. SPORT/P. 5AT"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "G37",
+      2008
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "24820-JK61C"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "G35",
+     2008,
+     2008
+    ],
+    [
+     "Infiniti",
+     "G37",
+     2008,
+     2008
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "climate-control",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. KA24DE + *W. VG33E. XE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2000-nissan-xterra/body_electrical/control_unit.html",
+       "pn": "27510-7Z411",
+       "role": "own",
+       "starred": [
+        "*W. KA24DE",
+        "*W. VG33E. XE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2000
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. KA24DE + *W. VG33E. XE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2001-nissan-xterra/body_electrical/control_unit.html",
+       "pn": "27510-7Z411",
+       "role": "own",
+       "starred": [
+        "*W. KA24DE",
+        "*W. VG33E. XE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2001
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. KA24DE + *W. VG33E. XE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2002-nissan-xterra/body_electrical/control_unit.html",
+       "pn": "27510-7Z411",
+       "role": "own",
+       "starred": [
+        "*W. KA24DE",
+        "*W. VG33E. XE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2002
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "27510-7Z411"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2002
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2002
+    ]
+   ],
+   "unit": "group"
+  },
+  {
    "cat": "window-regulator",
    "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC + *CC. SB + *CC. XB"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-frontier/body_side_rear/front_door_window_regulator.html",
+       "pn": "80720-2Z700",
+       "role": "own",
+       "starred": [
+        "*KC",
+        "*CC. SB",
+        "*CC. XB"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ]
+    }
+   ],
+   "kept_apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2003
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2002,
+     2004
+    ]
+   ],
+   "pn": [
+    "80720-2Z700"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2002,
+     2004
+    ]
+   ],
+   "unit": "vehicle-year"
+  },
+  {
+   "cat": "window-regulator",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC + *CC. SB + *CC. XB"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-frontier/body_side_rear/front_door_window_regulator.html",
+       "pn": "80721-2Z700",
+       "role": "own",
+       "starred": [
+        "*KC",
+        "*CC. SB",
+        "*CC. XB"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ]
+    }
+   ],
+   "kept_apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2003
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2002,
+     2004
+    ]
+   ],
+   "pn": [
+    "80721-2Z700"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2002,
+     2004
+    ]
+   ],
+   "unit": "vehicle-year"
+  },
+  {
+   "cat": "window-regulator",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *T + *KC + *CC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/1999-nissan-frontier/body_side_rear/front_door_window_regulator.html",
+       "pn": "80730-7B400",
+       "role": "own",
+       "starred": [
+        "*T",
+        "*KC",
+        "*CC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1999
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC + *CC, *T + *KC + *CC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2000-nissan-frontier/body_side_rear/front_door_window_regulator.html",
+       "pn": "80730-7B400",
+       "role": "own",
+       "starred": [
+        "*KC",
+        "*CC",
+        "*T",
+        "*KC",
+        "*CC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ]
+    },
     {
      "clauses": [
       {
@@ -1152,6 +2617,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -1163,7 +2631,7 @@
     [
      "Nissan",
      "Frontier",
-     1999,
+     2001,
      2004
     ],
     [
@@ -1206,6 +2674,66 @@
     {
      "clauses": [
       {
+       "notes": [
+        "Fitting Vehicle Options: *T + *KC + *CC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/1999-nissan-frontier/body_side_rear/front_door_window_regulator.html",
+       "pn": "80731-7B400",
+       "role": "own",
+       "starred": [
+        "*T",
+        "*KC",
+        "*CC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1999
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC + *CC, *T + *KC + *CC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2000-nissan-frontier/body_side_rear/front_door_window_regulator.html",
+       "pn": "80731-7B400",
+       "role": "own",
+       "starred": [
+        "*KC",
+        "*CC",
+        "*T",
+        "*KC",
+        "*CC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ]
+    },
+    {
+     "clauses": [
+      {
        "notes": [],
        "page": "https://www.nissanpartsdeal.com/parts-list/2001-nissan-xterra/body_side_rear/front_door_window_regulator.html",
        "pn": "80731-7B400",
@@ -1236,6 +2764,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -1247,7 +2778,7 @@
     [
      "Nissan",
      "Frontier",
-     1999,
+     2001,
      2004
     ],
     [
@@ -1283,6 +2814,174 @@
     ]
    ],
    "unit": "vehicle-year"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-ex35/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-ex37/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96301-1BA3D"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2015
+    ]
+   ],
+   "unit": "group"
   },
   {
    "cat": "side-mirrors",
@@ -1325,6 +3024,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -1367,6 +3069,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -1435,6 +3140,7 @@
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -1466,9 +3172,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -1506,9 +3217,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -1546,9 +3262,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -1598,9 +3319,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -1676,6 +3402,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -1739,6 +3468,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -1804,6 +3536,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "FX37",
@@ -1847,6 +3582,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -1889,6 +3627,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -1939,6 +3680,7 @@
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -1985,9 +3727,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX37",
@@ -2020,6 +3767,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -2051,27 +3801,71 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
       2015
      ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2016-infiniti-qx70/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3EV0B",
+       "role": "own",
+       "starred": [
+        "*W. PREMIUM"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2016
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2017-infiniti-qx70/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3EV0B",
+       "role": "own",
+       "starred": [
+        "*W. PREMIUM"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2017
+     ]
     }
    ],
-   "kept_apps": [
-    [
-     "Infiniti",
-     "FX50",
-     2012,
-     2013
-    ],
-    [
-     "Infiniti",
-     "QX70",
-     2016,
-     2017
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "96301-3EV0B"
    ],
@@ -2097,11 +3891,195 @@
      2017
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *T. (FED. 2WD+ CAL. 2WD). XE. MT + *T. (FED. 4WD+ CAL. 4WD) + *T. AT + *KC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/1998-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3S500",
+       "role": "own",
+       "starred": [
+        "*T. (FED. 2WD+ CAL. 2WD). XE. MT",
+        "*T. (FED. 4WD+ CAL. 4WD)",
+        "*T. AT",
+        "*KC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1998
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. 2WD. KA24DE. XE + *KC. SE + *CC. SE, *T + *KC + *CC. XE, *T. (FED. 2WD+ CAL. 2WD). XE. MT + *T. (FED. 4WD+ CAL. 4WD) + *T. AT + *KC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/1999-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3S500",
+       "role": "own",
+       "starred": [
+        "*KC. 2WD. KA24DE. XE",
+        "*KC. SE",
+        "*CC. SE",
+        "*T",
+        "*KC",
+        "*CC. XE",
+        "*T. (FED. 2WD+ CAL. 2WD). XE. MT",
+        "*T. (FED. 4WD+ CAL. 4WD)",
+        "*T. AT",
+        "*KC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1999
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. 2WD. KA24DE. XE + *KC. SE + *CC. SE, *T + *KC + *CC, *T + *KC + *CC. XE, *T. (FED. 2WD+ CAL. 2WD). XE. MT + *T. (FED. 4WD+ CAL. 4WD) + *T. AT + *KC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2000-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3S500",
+       "role": "own",
+       "starred": [
+        "*KC. 2WD. KA24DE. XE",
+        "*KC. SE",
+        "*CC. SE",
+        "*T",
+        "*KC",
+        "*CC",
+        "*T",
+        "*KC",
+        "*CC. XE",
+        "*T. (FED. 2WD+ CAL. 2WD). XE. MT",
+        "*T. (FED. 4WD+ CAL. 4WD)",
+        "*T. AT",
+        "*KC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. 2WD. KA24DE. XE + *KC. SE + *CC. SE, *KC. KA24DE + *KC. VG33E. XE + *CC. SB. XE + *CC. XB. XE, *T + *KC + *CC, *T + *KC + *CC. XE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2001-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3S500",
+       "role": "own",
+       "starred": [
+        "*KC. 2WD. KA24DE. XE",
+        "*KC. SE",
+        "*CC. SE",
+        "*KC. KA24DE",
+        "*KC. VG33E. XE",
+        "*CC. SB. XE",
+        "*CC. XB. XE",
+        "*T",
+        "*KC",
+        "*CC",
+        "*T",
+        "*KC",
+        "*CC. XE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2001
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC + *CC. SB + *CC. XB, *KC. 4WD. SC + *CC. SB. 4WD. SC + *CC. XB. 4WD. SC, *KC. KA24DE + *KC. VG33E. XE + *CC. SB. XE + *CC. XB. XE, *T + *KC + *CC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2002-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3S500",
+       "role": "own",
+       "starred": [
+        "*KC",
+        "*CC. SB",
+        "*CC. XB",
+        "*KC. 4WD. SC",
+        "*CC. SB. 4WD. SC",
+        "*CC. XB. 4WD. SC",
+        "*KC. KA24DE",
+        "*KC. VG33E. XE",
+        "*CC. SB. XE",
+        "*CC. XB. XE",
+        "*T",
+        "*KC",
+        "*CC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2002
+     ]
+    },
     {
      "clauses": [
       {
@@ -2157,13 +4135,58 @@
       "without_starred": "3.3L"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Frontier",
       2003
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC + *CC. SB + *CC. XB, *KC. (SE+ SC) + *CC. SB. (SE+ SC) + *CC. XB. (SE+ SC), *KC. 4WD. SC + *CC. SB. 2WD. SE + *CC. SB. SC + *CC. XB. 2WD. SE + *CC. XB. SC, *KC. 4WD. SC + *CC. SB. 4WD. SC + *CC. XB. 4WD. SC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3S500",
+       "role": "own",
+       "starred": [
+        "*KC",
+        "*CC. SB",
+        "*CC. XB",
+        "*KC. (SE+ SC)",
+        "*CC. SB. (SE+ SC)",
+        "*CC. XB. (SE+ SC)",
+        "*KC. 4WD. SC",
+        "*CC. SB. 2WD. SE",
+        "*CC. SB. SC",
+        "*CC. XB. 2WD. SE",
+        "*CC. XB. SC",
+        "*KC. 4WD. SC",
+        "*CC. SB. 4WD. SC",
+        "*CC. XB. 4WD. SC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
      ]
     },
     {
@@ -2195,9 +4218,14 @@
       "without_starred": "no limit"
      },
      "kinds": [
-      "b"
+      "b",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -2238,6 +4266,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -2280,6 +4311,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -2339,6 +4373,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -2346,26 +4383,7 @@
      ]
     }
    ],
-   "kept_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     1998,
-     2002
-    ],
-    [
-     "Nissan",
-     "Frontier",
-     2004,
-     2004
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2004,
-     2004
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "96301-3S500"
    ],
@@ -2385,7 +4403,889 @@
      2004
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-ex37/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3WV1E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3WV1E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3WV1E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96301-3WV1E"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2015
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-ex37/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3WV3E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3WV3E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3WV3E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96301-3WV3E"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2015
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2000-infiniti-i30/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2000
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2001-infiniti-i30/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2001
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2002-infiniti-i35/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2002
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2003-infiniti-i35/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2003
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2004-infiniti-i35/miscellaneous/rear_view_mirror.html",
+       "pn": "96301-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2004
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96301-3Y300"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "I30",
+     2000,
+     2001
+    ],
+    [
+     "Infiniti",
+     "I35",
+     2002,
+     2004
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-ex35/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA1E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA1E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-ex37/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA1E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA1E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA1E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96302-1BA1E"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2015
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-ex35/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-ex37/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3D",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96302-1BA3D"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2015
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-ex35/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-ex37/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *WAG. LEATHER"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2015-infiniti-qx50/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-1BA3E",
+       "role": "own",
+       "starred": [
+        "*WAG. LEATHER"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96302-1BA3E"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2015
+    ]
+   ],
+   "unit": "group"
   },
   {
    "cat": "side-mirrors",
@@ -2429,6 +5329,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -2472,6 +5375,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -2540,6 +5446,7 @@
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -2571,9 +5478,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -2611,9 +5523,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -2651,9 +5568,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -2703,9 +5625,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -2781,6 +5708,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -2844,6 +5774,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "FX35",
@@ -2909,6 +5842,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "FX37",
@@ -2952,6 +5888,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -2994,6 +5933,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -3044,6 +5986,7 @@
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -3090,9 +6033,14 @@
       "without_starred": "left out (contradicts itself)"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Infiniti",
       "FX37",
@@ -3125,6 +6073,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
@@ -3156,27 +6107,71 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "QX70",
       2015
      ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2016-infiniti-qx70/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3EV0B",
+       "role": "own",
+       "starred": [
+        "*W. PREMIUM"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2016
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *W. PREMIUM"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2017-infiniti-qx70/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3EV0B",
+       "role": "own",
+       "starred": [
+        "*W. PREMIUM"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2017
+     ]
     }
    ],
-   "kept_apps": [
-    [
-     "Infiniti",
-     "FX50",
-     2012,
-     2013
-    ],
-    [
-     "Infiniti",
-     "QX70",
-     2016,
-     2017
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "96302-3EV0B"
    ],
@@ -3202,11 +6197,117 @@
      2017
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *T. (FED. 2WD+ CAL. 2WD). XE. MT + *T. (FED. 4WD+ CAL. 4WD) + *T. AT + *KC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/1998-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3S500",
+       "role": "own",
+       "starred": [
+        "*T. (FED. 2WD+ CAL. 2WD). XE. MT",
+        "*T. (FED. 4WD+ CAL. 4WD)",
+        "*T. AT",
+        "*KC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1998
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. 2WD. KA24DE. XE + *KC. SE + *CC. SE, *T + *KC + *CC. XE, *T. (FED. 2WD+ CAL. 2WD). XE. MT + *T. (FED. 4WD+ CAL. 4WD) + *T. AT + *KC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/1999-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3S500",
+       "role": "own",
+       "starred": [
+        "*KC. 2WD. KA24DE. XE",
+        "*KC. SE",
+        "*CC. SE",
+        "*T",
+        "*KC",
+        "*CC. XE",
+        "*T. (FED. 2WD+ CAL. 2WD). XE. MT",
+        "*T. (FED. 4WD+ CAL. 4WD)",
+        "*T. AT",
+        "*KC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1999
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. 2WD. KA24DE. XE + *KC. SE + *CC. SE, *T + *KC + *CC, *T + *KC + *CC. XE, *T. (FED. 2WD+ CAL. 2WD). XE. MT + *T. (FED. 4WD+ CAL. 4WD) + *T. AT + *KC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2000-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3S500",
+       "role": "own",
+       "starred": [
+        "*KC. 2WD. KA24DE. XE",
+        "*KC. SE",
+        "*CC. SE",
+        "*T",
+        "*KC",
+        "*CC",
+        "*T",
+        "*KC",
+        "*CC. XE",
+        "*T. (FED. 2WD+ CAL. 2WD). XE. MT",
+        "*T. (FED. 4WD+ CAL. 4WD)",
+        "*T. AT",
+        "*KC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ]
+    },
     {
      "clauses": [
       {
@@ -3248,9 +6349,14 @@
       "without_starred": "3.3L"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Frontier",
@@ -3299,9 +6405,14 @@
       "without_starred": "3.3L"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Frontier",
@@ -3373,13 +6484,59 @@
       "without_starred": "3.3L"
      },
      "kinds": [
-      "c_engine"
+      "c_engine",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Frontier",
       2003
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *CC. XB. 2WD. MT, *KC + *CC. SB + *CC. XB, *KC. (SE+ SC) + *CC. SB. (SE+ SC) + *CC. XB. (SE+ SC), *KC. 4WD. SC + *CC. SB. 2WD. SE + *CC. SB. SC + *CC. XB. 2WD. SE + *CC. XB. SC, *KC. 4WD. SC + *CC. SB. 4WD. SC + *CC. XB. 4WD. SC"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-frontier/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3S500",
+       "role": "own",
+       "starred": [
+        "*CC. XB. 2WD. MT",
+        "*KC",
+        "*CC. SB",
+        "*CC. XB",
+        "*KC. (SE+ SC)",
+        "*CC. SB. (SE+ SC)",
+        "*CC. XB. (SE+ SC)",
+        "*KC. 4WD. SC",
+        "*CC. SB. 2WD. SE",
+        "*CC. SB. SC",
+        "*CC. XB. 2WD. SE",
+        "*CC. XB. SC",
+        "*KC. 4WD. SC",
+        "*CC. SB. 4WD. SC",
+        "*CC. XB. 4WD. SC"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
      ]
     },
     {
@@ -3411,9 +6568,14 @@
       "without_starred": "no limit"
      },
      "kinds": [
-      "b"
+      "b",
+      "starred_only"
      ],
      "listed_only_starred": true,
+     "reasons": [
+      "held_starred_scope",
+      "held_starred_only"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -3454,6 +6616,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -3496,6 +6661,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -3555,6 +6723,9 @@
       "c_engine"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Nissan",
       "Xterra",
@@ -3562,26 +6733,7 @@
      ]
     }
    ],
-   "kept_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     1998,
-     2000
-    ],
-    [
-     "Nissan",
-     "Frontier",
-     2004,
-     2004
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2004,
-     2004
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "96302-3S500"
    ],
@@ -3601,11 +6753,255 @@
      2004
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2000-infiniti-i30/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2000
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2001-infiniti-i30/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2001
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2002-infiniti-i35/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2002
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2003-infiniti-i35/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2003
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *S"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2004-infiniti-i35/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-3Y300",
+       "role": "own",
+       "starred": [
+        "*S"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2004
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96302-3Y300"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Infiniti",
+     "I30",
+     2000,
+     2001
+    ],
+    [
+     "Infiniti",
+     "I35",
+     2002,
+     2004
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *KC. SE + *CC. SE"
+       ],
+       "page": "https://www.nissanpartsdeal.com/parts-list/2007-nissan-titan/miscellaneous/rear_view_mirror.html",
+       "pn": "96302-ZC20A",
+       "role": "own",
+       "starred": [
+        "*KC. SE",
+        "*CC. SE"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ]
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "96302-ZC20A"
+   ],
+   "reason": "held_starred_only",
+   "reason_text": "claim rests only on starred clauses",
+   "round5_apps": [
+    [
+     "Nissan",
+     "Armada",
+     2006,
+     2007
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2007,
+     2007
+    ]
+   ],
+   "unit": "group"
   },
   {
    "cat": "side-mirrors",
    "held": [
+    {
+     "clauses": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *SED"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-m35h/miscellaneous/rear_view_mirror.html",
+       "pn": "K6301-1PM0B",
+       "role": "own",
+       "starred": [
+        "*SED"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "M35h",
+      2012
+     ]
+    },
     {
      "clauses": [
       {
@@ -3630,6 +7026,9 @@
       "c_drive"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "M37",
@@ -3660,6 +7059,9 @@
       "c_drive"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "M56",
@@ -3671,7 +7073,7 @@
     [
      "Infiniti",
      "M35h",
-     2012,
+     2013,
      2013
     ],
     [
@@ -3733,6 +7135,33 @@
      "clauses": [
       {
        "notes": [
+        "Fitting Vehicle Options: *SED"
+       ],
+       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-m35h/miscellaneous/rear_view_mirror.html",
+       "pn": "K6302-1PM0B",
+       "role": "own",
+       "starred": [
+        "*SED"
+       ]
+      }
+     ],
+     "kinds": [
+      "starred_only"
+     ],
+     "listed_only_starred": true,
+     "reasons": [
+      "held_starred_only"
+     ],
+     "t": [
+      "Infiniti",
+      "M35h",
+      2012
+     ]
+    },
+    {
+     "clauses": [
+      {
+       "notes": [
         "Fitting Vehicle Options: *SEDAN. (2WDSTD+ 2WDHICAS) + *SEDAN. 4WD. (BASE+ TECHNOLO+ ADVTECH), SEDAN. 4WD. (SPORTTEC + SPADTEC)"
        ],
        "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-m37/miscellaneous/rear_view_mirror.html",
@@ -3753,6 +7182,9 @@
       "c_drive"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "M37",
@@ -3783,6 +7215,9 @@
       "c_drive"
      ],
      "listed_only_starred": false,
+     "reasons": [
+      "held_starred_scope"
+     ],
      "t": [
       "Infiniti",
       "M56",
@@ -3794,7 +7229,7 @@
     [
      "Infiniti",
      "M35h",
-     2012,
+     2013,
      2013
     ],
     [
@@ -3850,14 +7285,15 @@
    "unit": "vehicle-year"
   }
  ],
- "note": "round5b-1119 (hub decision 1, 2026-11-19): vehicle-years held because a starred ('*') option configuration decides their drive or engine limit; the mark has no legend in the raw. reason held_starred_scope ('starred clause decides scope'). unit vehicle-year: the group ships without them (kept_apps); unit group: the whole group is held. kinds: a = drive gate, b = engine gate, c_drive / c_engine = no gate, the starred configuration widens it. Not shipped; they come back when the mark is explained.",
+ "note": "round5b-1119 (hub decision 1, 2026-11-19): vehicle-years held because a starred ('*') option configuration decides their drive or engine limit; the mark has no legend in the raw. reason held_starred_scope ('starred clause decides scope'). round6-1119 (hub decision 2): also every vehicle-year the number is listed for only through starred configurations, reason held_starred_only, kind starred_only. unit vehicle-year: the group ships without them (kept_apps, after every hold); unit group: the whole group is held. kinds: a = drive gate, b = engine gate, c_drive / c_engine = no gate, the starred configuration widens it. Not shipped; they come back when the mark is explained.",
  "ns": "nissan",
  "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
- "vehicle_years": 59,
+ "vehicle_years": 150,
  "vehicle_years_by_kind": {
-  "a": 11,
+  "a": 8,
   "b": 6,
   "c_drive": 4,
-  "c_engine": 43
+  "c_engine": 43,
+  "starred_only": 120
  }
 }
