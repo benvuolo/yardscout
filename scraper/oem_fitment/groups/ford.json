@@ -87888,34 +87888,6 @@
    ],
    "reman": false
   },
-  "ford:AE5Z10849LA": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5807"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "AE5Z-10849-LA"
-   ],
-   "reman": false
-  },
-  "ford:AE5Z10849MA": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5838"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "AE5Z-10849-MA"
-   ],
-   "reman": false
-  },
   "ford:AE5Z16005A": {
    "cat": "fender",
    "comp": null,
@@ -88011,20 +87983,6 @@
    ],
    "pns": [
     "BE5Z-10849-AC"
-   ],
-   "reman": false
-  },
-  "ford:BE5Z10849BC": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3914"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "BE5Z-10849-BC"
    ],
    "reman": false
   },
@@ -88403,20 +88361,6 @@
    ],
    "pns": [
     "YL3Z-10849-CA"
-   ],
-   "reman": false
-  },
-  "ford:YL3Z10849DA": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3693"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "YL3Z-10849-DA"
    ],
    "reman": false
   }
@@ -100288,60 +100232,6 @@
   {
    "apps": [
     [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2010
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 163,
-   "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:d69eb4e27e",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-10849-LA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T06:31:56Z",
-   "pn": [
-    "AE5Z-10849-LA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2010
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 163,
-   "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:b8e5079f5b",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-10849-MA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T06:36:04Z",
-   "pn": [
-    "AE5Z-10849-MA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Ford",
      "Fusion",
      2012,
@@ -100542,39 +100432,38 @@
    ],
    "cars": 842,
    "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:a98d008eb1",
-   "kind": "body",
-   "note": "Ford catalog lists #BE5Z-10849-AC for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T23:09:29Z",
-   "pn": [
-    "BE5Z-10849-AC"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
+   "gates": [
     [
      "Ford",
      "Fusion",
      2012,
-     2012
+     2012,
+     {
+      "eng": [
+       "2.5L"
+      ],
+      "fuel": "hybrid"
+     }
     ],
     [
      "Lincoln",
      "MKZ",
      2011,
-     2012
+     2012,
+     {
+      "eng": [
+       "2.5L"
+      ],
+      "fuel": "hybrid"
+     }
     ]
    ],
-   "cars": 842,
-   "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:d681066fec",
+   "id": "oem:ford:gauge-cluster:C:a98d008eb1",
    "kind": "body",
-   "note": "Ford catalog lists #BE5Z-10849-BC for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T23:09:53Z",
+   "note": "Ford catalog lists #BE5Z-10849-AC for both — trim-limited; 2.5L, hybrid only; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:09:29Z",
    "pn": [
-    "BE5Z-10849-BC"
+    "BE5Z-10849-AC"
    ],
    "reason": "trim",
    "tier": "likely"
@@ -101361,37 +101250,10 @@
    ],
    "reason": "trim",
    "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Expedition",
-     2000,
-     2000
-    ],
-    [
-     "Ford",
-     "F-150",
-     2001,
-     2001
-    ]
-   ],
-   "cars": 834,
-   "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:31847f949f",
-   "kind": "body",
-   "note": "Ford catalog lists #YL3Z-10849-DA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T22:31:27Z",
-   "pn": [
-    "YL3Z-10849-DA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
   }
  ],
  "ns": "ford",
- "policy_sha256": "96f528783ceb0378bda6dc338f26473aac353d4f5b8af12bf516ccfa68a3cfa6",
+ "policy_sha256": "24b4de0f9754a8265583fbe348b62f0c5f7037403f6c356c475a9250e7a83e2b",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

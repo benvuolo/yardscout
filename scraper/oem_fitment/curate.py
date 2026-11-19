@@ -2530,11 +2530,11 @@ class Curation:
         pages lists a cab it leaves out under another number of the same slot.
         Per model-year: the 2002 Frontier page lists power regulator 80721-3S500
         for KC + CC only beside 3S510 'T + KC + CC', while 1998-2001 list 3S500
-        for T, KC and CC too, so only 2002 is limited. The cabs the model-year
-        comes in are read from T's pages in every category (_t_page_cabs): the
-        2003-2004 Frontier pages code 80721-2Z700 KC / CC only and print no
-        regular-cab regulator in that slot, while other categories there code
-        T."""
+        for T, KC and CC too, so only 2002 is limited. On the Nissan pages the
+        cabs the model-year comes in are read from every category
+        (_t_page_cabs): the 2003-2004 Frontier pages code 80721-2Z700 KC / CC
+        only and print no regular-cab regulator in that slot, while other
+        categories there code T."""
         if not policy.LIKELY_CAB_LIST_RULE:
             return {}
         out = {}
@@ -2570,32 +2570,29 @@ class Curation:
                 for lr in self.t_list_rows.get((T, cat), []):
                     if policy.pn_key(self.ns, lr.pn) != c.key and policy.pn_key(self.ns, lr.pn) in mates:
                         page |= {self._NISSAN_CAB3[x] for x in (_fvo_cab_heads(lr.notes) or ())}
-            page |= self._t_page_cabs(T, fitment=bool(fall and fcabs))
+            if not (fall and fcabs):
+                page |= self._t_page_cabs(T)
             if ours and page - ours:
                 out[T] = self._cab_order(ours)
         return out
 
-    def _t_page_cabs(self, T, fitment: bool) -> set:
-        """Every cab T's own pages name in any category: Nissan option-column
-        cab codes (T / KC / CC) on the manifest rows, or (fitment) the cab
-        words of T's product-page fitment trims (rows_by_T)."""
+    def _t_page_cabs(self, T) -> set:
+        """Every Nissan cab code (T / KC / CC) an option column on T's own
+        pages names, in any category: the cabs the model-year comes in. Only
+        the option-column codes: they name the cab of each configuration.
+        Fitment trims mix cab words into trim names (GM "LT Crew Cab"), so a
+        trim list without "Regular Cab" limits only beside a regular-cab
+        number of the same slot (_cab_list_by_T)."""
         cache = self.__dict__.setdefault("_page_cabs", {})
-        key = (T, fitment)
-        if key not in cache:
+        if T not in cache:
             cabs = set()
-            if fitment:
-                for (_cat, _c, _r, f, _t) in getattr(self, "rows_by_T", {}).get(T, []):
-                    for tr in (f.trims or []):
-                        m = self._CAB_RE.search(tr)
-                        if m:
-                            cabs.add(re.sub(r"\s+", " ", m.group(1).lower()))
-            elif self.ns == "nissan":
+            if self.ns == "nissan":
                 for (t, _cat), rows in self.t_list_rows.items():
                     if t == T:
                         for lr in rows:
                             cabs |= {self._NISSAN_CAB3[x] for x in (_fvo_cab_heads(lr.notes) or ())}
-            cache[key] = frozenset(cabs)
-        return set(cache[key])
+            cache[T] = frozenset(cabs)
+        return set(cache[T])
 
     _BODY_WORDS = {"coupe": "coupe", "sedan": "sedan", "notchback": "sedan", "wagon": "wagon",
                    "hatchback": "hatchback", "liftback": "hatchback", "convertible": "convertible"}

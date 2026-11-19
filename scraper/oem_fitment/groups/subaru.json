@@ -20768,9 +20768,22 @@
    ],
    "cars": 197,
    "cat": "hood",
+   "gates": [
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.5L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:subaru:hood:C:6779a48c93",
    "kind": "body",
-   "note": "Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; verify the number on the part",
+   "note": "Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; Outback: 2.5L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:07:28Z",
    "pn": [
     "57229AG04A9P"
@@ -21395,9 +21408,33 @@
    ],
    "cars": 77,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015,
+     {
+      "eng": [
+       "2.5L"
+      ]
+     }
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015,
+     {
+      "eng": [
+       "2.5L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:subaru:climate-control:C:991a451755",
    "kind": "body",
-   "note": "Subaru catalog lists #72311AL10A for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #72311AL10A for both — fits some configurations; 2.5L only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:24:45Z",
    "pn": [
     "72311AL10A"
@@ -21542,7 +21579,7 @@
   }
  ],
  "ns": "subaru",
- "policy_sha256": "96f528783ceb0378bda6dc338f26473aac353d4f5b8af12bf516ccfa68a3cfa6",
+ "policy_sha256": "24b4de0f9754a8265583fbe348b62f0c5f7037403f6c356c475a9250e7a83e2b",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

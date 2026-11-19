@@ -5730,9 +5730,11 @@
  },
  "input_issues": [],
  "inputs": {
-  "decodes": "main@a85c654 docs/data/vin_decodes.json.gz",
+  "decodes": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/pin/vin_decodes.json.gz",
   "decodes_sha256": "1357625b4429eaf936acafb234b64efb383abdbdcfbbe5ba84b3518139a32fc4",
-  "inventory": "main@a85c654 docs/data/inventory_live.json",
+  "extras": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/pin/vehicle_extras.json",
+  "extras_sha256": "6ff3d44b86fe224c0bf39398516c25c94f9ee01c551a9a803946cd3d09e065e3",
+  "inventory": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/pin/inventory_live.json",
   "inventory_sha256": "1a9cfa73e9c15e41809e1149c2e752504e797efd91c18de4668df454364ce1d6"
  },
  "lint": [],
@@ -5827,8 +5829,8 @@
    },
    "honda": {
     "cars": 28627,
-    "mapped_cars": 28221,
-    "mapped_share": 0.9858
+    "mapped_cars": 28102,
+    "mapped_share": 0.9817
    },
    "mazda": {
     "cars": 6253,
@@ -5857,8 +5859,8 @@
    },
    "subaru": {
     "cars": 5621,
-    "mapped_cars": 5367,
-    "mapped_share": 0.9548
+    "mapped_cars": 5363,
+    "mapped_share": 0.9541
    },
    "toyota": {
     "cars": 26432,
@@ -5878,10 +5880,6 @@
   },
   "M6": {
    "by_target": {
-    "Acura|CL": {
-     "decoded": 105,
-     "make_mismatch": 2
-    },
     "Acura|Integra": {
      "decoded": 79
     },
@@ -7995,9 +7993,6 @@
     "Subaru|Impreza": {
      "decoded": 848,
      "make_mismatch": 1
-    },
-    "Subaru|Impreza WRX": {
-     "decoded": 4
     },
     "Subaru|Legacy": {
      "decoded": 855
@@ -180671,11 +180666,11 @@
   },
   {
    "cat": "bumper-front",
-   "detail": "Infiniti M37 2011-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2014",
+   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2011-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
-    "www.infinitipartsdeal.com:records:L1659"
+    "www.infinitipartsdeal.com:records:L1658"
    ],
-   "pn": "62022-1MJ0H",
+   "pn": "62022-1MA0H",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -180731,11 +180726,11 @@
   },
   {
    "cat": "bumper-front",
-   "detail": "M37 2011: 4WD only; M56 2011: 4WD only; Q70: gas only",
+   "detail": "M37 2011: 2WD only; M56 2011: 2WD only; Q70: gas only",
    "evidence": [
-    "www.infinitipartsdeal.com:records:L1658"
+    "www.infinitipartsdeal.com:records:L1659"
    ],
-   "pn": "62022-1MA0H",
+   "pn": "62022-1MJ0H",
    "reason": "held_drive_qualifier",
    "t": null
   },
@@ -180851,12 +180846,52 @@
   },
   {
    "cat": "climate-control",
-   "detail": "Frontier 2008: 2.5L only; Pathfinder 2007-2009: 4.0L only",
+   "detail": "Frontier 2000: 3.3L only; Frontier 2001-2002: king cab/crew cab, 3.3L only; Xterra: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1349"
+   ],
+   "pn": "27510-7Z416",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "detail": "Frontier 2010: 4.0L only; Frontier 2012-2013: 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L321"
+   ],
+   "pn": "27510-9BH0C",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "detail": "Frontier 2010: 4.0L only; Frontier 2012-2013: 4.0L only; Pathfinder: 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L322"
+   ],
+   "pn": "27510-9CA0A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "detail": "Nissan Frontier 2008: engine limit excludes the model's only engine",
    "evidence": [
     "www.nissanpartsdeal.com:records:L323"
    ],
    "pn": "27510-EA000",
-   "reason": "held_drive_qualifier",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "detail": "Nissan Frontier 2009: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L324"
+   ],
+   "pn": "27510-ZL00A",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
@@ -180868,6 +180903,16 @@
    ],
    "pn": "27500-2W601",
    "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Frontier 2001-2002: king cab/crew cab only; Xterra 2000: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3351"
+   ],
+   "pn": "H0100-9Z432",
+   "reason": "held_drive_qualifier",
    "t": null
   },
   {
@@ -181232,31 +181277,11 @@
   },
   {
    "cat": "door-front",
-   "detail": "Nissan Frontier 2000-2002;Nissan Xterra 2000-2002",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L3351"
-   ],
-   "pn": "H0100-9Z432",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "door-front",
    "detail": "Nissan Frontier 2000-2002;Nissan Xterra 2001-2002",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3350"
    ],
    "pn": "H0100-9Z431",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "door-front",
-   "detail": "Nissan Frontier 2001-2002;Nissan Xterra 2001-2002",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4268"
-   ],
-   "pn": "H0100-7Z832",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -181418,6 +181443,16 @@
    ],
    "pn": "HMA00-9BEBA",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Xterra: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4268"
+   ],
+   "pn": "H0100-7Z832",
+   "reason": "held_drive_qualifier",
    "t": null
   },
   {
@@ -182092,16 +182127,6 @@
    "cat": "gauge-cluster",
    "detail": "Frontier 1999: 3.3L only; Frontier 2001: 3.3L only",
    "evidence": [
-    "www.nissanpartsdeal.com:records:L3336"
-   ],
-   "pn": "24820-7Z100",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Frontier 1999: 3.3L only; Frontier 2001: 3.3L only",
-   "evidence": [
     "www.nissanpartsdeal.com:records:L3337"
    ],
    "pn": "24820-9Z000",
@@ -182110,27 +182135,17 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier 2000: 2.4L, manual only; Frontier 2001-2002: 3.3L, manual only; Xterra: manual only",
+   "detail": "Frontier 1999: king cab/crew cab, 3.3L only; Frontier 2001: king cab/crew cab, 3.3L only; Xterra: 3.3L only",
    "evidence": [
-    "www.nissanpartsdeal.com:records:L3329"
+    "www.nissanpartsdeal.com:records:L3336"
    ],
-   "pn": "24810-9Z475",
+   "pn": "24820-7Z100",
    "reason": "held_drive_qualifier",
    "t": null
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier 2000: 2WD, 2.4L, automatic only; Frontier 2001-2002: 2WD, 3.3L, automatic only; Xterra: 2WD, automatic only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L3324"
-   ],
-   "pn": "24810-9Z481",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Frontier 2000: 2WD, automatic only; Frontier 2001-2002: 2WD, 3.3L, automatic only; Xterra: 2WD, automatic only",
+   "detail": "Frontier 2000: 2WD, 3.3L, automatic only; Frontier 2001-2002: king cab/crew cab, 2WD, 3.3L, automatic only; Xterra: 2WD, 3.3L, automatic only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3331"
    ],
@@ -182140,27 +182155,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier 2000: 4WD, 2.4L, automatic only; Frontier 2001-2002: 3.3L only; Xterra 2000: 4WD, automatic only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L3330"
-   ],
-   "pn": "24810-9Z477",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Frontier 2000: 4WD, 2.4L, automatic only; Frontier 2001-2002: 3.3L only; Xterra 2000: 4WD, automatic only; Xterra 2001-2002: 3.3L only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L3328"
-   ],
-   "pn": "24810-9Z473",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Frontier 2000: manual only; Frontier 2001-2002: 3.3L, manual only; Xterra: 3.3L, manual only",
+   "detail": "Frontier 2000: 3.3L, manual only; Frontier 2001-2002: king cab/crew cab, 3.3L, manual only; Xterra: 3.3L, manual only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L3325"
    ],
@@ -182170,27 +182165,17 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier 2011: 4.0L, manual only; Frontier 2012: manual only; Xterra: manual only",
+   "detail": "Frontier 2002: king cab/crew cab, 3.3L only; Frontier 2003-2004: 3.3L only; Xterra: 3.3L only",
    "evidence": [
-    "www.nissanpartsdeal.com:records:L4795"
+    "www.nissanpartsdeal.com:records:L2153"
    ],
-   "pn": "24810-9BD4C",
+   "pn": "24810-2Z903",
    "reason": "held_drive_qualifier",
    "t": null
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier 2011: 4WD, 4.0L, automatic only; Frontier 2012: 4WD, automatic only; Xterra: automatic only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4794"
-   ],
-   "pn": "24810-9BD1B",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Frontier: 2WD, 4.0L only; Pathfinder: 2WD only; Xterra: 2WD only",
+   "detail": "Frontier: 2WD, 4.0L only; Pathfinder: 2WD, 4.0L only; Xterra: 2WD only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2188"
    ],
@@ -182200,7 +182185,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier: 2WD, 4.0L only; Pathfinder: 2WD only; Xterra: 2WD only",
+   "detail": "Frontier: 2WD, 4.0L only; Pathfinder: 2WD, 4.0L only; Xterra: 2WD only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2194"
    ],
@@ -182280,7 +182265,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier: 4WD, 3.3L only; Xterra 2003: 4WD only; Xterra 2004: 4WD, automatic only",
+   "detail": "Frontier: 4WD, 3.3L only; Xterra 2003: 4WD, 3.3L only; Xterra 2004: 4WD, 3.3L, automatic only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2152"
    ],
@@ -182300,37 +182285,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L2186"
-   ],
-   "pn": "24810-ZL80D",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L2193"
-   ],
-   "pn": "24810-ZL99A",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L2198"
-   ],
-   "pn": "24810-ZS42D",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder 2006-2007: part-time 4WD only; Pathfinder 2008: part-time 4WD, 4.0L only; Xterra: 4WD only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2720"
    ],
@@ -182340,11 +182295,51 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder 2006-2007: part-time 4WD only; Pathfinder 2008: part-time 4WD, 4.0L only; Xterra: 4WD only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2729"
    ],
    "pn": "24810-ZP67A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder 2008: part-time 4WD, 4.0L only; Pathfinder 2009: part-time 4WD only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2198"
+   ],
+   "pn": "24810-ZS42D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: part-time 4WD, 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4703"
+   ],
+   "pn": "24810-9BA7C",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: part-time 4WD, 4.0L only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2186"
+   ],
+   "pn": "24810-ZL80D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: part-time 4WD, 4.0L only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2193"
+   ],
+   "pn": "24810-ZL99A",
    "reason": "held_drive_qualifier",
    "t": null
   },
@@ -182355,6 +182350,26 @@
     "www.nissanpartsdeal.com:records:L3533"
    ],
    "pn": "24810-EA12D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, automatic only; Xterra: automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4794"
+   ],
+   "pn": "24810-9BD1B",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, manual only; Xterra: 4WD, automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4796"
+   ],
+   "pn": "24810-9BD4D",
    "reason": "held_drive_qualifier",
    "t": null
   },
@@ -182400,16 +182415,6 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Frontier: 4WD, manual only; Xterra: 4WD, automatic only",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4796"
-   ],
-   "pn": "24810-9BD4D",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
    "detail": "Infiniti M35 2008: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1154"
@@ -182446,6 +182451,696 @@
    ],
    "pn": "24820-EJ70B",
    "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Nissan Frontier 2000: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3324"
+   ],
+   "pn": "24810-9Z481",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Nissan Frontier 2000: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3328"
+   ],
+   "pn": "24810-9Z473",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Nissan Frontier 2000: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3329"
+   ],
+   "pn": "24810-9Z475",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Nissan Frontier 2000: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3330"
+   ],
+   "pn": "24810-9Z477",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Pathfinder 2006-2007: 2WD only; Pathfinder 2008: 2WD, 4.0L only; Xterra: 2WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2724"
+   ],
+   "pn": "24810-EA67D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Pathfinder 2006-2007: 2WD only; Pathfinder 2008: 2WD, 4.0L only; Xterra: 2WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2731"
+   ],
+   "pn": "24810-ZP77A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Pathfinder 2008: 2WD, 4.0L only; Pathfinder 2009: 2WD only; Xterra: 2WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2200"
+   ],
+   "pn": "24810-ZS44D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2312"
+   ],
+   "pn": "24810-ZD90A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2314"
+   ],
+   "pn": "24810-ZD90C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2315"
+   ],
+   "pn": "24810-ZD91A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2317"
+   ],
+   "pn": "24810-ZD91C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2318"
+   ],
+   "pn": "24810-ZD92A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2320"
+   ],
+   "pn": "24810-ZD92C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2323"
+   ],
+   "pn": "24810-ZD93C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2325"
+   ],
+   "pn": "24810-ZD94C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2329"
+   ],
+   "pn": "24810-ZD96C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2332"
+   ],
+   "pn": "24810-ZD99A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2333"
+   ],
+   "pn": "24810-ZD99B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2334"
+   ],
+   "pn": "24810-ZD99C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2727"
+   ],
+   "pn": "24810-EC44C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3023"
+   ],
+   "pn": "24810-7S82E",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3024"
+   ],
+   "pn": "24810-7S83A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3026"
+   ],
+   "pn": "24810-7S85A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4306"
+   ],
+   "pn": "24810-7S82C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4307"
+   ],
+   "pn": "24810-7S82D",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4308"
+   ],
+   "pn": "24810-7S83B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4309"
+   ],
+   "pn": "24810-7S84C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4311"
+   ],
+   "pn": "24810-7S85B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4312"
+   ],
+   "pn": "24810-7S85C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4313"
+   ],
+   "pn": "24810-8S74A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4316"
+   ],
+   "pn": "24810-8S74E",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4317"
+   ],
+   "pn": "24810-8S75A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4404"
+   ],
+   "pn": "24810-ZQ02D",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4405"
+   ],
+   "pn": "24810-ZQ03A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4406"
+   ],
+   "pn": "24810-ZQ03C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4407"
+   ],
+   "pn": "24810-ZQ03E",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4408"
+   ],
+   "pn": "24810-ZQ04B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4409"
+   ],
+   "pn": "24810-ZQ04D",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4410"
+   ],
+   "pn": "24810-ZQ07D",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4411"
+   ],
+   "pn": "24810-ZQ08A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4412"
+   ],
+   "pn": "24810-ZQ08C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4413"
+   ],
+   "pn": "24810-ZQ08E",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4414"
+   ],
+   "pn": "24810-ZQ09B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4415"
+   ],
+   "pn": "24810-ZQ09D",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4424"
+   ],
+   "pn": "24810-ZQ33C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4425"
+   ],
+   "pn": "24810-ZQ33E",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4426"
+   ],
+   "pn": "24810-ZQ34B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4427"
+   ],
+   "pn": "24810-ZQ34D",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4428"
+   ],
+   "pn": "24810-ZQ38C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4429"
+   ],
+   "pn": "24810-ZQ38E",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4430"
+   ],
+   "pn": "24810-ZQ39B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4431"
+   ],
+   "pn": "24810-ZQ39D",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4432"
+   ],
+   "pn": "24810-ZR01A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4433"
+   ],
+   "pn": "24810-ZR01C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4434"
+   ],
+   "pn": "24810-ZR02B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4435"
+   ],
+   "pn": "24810-ZR03C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4436"
+   ],
+   "pn": "24810-ZR03E",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4437"
+   ],
+   "pn": "24810-ZR04B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4438"
+   ],
+   "pn": "24810-ZR04D",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4439"
+   ],
+   "pn": "24810-ZR06A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4440"
+   ],
+   "pn": "24810-ZR06C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4441"
+   ],
+   "pn": "24810-ZR07B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4442"
+   ],
+   "pn": "24810-ZR08C",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4443"
+   ],
+   "pn": "24810-ZR08E",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4444"
+   ],
+   "pn": "24810-ZR09B",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4445"
+   ],
+   "pn": "24810-ZR09D",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4566"
+   ],
+   "pn": "24810-ZQ04A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4567"
+   ],
+   "pn": "24810-ZQ09A",
+   "reason": "held_market_kph",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "km/h-first unit",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4568"
+   ],
+   "pn": "24810-ZQ39A",
+   "reason": "held_market_kph",
    "t": null
   },
   {
@@ -182552,26 +183247,6 @@
   },
   {
    "cat": "grille",
-   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2014-2017",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1258"
-   ],
-   "pn": "62310-3JA0A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "grille",
-   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2014-2017",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1259"
-   ],
-   "pn": "62310-3JA0B",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "grille",
    "detail": "Infiniti M35 2006-2008;Infiniti M45 2006-2008",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1169"
@@ -182602,11 +183277,11 @@
   },
   {
    "cat": "grille",
-   "detail": "Infiniti M37 2011-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
+   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2011-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
-    "www.infinitipartsdeal.com:records:L1661"
+    "www.infinitipartsdeal.com:records:L1662"
    ],
-   "pn": "62310-1MA1B",
+   "pn": "62310-1MA0B",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -182642,11 +183317,11 @@
   },
   {
    "cat": "grille",
-   "detail": "M37 2011: 4WD only; M56 2011: 4WD only; Q70: gas only",
+   "detail": "M37 2011: 2WD only; M56 2011: 2WD only; Q70: gas only",
    "evidence": [
-    "www.infinitipartsdeal.com:records:L1662"
+    "www.infinitipartsdeal.com:records:L1661"
    ],
-   "pn": "62310-1MA0B",
+   "pn": "62310-1MA1B",
    "reason": "held_drive_qualifier",
    "t": null
   },
@@ -182678,6 +183353,26 @@
    ],
    "pn": "62310-EA700",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "QX60 2014-2015: 3.5L, gas only; QX60 2016-2017: gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1258"
+   ],
+   "pn": "62310-3JA0A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "QX60 2014-2015: 3.5L, gas only; QX60 2016-2017: gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1259"
+   ],
+   "pn": "62310-3JA0B",
+   "reason": "held_drive_qualifier",
    "t": null
   },
   {
@@ -183998,26 +184693,6 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2014-2017",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L364"
-   ],
-   "pn": "26060-3JJ3A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2014-2017",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L366"
-   ],
-   "pn": "26010-3JJ3A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
    "detail": "Infiniti M35 2006-2006;Infiniti M45 2006-2006",
    "evidence": [
     "www.infinitipartsdeal.com:records:L291"
@@ -184294,6 +184969,26 @@
    ],
    "pn": "26010-1LA5A",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L, gas only; QX60 2016-2017: AWD, gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L364"
+   ],
+   "pn": "26060-3JJ3A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L, gas only; QX60 2016-2017: AWD, gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L366"
+   ],
+   "pn": "26010-3JJ3A",
+   "reason": "held_drive_qualifier",
    "t": null
   },
   {
@@ -185503,7 +186198,17 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Frontier 2002-2004: 3.3L only; Xterra 2001-2004: 3.3L only",
+   "detail": "Frontier 2002: king cab/crew cab only; Frontier 2003-2004: 3.3L only; Xterra: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L265"
+   ],
+   "pn": "96301-3S510",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier 2002: king cab/crew cab, 3.3L only; Frontier 2003-2004: 3.3L only; Xterra: 3.3L only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L261"
    ],
@@ -185513,11 +186218,61 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Frontier 2003-2004: 3.3L only; Xterra 2001-2004: 3.3L only",
+   "detail": "Frontier 2002: regular cab/king cab only; Frontier 2003: king cab, 2.4L only; Xterra 2003: 2.4L only",
    "evidence": [
-    "www.nissanpartsdeal.com:records:L265"
+    "www.nissanpartsdeal.com:records:L259"
    ],
-   "pn": "96301-3S510",
+   "pn": "96302-3B300",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier 2002: regular cab/king cab only; Frontier 2003: king cab, 2.4L only; Xterra 2003: 2.4L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L263"
+   ],
+   "pn": "96301-S3800",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier 2005-2007: crew cab, 4.0L only; Frontier 2008-2010: 4.0L only; Frontier 2012-2017: 4.0L only; Frontier 2019: 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L303"
+   ],
+   "pn": "96302-EA18E",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier 2005-2007: crew cab, 4.0L only; Frontier 2008-2010: 4.0L only; Frontier 2012-2017: 4.0L only; Frontier 2019: 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L305"
+   ],
+   "pn": "96301-EA18E",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier 2005-2010: 4.0L only; Frontier 2012-2017: 4.0L only; Frontier 2019: 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L807"
+   ],
+   "pn": "96302-EA19E",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier 2005-2010: 4.0L only; Frontier 2012-2017: 4.0L only; Frontier 2019: 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L808"
+   ],
+   "pn": "96301-EA19E",
    "reason": "held_drive_qualifier",
    "t": null
   },
@@ -185639,6 +186394,66 @@
    ],
    "pn": "96302-CL80A",
    "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L, gas only; QX60 2016-2017: AWD, gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L372"
+   ],
+   "pn": "96302-3JN9B",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L, gas only; QX60 2016-2017: AWD, gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L377"
+   ],
+   "pn": "96301-3JN9B",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Pathfinder 2008: 4.0L only; Pathfinder 2010-2011: 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L302"
+   ],
+   "pn": "96302-EA005",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Pathfinder 2008: 4.0L only; Pathfinder 2010-2011: 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L306"
+   ],
+   "pn": "96301-EA005",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "QX60 2014-2015: 3.5L, gas only; QX60 2016-2017: gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L371"
+   ],
+   "pn": "96302-3JA9C",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "QX60 2014-2015: 3.5L, gas only; QX60 2016-2017: gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L376"
+   ],
+   "pn": "96301-3JA9C",
+   "reason": "held_drive_qualifier",
    "t": null
   },
   {
@@ -187050,6 +187865,86 @@
   },
   {
    "cat": "window-regulator",
+   "detail": "Frontier 2002: king cab/crew cab only; Xterra 2004: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L269"
+   ],
+   "pn": "80721-3S500",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Frontier 2002: king cab/crew cab only; Xterra 2004: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L271"
+   ],
+   "pn": "80720-3S500",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Frontier: 3.3L only; Xterra 2000: 2.4L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1338"
+   ],
+   "pn": "82731-7Z005",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Frontier: 3.3L only; Xterra 2000: 2.4L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1340"
+   ],
+   "pn": "82730-7Z005",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Frontier: 3.3L only; Xterra 2000: 2.4L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L275"
+   ],
+   "pn": "82721-7Z000",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Frontier: 3.3L only; Xterra 2000: 2.4L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L277"
+   ],
+   "pn": "82720-7Z000",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Frontier: 3.3L only; Xterra 2000: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L276"
+   ],
+   "pn": "82721-7Z005",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Frontier: 3.3L only; Xterra 2000: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L278"
+   ],
+   "pn": "82720-7Z005",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
    "detail": "Infiniti FX35 2003: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L211"
@@ -187965,23 +188860,23 @@
    "window-regulator": 1950,
    "wiper-motor": 799
   },
-  "likely_groups": 286,
+  "likely_groups": 249,
   "likely_groups_drive_noted": {
    "bumper-front": 5,
    "bumper-rear": 4,
-   "climate-control": 6,
-   "door-front": 7,
+   "climate-control": 13,
+   "door-front": 16,
    "door-rear": 6,
    "fender": 2,
-   "gauge-cluster": 69,
+   "gauge-cluster": 60,
    "grille": 8,
    "headlights": 16,
    "hood": 2,
    "liftgate": 2,
-   "side-mirrors": 21,
+   "side-mirrors": 27,
    "tail-lights": 8,
    "trunk-lid": 3,
-   "window-regulator": 35
+   "window-regulator": 40
   },
   "list_rows": 75222,
   "records": 7778,

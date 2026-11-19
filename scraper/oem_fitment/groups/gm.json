@@ -177887,34 +177887,6 @@
    ],
    "reman": false
   },
-  "gm:20835552": {
-   "cat": "window-switch",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L144"
-   ],
-   "names": [
-    "SWITCH, DOOR LOCK & SIDE WINDOW(PART OF 9)(MASTER SWITCH ASM)"
-   ],
-   "pns": [
-    "20835552"
-   ],
-   "reman": false
-  },
-  "gm:20835553": {
-   "cat": "window-switch",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L143"
-   ],
-   "names": [
-    "SWITCH, FRONT SIDE DOOR WINDOW CONTROL(W/POWER MIRROR SWITCH)(NEEDS TO BLACK ENAMEL PROGRAMMED)"
-   ],
-   "pns": [
-    "20835553"
-   ],
-   "reman": false
-  },
   "gm:20838852": {
    "cat": "window-switch",
    "comp": null,
@@ -203291,9 +203263,20 @@
    ],
    "cars": 255,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Oldsmobile",
+     "Alero",
+     2001,
+     2001,
+     {
+      "body": "coupe"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FL+FR+RL+RR+SL+SR:a702208886",
    "kind": "body",
-   "note": "GM catalog lists #19152000 for both — window motor only; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #19152000 for both — window motor only; option: fits some option packages; Alero: coupe only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:30:00Z",
    "pn": [
     "19152000"
@@ -203324,9 +203307,20 @@
    ],
    "cars": 255,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Oldsmobile",
+     "Alero",
+     2001,
+     2001,
+     {
+      "body": "coupe"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FL+FR+RL+RR+SL+SR:1bc70105c8",
    "kind": "body",
-   "note": "GM catalog lists #19152005 for both — window motor only; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #19152005 for both — window motor only; option: fits some option packages; Alero: coupe only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:30:08Z",
    "pn": [
     "19152005"
@@ -204486,6 +204480,9 @@
      2012,
      2012,
      {
+      "eng_not": [
+       "8.1L"
+      ],
       "fuel": "gas"
      }
     ]
@@ -204530,6 +204527,9 @@
      2012,
      2012,
      {
+      "eng_not": [
+       "8.1L"
+      ],
       "fuel": "gas"
      }
     ]
@@ -204567,94 +204567,6 @@
    "oldest_retrieved": "2026-11-05T07:09:48Z",
    "pn": [
     "20830824"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 417,
-   "cat": "window-switch",
-   "gates": [
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012,
-     {
-      "fuel": "gas"
-     }
-    ]
-   ],
-   "id": "oem:gm:window-switch:DM:d5841134b0",
-   "kind": "body",
-   "note": "GM catalog lists #20835552 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:30:05Z",
-   "pn": [
-    "20835552"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 417,
-   "cat": "window-switch",
-   "gates": [
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012,
-     {
-      "fuel": "gas"
-     }
-    ]
-   ],
-   "id": "oem:gm:window-switch:DM:7c40f97f24",
-   "kind": "body",
-   "note": "GM catalog lists #20835553 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:30:02Z",
-   "pn": [
-    "20835553"
    ],
    "reason": "option",
    "tier": "likely"
@@ -204716,6 +204628,9 @@
      2012,
      2012,
      {
+      "eng_not": [
+       "8.1L"
+      ],
       "fuel": "gas"
      }
     ]
@@ -204760,6 +204675,9 @@
      2012,
      2012,
      {
+      "eng_not": [
+       "8.1L"
+      ],
       "fuel": "gas"
      }
     ]
@@ -204804,6 +204722,9 @@
      2012,
      2012,
      {
+      "eng_not": [
+       "8.1L"
+      ],
       "fuel": "gas"
      }
     ]
@@ -204875,6 +204796,9 @@
      2012,
      2012,
      {
+      "eng_not": [
+       "8.1L"
+      ],
       "fuel": "gas"
      }
     ]
@@ -204919,6 +204843,9 @@
      2012,
      2012,
      {
+      "eng_not": [
+       "8.1L"
+      ],
       "fuel": "gas"
      }
     ]
@@ -206942,9 +206869,24 @@
    ],
    "cars": 302,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Malibu",
+     2016,
+     2016,
+     {
+      "eng": [
+       "1.5L",
+       "1.8L",
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FR:c26b6640c5",
    "kind": "body",
-   "note": "GM catalog lists #84198841 for both — window motor only; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #84198841 for both — window motor only; option: fits some option packages; Malibu 2016: 1.5L/1.8L/2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:32:52Z",
    "pn": [
     "84198841"
@@ -206975,9 +206917,24 @@
    ],
    "cars": 302,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Malibu",
+     2016,
+     2016,
+     {
+      "eng": [
+       "1.5L",
+       "1.8L",
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RL:beae76b046",
    "kind": "body",
-   "note": "GM catalog lists #84198850 for both — window motor only; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #84198850 for both — window motor only; option: fits some option packages; Malibu 2016: 1.5L/1.8L/2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:33:40Z",
    "pn": [
     "84198850"
@@ -207008,9 +206965,24 @@
    ],
    "cars": 302,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Malibu",
+     2016,
+     2016,
+     {
+      "eng": [
+       "1.5L",
+       "1.8L",
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RR:449ee3b062",
    "kind": "body",
-   "note": "GM catalog lists #84198851 for both — window motor only; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #84198851 for both — window motor only; option: fits some option packages; Malibu 2016: 1.5L/1.8L/2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:33:48Z",
    "pn": [
     "84198851"
@@ -207344,7 +207316,7 @@
   }
  ],
  "ns": "gm",
- "policy_sha256": "96f528783ceb0378bda6dc338f26473aac353d4f5b8af12bf516ccfa68a3cfa6",
+ "policy_sha256": "24b4de0f9754a8265583fbe348b62f0c5f7037403f6c356c475a9250e7a83e2b",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

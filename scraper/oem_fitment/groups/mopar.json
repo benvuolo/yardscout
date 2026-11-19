@@ -90957,20 +90957,6 @@
    ],
    "reman": false
   },
-  "mopar:4805424AI": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.moparpartsgiant.com:records:L2521"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "4805424AI"
-   ],
-   "reman": false
-  },
   "mopar:4805738AB": {
    "cat": "side-mirrors",
    "comp": null,
@@ -91054,20 +91040,6 @@
    ],
    "pns": [
     "4805944AB"
-   ],
-   "reman": false
-  },
-  "mopar:4805947AB": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.moparpartsgiant.com:records:L2524"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "4805947AB"
    ],
    "reman": false
   },
@@ -91198,20 +91170,6 @@
    ],
    "reman": false
   },
-  "mopar:4806270AA": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.moparpartsgiant.com:records:L663"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "4806270AA"
-   ],
-   "reman": false
-  },
   "mopar:4806871AL": {
    "cat": "side-mirrors",
    "comp": null,
@@ -91299,20 +91257,6 @@
    ],
    "reman": false
   },
-  "mopar:4894401AB": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1633"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "4894401AB"
-   ],
-   "reman": false
-  },
   "mopar:4894401AE": {
    "cat": "side-mirrors",
    "comp": null,
@@ -91325,20 +91269,6 @@
    ],
    "pns": [
     "4894401AE"
-   ],
-   "reman": false
-  },
-  "mopar:4894403AB": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1636"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "4894403AB"
    ],
    "reman": false
   },
@@ -91357,34 +91287,6 @@
    ],
    "reman": false
   },
-  "mopar:4894404AC": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1634"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "4894404AC"
-   ],
-   "reman": false
-  },
-  "mopar:4894404AD": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1635"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "4894404AD"
-   ],
-   "reman": false
-  },
   "mopar:4894404AF": {
    "cat": "side-mirrors",
    "comp": null,
@@ -91397,34 +91299,6 @@
    ],
    "pns": [
     "4894404AF"
-   ],
-   "reman": false
-  },
-  "mopar:4894405AC": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1637"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "4894405AC"
-   ],
-   "reman": false
-  },
-  "mopar:4894405AE": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1638"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "4894405AE"
    ],
    "reman": false
   },
@@ -91455,20 +91329,6 @@
    ],
    "pns": [
     "4894410AE"
-   ],
-   "reman": false
-  },
-  "mopar:4894411AC": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1639"
-   ],
-   "names": [
-    "MIRROR Outside Rearview"
-   ],
-   "pns": [
-    "4894411AC"
    ],
    "reman": false
   },
@@ -114133,9 +113993,22 @@
    ],
    "cars": 32,
    "cat": "gauge-cluster",
+   "gates": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002,
+     {
+      "eng": [
+       "3.5L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:gauge-cluster:C:99d5639795",
    "kind": "body",
-   "note": "Mopar catalog lists #4760404AH for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4760404AH for both — trim-limited; Concorde: 3.5L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T13:34:40Z",
    "pn": [
     "4760404AH"
@@ -114178,9 +114051,35 @@
    ],
    "cars": 826,
    "cat": "wheels",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:wheels:C:c1de88d963",
    "kind": "body",
-   "note": "Mopar catalog lists #4766332AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4766332AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T18:27:22Z",
    "pn": [
     "4766332AA"
@@ -114448,33 +114347,6 @@
     [
      "Chrysler",
      "300M",
-     2002,
-     2002
-    ],
-    [
-     "Chrysler",
-     "Concorde",
-     2002,
-     2002
-    ]
-   ],
-   "cars": 37,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:R:2d819e6737",
-   "kind": "body",
-   "note": "Mopar catalog lists #4805424AI for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T08:49:29Z",
-   "pn": [
-    "4805424AI"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "300M",
      2000,
      2000
     ],
@@ -114642,33 +114514,6 @@
     "4805944AB"
    ],
    "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "300M",
-     2002,
-     2002
-    ],
-    [
-     "Chrysler",
-     "Concorde",
-     2002,
-     2002
-    ]
-   ],
-   "cars": 37,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:L:bdde931dc5",
-   "kind": "body",
-   "note": "Mopar catalog lists #4805947AB for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T08:49:53Z",
-   "pn": [
-    "4805947AB"
-   ],
-   "reason": "conditional",
    "tier": "likely"
   },
   {
@@ -114927,33 +114772,6 @@
      "Charger",
      2007,
      2007
-    ]
-   ],
-   "cars": 660,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:R:269b87eb05",
-   "kind": "body",
-   "note": "Mopar catalog lists #4806270AA for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:10:25Z",
-   "pn": [
-    "4806270AA"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "300",
-     2006,
-     2006
-    ],
-    [
-     "Dodge",
-     "Charger",
-     2007,
-     2007
     ],
     [
      "Dodge",
@@ -114997,9 +114815,35 @@
    ],
    "cars": 860,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:tail-lights:R:68d1b3d471",
    "kind": "body",
-   "note": "Mopar catalog lists #4857954AA for both — older catalog-only number; verify the number on the part",
+   "note": "Mopar catalog lists #4857954AA for both — older catalog-only number; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T03:16:53Z",
    "pn": [
     "4857954AA"
@@ -115030,9 +114874,35 @@
    ],
    "cars": 860,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:tail-lights:L:af4a481a85",
    "kind": "body",
-   "note": "Mopar catalog lists #4857955AA for both — older catalog-only number; verify the number on the part",
+   "note": "Mopar catalog lists #4857955AA for both — older catalog-only number; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T03:16:45Z",
    "pn": [
     "4857955AA"
@@ -115063,9 +114933,35 @@
    ],
    "cars": 617,
    "cat": "hood",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:hood:C:62c7438697",
    "kind": "body",
-   "note": "Mopar catalog lists #4860455AC for both — older catalog-only number; verify the number on the part",
+   "note": "Mopar catalog lists #4860455AC for both — older catalog-only number; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T11:22:55Z",
    "pn": [
     "4860455AC"
@@ -115148,39 +115044,6 @@
      2005
     ],
     [
-     "Dodge",
-     "Caravan",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Grand Caravan",
-     2004,
-     2005
-    ]
-   ],
-   "cars": 657,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:L:5251c3a7a2",
-   "kind": "body",
-   "note": "Mopar catalog lists #4894401AB for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:38:07Z",
-   "pn": [
-    "4894401AB"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Town & Country",
-     2005,
-     2005
-    ],
-    [
      "Chrysler",
      "Voyager",
      2003,
@@ -115207,9 +115070,35 @@
    ],
    "cars": 826,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:side-mirrors:L:ec1b1f0f39",
    "kind": "body",
-   "note": "Mopar catalog lists #4894401AE for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894401AE for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:37:19Z",
    "pn": [
     "4894401AE"
@@ -115226,39 +115115,6 @@
      2005
     ],
     [
-     "Dodge",
-     "Caravan",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Grand Caravan",
-     2004,
-     2005
-    ]
-   ],
-   "cars": 657,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:L:080df62d92",
-   "kind": "body",
-   "note": "Mopar catalog lists #4894403AB for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:38:31Z",
-   "pn": [
-    "4894403AB"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Town & Country",
-     2005,
-     2005
-    ],
-    [
      "Chrysler",
      "Voyager",
      2003,
@@ -115285,9 +115141,35 @@
    ],
    "cars": 826,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:side-mirrors:L:9a5d04562a",
    "kind": "body",
-   "note": "Mopar catalog lists #4894403AG for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894403AG for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:37:27Z",
    "pn": [
     "4894403AG"
@@ -115304,72 +115186,6 @@
      2005
     ],
     [
-     "Dodge",
-     "Caravan",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Grand Caravan",
-     2004,
-     2005
-    ]
-   ],
-   "cars": 657,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:R:4faf338d59",
-   "kind": "body",
-   "note": "Mopar catalog lists #4894404AC for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:38:16Z",
-   "pn": [
-    "4894404AC"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Town & Country",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Caravan",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Grand Caravan",
-     2005,
-     2005
-    ]
-   ],
-   "cars": 617,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:R:f8543da95a",
-   "kind": "body",
-   "note": "Mopar catalog lists #4894404AD for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:38:23Z",
-   "pn": [
-    "4894404AD"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Town & Country",
-     2005,
-     2005
-    ],
-    [
      "Chrysler",
      "Voyager",
      2003,
@@ -115396,9 +115212,35 @@
    ],
    "cars": 826,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:side-mirrors:R:c1e4e36e3e",
    "kind": "body",
-   "note": "Mopar catalog lists #4894404AF for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894404AF for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:37:35Z",
    "pn": [
     "4894404AF"
@@ -115415,72 +115257,6 @@
      2005
     ],
     [
-     "Dodge",
-     "Caravan",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Grand Caravan",
-     2004,
-     2005
-    ]
-   ],
-   "cars": 657,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:L:fe6f7cbf30",
-   "kind": "body",
-   "note": "Mopar catalog lists #4894405AC for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:38:39Z",
-   "pn": [
-    "4894405AC"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Town & Country",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Caravan",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Grand Caravan",
-     2005,
-     2005
-    ]
-   ],
-   "cars": 617,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:L:cdc050cbba",
-   "kind": "body",
-   "note": "Mopar catalog lists #4894405AE for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:38:47Z",
-   "pn": [
-    "4894405AE"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Town & Country",
-     2005,
-     2005
-    ],
-    [
      "Chrysler",
      "Voyager",
      2003,
@@ -115507,9 +115283,35 @@
    ],
    "cars": 826,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:side-mirrors:L:42305e17af",
    "kind": "body",
-   "note": "Mopar catalog lists #4894405AF for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894405AF for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:37:43Z",
    "pn": [
     "4894405AF"
@@ -115552,47 +115354,40 @@
    ],
    "cars": 826,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:side-mirrors:R:c80723bffb",
    "kind": "body",
-   "note": "Mopar catalog lists #4894410AE for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894410AE for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:37:52Z",
    "pn": [
     "4894410AE"
    ],
    "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Town & Country",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Caravan",
-     2005,
-     2005
-    ],
-    [
-     "Dodge",
-     "Grand Caravan",
-     2004,
-     2005
-    ]
-   ],
-   "cars": 657,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:L:1e26f3a43b",
-   "kind": "body",
-   "note": "Mopar catalog lists #4894411AC for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:38:55Z",
-   "pn": [
-    "4894411AC"
-   ],
-   "reason": "option",
    "tier": "likely"
   },
   {
@@ -115630,9 +115425,35 @@
    ],
    "cars": 826,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:side-mirrors:L:82d1333035",
    "kind": "body",
-   "note": "Mopar catalog lists #4894411AE for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894411AE for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:37:59Z",
    "pn": [
     "4894411AE"
@@ -115669,9 +115490,35 @@
    ],
    "cars": 810,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:window-regulator:FR:4a5a18dc86",
    "kind": "body",
-   "note": "Mopar catalog lists #4894526AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894526AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:39:11Z",
    "pn": [
     "4894526AA"
@@ -115708,9 +115555,35 @@
    ],
    "cars": 810,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:window-regulator:FL:6763f10c72",
    "kind": "body",
-   "note": "Mopar catalog lists #4894527AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894527AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:39:19Z",
    "pn": [
     "4894527AA"
@@ -115747,9 +115620,35 @@
    ],
    "cars": 810,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:window-regulator:FR:97e57cd35c",
    "kind": "body",
-   "note": "Mopar catalog lists #4894528AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894528AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:39:27Z",
    "pn": [
     "4894528AA"
@@ -115786,9 +115685,35 @@
    ],
    "cars": 810,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:window-regulator:FL:d5b60033f0",
    "kind": "body",
-   "note": "Mopar catalog lists #4894529AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4894529AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:39:35Z",
    "pn": [
     "4894529AA"
@@ -115870,9 +115795,35 @@
    ],
    "cars": 865,
    "cat": "fender",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:fender:R:fb2f4b88ea",
    "kind": "body",
-   "note": "Mopar catalog lists #5018442AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5018442AB for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T11:23:51Z",
    "pn": [
     "5018442AB"
@@ -115921,9 +115872,35 @@
    ],
    "cars": 865,
    "cat": "fender",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:fender:L:e2cd119ed4",
    "kind": "body",
-   "note": "Mopar catalog lists #5018443AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5018443AB for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T11:24:09Z",
    "pn": [
     "5018443AB"
@@ -116221,9 +116198,35 @@
    ],
    "cars": 617,
    "cat": "gauge-cluster",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:gauge-cluster:C:328244f28a",
    "kind": "body",
-   "note": "Mopar catalog lists #5082400AD for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5082400AD for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T11:17:32Z",
    "pn": [
     "5082400AD"
@@ -116254,9 +116257,35 @@
    ],
    "cars": 617,
    "cat": "gauge-cluster",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:gauge-cluster:C:4526f3e124",
    "kind": "body",
-   "note": "Mopar catalog lists #5082406AI for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5082406AI for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T11:17:40Z",
    "pn": [
     "5082406AI"
@@ -116287,9 +116316,35 @@
    ],
    "cars": 617,
    "cat": "gauge-cluster",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:gauge-cluster:C:2e95788876",
    "kind": "body",
-   "note": "Mopar catalog lists #5082552AE for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5082552AE for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T11:17:48Z",
    "pn": [
     "5082552AE"
@@ -116653,9 +116708,23 @@
    ],
    "cars": 165,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:climate-control:C:32dc100e76",
    "kind": "body",
-   "note": "Mopar catalog lists #5134624AA for both — option: fits some option packages; verify the number on the part",
+   "note": "Mopar catalog lists #5134624AA for both — option: fits some option packages; Caravan: 2.4L/3.3L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:47Z",
    "pn": [
     "5134624AA"
@@ -116692,9 +116761,35 @@
    ],
    "cars": 810,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:climate-control:C:26f117dc08",
    "kind": "body",
-   "note": "Mopar catalog lists #5134624AC for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5134624AC for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:15Z",
    "pn": [
     "5134624AC"
@@ -116731,9 +116826,35 @@
    ],
    "cars": 810,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:climate-control:C:301c95cba9",
    "kind": "body",
-   "note": "Mopar catalog lists #5134625AC for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5134625AC for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:24Z",
    "pn": [
     "5134625AC"
@@ -116770,9 +116891,35 @@
    ],
    "cars": 810,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:climate-control:C:739ffd19d7",
    "kind": "body",
-   "note": "Mopar catalog lists #5134626AC for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5134626AC for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:07Z",
    "pn": [
     "5134626AC"
@@ -116809,9 +116956,35 @@
    ],
    "cars": 810,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:climate-control:C:c2a5a37ed4",
    "kind": "body",
-   "note": "Mopar catalog lists #5134627AC for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5134627AC for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:31Z",
    "pn": [
     "5134627AC"
@@ -116842,9 +117015,35 @@
    ],
    "cars": 617,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:climate-control:C:de5f78a527",
    "kind": "body",
-   "note": "Mopar catalog lists #5136781AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5136781AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:39Z",
    "pn": [
     "5136781AA"
@@ -117321,13 +117520,17 @@
      2012,
      {
       "drive": "4wd",
-      "drive_basis": "unchecked"
+      "drive_basis": "unchecked",
+      "eng": [
+       "4.7L",
+       "5.7L"
+      ]
      }
     ]
    ],
    "id": "oem:mopar:climate-control:C:7fd45cf94a",
    "kind": "body",
-   "note": "Mopar catalog lists #55111290AD for both — older catalog-only number; 1500: only 4WD checked; verify the number on the part",
+   "note": "Mopar catalog lists #55111290AD for both — older catalog-only number; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:22:08Z",
    "pn": [
     "55111290AD"
@@ -117360,13 +117563,17 @@
      2012,
      {
       "drive": "4wd",
-      "drive_basis": "unchecked"
+      "drive_basis": "unchecked",
+      "eng": [
+       "4.7L",
+       "5.7L"
+      ]
      }
     ]
    ],
    "id": "oem:mopar:climate-control:C:9424d53889",
    "kind": "body",
-   "note": "Mopar catalog lists #55111291AC for both — older catalog-only number; 1500: only 4WD checked; verify the number on the part",
+   "note": "Mopar catalog lists #55111291AC for both — older catalog-only number; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:22:24Z",
    "pn": [
     "55111291AC"
@@ -117399,13 +117606,17 @@
      2012,
      {
       "drive": "4wd",
-      "drive_basis": "unchecked"
+      "drive_basis": "unchecked",
+      "eng": [
+       "4.7L",
+       "5.7L"
+      ]
      }
     ]
    ],
    "id": "oem:mopar:climate-control:C:de515432b6",
    "kind": "body",
-   "note": "Mopar catalog lists #55111292AD for both — older catalog-only number; 1500: only 4WD checked; verify the number on the part",
+   "note": "Mopar catalog lists #55111292AD for both — older catalog-only number; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:22:16Z",
    "pn": [
     "55111292AD"
@@ -117924,13 +118135,17 @@
      2012,
      {
       "drive": "4wd",
-      "drive_basis": "unchecked"
+      "drive_basis": "unchecked",
+      "eng": [
+       "4.7L",
+       "5.7L"
+      ]
      }
     ]
    ],
    "id": "oem:mopar:headlights:L:a55cfaec10",
    "kind": "body",
-   "note": "Mopar catalog lists #55277409AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part",
+   "note": "Mopar catalog lists #55277409AE for both — option: fits some option packages; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:16:24Z",
    "pn": [
     "55277409AE"
@@ -117990,13 +118205,17 @@
      2012,
      {
       "drive": "4wd",
-      "drive_basis": "unchecked"
+      "drive_basis": "unchecked",
+      "eng": [
+       "4.7L",
+       "5.7L"
+      ]
      }
     ]
    ],
    "id": "oem:mopar:headlights:R:8b8966eecd",
    "kind": "body",
-   "note": "Mopar catalog lists #55277410AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part",
+   "note": "Mopar catalog lists #55277410AE for both — option: fits some option packages; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:16:32Z",
    "pn": [
     "55277410AE"
@@ -118056,13 +118275,18 @@
      2012,
      {
       "drive": "4wd",
-      "drive_basis": "stated"
+      "drive_basis": "stated",
+      "eng": [
+       "3.6L",
+       "4.7L",
+       "5.7L"
+      ]
      }
     ]
    ],
    "id": "oem:mopar:tail-lights:L+R:a73fce7bcf",
    "kind": "body",
-   "note": "Mopar catalog lists #55277414AB for both — option: fits some option packages; 1500: 4WD only; verify the number on the part",
+   "note": "Mopar catalog lists #55277414AB for both — option: fits some option packages; 1500: 4WD, 3.6L/4.7L/5.7L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T06:16:48Z",
    "pn": [
     "55277414AB"
@@ -118122,13 +118346,18 @@
      2012,
      {
       "drive": "4wd",
-      "drive_basis": "stated"
+      "drive_basis": "stated",
+      "eng": [
+       "3.6L",
+       "4.7L",
+       "5.7L"
+      ]
      }
     ]
    ],
    "id": "oem:mopar:tail-lights:L:bbae4c9220",
    "kind": "body",
-   "note": "Mopar catalog lists #55277415AB for both — option: fits some option packages; 1500: 4WD only; verify the number on the part",
+   "note": "Mopar catalog lists #55277415AB for both — option: fits some option packages; 1500: 4WD, 3.6L/4.7L/5.7L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T06:16:40Z",
    "pn": [
     "55277415AB"
@@ -118333,9 +118562,23 @@
    ],
    "cars": 408,
    "cat": "wheels",
+   "gates": [
+    [
+     "Dodge",
+     "Durango",
+     2001,
+     2001,
+     {
+      "eng": [
+       "4.7L",
+       "5.9L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:wheels:C:4a6975f50d",
    "kind": "body",
-   "note": "Mopar catalog lists #5GR83PAKAC for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5GR83PAKAC for both — trim-limited; Durango 2001: 4.7L/5.9L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T18:26:42Z",
    "pn": [
     "5GR83PAKAC"
@@ -118692,13 +118935,17 @@
      2012,
      {
       "drive": "4wd",
-      "drive_basis": "unchecked"
+      "drive_basis": "unchecked",
+      "eng": [
+       "4.7L",
+       "5.7L"
+      ]
      }
     ]
    ],
    "id": "oem:mopar:headlights:R:85dcfec5c8",
    "kind": "body",
-   "note": "Mopar catalog lists #68001484AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part",
+   "note": "Mopar catalog lists #68001484AE for both — option: fits some option packages; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:15:44Z",
    "pn": [
     "68001484AE"
@@ -118758,13 +119005,17 @@
      2012,
      {
       "drive": "4wd",
-      "drive_basis": "unchecked"
+      "drive_basis": "unchecked",
+      "eng": [
+       "4.7L",
+       "5.7L"
+      ]
      }
     ]
    ],
    "id": "oem:mopar:headlights:L:bd75f40f24",
    "kind": "body",
-   "note": "Mopar catalog lists #68001485AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part",
+   "note": "Mopar catalog lists #68001485AE for both — option: fits some option packages; 1500: 4.7L/5.7L only; 1500: only 4WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:15:52Z",
    "pn": [
     "68001485AE"
@@ -119701,9 +119952,35 @@
    ],
    "cars": 810,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:tail-lights:R:439428bd86",
    "kind": "body",
-   "note": "Mopar catalog lists #68241334AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68241334AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:36:55Z",
    "pn": [
     "68241334AA"
@@ -119740,9 +120017,35 @@
    ],
    "cars": 810,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "2.4L",
+       "3.3L"
+      ]
+     }
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005,
+     {
+      "eng": [
+       "3.3L",
+       "3.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:mopar:tail-lights:L:edc947c2c0",
    "kind": "body",
-   "note": "Mopar catalog lists #68241335AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68241335AA for both — trim-limited; Caravan: 2.4L/3.3L only; Grand Caravan 2005: 3.3L/3.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:37:03Z",
    "pn": [
     "68241335AA"
@@ -121036,7 +121339,7 @@
   }
  ],
  "ns": "mopar",
- "policy_sha256": "96f528783ceb0378bda6dc338f26473aac353d4f5b8af12bf516ccfa68a3cfa6",
+ "policy_sha256": "24b4de0f9754a8265583fbe348b62f0c5f7037403f6c356c475a9250e7a83e2b",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

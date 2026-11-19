@@ -61925,20 +61925,6 @@
    ],
    "reman": false
   },
-  "hmg:54651A7600": {
-   "cat": "strut",
-   "comp": null,
-   "evidence": [
-    "www.kiapartsnow.com:records:L3410"
-   ],
-   "names": [
-    "Strut Assy-Fr, LH"
-   ],
-   "pns": [
-    "54651A7600"
-   ],
-   "reman": false
-  },
   "hmg:54651A7650": {
    "cat": "strut",
    "comp": null,
@@ -62076,20 +62062,6 @@
    ],
    "pns": [
     "54661A7300"
-   ],
-   "reman": false
-  },
-  "hmg:54661A7600": {
-   "cat": "strut",
-   "comp": null,
-   "evidence": [
-    "www.kiapartsnow.com:records:L3415"
-   ],
-   "names": [
-    "Strut Assy-Fr, RH"
-   ],
-   "pns": [
-    "54661A7600"
    ],
    "reman": false
   },
@@ -62261,20 +62233,6 @@
    ],
    "reman": false
   },
-  "hmg:55300A7600": {
-   "cat": "strut",
-   "comp": null,
-   "evidence": [
-    "www.kiapartsnow.com:records:L3400"
-   ],
-   "names": [
-    "Shock Absorber Assy-Rear"
-   ],
-   "pns": [
-    "55300A7600"
-   ],
-   "reman": false
-  },
   "hmg:55300A7650": {
    "cat": "strut",
    "comp": null,
@@ -62300,20 +62258,6 @@
    ],
    "pns": [
     "55300A7660"
-   ],
-   "reman": false
-  },
-  "hmg:55300A7670": {
-   "cat": "strut",
-   "comp": null,
-   "evidence": [
-    "www.kiapartsnow.com:records:L3406"
-   ],
-   "names": [
-    "Shock Absorber Assy-Rear"
-   ],
-   "pns": [
-    "55300A7670"
    ],
    "reman": false
   },
@@ -71270,57 +71214,6 @@
      2014,
      2014,
      {
-      "eng": [
-       "1.6L"
-      ]
-     }
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2014,
-     2014,
-     {
-      "eng": [
-       "1.6L"
-      ]
-     }
-    ]
-   ],
-   "id": "oem:hmg:strut:C:750be2c5c0",
-   "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54651A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part",
-   "oldest_retrieved": "2026-11-09T21:44:12Z",
-   "pn": [
-    "54651A7600"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Kia",
-     "Forte",
-     2014,
-     2014
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2014,
-     2014
-    ]
-   ],
-   "cars": 164,
-   "cat": "strut",
-   "gates": [
-    [
-     "Kia",
-     "Forte",
-     2014,
-     2014,
-     {
       "drive": "2wd",
       "drive_basis": "stated",
       "eng": [
@@ -71944,57 +71837,6 @@
    "oldest_retrieved": "2026-11-09T21:44:44Z",
    "pn": [
     "54661A7300"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Kia",
-     "Forte",
-     2014,
-     2014
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2014,
-     2014
-    ]
-   ],
-   "cars": 164,
-   "cat": "strut",
-   "gates": [
-    [
-     "Kia",
-     "Forte",
-     2014,
-     2014,
-     {
-      "eng": [
-       "1.6L"
-      ]
-     }
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2014,
-     2014,
-     {
-      "eng": [
-       "1.6L"
-      ]
-     }
-    ]
-   ],
-   "id": "oem:hmg:strut:C:fd7b69ac33",
-   "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54661A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part",
-   "oldest_retrieved": "2026-11-09T21:44:51Z",
-   "pn": [
-    "54661A7600"
    ],
    "reason": "option",
    "tier": "likely"
@@ -72691,57 +72533,6 @@
      2014,
      {
       "eng": [
-       "1.6L"
-      ]
-     }
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2014,
-     2014,
-     {
-      "eng": [
-       "1.6L"
-      ]
-     }
-    ]
-   ],
-   "id": "oem:hmg:strut:C:fc11451430",
-   "kind": "body",
-   "note": "Hyundai/Kia catalog lists #55300A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part",
-   "oldest_retrieved": "2026-11-09T21:42:44Z",
-   "pn": [
-    "55300A7600"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Kia",
-     "Forte",
-     2014,
-     2014
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2014,
-     2014
-    ]
-   ],
-   "cars": 164,
-   "cat": "strut",
-   "gates": [
-    [
-     "Kia",
-     "Forte",
-     2014,
-     2014,
-     {
-      "eng": [
        "2.0L"
       ]
      }
@@ -72815,57 +72606,6 @@
    "oldest_retrieved": "2026-11-09T21:43:23Z",
    "pn": [
     "55300A7660"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Kia",
-     "Forte",
-     2014,
-     2014
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2014,
-     2014
-    ]
-   ],
-   "cars": 164,
-   "cat": "strut",
-   "gates": [
-    [
-     "Kia",
-     "Forte",
-     2014,
-     2014,
-     {
-      "eng": [
-       "1.6L"
-      ]
-     }
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2014,
-     2014,
-     {
-      "eng": [
-       "1.6L"
-      ]
-     }
-    ]
-   ],
-   "id": "oem:hmg:strut:C:d791a799c7",
-   "kind": "body",
-   "note": "Hyundai/Kia catalog lists #55300A7670 for both — option: fits some option packages; 1.6L only; verify the number on the part",
-   "oldest_retrieved": "2026-11-09T21:43:31Z",
-   "pn": [
-    "55300A7670"
    ],
    "reason": "option",
    "tier": "likely"
@@ -73148,7 +72888,7 @@
   }
  ],
  "ns": "hmg",
- "policy_sha256": "96f528783ceb0378bda6dc338f26473aac353d4f5b8af12bf516ccfa68a3cfa6",
+ "policy_sha256": "24b4de0f9754a8265583fbe348b62f0c5f7037403f6c356c475a9250e7a83e2b",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

@@ -82304,9 +82304,23 @@
    ],
    "cars": 392,
    "cat": "bumper-front",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:bumper-front:C:d309d52408",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-06957 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #52119-06957 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T14:34:44Z",
    "pn": [
     "52119-06957"
@@ -82739,9 +82753,23 @@
    ],
    "cars": 392,
    "cat": "bumper-front",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:bumper-front:C:5336565ba0",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-33967 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #52119-33967 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T14:35:01Z",
    "pn": [
     "52119-33967"
@@ -82955,9 +82983,23 @@
    ],
    "cars": 954,
    "cat": "bumper-rear",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2007,
+     2007,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:bumper-rear:C:f5f0729e70",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-06952 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #52159-06952 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:39:08Z",
    "pn": [
     "52159-06952"
@@ -83270,9 +83312,23 @@
    ],
    "cars": 954,
    "cat": "bumper-rear",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2007,
+     2007,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:bumper-rear:C:6ffe3e976b",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-33924 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #52159-33924 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:38:44Z",
    "pn": [
     "52159-33924"
@@ -83438,9 +83494,23 @@
    ],
    "cars": 197,
    "cat": "grille",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2012,
+     2012,
+     {
+      "eng": [
+       "2.5L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:grille:C:502aca1eb6",
    "kind": "body",
-   "note": "Toyota catalog lists #53101-06350 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #53101-06350 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T15:58:06Z",
    "pn": [
     "53101-06350"
@@ -83546,9 +83616,23 @@
    ],
    "cars": 55,
    "cat": "grille",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2015,
+     2015,
+     {
+      "eng": [
+       "2.5L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:grille:C:7bf2ce2d78",
    "kind": "body",
-   "note": "Toyota catalog lists #53101-06441 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #53101-06441 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T17:32:11Z",
    "pn": [
     "53101-06441"
@@ -83573,9 +83657,23 @@
    ],
    "cars": 55,
    "cat": "grille",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2015,
+     2015,
+     {
+      "eng": [
+       "2.5L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:grille:C:a8f4343e35",
    "kind": "body",
-   "note": "Toyota catalog lists #53101-06621 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #53101-06621 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T17:32:19Z",
    "pn": [
     "53101-06621"
@@ -83897,9 +83995,23 @@
    ],
    "cars": 954,
    "cat": "grille",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2007,
+     2007,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:grille:C:153cf67193",
    "kind": "body",
-   "note": "Toyota catalog lists #53101-33220 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #53101-33220 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:39:40Z",
    "pn": [
     "53101-33220"
@@ -84194,9 +84306,23 @@
    ],
    "cars": 392,
    "cat": "grille",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:grille:C:98214f7c64",
    "kind": "body",
-   "note": "Toyota catalog lists #53101-33260 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #53101-33260 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T14:39:08Z",
    "pn": [
     "53101-33260"
@@ -84395,9 +84521,23 @@
    ],
    "cars": 392,
    "cat": "grille",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:grille:C:5d0385227c",
    "kind": "body",
-   "note": "Toyota catalog lists #53114-33900 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #53114-33900 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T14:39:24Z",
    "pn": [
     "53114-33900"
@@ -85124,9 +85264,23 @@
    ],
    "cars": 954,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2007,
+     2007,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:climate-control:C:1c9a358020",
    "kind": "body",
-   "note": "Toyota catalog lists #55900-06271 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #55900-06271 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:55:09Z",
    "pn": [
     "55900-06271"
@@ -85178,9 +85332,23 @@
    ],
    "cars": 392,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:climate-control:C:d41007eda9",
    "kind": "body",
-   "note": "Toyota catalog lists #55900-06330 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #55900-06330 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:42:43Z",
    "pn": [
     "55900-06330"
@@ -85205,9 +85373,23 @@
    ],
    "cars": 197,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2012,
+     2012,
+     {
+      "eng": [
+       "2.5L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:climate-control:C:22188a16a8",
    "kind": "body",
-   "note": "Toyota catalog lists #55900-06370 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #55900-06370 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:44:38Z",
    "pn": [
     "55900-06370"
@@ -87539,9 +87721,23 @@
    ],
    "cars": 392,
    "cat": "headlights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:R:d1d9519b49",
    "kind": "body",
-   "note": "Toyota catalog lists #81110-06520 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #81110-06520 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:40:07Z",
    "pn": [
     "81110-06520"
@@ -87620,9 +87816,23 @@
    ],
    "cars": 954,
    "cat": "headlights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2007,
+     2007,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:R:2f0e5fcdfa",
    "kind": "body",
-   "note": "Toyota catalog lists #81110-06C10 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #81110-06C10 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:51:17Z",
    "pn": [
     "81110-06C10"
@@ -87728,9 +87938,23 @@
    ],
    "cars": 197,
    "cat": "headlights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2012,
+     2012,
+     {
+      "eng": [
+       "2.5L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:R:384a84cf6c",
    "kind": "body",
-   "note": "Toyota catalog lists #81130-06890 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #81130-06890 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:42:14Z",
    "pn": [
     "81130-06890"
@@ -88193,9 +88417,23 @@
    ],
    "cars": 392,
    "cat": "headlights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:L:dc28992bb0",
    "kind": "body",
-   "note": "Toyota catalog lists #81150-06520 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #81150-06520 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:40:11Z",
    "pn": [
     "81150-06520"
@@ -88274,9 +88512,23 @@
    ],
    "cars": 954,
    "cat": "headlights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2007,
+     2007,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:L:ce7440a976",
    "kind": "body",
-   "note": "Toyota catalog lists #81150-06C10 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #81150-06C10 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:51:37Z",
    "pn": [
     "81150-06C10"
@@ -88382,9 +88634,23 @@
    ],
    "cars": 197,
    "cat": "headlights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2012,
+     2012,
+     {
+      "eng": [
+       "2.5L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:headlights:L:5510b17ae6",
    "kind": "body",
-   "note": "Toyota catalog lists #81170-06890 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #81170-06890 for both — trim-limited; Camry: 2.5L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:42:23Z",
    "pn": [
     "81170-06890"
@@ -88685,9 +88951,23 @@
    ],
    "cars": 392,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:tail-lights:R:8f2aca0900",
    "kind": "body",
-   "note": "Toyota catalog lists #81550-06350 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #81550-06350 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:41:03Z",
    "pn": [
     "81550-06350"
@@ -88853,9 +89133,23 @@
    ],
    "cars": 392,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:tail-lights:R:d79a7570e9",
    "kind": "body",
-   "note": "Toyota catalog lists #81551-33530 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #81551-33530 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:40:51Z",
    "pn": [
     "81551-33530"
@@ -89015,9 +89309,23 @@
    ],
    "cars": 392,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:tail-lights:L:d657fd6d98",
    "kind": "body",
-   "note": "Toyota catalog lists #81560-06350 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #81560-06350 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:41:07Z",
    "pn": [
     "81560-06350"
@@ -89183,9 +89491,23 @@
    ],
    "cars": 392,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:tail-lights:L:112300162d",
    "kind": "body",
-   "note": "Toyota catalog lists #81561-33530 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #81561-33530 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:40:59Z",
    "pn": [
     "81561-33530"
@@ -89345,9 +89667,23 @@
    ],
    "cars": 392,
    "cat": "gauge-cluster",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:gauge-cluster:C:6f2db0824e",
    "kind": "body",
-   "note": "Toyota catalog lists #83800-06J50 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #83800-06J50 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T14:30:44Z",
    "pn": [
     "83800-06J50"
@@ -89372,9 +89708,23 @@
    ],
    "cars": 954,
    "cat": "gauge-cluster",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2007,
+     2007,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:gauge-cluster:C:7f0bb73a53",
    "kind": "body",
-   "note": "Toyota catalog lists #83800-06Q60 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #83800-06Q60 for both — trim-limited; Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:32:36Z",
    "pn": [
     "83800-06Q60"
@@ -89399,9 +89749,23 @@
    ],
    "cars": 392,
    "cat": "gauge-cluster",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:gauge-cluster:C:21a61033fb",
    "kind": "body",
-   "note": "Toyota catalog lists #83800-33G20 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #83800-33G20 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T14:31:16Z",
    "pn": [
     "83800-33G20"
@@ -92714,9 +93078,23 @@
    ],
    "cars": 392,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:R:225fc5d230",
    "kind": "body",
-   "note": "Toyota catalog lists #87910-33660-J2 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #87910-33660-J2 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:41:15Z",
    "pn": [
     "87910-33660-J2"
@@ -92957,9 +93335,23 @@
    ],
    "cars": 954,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2007,
+     2007,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:R:6b4ffb82fb",
    "kind": "body",
-   "note": "Toyota catalog lists #87910-33670-G0 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #87910-33670-G0 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:52:57Z",
    "pn": [
     "87910-33670-G0"
@@ -93065,9 +93457,23 @@
    ],
    "cars": 392,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:R:d5656a2c65",
    "kind": "body",
-   "note": "Toyota catalog lists #87910-33670-J2 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #87910-33670-J2 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:41:27Z",
    "pn": [
     "87910-33670-J2"
@@ -95048,9 +95454,23 @@
    ],
    "cars": 392,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:db6202e927",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-33620-J2 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #87940-33620-J2 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:41:31Z",
    "pn": [
     "87940-33620-J2"
@@ -95291,9 +95711,23 @@
    ],
    "cars": 954,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2007,
+     2007,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:cae47ae725",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-33630-G0 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #87940-33630-G0 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:53:33Z",
    "pn": [
     "87940-33630-G0"
@@ -95399,9 +95833,23 @@
    ],
    "cars": 392,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
    "id": "oem:toyota:side-mirrors:L:5cad1119e8",
    "kind": "body",
-   "note": "Toyota catalog lists #87940-33630-J2 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #87940-33630-J2 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:41:47Z",
    "pn": [
     "87940-33630-J2"
@@ -97259,7 +97707,7 @@
   }
  ],
  "ns": "toyota",
- "policy_sha256": "96f528783ceb0378bda6dc338f26473aac353d4f5b8af12bf516ccfa68a3cfa6",
+ "policy_sha256": "24b4de0f9754a8265583fbe348b62f0c5f7037403f6c356c475a9250e7a83e2b",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

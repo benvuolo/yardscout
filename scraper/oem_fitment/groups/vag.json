@@ -69169,9 +69169,23 @@
    ],
    "cars": 139,
    "cat": "gauge-cluster",
+   "gates": [
+    [
+     "Volkswagen",
+     "Golf",
+     2003,
+     2003,
+     {
+      "eng": [
+       "1.8L",
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:vag:gauge-cluster:C:ce122997d5",
    "kind": "body",
-   "note": "VW/Audi catalog lists #1J5-920-906-J for both — trim-limited; verify the number on the part",
+   "note": "VW/Audi catalog lists #1J5-920-906-J for both — trim-limited; Golf: 1.8L/2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:38:53Z",
    "pn": [
     "1J5-920-906-J"
@@ -69196,9 +69210,23 @@
    ],
    "cars": 139,
    "cat": "gauge-cluster",
+   "gates": [
+    [
+     "Volkswagen",
+     "Golf",
+     2003,
+     2003,
+     {
+      "eng": [
+       "1.8L",
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:vag:gauge-cluster:C:3208fc0615",
    "kind": "body",
-   "note": "VW/Audi catalog lists #1J5-920-906-N for both — trim-limited; verify the number on the part",
+   "note": "VW/Audi catalog lists #1J5-920-906-N for both — trim-limited; Golf: 1.8L/2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:39:01Z",
    "pn": [
     "1J5-920-906-N"
@@ -69421,7 +69449,7 @@
   }
  ],
  "ns": "vag",
- "policy_sha256": "96f528783ceb0378bda6dc338f26473aac353d4f5b8af12bf516ccfa68a3cfa6",
+ "policy_sha256": "24b4de0f9754a8265583fbe348b62f0c5f7037403f6c356c475a9250e7a83e2b",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

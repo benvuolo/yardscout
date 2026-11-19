@@ -228,6 +228,10 @@ GMROWS = {(SIL, "window-switch"): [(kS, None, fr(2007, 2013, "Silverado", [], ["
 cg = _CL("gm", t_rows=GMROWS, members={"20835552": {"slot": _Slot(["DM"])}, "REG": {"slot": _Slot(["DM"])}})
 check("cab list from fitment trims: Silverado master switch extended/crew beside the regular-cab switch",
       cg._cab_list_by_T(kS, "window-switch", [SIL], ("DM",)) == {SIL: ["extended cab", "crew cab"]})
+cg1 = _CL("gm", t_rows={(SIL, "side-mirrors"): [(kS, None, fr(2007, 2013, "Silverado", [], ["LT Extended Cab", "LTZ Crew Cab"]),
+                                                  None)]}, members={"20835552": {"slot": _Slot(["L"])}})
+check("cab list from fitment trims: no regular-cab number in the slot, no limit (trim names carry cab words)",
+      cg1._cab_list_by_T(kS, "side-mirrors", [SIL], ("L",)) == {})
 ALE = ("Oldsmobile", "Alero", 2001)
 kC, kD = _K("19152000"), _K("SED")
 BROWS = {(ALE, WR): [(kC, None, fr(1999, 2004, "Alero", [], ["Coupe GL", "Coupe GLS"]), None),
