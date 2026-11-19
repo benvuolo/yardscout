@@ -4460,5 +4460,23 @@
    "verdict": "RIGHT",
    "why": "Every catalog name is a regulator (\"Regulator ...\" / \"Window Regulator\" / \"Power Regulator\"), no motor named; note does not say \"window motor only\"."
   }
- ]
+ ],
+ "comparison_with_curation_report": {
+  "read_after_push": "round10_names_2026-11-19.json (read only after eb8690c3 was pushed)",
+  "agree": "same 21 mopar + 8 subaru motor-alone numbers; no regulator-named number got \"window motor only\"; 0 notes over 160",
+  "differ": [
+   {
+    "ns": "mopar",
+    "pn": "68079283AB",
+    "curation": "class motor, changed (names cited: lists L521 main, records L282 name and aux_desc)",
+    "this_check": "WRONG: records L282 description \"Window Regulator, Front Driver Side\" (a regulator name) not among the curation names; its rule reads only the name and aux fields, so the mixed reading was not seen"
+   },
+   {
+    "ns": "mopar",
+    "pn": "68037296AA / 68037297AA",
+    "curation": "unchanged regulator group",
+    "this_check": "RISK: lists rows carry aux \"Motor\" beside aux \"Regulator\" and records other_names say \"Power Window Motor; Window Motor\"; note unchanged so not WRONG"
+   }
+  ]
+ }
 }

@@ -6311,3 +6311,9 @@ records and lists; no continuation parts exist). Output:
   Regulator Assembly, Front Right/Left").
 - Suggestion: say "includes motor" for the five Subaru "Regulator & Motor Assembly" numbers
   (and maybe the two Mopar ones). A picker would then know the motor comes with it.
+- Compared after push with `_report/round10_names_2026-11-19.json`: both reports pick the same
+  21 + 8 motor-alone numbers. Two readings differ. (1) 68079283AB: curation calls it motor from the
+  name/aux fields only, so it never sees the regulator description at records L282. (2)
+  68037296AA/97AA: curation calls it a plain regulator, but the aux "Motor" rows and the motor
+  aliases make it RISK. Gap: the curation rule does not read `description` or `other_names`.
+  Recommendation: have it read them too and hold a group when they disagree in kind.
