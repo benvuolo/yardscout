@@ -10,10 +10,15 @@
   .wrap { max-width: 560px; margin: 0 auto; }
   h1 { font-size: 18px; margin: 0 0 4px; }
   p.how { margin: 0 0 16px; color: #555; }
-  .card { background: #ffffff; border: 1px solid #ddd6c8; border-radius: 10px; padding: 20px; }
+  .card { background: #ffffff; border: 1px solid #ddd6c8; border-radius: 10px; padding: 20px; overflow-x: auto; }
+  .pick { display: flex; flex-wrap: wrap; gap: 12px 20px; margin: 0 0 14px; }
+  .pick label { font-size: 13px; color: #555; display: flex; flex-direction: column; gap: 4px; }
+  select { font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid #c9c1b1; background: #fff; color: #1c1c1c; }
   button { margin-top: 16px; font: inherit; font-weight: 600; padding: 10px 16px; border-radius: 8px;
            border: 0; background: #0B6477; color: #fff; cursor: pointer; }
   #done { margin-left: 10px; color: #0B6477; font-weight: 600; }
+  #warn { margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: #fff4d6; color: #5c4300; font-size: 14px; }
+  #warn[hidden] { display: none; }
   ol { padding-left: 20px; color: #333; }
   code { background: #ece7db; padding: 1px 5px; border-radius: 4px; }
 </style>
@@ -21,7 +26,23 @@
 <body>
 <div class="wrap">
   <h1>Your signature</h1>
-  <p class="how">Press the button, then paste into Gmail's signature box.</p>
+  <p class="how">Pick the title and address, press the button, then paste into Gmail's signature box.</p>
+
+  <div class="pick">
+    <label>Title
+      <select id="title">
+        <option>Founder</option>
+        <option>CEO</option>
+        <option>Founder &amp; CEO</option>
+      </select>
+    </label>
+    <label>Address shown
+      <select id="addr">
+        <option value="hello@yardscout.io">hello@yardscout.io (works today)</option>
+        <option value="ben@yardscout.io">ben@yardscout.io (set it up first)</option>
+      </select>
+    </label>
+  </div>
 
   <div class="card">
     <!-- SIGNATURE START: everything inside #sig is what gets copied. Inline
@@ -37,12 +58,12 @@
             </a>
           </td>
           <td style="padding:0 0 0 14px;vertical-align:middle;border-left:2px solid #1095AF;">
-            <div style="font-size:15px;line-height:20px;font-weight:bold;color:#1c1c1c;">Ben Vuolo</div>
+            <div style="font-size:15px;line-height:20px;color:#1c1c1c;"><b>Ben</b><span style="color:#999999;">&nbsp;|&nbsp;</span><span id="sig-title">Founder</span></div>
             <div style="font-size:13px;line-height:18px;color:#555555;">YardScout &middot; live inventory for self-service junkyards</div>
             <div style="font-size:13px;line-height:18px;">
               <a href="https://yardscout.io/" style="color:#0B6477;text-decoration:none;font-weight:bold;">yardscout.io</a>
               <span style="color:#999999;">&nbsp;|&nbsp;</span>
-              <a href="mailto:hello@yardscout.io" style="color:#0B6477;text-decoration:none;">hello@yardscout.io</a>
+              <a id="sig-mail" href="mailto:hello@yardscout.io" style="color:#0B6477;text-decoration:none;">hello@yardscout.io</a>
             </div>
           </td>
         </tr>
@@ -50,6 +71,9 @@
     </div>
     <!-- SIGNATURE END -->
   </div>
+
+  <p id="warn" hidden>ben@yardscout.io does not receive mail yet. Add it in Cloudflare first
+  (yardscout.io &rarr; Email &rarr; Email Routing &rarr; Routing rules &rarr; Create address), or mail sent to it will bounce.</p>
 
   <button type="button" id="copy">Copy signature</button><span id="done" aria-live="polite"></span>
 
@@ -62,9 +86,22 @@
   choose <b>Web address (URL)</b>, and enter <code>https://yardscout.io/icon-192.png</code>, then set its size to Small.</p>
 </div>
 <script>
+  var title = document.getElementById('title');
+  var addr = document.getElementById('addr');
+  var done = document.getElementById('done');
+  function apply() {
+    document.getElementById('sig-title').textContent = title.value;
+    var m = document.getElementById('sig-mail');
+    m.textContent = addr.value;
+    m.setAttribute('href', 'mailto:' + addr.value);
+    document.getElementById('warn').hidden = addr.value.indexOf('hello@') === 0;
+    done.textContent = '';
+  }
+  title.addEventListener('change', apply);
+  addr.addEventListener('change', apply);
+  apply();
   document.getElementById('copy').addEventListener('click', function () {
     var sig = document.getElementById('sig');
-    var done = document.getElementById('done');
     var sel = window.getSelection();
     var range = document.createRange();
     range.selectNodeContents(sig);
