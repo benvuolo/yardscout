@@ -2,7 +2,7 @@
  "schema": "nissan_verify/1",
  "date": "2026-11-19",
  "check": "independent blind check 1119e",
- "status": "in progress (draw committed before verdicts)",
+ "status": "in progress: 30 group verdicts done, pairs to follow",
  "pins": {
   "candidate": "scraper/oem_fitment/groups/_report/nissan.candidate.json @ df0bdc0a",
   "candidate_sha256": "4c48693ab309ac47fd765261a4aa261337b388f8259c2b9e730d1f5e1ea8a2bf",
@@ -549,7 +549,426 @@
   ]
  },
  "replay": "lot replayed with a copy of audit11_4/lot_replay.mjs that only adds per-car output (verdict, warn, decode); the app code it runs is extracted from docs/app.js unchanged; payload apps from junkyard_scraper._oem_gated_apps",
- "groups": [],
+ "groups": [
+  {
+   "id": "oem:nissan:climate-control:C:8d55de172f",
+   "pn": "27510-8Z310",
+   "verdict": "RIGHT",
+   "claim": "Frontier 2002 (gate crew cab + 3.3L) / Xterra 2002 (ungated)",
+   "evidence": [
+    "nissan.lists:171 Xterra 2002: 8Z310 Production Date 07/2001-09/2002, 'W. KA24DE + W. (VG33E+ VG33ER). XE'; SE takes 8Z315 same window; XE from 09/2002 takes ZD005",
+    "nissan.lists:329 Frontier 2002: 8Z310 07/2001-09/2002 '*CC. SB. SC + *CC. XB. SC, CC. SB. XE + CC. XB. XE' (crew cab only); king cab numbers 7Z411/ZD015 etc.",
+    "nissan.lists:209/:274 and :311/:408: the same number on the 2001 and 2003 pages, so the window spans the 2002 model year; its edges sit on the changeover months",
+    "nissan.jsonl:4264 product page: Frontier SC/XE 3.3, Xterra XE"
+   ],
+   "app": "Xterra 2002 159 plain; Frontier 2002 51 if-equipped (cab/engine line), 19 excluded (2.4L decodes)",
+   "comment": "XE-vs-SE trim split carried only by the generic 'option' note; the 2002 pages also list ZD005 'from 09/2002' for the same options (edge month only)."
+  },
+  {
+   "id": "oem:nissan:climate-control:C:0930da868c",
+   "pn": "27515-1E400",
+   "verdict": "RIGHT",
+   "claim": "Altima/Stanza 1993-1994, ungated",
+   "evidence": [
+    "nissan.lists:669,:546,:820,:808: 27515-1E400 'F/AIR CONDITIONER LESS', '*FED. S. GXE + *CAL. S. GXE, FED. S. XE + CAL. S. XE', no production date, identical on all four pages",
+    "nissan.jsonl:4816 product page: Altima and Stanza 1993-1994 GXE/XE 2.4L"
+   ],
+   "app": "18 Altima plain (no Stanza in the lot)",
+   "comment": "The option is 'without air conditioner'; the note only says 'fits some option packages'. Suggest naming the option."
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:af4e698f6e",
+   "pn": "24810-ZD016",
+   "verdict": "RISK",
+   "risk_kind": [
+    "missing own page"
+   ],
+   "claim": "Frontier 2003-2004 (king cab + 2.4L) / Xterra 2003-2004 (2.4L)",
+   "evidence": [
+    "nissan.lists:410 Frontier 2003, :437 Frontier 2004: ZD016 '*KC. KA24DE' (undated); 1Z916 'KC. KA24DE' also listed",
+    "nissan.lists:276 Xterra 2003: ZD016 '*W. KA24DE'; 2Z916 'W. KA24DE' from 08/2002",
+    "Xterra 2004: no own catalog page in raw; the claim rests on product page nissan.jsonl:2155 (2003-2004 Xterra XE 2.4L)"
+   ],
+   "app": "Xterra 2004: 4 plain + 15 if-equipped; Frontier 2003-04 52 if-equipped, 50 excluded; Xterra 2003 1 plain + 9 if-equipped",
+   "lot_affected": 19
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:a1e39cd715",
+   "pn": "24810-ZD103",
+   "verdict": "RISK",
+   "risk_kind": [
+    "missing own page",
+    "ambiguous clause ('*' prefix) with an overlapping drive/trans-specific number"
+   ],
+   "claim": "Frontier 2003-2004 / Xterra 2003-2004, gate 3.3L",
+   "evidence": [
+    "nissan.lists:276 Xterra 2003: ZD103 '*W. VG33E + *W. VG33ER. SE'; ZD210 '*W. 4WD. VG33E. AT + *W. 4WD. VG33ER. SE. AT' is listed for the 4WD automatic subset of the same clause; 2Z700/2Z710 '*W. 4WD. AT'",
+    "nissan.lists:410/:437 Frontier: ZD103 '*KC. 4WD. SC + *KC. VG33E. XE + *CC. SB. (XE+ SC) + *CC. XB. (XE+ SC)'; ZD210/2Z710 for '*KC. 4WD. (XE+ SC). AT ...'",
+    "Xterra 2004: no own page; product page nissan.jsonl:2156 only",
+    "No page in the raw explains the leading '*'; whether a 4WD automatic V6 carries ZD103 or ZD210 cannot be settled"
+   ],
+   "app": "270 plain (Xterra 2003 92, Xterra 2004 128, Frontier 50), 36 if-equipped (engine), 45 excluded",
+   "lot_affected": 306
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:0c05f2a0d3",
+   "pn": "24820-6AH2A",
+   "verdict": "RIGHT",
+   "claim": "M37 2013 (2WD) / Q70 2014 (2WD, 3.7L, gas)",
+   "evidence": [
+    "infiniti.lists:951 M37 2013 and :1201 Q70 2014 gas: identical clause '*SEDAN. 2WDSTD. SPORTPRE, *SEDAN. 2WDSTD. VQ37VHR. PREMIUM + *SEDAN. 2WDSTD. BASE'; 2WD HICAS / Sport Tech take 1MK2A/1MK5A",
+    "infiniti.jsonl:2314 product page"
+   ],
+   "app": "6 plain, 2 if-equipped (drive/engine), 2 excluded (AWD)",
+   "comment": "The Q70 3.7L limit is narrower than the page (SPORTPRE clause has no engine word): it hides donors, never adds one."
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:b966a0f36b",
+   "pn": "24810-7S00E",
+   "verdict": "RISK",
+   "risk_kind": [
+    "gate basis not found on the page",
+    "window edge inside/at the model-year start"
+   ],
+   "claim": "Armada 2005-2006 (ungated) / Titan 2005 (gate 4WD, drive_basis 'stated') / Titan 2006 (ungated)",
+   "evidence": [
+    "nissan.lists:198 Titan 2005: 7S00E Production Date 10/2004-08/2006, '*KC. (SE+ LE) + *CC. (SE+ LE)' - no drive word; the 4WD limit the note states for Titan 2005 is not on this row, and the identical row on nissan.lists:180 (Titan 2006) is left ungated",
+    "nissan.lists:198 also lists 7S204/7S205 'Production Date 10/2003-10/2004', and 7S005 (same '*KC. (SE+ LE) + *CC. (SE+ LE)', replaced by 7S01A): early 2005 builds may carry another number; the pages cannot place the MY2005 start",
+    "nissan.lists:266 Armada 2005: 7S004 08/2003-10/2004 'W. SE' Replaced By 7S00E (supersession covers early builds)",
+    "nissan.lists:303 Armada 2006 / :180 Titan 2006: 7S04E/7S04x from 08/2006 (end edge at changeover)"
+   ],
+   "app": "Armada 222 plain; Titan 2005 45 plain (4WD), 20 if-equipped, 80 excluded (2WD); Titan 2006 151 plain, 1 if-equipped (VIN mismatch)",
+   "lot_affected": 65,
+   "comment": "No donor is shown that the page rules out, but the Titan 2005 drive gate has no basis on the page I read, which suggests a reading problem worth a look."
+  },
+  {
+   "id": "oem:nissan:gauge-cluster:C:94b77541fa",
+   "pn": "24810-7Z809",
+   "verdict": "WRONG",
+   "wrong_kind": "build window inside the model year, not gated",
+   "claim": "Frontier 2002 (king/crew cab + 3.3L) / Xterra 2002 (3.3L), no built gate",
+   "evidence": [
+    "nissan.lists:173 Xterra 2002 and nissan.lists:331 Frontier 2002: 7Z809 'Production Date 07/2001-04/2002', Replaced By 7Z909",
+    "nissan.lists:276 (Xterra 2003 page) and :410 (Frontier 2003 page): 7Z909 'Production Date 04/2002-09/2002' 'W. SE' / 'KC. (SE+ SC) + CC. ...' - the same options for builds after 04/2002",
+    "nissan.lists:171 (Xterra 2002 climate page) lists 8Z310 07/2001-09/2002 and ZD005 from 09/2002, i.e. the catalog's 2002 Xterra runs to about 09/2002; nissan.lists:331 (Frontier 2002) lists 2Z700 09/2002-12/2002",
+    "07/2001-04/2002 is about nine months inside a model year that runs 07/2001 to about 09/2002; a 2002 truck built 04/2002-09/2002 left the factory with 7Z909. 'Replaced By' runs one way (7Z909 serves a 7Z809 car), not the other"
+   ],
+   "app": "Xterra 2002: 131 plain rows (no 'check the build date' line); Frontier 2002: 51 if-equipped with a cab/engine line only (no build-date line); 22 excluded",
+   "lot_affected": 182
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:8c5caed8f7",
+   "pn": "96301-7S600",
+   "verdict": "RIGHT",
+   "claim": "Armada/Titan 2004-2005, ungated",
+   "evidence": [
+    "nissan.lists:326/:271 Armada 2004/2005: 7S600 'POWER/HEAT/MEM/CRO' 'W. LE', undated, Replaced By ZC60A",
+    "nissan.lists:488 Titan 2004 (undated) and :203 Titan 2005: 7S600 10/2003-08/2005 'KC. LE + CC. LE'; ZC60A from 08/2005 (end at the changeover)"
+   ],
+   "app": "502 plain",
+   "comment": "LE-only (heated/memory) carried by the generic option note."
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:18d0a73d38",
+   "pn": "K6301-1PM0B",
+   "verdict": "RISK",
+   "risk_kind": [
+    "ambiguous clause ('*' prefix) decides the drive scope"
+   ],
+   "claim": "M35h 2012-2013, M37 2012-2013, M56 2012-2013, Q70 2014 (gas)",
+   "evidence": [
+    "infiniti.lists:915 M37 2012 / :1427 M56 2012: '*SEDAN. (2WDSTD+ 2WDHICAS) + *SEDAN. 4WD. (BASE+ TECHNOLO+ ADVTECH), SEDAN. 4WD. (SPORTTEC + SPADTEC)' - the only unstarred clause is 4WD Sport Tech; K6301-1MA0B carries the unstarred 'SEDAN, SEDAN. (2WDSTD+ 2WDHICAS) + ...'",
+    "infiniti.lists:1179 M35h 2012: '*SED' only",
+    "2013 pages add an unstarred 'SEDAN'",
+    "What the leading '*' means is not stated anywhere in the raw"
+   ],
+   "app": "22 plain (2012: M37 8, M35h 3)",
+   "lot_affected": 11
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:f606f17c72",
+   "pn": "96301-1NC3A",
+   "verdict": "RIGHT",
+   "claim": "G25 2011-2012 / Q40 2015",
+   "evidence": [
+    "infiniti.lists:607,:728,:827: 'S. JOURNEY', undated, Replaced By 1NC4A on all three pages"
+   ],
+   "app": "38 plain",
+   "comment": "Journey trim only, via the option note."
+  },
+  {
+   "id": "oem:nissan:side-mirrors:L:20d98c4d13",
+   "pn": "96302-1BA3D",
+   "verdict": "RISK",
+   "risk_kind": [
+    "missing own page"
+   ],
+   "claim": "EX35 2011 (built 01/2011-07/2012), EX35 2012, EX37 2013, QX50 2014-2015",
+   "evidence": [
+    "infiniti.lists:901 EX35 2011: 1BA3D 01/2011-07/2012 '*WAG. LEATHER'; 1BA3A 08/2009-01/2011 replaced by 1BA3D (built gate right)",
+    "infiniti.lists:1274 EX37 2013 01/2011-07/2015; :1079/:1303 QX50 2014/2015 07/2012-07/2015",
+    "EX35 2012: no own page in raw (product page infiniti.jsonl:655 only)"
+   ],
+   "app": "9 plain, 8 if-equipped (build date)",
+   "lot_affected": 3
+  },
+  {
+   "id": "oem:nissan:side-mirrors:L:e2ae1e4b3f",
+   "pn": "96302-9BC9B",
+   "verdict": "RIGHT",
+   "claim": "Frontier 2013-2019 / Xterra 2012-2013",
+   "evidence": [
+    "nissan.lists:685 Frontier 2013: 9BC9B 04/2012-09/2016 'KC. SV + CC. SV'; EA005 08/2011-04/2012 replaced by 9BC9B",
+    "nissan.lists:690,:704,:755,:737,:775,:779: Frontier 2014-2019 SV",
+    "nissan.lists:642/:729 Xterra 2012/2013 'W. (S + PRO-4X)'"
+   ],
+   "app": "79 plain",
+   "comment": "trim (SV / S / PRO-4X) via the option note."
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:af4981ab30",
+   "pn": "K6301-1MA0B",
+   "verdict": "WRONG",
+   "wrong_kind": "build window inside the model year, not gated",
+   "claim": "M35h 2012-2013, M37 2012-2013, M56 2011-2013, Q70 2014 (gas); M56 2011 ungated",
+   "evidence": [
+    "infiniti.lists:1013 M56 2011: K6301-1MA0A 'Production Date 01/2010-12/2010' Replaced By 1MA0B, and K6301-1MA0B 'Production Date 12/2010-04/2012' - the 2011 M56 page itself shows 2011 cars built from 01/2010 with another number",
+    "infiniti.jsonl:851 product page: 'Production Date: 12/2010-04/2012', replaces 1MA0A",
+    "The candidate gates the same pattern elsewhere (EX35 2011, 1BA3D/1BA3A, built 01/2011-07/2012) but not here"
+   ],
+   "app": "M56 2011: 3 plain rows with no build-date line (others 22 plain)",
+   "lot_affected": 3
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:a7a51982a0",
+   "pn": "96301-1BA3D",
+   "verdict": "RISK",
+   "risk_kind": [
+    "missing own page"
+   ],
+   "claim": "EX35 2011 (built 01/2011-07/2012), EX35 2012, EX37 2013, QX50 2014-2015",
+   "evidence": [
+    "infiniti.lists:901 EX35 2011 (built gate right); :1274, :1079, :1303 as the LH mirror",
+    "EX35 2012: no own page (product page infiniti.jsonl:659 only)"
+   ],
+   "app": "9 plain, 8 if-equipped",
+   "lot_affected": 3
+  },
+  {
+   "id": "oem:nissan:side-mirrors:R:c207bafd8e",
+   "pn": "96301-3EV0B",
+   "verdict": "RISK",
+   "risk_kind": [
+    "ambiguous clause ('*' prefix) decides the engine scope"
+   ],
+   "claim": "FX37 2013, FX50 2012-2013, QX70 2014-2017, ungated",
+   "evidence": [
+    "infiniti.lists:1024 FX37 2013: '*W. VK50VE, *W. VQ37HR. PREMIUM, *W. VQ37VHR. PREMIUM, W. VK50VE' - the only unstarred clause is the 5.0L VK50VE; 1CA0A carries the unstarred 'W. VQ37VHR. PREMIUM'",
+    "infiniti.lists:1225/:1258 QX70 2016/2017: '*W. PREMIUM' only",
+    "No page explains '*'"
+   ],
+   "app": "20 plain, all 3.7L FX37/QX70",
+   "lot_affected": 20
+  },
+  {
+   "id": "oem:nissan:window-regulator:RL:613aa019d9",
+   "pn": "82721-1LA0A",
+   "verdict": "RIGHT",
+   "claim": "QX56 2011-2013 / QX80 2014-2019",
+   "evidence": [
+    "infiniti.lists:621,:988,:802,:787,:1141,:1248,:1352,:1488,:1511 rear-door pages: 1LA0A Driver Side, no options or dates, Replaced By 1LA0B"
+   ],
+   "app": "98 plain"
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR+RR:2ba0393882",
+   "pn": "80730-JX30C",
+   "verdict": "RISK",
+   "risk_kind": [
+    "missing own page"
+   ],
+   "claim": "Cube 2012-2014, Juke 2012-2014 (front RH motor), Rogue 2012-2013 (rear RH motor)",
+   "evidence": [
+    "nissan.lists:741 Cube 2012 front page: JX30C from 04/2011; JX30B 10/2010-04/2011 replaced by JX30C",
+    "nissan.lists:540 Juke 2012 front: 04/2011-10/2014",
+    "nissan.lists:499 Rogue 2012 REAR door page lists JX30C; the Rogue front RH motor is 80730-JM00A (nissan.lists:498)",
+    "Rogue 2013: no own page (product page nissan.jsonl:235 only)"
+   ],
+   "app": "1037 plain (Rogue 2013: 432)",
+   "lot_affected": 432,
+   "comment": "The app shows no door position for OEM rows: a Cube front-door seeker is sent to Rogues whose matching motor is in the rear door."
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:c1c2e4c0aa",
+   "pn": "80731-JX30C",
+   "verdict": "RIGHT",
+   "claim": "Cube/Juke 2012-2014, Leaf 2012 (front LH motor)",
+   "evidence": [
+    "nissan.lists:741,:746,:784 Cube; :540,:542,:602 Juke; :693 Leaf 2012: JX30C front LH, from 04/2011; JX30B (to 04/2011) replaced by it"
+   ],
+   "app": "260 plain"
+  },
+  {
+   "id": "oem:nissan:window-regulator:RR:3541fd3908",
+   "pn": "82731-CV01B",
+   "verdict": "RIGHT",
+   "claim": "Cube 2011-2014, Juke 2013-2014, Juke 2016 (built 10/2014-03/2015, 08/2015-02/2016), Leaf 2011-2012",
+   "evidence": [
+    "nissan.lists:656 Cube 2011: CV01B 03/2010-03/2015 (CV01A 02/2009-03/2010)",
+    "nissan.lists:735 Juke 2016: CV01B '08/2015-02/2016,10/2014-03/2015', 1FA0A 03/2015-08/2015, CV01C from 02/2016 - matches the built gate",
+    "Cube/Juke/Leaf rear pages :742,:747,:785,:543,:603,:726,:694 undated"
+   ],
+   "app": "248 plain, 13 if-equipped (Juke 2016 build date)"
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:193f15aace",
+   "pn": "80731-7B400",
+   "verdict": "RISK",
+   "risk_kind": [
+    "missing own page"
+   ],
+   "claim": "Frontier 1999-2004 / Xterra 2000-2004 front LH motor",
+   "evidence": [
+    "nissan.lists:534,:389 Frontier 1999/2000: '*T + *KC + *CC' (all starred); 2001-2004 and Xterra 2000-2003 pages (:316,:333,:412,:439,:193,:214,:176,:278) undated, no options",
+    "Xterra 2004: no own page (product page nissan.jsonl:267 only)"
+   ],
+   "app": "937 plain (Xterra 2004: 147)",
+   "lot_affected": 147
+  },
+  {
+   "id": "oem:nissan:window-regulator:RL:2b80079398",
+   "pn": "82721-1BA0A",
+   "verdict": "RISK",
+   "risk_kind": [
+    "missing own page"
+   ],
+   "claim": "EX35 2008-2012, EX37 2013, QX50 2014-2017 rear LH regulator",
+   "evidence": [
+    "infiniti.lists:1040,:757,:904,:1195,:1277,:1082,:1306,:1002,:1113: undated, no options",
+    "EX35 2008: no own page (product page infiniti.jsonl:553 only)"
+   ],
+   "app": "107 plain (EX35 2008: 48)",
+   "lot_affected": 48
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:88ed5d8f57",
+   "pn": "80721-AR000",
+   "verdict": "RIGHT",
+   "claim": "FX35/FX45 2003-2004, Q45 2002-2005, Q45 2006 (built 01/2001-04/2006)",
+   "evidence": [
+    "infiniti.lists:489/:890 FX35/FX45 2004: AR000 11/2002-09/2004, CL00A from 09/2004 (the candidate gates the 2005 side, FX35 2005 built 09/2004-)",
+    "infiniti.lists:1517 Q45 2006: AR000 01/2001-04/2006, AT30A from 04/2006 (gated)",
+    "Q45 2002-2005, FX 2003 pages undated"
+   ],
+   "app": "98 plain"
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR:53fc2ca156",
+   "pn": "80730-7B400",
+   "verdict": "RISK",
+   "risk_kind": [
+    "missing own page"
+   ],
+   "claim": "Frontier 1999-2004 / Xterra 2000-2004 front RH motor",
+   "evidence": [
+    "same pages as 80731-7B400 (RH rows)",
+    "Xterra 2004: no own page (product page nissan.jsonl:268 only)"
+   ],
+   "app": "937 plain (Xterra 2004: 147)",
+   "lot_affected": 147
+  },
+  {
+   "id": "oem:nissan:window-regulator:RL:e4f0acae65",
+   "pn": "82701-0E710",
+   "verdict": "RISK",
+   "risk_kind": [
+    "missing own page"
+   ],
+   "claim": "Altima/Stanza 1993-1997 rear LH regulator (XE)",
+   "evidence": [
+    "nissan.lists:674,:551,:630,:515 Altima 1993/1994/1996/1997 and Stanza :825,:813,:819,:831,:837: 'FED. S. XE + CAL. S. XE', undated",
+    "Altima 1995: no own page (product page nissan.jsonl:1562 only)"
+   ],
+   "app": "67 plain (Altima 1995: 15)",
+   "lot_affected": 15,
+   "comment": "XE (non-power) trim only via the option note."
+  },
+  {
+   "id": "oem:nissan:window-regulator:FL:8380ea4d2d",
+   "pn": "80721-CL00A",
+   "verdict": "RIGHT",
+   "claim": "FX35 2005 (built 09/2004-06/2006), FX35/FX45 2006",
+   "evidence": [
+    "infiniti.lists:702 FX35 2005: CL00A 09/2004-06/2006, AR000 11/2002-09/2004 (gated)",
+    "infiniti.lists:476/:931 FX35/FX45 2006: CL00A 09/2004-06/2006, CL70B from 06/2006 (end at the changeover)"
+   ],
+   "app": "37 plain, 50 if-equipped (FX35 2005 build date)"
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR:5b1d1ced1f",
+   "pn": "80720-AR000",
+   "verdict": "RISK",
+   "risk_kind": [
+    "window edge inside the model year unclear"
+   ],
+   "claim": "FX35/FX45 2003-2004, Q45 2002-2005, Q45 2006 (built 01/2001-04/2006)",
+   "evidence": [
+    "infiniti.lists:489/:890 FX35/FX45 2004: 80720-AR000 (RH) 'Production Date 11/2002-07/2004', CL00A RH from 07/2004; the LH on the same page changes at 09/2004 (80721-AR000 to 09/2004), and the candidate treats 09/2004 as inside MY2005 (FX35 2005 LH built gate). If MY2004 builds ran past 07/2004, those cars carry CL00A on the RH; the identical 2004 and 2005 pages (:489, :702) cannot settle the changeover"
+   ],
+   "app": "98 plain (FX35/FX45 2004: 50)",
+   "lot_affected": 50
+  },
+  {
+   "id": "oem:nissan:window-regulator:RR:300fc2f362",
+   "pn": "82720-0E717",
+   "verdict": "RIGHT",
+   "claim": "Altima/Stanza 1997 rear RH",
+   "evidence": [
+    "nissan.lists:515/:837: 0E717 from 07/1996, 0E715 08/1993-07/1996 replaced by 0E717 (model-year changeover), 'FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)'; XE takes 82700-0E710"
+   ],
+   "app": "25 plain"
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR+RR:9028a640d2",
+   "pn": "82730-3Z005",
+   "verdict": "WRONG",
+   "claim": "Altima 2003-2004 (rear RH motor), Sentra 2004-2006 (front RH motor)",
+   "evidence": [
+    "nissan.lists:570 Altima 2003 (rear RH motor): 82730-8J000 08/2001-08/2002 and 82730-3Z000 08/2002-11/2002, both Replaced By 3Z005; 3Z005 11/2002-01/2004. A 2003 Altima built 08/2002-11/2002 left the factory with 3Z000 (Replaced By runs one way)",
+    "nissan.lists:612 Sentra 2005 page (front RH motor): 80730-4Z305 Production Date 04/2003-04/2004, 82730-3Z005 from 04/2004",
+    "nissan.lists:621 Sentra 2004 page: 4Z305 and 3Z005 both listed, undated, for the same options (4S. QR25DE + 4S. 1. 8S); 4Z305 is not replaced by 3Z005. With 3Z005 starting 04/2004, most 2004 Sentras (built 2003 to spring 2004) carry 4Z305",
+    "nissan.jsonl:415 product page (2002-2006 Altima, 2004-2006 Sentra)"
+   ],
+   "app": "816 plain, 1 if-equipped (VIN mismatch); Altima 2003 205 plain and Sentra 2004 150 plain with no build-date line",
+   "lot_affected": 355,
+   "comment": "Sentra 2005 (from 04/2004) and Altima 2004 judged fine. Also a door-position difference the app does not show (Altima rear door, Sentra front door).",
+   "wrong_kind": "build window inside the model year, not gated (Altima 2003, Sentra 2004)"
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR:7dce330660",
+   "pn": "80730-AL501",
+   "verdict": "RIGHT",
+   "claim": "FX35/FX45 2003-2008 front RH motor",
+   "evidence": [
+    "infiniti.lists:595,:489,:702,:476,:582,:542,:855,:890,:944,:931,:1387,:1239: AL501 Passenger Side, undated, no options"
+   ],
+   "app": "232 plain"
+  },
+  {
+   "id": "oem:nissan:window-regulator:FR:b852d2abef",
+   "pn": "80720-1MA0B",
+   "verdict": "WRONG",
+   "wrong_kind": "build window inside the model year, not gated (Q70/Q70L 2015)",
+   "claim": "Q70 2015-2018 (gas), Q70L 2015-2016, Q70L 2018; no built gate",
+   "evidence": [
+    "infiniti.lists:1492 (Q70 2016 gas) and :1358 (Q70L 2016): 80720-1MA0A Production Date 07/2014-02/2015 Replaced By 1MA0B; 1MA0B Production Date 02/2015-02/2018",
+    "infiniti.lists:1125 (Q70 2015 gas) and :1318 (Q70L 2015): both 1MA0A (SEDAN, SEDAN + LSEDAN, Replaced By 1MA0B) and 1MA0B listed for the 2015 car",
+    "The 2015 model year starts about 07/2014 (1MA0A first build); 2015 cars built before 02/2015 carry 1MA0A. Q70 2016-2018 judged fine (the 02/2018 end is not followed by another number on the 2018/2019 pages)"
+   ],
+   "app": "7 plain; Q70 2015 4 and Q70L 2015 1 with no build-date line",
+   "lot_affected": 5
+  }
+ ],
  "pairs": [],
  "gate_checks": []
 }
