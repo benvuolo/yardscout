@@ -12,7 +12,10 @@ Apple: App Store Connect Sales and Trends, SUBSCRIPTION/SUMMARY (the newest
        published day; Apple publishes a day behind). Counts paid
        subscriptions only: comps, TestFlight and sandbox purchases never
        appear in it.
-       Env: ASC_KEY_ID, ASC_ISSUER_ID, ASC_P8 (a Sales-role key), ASC_VENDOR.
+       Env: ASC_KEY_ID, ASC_ISSUER_ID, ASC_P8 (a Sales-role key), ASC_VENDOR,
+       and optional ASC_VENDOR_LLC (the account became YardScout LLC on
+       2026-11-05 with a second vendor number; both are read for the same
+       day and added, see apple_combine).
 Google: Play Console's monthly subscriptions report, which Google writes to
        the developer account's Cloud Storage bucket
        (financial-stats/subscriptions/subscriptions_<package>_<YYYYMM>_*.csv).
@@ -144,7 +147,36 @@ def google_count(sa_json: str, bucket_raw: str, package: str) -> dict:
 
 
 # ---------------------------------------------------------------- Apple
-def apple_count(key_id: str, issuer: str, p8: str, vendor: str, today: dt.date | None = None) -> dict:
+def apple_combine(per_vendor: list[dict], today: dt.date) -> dict:
+    """One count from several vendor numbers' daily snapshots (pure).
+
+    per_vendor: for each vendor number, {day: (active, trial)} for the days
+    of the window that had a report. The account became YardScout LLC on
+    2026-11-05 with a new vendor number; a subscription shows under the old
+    number until it renews, then under the new one. So the snapshots are
+    added for ONE day, the newest day every reporting vendor number has
+    (adding different days could count a subscription twice on the day it
+    moves). A vendor number with no report in the window has none active."""
+    have = [d for d in per_vendor if d]
+    if not have:
+        return {"active": 0, "trial": 0, "asOf": (today - dt.timedelta(days=1)).isoformat(),
+                "note": "no subscription report in 5 days (none active)"}
+    common = set(have[0])
+    for d in have[1:]:
+        common &= set(d)
+    if common:
+        day = max(common)
+        out = {"active": sum(d[day][0] for d in have), "trial": sum(d[day][1] for d in have), "asOf": day}
+    else:   # no shared day: each one's newest, and say so
+        out = {"active": sum(d[max(d)][0] for d in have), "trial": sum(d[max(d)][1] for d in have),
+               "asOf": min(max(d) for d in have), "note": "legal entities read on different days"}
+    if len(per_vendor) > 1:
+        out["entities"] = [{"active": d[out["asOf"]][0] if out["asOf"] in d else (d[max(d)][0] if d else 0)} for d in per_vendor]
+    return out
+
+
+def apple_count(key_id: str, issuer: str, p8: str, vendor: str, today: dt.date | None = None,
+                more_vendors: tuple[str, ...] = ()) -> dict:
     import jwt
     import requests
     key = p8.strip().replace("\\n", "\n")
@@ -152,23 +184,25 @@ def apple_count(key_id: str, issuer: str, p8: str, vendor: str, today: dt.date |
                      key, algorithm="ES256", headers={"kid": key_id, "typ": "JWT"})
     H = {"Authorization": f"Bearer {tok}", "Accept": "application/a-gzip"}
     today = today or dt.date.today()
-    for i in range(1, 6):
-        day = (today - dt.timedelta(days=i)).isoformat()
-        r = requests.get("https://api.appstoreconnect.apple.com/v1/salesReports", headers=H, timeout=60, params={
-            "filter[frequency]": "DAILY", "filter[reportType]": "SUBSCRIPTION", "filter[reportSubType]": "SUMMARY",
-            "filter[vendorNumber]": vendor, "filter[reportDate]": day, "filter[version]": "1_4"})
-        if r.status_code == 404:
-            continue
-        if r.status_code == 403:
-            return {"error": "the App Store key can't read Sales and Trends (needs the Sales role)"}
-        if r.status_code != 200:
-            return {"error": f"App Store report HTTP {r.status_code}"}
-        rows = list(csv.DictReader(io.StringIO(gzip.decompress(r.content).decode()), delimiter="\t"))
-        act = sum(int(x.get("Active Standard Price Subscriptions") or 0) for x in rows)
-        trial = sum(int(x.get("Active Free Trial Introductory Offer Subscriptions") or 0) for x in rows)
-        return {"active": act, "trial": trial, "asOf": day}
-    return {"active": 0, "trial": 0, "asOf": (today - dt.timedelta(days=1)).isoformat(),
-            "note": "no subscription report in 5 days (none active)"}
+    per_vendor: list[dict] = []
+    for vn in [vendor, *[v for v in more_vendors if v and v != vendor]]:
+        days: dict = {}
+        for i in range(1, 6):
+            day = (today - dt.timedelta(days=i)).isoformat()
+            r = requests.get("https://api.appstoreconnect.apple.com/v1/salesReports", headers=H, timeout=60, params={
+                "filter[frequency]": "DAILY", "filter[reportType]": "SUBSCRIPTION", "filter[reportSubType]": "SUMMARY",
+                "filter[vendorNumber]": vn, "filter[reportDate]": day, "filter[version]": "1_4"})
+            if r.status_code == 404:
+                continue
+            if r.status_code == 403:
+                return {"error": "the App Store key can't read Sales and Trends (needs the Sales role)"}
+            if r.status_code != 200:
+                return {"error": f"App Store report HTTP {r.status_code}"}
+            rows = list(csv.DictReader(io.StringIO(gzip.decompress(r.content).decode()), delimiter="\t"))
+            days[day] = (sum(int(x.get("Active Standard Price Subscriptions") or 0) for x in rows),
+                         sum(int(x.get("Active Free Trial Introductory Offer Subscriptions") or 0) for x in rows))
+        per_vendor.append(days)
+    return apple_combine(per_vendor, today)
 
 
 def main() -> int:
@@ -176,7 +210,8 @@ def main() -> int:
     e = os.environ
     if e.get("ASC_VENDOR") and e.get("ASC_P8") and e.get("ASC_KEY_ID") and e.get("ASC_ISSUER_ID"):
         try:
-            out["apple"] = apple_count(e["ASC_KEY_ID"], e["ASC_ISSUER_ID"], e["ASC_P8"], e["ASC_VENDOR"])
+            out["apple"] = apple_count(e["ASC_KEY_ID"], e["ASC_ISSUER_ID"], e["ASC_P8"], e["ASC_VENDOR"],
+                                       more_vendors=tuple(x for x in (e.get("ASC_VENDOR_LLC", ""),) if x))
         except Exception as ex:  # never sink the other store
             out["apple"] = {"error": f"{type(ex).__name__}"}
     else:
