@@ -6233,3 +6233,48 @@ continuation parts exist). Own reading of every page name; curation code not use
   pages, the reverse of the usual 80730=RH pattern. Side is out of scope here, but if notes or the app ever
   state a side, read it from the name, not the number. (2) The 160-char limit is nearly reached; a longer build
   window text would go over it, so a test on note length is worth having.
+
+## 2026-11-19 Round 10: mopar and subaru window motors say "window motor only" (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round10-1119` from origin/main 72774a27)
+
+Live notes only, no claim change. Pins as shipped (live oem-raw@dca9cd84, lot main@a85c654; not
+re-pinned). Census: `groups/_report/round10_names_2026-11-19.json`; per make
+`<ns>.round10.json`; `live_diff_2026-11-19_round10.txt`; test `test_round10_1119` (22).
+
+- **Cause.** `positions.packaging()` decides "motor" only when no name's head contains
+  "Regulator". The head is cut at the first comma, semicolon or bracket, so these names keep
+  "Regulator" and the class is `reg?`, which has no words:
+  - mopar: "Motor - Window Regulator", "MOTOR Window Regulator", "MOTOR WINDOW REGULATOR 6 Pin
+    [Front]" / "2 Pin [Rear]", printed beside "Window Motor";
+  - subaru: "Motor Assembly-Regulator", the nissan pattern.
+- **Fix.** It lives in curate.py under `ROUND10_NS = {mopar, subaru}` (`Curation._r10_class`).
+  The class is read from every catalog name the raw prints for the number, list rows on every page
+  and product records, with `site:lists|records:L<line>`. For a motor, the finished note gains
+  "window motor only; " after the dash, and nothing else changes: apps, gates, ids and tiers stay as
+  they were. The group is held instead when the words take the note past 160 characters, when the
+  names mix a motor and a regulator, when a name is neither, or when the raw has no name.
+- **Result.**
+  - mopar: **21 groups changed** (6,490 plain lot rows on the lot main ships today); 33 regulator
+    groups unchanged.
+  - subaru: **8 changed** (1,128 plain, 20 if equipped); 9 regulator groups unchanged, among them
+    5 "Regulator & Motor Assembly" numbers whose notes say nothing about packaging (not in scope).
+  - **Held: 0**: no mixed or unreadable name, no note over the cap (longest new note 118).
+- **Hash.** `positions.py` is unchanged, so `policy_sha256` is unchanged (71024c85…). gm, toyota,
+  ford, hmg, vag, mb and nissan re-curate byte-identical, with live diff 0. mopar and subaru differ
+  only in those notes.
+- **Payload.** Rebuilt with `python3 -c "import sys; sys.path.insert(0,'scraper'); import
+  junkyard_scraper as js; js.write_interchange_payload()"`. All 30 files are rewritten. 29 differ
+  only in `builtAt`; `docs/data/oem/window-regulator.json` differs in the 29 notes only. No app
+  change, no cache-name bump.
+- **Item 4 (measure only).** Shipped groups outside window-regulator whose number's name is a
+  component (glass, cover, lens, bezel, knob, motor) with no word in the note that says so:
+  - toyota bumper-front 26 of 26 ("Cover, Front Bumper", e.g. 52119-06919, 52119-06957,
+    52119-06974) and bumper-rear 15 of 15 ("Cover, Rear Bumper", e.g. 52159-06952, 52159-06961,
+    52159-06963). These are the bumper covers, the plastic fascia;
+  - toyota tail-lights 16 of 24 ("Lens & Body, Rear Combination Lamp", e.g. 81551-0E010,
+    81551-30A50, 81551-33530);
+  - mopar bumper-front 1 ("Bumper Cover" 5073002AC); vag bumper-front 1 ("Bumper Cover"
+    1HM-807-217-D-GRU);
+  - gm, ford, hmg, subaru, mb, nissan: 0.
+- Suggestion: the bumper rows could say "bumper cover (fascia) only, not the reinforcement", and
+  the Toyota tail lamps could name the catalog's "lens & body" unit. Both are live note changes,
+  the hub's call.
