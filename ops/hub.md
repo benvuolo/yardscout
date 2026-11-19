@@ -2053,3 +2053,19 @@ now read "<model>: only 2WD checked".
 - 23:30 UTC Apple 1.13.1 build 42 still WAITING_FOR_REVIEW. Check-in
   trig_01JcAHSWqZ1rxaB5VAPHXG34 at 2026-11-19 09:10 UTC (on acceptance:
   store-listing.yml + play-subscription-listing.yml).
+
+## 2026-11-19 ~00:10 UTC nissan independent check FAILED again; round 3 started
+
+`interchange/verify-nissan-1118c` (961fdf12; verifier's section at the end
+of ops/interchange.md, report groups/_report/nissan_verify_2026-11-18c.json).
+Seed 73901118: groups 21 RIGHT / 9 WRONG / 0 RISK, pairs 27 / 2 / 1. Do not
+ship nissan. Classes: product-page engine column never used as a limit (20
+groups, 286 plain lot cars); the "gas" gate lets QX60 hybrids through
+(5N1CL0 VINs decoded 2.5L); joined drive codes (2WDSTD/2WDHICAS) ungated;
+4wd gate confirms All-Mode cars beside a "W. AUTO" sibling; a Kph cluster;
+feed "Rogue" 2014-15 = Rogue Select (JN8AS5); Frontier regular cab listed
+under another number (borderline).
+- Round 3 builder on `interchange/round3-1119`: census of the same classes
+  on the 8 LIVE makes first, fixed claims-only-down on live; then the 8 fixes
+  on the nissan candidate. A new independent check follows before nissan
+  ships.
