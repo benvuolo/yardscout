@@ -1,0 +1,4677 @@
+{
+ "schema": "nissan_names_verify/1",
+ "as_of": "2026-11-19",
+ "candidate": "scraper/oem_fitment/groups/_report/nissan.candidate.json@83496438",
+ "raw": "oem-raw@57e8b5b9: raw/www.nissanpartsdeal.com.jsonl, raw/www.nissanpartsdeal.com.lists.jsonl, raw/www.infinitipartsdeal.com.jsonl, raw/www.infinitipartsdeal.com.lists.jsonl (no numbered continuation parts exist at that commit)",
+ "method": "Independent reading: every record and list-manifest row (all categories, both sites) whose pn equals a candidate number was collected; the page names (record name / list row main) were classified by hand-written rules over the literal catalog wording, not the curation code. Evidence keys are file:line (1-based physical line in the git blob). Line numbers of .lists.jsonl point at the list-page manifest record containing the row.",
+ "groups": 103,
+ "window_motor_only_groups": 30,
+ "counts": {
+  "claim1_component": {
+   "RIGHT": 102,
+   "RISK": 1
+  },
+  "claim2_label": {
+   "RIGHT": 103
+  },
+  "claim3_length": {
+   "RIGHT": 103
+  }
+ },
+ "ship_gate": "PASS (0 WRONG)",
+ "records": [
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27515-1E400"
+   ],
+   "id": "oem:nissan:climate-control:C:0930da868c",
+   "note": "Nissan catalog lists #27515-1E400 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "catalog_descriptions": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4816"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:546",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:669",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:808",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:820"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: A/C (climate) controller unit",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Controller Assy-Air Conditiner'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27515-2B000"
+   ],
+   "id": "oem:nissan:climate-control:C:14a91b9048",
+   "note": "Nissan catalog lists #27515-2B000 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "catalog_descriptions": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1570"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:546",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:669",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:808",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:814",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:820"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: A/C (climate) controller unit",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Controller Assy-Air Conditiner'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27515-2B001"
+   ],
+   "id": "oem:nissan:climate-control:C:84d41714d2",
+   "note": "Nissan catalog lists #27515-2B001 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "catalog_descriptions": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1571"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:510",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:546",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:625",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:808",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:814",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:826",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:832"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: A/C (climate) controller unit",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Controller Assy-Air Conditiner'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "28525-1E501"
+   ],
+   "id": "oem:nissan:climate-control:C:e149091576",
+   "note": "Nissan catalog lists #28525-1E501 for both — option: fits some option packages; Altima 1994: built 06/1992-07/1994 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "catalog_descriptions": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1572"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:546",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:669",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:808",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:814",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:820"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: A/C (climate) controller unit",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Controller Assy-Air Conditiner'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 150
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "28525-1E505"
+   ],
+   "id": "oem:nissan:climate-control:C:1573cf6be3",
+   "note": "Nissan catalog lists #28525-1E505 for both — option: fits some option packages; built 02/1996-07/1996 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "catalog_descriptions": [
+    "Controller Assy-Air Conditiner"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4804"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:510",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:625",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:826",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:832"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: A/C (climate) controller unit",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Controller Assy-Air Conditiner'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 137
+  },
+  {
+   "cat": "wiper-motor",
+   "pn": [
+    "28710-1BA0A"
+   ],
+   "id": "oem:nissan:wiper-motor:R:a769ed6262",
+   "note": "Infiniti catalog lists #28710-1BA0A for both — rear wiper motor; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Rear Window Wiper"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Rear Window Wiper"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:1874"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:27",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:77",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:118",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:209"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: rear wiper motor",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Motor Assy-Rear Window Wiper'); note carries no component wording; note wording 'rear wiper motor' matches the page name",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 120
+  },
+  {
+   "cat": "wiper-motor",
+   "pn": [
+    "28800-1LA0A"
+   ],
+   "id": "oem:nissan:wiper-motor:F:856ae4a8fa",
+   "note": "Infiniti catalog lists #28800-1LA0A for both — windshield wiper motor with linkage; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Drive Assy-Windshield Wiper"
+   ],
+   "catalog_descriptions": [
+    "Drive Assy-Windshield Wiper"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:2028"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:84",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:231"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: windshield wiper drive (only drive/motor number on its pages; no separate motor or link listed)",
+   "window_motor_only": false,
+   "verdict_1_component": "RISK",
+   "why_1": "catalog name 'Drive Assy-Windshield Wiper' is the whole drive assembly (RIGHT as to assembly vs component), and its pages list no separate motor or link; but \"with linkage\" is not carried by the page name itself, only inferred from it being the sole drive number on the page",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 139
+  },
+  {
+   "cat": "wiper-motor",
+   "pn": [
+    "28815-CG000"
+   ],
+   "id": "oem:nissan:wiper-motor:F:afab414f54",
+   "note": "Infiniti catalog lists #28815-CG000 for both — windshield wiper motor; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Windshield Wiper"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Windshield Wiper"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:1856"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:22",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:95",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:97",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:107",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:109",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:252",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:258",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:264"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: windshield wiper motor (motor alone; page lists link assys separately)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Motor Assy-Windshield Wiper'); note carries no component wording; note wording 'windshield wiper motor' matches the page name",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 126
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80700-0E710"
+   ],
+   "id": "oem:nissan:window-regulator:FR:c7447087e9",
+   "note": "Nissan catalog lists #80700-0E710 for both — fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1558"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:514",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:550",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:629",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:673",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:812",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:818",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:824",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:830",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:836"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 100
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80701-0E710"
+   ],
+   "id": "oem:nissan:window-regulator:FL:3bdf24c2b5",
+   "note": "Nissan catalog lists #80701-0E710 for both — fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1556"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:514",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:550",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:629",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:673",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:812",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:818",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:824",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:830",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:836"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 100
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-0E700"
+   ],
+   "id": "oem:nissan:window-regulator:FR:f7531ad609",
+   "note": "Nissan catalog lists #80720-0E700 for both — fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4820"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:550",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:673",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:812",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:824"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 100
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1BA0B"
+   ],
+   "id": "oem:nissan:window-regulator:FR:93900f8eb1",
+   "note": "Infiniti catalog lists #80720-1BA0B for both — fits some configurations; EX35: built 08/2009-07/2012 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:664"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:756",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:903",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1001",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1039",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1081",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1112",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1194",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1276",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1305"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 136
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1CA0A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:f60d961e88",
+   "note": "Infiniti catalog lists #80720-1CA0A for both — fits some configurations; built 03/2008-04/2009 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:2210"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:666",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:683",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1067",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1402"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 130
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1CA0B"
+   ],
+   "id": "oem:nissan:window-regulator:FR:11668ccb7b",
+   "note": "Infiniti catalog lists #80720-1CA0B for both — fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:256"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:666",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:683",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1026",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1052",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1067",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1159",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1168",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1218",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1227",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1402",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1456",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1466"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 136
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1MA0A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:71d645f334",
+   "note": "Infiniti catalog lists #80720-1MA0A for both — option: fits some option packages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:855"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:918",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:959",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1016",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1125",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1182",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1209",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1251",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1291",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1318",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1358",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1430",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1480",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1492"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 111
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1MA0B"
+   ],
+   "id": "oem:nissan:window-regulator:FR:9b9ad14dfa",
+   "note": "Infiniti catalog lists #80720-1MA0B for both — option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:2383"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1125",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1318",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1358",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1363",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1370",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1492",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1497",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1507",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1515"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 144
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-2Y000"
+   ],
+   "id": "oem:nissan:window-regulator:FR:d6b89efe10",
+   "note": "Infiniti catalog lists #80720-2Y000 for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:513"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:569",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:634",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:716",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:815"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-3JA0A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:7b083459e1",
+   "note": "Infiniti catalog lists #80720-3JA0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:384"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:338",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:530",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:743",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:842",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1144",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1262"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 146
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-9BF0A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:a4cbca0906",
+   "note": "Nissan catalog lists #80720-9BF0A for both — option: fits some option packages; Xterra 2014: built from 10/2013 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Window Regulator; Regulator Assembly - Door Window, Passenger Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4890"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:686",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:691",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:705",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:730",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:738",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:756",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:776",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:780",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:794",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:804"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 147
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-AR000"
+   ],
+   "id": "oem:nissan:window-regulator:FR:483bf55241",
+   "note": "Infiniti catalog lists #80720-AR000 for both — fits some configurations; FX35: built 11/2002-07/2004 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:43"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:297",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:489",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:595",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:649",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:651",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:668",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:702",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:855",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:857",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:890",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:944",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1249",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1353",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1365",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1372",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1517"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 136
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-CL00A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:a6c50f650e",
+   "note": "Infiniti catalog lists #80720-CL00A for both — fits some configurations; built 07/2004-06/2006 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:206"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:476",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:489",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:582",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:702",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:890",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:931",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:944",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1387"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 130
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-CL70B"
+   ],
+   "id": "oem:nissan:window-regulator:FR:9c547d77ec",
+   "note": "Infiniti catalog lists #80720-CL70B for both — fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh. This item is non-returnable."
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:639"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:476",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:542",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:582",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:931",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1239",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1387"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 138
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-EH100"
+   ],
+   "id": "oem:nissan:window-regulator:FR:36a5b7ab0d",
+   "note": "Infiniti catalog lists #80720-EH100 for both — fits some configurations; built 12/2004-06/2008 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:303"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:463",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:555",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:647",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:696",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:771",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:984",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1415"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 130
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-EH10A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:5247ba7a44",
+   "note": "Infiniti catalog lists #80720-EH10A for both — fits some configurations; built 06/2008-03/2009 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:907"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:555",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:647",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:872",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:984",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1415",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1443"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 130
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-JK00A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:ecc50c6f8c",
+   "note": "Infiniti catalog lists #80720-JK00A for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,Rh"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:162"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:324",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:365",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:421",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:449",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:516",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:610",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:731",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:830"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-ZL90A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:193c5b81db",
+   "note": "Nissan catalog lists #80720-ZL90A for both — option: fits some option packages; Frontier: built 08/2011-05/2013 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Door Window Passenger Side Regulator Assembly; Regulator Assembly - Door Window, Passenger Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:313"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:395",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:419",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:475",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:508",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:521",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:563",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:619",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:643",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:686",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:691",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:730",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:794"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 147
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-0E700"
+   ],
+   "id": "oem:nissan:window-regulator:FL:8a100575f1",
+   "note": "Nissan catalog lists #80721-0E700 for both — fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4819"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:550",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:673",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:812",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:824"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 100
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1BA0B"
+   ],
+   "id": "oem:nissan:window-regulator:FL:2ac42fbd22",
+   "note": "Infiniti catalog lists #80721-1BA0B for both — fits some configurations; EX35: built 08/2009-07/2012 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:663"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:756",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:903",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1001",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1039",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1081",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1112",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1194",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1276",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1305"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 136
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1CA0A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:8f4bbee9d9",
+   "note": "Infiniti catalog lists #80721-1CA0A for both — fits some configurations; built 03/2008-04/2009 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:2209"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:666",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:683",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1067",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1402"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 130
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1CA0B"
+   ],
+   "id": "oem:nissan:window-regulator:FL:850d96d981",
+   "note": "Infiniti catalog lists #80721-1CA0B for both — fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:255"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:666",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:683",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1026",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1052",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1067",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1159",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1168",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1218",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1227",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1402",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1456",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1466"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 136
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1MA0A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:e51f9518bf",
+   "note": "Infiniti catalog lists #80721-1MA0A for both — option: fits some option packages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:854"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:918",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:959",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1016",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1125",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1182",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1209",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1251",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1291",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1318",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1358",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1430",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1480",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1492"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 111
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-1MA0B"
+   ],
+   "id": "oem:nissan:window-regulator:FL:c6147b76d6",
+   "note": "Infiniti catalog lists #80721-1MA0B for both — option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:2382"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1125",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1318",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1358",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1363",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1370",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1492",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1497",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1507",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1515"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 144
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-3JA0A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:0809689189",
+   "note": "Infiniti catalog lists #80721-3JA0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:383"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:338",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:530",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:743",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:842",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1144",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1262"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 146
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-9BF0A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:acc05f1183",
+   "note": "Nissan catalog lists #80721-9BF0A for both — option: fits some option packages; Xterra 2014: built from 10/2013 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Door Window Driver Side Regulator Assembly; Regulator Assembly - Door Window, Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4889"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:686",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:691",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:705",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:730",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:738",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:756",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:776",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:780",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:794",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:804"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 147
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-AR000"
+   ],
+   "id": "oem:nissan:window-regulator:FL:6ec1df0c75",
+   "note": "Infiniti catalog lists #80721-AR000 for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:38"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:297",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:489",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:595",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:649",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:651",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:668",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:702",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:855",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:857",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:890",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:944",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1249",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1353",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1365",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1372",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1517"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-CL00A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:8380ea4d2d",
+   "note": "Infiniti catalog lists #80721-CL00A for both — fits some configurations; built 09/2004-06/2006 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:205"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:476",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:489",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:582",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:702",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:890",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:931",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:944",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1387"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 130
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-CL70B"
+   ],
+   "id": "oem:nissan:window-regulator:FL:35d6c18452",
+   "note": "Infiniti catalog lists #80721-CL70B for both — fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:638"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:476",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:542",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:582",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:931",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1239",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1387"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 138
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-EH100"
+   ],
+   "id": "oem:nissan:window-regulator:FL:df8b845bbf",
+   "note": "Infiniti catalog lists #80721-EH100 for both — fits some configurations; built 12/2004-06/2008 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:302"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:463",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:555",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:647",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:696",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:771",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:984",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1415"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 130
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-EH10A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:093b21daec",
+   "note": "Infiniti catalog lists #80721-EH10A for both — fits some configurations; built 06/2008-03/2009 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:906"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:555",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:647",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:872",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:984",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1415",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1443"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 130
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-JK00A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:8a8c3dabe5",
+   "note": "Infiniti catalog lists #80721-JK00A for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:161"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:324",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:365",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:421",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:449",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:516",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:610",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:731",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:830"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-ZL90A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:1c612166b6",
+   "note": "Nissan catalog lists #80721-ZL90A for both — option: fits some option packages; Frontier: built 08/2011-05/2013 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Window Regulator; Regulator Assembly - Door Window, Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:311"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:395",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:419",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:475",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:508",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:521",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:563",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:619",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:643",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:686",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:691",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:730",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:794"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 147
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-1E400"
+   ],
+   "id": "oem:nissan:window-regulator:FR:b9dba4519b",
+   "note": "Nissan catalog lists #80730-1E400 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1555"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:514",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:550",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:629",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:673",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:812",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:818",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:824",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:830",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:836"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 119
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-1LE0A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:abe0045c82",
+   "note": "Infiniti catalog lists #80730-1LE0A for both — window motor only; fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:573"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:620",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:786",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:801",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:987",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1140"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 155
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-1MA0A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:253fa1deef",
+   "note": "Infiniti catalog lists #80730-1MA0A for both — window motor only; fits some configurations; Q70 2014: checked on gas-model pages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:853"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:918",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:959",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1016",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1125",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1182",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1209",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1251",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1291",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1318",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1358",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1363",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1370",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1430",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1480",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1492",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1497",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1507",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1515"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 159
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-2Y000"
+   ],
+   "id": "oem:nissan:window-regulator:FR:2cb4dbbce8",
+   "note": "Infiniti catalog lists #80730-2Y000 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:511"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:569",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:634",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:716",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:815"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 121
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-7B400"
+   ],
+   "id": "oem:nissan:window-regulator:FR:96252c03f6",
+   "note": "Nissan catalog lists #80730-7B400 for both — window motor only; option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:268"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:176",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:193",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:214",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:278",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:316",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:333",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:389",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:412",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:439",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:534"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 128
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-AL501"
+   ],
+   "id": "oem:nissan:window-regulator:FR:7dce330660",
+   "note": "Infiniti catalog lists #80730-AL501 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:35"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:297",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:476",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:489",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:542",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:582",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:595",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:649",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:651",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:668",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:702",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:855",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:857",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:890",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:931",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:944",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1239",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1387"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 121
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-EA005"
+   ],
+   "id": "oem:nissan:window-regulator:FR:ed65463647",
+   "note": "Nissan catalog lists #80730-EA005 for both — window motor only; option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Window Motor; Motor Assembly - Regulator, Passenger Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:309"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:219",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:230",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:241",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:258",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:287",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:292",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:298",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:360",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:374",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:406",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:452",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:467",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:475",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:508",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:563",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:575",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:586",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:619",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:643",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:686",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:691",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:705",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:730",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:738",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:756",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:776",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:780",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:794",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:804"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 128
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80731-1E400"
+   ],
+   "id": "oem:nissan:window-regulator:FL:302a2c3f91",
+   "note": "Nissan catalog lists #80731-1E400 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1554"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:514",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:550",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:629",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:673",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:812",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:818",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:824",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:830",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:836"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 119
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80731-1LE0A"
+   ],
+   "id": "oem:nissan:window-regulator:FR:e61a6d2f3f",
+   "note": "Infiniti catalog lists #80731-1LE0A for both — window motor only; fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:574"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:620",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:786",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:801",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:987",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1140"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 155
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80731-1MA0A"
+   ],
+   "id": "oem:nissan:window-regulator:FL:4a4976c932",
+   "note": "Infiniti catalog lists #80731-1MA0A for both — window motor only; fits some configurations; Q70 2014: checked on gas-model pages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:852"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:918",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:959",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1016",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1125",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1182",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1209",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1251",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1291",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1318",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1358",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1363",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1370",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1430",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1480",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1492",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1497",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1507",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1515"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 159
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80731-7B400"
+   ],
+   "id": "oem:nissan:window-regulator:FL:d740839e2b",
+   "note": "Nissan catalog lists #80731-7B400 for both — window motor only; option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:267"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:176",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:193",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:214",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:278",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:316",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:333",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:389",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:412",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:439",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:534"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 128
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80731-AL511"
+   ],
+   "id": "oem:nissan:window-regulator:FL:628ab6fea2",
+   "note": "Infiniti catalog lists #80731-AL511 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:31"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:297",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:476",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:489",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:542",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:582",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:595",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:649",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:651",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:668",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:702",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:855",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:857",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:890",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:931",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:944",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1239",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1387"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 121
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80731-EA005"
+   ],
+   "id": "oem:nissan:window-regulator:FL:b4262f30ce",
+   "note": "Nissan catalog lists #80731-EA005 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Window Motor; Motor Assembly - Regulator, Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:308"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:219",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:292",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:298",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:360",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:374",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:406",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:452",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:467",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:475",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:508",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:563",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:575",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:586",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:619",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:643",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:686",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:691",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:705",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:730",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:738",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:756",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:776",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:780",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:794",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:804"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 119
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80731-JX30C"
+   ],
+   "id": "oem:nissan:window-regulator:FL:c1c2e4c0aa",
+   "note": "Nissan catalog lists #80731-JX30C for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Window Motor; Motor Assembly - Regulator, Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1415"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:540",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:542",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:602",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:655",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:665",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:693",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:709",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:725",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:734",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:741",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:746",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:782",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:784"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 119
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82700-0E710"
+   ],
+   "id": "oem:nissan:window-regulator:RR:f75b55f595",
+   "note": "Nissan catalog lists #82700-0E710 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assembly-Rear Door Window,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1564"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:515",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:630",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:819",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:831",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:837"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82701-0E710"
+   ],
+   "id": "oem:nissan:window-regulator:RL:3815a77992",
+   "note": "Nissan catalog lists #82701-0E710 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Rear Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1562"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:515",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:630",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:819",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:831",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:837"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82720-0E700"
+   ],
+   "id": "oem:nissan:window-regulator:RR:6fa0b8f2c7",
+   "note": "Nissan catalog lists #82720-0E700 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assembly-Rear Door Window,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4824"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82720-0E715"
+   ],
+   "id": "oem:nissan:window-regulator:RR:ef4975d606",
+   "note": "Nissan catalog lists #82720-0E715 for both — option: fits some option packages; Altima: built 08/1993-07/1996 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assembly-Rear Door Window,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1565"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:515",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:630",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:819",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:831",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:837"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 145
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82720-0E717"
+   ],
+   "id": "oem:nissan:window-regulator:RR:300fc2f362",
+   "note": "Nissan catalog lists #82720-0E717 for both — option: fits some option packages; built from 07/1996 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assembly-Rear Door Window,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4806"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:515",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:630",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:831",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:837"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 134
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82720-1BA0A"
+   ],
+   "id": "oem:nissan:window-regulator:RR:33c19e2380",
+   "note": "Infiniti catalog lists #82720-1BA0A for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assembly-Rear Door Window,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:554"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:757",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:904",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1002",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1040",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1082",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1113",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1195",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1277",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1306"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82720-1LA0A"
+   ],
+   "id": "oem:nissan:window-regulator:RR:b1b62f2f6b",
+   "note": "Infiniti catalog lists #82720-1LA0A for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assembly-Rear Door Window,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:580"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:621",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:787",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:802",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:988",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1141",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1248",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1352",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1488",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1511"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82720-1U600"
+   ],
+   "id": "oem:nissan:window-regulator:RR:d2ea825926",
+   "note": "Nissan catalog lists #82720-1U600 for both — fits some configurations; Juke: built 09/2011-03/2015, 09/2015-02/2016 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Door Window Right Hand; Regulator Assembly - Rear Door Window, Passenger Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1422"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:541",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:543",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:603",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:666",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:694",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:710",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:726",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:735",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:783"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 151
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82720-JK000"
+   ],
+   "id": "oem:nissan:window-regulator:RR:9709cdbc28",
+   "note": "Infiniti catalog lists #82720-JK000 for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assembly-Rear Door Window,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:124"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:296",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:325",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:366",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:394",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:422",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:450",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:517",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:611",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:732",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:759",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:831"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82721-0E700"
+   ],
+   "id": "oem:nissan:window-regulator:RL:6201d377aa",
+   "note": "Nissan catalog lists #82721-0E700 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Rear Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4823"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82721-0E715"
+   ],
+   "id": "oem:nissan:window-regulator:RL:c894b84ebd",
+   "note": "Nissan catalog lists #82721-0E715 for both — option: fits some option packages; Altima: built 08/1993-02/1996 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Rear Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1563"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:515",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:630",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:819",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:831",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:837"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 145
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82721-0E717"
+   ],
+   "id": "oem:nissan:window-regulator:RL:e6dd47a01e",
+   "note": "Nissan catalog lists #82721-0E717 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Rear Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4805"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:515",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:630",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:831",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:837"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82721-1BA0A"
+   ],
+   "id": "oem:nissan:window-regulator:RL:66d3838d2b",
+   "note": "Infiniti catalog lists #82721-1BA0A for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Rear Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:553"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:757",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:904",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1002",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1040",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1082",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1113",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1195",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1277",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1306"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82721-1LA0A"
+   ],
+   "id": "oem:nissan:window-regulator:RL:613aa019d9",
+   "note": "Infiniti catalog lists #82721-1LA0A for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Rear Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:579"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:621",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:787",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:802",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:988",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1141",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1248",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1352",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1488",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1511"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82721-1U600"
+   ],
+   "id": "oem:nissan:window-regulator:RL:dd2ee3c898",
+   "note": "Nissan catalog lists #82721-1U600 for both — fits some configurations; Juke: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Window Regulator; Regulator Assembly - Rear Door Window, Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1421"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:541",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:543",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:603",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:666",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:694",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:710",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:726",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:735",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:783"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 151
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82721-JK000"
+   ],
+   "id": "oem:nissan:window-regulator:RL:07ca7ce35e",
+   "note": "Infiniti catalog lists #82721-JK000 for both — fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Regulator Assy-Rear Door Window, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Assy-Rear Door Window,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:123"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:296",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:325",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:366",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:394",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:422",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:450",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:517",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:611",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:732",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:759",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:831"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: window regulator (motor not stated)",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Regulator Assy-Rear Door Window, LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 102
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82730-1E400"
+   ],
+   "id": "oem:nissan:window-regulator:RR:5af5348a13",
+   "note": "Nissan catalog lists #82730-1E400 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4822"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 119
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82730-1MA0A"
+   ],
+   "id": "oem:nissan:window-regulator:RR:0399e251c5",
+   "note": "Infiniti catalog lists #82730-1MA0A for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:578"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:621",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:787",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:802",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:919",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:960",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:988",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1017",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1126",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1141",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1183",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1210",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1248",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1252",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1292",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1319",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1352",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1359",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1364",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1431",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1481",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1488",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1493",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1498",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1503",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1508"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 121
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82730-1MA0B"
+   ],
+   "id": "oem:nissan:window-regulator:RR:e288debf89",
+   "note": "Infiniti catalog lists #82730-1MA0B for both — window motor only; fits some configurations; Q70: checked on gas-model pages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assembly - Regulator, RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:2425"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1352",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1364",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1371",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1488",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1498",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1503",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1508",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1511",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1516"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 154
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82730-3KG0A"
+   ],
+   "id": "oem:nissan:window-regulator:RR:f0335b4f27",
+   "note": "Infiniti catalog lists #82730-3KG0A for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:386"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:339",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:531",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:744",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:843",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1145",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1263"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 121
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82730-3TA2A"
+   ],
+   "id": "oem:nissan:window-regulator:RR:4e683f9bc0",
+   "note": "Nissan catalog lists #82730-3TA2A for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Window Motor; Motor Assembly - Regulator, Passenger Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:64"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:377",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:442",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:480",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:486",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:526",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:528",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:555",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:566",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:591",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:646",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:678",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:721",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:733",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:773",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:840"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 119
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82730-CV01B"
+   ],
+   "id": "oem:nissan:window-regulator:RL:957704c7ca",
+   "note": "Nissan catalog lists #82730-CV01B for both — window motor only; option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Driver Side Motor Assembly; Motor Assembly - Regulator, Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1419"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:541",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:543",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:603",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:605",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:656",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:666",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:694",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:710",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:726",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:735",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:742",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:747",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:783",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:785"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 128
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82730-D9000"
+   ],
+   "id": "oem:nissan:window-regulator:RR:82b1c2f0d3",
+   "note": "Nissan catalog lists #82730-D9000 for both — window motor only; fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1561"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:515",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:630",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:819",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:831",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:837"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 157
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82730-EH100"
+   ],
+   "id": "oem:nissan:window-regulator:RR:7bdd385f34",
+   "note": "Infiniti catalog lists #82730-EH100 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:305"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:464",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:556",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:648",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:697",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:772",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:873",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:985",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1416",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1444"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 121
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82731-1E400"
+   ],
+   "id": "oem:nissan:window-regulator:RL:442bf3166f",
+   "note": "Nissan catalog lists #82731-1E400 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4821"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 119
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82731-1MA0A"
+   ],
+   "id": "oem:nissan:window-regulator:RL:5e7daeef32",
+   "note": "Infiniti catalog lists #82731-1MA0A for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:577"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:621",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:787",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:802",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:919",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:960",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:988",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1017",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1126",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1141",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1183",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1210",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1248",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1252",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1292",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1319",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1352",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1359",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1364",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1431",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1481",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1488",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1493",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1498",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1503",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1508"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 121
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82731-1MA0B"
+   ],
+   "id": "oem:nissan:window-regulator:RL:933a258031",
+   "note": "Infiniti catalog lists #82731-1MA0B for both — window motor only; fits some configurations; Q70: checked on gas-model pages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assembly - Regulator, LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:2424"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1352",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1364",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1371",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1488",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1498",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1503",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1508",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1511",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1516"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 154
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82731-3KG0A"
+   ],
+   "id": "oem:nissan:window-regulator:RL:469a64fa44",
+   "note": "Infiniti catalog lists #82731-3KG0A for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:385"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:339",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:531",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:744",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:843",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1145",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1263"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 121
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82731-3TA2A"
+   ],
+   "id": "oem:nissan:window-regulator:RL:5863edc17c",
+   "note": "Nissan catalog lists #82731-3TA2A for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Window Motor; Motor Assembly - Regulator, Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:63"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:377",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:442",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:480",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:486",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:526",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:528",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:555",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:566",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:591",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:646",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:678",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:721",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:733",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:773",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:840"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 119
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82731-CV01B"
+   ],
+   "id": "oem:nissan:window-regulator:RR:500e34fcf0",
+   "note": "Nissan catalog lists #82731-CV01B for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "catalog_descriptions": [
+    "Regulator Passenger Side Motor Assembly; Motor Assembly - Regulator, Passenger Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1420"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:541",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:543",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:603",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:605",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:656",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:666",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:694",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:710",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:726",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:735",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:742",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:747",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:783",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:785"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, RH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 119
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82731-D9000"
+   ],
+   "id": "oem:nissan:window-regulator:RL:0d07775a4b",
+   "note": "Nissan catalog lists #82731-D9000 for both — window motor only; fits some configurations; Altima: built 08/1993-02/1996 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assy-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1560"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:515",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:551",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:630",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:674",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:813",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:819",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:825",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:831",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:837"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 155
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82731-EH100"
+   ],
+   "id": "oem:nissan:window-regulator:RL:0044687416",
+   "note": "Infiniti catalog lists #82731-EH100 for both — window motor only; fits some configurations; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "catalog_descriptions": [
+    "Motor Assembly-Regulator,LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:304"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:464",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:556",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:648",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:697",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:772",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:873",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:985",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1416",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1444"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "component: window regulator motor alone",
+   "window_motor_only": true,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names it 'Motor Assy-Regulator, LH' (motor alone); note says \"window motor only\"",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 121
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-1BA1D"
+   ],
+   "id": "oem:nissan:side-mirrors:R:efead87917",
+   "note": "Infiniti catalog lists #96301-1BA1D for both — option: fits some option packages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Door Mirror Assy-RH"
+   ],
+   "catalog_descriptions": [
+    "Door Mirror Assy-RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:657"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:901",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:999",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1079",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1274",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1303"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 111
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-1CA1A"
+   ],
+   "id": "oem:nissan:side-mirrors:R:8cb1600395",
+   "note": "Infiniti catalog lists #96301-1CA1A for both — option: fits some option packages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Door Mirror Assy-RH"
+   ],
+   "catalog_descriptions": [
+    "Door Mirror Assy-RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:252"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:664",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:681",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1024",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1050",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1065",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1157",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1166",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1216",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1225",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1258",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1400",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1454",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1464"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 111
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-1E400"
+   ],
+   "id": "oem:nissan:side-mirrors:R:0e59658bba",
+   "note": "Nissan catalog lists #96301-1E400 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Door Mirror Assy-RH"
+   ],
+   "catalog_descriptions": [
+    "Door Right Hand Mirror Assembly; Door Mirror Assembly - Passenger Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1550"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:548",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:627",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:671",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:810",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:816",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:822",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:828"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-2B500"
+   ],
+   "id": "oem:nissan:side-mirrors:R:e2c158fdbf",
+   "note": "Nissan catalog lists #96301-2B500 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Door Mirror Assy-RH"
+   ],
+   "catalog_descriptions": [
+    "Door Mirror Assy-RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1551"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:512",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:627",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:816",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:828",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:834"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-EV50A"
+   ],
+   "id": "oem:nissan:side-mirrors:R:cd708948c6",
+   "note": "Infiniti catalog lists #96301-EV50A for both — fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Door Mirror Assy-RH"
+   ],
+   "catalog_descriptions": [
+    "Door Mirror Assy-RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:905"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:552",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:644",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:869",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:981",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1412",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1440"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 137
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-ZC60A"
+   ],
+   "id": "oem:nissan:side-mirrors:R:d525beef3d",
+   "note": "Nissan catalog lists #96301-ZC60A for both — option: fits some option packages; built 08/2005-08/2006 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Mirror Assy-Outside, RH"
+   ],
+   "catalog_descriptions": [
+    "Mirror Assy-Outside,RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1010"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:185",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:203",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:271",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:308",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:342",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:353"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Mirror Assy-Outside, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 137
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-ZH10A"
+   ],
+   "id": "oem:nissan:side-mirrors:R:e84b7019b7",
+   "note": "Nissan catalog lists #96301-ZH10A for both — option: fits some option packages; Titan: built 08/2005-04/2007 only; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Mirror Assy-Outside, RH"
+   ],
+   "catalog_descriptions": [
+    "Mirror Assembly; Mirror Assembly - Outside, Passenger Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:4323"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:185",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:203",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:342",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:385",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:696",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:702",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:762",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:764",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:767"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Mirror Assy-Outside, RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 144
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-1BA1D"
+   ],
+   "id": "oem:nissan:side-mirrors:L:2fec60e2ea",
+   "note": "Infiniti catalog lists #96302-1BA1D for both — option: fits some option packages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Door Mirror Assy-LH"
+   ],
+   "catalog_descriptions": [
+    "Door Mirror Assy-LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:653"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:901",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:999",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1079",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1274",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1303"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 111
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-1CA1A"
+   ],
+   "id": "oem:nissan:side-mirrors:L:97243e6ea8",
+   "note": "Infiniti catalog lists #96302-1CA1A for both — option: fits some option packages; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Door Mirror Assy-LH"
+   ],
+   "catalog_descriptions": [
+    "Door Mirror Assy-LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:249"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:664",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:681",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1024",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1050",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1065",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1157",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1166",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1216",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1225",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1258",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1400",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1454",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1464"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 111
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-1E400"
+   ],
+   "id": "oem:nissan:side-mirrors:L:8655da36ab",
+   "note": "Nissan catalog lists #96302-1E400 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Door Mirror Assy-LH"
+   ],
+   "catalog_descriptions": [
+    "Door Left Hand Mirror Assembly; Door Mirror Assembly - Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1546"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:548",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:627",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:671",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:810",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:816",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:822",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:828"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-2B500"
+   ],
+   "id": "oem:nissan:side-mirrors:L:687cb2a319",
+   "note": "Nissan catalog lists #96302-2B500 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Door Mirror Assy-LH"
+   ],
+   "catalog_descriptions": [
+    "Door Mirror Assy-LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1547"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:512",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:627",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:816",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:828",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:834"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-EV50A"
+   ],
+   "id": "oem:nissan:side-mirrors:L:786a2d03ce",
+   "note": "Infiniti catalog lists #96302-EV50A for both — fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part",
+   "label": "Infiniti catalog",
+   "catalog_names": [
+    "Door Mirror Assy-LH"
+   ],
+   "catalog_descriptions": [
+    "Door Mirror Assy-LH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.infinitipartsdeal.com.jsonl:904"
+    ],
+    "list_rows": [
+     "raw/www.infinitipartsdeal.com.lists.jsonl:552",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:644",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:869",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:981",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1412",
+     "raw/www.infinitipartsdeal.com.lists.jsonl:1440"
+    ]
+   },
+   "record_sites": [
+    "Infiniti"
+   ],
+   "claimed_vehicle_sites": [
+    "Infiniti"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Infiniti-site pages (seed make Infiniti); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 137
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6301-1E400"
+   ],
+   "id": "oem:nissan:side-mirrors:R:f093798f95",
+   "note": "Nissan catalog lists #J6301-1E400 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Door Mirror Assy-RH"
+   ],
+   "catalog_descriptions": [
+    "Door Right Hand Mirror Assembly; Door Mirror Assembly - Passenger Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1552"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:548",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:627",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:671",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:810",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:816",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:822",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:828"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6301-2B500"
+   ],
+   "id": "oem:nissan:side-mirrors:R:35c5d6639d",
+   "note": "Nissan catalog lists #J6301-2B500 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Door Mirror Assy-RH"
+   ],
+   "catalog_descriptions": [
+    "Door Mirror Assy-RH"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1553"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:512",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:627",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:816",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:828",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:834"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-RH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6302-1E400"
+   ],
+   "id": "oem:nissan:side-mirrors:L:3e56ef6157",
+   "note": "Nissan catalog lists #J6302-1E400 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Door Mirror Assy-LH"
+   ],
+   "catalog_descriptions": [
+    "Door Left Hand Mirror Assembly; Door Mirror Assembly - Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1548"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:548",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:627",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:671",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:810",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:816",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:822",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:828"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6302-2B500"
+   ],
+   "id": "oem:nissan:side-mirrors:L:b5e9556a29",
+   "note": "Nissan catalog lists #J6302-2B500 for both — option: fits some option packages; verify the number on the part",
+   "label": "Nissan catalog",
+   "catalog_names": [
+    "Door Mirror Assy-LH"
+   ],
+   "catalog_descriptions": [
+    "Mirror Assembly; Door Mirror Assembly - Driver Side"
+   ],
+   "evidence": {
+    "records": [
+     "raw/www.nissanpartsdeal.com.jsonl:1549"
+    ],
+    "list_rows": [
+     "raw/www.nissanpartsdeal.com.lists.jsonl:512",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:627",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:816",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:828",
+     "raw/www.nissanpartsdeal.com.lists.jsonl:834"
+    ]
+   },
+   "record_sites": [
+    "Nissan"
+   ],
+   "claimed_vehicle_sites": [
+    "Nissan"
+   ],
+   "component_class": "assembly: outside door mirror",
+   "window_motor_only": false,
+   "verdict_1_component": "RIGHT",
+   "why_1": "catalog names the whole assembly ('Door Mirror Assy-LH'); note carries no component wording",
+   "verdict_2_label": "RIGHT",
+   "why_2": "every claimed model is listed on Nissan-site pages (seed make Nissan); number appears on no other-site page",
+   "verdict_3_length": "RIGHT",
+   "note_length": 109
+  }
+ ],
+ "post_push_comparison": {
+  "read_after_verdicts_pushed_at": "cff56960",
+  "against": "scraper/oem_fitment/groups/_report/round9_names_2026-11-19.json",
+  "result": "Same catalog names, same per-number reference counts, same notes and labels for all 103 groups; class agrees for all 103 (regulator 49 = my assembly, motor 30 = my component, assembly 24 = my assembly).",
+  "differs": [
+   {
+    "pn": [
+     "28800-1LA0A"
+    ],
+    "cat": "wiper-motor",
+    "note": "round9 reads Drive Assy-Windshield Wiper as a plain assembly and lets the phrase \"windshield wiper motor with linkage\" stand; my reading agrees it is the assembly but keeps claim 1 at RISK because the word linkage is not in the page name (it is inferred: its two pages list no separate motor or link number). Not a disagreement on the name itself."
+   }
+  ]
+ }
+}
