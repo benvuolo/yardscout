@@ -1,0 +1,233 @@
+{
+ "changed": 8,
+ "held": 0,
+ "note": "round10-1119: window-regulator groups whose catalog part name is a motor gain 'window motor only' on the finished note (change 'phrase'); a note the words take past the cap, mixed or unreadable names hold the group (change 'held'). Names with site:file:line.",
+ "ns": "subaru",
+ "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "rows": [
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor Assembly-Regulator",
+     "ref": "www.subarupartsdeal.com:lists:L107"
+    },
+    {
+     "name": "Motor Assembly-Regulator",
+     "ref": "www.subarupartsdeal.com:lists:L133"
+    },
+    {
+     "name": "Motor Assembly-Regulator",
+     "ref": "www.subarupartsdeal.com:lists:L19"
+    },
+    {
+     "name": "Motor Assembly-Regulator",
+     "ref": "www.subarupartsdeal.com:lists:L32"
+    },
+    {
+     "name": "Motor Assembly-Regulator",
+     "ref": "www.subarupartsdeal.com:lists:L94"
+    },
+    {
+     "name": "Motor Assembly-Regulator",
+     "ref": "www.subarupartsdeal.com:records:L312"
+    }
+   ],
+   "new_note": "Subaru catalog lists #61188AE00A for both — window motor only; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #61188AE00A for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "61188AE00A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor Assembly-Regulator",
+     "ref": "www.subarupartsdeal.com:lists:L120"
+    },
+    {
+     "name": "Motor Assembly-Regulator",
+     "ref": "www.subarupartsdeal.com:records:L413"
+    }
+   ],
+   "new_note": "Subaru catalog lists #61188AE00B for both — window motor only; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #61188AE00B for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "61188AE00B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor Assembly-Regulator,Front Left",
+     "ref": "www.subarupartsdeal.com:lists:L107"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Front Left",
+     "ref": "www.subarupartsdeal.com:lists:L133"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Front Left",
+     "ref": "www.subarupartsdeal.com:lists:L19"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Front Left",
+     "ref": "www.subarupartsdeal.com:lists:L32"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Front Left",
+     "ref": "www.subarupartsdeal.com:lists:L94"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Front Left",
+     "ref": "www.subarupartsdeal.com:records:L313"
+    }
+   ],
+   "new_note": "Subaru catalog lists #61188AE01A for both — window motor only; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #61188AE01A for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "61188AE01A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor Assembly-Regulator,Front Left",
+     "ref": "www.subarupartsdeal.com:lists:L120"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Front Left",
+     "ref": "www.subarupartsdeal.com:records:L414"
+    }
+   ],
+   "new_note": "Subaru catalog lists #61188AE01B for both — window motor only; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #61188AE01B for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "61188AE01B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor Assembly-Regulator,Rear Right",
+     "ref": "www.subarupartsdeal.com:lists:L107"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Right",
+     "ref": "www.subarupartsdeal.com:lists:L133"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Right",
+     "ref": "www.subarupartsdeal.com:lists:L19"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Right",
+     "ref": "www.subarupartsdeal.com:lists:L32"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Right",
+     "ref": "www.subarupartsdeal.com:lists:L94"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Right",
+     "ref": "www.subarupartsdeal.com:records:L315"
+    }
+   ],
+   "new_note": "Subaru catalog lists #62188AE00A for both — window motor only; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #62188AE00A for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "62188AE00A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor Assembly-Regulator,Rear Right",
+     "ref": "www.subarupartsdeal.com:lists:L120"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Right",
+     "ref": "www.subarupartsdeal.com:records:L416"
+    }
+   ],
+   "new_note": "Subaru catalog lists #62188AE00B for both — window motor only; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #62188AE00B for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "62188AE00B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor Assembly-Regulator,Rear Left",
+     "ref": "www.subarupartsdeal.com:lists:L107"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Left",
+     "ref": "www.subarupartsdeal.com:lists:L133"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Left",
+     "ref": "www.subarupartsdeal.com:lists:L19"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Left",
+     "ref": "www.subarupartsdeal.com:lists:L32"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Left",
+     "ref": "www.subarupartsdeal.com:lists:L94"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Left",
+     "ref": "www.subarupartsdeal.com:records:L314"
+    }
+   ],
+   "new_note": "Subaru catalog lists #62188AE01A for both — window motor only; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #62188AE01A for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "62188AE01A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor Assembly-Regulator,Rear Left",
+     "ref": "www.subarupartsdeal.com:lists:L120"
+    },
+    {
+     "name": "Motor Assembly-Regulator,Rear Left",
+     "ref": "www.subarupartsdeal.com:records:L415"
+    }
+   ],
+   "new_note": "Subaru catalog lists #62188AE01B for both — window motor only; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #62188AE01B for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "62188AE01B"
+   ]
+  }
+ ]
+}

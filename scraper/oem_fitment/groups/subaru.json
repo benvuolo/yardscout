@@ -21004,7 +21004,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL+FR:d3510d5ccf",
    "kind": "body",
-   "note": "Subaru catalog lists #61188AE00A for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #61188AE00A for both — window motor only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:06:55Z",
    "pn": [
     "61188AE00A"
@@ -21031,7 +21031,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL+FR:b40b4e702d",
    "kind": "body",
-   "note": "Subaru catalog lists #61188AE00B for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #61188AE00B for both — window motor only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:36:46Z",
    "pn": [
     "61188AE00B"
@@ -21058,7 +21058,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL:dd63359e02",
    "kind": "body",
-   "note": "Subaru catalog lists #61188AE01A for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #61188AE01A for both — window motor only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:07:00Z",
    "pn": [
     "61188AE01A"
@@ -21085,7 +21085,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL:f3d43f0677",
    "kind": "body",
-   "note": "Subaru catalog lists #61188AE01B for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #61188AE01B for both — window motor only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:36:54Z",
    "pn": [
     "61188AE01B"
@@ -21166,7 +21166,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RR:616fb00389",
    "kind": "body",
-   "note": "Subaru catalog lists #62188AE00A for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #62188AE00A for both — window motor only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:07:10Z",
    "pn": [
     "62188AE00A"
@@ -21193,7 +21193,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RR:7873578adc",
    "kind": "body",
-   "note": "Subaru catalog lists #62188AE00B for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #62188AE00B for both — window motor only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:37:10Z",
    "pn": [
     "62188AE00B"
@@ -21220,7 +21220,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RL:d80075e6aa",
    "kind": "body",
-   "note": "Subaru catalog lists #62188AE01A for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #62188AE01A for both — window motor only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:07:05Z",
    "pn": [
     "62188AE01A"
@@ -21247,7 +21247,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RL:8cede519df",
    "kind": "body",
-   "note": "Subaru catalog lists #62188AE01B for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #62188AE01B for both — window motor only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:37:02Z",
    "pn": [
     "62188AE01B"

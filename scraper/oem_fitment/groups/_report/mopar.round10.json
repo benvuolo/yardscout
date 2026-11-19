@@ -1,0 +1,645 @@
+{
+ "changed": 21,
+ "held": 0,
+ "note": "round10-1119: window-regulator groups whose catalog part name is a motor gain 'window motor only' on the finished note (change 'phrase'); a note the words take past the cap, mixed or unreadable names hold the group (change 'held'). Names with site:file:line.",
+ "ns": "mopar",
+ "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "rows": [
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "MOTOR Window Regulator",
+     "ref": "www.moparpartsgiant.com:lists:L1013"
+    },
+    {
+     "name": "MOTOR Window Regulator",
+     "ref": "www.moparpartsgiant.com:lists:L1194"
+    },
+    {
+     "name": "MOTOR Window Regulator",
+     "ref": "www.moparpartsgiant.com:lists:L814"
+    },
+    {
+     "name": "MOTOR Window Regulator",
+     "ref": "www.moparpartsgiant.com:lists:L815"
+    },
+    {
+     "name": "MOTOR Window Regulator",
+     "ref": "www.moparpartsgiant.com:records:L2478"
+    }
+   ],
+   "new_note": "Mopar catalog lists #5012545AA for both — window motor only; older catalog-only number; verify the number on the part",
+   "old_note": "Mopar catalog lists #5012545AA for both — older catalog-only number; verify the number on the part",
+   "pn": [
+    "5012545AA"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L471"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L180"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L180"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68004590AC for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68004590AC for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68004590AC"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "MOTOR WINDOW REGULATOR 6 Pin",
+     "ref": "www.moparpartsgiant.com:lists:L335"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L471"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L181"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L181"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68004591AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68004591AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68004591AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L471"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L182"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L182"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68004818AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68004818AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68004818AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L471"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L183"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L183"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68004819AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68004819AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68004819AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "MOTOR WINDOW REGULATOR 6 Pin Front",
+     "ref": "www.moparpartsgiant.com:lists:L1291"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L1027"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L25"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L74"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L1061"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L1061"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68030656AA for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68030656AA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68030656AA"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "MOTOR WINDOW REGULATOR 6 Pin Front",
+     "ref": "www.moparpartsgiant.com:lists:L1291"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L1027"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L25"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L74"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L1060"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L1060"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68030657AA for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68030657AA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68030657AA"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "MOTOR WINDOW REGULATOR 2 Pin",
+     "ref": "www.moparpartsgiant.com:lists:L1291"
+    },
+    {
+     "name": "MOTOR WINDOW REGULATOR 2 Pin Rear",
+     "ref": "www.moparpartsgiant.com:lists:L1291"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L1027"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L25"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L74"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L1062"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L1062"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68030660AA for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68030660AA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68030660AA"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "MOTOR WINDOW REGULATOR 2 Pin",
+     "ref": "www.moparpartsgiant.com:lists:L1291"
+    },
+    {
+     "name": "MOTOR WINDOW REGULATOR 2 Pin Rear",
+     "ref": "www.moparpartsgiant.com:lists:L1291"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L1027"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L25"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L74"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L1063"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L1063"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68030661AA for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68030661AA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68030661AA"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L1010"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L487"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L2134"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L2134"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68044804AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68044804AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68044804AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L1010"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L487"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L2135"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L2135"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68044805AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68044805AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68044805AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L1011"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L488"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L2136"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L2136"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68045134AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68045134AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68045134AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L1011"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L488"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L2137"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L2137"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68045135AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68045135AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68045135AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L521"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L281"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L281"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68079282AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68079282AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68079282AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L521"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L282"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L282"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68079283AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68079283AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68079283AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L522"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L285"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L285"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68079284AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68079284AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68079284AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L522"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L286"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L286"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68079285AB for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68079285AB for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68079285AB"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L126"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L367"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L708"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L726"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L1425"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L1425"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68143986AA for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68143986AA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68143986AA"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L126"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L367"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L708"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L726"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L1424"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L1424"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68143987AA for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68143987AA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68143987AA"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L127"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L368"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L709"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L727"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L1427"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L1427"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68143988AA for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68143988AA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68143988AA"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "class": "motor",
+   "names": [
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L127"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L368"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L709"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:lists:L727"
+    },
+    {
+     "name": "Motor - Window Regulator",
+     "ref": "www.jeeppartsdeal.com:records:L1426"
+    },
+    {
+     "name": "Window Motor",
+     "ref": "www.jeeppartsdeal.com:records:L1426"
+    }
+   ],
+   "new_note": "Mopar catalog lists #68143989AA for both — window motor only; trim-limited; verify the number on the part",
+   "old_note": "Mopar catalog lists #68143989AA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "68143989AA"
+   ]
+  }
+ ]
+}

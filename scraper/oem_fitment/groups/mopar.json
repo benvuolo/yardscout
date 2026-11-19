@@ -115746,7 +115746,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+RL+SL:ede1e4c9fe",
    "kind": "body",
-   "note": "Mopar catalog lists #5012545AA for both — older catalog-only number; verify the number on the part",
+   "note": "Mopar catalog lists #5012545AA for both — window motor only; older catalog-only number; verify the number on the part",
    "oldest_retrieved": "2026-11-06T08:34:25Z",
    "pn": [
     "5012545AA"
@@ -119069,7 +119069,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:7a6551a190",
    "kind": "body",
-   "note": "Mopar catalog lists #68004590AC for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68004590AC for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:07:50Z",
    "pn": [
     "68004590AC"
@@ -119096,7 +119096,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:b28eceec4d",
    "kind": "body",
-   "note": "Mopar catalog lists #68004591AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68004591AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:07:54Z",
    "pn": [
     "68004591AB"
@@ -119123,7 +119123,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:f0adace025",
    "kind": "body",
-   "note": "Mopar catalog lists #68004818AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68004818AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:07:58Z",
    "pn": [
     "68004818AB"
@@ -119150,7 +119150,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:04f8d17a22",
    "kind": "body",
-   "note": "Mopar catalog lists #68004819AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68004819AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:08:02Z",
    "pn": [
     "68004819AB"
@@ -119264,7 +119264,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:9af0b2b16c",
    "kind": "body",
-   "note": "Mopar catalog lists #68030656AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68030656AA for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T02:55:08Z",
    "pn": [
     "68030656AA"
@@ -119297,7 +119297,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:2892c543ec",
    "kind": "body",
-   "note": "Mopar catalog lists #68030657AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68030657AA for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T02:55:00Z",
    "pn": [
     "68030657AA"
@@ -119330,7 +119330,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:f040d2a5bb",
    "kind": "body",
-   "note": "Mopar catalog lists #68030660AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68030660AA for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T02:55:16Z",
    "pn": [
     "68030660AA"
@@ -119363,7 +119363,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:9d8f4610bf",
    "kind": "body",
-   "note": "Mopar catalog lists #68030661AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68030661AA for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T02:55:24Z",
    "pn": [
     "68030661AA"
@@ -119456,7 +119456,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:a91e8bbae5",
    "kind": "body",
-   "note": "Mopar catalog lists #68044804AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68044804AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T06:22:08Z",
    "pn": [
     "68044804AB"
@@ -119483,7 +119483,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:9f81b4ce79",
    "kind": "body",
-   "note": "Mopar catalog lists #68044805AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68044805AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T06:22:16Z",
    "pn": [
     "68044805AB"
@@ -119510,7 +119510,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RR:5041e35da0",
    "kind": "body",
-   "note": "Mopar catalog lists #68045134AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68045134AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T06:22:32Z",
    "pn": [
     "68045134AB"
@@ -119537,7 +119537,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RL:d2c2d17fa5",
    "kind": "body",
-   "note": "Mopar catalog lists #68045135AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68045135AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T06:22:40Z",
    "pn": [
     "68045135AB"
@@ -119645,7 +119645,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:216e741866",
    "kind": "body",
-   "note": "Mopar catalog lists #68079282AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68079282AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:16:54Z",
    "pn": [
     "68079282AB"
@@ -119672,7 +119672,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:2889c4891f",
    "kind": "body",
-   "note": "Mopar catalog lists #68079283AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68079283AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:16:58Z",
    "pn": [
     "68079283AB"
@@ -119699,7 +119699,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RR:963d66daff",
    "kind": "body",
-   "note": "Mopar catalog lists #68079284AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68079284AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:17:14Z",
    "pn": [
     "68079284AB"
@@ -119726,7 +119726,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RL:3f5accb168",
    "kind": "body",
-   "note": "Mopar catalog lists #68079285AB for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68079285AB for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:17:18Z",
    "pn": [
     "68079285AB"
@@ -119834,7 +119834,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:66e027efb8",
    "kind": "body",
-   "note": "Mopar catalog lists #68143986AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68143986AA for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T03:58:51Z",
    "pn": [
     "68143986AA"
@@ -119861,7 +119861,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:09a542ea65",
    "kind": "body",
-   "note": "Mopar catalog lists #68143987AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68143987AA for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T03:58:43Z",
    "pn": [
     "68143987AA"
@@ -119888,7 +119888,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RR:d5ce33c781",
    "kind": "body",
-   "note": "Mopar catalog lists #68143988AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68143988AA for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T03:59:15Z",
    "pn": [
     "68143988AA"
@@ -119915,7 +119915,7 @@
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RL:dc4f56d942",
    "kind": "body",
-   "note": "Mopar catalog lists #68143989AA for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #68143989AA for both — window motor only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T03:59:07Z",
    "pn": [
     "68143989AA"

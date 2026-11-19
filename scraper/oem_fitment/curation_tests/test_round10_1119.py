@@ -1,0 +1,112 @@
+#!/usr/bin/env python3
+"""Round 10 (interchange 2026-11-19, branch interchange/round10-1119): after
+round 9's A5 measure, mopar and subaru window-regulator numbers whose catalog
+part name is a motor say 'window motor only' (curate.ROUND10_NS). Live claims
+only say less: the finished note gains the phrase and nothing else changes; a
+note the words take past the cap, names mixing a motor and a regulator, or no
+name in the raw, hold the group. positions.py (policy_sha256) is unchanged, so
+the other seven groups files stay byte-identical."""
+import json
+import re
+from types import SimpleNamespace
+
+from _util import OEM, check, done
+import adapters as A
+import curate as C
+import policy
+import positions
+
+JPD = "www.jeeppartsdeal.com"
+SPD = "www.subarupartsdeal.com"
+
+
+def lr(pn, main, site=JPD, line=1):
+    return A.ListRow(site=site, seed=("Jeep", "Liberty", 2008), cat="window-regulator", list_url="https://x/y",
+                     pn=pn, section="diagram", main=main, aux="", notes=[], locations=["Front"], replace=None,
+                     matched=True, excluded_by=None, product=None, retrieved="", line=line, status=200)
+
+
+class _K:
+    def __init__(self, ns, pn, names=(), site=JPD):
+        self.key, self.pns = policy.pn_key(ns, pn), {pn}
+        self.records = [SimpleNamespace(site=site, oem_names=[n], pointer=f"{site}:records:L{i + 1}")
+                        for i, n in enumerate(names)]
+
+
+class _Cur:
+    for _m in ("_r10_class", "_class_names"):
+        locals()[_m] = getattr(C.Curation, _m)
+
+    def __init__(self, ns, rows):
+        self.ns, self.rows = ns, list(rows)
+
+    def _pn_list_rows(self, key, cat):
+        return [x for x in self.rows if policy.pn_key(self.ns, x.pn) == key and x.cat == cat]
+
+
+def cls(ns, mains, records=(), site=JPD):
+    pn = "68004590AC"
+    return _Cur(ns, [lr(pn, m, site, i + 1) for i, m in enumerate(mains)])._r10_class(_K(ns, pn, records, site),
+                                                                                       "window-regulator")
+
+
+# ------------------------------------------------------------ the reading
+for names, want in ((["Motor - Window Regulator"], "motor"), (["MOTOR Window Regulator"], "motor"),
+                    (["MOTOR WINDOW REGULATOR 6 Pin Front"], "motor"), (["Window Motor"], "motor"),
+                    (["Regulator - Front Door Window"], "regulator"), (["REGULATOR Rear Door Window"], "regulator"),
+                    (["Power Regulator"], "regulator"), (["Regulator & Motor Assembly-Front Right"], "regulator")):
+    check(f"reading: {names[0]!r} -> {want}", cls("mopar", names)["class"] == want, cls("mopar", names))
+check("reading: subaru 'Motor Assembly-Regulator' -> motor",
+      cls("subaru", ["Motor Assembly-Regulator"], site=SPD)["class"] == "motor")
+check("reading: every name the raw prints counts (a product record naming a regulator beside a motor list row: mixed, "
+      "held)", cls("mopar", ["Motor - Window Regulator"], records=["Regulator - Front Door Window"])["class"] == "mixed"
+      and cls("mopar", ["Motor - Window Regulator"], records=["Regulator - Front Door Window"])["hold"])
+check("reading: a name that is neither (Glass) holds; no name holds",
+      cls("mopar", ["Glass - Door"])["hold"] and cls("mopar", [])["hold"])
+check("reading: each name keeps its place in the raw",
+      cls("mopar", ["Window Motor"])["names"] == [{"name": "Window Motor", "ref": f"{JPD}:lists:L1"}])
+_t = "trim-limited; " + "x" * (policy.NOTE_MAX_LEN - len("Mopar catalog lists #68004590AC for both — trim-limited; "
+                                                         "; verify the number on the part") - 1)
+check("cap: a reason that fits alone but not with 'window motor only' is caught by the hold test (never cut)",
+      C._likely_note_fits("Mopar", "68004590AC", _t) and not C._likely_note_fits("Mopar", "68004590AC", _t,
+                                                                                    C.PACK_TEXT["motor"]))
+check("cause: positions.packaging reads these motor names as 'reg?' (unchanged: it feeds policy_sha256)",
+      all(positions.packaging("window-regulator", ns, "x", [n]) == "reg?"
+          for ns, n in (("mopar", "Motor - Window Regulator"), ("subaru", "Motor Assembly-Regulator"))))
+check("round 10 is mopar and subaru only, kept out of policy.py and positions.py",
+      C.ROUND10_NS == frozenset({"mopar", "subaru"})
+      and "ROUND10" not in (OEM / "policy.py").read_text() and "ROUND10" not in (OEM / "positions.py").read_text())
+
+# ------------------------------------------------------------ committed files
+REP = OEM / "groups" / "_report"
+cen = json.loads((REP / "round10_names_2026-11-19.json").read_text())
+docs = {ns: json.loads((OEM / "groups" / f"{ns}.json").read_text()) for ns in ("mopar", "subaru")}
+by = {(ns, tuple(g["pn"])): g for ns, d in docs.items() for g in d["likely"]}
+check("census: 21 mopar and 8 subaru groups changed, none held",
+      cen["summary"]["mopar"]["changed"] == 21 and cen["summary"]["subaru"]["changed"] == 8 and not cen["held"])
+ok_rows = [r for r in cen["changed"]
+           if by[(r["ns"], tuple(r["pn"]))]["note"] == r["new_note"]
+           and r["new_note"] == r["old_note"].replace(" for both — ", " for both — window motor only; ", 1)
+           and len(r["new_note"]) <= policy.NOTE_MAX_LEN and r["names"]
+           and all(re.match(r"^www\.\w+\.com:(lists|records):L\d+$", n["ref"]) for n in r["names"])]
+check("every changed group ships the census new note: the old note plus 'window motor only; ', within 160, names "
+      "with their raw lines", len(ok_rows) == len(cen["changed"]) == 29, len(ok_rows))
+check("no other mopar / subaru group says 'window motor only'",
+      sum("window motor only" in g["note"] for g in by.values()) == 29)
+shas = {json.loads(p.read_text())["policy_sha256"] for p in (OEM / "groups").glob("*.json")}
+check("policy_sha256 is one value across the nine groups files and is the tree's",
+      shas == {C.policy_sha256()}, shas)
+ld = (REP / "live_diff_2026-11-19_round10.txt").read_text()
+summ = dict(re.findall(r"^# (\w+) LIVE: (.*)$", ld, re.M))
+same = [ns for ns, s in summ.items() if s.startswith("removed 0 groups, added 0 groups, changed 0;")]
+check("live diff: gm, toyota, ford, hmg, vag, mb, nissan unchanged",
+      sorted(same) == ["ford", "gm", "hmg", "mb", "nissan", "toyota", "vag"], sorted(same))
+check("live diff: mopar 21 / subaru 8 changed (notes); 0 removed, 0 added, 0 gained, 0 widened, 0 added claims",
+      all(re.match(r"removed 0 groups, added 0 groups, changed %d; app-years lost 0, gained 0; gates narrowed 0, "
+                   r"widened 0; added claims 0" % n, summ.get(ns, "")) for ns, n in (("mopar", 21), ("subaru", 8))),
+      {k: summ.get(k) for k in ("mopar", "subaru")})
+lazy = json.loads((OEM.parents[1] / "docs" / "data" / "oem" / "window-regulator.json").read_text())
+ship = {g["id"]: g["note"] for g in lazy["oemGroups"]}
+check("payload: the window-regulator lazy file carries the 29 new notes",
+      all(ship.get(r["group"]) == r["new_note"] for r in cen["changed"]))
+done("test_round10_1119")

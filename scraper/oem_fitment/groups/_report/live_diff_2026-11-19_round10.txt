@@ -1,0 +1,96 @@
+mopar CHANGED LIVE ('window-regulator', ('5012545AA',)) [['Chrysler', '300M', 2000, 2000], ['Chrysler', 'LHS', 2000, 2000], ['Dodge', 'Intrepid', 1998, 1998]] lost [] gained []
+    old: Mopar catalog lists #5012545AA for both — older catalog-only number; verify the number on the part
+    new: Mopar catalog lists #5012545AA for both — window motor only; older catalog-only number; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68004590AC',)) [['Dodge', 'Nitro', 2007, 2007], ['Jeep', 'Liberty', 2008, 2008]] lost [] gained []
+    old: Mopar catalog lists #68004590AC for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68004590AC for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68004591AB',)) [['Dodge', 'Nitro', 2007, 2007], ['Jeep', 'Liberty', 2008, 2008]] lost [] gained []
+    old: Mopar catalog lists #68004591AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68004591AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68004818AB',)) [['Dodge', 'Nitro', 2007, 2007], ['Jeep', 'Liberty', 2008, 2008]] lost [] gained []
+    old: Mopar catalog lists #68004818AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68004818AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68004819AB',)) [['Dodge', 'Nitro', 2007, 2007], ['Jeep', 'Liberty', 2008, 2008]] lost [] gained []
+    old: Mopar catalog lists #68004819AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68004819AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68030656AA',)) [['Chrysler', 'Town & Country', 2008, 2008], ['Dodge', 'Grand Caravan', 2010, 2010], ['Ram', 'C/V', 2013, 2013]] lost [] gained []
+    old: Mopar catalog lists #68030656AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68030656AA for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68030657AA',)) [['Chrysler', 'Town & Country', 2008, 2008], ['Dodge', 'Grand Caravan', 2010, 2010], ['Ram', 'C/V', 2013, 2013]] lost [] gained []
+    old: Mopar catalog lists #68030657AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68030657AA for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68030660AA',)) [['Chrysler', 'Town & Country', 2008, 2008], ['Dodge', 'Grand Caravan', 2010, 2010], ['Ram', 'C/V', 2013, 2013]] lost [] gained []
+    old: Mopar catalog lists #68030660AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68030660AA for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68030661AA',)) [['Chrysler', 'Town & Country', 2008, 2008], ['Dodge', 'Grand Caravan', 2010, 2010], ['Ram', 'C/V', 2013, 2013]] lost [] gained []
+    old: Mopar catalog lists #68030661AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68030661AA for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68044804AB',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68044804AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68044804AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68044805AB',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68044805AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68044805AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68045134AB',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68045134AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68045134AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68045135AB',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68045135AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68045135AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68079282AB',)) [['Dodge', 'Durango', 2013, 2013], ['Jeep', 'Grand Cherokee', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68079282AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68079282AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68079283AB',)) [['Dodge', 'Durango', 2013, 2013], ['Jeep', 'Grand Cherokee', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68079283AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68079283AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68079284AB',)) [['Dodge', 'Durango', 2013, 2013], ['Jeep', 'Grand Cherokee', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68079284AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68079284AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68079285AB',)) [['Dodge', 'Durango', 2013, 2013], ['Jeep', 'Grand Cherokee', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68079285AB for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68079285AB for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68143986AA',)) [['Chrysler', '300', 2011, 2011], ['Dodge', 'Charger', 2013, 2013]] lost [] gained []
+    old: Mopar catalog lists #68143986AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68143986AA for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68143987AA',)) [['Chrysler', '300', 2011, 2011], ['Dodge', 'Charger', 2013, 2013]] lost [] gained []
+    old: Mopar catalog lists #68143987AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68143987AA for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68143988AA',)) [['Chrysler', '300', 2011, 2011], ['Dodge', 'Charger', 2013, 2013]] lost [] gained []
+    old: Mopar catalog lists #68143988AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68143988AA for both — window motor only; trim-limited; verify the number on the part
+mopar CHANGED LIVE ('window-regulator', ('68143989AA',)) [['Chrysler', '300', 2011, 2011], ['Dodge', 'Charger', 2013, 2013]] lost [] gained []
+    old: Mopar catalog lists #68143989AA for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #68143989AA for both — window motor only; trim-limited; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('61188AE00A',)) [['Subaru', 'Legacy', 2001, 2003], ['Subaru', 'Outback', 2003, 2003]] lost [] gained []
+    old: Subaru catalog lists #61188AE00A for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #61188AE00A for both — window motor only; fits some configurations; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('61188AE00B',)) [['Subaru', 'Legacy', 2004, 2004], ['Subaru', 'Outback', 2004, 2004]] lost [] gained []
+    old: Subaru catalog lists #61188AE00B for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #61188AE00B for both — window motor only; fits some configurations; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('61188AE01A',)) [['Subaru', 'Legacy', 2001, 2003], ['Subaru', 'Outback', 2003, 2003]] lost [] gained []
+    old: Subaru catalog lists #61188AE01A for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #61188AE01A for both — window motor only; fits some configurations; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('61188AE01B',)) [['Subaru', 'Legacy', 2004, 2004], ['Subaru', 'Outback', 2004, 2004]] lost [] gained []
+    old: Subaru catalog lists #61188AE01B for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #61188AE01B for both — window motor only; fits some configurations; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('62188AE00A',)) [['Subaru', 'Legacy', 2001, 2003], ['Subaru', 'Outback', 2003, 2003]] lost [] gained []
+    old: Subaru catalog lists #62188AE00A for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #62188AE00A for both — window motor only; fits some configurations; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('62188AE00B',)) [['Subaru', 'Legacy', 2004, 2004], ['Subaru', 'Outback', 2004, 2004]] lost [] gained []
+    old: Subaru catalog lists #62188AE00B for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #62188AE00B for both — window motor only; fits some configurations; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('62188AE01A',)) [['Subaru', 'Legacy', 2001, 2003], ['Subaru', 'Outback', 2003, 2003]] lost [] gained []
+    old: Subaru catalog lists #62188AE01A for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #62188AE01A for both — window motor only; fits some configurations; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('62188AE01B',)) [['Subaru', 'Legacy', 2004, 2004], ['Subaru', 'Outback', 2004, 2004]] lost [] gained []
+    old: Subaru catalog lists #62188AE01B for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #62188AE01B for both — window motor only; fits some configurations; verify the number on the part
+# gm LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# mopar LIVE: removed 0 groups, added 0 groups, changed 21; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# toyota LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# ford LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# nissan LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# hmg LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# subaru LIVE: removed 0 groups, added 0 groups, changed 8; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# vag LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# mb LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
