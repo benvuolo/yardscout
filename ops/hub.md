@@ -2304,3 +2304,13 @@ ben@yardscout.io can be used.
   touched); build 43 not listed yet (Apple is processing it). Details and
   the What's New text: `ops/release.md`. iPhone submission of build 43
   follows 1.13.1's approval (`submit_only=true`).
+- Apple sales, supporting fact: the owner's inbox has Apple Developer's
+  "verify your work email address ... to enroll your organization in the
+  Apple Developer Program" dated 2026-11-01, four days before the first
+  report row that names YardScout LLC. Task #76 waits for the new vendor
+  number (`ASC_VENDOR_NUMBER_LLC`).
+- Email: hello@yardscout.io receives (mail delivered 11-01, 11-05, 11-09);
+  nothing has ever arrived for ben@, so it is treated as not set up.
+- 09:10 UTC check-in (trig_01JcAHSWqZ1rxaB5VAPHXG34) now also submits iOS
+  1.13.2 build 43 with `submit_only=true` when 1.13.1 is READY_FOR_SALE, and
+  must not run it while 1.13.1 is still in the queue.
