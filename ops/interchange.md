@@ -4502,3 +4502,224 @@ were read only after the verdicts were committed (64b60076).
    cab that is not listed.
 8. Coverage, not a wrong row: the awd gate hides 4WD-decoded QX60/JX35 cars,
    which are AWD.
+
+## 2026-11-19 Round 3: the five flaw classes on the live makes, nissan candidate rebuilt (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round3-1119`)
+
+Hub brief: census the 2026-11-18c check's flaw classes on the 8 shipped
+makes and fix them, claims only down (Part A); apply the verifier's 8
+suggested fixes to the nissan candidate and re-check every WRONG/RISK item
+(Part B). Pins: oem-raw@dca9cd84 (shipped), @57e8b5b9 (nissan), lot
+main@a85c654 (inventory, decodes, vehicle_extras). No fetch, crawl, dispatch,
+email or main push. This continues the builder stopped by the restart: its
+uncommitted rules (in another worktree) were recovered, reviewed, corrected
+and finished here.
+
+### Rules (curate.py / policy.py / validate.py; hashed inputs, all shipped namespaces re-curated in the same push)
+
+- **Engine column (class 1)**, `policy.LIKELY_FIT_ENGINE_RULE`,
+  `Curation.fit_engine_limit`: when every product-page fitment row of a
+  number for T prints a displacement and they leave out one T's model-year
+  offers, the number is limited to the printed ones (gate `eng`, note "Camry:
+  2.4L, hybrid only"). "Offers" = the catalog attests it for T AND T's year
+  page lists it or a lot car of T is decoded with it (`curate.lot_engines`,
+  new `--extras` input; its sha256 is recorded in the report inputs). The
+  catalog alone over-states a model-year (one Camry row covers 2007-2017 with
+  2.4/2.5/3.5L) and a lot decode the catalog never attests is a listing/VIN
+  mismatch (a "2000 F-150" decoded 7.3L); without the lot input every attested
+  displacement counts (fail closed).
+- A column naming none of the engines T offers leaves T out
+  (`fit_engine_conflict`: JK00C "2015 Q40 | 2.5L", every Q40 is 3.7L).
+- **Fuel words (class 2)**: "gas only" from the column needs GAS/FLEX words;
+  a bare "2.4L L4" says nothing (the inherited code read it as gas and dropped
+  the Camry Hybrid from shared hoods/grilles). Hybrid words include
+  fordpartsgiant "4 Cyl 2.5L PFI Gas/Electric" (Fusion/MKZ/Milan hybrid; the
+  inherited regex missed it). Engine strings of both raws were censused for
+  this (GM, Nissan and Lexus print no fuel at all). A Hybrid-named feed year on
+  a gas column is left out.
+- **"gas" gates read the decode**: a gas-limited year whose engine column
+  leaves out an attested displacement carries `eng_not` (the hybrid's own
+  displacement, e.g. QX60 2.5L). docs/app.js rules out a donor decoded with
+  one; an undecoded donor is unchanged; no note change. I first tried making
+  the column the engine gate there: on GM it lists the hybrid's 6.0L among the
+  gas engines, so it protected nothing and its label pushed 10 notes past 160.
+- **Market (class 3)**, `LIKELY_MARKET_UNIT_RULE`: km/h-first units
+  ("KMH/MPH", "KPH/MPH", "Instrument-Kph"; "MPH/KMH" is the US unit) and
+  mandatory export equipment groups ("Mandatory (EUROPEAN EQUIPMENT GROUP)",
+  "EXPORT Mandatory (Middle East ...)") are not US parts: per own-page row, and
+  class-wide when the record names the km/h unit (`held_market_kph`).
+- **Cab / body lists (class 4)**, `LIKELY_CAB_LIST_RULE`, per model-year: every
+  configuration names a cab (fitment trims, or Nissan T/KC/CC codes) and T's
+  page lists a left-out cab under another number of the slot -> gate `cab`
+  (a string, or a list of 2+ cabs); silhouettes in fitment trims -> gate
+  `body`. A model whose years share one list is named once ("Frontier: king
+  cab/crew cab only"). On Nissan pages the cabs a model-year comes in are read
+  from every category (2003-04 Frontier: KC/CC only on every page); GM trim
+  strings keep the same-slot requirement (they mix cab words into trim names).
+- **Joined drive tokens (class 5)**: 2WDSTD / 2WDHICAS read as 2WD (the only
+  joined forms in either raw).
+- **All-Mode sibling**: a Nissan "4WD" number beside an "AUTO" number of the
+  slot gets `drive_not: "a4wd"`; the app keeps 4WD decodes "if equipped".
+- **Rogue / Rogue Select**: `policy.AMBIGUOUS_FEED_YEARS` (Rogue 2014-15): the
+  year joins only if the Rogue Select pages of that year list the number too.
+  Raw seeds exist only as ("Rogue Select", 2014), so 2015 is always refused.
+- App (docs/app.js OEM-GATE): `cab` lists, `drive_not`, `eng_not`; sw
+  `jh-v213`. Payload shape unchanged (`[make, model, lo, hi, null, gate]`);
+  old readers ignore the new keys.
+
+### Part A census (`groups/_report/class_census_2026-11-19.json`)
+
+Counts are (group, lot car) donor pairs shown plain that the car's own decode
+contradicts, replayed with the app's own OEM-GATE code
+(`audit11_4/lot_replay.mjs`). Before = origin/main groups and app; after = this
+branch.
+
+| class | gm | ford | mopar | toyota | subaru | vag | mb | hmg |
+|---|---|---|---|---|---|---|---|---|
+| 1 engine, material: groups / app-years / pairs before | 3 / 3 / 30 | 4 / 10 / 628 | 45 / 78 / 514 | 32 / 32 / 7,196 | 2 / 3 / 27 | 2 / 2 / 6 | 0 | 0 |
+| 1 engine, material, after | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 engine, raw (catalog-only, over-broad) before -> after pairs | 42 -> 12 | 632 -> 3 | 533 -> 19 | 7,196 -> 0 | 28 -> 1 | 6 -> 0 | 0 | 0 |
+| 2 gas gate, hybrid displacement: app-years (pairs) | 11 (0) -> 9 (0), 7 with eng_not | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 3 market text hits: groups before -> after | 3 -> 3 | 9 -> 5 | 3 -> 0 | 24 -> 24 | 0 | 0 | 0 | 0 |
+| 4 cab list ungated: groups / app-years | 2 / 4 -> 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 4 body list ungated: groups / app-years (pairs) | 2 / 2 (66) -> 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 5 joined drive tokens | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+- Class 1 is real on the live makes. Largest: 2011 Camry bumpers, grilles,
+  headlamps, tail lamps, clusters, climate panels and mirrors whose column
+  lists only "2.4 L FULL HYBRID" were plain for 350 gas Camrys each (2.5L);
+  Fusion/MKZ hybrid clusters plain for 3.0/3.5L cars; 2016 Malibu window
+  motors (new body) plain for the old-body 2.5L Malibu Limited.
+- Raw leftovers after are decodes the catalog never attests for T (a 2.5L
+  Yukon, 1.0L Titan, 3.0L F-150): listing/VIN mismatches, not class 1.
+- Class 2 on GM: the 11 "Silverado 1500 2012: gas only" years; 0 plain pairs on
+  this lot (no 2012 1500 decoded 6.0L; the lot's 2011/2013 hybrids say Hybrid
+  in the VIN trim, which the gas gate reads). 7 now carry eng_not ["8.1L"]
+  (attested, impossible, harmless); the hybrid's 6.0L cannot be ruled out from
+  GM's column (it lists 6.0L for the gas trucks). RISK left: a Silverado Hybrid
+  with an unusable VIN trim, listed plain, decoded 6.0L.
+- Class 3 after: ford's 5 are "MPH/KMH" / "MPH/KPH" (US) and "(-)GCC"
+  (negated); GM's 3 are one "(EXPORT)" configuration beside US ones; toyota's
+  24 are "CANADA SPEC" alternatives beside US ones (the existing rule keeps
+  those rows). None is a flaw. Removed: ford 3 Canada clusters, mopar 3 export
+  mirrors.
+
+### Live diff vs origin/main 9945d42d (`groups/_report/live_diff_2026-11-19_round3.txt`)
+
+| ns | removed | narrowed (changed) | app-years gated narrower | added claims |
+|---|---|---|---|---|
+| gm | 2 | 12 | 12 | 0 |
+| ford | 4 | 1 | 3 | 0 |
+| mopar | 10 | 38 | 64 | 0 |
+| toyota | 0 | 32 | 32 | 0 |
+| subaru | 0 | 2 | 3 | 0 |
+| vag | 0 | 2 | 2 | 0 |
+| hmg, mb | 0 | 0 | 0 | 0 (hmg: 4 held strut groups removed) |
+
+- **0 added groups, 0 gained app-years, 0 widened gates on every shipped
+  namespace.** 16 live groups removed, 87 narrowed. Correction: commit
+  21663350's message says "77 narrowed" and "264 -> 244"; the right figures are
+  87 and 283 -> 246.
+- Removed: ford AE5Z-10849-MA, BE5Z-10849-BC ("With KMH/MPH Speedometer"),
+  YL3Z-10849-DA ("...KPH/MPH": the km/h-first reading, fail closed; its note
+  says "programmed ... for all vehicles", so a second reader may judge it US),
+  AE5Z-10849-LA (MKZ 2010 left out: its row is the 2.5L hybrid, every 2010 MKZ
+  is 3.5L, and Milan alone is one model); mopar 4805424AI, 4805947AB, 4806270AA
+  (export equipment groups); mopar 7 Town & Country/Caravan/Grand Caravan 2004-05
+  mirrors and gm 20835552/3 (Silverado master switches, regular cab under
+  another number) are refused only because the named limit makes the note
+  over 160 chars: lost coverage, not wrong claims.
+- Payload (docs/data/interchange.json + oem/*.json) 1,506,506 -> 1,507,600
+  bytes; oemStatus ok x8.
+
+### Plain donors on the pinned lot (app code in node)
+
+| ns | plain pairs | if equipped | excluded | cars with a plain row |
+|---|---|---|---|---|
+| gm | 54,294 -> 53,238 | 1,787 -> 1,913 | 3,771 -> 3,867 | 8,134 -> 8,046 |
+| ford | 27,335 -> 24,523 | 0 -> 581 | 0 -> 229 | 6,949 -> 6,949 |
+| mopar | 115,912 -> 108,299 | 27 -> 1,978 | 342 -> 751 | 7,629 -> 7,521 |
+| toyota | 112,182 -> 97,429 | 0 -> 7,557 | 0 -> 7,196 | 2,211 -> 2,211 |
+| subaru | 4,055 -> 3,992 | 0 -> 36 | 0 -> 27 | 1,184 -> 1,143 |
+| vag | 1,501 -> 1,489 | 0 -> 6 | 0 -> 6 | 458 -> 458 |
+| hmg, mb | unchanged (3,754; 243) | | | |
+| **shipped** | **319,276 -> 292,967** | **1,814 -> 12,071** | **4,113 -> 12,076** | |
+| nissan candidate | 76,270 -> 59,047 | 6,190 -> 4,961 | 3,676 -> 1,790 | 15,227 -> 14,995 |
+
+The new app run on main's groups gives main's numbers exactly (the app change
+alone moves nothing). Toyota's 7,557 "if equipped" are mostly 2007-2011 Camrys
+decoded 2.4L on hybrid-only parts: the gas 2.4L (2007-09) and the hybrid
+decode the same, and nothing on the car says hybrid.
+
+### Part B, nissan candidate (oem-raw@57e8b5b9; NOT shipped)
+
+`groups/_report/nissan.candidate.json`: 249 Likely, **246 shippable**
+(was 283): window-regulator 113, side-mirrors 66, gauge-cluster 46,
+climate-control 21; 84 gated (eng 51, fuel 40, cab 25, drive 24, trans 8,
+drive_not 1). Refusals: held_drive_qualifier 65 (note over 160), km/h 62,
+engine conflict 47. Against the old candidate: 38 removed, 25 narrowed,
+1 added (24810-9BD4C, 4 app-years: it was refused only by the note cap; the
+engine column now gives every year the same narrower label, so the note fits).
+
+Verifier items (`groups/_report/nissan_recheck_2026-11-19.json`, my own
+re-check, not independent):
+
+| item | now |
+|---|---|
+| G3 27510-8Z315 | fixed: Xterra eng 3.3L (Frontier crew cab + 3.3L); 3 Xterra + 41 Frontier 2.4L not offered |
+| G4 24810-EC44C | fixed: refused, km/h (record "Instrument-Kph") |
+| G5 24810-7Z809 | fixed: Xterra eng 3.3L, Frontier king/crew cab + 3.3L; 7 + 41 2.4L not offered |
+| G7 24810-ZP77A | gone: note over 160 ("Pathfinder 2008: 2WD, 4.0L only") |
+| G12 96302-3JA9C | gone: note over 160 (QX60 2014-15 "3.5L, gas", 2016-17 "gas") |
+| G25 80721-3S500 | gone: note over 160 ("Frontier 2002: king cab/crew cab only; Xterra 2004: 3.3L only") |
+| G27 80721-2Z700 | fixed: Frontier 2002 king/crew cab; 2003-04 plain because no category on those pages codes a regular cab (2003 KC 62 / CC 60 rows, 2004 KC 41 / CC 42) |
+| G29 80730-JK00C | gone: Q40 left out (column 2.5L, every Q40 3.7L); G25 alone |
+| G30 80730-4BA1A | fixed: Rogue 2014-15 out. Murano 2016-17 / Rogue 2017-19 "gas only" with no engine gate (no engine column on its page); 0 hybrids on the lot; RISK stays |
+| P38 24810-3JA1B | fixed: QX60 eng 3.5L + gas; 8 QX60 2.5L (5N1CL0) not offered |
+| P43 24810-EA48D | fixed: Pathfinder 4wd + drive_not a4wd; 89 4WD "if equipped", 70 4x2 out |
+| P48 24810-ZP93A (RISK) | unchanged: no unit printed, km/h rule cannot read it |
+| census 24820-1MK5A / 6AH2A | fixed: M37 2WD (stated); 6 M37x AWD out |
+| census 24810-9BA7C | gone: note over 160 |
+| census JK61C / JK61D | gone, no refusal record, step not traced; the AT-only limit is still not read for them |
+| census 27510-7Z416, 96301/2-EA18E | gone: note over 160 |
+| item 8 (awd gate hides 4WD-decoded QX60/JX35) | not changed: showing them would add claims |
+
+Census of the rebuilt candidate: material engine 0, cab 0, body 0, market 0;
+joined tokens 4 groups (K6301/K6302 mirrors whose rows list "(2WDSTD+
+2WDHICAS) + 4WD": both drives, correctly ungated); fuel 29 groups / 85 years
+with a gas gate and no engine column (0 plain pairs). No release sample was run;
+a new independent checker decides.
+
+### Tests
+
+- New `curation_tests/test_round3_1119.py` (36 checks); `pf_guards_unit.mjs`
+  r3 block, 25 checks (cab lists, drive_not, eng+hybrid, pfRunSearch; the 5
+  eng_not checks are new here, the rest came with the recovered work).
+- curation_tests 23/23 files pass (Phase 2 parity SKIP unchanged);
+  oem_fitment/tests 42/42; test_interchange, test_am_gates, pf_guards_unit pass.
+- Full regression: running at the time of this commit; result in the next commit.
+
+### Noticed, not fixed
+
+- The 160-char note cap now costs real coverage: 9 live groups (7 Caravan/T&C
+  mirrors, 2 Silverado switches) and 65 nissan groups (37 before this round) are
+  refused only because the true limit is long. Suggest: once a limit is a gate, let the note say
+  "engine-limited (see each car)" instead of listing every year; the app's
+  per-donor line already names the limit. Hub/owner decision.
+- Engine limits on body parts are often immaterial (Caravan mirror
+  "2.4L/3.3L only"): true per the page, but they turn undecoded donors into
+  "if equipped" (mopar 96 cars). Coverage only.
+- GM Silverado Hybrid 6.0L vs the "gas" gate: see class 2 (0 cars today).
+- YL3Z-10849-DA "KPH/MPH" removal is the strict reading; worth a second look.
+- JK61C/JK61D AT-only speedometers: no transmission gate rule reads them.
+- The census's market-text measure is noisy (US alternatives); the rule reads
+  units and equipment groups only.
+- `backend/node_modules` was symlinked for the regression and removed; not
+  committed.
+
+### For the hub
+
+1. Merge `interchange/round3-1119`? Live: 0 added claims, 16 removed, 87
+   narrowed (diff file above). App change + sw jh-v213.
+2. Nissan: 246 shippable, not shipped; needs a new independent sample.
+3. Decide the note-cap suggestion above before the next round; it is the
+   largest remaining coverage cost.
