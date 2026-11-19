@@ -1872,6 +1872,16 @@ class Curation:
                 text, drv, gate_by_T = lim2["text"], lim2["drv"], lim2["gates"]
                 apps = _runs(Ts)
             slot = "+".join(sorted(slots)) or "C"
+            if self.ns in ROUND10B_NS and self.ns not in ROUND10_NS and cat == "window-regulator":
+                dis = self._name_disagree(c, cat)
+                if dis:
+                    why = "the names disagree in kind (" + "/".join(dis["kinds"]) + ")"
+                    self.refuse("held_name_disagree", cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                                detail=why)
+                    self.round10_rows.append({"cat": cat, "pn": pns, "class": None, "change": "held",
+                                              "reason": "held_name_disagree", "detail": why,
+                                              "names_all_fields": dis["names"]})
+                    continue
             if self.ns in ROUND9_NS:
                 # round9-1119 A: the number's catalog part name decides the
                 # note's words; a name the rule cannot place holds the group
@@ -1888,7 +1898,12 @@ class Curation:
                 pack0 = _pack_text(cat, self._note_pack(c, cat), slot)
                 row = {"cat": cat, "pn": pns, "class": r10["class"], "names": r10["names"], "old_note": note}
                 why10 = None
-                if r10["class"] not in ("motor", "regulator"):
+                dis = self._name_disagree(c, cat)
+                row["names_all_fields"] = [{"field": f, "name": n, "ref": p_, "kind": _kind10b(n) or None}
+                                           for f, n, p_ in self._wide_names(c, cat)]
+                if dis:
+                    why10 = ("held_name_disagree", "the names disagree in kind (" + "/".join(dis["kinds"]) + ")")
+                elif r10["class"] not in ("motor", "regulator"):
                     why10 = ("held_part_name", r10["hold"])
                 elif r10["class"] == "motor" and pack0 != PACK_TEXT["motor"]:
                     if pack0:
@@ -3392,6 +3407,34 @@ class Curation:
                 cache[(c.key, cat)] = "motor" if self._name_class(c, cat)["class"] == "motor" else c.packaging
             return cache[(c.key, cat)]
         return c.packaging
+
+    def _wide_names(self, c, cat) -> list:
+        """round10b: [(field, name, 'site:file:Lline')] every naming field the
+        raw prints for the number: list rows on every page (main, aux) and the
+        product records (name, aux, description, other_names), each
+        ';'-separated value on its own."""
+        out = set()
+        for lr in self._pn_list_rows(c.key, cat):
+            for fld in ("main", "aux"):
+                for n in str(getattr(lr, fld, "") or "").split(";"):
+                    if n.strip():
+                        out.add((f"list.{fld}", n.strip(), f"{lr.site}:lists:L{lr.line}"))
+        for r in c.records:
+            for fld in ("name", "aux", "description", "other_names"):
+                for n in str(getattr(r, fld, "") or "").split(";"):
+                    if n.strip():
+                        out.add((f"record.{fld}", n.strip(), r.pointer))
+        return sorted(out)
+
+    def _name_disagree(self, c, cat) -> dict | None:
+        """round10b: {'kinds', 'names'} when the number's names disagree in
+        kind (a motor beside a regulator or regulator-with-motor), else None."""
+        names = self._wide_names(c, cat)
+        kinds = {k for _f, n, _p in names if (k := _kind10b(n))}
+        if "motor" in kinds and kinds & {"regulator", "regulator+motor"}:
+            return {"kinds": sorted(kinds),
+                    "names": [{"field": f, "name": n, "ref": p_, "kind": _kind10b(n) or None} for f, n, p_ in names]}
+        return None
 
     def _r10_class(self, c, cat) -> dict:
         """round10: 'motor' / 'regulator' from every catalog name the raw prints
@@ -5731,6 +5774,30 @@ ROUND9_NS = frozenset({"nissan"})
 # and a regulator, or one with no name in the raw, holds the group.
 ROUND10_NS = frozenset({"mopar", "subaru"})
 _R10_MOTOR_RE = re.compile(r"^\s*(?:power\s+)?(?:window\s+)?motor\b", re.I)
+# round10b-1119 (hub, after the round-10 check: mopar 68079283AB is named
+# "Motor - Window Regulator" / "Window Motor" but its record's description
+# says "Window Regulator, Front Driver Side"): the kind is read from every
+# naming field the raw prints (list rows main, aux; records name, aux,
+# description, other_names; ';'-separated values apart). A number whose
+# names disagree in kind, a motor beside a regulator or a regulator with its
+# motor, gets no packaging words and its group is held (mopar, subaru, nissan).
+ROUND10B_NS = frozenset({"mopar", "subaru", "nissan"})
+_R10B_REGMOTOR_RE = re.compile(r"\bmotor\s+(?:and|&)\s+regulator\b|\bregulator\s+(?:and|&)\s+motor\b|"
+                               r"\bregulator\b.*\b(?:with|w/)\s*motor\b", re.I)
+_R10B_MOTOR_RE = re.compile(r"^\s*(?:power\s+)?(?:window\s+)?motor\b|\b(?:window|regulator)\s+motor\b|"
+                            r"\bmotor\s+ass(?:y|embly)\b", re.I)
+_R10B_REG_RE = re.compile(r"\bregulator\b", re.I)
+
+
+def _kind10b(name: str) -> str:
+    """'regulator+motor' | 'motor' | 'regulator' | '' (says neither)."""
+    if _R10B_REGMOTOR_RE.search(name):
+        return "regulator+motor"
+    if _R10B_MOTOR_RE.search(name):
+        return "motor"
+    return "regulator" if _R10B_REG_RE.search(name) else ""
+
+
 _R10_REG_RE = re.compile(r"^\s*(?:power\s+)?(?:(?:front|rear)\s+)?(?:door\s+)?(?:window\s+)?regulator\b", re.I)
 _NAME_MOTOR_RE = re.compile(r"^\s*motor\s+ass(?:y|embly)\b", re.I)
 _NAME_REG_RE = re.compile(r"^\s*regulator\s+ass(?:y|embly)\b", re.I)
@@ -6399,7 +6466,7 @@ def main(argv=None) -> int:
                 "by_category_class": dict(sorted(Counter(f"{x['cat']}:{x['class']}" for x in cur9.round9_names).items())),
                 "rows": cur9.round9_names})
         r10 = getattr(results[ns], "round10_rows", None)
-        if ns in ROUND10_NS and r10 is not None:
+        if ns in ROUND10B_NS and r10 is not None:
             write_json(out / "_report" / f"{ns}.round10.json", {
                 "note": "round10-1119: window-regulator groups whose catalog part name is a motor gain 'window "
                         "motor only' on the finished note (change 'phrase'); a note the words take past the cap, "

@@ -93038,36 +93038,6 @@
    ],
    "reman": false
   },
-  "mopar:68037296AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1680"
-   ],
-   "names": [
-    "Regulator",
-    "Regulator Assembly - Front Door Window"
-   ],
-   "pns": [
-    "68037296AA"
-   ],
-   "reman": false
-  },
-  "mopar:68037297AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1681"
-   ],
-   "names": [
-    "Regulator",
-    "Regulator Assembly - Front Door Window"
-   ],
-   "pns": [
-    "68037297AA"
-   ],
-   "reman": false
-  },
   "mopar:68044804AB": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -93185,21 +93155,6 @@
    ],
    "pns": [
     "68079282AB"
-   ],
-   "reman": false
-  },
-  "mopar:68079283AB": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L282"
-   ],
-   "names": [
-    "Motor - Window Regulator",
-    "Window Motor"
-   ],
-   "pns": [
-    "68079283AB"
    ],
    "reman": false
   },
@@ -119374,72 +119329,6 @@
   {
    "apps": [
     [
-     "Chrysler",
-     "Town & Country",
-     1998,
-     1999
-    ],
-    [
-     "Dodge",
-     "Caravan",
-     1999,
-     1999
-    ],
-    [
-     "Dodge",
-     "Grand Caravan",
-     2000,
-     2000
-    ]
-   ],
-   "cars": 146,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:FR:6f32cd7474",
-   "kind": "body",
-   "note": "Mopar catalog lists #68037296AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:46:39Z",
-   "pn": [
-    "68037296AA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Town & Country",
-     1998,
-     1999
-    ],
-    [
-     "Dodge",
-     "Caravan",
-     1999,
-     1999
-    ],
-    [
-     "Dodge",
-     "Grand Caravan",
-     2000,
-     2000
-    ]
-   ],
-   "cars": 146,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:FL:193ac0fcdf",
-   "kind": "body",
-   "note": "Mopar catalog lists #68037297AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:46:47Z",
-   "pn": [
-    "68037297AA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Ram",
      "1500",
      2012,
@@ -119649,33 +119538,6 @@
    "oldest_retrieved": "2026-11-05T01:16:54Z",
    "pn": [
     "68079282AB"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Dodge",
-     "Durango",
-     2013,
-     2013
-    ],
-    [
-     "Jeep",
-     "Grand Cherokee",
-     2011,
-     2011
-    ]
-   ],
-   "cars": 275,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:FL:2889c4891f",
-   "kind": "body",
-   "note": "Mopar catalog lists #68079283AB for both — window motor only; trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:16:58Z",
-   "pn": [
-    "68079283AB"
    ],
    "reason": "trim",
    "tier": "likely"

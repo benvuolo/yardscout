@@ -25,6 +25,8 @@ mopar CHANGED LIVE ('window-regulator', ('68030660AA',)) [['Chrysler', 'Town & C
 mopar CHANGED LIVE ('window-regulator', ('68030661AA',)) [['Chrysler', 'Town & Country', 2008, 2008], ['Dodge', 'Grand Caravan', 2010, 2010], ['Ram', 'C/V', 2013, 2013]] lost [] gained []
     old: Mopar catalog lists #68030661AA for both — trim-limited; verify the number on the part
     new: Mopar catalog lists #68030661AA for both — window motor only; trim-limited; verify the number on the part
+mopar REMOVED LIVE ('window-regulator', ('68037296AA',)) [['Chrysler', 'Town & Country', 1998, 1999], ['Dodge', 'Caravan', 1999, 1999], ['Dodge', 'Grand Caravan', 2000, 2000]]
+mopar REMOVED LIVE ('window-regulator', ('68037297AA',)) [['Chrysler', 'Town & Country', 1998, 1999], ['Dodge', 'Caravan', 1999, 1999], ['Dodge', 'Grand Caravan', 2000, 2000]]
 mopar CHANGED LIVE ('window-regulator', ('68044804AB',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
     old: Mopar catalog lists #68044804AB for both — trim-limited; verify the number on the part
     new: Mopar catalog lists #68044804AB for both — window motor only; trim-limited; verify the number on the part
@@ -40,9 +42,7 @@ mopar CHANGED LIVE ('window-regulator', ('68045135AB',)) [['Ram', '1500', 2012, 
 mopar CHANGED LIVE ('window-regulator', ('68079282AB',)) [['Dodge', 'Durango', 2013, 2013], ['Jeep', 'Grand Cherokee', 2011, 2011]] lost [] gained []
     old: Mopar catalog lists #68079282AB for both — trim-limited; verify the number on the part
     new: Mopar catalog lists #68079282AB for both — window motor only; trim-limited; verify the number on the part
-mopar CHANGED LIVE ('window-regulator', ('68079283AB',)) [['Dodge', 'Durango', 2013, 2013], ['Jeep', 'Grand Cherokee', 2011, 2011]] lost [] gained []
-    old: Mopar catalog lists #68079283AB for both — trim-limited; verify the number on the part
-    new: Mopar catalog lists #68079283AB for both — window motor only; trim-limited; verify the number on the part
+mopar REMOVED LIVE ('window-regulator', ('68079283AB',)) [['Dodge', 'Durango', 2013, 2013], ['Jeep', 'Grand Cherokee', 2011, 2011]]
 mopar CHANGED LIVE ('window-regulator', ('68079284AB',)) [['Dodge', 'Durango', 2013, 2013], ['Jeep', 'Grand Cherokee', 2011, 2011]] lost [] gained []
     old: Mopar catalog lists #68079284AB for both — trim-limited; verify the number on the part
     new: Mopar catalog lists #68079284AB for both — window motor only; trim-limited; verify the number on the part
@@ -86,7 +86,7 @@ subaru CHANGED LIVE ('window-regulator', ('62188AE01B',)) [['Subaru', 'Legacy', 
     old: Subaru catalog lists #62188AE01B for both — fits some configurations; verify the number on the part
     new: Subaru catalog lists #62188AE01B for both — window motor only; fits some configurations; verify the number on the part
 # gm LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
-# mopar LIVE: removed 0 groups, added 0 groups, changed 21; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# mopar LIVE: removed 3 groups, added 0 groups, changed 20; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # toyota LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # ford LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # nissan LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
