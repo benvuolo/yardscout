@@ -1,0 +1,480 @@
+{
+ "status": "in progress (work-in-progress snapshot; verdicts not final)",
+ "draw": {
+  "seed": 91371119,
+  "method": "eligible = candidate likely groups sorted by id, not _oem_held(cat, nissan); quotas by largest remainder (ties by cat name); per cat in sorted order rng.sample(ids, quota); pairs: rng.sample(remaining sorted ids, 30), then per group rng.choice(seeker vehicle-year), rng.choice(other vehicle-years) for donor",
+  "eligible": 171,
+  "held": [
+   "oem:nissan:wiper-motor:F:856ae4a8fa",
+   "oem:nissan:wiper-motor:F:afab414f54",
+   "oem:nissan:wiper-motor:R:a769ed6262"
+  ],
+  "counts": {
+   "climate-control": 16,
+   "gauge-cluster": 8,
+   "side-mirrors": 43,
+   "window-regulator": 104
+  },
+  "quota": {
+   "climate-control": 3,
+   "gauge-cluster": 1,
+   "side-mirrors": 8,
+   "window-regulator": 18
+  },
+  "groups": [
+   "oem:nissan:climate-control:C:c87195cb31",
+   "oem:nissan:climate-control:C:0930da868c",
+   "oem:nissan:climate-control:C:8d55de172f",
+   "oem:nissan:gauge-cluster:C:e4748e0063",
+   "oem:nissan:side-mirrors:R:e241aca37a",
+   "oem:nissan:side-mirrors:R:5a1002bbfb",
+   "oem:nissan:side-mirrors:R:2e0d578a9b",
+   "oem:nissan:side-mirrors:L:9fb998cc40",
+   "oem:nissan:side-mirrors:L:3a7d2918b4",
+   "oem:nissan:side-mirrors:R:ccf0dd8c02",
+   "oem:nissan:side-mirrors:L:c7e208257e",
+   "oem:nissan:side-mirrors:L:275797ed4b",
+   "oem:nissan:window-regulator:RL:52a30f55d6",
+   "oem:nissan:window-regulator:RL:e4f0acae65",
+   "oem:nissan:window-regulator:FL:8380ea4d2d",
+   "oem:nissan:window-regulator:RR:1334ba2257",
+   "oem:nissan:window-regulator:RL:2b80079398",
+   "oem:nissan:window-regulator:RR:d2ea825926",
+   "oem:nissan:window-regulator:RL:9c3158fe6c",
+   "oem:nissan:window-regulator:RR:e01e9e3108",
+   "oem:nissan:window-regulator:FR:d8546bff47",
+   "oem:nissan:window-regulator:FL:8a8c3dabe5",
+   "oem:nissan:window-regulator:FR+RR:c0080caac8",
+   "oem:nissan:window-regulator:FL:caae218094",
+   "oem:nissan:window-regulator:FR+RR:378263fba3",
+   "oem:nissan:window-regulator:RR:8a43082eeb",
+   "oem:nissan:window-regulator:FR:7bfa59850d",
+   "oem:nissan:window-regulator:FR:864a4dfc29",
+   "oem:nissan:window-regulator:FL:fe9aac0699",
+   "oem:nissan:window-regulator:FR:65198fbb3c"
+  ],
+  "pairs": [
+   {
+    "id": "oem:nissan:window-regulator:RL:ff6945906c",
+    "seeker": [
+     "Infiniti",
+     "QX80",
+     2016
+    ],
+    "donor": [
+     "Infiniti",
+     "Q70L",
+     2016
+    ]
+   },
+   {
+    "id": "oem:nissan:climate-control:C:ae1dc8c725",
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1995
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1997
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RR:300fc2f362",
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1997
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1997
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:93900f8eb1",
+    "seeker": [
+     "Infiniti",
+     "EX37",
+     2013
+    ],
+    "donor": [
+     "Infiniti",
+     "QX50",
+     2014
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:8f4bbee9d9",
+    "seeker": [
+     "Infiniti",
+     "FX50",
+     2009
+    ],
+    "donor": [
+     "Infiniti",
+     "FX35",
+     2009
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:bcd256d33f",
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1997
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1997
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RL:07ca7ce35e",
+    "seeker": [
+     "Infiniti",
+     "G25",
+     2012
+    ],
+    "donor": [
+     "Infiniti",
+     "G35",
+     2008
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR+RR:cb1df0b30f",
+    "seeker": [
+     "Nissan",
+     "Rogue",
+     2010
+    ],
+    "donor": [
+     "Nissan",
+     "Cube",
+     2011
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:0564c83b59",
+    "seeker": [
+     "Infiniti",
+     "FX35",
+     2007
+    ],
+    "donor": [
+     "Infiniti",
+     "FX45",
+     2008
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:L:c9b83a64d6",
+    "seeker": [
+     "Infiniti",
+     "Q70",
+     2014
+    ],
+    "donor": [
+     "Infiniti",
+     "M37",
+     2013
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:bde5900fbb",
+    "seeker": [
+     "Infiniti",
+     "Q70",
+     2014
+    ],
+    "donor": [
+     "Infiniti",
+     "M35h",
+     2012
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:df8b845bbf",
+    "seeker": [
+     "Infiniti",
+     "M35",
+     2008
+    ],
+    "donor": [
+     "Infiniti",
+     "M45",
+     2008
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL+RL:1446fc5acb",
+    "seeker": [
+     "Nissan",
+     "Sentra",
+     2005
+    ],
+    "donor": [
+     "Nissan",
+     "Sentra",
+     2006
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:5247ba7a44",
+    "seeker": [
+     "Infiniti",
+     "M35",
+     2009
+    ],
+    "donor": [
+     "Infiniti",
+     "M45",
+     2009
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:ed07457961",
+    "seeker": [
+     "Nissan",
+     "Xterra",
+     2012
+    ],
+    "donor": [
+     "Nissan",
+     "Xterra",
+     2013
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:cdadea11eb",
+    "seeker": [
+     "Nissan",
+     "Frontier",
+     2015
+    ],
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2016
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:8f295062d9",
+    "seeker": [
+     "Nissan",
+     "Frontier",
+     2017
+    ],
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2018
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:600356f5ea",
+    "seeker": [
+     "Infiniti",
+     "FX37",
+     2013
+    ],
+    "donor": [
+     "Infiniti",
+     "FX50",
+     2010
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:6c7c1b9c18",
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1994
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1993
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:dfdc9646f6",
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "donor": [
+     "Nissan",
+     "Stanza",
+     1997
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:L:4d061f935b",
+    "seeker": [
+     "Infiniti",
+     "FX35",
+     2009
+    ],
+    "donor": [
+     "Infiniti",
+     "QX70",
+     2017
+    ]
+   },
+   {
+    "id": "oem:nissan:climate-control:C:5b06ab53ea",
+    "seeker": [
+     "Nissan",
+     "Frontier",
+     2004
+    ],
+    "donor": [
+     "Nissan",
+     "Xterra",
+     2004
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:RR:9709cdbc28",
+    "seeker": [
+     "Infiniti",
+     "G25",
+     2011
+    ],
+    "donor": [
+     "Infiniti",
+     "G25",
+     2012
+    ]
+   },
+   {
+    "id": "oem:nissan:climate-control:C:b6eb30db5d",
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1995
+    ]
+   },
+   {
+    "id": "oem:nissan:side-mirrors:R:1dc4b97375",
+    "seeker": [
+     "Infiniti",
+     "M35h",
+     2013
+    ],
+    "donor": [
+     "Infiniti",
+     "M37",
+     2013
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:f05355bd0d",
+    "seeker": [
+     "Infiniti",
+     "Q70L",
+     2015
+    ],
+    "donor": [
+     "Infiniti",
+     "Q70L",
+     2018
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FL:093b21daec",
+    "seeker": [
+     "Infiniti",
+     "M45",
+     2009
+    ],
+    "donor": [
+     "Infiniti",
+     "M35",
+     2009
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:f60d961e88",
+    "seeker": [
+     "Infiniti",
+     "FX50",
+     2009
+    ],
+    "donor": [
+     "Infiniti",
+     "FX35",
+     2009
+    ]
+   },
+   {
+    "id": "oem:nissan:climate-control:C:576d54aaab",
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1995
+    ],
+    "donor": [
+     "Nissan",
+     "Altima",
+     1994
+    ]
+   },
+   {
+    "id": "oem:nissan:window-regulator:FR:36a5b7ab0d",
+    "seeker": [
+     "Infiniti",
+     "M45",
+     2008
+    ],
+    "donor": [
+     "Infiniti",
+     "M35",
+     2008
+    ]
+   }
+  ]
+ },
+ "notes": [
+  "RULES I apply (fixed before reading most items):",
+  "- missing own list page for a vy: if the product record's list_url is that vy's page (list_info = its row) and a same-chassis page shows siblings, treat as seen; else RISK.",
+  "- option groups: note \"option: fits some option packages\" absorbs siblings distinguished only by trim/option codes and the unexplained '*' mark, UNLESS the sibling distinction is a drive/engine/cab/body/trans word (then check gate) or the '*' decides a drive split.",
+  "- window: plausible MY Y build span 06/(Y-1)..09/Y. A same-option sibling whose production boundary falls inside that span on an ungated vy => RISK (window edge). Built gate present => fine.",
+  "G01 RIGHT  Frontier 2000 page missing for climate-control but record list_url = 2000 Frontier control_unit page (list_info). Xterra 2000 built gate = page r14 05/1999-11/1999 (siblings 7Z101 11/1999-07/2000, 7Z401 07/2000-07/2001).",
+  "G02 RIGHT  27515-1E400 'F/AIR CONDITIONER LESS' on all 4 pages, no dated same-option sibling.",
+  "G03 RISK   window: 2002 Frontier lists:329 r12 8Z310 07/2001-09/2002 vs r15 ZD005 from 09/2002 same option text; Xterra lists:171 r12 vs r15 same. 2003 pages also list 8Z310. Xterra 159 plain, Frontier 51 unc (cab/eng line only). gates cab crew cab + eng 3.3L correct (CC on both clauses, VG33E/VG33ER 3.3L).",
+  "G04 RIGHT  M45 2006 lists:688 r4 05/2005-05/2006 'S'; EH11B same window '*S' (option); M35 2006 via record jsonl:1152 list_url 2006 M35. built gate both. 106 unc.",
+  "G05 RISK   J6301-1E400 GLE: J6301-2B500 same option undated on 1995 Stanza lists:816 r26 / 1996 Altima lists:627 r23; black sibling splits 02/1995 (r20/r21). Altima 1995 15 + 1996 9 plain.",
+  "G06 RIGHT  96301-1E400 to 02/1995; Altima 1995 built gate from record jsonl:1550 list_info (1995 Altima page).",
+  "G07 RIGHT  K6301-1MA0A 01/2010-12/2010 (M56 lists:1013 r10, M37 record jsonl:850); built gate both; 28 unc.",
+  "G08 RISK   Titan 2006 lists:185 r39 7S200 10/2004-08/2006 vs r47 ZH10A 08/2006- same option (KC. SE + CC. SE); Titan 2006 151 plain. Armada 2005 gate from 2006 Armada lists:308 r25.",
+  "G09 RIGHT",
+  "G10 RISK   '*' mark decides AWD: QX60 2015 lists:528 r23 3JA9A 'W. BASE' vs r26/r27 3JN9B/3JN9C '*W. AWD. BASE'. 27 4WD-decoded QX60 2015 plain; JX35 lists:336 r23 'W, W. BASE'. gas gate ok (2.5L excluded 1).",
+  "G11 RISK   1NC4A dated 08/2008-11/2009 on 2008 G37 sedan lists:387 r19 (and record jsonl:98), undated on G25/Q40 pages; conflict unsettled. 38 plain.",
+  "G12 RISK   Titan 2006 lists:185 r41 7S600 undated, r40 ZC400 'KC. LE + CC. LE' undated; 2007 Titan lists:342 r48 7S600 10/2004-08/2006; 2008 Titan lists:385 r42 ZC400 08/2006-04/2007. 151 plain.",
+  "G13 RIGHT",
+  "G14 RIGHT",
+  "G15 RISK   FX 2006 lists:476 r10 CL00A 09/2004-06/2006 vs r11 CL70B from 06/2006; FX35 2005 gated on the same pattern (AR000 to 09/2004) but 2006 not. 37 plain.",
+  "REVISION: dates are per page (JK00A 11/2009-08/2010 on G37 2009 page vs 11/2009-06/2014 on 2010 page; 7S200 Armada vs Titan windows differ). Own page decides; dates on other pages don't override. => G11 RIGHT (own pages undated, sole for option). Window-edge rule uses own-page dates.",
+  "G17 RIGHT  sole RL number on every page; EX35 2008 via record jsonl:553.",
+  "G18 RIGHT  Juke 2015 lists:710 r22 two runs, built gate matches; Leaf sole.",
+  "G19 RISK   QX60 2018 page is the '-gas' catalog (lists:1145) but no gas gate (2014-2017 gated); product page lists 2.5L QR25DER 2014-2020; hybrid catalog never read. 0 lot hybrids 2018.",
+  "G20 RIGHT  JX35 sole undated; QX60 2014 via record jsonl:389 (11/2012-10/2014) gas gate.",
+  "G21 RISK   I35 2003 lists:716 r8 2Y000 07/2001-08/2003 vs r9 2Y001 from 08/2003; 22 plain.",
+  "G22 RIGHT  sole undated FL on G25/Q40 pages.",
+  "G23 WRONG  Versa 2007 ungated: sedan lists:592 r15 89915 12/2006-07/2007 vs r14 8991A 07/2007-06/2011; hatch lists:594 r15 05/2006-01/2007 vs r14 8991A 01/2007-06/2011. 175 plain. Also position: Murano = rear RH motor (rear_door pages), Versa = front RH motor (front_door pages); note silent.",
+  "G24 RISK   Frontier 2010 lists:475 r11 EA000 and r12 ZL90A share option clauses, undated; Pathfinder 2010 lists:419 shows 04/2010 changeover. Frontier 2010-2011 33 plain.",
+  "G16 RISK   G25 2012 lists:732 r16 JK60C 06/2011-06/2014 vs r15 JK60B 08/2010-06/2011 same option. 12 plain. Q40 fine. Part is 'Motor Assy-Regulator, RH' in window-regulator cat."
+ ]
+}
