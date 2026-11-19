@@ -3441,3 +3441,36 @@ categories, live claims may only say less (task 83).
   Front/Rear Bumper"), toyota tail-lights 16 of 24 ("Lens & Body"), mopar
   bumper-front 1, vag bumper-front 1. Recommended to the owner as the next
   wording round.
+
+## 2026-11-19 20:28 UTC round 10 on main: "window motor only" on mopar and subaru; three mopar numbers held
+
+- **Round 10b** (`interchange/round10-1119` head 6449ee7e): the name
+  reading now takes every naming field the raw prints (name, main, aux,
+  description, other names) on mopar, subaru and nissan. A number whose
+  values disagree in kind gets no phrase and is held.
+  - "window motor only" added: mopar 20, subaru 8 (nissan 30 unchanged;
+    `nissan.json` byte-identical, no disagreement in its 79 groups).
+  - Held, all mopar, 562 plain lot rows: 68079283AB (names say motor, the
+    description says regulator; the page itself reads it as the motor, so
+    it looks like a slip in the catalog, held anyway), 68037296AA and
+    68037297AA (listed once as regulator and once as motor on each page).
+- **Hub's check:** the other seven groups files identical to main; mopar
+  291 -> 288 groups (those three), 20 notes changed; subaru 8 notes
+  changed; every changed note is the old note with the phrase inserted;
+  payload `window-regulator.json`: three groups out, 28 note-only
+  changes, nothing else; `oemGroups2` and `amGroups` identical.
+- **Second independent check** (fresh agent, blind, every naming field;
+  branch `interchange/verify-round10b-names-1119` head 09e73285): 147
+  groups (mopar 51, subaru 17, nissan 79): **0 WRONG**; RISK 2 (mopar
+  68079286AA / 68079287AA: one alias says "Power Window Motor and
+  Regulator Assembly", the notes say nothing about the motor). Longest
+  note 159.
+- Quick regression on the merged tree (`hub/rc6-1119`): 76 passed, 0
+  failed. Data only: no app change, no cache-name bump. Pushed to main
+  20:28 UTC.
+- Left for a later wording round (each adds wording, so each needs its own
+  independent check): "regulator with motor" on the five subaru
+  "Regulator & Motor Assembly" numbers; "bumper cover only" on toyota's 41
+  bumper numbers (and mopar 1, vag 1); "lens and body" on 16 toyota
+  tail-light numbers; the results head that says "window regulator +
+  motor" above motor-only rows (a shell change).
