@@ -65,5 +65,11 @@ yardscout.io@gmail.com, they/them). Accuracy and dependability come first.
   fields; its `_doc` has the limits). Never add it for a host that refuses the
   service, and never use it to get around a block (rule 2). A takedown stays a
   data change (`ops/yards.md`, "Photo takedown").
+- Email drafts (owner, 2026-11-18: "ensure they're filled out with an
+  address/proper destination"; 2026-11-19: "I only want drafts if they have
+  recepients"): a draft goes into the owner's Gmail only with a recipient
+  address. With no confirmed address, keep the text in the workstream's ops
+  file (`ops/yard-outreach-drafts.md` for outreach) and tell the owner which
+  address is missing. Sessions draft; the owner sends.
 - Keep one session per workstream (`ops/README.md`). Do not take on another
   workstream's files in passing; note the need in that workstream's file.

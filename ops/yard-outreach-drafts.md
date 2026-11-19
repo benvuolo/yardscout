@@ -356,3 +356,81 @@ opens upullitdavie.com), Ario (no address found: "ari.app" is an unrelated
 auto-repair software company; autopartneredsolutions.com turns AI agents
 away; owner decision on Ario still open). Form texts for Harry's and Davie
 were given to the owner in chat.
+
+## Texts held out of Gmail until they have a recipient (owner, 2026-11-19 about 17:47 UTC: "I only want drafts if they have recepients")
+
+The hub removed two drafts from Gmail at 17:50 UTC because neither had a
+recipient; their texts are kept here. A draft goes back into Gmail only
+with a recipient address the owner or the company's own page confirms.
+The owner had already asked on 11-18 for drafts "filled out with an
+address/proper destination"; the hub made a recipient-less one again on
+11-19 (the catalog operator, below). Both web searches on 11-19 found no
+address confirmed by the company itself: for the catalog operator one
+third-party guide gives a customer-service address at the PartsGiant
+domain (unverified, not used); for 1A Auto nothing.
+
+### A. OEM parts catalog operator (PartsGiant / PartsDeal / PartsNow sites)
+
+Subject: Asking permission to read your OEM parts catalog pages (YardScout)
+
+Hello,
+
+I run YardScout, a small app that shows which cars are on self-service
+junkyard lots and which parts are worth pulling from them. To tell people
+which donor cars carry the same OEM part number as their own car, we have
+been reading the public fitment lists on your OEM parts catalog sites (the
+PartsGiant, PartsDeal and PartsNow sites) with an automated reader. It asks
+for one page every eight seconds, follows your robots rules, and names
+itself "YardScout-research" in its user agent.
+
+Several of your sites have answered that reader with a 403. We took that as
+a no and stopped reading them. We have not tried to get around it and we
+will not.
+
+I would rather ask than assume. Would you allow either of these?
+
+1. Reading a limited set of catalog list pages, at a pace and at hours you
+   choose.
+2. A data arrangement for part-number fitment, on terms that work for you.
+
+In return we can name your catalog as the source beside every part number
+we show, and link each number to your product page, so people who want the
+part new can buy it from you.
+
+If the answer is no, tell me and we will leave all of your sites alone.
+
+Thank you,
+Ben
+YardScout
+
+(The link-out offer is the owner's to keep or strike: the app does not link
+to catalog product pages today.)
+
+### B. 1A Auto
+
+Subject: Asking permission to use 1A Auto fitment info (YardScout)
+
+Hi,
+
+I'm Ben, I run YardScout. It's a free app that helps people find used parts
+at self-service junkyards by showing which cars on a lot carry a part that
+fits their car.
+
+Earlier this month our crawler read a few thousand of your public part
+pages, slowly (one page every 8 seconds, following your robots.txt). When
+your site sent back an error it stopped, and we haven't gone back. I should
+have asked first, so I'm asking now.
+
+All we're after is the fitment lists, meaning which years and models each
+part fits, so we can tell someone a 2012 Equinox and a 2013 Terrain take
+the same headlight. No prices, descriptions or photos, and we wouldn't
+republish your catalog. We'd be happy to link to your part page so people
+can buy new when the yard doesn't have one.
+
+Would you be OK with us reading those pages at a pace you pick, or do you
+have a fitment feed for partners? If the answer is no, that's fine, we'll
+leave it alone.
+
+Thanks,
+Ben
+YardScout
