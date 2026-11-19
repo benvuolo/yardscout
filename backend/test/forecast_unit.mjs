@@ -245,5 +245,99 @@ const ctxQ = { ...Q, radiusMi: 25, place: '84401', where: 'parts' };
   check('compact: files loaded once for both mounts', log.length === 2, JSON.stringify(log));
 }
 
+// ---- donor models: q.specs (the Parts card, 2026-11-19) ----
+{
+  const ix2 = { ...index, makes: { Toyota: ['toyota', 40], Lexus: ['lexus', 9], Honda: ['honda', 3], Nissan: ['nissan', 1], Ford: ['ford', 1] } };
+  const lexus = { builtAt: index.builtAt, make: 'Lexus', slug: 'lexus', models: {
+    'GX 470': [[0, 2005, 0, 1, 0, 0, 0, 0, 0, 1], [1, 2008, 1, 0, 0, 0, 0, 0, 0, 0], [2, 2006, 9, 9, 9, 9, 9, 9, 9, 9], [0, 2011, 4, 4, 4, 4, 4, 4, 4, 4]],
+    'gx 470': [[5, 2004, 0, 0, 0, 0, 0, 0, 1, 0]],   // a second spelling: same model, any case (modelRows' rule)
+  } };
+  const toy = { ...file, models: { ...file.models, Tundra: [[0, 2002, 0, 0, 0, 1, 0, 0, 0, 0]], 'Tundra Access Cab': [[1, 2003, 0, 0, 0, 0, 0, 0, 1, 0]] } };
+  const FILES = { toyota: toy, lexus };
+  const sum = (specs, files = FILES) => F.summary({ index: ix2, files, file }, { ...Q, radiusMi: 25, yrMin: 2003, yrMax: 2009, specs });
+  const own = F.summary(data, { ...Q, radiusMi: 25, yrMin: 2003, yrMax: 2009 });
+  const R = { make: 'Toyota', model: '4Runner', yrMin: 2003, yrMax: 2009 };
+  const GX = { make: 'Lexus', model: 'GX 470', yrMin: 2003, yrMax: 2009 };
+
+  const sOwn = sum([R]);
+  check('specs: one spec equal to the own generation = today, byte for byte', JSON.stringify(sOwn) === JSON.stringify(own) && JSON.stringify(F.words(sOwn, { ...Q, radiusMi: 25, yrMin: 2003, yrMax: 2009 })) === JSON.stringify(F.words(own, { ...Q, radiusMi: 25, yrMin: 2003, yrMax: 2009 })), JSON.stringify([sOwn.total, own.total]));
+  check('specs: none or empty = today', JSON.stringify(F.summary(data, { ...Q, radiusMi: 25, specs: [] })) === JSON.stringify(F.summary(data, { ...Q, radiusMi: 25 })));
+  const sRG = sum([R, GX]);
+  // 4Runner 2003-09 near (yards 0,1,5,6 counted): 2004@0 = 5, 2006@1 = 4, 2008@5 = 4 -> 13
+  // GX 470 2003-09: 2005@0 = 2, 2008@1 = 1, gx 470 2004@5 = 1 -> 4 (2006@2 stale, 2011 out of years)
+  check('specs: weekly counts summed over the specs', sRG.total === own.total + 4 && sRG.total === 17, `${sRG.total} own ${own.total}`);
+  check('specs: per-spec counts', JSON.stringify(sRG.specs.map(x => [x.model, x.n])) === '[["GX 470",4],["4Runner",13]]', JSON.stringify(sRG.specs));
+  check('specs: stale and new yards stay uncounted, the same skipped facts', sRG.skipped.stale === own.skipped.stale && sRG.skipped.newYard === own.skipped.newYard && sRG.yardsCounted === own.yardsCounted);
+  check('specs: rate = per-yard arrivals / that yard\'s covered weeks, summed', Math.abs(sRG.rate - (own.rate + 2 / 8 + 1 / 8 + 1 / 4)) < 1e-9, String(sRG.rate));
+  const split = sum([{ ...R, yrMax: 2006 }, { ...R, yrMin: 2005 }, GX, GX]);
+  check('specs: overlapping ranges merged, duplicates once: no double count', split.total === sRG.total && split.specs.length === 2, `${split.total} ${JSON.stringify(split.specs)}`);
+  check('specs: touching ranges merge too', F._mergeSpecs([{ ...R, yrMax: 2005 }, { ...R, yrMin: 2006 }]).length === 1);
+  const pre = sum([R, { make: 'Toyota', model: '4Run*', yrMin: 2003, yrMax: 2009 }, GX]);
+  check('specs: a "*" model and an exact one over the same cars count each car once', pre.total === sRG.total, String(pre.total));
+  const pipe = sum([{ make: 'Toyota|Lexus', model: 'GX 470', yrMin: 2003, yrMax: 2009 }, R]);
+  check('specs: "Toyota|Lexus" is one spec per make', pipe.total === sRG.total, String(pipe.total));
+  const tun = sum([R, { make: 'Toyota', model: 'Tundra*', yrMin: 2000, yrMax: 2006 }]);
+  check('specs: a "*" model counts every model starting with the stem', tun.total === 13 + 1 + 1, String(tun.total));
+  const noFile = sum([R, GX], { toyota: toy });
+  check('specs: a needed make file missing = no data (never a partial sum)', noFile.status === 'no data');
+  const zero = sum([R, { make: 'Yugo', model: 'GV', yrMin: 1987, yrMax: 1991 }], { toyota: toy, yugo: null });
+  check('specs: a make the index does not list counts 0', zero.status === 'ok' && zero.total === 13);
+
+  const q = { ...Q, radiusMi: 25, yrMin: 2003, yrMax: 2009 };
+  const w = F.words(sRG, q);
+  check('words: subject "Donor models"', w.subject === 'Donor models', w.subject);
+  check('words: headline and facts use the existing rules', w.headline === F.words({ ...own, ...sRG, specs: undefined }, q).headline && /^17 in the last 8 weeks at 4 yards/.test(w.facts), `${w.headline} | ${w.facts}`);
+  check('words: models, most arrivals first', JSON.stringify(w.models) === '["2003-09 4Runner","2003-09 GX 470"]' && w.modelsMore.length === 0, JSON.stringify(w.models));
+  check('words: caveat', w.caveat === 'Counts every car of these models and years. The list shows, car by car, which have the right engine and options.');
+  check('words: never "donor cars", "carry", "have the part", "first", "only", "largest"', !/donor car|carr(y|ies)|have the part|\bfirst\b|\bonly\b|largest/i.test([w.headline, w.facts, w.models.join(' ')].join(' ')));
+  const many = sum([R, GX, { make: 'Toyota', model: 'Tundra', yrMin: 2000, yrMax: 2006 }, { make: 'Toyota', model: 'Sequoia', yrMin: 2001, yrMax: 2007 }, { make: 'Toyota', model: 'Tacoma', yrMin: 1995, yrMax: 2004 }]);
+  const wm = F.words(many, q);
+  check('words: three models, then the rest', wm.models.length === 3 && wm.models[0] === '2003-09 4Runner' && wm.modelsMore.length === 2 && wm.modelsMore.includes('1995-2004 Tacoma'), JSON.stringify([wm.models, wm.modelsMore]));
+
+  // mount
+  const mk = (extra) => load({ fetch: fakeFetch({ 'data/arrivals/index.json': ix2, 'data/arrivals/toyota.json': toy, 'data/arrivals/lexus.json': lexus, ...extra }) }).YSForecast;
+  const ctxS = { ...Q, radiusMi: 25, yrMin: 2003, yrMax: 2009, where: 'parts' };
+  {
+    const G = mk();
+    const a = { innerHTML: '' }, b = { innerHTML: '' }, c = { innerHTML: '' };
+    await G.mount(a, ctxS);
+    await G.mount(b, { ...ctxS, specs: [R] });
+    check('mount: specs = own generation renders byte-identical HTML', a.innerHTML === b.innerHTML && a.innerHTML.length > 100);
+    const st = await G.mount(c, { ...ctxS, specs: [R, GX] });
+    check('mount: donor models render', st === 'ok' && c.innerHTML.includes('data-ysf-kind="donor-models"') && c.innerHTML.includes('>Donor models<') && c.innerHTML.includes('2003-09 4Runner, 2003-09 GX 470') && c.innerHTML.includes('class="ysf-caveat"') && c.innerHTML.includes('Past weeks, not a promise.'), c.innerHTML.slice(0, 400));
+    const d = { innerHTML: '' };
+    await G.mount(d, { ...ctxS, specs: many.specs.map(({ n, ...x }) => x) });
+    check('mount: "and N more" opens the rest (details, title), no ellipsis', d.innerHTML.includes('<details class="ysf-models ysf-models-more">') && d.innerHTML.includes('and 2 more') && d.innerHTML.includes('title="') && !/…|\.\.\./.test(d.innerHTML.replace(/Past weeks/, '')), d.innerHTML.slice(0, 500));
+    const e = { innerHTML: '' };
+    await G.mount(e, { ...ctxS, compact: true, specs: [R, GX] });
+    check('mount: compact (watch rows) ignores specs', !e.innerHTML.includes('donor-models') && e.innerHTML.includes('ysf-compact'));
+  }
+  {
+    const G = mk({ 'data/arrivals/lexus.json': undefined });
+    const a = { innerHTML: '' }, own2 = { innerHTML: '' };
+    await G.mount(own2, ctxS);
+    const st = await G.mount(a, { ...ctxS, specs: [R, GX] });
+    check('mount: a needed make file missing = today\'s own-model block', st === 'ok' && a.innerHTML === own2.innerHTML, a.innerHTML.slice(0, 200));
+  }
+  {
+    const log = [];
+    const G = load({ fetch: fakeFetch({ 'data/arrivals/index.json': ix2, 'data/arrivals/toyota.json': toy, 'data/arrivals/lexus.json': lexus }, log) }).YSForecast;
+    const a = { innerHTML: '' };
+    const five = [R, GX, { make: 'Honda', model: 'Pilot', yrMin: 2003, yrMax: 2008 }, { make: 'Nissan', model: 'Xterra', yrMin: 2005, yrMax: 2010 }, { make: 'Ford', model: 'Ranger', yrMin: 1998, yrMax: 2011 }];
+    await G.mount(a, { ...ctxS, specs: five });
+    check('mount: more than 4 makes = today\'s own-model block, no extra files fetched', !a.innerHTML.includes('donor-models') && a.innerHTML.includes('2003-2009 4Runner') && !log.some(u => /honda|nissan|ford|lexus/.test(u)), JSON.stringify(log));
+    const b = { innerHTML: '' };
+    await G.mount(b, { ...ctxS, specs: [R, GX] });
+    await G.mount({ innerHTML: '' }, { ...ctxS, specs: [R, GX] });
+    check('mount: each make file fetched once', log.filter(u => u.endsWith('lexus.json')).length === 1 && log.filter(u => u.endsWith('toyota.json')).length === 1, JSON.stringify(log));
+  }
+  {
+    const G = mk({ 'data/arrivals/lexus.json': { ...lexus, builtAt: '2026-11-20T07:00:00Z' } });
+    const a = { innerHTML: '' };
+    await G.mount(a, { ...ctxS, specs: [R, GX] });
+    check('mount: a make file from another build = today\'s own-model block', !a.innerHTML.includes('donor-models') && a.innerHTML.includes('2003-2009 4Runner'));
+  }
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
