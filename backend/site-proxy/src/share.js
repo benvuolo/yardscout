@@ -500,7 +500,7 @@ function layout({ title, desc, canonical, body, status = 200, robots = 'index,fo
 <meta name="robots" content="${robots}"><meta name="theme-color" content="#F4F2EC" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1A" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="${esc(canonical)}">
 <meta name="apple-itunes-app" content="app-id=6817126581, app-argument=${esc(appArg || canonical)}">
-<link rel="icon" type="image/png" sizes="192x192" href="${SITE}/favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="${SITE}/favicon-32.png?v=3"><link rel="apple-touch-icon" href="${SITE}/apple-touch-icon.png?v=3">
+<link rel="icon" href="${SITE}/favicon.ico?v=4" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="${SITE}/favicon-32.png?v=4"><link rel="apple-touch-icon" href="${SITE}/apple-touch-icon.png?v=4">
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="YardScout">
 <meta property="og:title" content="${esc(ogTitle || title)}"><meta property="og:description" content="${esc(ogDesc || desc)}">
 <meta property="og:url" content="${esc(canonical)}"><meta property="og:image" content="${OG_IMAGE}">
