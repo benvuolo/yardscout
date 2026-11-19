@@ -2184,3 +2184,44 @@ groups); lot cars whose VIN decodes as another vehicle shown plain.
   VIN disagree, check the car" for a mismatch car.
 - Data need written to ops/data.md (model mismatches not flagged; census:
   3,143 cars in 316 name pairs, most are naming, a few hundred real).
+
+## 2026-11-19 ~05:45 UTC nissan check 1119e FAILED (7 WRONG, one class); round 5 started
+
+- Independent check `interchange/verify-nissan-1119e` (4998471a), seed
+  52941119: groups 21 RIGHT / 4 WRONG / 5 RISK, pairs 23 / 3 / 4. Nissan
+  stays off.
+- All 7 WRONG are one class, and it is a hub decision that was wrong: round
+  4 decision 2 left a build window alone when the rest of the model year is
+  carried by the number's own predecessor or successor. "Replaced By" runs
+  one way (the newer number serves the older car; the older part is not
+  stated to fit a car built with the newer one), so those vehicle-years
+  need the build-date gate too. Checker's census on the candidate: 76
+  vehicle-years in 50 groups, about 2,917 plain rows.
+- **Same class on the live makes** (round 4 census, `window_linked`): toyota
+  88 app-years (676 plain lot pairs), ford 1 (13), hmg 1 (323). Live since
+  the makes first shipped; Likely tier, "verify the number on the part".
+- RISK kinds: an unexplained leading "*" on option clauses decides drive or
+  engine scope (5 items); 7 drive gates labelled "stated" with no drive
+  word on the row (Titan 2005 7S00E among them: the hub's "leave it for the
+  check" call came back "no basis"); a 1-2 month model-year edge.
+- Round 5 hub decisions (builder a2ac3fad resumed, branch
+  `interchange/round5-1119`, live makes first, claims only down):
+  1. linked windows are windows: note names the window + `built` gate, or
+     the vehicle-year is dropped at the 160-char cap; launch / end-of-run
+     windows with no other number stay as they are;
+  2. other-page windows match on the number, not the option clause (Sentra
+     2004); find why Stanza 1995 has no gate;
+  3. a starred / unstarred difference alone is never a drive split (Titan
+     pair reverted);
+  4. `drive_basis: "stated"` only with the drive word on the number's own
+     row; sibling-inferred gates get basis `"sibling"` and say so in the
+     app line;
+  5. "*": no fetch; grep the raw for a legend, report, change nothing
+     unless the raw settles it.
+- Checker suggestions kept for later (not in round 5): show the donor's
+  door position on regulator and mirror rows (80730-JX30C is a front-door
+  motor on a Cube/Juke and a rear-door one on a Rogue); name a stated
+  option such as "without A/C" in the note.
+- After round 5: hub review, live diff 0 added, regress, merge the live
+  part, live check; then a sixth independent nissan check (new seed; used:
+  46021118, 61181118, 73901118, 38271119, 52941119).

@@ -130,4 +130,58 @@ jobs:
                   break
           else:
               print("Active subscriptions: no SUBSCRIPTION report in the last 4 days (none active, or not published yet).")
+          # 2026-11-19: the owner's Trends page shows units through 11-17 while SALES is 404 here since
+          # 11-06. Read-only checks that tell a changed vendor number from a missing report:
+          # Apple's full reason, the legal name on the last report found, and whether the
+          # subscription reports for this vendor still move. Counts only, no subscriber rows.
+          import json as _json
+          def why(text):
+              try: return "; ".join(sorted({(e.get("detail") or e.get("title") or "")[:200] for e in _json.loads(text).get("errors", [])}))
+              except Exception: return " ".join(text.split())[:200]
+          r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "DAILY", "filter[reportType]": "SALES",
+              "filter[reportSubType]": "SUMMARY", "filter[vendorNumber]": os.environ["VENDOR"], "filter[reportDate]": last, "filter[version]": "1_1"})
+          print(f"SALES {last}: HTTP {r.status_code} " + ("" if r.status_code == 200 else why(r.text)))
+          for back in range(2, 40):   # the newest SALES report this vendor number has, and the names on it
+              day = (today - dt.timedelta(days=back)).isoformat()
+              r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "DAILY", "filter[reportType]": "SALES",
+                  "filter[reportSubType]": "SUMMARY", "filter[vendorNumber]": os.environ["VENDOR"], "filter[reportDate]": day, "filter[version]": "1_1"})
+              if r.status_code == 200:
+                  rows = list(csv.DictReader(io.StringIO(gzip.decompress(r.content).decode()), delimiter="\t"))
+                  print(f"newest SALES report for this vendor number: {day}; Developer column: "
+                        + ", ".join(sorted({x.get("Developer", "") for x in rows})) + "; Provider: " + ", ".join(sorted({x.get("Provider", "") for x in rows})))
+                  break
+          print("subscription snapshot by day (active paid):")
+          for i in range(16, 0, -1):
+              day = (today - dt.timedelta(days=i)).isoformat()
+              r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "DAILY", "filter[reportType]": "SUBSCRIPTION",
+                  "filter[reportSubType]": "SUMMARY", "filter[vendorNumber]": os.environ["VENDOR"], "filter[reportDate]": day, "filter[version]": "1_4"})
+              if r.status_code == 200:
+                  rows = list(csv.DictReader(io.StringIO(gzip.decompress(r.content).decode()), delimiter="\t"))
+                  print(f"  {day}: " + str(sum(int(x.get("Active Standard Price Subscriptions") or 0) for x in rows)))
+              else:
+                  print(f"  {day}: HTTP {r.status_code} {why(r.text)[:90]}")
+          for kind in ("SUBSCRIPTION_EVENT", "SUBSCRIBER"):
+              ver = None
+              for v in ("1_4", "1_3", "1_2"):
+                  r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "DAILY", "filter[reportType]": kind,
+                      "filter[reportSubType]": "SUMMARY" if kind == "SUBSCRIPTION_EVENT" else "DETAILED", "filter[vendorNumber]": os.environ["VENDOR"],
+                      "filter[reportDate]": last, "filter[version]": v})
+                  if r.status_code != 400: ver = v; break
+              if not ver:
+                  print(f"{kind}: no version accepted ({why(r.text)[:120]})"); continue
+              print(f"{kind} {ver} by day:")
+              for i in range(16, 0, -1):
+                  day = (today - dt.timedelta(days=i)).isoformat()
+                  r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "DAILY", "filter[reportType]": kind,
+                      "filter[reportSubType]": "SUMMARY" if kind == "SUBSCRIPTION_EVENT" else "DETAILED", "filter[vendorNumber]": os.environ["VENDOR"],
+                      "filter[reportDate]": day, "filter[version]": ver})
+                  if r.status_code == 200:
+                      rows = list(csv.DictReader(io.StringIO(gzip.decompress(r.content).decode()), delimiter="\t"))
+                      ev = {}
+                      for x in rows:
+                          k = x.get("Event") or ("refund" if (x.get("Refund") or "").strip() else "purchase or renewal")
+                          ev[k] = ev.get(k, 0) + int(float(x.get("Quantity") or x.get("Units") or 1))
+                      print(f"  {day}: " + (", ".join(f"{k} {n}" for k, n in sorted(ev.items())) or "empty"))
+                  elif r.status_code != 404:
+                      print(f"  {day}: HTTP {r.status_code} {why(r.text)[:90]}")
           PY
