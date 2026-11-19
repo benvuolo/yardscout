@@ -3474,3 +3474,18 @@ categories, live claims may only say less (task 83).
   bumper numbers (and mopar 1, vag 1); "lens and body" on 16 toyota
   tail-light numbers; the results head that says "window regulator +
   motor" above motor-only rows (a shell change).
+
+## 2026-11-19 20:40 UTC round 10 is on main but not yet on the site: no pages build started for 8fa3d772
+
+One live load at 20:40 UTC (2003 Subaru Legacy, window regulator, zip
+80201): cache `jh-v220`, 22 donor cars, forecast drawn, no page errors,
+but the notes are still the old ones ("Subaru catalog lists #61188AE00A
+for both — fits some configurations"). The live
+`data/oem/window-regulator.json` reads builtAt 18:22 with 198 groups; the
+file on main reads builtAt 20:26 with 195. Cause: GitHub started no
+"pages build and deployment" run for the 20:29 push (the last one is 20:04
+for e080c0fe). This entry's push is a second trigger. Data files are
+served with a four-hour browser cache (`max-age=14400`), so a returning
+visitor can see the older notes for up to four hours after the deploy; the
+older notes say less, nothing wrong is shown in the meantime. Re-check
+after the next deploy.
