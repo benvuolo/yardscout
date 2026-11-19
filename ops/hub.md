@@ -2828,3 +2828,47 @@ one-month-wider or narrower build span.
   cron runs, lists go stale; the daily ops email reports scan age. A
   second trigger (a scheduled task that dispatches the scan when the last
   one is over 5 hours old) would close it. Not built.
+
+## 2026-11-19 ~14:00 UTC round 8 on main (candidate only); a large live class sized, not acted on
+
+- **Round 8 (interchange builder), branch `interchange/round8-1119` head
+  c7ecaa9e, merged to main.** Nissan only (`ROUND8_NS`): a vehicle-year is
+  claimed only when its own catalog page carries it. Held: no page of its
+  own (61 vehicle-years on the round-7 candidate), a build window borrowed
+  from another model year's page (17), undated same-option siblings (155),
+  claims that depend on reading "+" (29); "gas only" notes now say
+  "checked on gas-model pages" where the hybrid pages were not read.
+  Candidate: 153 -> 108 shippable groups (regulators 82, mirrors 16,
+  climate 7, gauge 3), app-years 915 -> 617, plain pairs 24,198 -> 14,890.
+  Hub check: the 8 live groups files and `docs/` are identical to main;
+  `test_round8_1119` 24 checks; quick regression on the merged tree 75/0/0.
+- **Part A census on the LIVE makes** (`groups/_report/round8_census_2026-11-19.json`;
+  nothing changed):
+
+  | make | vehicle-years with no page of their own | lot rows | beside undated same-option siblings | lot rows | pages a crawl would read |
+  |---|---|---|---|---|---|
+  | toyota | 600 (439 groups) | 94,567 | 239 | 7,798 | 122 |
+  | gm | 173 | 37,555 | 212 | 15,598 | 57 |
+  | ford | 47 | 9,731 | 2 | 279 | 15 |
+  | subaru | 23 | 1,571 | 9 | 252 | 5 |
+  | mopar | 12 | 2,106 | 96 | 16,129 | 4 |
+  | vag | 4 | 832 | 0 | 0 | 1 |
+  | mb | 0 | 0 | 18 | 122 | 0 |
+  | hmg | 0 | 0 | 4 | 16 | 0 |
+
+  No live gate borrows a window from another page. "No page of its own"
+  means the claim rests on the part's product record (its fitment list)
+  while the model year's own list page, where options, build windows and
+  sibling numbers show, was never read: about 146,000 of the roughly
+  290,000 plain donor rows. These are "Likely" rows ("verify the number on
+  the part"), and seven makes passed their release samples with them; the
+  nissan checks show what such a page can add. Hub's call: do NOT hold them
+  on a census alone (it would halve the live catalog matches on no finding
+  of a wrong fit). The honest next step is to read the pages: 204 list
+  pages for the live makes plus 22 for nissan. A crawl is the owner's
+  decision (like the open gm one); put to the owner 11-19.
+- **Ninth independent nissan check: waits for scan 44535632042's commit**,
+  so the lot it replays carries the new listing/VIN model flag (on the old
+  pinned lot the QX80 / QX60 car would be plain again and the check would
+  fail on a thing already fixed). New seed; used: 46021118, 61181118,
+  73901118, 38271119, 52941119, 27641119, 91371119, 15841119.
