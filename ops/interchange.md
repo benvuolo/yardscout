@@ -5614,3 +5614,30 @@ re-check, not independent):
   ford / gm gas-only gates was not measured; worth a census.
 - The 160 cap now costs ford 2 live groups (decision 4's windows on both
   models).
+
+
+## 2026-11-19 — independent blind check of nissan.candidate.json (verify 1119g)
+
+Branch `interchange/verify-nissan-1119g` (from main 0212ed03). Report:
+`scraper/oem_fitment/groups/_report/nissan_verify_2026-11-19g.json`. Written before reading
+this file, the hub file, the spec or earlier reports. Pins: raw oem-raw 57e8b5b9 (six nissan/infiniti
+files, sha256 match the candidate's `raw` block); lot main a85c654 (inventory 1a9cfa73…, extras
+6ff3d44b…, vin_decodes 1357625b…); app OEM-GATE block at 0212ed03 run unchanged (my replay
+matches audit11_4/lot_replay.mjs exactly). Own draw, seed 91371119, 171 shippable groups
+(3 wiper-motor held): 30 groups (window-regulator 18, side-mirrors 8, climate-control 3,
+gauge-cluster 1) + 30 pairs.
+
+**Result: FAIL (1 WRONG).** Groups 18 RIGHT / 11 RISK / 1 WRONG; pairs 26 RIGHT / 4 RISK / 0 WRONG.
+
+- WRONG G23 `oem:nissan:window-regulator:FR+RR:c0080caac8` #80730-89915, Versa 2007: plain row
+  (175 lot cars), but both 2007 Versa own pages end the number's build window inside MY2007 and
+  list 8991A for the rest (sedan lists:592 r15 12/2006-07/2007 vs r14 8991A 07/2007-; hatch
+  lists:594 r15 05/2006-01/2007 vs r14 8991A 01/2007-). No built gate, no build-date line.
+  Census: the only ungated vehicle-year of that kind in the candidate.
+- RISK kinds: window edge at a changeover month on an ungated year (G03, G08, G15, G16, G21,
+  P03, P12, P30; census 45 vehicle-years / 26 groups); same-option siblings with a date split
+  shown on another page (G05, G12, G24, G27); unexplained `*` deciding AWD (G10, twin L group);
+  cross-door numbers with a silent note (G25, P08; census 6 window-regulator groups).
+- Suggestions: gate Versa 2007; say the door on the 6 cross-door groups; gate both sides of a
+  changeover month consistently (FX 2005 gated, FX 2006 not; M 2009 gated, M 2008 not); read
+  `*` before relying on an AWD sibling; recrawl the missing 1995 Altima pages.
