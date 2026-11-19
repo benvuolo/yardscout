@@ -168,7 +168,12 @@ check("candidate: kept where every starred configuration repeats an unstarred on
       "or held by a round-8 rule (not by the mark)",
       claims("window-regulator", "80720-2Z700", "Nissan", "Xterra", 2002)
       or ("window-regulator", "80720-2Z700", ("Nissan", "Xterra", 2002)) in r8_T)
+# round 9 E: nissan ships its candidate (the starred holds are already in it)
 for p in sorted((OEM / "groups").glob("*.json")):
+    if p.stem == "nissan":
+        check("shipped groups/nissan.json is the candidate these checks read",
+              p.read_bytes() == (OEM / "groups" / "_report" / "nissan.candidate.json").read_bytes())
+        continue
     check(f"shipped groups/{p.name}: no held_starred_scope claim removed (nissan candidate only)",
           not (OEM / "groups" / "_report" / f"{p.stem}.starred_held.json").exists())
 done("test_round5b_1119")

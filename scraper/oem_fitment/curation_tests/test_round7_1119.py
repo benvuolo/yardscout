@@ -222,7 +222,8 @@ summ = re.findall(r"^# (\w+) LIVE: removed (\d+) groups, added (\d+) groups.*?ga
 check("live diff vs origin/main: 9 namespaces, 0 added groups, 0 gained app-years, 0 widened gates",
       len(summ) == 9 and all(a == g == w_ == ac == "0" for _ns, _r, a, g, w_, ac in summ), summ)
 pay = json.loads((OEM.parent.parent / "docs" / "data" / "interchange.json").read_text())
-check("payload: oemStatus ok for the 8 shipped namespaces",
-      sorted(pay["oemStatus"]) == ["ford", "gm", "hmg", "mb", "mopar", "subaru", "toyota", "vag"]
+# round 9 E: nissan ships (in oemGroups2, junkyard_scraper.OEM_NEW_FIELD_NS)
+check("payload: oemStatus ok for the 8 shipped namespaces and nissan",
+      sorted(pay["oemStatus"]) == ["ford", "gm", "hmg", "mb", "mopar", "nissan", "subaru", "toyota", "vag"]
       and all(x.startswith("ok ") for x in pay["oemStatus"].values()), pay["oemStatus"])
 done("test_round7_1119")

@@ -85,7 +85,9 @@ check("no groups and no aftermarket files: no lazy files, no new keys, payload a
 # subaru withheld 2026-11-09: subarupartsdeal's "Fitting Vehicle Options" column
 # encodes model/body (S/W/OBK/P), which curation ignored (ops/interchange.md)
 # re-shipped 2026-11-09 after the make-breadth §11.4 round 4 (0 WRONG) and hub confirmation
-APPROVED_NS = {"toyota", "gm", "mopar", "ford", "vag", "hmg", "mb", "subaru"}
+# nissan: round 9 E (2026-11-19, the owner's "ship", hub brief), in the newer
+# field only (oemGroups2, junkyard_scraper.OEM_NEW_FIELD_NS)
+APPROVED_NS = {"toyota", "gm", "mopar", "ford", "vag", "hmg", "mb", "subaru", "nissan"}
 _shipped = {p.stem for p in DEFAULT_DIR.glob("*.json")}
 check("the repo ships groups/<ns>.json only for the owner-approved namespaces (§11.5)",
       _shipped <= APPROVED_NS, str(sorted(_shipped - APPROVED_NS)))

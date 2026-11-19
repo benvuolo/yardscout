@@ -6141,3 +6141,69 @@ wiper-motor 3 held category; gauge-cluster 0), 8 removed, 73 changed, 36 app-yea
   note change, hub's call); make "no engine decode" under a gas gate "if equipped" when the
   model-year has a hybrid (D: 24 nissan rows, all VIN-less); re-pin the live makes to oem-raw
   57e8b5b9 so the 37 census pages completion pass 1 already read count (live groups change).
+
+## 2026-11-19 Round 9 E + G: nissan on, in the newer payload field only (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/nissan-ship-1119` on `interchange/round9-1119`; not merged, no store release)
+
+**Rule (G4): a namespace or gate key that older shells cannot read correctly ships in the newer
+field.** Store apps bundle the shell and read each new payload with their own older code (an app
+older than gates-1118 ignores every gate; later shells miss newer keys and wordings). Such a
+namespace's groups ship under `oemGroups2` (the lazy files `docs/data/oem/<cat>.json`, and the main
+file for a Verified group), never under `oemGroups`. Shells from this release on read both
+(`pfOemGroupsOf`: oemGroups, then oemGroups2); every earlier shell reads `oemGroups` only and shows
+none of it, as before the namespace shipped. Set: `junkyard_scraper.OEM_NEW_FIELD_NS = {nissan}`.
+A namespace leaves the set only when every store build in use reads its keys (iPhone users are on
+1.13.0, pre-gates). The eight live makes stay in `oemGroups`, byte-identical; their old-shell
+exposure stays as it is. A new gate key on a live make would follow the same rule (its groups
+would move to the newer field), which is not done here.
+
+- **What turns nissan on (G1):** `groups/nissan.json`. Every `groups/*.json` is loaded; there is
+  no namespace list, and `_OEM_BRANDS` already names nissan. Before this branch nissan existed only
+  as `_report/nissan.candidate.json`, which the payload never reads.
+- **Old shells on today's payload format (G1; b22c3640 lot, round-9 candidate, 100 payload
+  groups):**
+  - (a) A pre-gates shell (1.13.0, live on iOS; also 1.13.1) shows every donor plain. That is
+    **1,110 rows** the current shell shows "if equipped" (1,108) or hides (2); it was 1,181 on the
+    1119i candidate.
+  - (b) The 1.13.2 shell (81c57f67): gates-1118, the round-4 built / drive_not code and the
+    round-5 sibling line are all ancestors of 81c57f67, and no gate commit comes after it. By
+    commit history it therefore runs today's OEM-GATE code, so 0 rows would differ. This was not
+    checked by running that build's own script: reading the old bundled script out of git was
+    refused in this session, so treat it as unverified.
+- **Mechanism (G2).**
+  - Scraper side:
+    - `_attach_lazy_layers` routes new-field groups to `oemGroups2`, and writes that key only when
+      it holds a group.
+    - The index adds an `oem2` count beside unchanged `oem` / `am`.
+    - `_lazy_trim` sheds `oemGroups2` first.
+    - `_oem_split_new_field` keeps a new-field Verified group out of the main file's `oemGroups`.
+  - App side: `pfOemGroupsOf(d)` in the lazy loader and the main-file read. That is one helper and
+    two changed lines. It ships first on its own branch, `interchange/payload-field2-reader`
+    (4611cd7c, for 1.13.3), and this branch sits on top of it. The service-worker name is not
+    bumped (the hub sets it at merge).
+  - `measure.py` merges `oemGroups2` for the new-client view.
+  - No existing mechanism is certain to have the same effect. Today's shell skips `src !== 'oem'`,
+    but the 1.13.0 script could not be read to confirm it does the same.
+- **E counts (b22c3640 lot).**
+  - Before: nissan ships nothing.
+  - After: **100 payload groups, 546 app-years, 14,026 plain / 1,108 if equipped / 2 hidden**
+    pairs:
+    - window-regulator: 79 groups, 472 app-years, 13,634 / 602 / 2
+    - side-mirrors: 16 groups, 53 app-years, 308 / 488 / 0
+    - climate-control: 5 groups, 21 app-years, 84 / 18 / 0
+  - The 3 wiper-motor groups stay held (GROUP_HOLD_CATS as it stands).
+  - On the 1119i candidate the totals were 108 groups, 617 app-years and 15,001 / 1,150 / 31; the
+    71 app-years lost are 36 narrowed plus 35 in the 8 removed groups.
+  - The eight live groups files are byte-identical. Payload: every lazy file's `oemGroups` and
+    `amGroups`, the main file's `oemGroups` / `oemVg` and the old keys are unchanged (no
+    contradiction demotion from the nissan cells). 26 of 29 lazy files differ only in `builtAt`;
+    the nissan groups sit under `oemGroups2` in climate-control (5), side-mirrors (16) and
+    window-regulator (79). `oemStatus` gains `nissan: ok 57e8b5b9 103 groups`.
+- **Tests.**
+  - New: `curation_tests/test_ship_1119.py` (16 checks). It compares a build with nissan against
+    one without; checks that an old-shell reader (oemGroups only) of the committed files sees zero
+    nissan groups and the new reader sees all 100; and checks the trim order.
+  - `backend/test/pf_guards_unit.mjs` gains a round 9 G block. It runs the real pfRunSearch with
+    the reader swapped to the old one: no nissan donor appears, and the toyota rows are identical.
+  - Pinned live set updated: test_lazy_payload / test_payload APPROVED (nissan added), test_round6
+    / test_round7 oemStatus, test_gates_1118 ("nissan ships the reviewed candidate"), and
+    test_round5b (starred holds: live namespaces only). test_gates_1118 also reads `oemGroups2`.

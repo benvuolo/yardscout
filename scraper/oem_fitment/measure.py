@@ -730,8 +730,10 @@ def load_payloads(before_path, groups_dir):
         # client renders every lazy-file group Likely, as _tier does for a
         # Likely group). Aftermarket groups are measured by --aftermarket.
         after, files = js.build_interchange_files()
-        after["oemGroups"] = list(after.get("oemGroups") or []) + [
-            dict(g, tier="likely") for c in sorted(files) for g in files[c].get("oemGroups") or []]
+        # (round 9 G: the new client also reads oemGroups2, in both files)
+        after["oemGroups"] = list(after.get("oemGroups") or []) + list(after.pop("oemGroups2", None) or []) + [
+            dict(g, tier="likely") for c in sorted(files)
+            for g in (files[c].get("oemGroups") or []) + (files[c].get("oemGroups2") or [])]
     finally:
         js.OEM_GROUPS_DIR = saved
     return before, after
