@@ -5409,3 +5409,16 @@ from the held gated vehicle-years: those gates are what excluded donors.
    cases: 96301/96302-1CA0A and -1CA1A QX70 / FX35 / FX37, and
    80730/80731-7B400 Xterra 2001.
 3. Nissan: 214 shippable, not shipped; the sixth independent check decides.
+
+
+## 2026-11-19 (f) — independent blind check of nissan.candidate.json (branch interchange/verify-nissan-1119f)
+
+Candidate @29e5fe96 (sha256 7bce6c02...), raw oem-raw@57e8b5b9 (six jsonl sha256 match the candidate's raw block), lot main@a85c654 (inventory 1a9cfa73..., vin_decodes 1357625b..., vehicle_extras 6ff3d44b...). Seed 27641119, own draw (not sample.py): 30 groups by largest remainder over the 214 shippable Likely groups (wiper-motor held) + 30 pairs. Lot replayed through the app's own OEM-GATE code (lot_replay.mjs logic, warn text recorded). Verdicts: `scraper/oem_fitment/groups/_report/nissan_verify_2026-11-19f.json`.
+
+**Result: FAIL.** Groups 23 RIGHT / 1 WRONG / 6 RISK; pairs 21 RIGHT / 1 WRONG / 8 RISK.
+
+- WRONG (both the same flaw): Titan rear-door window parts with a `cab: "crew cab"` gate whose own page row has no cab clause (the same page restricts the glass rows by KC/CC). The app line reads "this part is listed for crew cab only", a basis the catalog does not have. 82720-7S000 Titan 2005 (lists:L205; 145 lot donors, all if-equipped) and 82730-9FJ0A Titan 2012 (lists:L745; 20 donors). No donor is wrongly offered; the stated basis is false. Census: 6 groups / 8 vehicle-years / 227 distinct Titan donors (82720/82721-7S000 2005, 82730/82731-7S000 2010-11, 82730/82731-9FJ0A 2012).
+- RISK kinds: claims resting only on '*'-starred option clauses (no legend on any page; 33 groups in census); QX60 gas-only gate without eng_not lets 2.5L (hybrid) decodes through as plain rows (54 cars, 8 groups; hybrid pages never read); ungated production windows that end inside the model year (M35/M45 2008 80721-EH100, Altima 1996 82721-0E715; 7 groups in census); Xterra drive/transmission words ('W. 4WD. S. 6MT') not gated; transmission (6MT) not gated on G35/G37 2008 speedometers; production windows that disagree between pages (96302-7S600).
+- Suggestions (owner/hub decide): a stated/inferred basis for cab gates like drive_basis; eng_not 2.5L or read the QX60 hybrid pages; a window-vs-build-span census; settle what '*' means.
+
+Method notes, every reference and the census are in the JSON. Nothing else changed; scratch deleted.

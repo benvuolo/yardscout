@@ -67,7 +67,14 @@
    "window-regulator": 16
   }
  },
- "method_notes": [],
+ "method_notes": [
+  "Draw: shippable = candidate 'likely' (217) minus GROUP_HOLD_CATS (read from scraper/junkyard_scraper.py: wiper-motor's 3 groups held) = 214, sorted by id; categories sorted; largest remainder over 30 -> climate-control 2, gauge-cluster 4, side-mirrors 8, window-regulator 16; random.Random(27641119).sample per category in that order; then rng.sample(remaining 184 sorted, 30) for pairs; per pair rng.choice(sorted vehicle-years) as seeker, rng.choice(the others) as donor. audit11_4/sample.py not used.",
+  "Pages: my own reader (scratch raw.py) over git objects of oem-raw@57e8b5b9 (git show of the six jsonl files, sha256 checked against the candidate's raw block). Own-page evidence per vehicle-year = rows of that catalog's list pages (lists.jsonl) plus the list_info of product records whose list_url is that vehicle-year's page (records.jsonl). The crawler's own fields (matched, excluded_by, flags) were not used.",
+  "App: lot_replay.mjs read; it extracts canonicalMake/pfSquash/pfSquashModel/pfAppMatches/splitCategoryMake/expandV2Row/pfAmParseEngine/pfAmCarTrans, the AM-GATE and the OEM-GATE blocks verbatim from docs/app.js into a node vm and calls pfOemDonorGate per donor; its candidate prefilter is the same squash test pfAppMatches does. I ran a scratch copy differing in two lines (app.js path taken from argv; each donor's warn text recorded). Payload apps from junkyard_scraper._oem_gated_apps for all 214 groups. Lot: 338616 cars; totals plain 38357 / if-equipped 5424 / excluded 297 (car x group).",
+  "'Plain row' = verdict confirm with no gate line; every OEM Likely row still carries its group note (option / some configurations / verify the number). Trim and package limits inside an 'option' or 'fits some configurations' note were accepted as covered; drive, engine, fuel, cab, transmission and build-window limits were not (the app has gates for those).",
+  "Cab abbreviations T / KC / CC are not defined anywhere in the raw pages; they were read as regular / king / crew cab because pickup pages use exactly these body codes (Frontier T/KC/CC, Titan KC/CC). Claims whose cab wording depends on that reading are noted, not counted RISK.",
+  "Not checked: the hybrid catalog pages of QX60/Q70 (not in oem-raw: the years page offers them, only 'gas' was read); any page outside oem-raw@57e8b5b9; donor build dates (no source)."
+ ],
  "window_rule": "Window rule used throughout (an assumption, not on the pages): model year Y is taken as built 08/(Y-1)..07/Y. An ungated vehicle-year whose own page gives the deciding row a Production Date window that cuts inside that span is RISK; a window ending or starting just outside it is noted, not counted.",
  "star_mark": "'*' prefix on option clauses: no legend anywhere in the raw pages; same configuration appears starred under one number and unstarred under another",
  "summary": {
@@ -77,9 +84,11 @@
    "WRONG": 1
   },
   "pairs": {
-   "PENDING": 30
+   "RISK": 8,
+   "RIGHT": 21,
+   "WRONG": 1
   },
-  "pass": null
+  "pass": false
  },
  "groups": [
   {
@@ -1641,7 +1650,19 @@
     ]
    ],
    "note": "Nissan catalog lists #80720-3JA0A for both — fits some configurations; QX60 2014-2017: gas only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RISK",
+   "why": "80720-3JA0A front RH regulator, seeker QX60 2014 / donor QX60 2015: both gas-catalog pages list it with no clause (records:L384, lists:L530). Product page: QX60 2014-2020 includes 2.5L QR25DER (the hybrid). Gate fuel 'gas' with no eng_not: the one QX60 2015 donor decoded 2.5L is a plain row under 'QX60 2014-2017: gas only' (group-wide 9: 8 in 2014, 1 in 2015). Fit not contradicted (product page lists QR25DER); the shown limit is not enforced. Hybrid catalog pages were not read.",
+   "refs": [
+    "www.infinitipartsdeal.com:records:L384",
+    "www.infinitipartsdeal.com:lists:L530"
+   ],
+   "lot_cars_affected": 1,
+   "risk_kinds": [
+    "gas gate passes hybrid-displacement decodes",
+    "hybrid catalog page not read"
+   ],
+   "marks": null,
+   "gate_check": "QX60 2015 fuel gas: right as a reading of the gas page; not enough (2.5L decodes pass)."
   },
   {
    "id": "oem:nissan:gauge-cluster:C:8fda9acbc5",
@@ -1680,7 +1701,19 @@
     ]
    ],
    "note": "Nissan catalog lists #24810-7S02E for both — option: fits some option packages; built 08/2005-08/2006 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RISK",
+   "why": "24810-7S02E combination meter, seeker Titan 2006 / donor Armada 2006. Armada 2006 page: 'Production Date: 08/2005-08/2006; Fitting Vehicle Options: *W. SE' (unstarred 'W. SE' in an overlapping window goes to 7S00E); Titan 2006 page: '08/2005-08/2006; *KC. (SE+ LE) + *CC. (SE+ LE)'. Both sides rest only on the unexplained '*'. Built gates match the pages. Lot: Armada 2006 119 if-equipped (build line), Titan 2006 152.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L303",
+    "www.nissanpartsdeal.com:lists:L180",
+    "www.nissanpartsdeal.com:records:L3019"
+   ],
+   "lot_cars_affected": 119,
+   "risk_kinds": [
+    "claim rests only on starred clauses"
+   ],
+   "marks": "'*' prefix on option clauses: no legend anywhere in the raw pages; same configuration appears starred under one number and unstarred under another; this pair depends on it on both sides.",
+   "gate_check": "built 2005-08..2006-08 on both: right and enough as a window."
   },
   {
    "id": "oem:nissan:window-regulator:FR:7bfa59850d",
@@ -1710,7 +1743,17 @@
     ]
    ],
    "note": "Nissan catalog lists #80720-2Z710 for both — option: fits some option packages; Frontier 2003: built from 10/2002 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80720-2Z710 front RH regulator, seeker Frontier 2003 / donor Xterra 2002. Frontier 2003 page: 'Production Date: from 10/2002; KC + CC. SB + CC. XB' (3S510 07/2001-09/2002) -> built gate matches. Xterra 2002 page: 'W. KA24DE + W. VG33E. XE' (SE -> 3S500/2Z700): trim limit = option note. Lot: Xterra 2002 159 plain, Frontier 2003 48 if-equipped.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L412",
+    "www.nissanpartsdeal.com:lists:L176",
+    "www.nissanpartsdeal.com:records:L4278"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": "Xterra 2002 page gives no date while the Frontier page dates the same number from 10/2002; the Xterra page lists it, which is the claim.",
+   "gate_check": "Frontier 2003 built from 2002-10: right and enough."
   },
   {
    "id": "oem:nissan:window-regulator:FL:c0880fb396",
@@ -1740,7 +1783,16 @@
     ]
    ],
    "note": "Nissan catalog lists #80721-2Z710 for both — option: fits some option packages; Frontier 2003: built from 10/2002 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80721-2Z710 front LH regulator, seeker Xterra 2002 / donor Xterra 2003: both pages 'W. KA24DE + W. VG33E. XE'. Trim limit = option note. Lot: Xterra 2003 102 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L176",
+    "www.nissanpartsdeal.com:lists:L278"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:window-regulator:FL:c1c2e4c0aa",
@@ -1760,7 +1812,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #80731-JX30C for both — fits some configurations; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80731-JX30C front LH window motor, seeker Cube 2012 / donor Juke 2012: Cube 2012 'Production Date: from 04/2011' (JX30B 10/2010-04/2011), Juke 2012 '04/2011-10/2014' (JX30B 07/2010-04/2011). Both windows cover the assumed 2012 build span. Lot: Juke 2012 63 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L741",
+    "www.nissanpartsdeal.com:lists:L540"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:window-regulator:FL:8a8c3dabe5",
@@ -1780,7 +1841,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #80721-JK00A for both — fits some configurations; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80721-JK00A front LH regulator, seeker G25 2012 / donor Q40 2015: both pages list it with no clause, sole number. Lot: Q40 2015 10 plain.",
+   "refs": [
+    "www.infinitipartsdeal.com:lists:L731",
+    "www.infinitipartsdeal.com:lists:L830"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:window-regulator:FR:4be798272d",
@@ -1810,7 +1880,16 @@
     ]
    ],
    "note": "Nissan catalog lists #80720-1MA0B for both — option: fits some option packages; Q70: gas only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80720-1MA0B front RH regulator, seeker Q70L 2016 / donor Q70 2016: both pages 'Production Date: 02/2015-02/2018' (1MA0A 07/2014-02/2015); window covers the assumed 2016 span. Q70 gas gate right. Lot: no Q70 2016 donor (group: Q70 2017 1, Q70L 2016 1 plain).",
+   "refs": [
+    "www.infinitipartsdeal.com:lists:L1358",
+    "www.infinitipartsdeal.com:lists:L1492"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": "Q70 2016 fuel gas: right and enough."
   },
   {
    "id": "oem:nissan:window-regulator:FR:a83d5e7f28",
@@ -1840,7 +1919,16 @@
     ]
    ],
    "note": "Nissan catalog lists #80720-EA000 for both — option: fits some option packages; Pathfinder 2010: built 07/2008-04/2010 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80720-EA000 front RH regulator, seeker Frontier 2011 / donor Frontier 2008: 2011 '*CC. SE, *KC. SE, *KC. VQ40DE. SE, CC. (LE + OFFROAD), KC. (LE + OFFROAD)', 2008 the same plus '*KC. QR25DE + *KC. SE'. Trim limits = option note; unstarred LE/OFFROAD clauses on both. Lot: Frontier 2008 33 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L563",
+    "www.nissanpartsdeal.com:lists:L467"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:climate-control:C:b6eb30db5d",
@@ -1860,7 +1948,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #27515-2B001 for both — option: fits some option packages; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "27515-2B001 A/C controller (F/VALUE OPTION PACKAGE / W/O AIR CONDITIONER), seeker Stanza 1996 / donor Altima 1995: both '*FED. S. GXE + *CAL. S. GXE, FED. S. XE + CAL. S. XE'. Option note. Lot: Altima 1995 15 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L826",
+    "www.nissanpartsdeal.com:records:L1571"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": "XE clause unstarred: does not rest on '*'.",
+   "gate_check": null
   },
   {
    "id": "oem:nissan:window-regulator:RR:f315a587d8",
@@ -1890,7 +1987,19 @@
     ]
    ],
    "note": "Nissan catalog lists #82730-3KG0A for both — fits some configurations; QX60 2014-2017: gas only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RISK",
+   "why": "82730-3KG0A rear RH window motor, seeker JX35 2013 / donor QX60 2016: both pages list it with no clause (lists:L339, L843). Donor side right for the 11 QX60 2016 donors shown (all 3.5L). Same gate flaw as the 3JA0A groups: fuel 'gas' without eng_not lets 2.5L (hybrid) QX60 decodes through as plain rows (group-wide 9: 8 QX60 2014, 1 2015; 0 in the donor year).",
+   "refs": [
+    "www.infinitipartsdeal.com:lists:L339",
+    "www.infinitipartsdeal.com:lists:L843",
+    "www.infinitipartsdeal.com:records:L386"
+   ],
+   "lot_cars_affected": 0,
+   "risk_kinds": [
+    "gas gate passes hybrid-displacement decodes"
+   ],
+   "marks": null,
+   "gate_check": "QX60 2016 fuel gas: right; not enough (2.5L would pass; none in this year on the lot)."
   },
   {
    "id": "oem:nissan:gauge-cluster:C:a608594e4c",
@@ -1910,7 +2019,19 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #24810-7S00E for both — option: fits some option packages; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RISK",
+   "why": "24810-7S00E combination meter, seeker Titan 2006 / donor Armada 2006. Armada 2006 page: 'Production Date: 10/2004-08/2006; W. SE' (unstarred). Titan 2006 page: '10/2004-08/2006; *KC. (SE+ LE) + *CC. (SE+ LE)' only: the seeker side rests on the unexplained '*'. Lot: Armada 2006 119 plain (option note).",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L303",
+    "www.nissanpartsdeal.com:lists:L180",
+    "www.nissanpartsdeal.com:records:L2757"
+   ],
+   "lot_cars_affected": 119,
+   "risk_kinds": [
+    "claim rests only on starred clauses"
+   ],
+   "marks": "'*' prefix on option clauses: no legend anywhere in the raw pages; same configuration appears starred under one number and unstarred under another; Titan side depends on it.",
+   "gate_check": null
   },
   {
    "id": "oem:nissan:side-mirrors:R:42a5905f53",
@@ -1930,7 +2051,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #J6301-2B500 for both — option: fits some option packages; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "J6301-2B500 RH mirror (primer), seeker Altima 1997 / donor Altima 1995: both 'FED. S. GLE + CAL. S. GLE' (black 96301-2B500 for XE/GXE/SE). Option note. Lot: Altima 1995 15 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L512",
+    "www.nissanpartsdeal.com:records:L1553"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:window-regulator:RR:5af5348a13",
@@ -1950,7 +2080,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #82730-1E400 for both — fits some configurations; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "82730-1E400 rear RH window motor, seeker Altima 1993 / donor Stanza 1993: both 'Production Date: 06/1992-08/1993' (D9000 from 08/1993); covers the assumed 1993 span. No Stanza 1993 donor on the lot (Altima 1993 6 plain).",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L674",
+    "www.nissanpartsdeal.com:lists:L825"
+   ],
+   "lot_cars_affected": 0,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:window-regulator:FR:677f5fddfe",
@@ -1980,7 +2119,16 @@
     ]
    ],
    "note": "Nissan catalog lists #80720-1BA0B for both — fits some configurations; EX35 2010: built 08/2009-07/2012 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80720-1BA0B front RH regulator, seeker EX35 2011 / donor QX50 2014: both pages list it with no clause, sole number. Lot: QX50 2014 4 plain.",
+   "refs": [
+    "www.infinitipartsdeal.com:lists:L903",
+    "www.infinitipartsdeal.com:lists:L1081"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:side-mirrors:L:8928720fce",
@@ -2010,7 +2158,22 @@
     ]
    ],
    "note": "Nissan catalog lists #96302-7S600 for both — option: fits some option packages; Titan 2005: built 10/2004-08/2006 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RISK",
+   "why": "96302-7S600 LH mirror (POWER/HEAT/MEM/CRO), seeker Titan 2005 / donor Armada 2005. Titan 2005 page: 'KC. LE + CC. LE' with no date; Titan 2004 page lists it undated too. The Titan 2005 build gate '10/2004-08/2006' comes from the 2007 Titan page; the 2006 Armada page gives the same number '10/2004-08/2005'. The catalog's windows for this number disagree between pages, and the donor Armada 2005 (page undated) is a plain row although the 2006 Armada page dates the number from 10/2004 (inside the assumed 2005 build span). Not contradicted, edges unsettled. Lot: Armada 2005 103 plain, Titan 2005 145 if-equipped.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L203",
+    "www.nissanpartsdeal.com:lists:L271",
+    "www.nissanpartsdeal.com:lists:L342",
+    "www.nissanpartsdeal.com:lists:L308",
+    "www.nissanpartsdeal.com:lists:L488"
+   ],
+   "lot_cars_affected": 248,
+   "risk_kinds": [
+    "production windows disagree between pages",
+    "gate window taken from another model year page"
+   ],
+   "marks": null,
+   "gate_check": "Titan 2005 built 2004-10..2006-08: stated on the 2007 page, not on the 2005 page; window edge not settled. Armada 2005: no gate although another page dates the number from 10/2004."
   },
   {
    "id": "oem:nissan:window-regulator:FL:c7c1dab96d",
@@ -2030,7 +2193,18 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #80721-EH100 for both — fits some configurations; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RISK",
+   "why": "80721-EH100 front LH regulator, seeker M35 2008 / donor M45 2008: both 2008 pages 'Production Date: 12/2004-06/2008', successor EH10A 06/2008-03/2009 on the same pages. The window ends inside the assumed 2008 build span and the 2008 vehicle-years are ungated: late-build 2008 cars are listed under EH10A, but every 2008 donor is a plain row. Lot: M35 2008 35 + M45 2008 4 plain.",
+   "refs": [
+    "www.infinitipartsdeal.com:lists:L555",
+    "www.infinitipartsdeal.com:lists:L984"
+   ],
+   "lot_cars_affected": 39,
+   "risk_kinds": [
+    "production window edge inside the model year, ungated"
+   ],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:side-mirrors:L:f4bea740f3",
@@ -2050,7 +2224,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #96302-9BC9B for both — option: fits some option packages; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "96302-9BC9B LH mirror, seeker Frontier 2016 / donor Frontier 2014: 2014 'KC. SV + CC. SV'; 2016 'KC. SV + CC. FED. SV + CC. FLXFUEL. ... SV ..., KC. SV + CC. SV'. SV trim = option note (9BE8C also lists one SV crew long-bed flex-fuel AT config: same config under two numbers, 'verify the number'). Lot: Frontier 2014 14 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L690",
+    "www.nissanpartsdeal.com:lists:L755"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:side-mirrors:R:0145a31b97",
@@ -2082,7 +2265,16 @@
     ]
    ],
    "note": "Nissan catalog lists #96301-9BC9A for both — option: fits some option packages; Xterra: 2WD only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "96301-9BC9A RH mirror, seeker Frontier 2013 / donor Frontier 2014: 2013 'Production Date: 04/2012-09/2016; KC. S + CC. S' (EA000 08/2011-04/2012; covers the assumed 2013 span), 2014 'KC. S + CC. S'. Lot: Frontier 2014 14 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L685",
+    "www.nissanpartsdeal.com:lists:L690"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:window-regulator:RR:3558fa3b82",
@@ -2113,7 +2305,19 @@
     ]
    ],
    "note": "Nissan catalog lists #82730-9FJ0A for both — fits some configurations; Titan: crew cab, built 08/2011-11/2014 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "WRONG",
+   "why": "82730-9FJ0A rear RH window motor, seeker Armada 2009 / donor Titan 2012. Titan 2012 rear-door page (lists:L745): the row is 'Location: Passenger Side; Production Date: 08/2011-11/2014' with no cab clause, while the same page restricts the glass rows by cab (82300-7S200 'KC. S', 82300-7S210 '*KC. S, KC. (SV + PRO/4X)', 82300-8S500 'CC'); product page: Titan all trims. The app's line on every Titan 2012 donor says 'this part is listed for crew cab only' and the note 'Titan: crew cab' -- a catalog basis the page contradicts. Same flaw as 82720-7S000. No donor is wrongly offered (cab never decoded); the stated basis is false. Armada 2009 side right ('Production Date: 04/2008-08/2011', covers 2009). Build gate 08/2011-11/2014 matches the page.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L745",
+    "www.nissanpartsdeal.com:lists:L714",
+    "www.nissanpartsdeal.com:records:L4725"
+   ],
+   "lot_cars_affected": 20,
+   "risk_kinds": [
+    "cab gate/basis not on the pages"
+   ],
+   "marks": null,
+   "gate_check": "Titan 2012 built 2011-08..2014-11: right and enough. cab 'crew cab': not on the page; wording states a basis the page does not have."
   },
   {
    "id": "oem:nissan:window-regulator:RL:40291aff78",
@@ -2143,7 +2347,19 @@
     ]
    ],
    "note": "Nissan catalog lists #82721-0E715 for both — option: fits some option packages; Altima 1994: built 08/1993-02/1996 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RISK",
+   "why": "82721-0E715 rear LH regulator, seeker Stanza 1996 / donor Altima 1996: both 1996 pages 'Production Date: 08/1993-02/1996', successor 0E717 'from 07/1996' on the same page. The window ends 02/1996, inside the assumed 1996 build span; Altima 1994 carries this exact window as a gate, 1996 does not. Every Altima 1996 donor is a plain row although the page lists the number only to 02/1996 (and nothing for 02-07/1996). Lot: Altima 1996 9 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L831",
+    "www.nissanpartsdeal.com:lists:L630",
+    "www.nissanpartsdeal.com:records:L1563"
+   ],
+   "lot_cars_affected": 9,
+   "risk_kinds": [
+    "production window edge inside the model year, ungated"
+   ],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:side-mirrors:R:adc1c9817d",
@@ -2163,7 +2379,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #96301-1CA0A for both — option: fits some option packages; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "96301-1CA0A RH mirror, seeker FX50 2009 / donor FX35 2011: FX50 2009 'W. VQ35HR. PREMIUM, W. VQ35HR. PREMIUM + W. VK50VE' (VK50VE is the FX50 engine; 1CA0B also lists 'W. VK50VE'), FX35 2011 'W. VQ35HR. PREMIUM'. Engine words match the models; package = option note. Lot: FX35 2011 15 plain.",
+   "refs": [
+    "www.infinitipartsdeal.com:lists:L1065",
+    "www.infinitipartsdeal.com:records:L251"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": "'+' must read as 'or' here ('VQ35HR. PREMIUM + VK50VE' cannot be one car); VK50VE under two numbers unexplained, covered by 'verify the number'.",
+   "gate_check": null
   },
   {
    "id": "oem:nissan:side-mirrors:R:3a428bf512",
@@ -2193,7 +2418,19 @@
     ]
    ],
    "note": "Nissan catalog lists #96301-EA000 for both — option: fits some option packages; Frontier 2012: built 08/2010-04/2012 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RISK",
+   "why": "96301-EA000 RH mirror, seeker Frontier 2011 / donor Xterra 2007. Frontier 2011 'KC. QR25DE + KC. VQ40DE. SE + CC. SE, KC. S + CC. S'. Xterra 2007 page: 'W. 2WD. S + W. 4WD. S. 6MT + W. BASECAMP' (EA005 '*W. (S + BASECAMP), W, W. (SE + OFFROAD)'): a 4WD Xterra is listed only as S with the 6-speed manual (or Basecamp). No drive/trans gate: the 43 4WD Xterra 2007 donors are plain rows with the option note only; none has a decoded transmission, so none is contradicted.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L562",
+    "www.nissanpartsdeal.com:lists:L297",
+    "www.nissanpartsdeal.com:records:L307"
+   ],
+   "lot_cars_affected": 43,
+   "risk_kinds": [
+    "drive/trans words on the page not gated (option note only)"
+   ],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:window-regulator:FR:f7531ad609",
@@ -2213,7 +2450,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #80720-0E700 for both — fits some configurations; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80720-0E700 front RH regulator, seeker Altima 1993 / donor Stanza 1993: both 'Production Date: 06/1992-08/1993' (0E715 from 08/1993); covers the assumed 1993 span. 80700-0E710 listed beside it with no clause (unexplained sibling, conditional note). No Stanza 1993 donor on the lot.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L673",
+    "www.nissanpartsdeal.com:lists:L824"
+   ],
+   "lot_cars_affected": 0,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:climate-control:C:0930da868c",
@@ -2233,7 +2479,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #27515-1E400 for both — option: fits some option packages; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "27515-1E400 A/C controller (F/AIR CONDITIONER LESS), seeker Stanza 1994 / donor Altima 1994: both '*FED. S. GXE + *CAL. S. GXE, FED. S. XE + CAL. S. XE'; 27515-2B000/2B001 carry the same clauses (no date): same config under three numbers, 'verify the number'. Lot: Altima 1994 12 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L808",
+    "www.nissanpartsdeal.com:lists:L546"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:side-mirrors:L:d5b56df279",
@@ -2253,7 +2508,16 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #J6302-2B500 for both — option: fits some option packages; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "J6302-2B500 LH mirror (less paint/primer), seeker Stanza 1995 / donor Stanza 1996: both 'FED. S. GLE + CAL. S. GLE', no date. No Stanza donor on the lot.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L816",
+    "www.nissanpartsdeal.com:lists:L828"
+   ],
+   "lot_cars_affected": 0,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:window-regulator:FR:bde5900fbb",
@@ -2283,7 +2547,16 @@
     ]
    ],
    "note": "Nissan catalog lists #80730-1MA0A for both — fits some configurations; Q70 2014-2018: gas only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80730-1MA0A front RH window motor, seeker Q70 2014 / donor Q70 2015: both gas pages list it with no clause, sole number. Gas gate right (M35h page lists it too). Lot: Q70 2015 plain.",
+   "refs": [
+    "www.infinitipartsdeal.com:lists:L1209",
+    "www.infinitipartsdeal.com:lists:L1125"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": "Q70 2014/2015 fuel gas: right and enough."
   },
   {
    "id": "oem:nissan:window-regulator:FL:e1dbcc78e0",
@@ -2313,7 +2586,16 @@
     ]
    ],
    "note": "Nissan catalog lists #80721-0E715 for both — fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80721-0E715 front LH regulator, seeker Stanza 1996 / donor Altima 1995: Stanza 1996 page and Altima 1995 (record list_info) list it with no date; 80701-0E710 beside it unexplained (conditional note). Lot: Altima 1995 15 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L830",
+    "www.nissanpartsdeal.com:records:L1557"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   },
   {
    "id": "oem:nissan:climate-control:C:88ffd5369b",
@@ -2346,7 +2628,17 @@
     ]
    ],
    "note": "Nissan catalog lists #27515-7Z401 for both — option: fits some option packages; Frontier: regular cab/king cab only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "27515-7Z401 A/C controller, seeker Xterra 2001 / donor Frontier 2002. Xterra 2001: 'Production Date: 07/2000-07/2001; W. KA24DE + W. VG33E. XE' (covers the assumed 2001 span). Frontier 2002: 'KC. KA24DE + KC. VG33E. XE, T + KC. KA24DE + KC. VG33E. XE' -> cab gate regular/king cab; no CC clause for this number (CC rows go to 7Z411/8Z310...). Lot: Frontier 2002 70 if-equipped with the cab line.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L209",
+    "www.nissanpartsdeal.com:lists:L329",
+    "www.nissanpartsdeal.com:records:L1352"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": "'T' is read as regular cab: the pages never define T/KC/CC, but Frontier pages use exactly these three body codes; the 'regular cab' half of the line depends on that reading.",
+   "gate_check": "Frontier 2002 cab [regular cab, king cab]: right (T and KC clauses only) and enough (trim XE/KA24DE within the option note)."
   },
   {
    "id": "oem:nissan:gauge-cluster:C:475f5db47c",
@@ -2379,7 +2671,16 @@
     ]
    ],
    "note": "Nissan catalog lists #24820-6AH1A for both — option: fits some option packages; Q70: 3.7L, gas only; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "24820-6AH1A speedometer, seeker M37 2013 / donor Q70 2014: both 'SEDAN. VQ37VHR. (TECHNOLO + SPORTTEC)'. Q70 gate 3.7L + gas right. Lot: Q70 2014 1 plain (3.7L), 1 if-equipped.",
+   "refs": [
+    "www.infinitipartsdeal.com:lists:L951",
+    "www.infinitipartsdeal.com:lists:L1201"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": "Q70 2014 eng 3.7L + fuel gas: right and enough."
   },
   {
    "id": "oem:nissan:window-regulator:FR:864a4dfc29",
@@ -2399,9 +2700,71 @@
    ],
    "gates": null,
    "note": "Nissan catalog lists #80720-EA010 for both — option: fits some option packages; verify the number on the part",
-   "verdict": "PENDING"
+   "verdict": "RIGHT",
+   "why": "80720-EA010 front RH regulator, seeker Frontier 2005 / donor Frontier 2012: 2005 'CC. SE, KC. QR25DE + KC. SE', 2012 'CC. S, KC. S'. Trim limits = option note. Lot: Frontier 2012 13 plain.",
+   "refs": [
+    "www.nissanpartsdeal.com:lists:L406",
+    "www.nissanpartsdeal.com:lists:L619"
+   ],
+   "lot_cars_affected": null,
+   "risk_kinds": [],
+   "marks": null,
+   "gate_check": null
   }
  ],
- "census": null,
- "suggestions": null
+ "census": {
+  "note": "My own census (scratch mycensus.py) over all 214 shippable groups, same page reading. Lot counts are car x group rows (a car can count in two groups).",
+  "cab_gate_without_cab_on_page (the WRONG pattern)": {
+   "groups": [
+    "oem:nissan:window-regulator:RR:6301214527 (82720-7S000 Titan 2005)",
+    "oem:nissan:window-regulator:RL:f931d0ff95 (82721-7S000 Titan 2005)",
+    "oem:nissan:window-regulator:RR:b8e2ce6d74 (82730-7S000 Titan 2010-2011)",
+    "oem:nissan:window-regulator:RL:1e7d4232c0 (82731-7S000 Titan 2010-2011)",
+    "oem:nissan:window-regulator:RR:3558fa3b82 (82730-9FJ0A Titan 2012)",
+    "oem:nissan:window-regulator:RL:7310dd08b7 (82731-9FJ0A Titan 2012)"
+   ],
+   "vehicle_years": 8,
+   "lot": "454 car x group rows, 227 distinct Titan donors (2005 145, 2010 32, 2011 30, 2012 20), all if-equipped with the line \"this part is listed for crew cab only\"; none plain, none excluded.",
+   "other cab gates (9) have KC/CC/T clauses on their own rows": true
+  },
+  "qx60_2.5L_decodes_plain_under_gas_only": {
+   "groups": 8,
+   "cars": 54,
+   "detail": "window-regulator FR:361942cc55 9, FL:0a6d4c77d8 9, RR:e01e9e3108 8, RL:7a9947516c 8, RR:f315a587d8 9, RL:9c3158fe6c 9; side-mirrors R:ccf0dd8c02 1, L:27714784b8 1"
+  },
+  "star_only_claims": {
+   "vehicle_years": 91,
+   "groups": 33,
+   "lot_plain_rows": 3180,
+   "lot_if_equipped_rows": 999
+  },
+  "ungated_window_cutting_assumed_build_span": {
+   "vehicle_years": 12,
+   "groups": 7,
+   "lot_plain_rows": 264,
+   "groups_list": [
+    "gauge-cluster:C:397ce76b2d (Q70 2014, 01/2013-11/2013)",
+    "window-regulator:FR:a6c50f650e and FL:8380ea4d2d (FX35/FX45 2006, to 06/2006)",
+    "window-regulator:FR:77c7dd0326 and FL:c7c1dab96d (M35/M45 2008, 12/2004-06/2008)",
+    "window-regulator:RL:40291aff78 (Altima/Stanza 1996, 08/1993-02/1996)",
+    "side-mirrors:L:eb4a01ee07 (Titan 2008, 08/2006-04/2008)"
+   ]
+  },
+  "drive_words_on_own_rows_without_drive_gate (upper bound, includes clauses that cover every drive)": {
+   "vehicle_years": 70,
+   "groups": 25
+  },
+  "transmission_words_on_own_rows_without_trans_gate (upper bound)": {
+   "vehicle_years": 35,
+   "groups": 12
+  }
+ },
+ "suggestions": [
+  "Cab gates: give cab the same basis field drive already has (stated / inferred). The six Titan rear-door groups infer crew-cab-only (probably right physically) but the line says 'listed for crew cab only'; an inferred cab should say so, as drive_basis 'sibling' does.",
+  "QX60 2014-2017 gas-only groups: add eng_not ['2.5L'] (as round3 did elsewhere) or read the hybrid catalog pages the years page already offers; 54 2.5L QX60 donors are plain under a 'gas only' note.",
+  "Build windows: the curation gates some years and not others for the same window (82721-0E715 gated on Altima 1994, not 1996 where the window ends 02/1996). A census like the one here (window vs. the model year's build span) would catch the 7 groups listed.",
+  "The '*' mark: 33 groups rest only on starred clauses. Its meaning is not on the pages; one targeted look at what the site means by it (a legend page, if the operator approves fetching it) would settle 91 vehicle-years either way.",
+  "Drive/transmission words inside option clauses (Xterra 'W. 4WD. S. 6MT') are left to the option note; a 4WD-automatic Xterra donor is plain. Consider an 'if equipped' drive/trans line where a page restricts a drive to one transmission.",
+  "Pages disagree on one number's production window (96302-7S600: 10/2004-08/2006 on 2007 Titan, 10/2004-08/2005 on 2006 Armada, none on 2004/2005 pages); when windows disagree the claim could say so or stay if-equipped on every year."
+ ]
 }
