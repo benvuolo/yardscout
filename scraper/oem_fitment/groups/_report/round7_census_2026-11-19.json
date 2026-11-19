@@ -1,0 +1,6035 @@
+{
+ "report": "round7_census_2026-11-19",
+ "branch": "interchange/round7-1119",
+ "base": "origin/main 23376d18 (round 6 live; nissan candidate at round 6)",
+ "pins": {
+  "shipped_raw": "oem-raw@dca9cd845f26",
+  "nissan_raw": "oem-raw@57e8b5b99de0",
+  "lot": "main@a85c654 inventory 1a9cfa73, vin_decodes 1357625b, vehicle_extras 6ff3d44b"
+ },
+ "tool": "census on the groups origin/main ships, with this branch's build_window read with and without the round-7 rules (curate.Curation._r7); lot rows = car x group rows of the vehicle-year in the main replay",
+ "model_year_span": "07/(y-1)-06/y; decision 2 widens the changeover test by one month either way",
+ "classes": {
+  "d1_page_cut": "a page that lists the number cuts the span while the union of the pages covered it (or an undated page sat beside a dated cutting one); no built gate on main",
+  "d2_changeover": "a same-option number changes over with this one inside the span +-1 month; no built gate",
+  "d3_split": "undated on T's page beside a same-option number whose split another page dates; no built gate",
+  "d4_cross_position": "group: the number's known position (FR/RR/FL/RL/L/R...) differs between models",
+  "d5_star_blind": "nissan: read without the mark, a drive / engine limit appears or changes",
+  "x_two_numbers_undated_no_date": "information only, not acted on: T's page lists the number and a same-option number (not its predecessor/successor) both undated, and no page dates either (the 1119g G05 pattern)"
+ },
+ "census_on_main": {
+  "gm": {
+   "x_two_numbers_undated_no_date": {
+    "vehicle_years": 155,
+    "groups": 97,
+    "lot_rows": {
+     "plain": 13892,
+     "unc": 8
+    }
+   }
+  },
+  "ford": {
+   "x_two_numbers_undated_no_date": {
+    "vehicle_years": 2,
+    "groups": 2,
+    "lot_rows": {
+     "plain": 278,
+     "unc": 1
+    }
+   }
+  },
+  "mopar": {
+   "x_two_numbers_undated_no_date": {
+    "vehicle_years": 12,
+    "groups": 8,
+    "lot_rows": {
+     "plain": 215,
+     "unc": 9,
+     "exc": 114
+    }
+   }
+  },
+  "toyota": {
+   "d1_page_cut": {
+    "vehicle_years": 2,
+    "groups": 2,
+    "lot_rows": {
+     "plain": 2
+    }
+   },
+   "d2_changeover": {
+    "vehicle_years": 2,
+    "groups": 2,
+    "lot_rows": {
+     "plain": 12
+    }
+   },
+   "x_two_numbers_undated_no_date": {
+    "vehicle_years": 28,
+    "groups": 24,
+    "lot_rows": {
+     "plain": 696
+    }
+   }
+  },
+  "subaru": {
+   "x_two_numbers_undated_no_date": {
+    "vehicle_years": 8,
+    "groups": 8,
+    "lot_rows": {
+     "plain": 212,
+     "unc": 9,
+     "exc": 3
+    }
+   }
+  },
+  "hmg": {},
+  "vag": {},
+  "mb": {},
+  "nissan": {
+   "d1_page_cut": {
+    "vehicle_years": 1,
+    "groups": 1,
+    "lot_rows": {
+     "plain": 175
+    }
+   },
+   "d2_changeover": {
+    "vehicle_years": 30,
+    "groups": 18,
+    "lot_rows": {
+     "plain": 784,
+     "unc": 27,
+     "exc": 3
+    }
+   },
+   "d3_split": {
+    "vehicle_years": 28,
+    "groups": 16,
+    "lot_rows": {
+     "plain": 1888,
+     "unc": 102,
+     "exc": 52
+    }
+   },
+   "d4_cross_position": {
+    "groups": 6,
+    "lot_rows": {
+     "unc": 839,
+     "plain": 2473
+    }
+   },
+   "d5_star_blind": {
+    "vehicle_years": 2,
+    "groups": 2,
+    "lot_rows": {
+     "plain": 112,
+     "exc": 2
+    }
+   },
+   "x_two_numbers_undated_no_date": {
+    "vehicle_years": 36,
+    "groups": 9,
+    "lot_rows": {
+     "plain": 1014,
+     "exc": 20,
+     "unc": 32
+    }
+   }
+  }
+ },
+ "census_rows": {
+  "gm": {
+   "x_two_numbers_undated_no_date": [
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "10305685"
+     ],
+     "t": [
+      "Chevrolet",
+      "Camaro",
+      1995
+     ],
+     "siblings": [
+      "16625870"
+     ],
+     "lot": {
+      "plain": 54
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "10305685"
+     ],
+     "t": [
+      "Pontiac",
+      "Firebird",
+      1995
+     ],
+     "siblings": [
+      "16625870"
+     ],
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "10305686"
+     ],
+     "t": [
+      "Chevrolet",
+      "Camaro",
+      1995
+     ],
+     "siblings": [
+      "16625871"
+     ],
+     "lot": {
+      "plain": 54
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "10305686"
+     ],
+     "t": [
+      "Pontiac",
+      "Firebird",
+      1995
+     ],
+     "siblings": [
+      "16625871"
+     ],
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "10308120"
+     ],
+     "t": [
+      "Buick",
+      "Regal",
+      2000
+     ],
+     "siblings": [
+      "10435588"
+     ],
+     "lot": {
+      "plain": 31
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "10308120"
+     ],
+     "t": [
+      "Buick",
+      "Regal",
+      2003
+     ],
+     "siblings": [
+      "10435588"
+     ],
+     "lot": {
+      "plain": 34
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "10361617"
+     ],
+     "t": [
+      "Buick",
+      "Regal",
+      2003
+     ],
+     "siblings": [
+      "88986368"
+     ],
+     "lot": {
+      "plain": 34
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "10361617"
+     ],
+     "t": [
+      "Buick",
+      "Regal",
+      2004
+     ],
+     "siblings": [
+      "88986368"
+     ],
+     "lot": {
+      "plain": 18
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "10361618"
+     ],
+     "t": [
+      "Buick",
+      "Regal",
+      2003
+     ],
+     "siblings": [
+      "88986369"
+     ],
+     "lot": {
+      "plain": 34
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "10361618"
+     ],
+     "t": [
+      "Buick",
+      "Regal",
+      2004
+     ],
+     "siblings": [
+      "88986369"
+     ],
+     "lot": {
+      "plain": 18
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "10367042"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "21997350",
+      "21997352",
+      "21997350",
+      "21997352"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "10381052"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "10381076",
+      "88892970",
+      "88986357"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "10381053"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "10381077",
+      "88892971",
+      "88986358"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "10381076"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "10381052",
+      "88892970",
+      "88986357"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "10381077"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "10381053",
+      "88892971",
+      "88986358"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "15098964"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      2000
+     ],
+     "siblings": [
+      "15098965",
+      "15098965",
+      "15098965",
+      "15098965"
+     ],
+     "lot": {
+      "plain": 47
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15105940"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      2000
+     ],
+     "siblings": [
+      "12477709",
+      "12477709"
+     ],
+     "lot": {
+      "plain": 47
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15105941"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      2000
+     ],
+     "siblings": [
+      "88987586",
+      "88987586",
+      "88987586",
+      "88987586"
+     ],
+     "lot": {
+      "plain": 47
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15172059"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      1999
+     ],
+     "siblings": [
+      "15172248",
+      "15179830",
+      "25876715",
+      "25876716"
+     ],
+     "lot": {
+      "plain": 206
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15172059"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2000
+     ],
+     "siblings": [
+      "12474090",
+      "15172248",
+      "15179830",
+      "25876715"
+     ],
+     "lot": {
+      "plain": 335,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15172059"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "15124828",
+      "15124829",
+      "15226943",
+      "15226943"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15172060"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      1999
+     ],
+     "siblings": [
+      "15172247",
+      "15179829",
+      "25876714",
+      "88986362"
+     ],
+     "lot": {
+      "plain": 206
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15172060"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2000
+     ],
+     "siblings": [
+      "12474091",
+      "15172247",
+      "15179829",
+      "25876714"
+     ],
+     "lot": {
+      "plain": 335,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15172060"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "15124827",
+      "15226944",
+      "15226944",
+      "19153377"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15172864"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      2000
+     ],
+     "siblings": [
+      "12477707",
+      "12477707",
+      "12477707",
+      "12477707"
+     ],
+     "lot": {
+      "plain": 47
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15193316"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      2000
+     ],
+     "siblings": [
+      "88987587",
+      "88987587",
+      "88987587",
+      "88987587"
+     ],
+     "lot": {
+      "plain": 47
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15246903"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2005
+     ],
+     "siblings": [
+      "88987571",
+      "88987571"
+     ],
+     "lot": {
+      "plain": 37
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15246903"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2011
+     ],
+     "siblings": [
+      "88987571",
+      "88987571"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15246904"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2005
+     ],
+     "siblings": [
+      "88987572",
+      "88987572"
+     ],
+     "lot": {
+      "plain": 37
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15246904"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2011
+     ],
+     "siblings": [
+      "88987572",
+      "88987572"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15246905"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2005
+     ],
+     "siblings": [
+      "88987571",
+      "88987571"
+     ],
+     "lot": {
+      "plain": 37
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15246905"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2011
+     ],
+     "siblings": [
+      "88987571",
+      "88987571"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15246906"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2005
+     ],
+     "siblings": [
+      "88987572",
+      "88987572"
+     ],
+     "lot": {
+      "plain": 37
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15246906"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2011
+     ],
+     "siblings": [
+      "88987572",
+      "88987572"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15757375"
+     ],
+     "t": [
+      "GMC",
+      "Safari",
+      2000
+     ],
+     "siblings": [
+      "12476269",
+      "12476269"
+     ],
+     "lot": {
+      "plain": 21
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15757375"
+     ],
+     "t": [
+      "GMC",
+      "Safari",
+      2001
+     ],
+     "siblings": [
+      "12476269",
+      "12476269"
+     ],
+     "lot": {
+      "plain": 15
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15757376"
+     ],
+     "t": [
+      "GMC",
+      "Safari",
+      2000
+     ],
+     "siblings": [
+      "12476270",
+      "12476270"
+     ],
+     "lot": {
+      "plain": 21
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15757376"
+     ],
+     "t": [
+      "GMC",
+      "Safari",
+      2001
+     ],
+     "siblings": [
+      "12476270",
+      "12476270"
+     ],
+     "lot": {
+      "plain": 15
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15764747"
+     ],
+     "t": [
+      "GMC",
+      "Yukon",
+      1999
+     ],
+     "siblings": [
+      "12376745",
+      "12376745",
+      "12376745",
+      "12376745"
+     ],
+     "lot": {
+      "plain": 76
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15764748"
+     ],
+     "t": [
+      "GMC",
+      "Yukon",
+      1999
+     ],
+     "siblings": [
+      "12376268",
+      "12376268",
+      "12382608",
+      "12382608"
+     ],
+     "lot": {
+      "plain": 76
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789756"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120844",
+      "88980570",
+      "19120844",
+      "88980570"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789757"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120843",
+      "88980571",
+      "19120843",
+      "88980571"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789780"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120844",
+      "19120844"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789781"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120843",
+      "19120843"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789782"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120844",
+      "88980570",
+      "19120844",
+      "88980570"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789783"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120843",
+      "88980571",
+      "19120843",
+      "88980571"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789788"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120844",
+      "88980573",
+      "19120844",
+      "88980573"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789789"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120843",
+      "88980571",
+      "19120843",
+      "88980571"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789790"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120844",
+      "88980570",
+      "19120844",
+      "88980570"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789791"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120844",
+      "88980573",
+      "19120844",
+      "88980573"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "15789792"
+     ],
+     "t": [
+      "Buick",
+      "Rainier",
+      2004
+     ],
+     "siblings": [
+      "19120843",
+      "88980574",
+      "19120843",
+      "88980574"
+     ],
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "15871124"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      1999
+     ],
+     "siblings": [
+      "19120846",
+      "19120846",
+      "20945138",
+      "20945138"
+     ],
+     "lot": {
+      "plain": 206
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "15871124"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2000
+     ],
+     "siblings": [
+      "19120846",
+      "19120846",
+      "20945138",
+      "20945138"
+     ],
+     "lot": {
+      "plain": 335,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "15871124"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "19120846",
+      "19120846",
+      "20945138",
+      "20945138"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "15871125"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      1999
+     ],
+     "siblings": [
+      "19120847",
+      "19120847",
+      "20945139",
+      "20945139"
+     ],
+     "lot": {
+      "plain": 206
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "15871125"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2000
+     ],
+     "siblings": [
+      "19120847",
+      "19120847",
+      "20945139",
+      "20945139"
+     ],
+     "lot": {
+      "plain": 335,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "15871125"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "19120847",
+      "19120847",
+      "20945139",
+      "20945139"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "headlights",
+     "pn": [
+      "16526225"
+     ],
+     "t": [
+      "GMC",
+      "Jimmy",
+      1998
+     ],
+     "siblings": [
+      "16523153",
+      "16523153"
+     ],
+     "lot": {
+      "plain": 36
+     }
+    },
+    {
+     "cat": "headlights",
+     "pn": [
+      "16526228"
+     ],
+     "t": [
+      "GMC",
+      "Jimmy",
+      1998
+     ],
+     "siblings": [
+      "16524596",
+      "16524596"
+     ],
+     "lot": {
+      "plain": 36
+     }
+    },
+    {
+     "cat": "headlights",
+     "pn": [
+      "16526228"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      2000
+     ],
+     "siblings": [
+      "16524596",
+      "16524596"
+     ],
+     "lot": {
+      "plain": 47
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "16625870"
+     ],
+     "t": [
+      "Chevrolet",
+      "Camaro",
+      1995
+     ],
+     "siblings": [
+      "10305685"
+     ],
+     "lot": {
+      "plain": 54
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "16625870"
+     ],
+     "t": [
+      "Pontiac",
+      "Firebird",
+      1995
+     ],
+     "siblings": [
+      "10305685"
+     ],
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "16625871"
+     ],
+     "t": [
+      "Chevrolet",
+      "Camaro",
+      1995
+     ],
+     "siblings": [
+      "10305686"
+     ],
+     "lot": {
+      "plain": 54
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "16625871"
+     ],
+     "t": [
+      "Pontiac",
+      "Firebird",
+      1995
+     ],
+     "siblings": [
+      "10305686"
+     ],
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19120846"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      1999
+     ],
+     "siblings": [
+      "15871124",
+      "15871124",
+      "20945138",
+      "20945138"
+     ],
+     "lot": {
+      "plain": 206
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19120846"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2000
+     ],
+     "siblings": [
+      "15871124",
+      "15871124",
+      "20945138",
+      "20945138"
+     ],
+     "lot": {
+      "plain": 335,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19120846"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "15871124",
+      "15871124",
+      "20945138",
+      "20945138"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19120847"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      1999
+     ],
+     "siblings": [
+      "15871125",
+      "15871125",
+      "20945139",
+      "20945139"
+     ],
+     "lot": {
+      "plain": 206
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19120847"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2000
+     ],
+     "siblings": [
+      "15871125",
+      "15871125",
+      "20945139",
+      "20945139"
+     ],
+     "lot": {
+      "plain": 335,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19120847"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "15871125",
+      "15871125",
+      "20945139",
+      "20945139"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "19153377"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "15124827",
+      "15172060",
+      "15226944",
+      "15226944"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "19153378"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "15124828",
+      "15124829",
+      "15172059",
+      "15226943"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "19179358"
+     ],
+     "t": [
+      "GMC",
+      "Jimmy",
+      1998
+     ],
+     "siblings": [
+      "15721391",
+      "15721391"
+     ],
+     "lot": {
+      "plain": 36
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "19179679"
+     ],
+     "t": [
+      "GMC",
+      "Jimmy",
+      1998
+     ],
+     "siblings": [
+      "15721392",
+      "15721392"
+     ],
+     "lot": {
+      "plain": 36
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19244837"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "25719488"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19244838"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "25719489"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19244841"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "25701606"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "19244842"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "25701607"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "19417443"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2005
+     ],
+     "siblings": [
+      "20985455",
+      "20985455"
+     ],
+     "lot": {
+      "plain": 37
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "19417443"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2011
+     ],
+     "siblings": [
+      "20985455",
+      "20985455"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "19417444"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2005
+     ],
+     "siblings": [
+      "20985454",
+      "20985454"
+     ],
+     "lot": {
+      "plain": 37
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "19417444"
+     ],
+     "t": [
+      "GMC",
+      "Canyon",
+      2011
+     ],
+     "siblings": [
+      "20985454",
+      "20985454"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "20787113"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20787114",
+      "20787114",
+      "20787114",
+      "20787114"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "20787113"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "20787114",
+      "20787114",
+      "20787117",
+      "25936131"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "20787114"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20787113",
+      "20787113"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "20787114"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "20787113",
+      "20787117",
+      "25936131",
+      "25936131"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20809948"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15886196",
+      "15886197",
+      "15886198",
+      "15886199"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20809948"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "15886196",
+      "15886198",
+      "15886199",
+      "15951108"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20809948"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2012
+     ],
+     "siblings": [
+      "15886198",
+      "15886199",
+      "15951108",
+      "15951109"
+     ],
+     "lot": {
+      "plain": 91
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20809968"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15886196",
+      "15886197",
+      "15886198",
+      "15886199"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20809968"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "15886196",
+      "15886198",
+      "15886199",
+      "15951108"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20809968"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2012
+     ],
+     "siblings": [
+      "15886198",
+      "15886199",
+      "15951108",
+      "15951109"
+     ],
+     "lot": {
+      "plain": 91
+     }
+    },
+    {
+     "cat": "window-switch",
+     "pn": [
+      "20830824"
+     ],
+     "t": [
+      "Buick",
+      "Regal",
+      2011
+     ],
+     "siblings": [
+      "20912823",
+      "20912823"
+     ],
+     "lot": {
+      "plain": 150
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20843116"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15874992",
+      "20843177",
+      "20862098",
+      "25831065"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20843116"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "15951106",
+      "20843118",
+      "20843177",
+      "20862094"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20843116"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2012
+     ],
+     "siblings": [
+      "15951106",
+      "20756892",
+      "20843114",
+      "20843118"
+     ],
+     "lot": {
+      "plain": 91
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20843177"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15874992",
+      "20843116",
+      "20862098",
+      "25831065"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20843177"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "15951106",
+      "20843116",
+      "20843118",
+      "20862094"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20843177"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2012
+     ],
+     "siblings": [
+      "15951106",
+      "20756892",
+      "20843114",
+      "20843116"
+     ],
+     "lot": {
+      "plain": 91
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20862098"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15874992",
+      "20843116",
+      "20843177",
+      "25776087"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20862098"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "15951106",
+      "20843116",
+      "20843118",
+      "20843177"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "20862098"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2012
+     ],
+     "siblings": [
+      "15951106",
+      "20756892",
+      "20843114",
+      "20843116"
+     ],
+     "lot": {
+      "plain": 91
+     }
+    },
+    {
+     "cat": "window-switch",
+     "pn": [
+      "20912823"
+     ],
+     "t": [
+      "Buick",
+      "Regal",
+      2011
+     ],
+     "siblings": [
+      "20830824",
+      "20830824"
+     ],
+     "lot": {
+      "plain": 150
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20914715"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20945138",
+      "20945138",
+      "20945138",
+      "20945138"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20914715"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "20945138",
+      "20945138",
+      "20945138",
+      "20945138"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20914715"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2012
+     ],
+     "siblings": [
+      "20945138",
+      "20945138",
+      "20945138",
+      "20945138"
+     ],
+     "lot": {
+      "plain": 91
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20914716"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20945139",
+      "20945139",
+      "20945139",
+      "20945139"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20914716"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "20945139",
+      "20945139",
+      "20945139",
+      "20945139"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20914716"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2012
+     ],
+     "siblings": [
+      "20945139",
+      "20945139",
+      "20945139",
+      "20945139"
+     ],
+     "lot": {
+      "plain": 91
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20945138"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20914715",
+      "20914715",
+      "20914715",
+      "20914715"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20945138"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "20914715",
+      "20914715",
+      "20914715",
+      "20914715"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20945138"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2012
+     ],
+     "siblings": [
+      "20914715",
+      "20914715",
+      "20914715",
+      "20914715"
+     ],
+     "lot": {
+      "plain": 91
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20945139"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20914716",
+      "20914716",
+      "20914716",
+      "20914716"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20945139"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2008
+     ],
+     "siblings": [
+      "20914716",
+      "20914716",
+      "20914716",
+      "20914716"
+     ],
+     "lot": {
+      "plain": 234
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "20945139"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2012
+     ],
+     "siblings": [
+      "20914716",
+      "20914716",
+      "20914716",
+      "20914716"
+     ],
+     "lot": {
+      "plain": 91
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "21997350"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "10367042",
+      "10367042",
+      "21997352",
+      "10367042"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "21997352"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "10367042",
+      "10367042",
+      "15832316",
+      "15832316"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25644750"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "88891649"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-switch",
+     "pn": [
+      "25701077"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "19259965",
+      "19259971",
+      "25690121",
+      "25690125"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "25701606"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "19244841"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "25701607"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "19244842"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "25719488"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "19244837"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "25719489"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "19244838"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-switch",
+     "pn": [
+      "25743667"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "25743668",
+      "25743669"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-switch",
+     "pn": [
+      "25743668"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "25743667",
+      "25743669"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-switch",
+     "pn": [
+      "25743669"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "25743667",
+      "25743668"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25747210"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "88986374"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25747211"
+     ],
+     "t": [
+      "Cadillac",
+      "Seville",
+      2003
+     ],
+     "siblings": [
+      "88986373"
+     ],
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25776084"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20862099",
+      "20862099"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25776087"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20862098",
+      "20862098"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25776088"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20862099",
+      "20862099"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25779805"
+     ],
+     "t": [
+      "Cadillac",
+      "Escalade",
+      2007
+     ],
+     "siblings": [
+      "15886196",
+      "25782166",
+      "25782175",
+      "25865452"
+     ],
+     "lot": {
+      "plain": 65
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25779805"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15886196",
+      "15886197",
+      "15886198",
+      "15886199"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25779849"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15886196",
+      "15886197",
+      "15886198",
+      "15886199"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25782166"
+     ],
+     "t": [
+      "Cadillac",
+      "Escalade",
+      2007
+     ],
+     "siblings": [
+      "15886196",
+      "25779805",
+      "25782175",
+      "25865452"
+     ],
+     "lot": {
+      "plain": 65
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25782166"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15886196",
+      "15886197",
+      "15886198",
+      "15886199"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25831064"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "20862098",
+      "20862098"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25831065"
+     ],
+     "t": [
+      "Cadillac",
+      "Escalade",
+      2007
+     ],
+     "siblings": [
+      "15874992",
+      "25831194",
+      "25892978",
+      "15874992"
+     ],
+     "lot": {
+      "plain": 65
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25831065"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15874992",
+      "20843116",
+      "20843177",
+      "20862098"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25831194"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15874992",
+      "20843116",
+      "20843177",
+      "20862098"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25831236"
+     ],
+     "t": [
+      "Chevrolet",
+      "Avalanche",
+      2007
+     ],
+     "siblings": [
+      "15874992",
+      "20843116",
+      "20843177",
+      "20862098"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25876714"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      1999
+     ],
+     "siblings": [
+      "15172060",
+      "15172247",
+      "15179829",
+      "88986362"
+     ],
+     "lot": {
+      "plain": 206
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25876714"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2000
+     ],
+     "siblings": [
+      "12474091",
+      "15172060",
+      "15172247",
+      "15179829"
+     ],
+     "lot": {
+      "plain": 335,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25876714"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "15124827",
+      "15172060",
+      "15226944",
+      "15226944"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25876715"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      1999
+     ],
+     "siblings": [
+      "15172059",
+      "15172248",
+      "15179830",
+      "25876716"
+     ],
+     "lot": {
+      "plain": 206
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25876715"
+     ],
+     "t": [
+      "Chevrolet",
+      "Silverado 1500",
+      2000
+     ],
+     "siblings": [
+      "12474090",
+      "15172059",
+      "15172248",
+      "15179830"
+     ],
+     "lot": {
+      "plain": 335,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "25876715"
+     ],
+     "t": [
+      "GMC",
+      "Sierra 1500",
+      2004
+     ],
+     "siblings": [
+      "15124828",
+      "15124829",
+      "15172059",
+      "15226943"
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "5978195"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      1996
+     ],
+     "siblings": [
+      "5978189",
+      "5978189"
+     ],
+     "lot": {
+      "plain": 16
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "5978195"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      2000
+     ],
+     "siblings": [
+      "15721389",
+      "15721389"
+     ],
+     "lot": {
+      "plain": 47
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "5978196"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      1996
+     ],
+     "siblings": [
+      "5978190",
+      "5978190"
+     ],
+     "lot": {
+      "plain": 16
+     }
+    },
+    {
+     "cat": "tail-lights",
+     "pn": [
+      "5978196"
+     ],
+     "t": [
+      "GMC",
+      "Sonoma",
+      2000
+     ],
+     "siblings": [
+      "15721390",
+      "15721390"
+     ],
+     "lot": {
+      "plain": 47
+     }
+    },
+    {
+     "cat": "window-switch",
+     "pn": [
+      "84512890"
+     ],
+     "t": [
+      "Chevrolet",
+      "Equinox",
+      2018
+     ],
+     "siblings": [
+      "23161707",
+      "23161707",
+      "26200592",
+      "26200592"
+     ],
+     "lot": {
+      "plain": 49
+     }
+    },
+    {
+     "cat": "window-switch",
+     "pn": [
+      "84512890"
+     ],
+     "t": [
+      "Chevrolet",
+      "Malibu",
+      2020
+     ],
+     "siblings": [
+      "84512940",
+      "84699725"
+     ],
+     "lot": {
+      "plain": 47
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "95298985"
+     ],
+     "t": [
+      "Chevrolet",
+      "Trax",
+      2016
+     ],
+     "siblings": [
+      "42693257"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "95298986"
+     ],
+     "t": [
+      "Chevrolet",
+      "Trax",
+      2016
+     ],
+     "siblings": [
+      "95298982"
+     ],
+     "lot": {
+      "plain": 92
+     }
+    }
+   ]
+  },
+  "ford": {
+   "x_two_numbers_undated_no_date": [
+    {
+     "cat": "bumper-front",
+     "pn": [
+      "7L1Z-17757-A"
+     ],
+     "t": [
+      "Ford",
+      "Expedition",
+      2007
+     ],
+     "siblings": [
+      "7L1Z-16758-B"
+     ],
+     "lot": {
+      "plain": 203,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "bumper-front",
+     "pn": [
+      "8A8Z-17757-A"
+     ],
+     "t": [
+      "Lincoln",
+      "MKS",
+      2009
+     ],
+     "siblings": [
+      "8A5Z-17D957-AAPTM"
+     ],
+     "lot": {
+      "plain": 75
+     }
+    }
+   ]
+  },
+  "mopar": {
+   "x_two_numbers_undated_no_date": [
+    {
+     "cat": "climate-control",
+     "pn": [
+      "4698198AC"
+     ],
+     "t": [
+      "Chrysler",
+      "LHS",
+      2000
+     ],
+     "siblings": [
+      "4698199AG"
+     ],
+     "lot": {
+      "plain": 13
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "4698199AG"
+     ],
+     "t": [
+      "Chrysler",
+      "LHS",
+      2000
+     ],
+     "siblings": [
+      "4698198AC"
+     ],
+     "lot": {
+      "plain": 13
+     }
+    },
+    {
+     "cat": "wheels",
+     "pn": [
+      "4782244AC"
+     ],
+     "t": [
+      "Chrysler",
+      "300M",
+      2001
+     ],
+     "siblings": [
+      "4782175AB"
+     ],
+     "lot": {
+      "plain": 18
+     }
+    },
+    {
+     "cat": "wheels",
+     "pn": [
+      "4782244AC"
+     ],
+     "t": [
+      "Chrysler",
+      "300M",
+      2002
+     ],
+     "siblings": [
+      "4782175AB"
+     ],
+     "lot": {
+      "plain": 18
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "4805944AB"
+     ],
+     "t": [
+      "Chrysler",
+      "300M",
+      2002
+     ],
+     "siblings": [
+      "4805946AB"
+     ],
+     "lot": {
+      "plain": 18
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "4805947AD"
+     ],
+     "t": [
+      "Chrysler",
+      "300M",
+      2002
+     ],
+     "siblings": [
+      "4805951AD"
+     ],
+     "lot": {
+      "plain": 18
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "55111290AD"
+     ],
+     "t": [
+      "Ram",
+      "1500",
+      2012
+     ],
+     "siblings": [
+      "55111291AC",
+      "55111292AD"
+     ],
+     "lot": {
+      "plain": 37,
+      "unc": 3,
+      "exc": 38
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "55111290AD"
+     ],
+     "t": [
+      "Ram",
+      "2500",
+      2011
+     ],
+     "siblings": [
+      "55111291AC",
+      "55111292AD"
+     ],
+     "lot": {
+      "plain": 2
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "55111291AC"
+     ],
+     "t": [
+      "Ram",
+      "1500",
+      2012
+     ],
+     "siblings": [
+      "55111290AD",
+      "55111292AD"
+     ],
+     "lot": {
+      "plain": 37,
+      "unc": 3,
+      "exc": 38
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "55111291AC"
+     ],
+     "t": [
+      "Ram",
+      "2500",
+      2011
+     ],
+     "siblings": [
+      "55111290AD",
+      "55111292AD"
+     ],
+     "lot": {
+      "plain": 2
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "55111292AD"
+     ],
+     "t": [
+      "Ram",
+      "1500",
+      2012
+     ],
+     "siblings": [
+      "55111290AD",
+      "55111291AC"
+     ],
+     "lot": {
+      "plain": 37,
+      "unc": 3,
+      "exc": 38
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "55111292AD"
+     ],
+     "t": [
+      "Ram",
+      "2500",
+      2011
+     ],
+     "siblings": [
+      "55111290AD",
+      "55111291AC"
+     ],
+     "lot": {
+      "plain": 2
+     }
+    }
+   ]
+  },
+  "toyota": {
+   "x_two_numbers_undated_no_date": [
+    {
+     "cat": "bumper-front",
+     "pn": [
+      "52119-30961"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "52119-30979"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "bumper-front",
+     "pn": [
+      "52119-30962"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "52119-30981"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "grille",
+     "pn": [
+      "53111-30870"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "53111-30C40"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "grille",
+     "pn": [
+      "53111-30A30"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "53111-30C50"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "85710-30390"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "85710-58010"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "85710-30390"
+     ],
+     "t": [
+      "Lexus",
+      "GS 430",
+      2006
+     ],
+     "siblings": [
+      "85710-58010"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "85710-58010"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "85710-30390",
+      "85710-30420"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "85710-58010"
+     ],
+     "t": [
+      "Lexus",
+      "GS 430",
+      2006
+     ],
+     "siblings": [
+      "85710-30390"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "85720-30330"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "85720-58010"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "85720-30330"
+     ],
+     "t": [
+      "Lexus",
+      "GS 430",
+      2006
+     ],
+     "siblings": [
+      "85720-58010"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "85720-58010"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "85720-30330",
+      "85720-30370"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "85720-58010"
+     ],
+     "t": [
+      "Lexus",
+      "GS 430",
+      2006
+     ],
+     "siblings": [
+      "85720-30330"
+     ],
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87901-30240-A2"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87901-30210-A0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87901-30240-B1"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87901-30210-B0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87901-30240-B2"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87901-30210-B1"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87901-30240-C1"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87901-30210-C0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87901-30240-D0"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87901-30210-D0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87901-30240-G1"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87901-30210-G0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87901-30240-J1"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87901-30210-J0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87901-30240-J2"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87901-30210-J1"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87906-30300-A2"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87906-30270-A0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87906-30300-B1"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87906-30270-B0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87906-30300-B2"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87906-30270-B1"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87906-30300-C1"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87906-30270-C0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87906-30300-D0"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87906-30270-D0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87906-30300-G1"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87906-30270-G0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87906-30300-J1"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87906-30270-J0"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "87906-30300-J2"
+     ],
+     "t": [
+      "Lexus",
+      "GS 350",
+      2007
+     ],
+     "siblings": [
+      "87906-30270-J1"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    }
+   ],
+   "d2_changeover": [
+    {
+     "cat": "headlights",
+     "pn": [
+      "81070-30B51"
+     ],
+     "t": [
+      "Lexus",
+      "GS 430",
+      2006
+     ],
+     "window": "built 07/2005-07/2006",
+     "kind": "changeover",
+     "changeover": "07/2005 81070-30B50",
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "headlights",
+     "pn": [
+      "81070-30B61"
+     ],
+     "t": [
+      "Lexus",
+      "GS 430",
+      2006
+     ],
+     "window": "built 07/2005-07/2006",
+     "kind": "changeover",
+     "changeover": "07/2005 81070-30B60",
+     "lot": {
+      "plain": 6
+     }
+    }
+   ],
+   "d1_page_cut": [
+    {
+     "cat": "headlights",
+     "pn": [
+      "81145-53543"
+     ],
+     "t": [
+      "Lexus",
+      "IS 350",
+      2012
+     ],
+     "window": "built 09/2011-04/2013",
+     "kind": "unlinked",
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "headlights",
+     "pn": [
+      "81185-53543"
+     ],
+     "t": [
+      "Lexus",
+      "IS 350",
+      2012
+     ],
+     "window": "built 09/2011-04/2013",
+     "kind": "unlinked",
+     "lot": {
+      "plain": 1
+     }
+    }
+   ]
+  },
+  "subaru": {
+   "x_two_numbers_undated_no_date": [
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "61041AL00A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "siblings": [
+      "61041AL02A"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "61041AL02A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "siblings": [
+      "61041AL00A"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "72311AL10A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "siblings": [
+      "72311AL11A"
+     ],
+     "lot": {
+      "plain": 16,
+      "unc": 9,
+      "exc": 3
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "72311AL11A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "siblings": [
+      "72311AL10A"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "72311AL20A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "siblings": [
+      "72311AL21A"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "72311AL21A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "siblings": [
+      "72311AL20A"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "headlights",
+     "pn": [
+      "84001AL02A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "siblings": [
+      "84002AL00A"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "headlights",
+     "pn": [
+      "84001AL03A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "siblings": [
+      "84002AL01A"
+     ],
+     "lot": {
+      "plain": 28
+     }
+    }
+   ]
+  },
+  "hmg": {},
+  "vag": {},
+  "mb": {},
+  "nissan": {
+   "d3_split": [
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-1MA5A"
+     ],
+     "t": [
+      "Infiniti",
+      "M37",
+      2013
+     ],
+     "window": "built 01/2013-11/2013",
+     "kind": "no_other_row",
+     "lot": {
+      "plain": 8
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "27515-7Z401"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     "window": "built 07/2001-09/2002",
+     "kind": "split",
+     "lot": {
+      "unc": 70
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-2Z710"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2002
+     ],
+     "window": "built from 10/2002",
+     "kind": "drop",
+     "lot": {
+      "plain": 159
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-2Z710"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2003
+     ],
+     "window": "built from 10/2002",
+     "kind": "no_other_row",
+     "lot": {
+      "plain": 102
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-3S510"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     "window": "built 07/2001-09/2002",
+     "kind": "split",
+     "lot": {
+      "plain": 70
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-3S510"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2002
+     ],
+     "window": "built 07/2001-09/2002",
+     "kind": "split",
+     "lot": {
+      "plain": 159
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-3S510"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2003
+     ],
+     "window": "built 07/2001-09/2002",
+     "kind": "drop",
+     "lot": {
+      "plain": 102
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     "window": "built 08/2009-04/2010",
+     "kind": "no_other_row",
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     "window": "built 08/2009-04/2010",
+     "kind": "drop",
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-2Z710"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2002
+     ],
+     "window": "built from 10/2002",
+     "kind": "drop",
+     "lot": {
+      "plain": 159
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-2Z710"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2003
+     ],
+     "window": "built from 10/2002",
+     "kind": "no_other_row",
+     "lot": {
+      "plain": 102
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-3S510"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     "window": "built 07/2001-09/2002",
+     "kind": "split",
+     "lot": {
+      "plain": 70
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-3S510"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2002
+     ],
+     "window": "built 07/2001-09/2002",
+     "kind": "split",
+     "lot": {
+      "plain": 159
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-3S510"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2003
+     ],
+     "window": "built 07/2001-09/2002",
+     "kind": "drop",
+     "lot": {
+      "plain": 102
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     "window": "built 08/2009-04/2010",
+     "kind": "no_other_row",
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     "window": "built 08/2009-04/2010",
+     "kind": "drop",
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-7S200"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2005
+     ],
+     "window": "built 10/2004-08/2005",
+     "kind": "unlinked",
+     "lot": {
+      "plain": 145
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-7S200"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "window": "built 10/2004-08/2005",
+     "kind": "drop",
+     "lot": {
+      "plain": 151,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-9BC9A"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2012
+     ],
+     "window": "built 04/2012-09/2016",
+     "kind": "drop",
+     "lot": {
+      "plain": 12,
+      "unc": 2
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-9BC9A"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2013
+     ],
+     "window": "built 04/2012-09/2016",
+     "kind": "split",
+     "lot": {
+      "plain": 4,
+      "exc": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2012
+     ],
+     "window": "built 08/2011-04/2012",
+     "kind": "no_other_row",
+     "lot": {
+      "plain": 14
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-ZH10A"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2012
+     ],
+     "window": "built 08/2005-04/2008",
+     "kind": "drop",
+     "lot": {
+      "plain": 44
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-ZH10A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ],
+     "window": "built 08/2005-04/2008",
+     "kind": "split",
+     "lot": {
+      "plain": 79
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-7S600"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "window": "built 10/2004-08/2006",
+     "kind": "split",
+     "lot": {
+      "plain": 151,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-9BC9A"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2012
+     ],
+     "window": "built 04/2012-09/2016",
+     "kind": "drop",
+     "lot": {
+      "plain": 12,
+      "unc": 2
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-9BC9A"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2013
+     ],
+     "window": "built 04/2012-09/2016",
+     "kind": "split",
+     "lot": {
+      "plain": 4,
+      "exc": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2012
+     ],
+     "window": "built 08/2011-04/2012",
+     "kind": "no_other_row",
+     "lot": {
+      "plain": 14
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-S3800"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     "window": "built 07/2001-09/2002",
+     "kind": "split",
+     "lot": {
+      "unc": 26,
+      "exc": 44
+     }
+    }
+   ],
+   "x_two_numbers_undated_no_date": [
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-89Y00"
+     ],
+     "t": [
+      "Nissan",
+      "200SX",
+      1997
+     ],
+     "siblings": [
+      "24820-8B700"
+     ],
+     "lot": {
+      "plain": 5,
+      "exc": 2
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-89Y00"
+     ],
+     "t": [
+      "Nissan",
+      "200SX",
+      1998
+     ],
+     "siblings": [
+      "24820-8B700"
+     ],
+     "lot": {
+      "plain": 4,
+      "unc": 2
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-89Y00"
+     ],
+     "t": [
+      "Nissan",
+      "Sentra",
+      1997
+     ],
+     "siblings": [
+      "24820-8B700"
+     ],
+     "lot": {
+      "plain": 26,
+      "unc": 2
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-89Y00"
+     ],
+     "t": [
+      "Nissan",
+      "Sentra",
+      1998
+     ],
+     "siblings": [
+      "24820-8B700"
+     ],
+     "lot": {
+      "plain": 21,
+      "unc": 2
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-8B703"
+     ],
+     "t": [
+      "Nissan",
+      "200SX",
+      1997
+     ],
+     "siblings": [
+      "24820-89Y06"
+     ],
+     "lot": {
+      "plain": 2,
+      "exc": 5
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "27510-9BF0B"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2013
+     ],
+     "siblings": [
+      "27510-9BK0A"
+     ],
+     "lot": {
+      "unc": 6,
+      "exc": 4
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "27510-9BF0B"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2014
+     ],
+     "siblings": [
+      "27510-9BK0A"
+     ],
+     "lot": {
+      "unc": 9,
+      "exc": 5
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-2Z700"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2003
+     ],
+     "siblings": [
+      "80720-3S500"
+     ],
+     "lot": {
+      "plain": 48
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-EA005"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2005
+     ],
+     "siblings": [
+      "80730-ZP80A"
+     ],
+     "lot": {
+      "plain": 177
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-EA005"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2006
+     ],
+     "siblings": [
+      "80730-ZP80A"
+     ],
+     "lot": {
+      "plain": 193
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-EA005"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2007
+     ],
+     "siblings": [
+      "80730-ZP80A"
+     ],
+     "lot": {
+      "plain": 112
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-EA005"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2008
+     ],
+     "siblings": [
+      "80730-ZP80A"
+     ],
+     "lot": {
+      "plain": 120,
+      "unc": 11,
+      "exc": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2009
+     ],
+     "siblings": [
+      "96301-1CA0B"
+     ],
+     "lot": {
+      "plain": 19
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2010
+     ],
+     "siblings": [
+      "96301-1CA0B"
+     ],
+     "lot": {
+      "plain": 17
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2012
+     ],
+     "siblings": [
+      "96301-1CA0B",
+      "96301-3EV0B"
+     ],
+     "lot": {
+      "plain": 5
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX37",
+      2013
+     ],
+     "siblings": [
+      "96301-1CA0B",
+      "96301-3EV0B"
+     ],
+     "lot": {
+      "plain": 7
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX50",
+      2009
+     ],
+     "siblings": [
+      "96301-1CA0B"
+     ],
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX50",
+      2010
+     ],
+     "siblings": [
+      "96301-1CA0B"
+     ],
+     "lot": {}
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2016
+     ],
+     "siblings": [
+      "96301-3EV0B"
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2017
+     ],
+     "siblings": [
+      "96301-3EV0B"
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3Y200"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2001
+     ],
+     "siblings": [
+      "96301-3Y300"
+     ],
+     "lot": {
+      "plain": 26
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3Y200"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2002
+     ],
+     "siblings": [
+      "96301-3Y300"
+     ],
+     "lot": {
+      "plain": 32
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3Y200"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2003
+     ],
+     "siblings": [
+      "96301-3Y300"
+     ],
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3Y200"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2004
+     ],
+     "siblings": [
+      "96301-3Y300"
+     ],
+     "lot": {
+      "plain": 15
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2009
+     ],
+     "siblings": [
+      "96302-1CA0B"
+     ],
+     "lot": {
+      "plain": 19
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2010
+     ],
+     "siblings": [
+      "96302-1CA0B"
+     ],
+     "lot": {
+      "plain": 17
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2012
+     ],
+     "siblings": [
+      "96302-1CA0B",
+      "96302-3EV0B"
+     ],
+     "lot": {
+      "plain": 5
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX37",
+      2013
+     ],
+     "siblings": [
+      "96302-1CA0B",
+      "96302-3EV0B"
+     ],
+     "lot": {
+      "plain": 7
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX50",
+      2009
+     ],
+     "siblings": [
+      "96302-1CA0B"
+     ],
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX50",
+      2010
+     ],
+     "siblings": [
+      "96302-1CA0B"
+     ],
+     "lot": {}
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2016
+     ],
+     "siblings": [
+      "96302-3EV0B"
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1CA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2017
+     ],
+     "siblings": [
+      "96302-3EV0B"
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3Y200"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2001
+     ],
+     "siblings": [
+      "96302-3Y300"
+     ],
+     "lot": {
+      "plain": 26
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3Y200"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2002
+     ],
+     "siblings": [
+      "96302-3Y300"
+     ],
+     "lot": {
+      "plain": 32
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3Y200"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2003
+     ],
+     "siblings": [
+      "96302-3Y300"
+     ],
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3Y200"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2004
+     ],
+     "siblings": [
+      "96302-3Y300"
+     ],
+     "lot": {
+      "plain": 15
+     }
+    }
+   ],
+   "d2_changeover": [
+    {
+     "cat": "climate-control",
+     "pn": [
+      "27510-8Z315"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2002
+     ],
+     "window": "built 07/2001-09/2002",
+     "kind": "changeover",
+     "changeover": "07/2001 27510-7Z416",
+     "lot": {
+      "plain": 131,
+      "unc": 25,
+      "exc": 3
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "27515-7Z401"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2001
+     ],
+     "window": "built 07/2000-07/2001",
+     "kind": "changeover",
+     "changeover": "07/2000 27515-7Z101",
+     "lot": {
+      "plain": 96
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "28525-1E501"
+     ],
+     "t": [
+      "Nissan",
+      "Altima",
+      1994
+     ],
+     "window": "built 06/1992-07/1994",
+     "kind": "changeover",
+     "changeover": "07/1994 28525-1E504",
+     "lot": {
+      "plain": 12
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "28525-1E501"
+     ],
+     "t": [
+      "Nissan",
+      "Stanza",
+      1994
+     ],
+     "window": "built 06/1992-07/1994",
+     "kind": "changeover",
+     "changeover": "07/1994 28525-1E504",
+     "lot": {}
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "28525-1E504"
+     ],
+     "t": [
+      "Nissan",
+      "Stanza",
+      1995
+     ],
+     "window": "built 07/1994-02/1996",
+     "kind": "changeover",
+     "changeover": "07/1994 28525-1E501",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-AR000"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2004
+     ],
+     "window": "built 11/2002-07/2004",
+     "kind": "changeover",
+     "changeover": "07/2004 80720-CL00A",
+     "lot": {
+      "plain": 45
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-AR000"
+     ],
+     "t": [
+      "Infiniti",
+      "FX45",
+      2004
+     ],
+     "window": "built 11/2002-07/2004",
+     "kind": "changeover",
+     "changeover": "07/2004 80720-CL00A",
+     "lot": {
+      "plain": 5
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-CL00A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2005
+     ],
+     "window": "built 07/2004-06/2006",
+     "kind": "changeover",
+     "changeover": "07/2004 80720-AR000",
+     "lot": {
+      "plain": 50
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-CL00A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2006
+     ],
+     "window": "built 07/2004-06/2006",
+     "kind": "changeover",
+     "changeover": "06/2006 80720-CL70B",
+     "lot": {
+      "plain": 34
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-CL00A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX45",
+      2005
+     ],
+     "window": "built 07/2004-06/2006",
+     "kind": "changeover",
+     "changeover": "07/2004 80720-AR000",
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-CL00A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX45",
+      2006
+     ],
+     "window": "built 07/2004-06/2006",
+     "kind": "changeover",
+     "changeover": "06/2006 80720-CL70B",
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-CL70B"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2007
+     ],
+     "window": "built from 06/2006",
+     "kind": "changeover",
+     "changeover": "06/2006 80720-CL00A",
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-CL70B"
+     ],
+     "t": [
+      "Infiniti",
+      "FX45",
+      2007
+     ],
+     "window": "built from 06/2006",
+     "kind": "changeover",
+     "changeover": "06/2006 80720-CL00A",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2008
+     ],
+     "window": "built 12/2004-06/2008",
+     "kind": "changeover",
+     "changeover": "06/2008 80720-EH10A",
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2008
+     ],
+     "window": "built 12/2004-06/2008",
+     "kind": "changeover",
+     "changeover": "06/2008 80720-EH10A",
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-CL00A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2006
+     ],
+     "window": "built 09/2004-06/2006",
+     "kind": "changeover",
+     "changeover": "06/2006 80721-CL70B",
+     "lot": {
+      "plain": 34
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-CL00A"
+     ],
+     "t": [
+      "Infiniti",
+      "FX45",
+      2006
+     ],
+     "window": "built 09/2004-06/2006",
+     "kind": "changeover",
+     "changeover": "06/2006 80721-CL70B",
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-CL70B"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2007
+     ],
+     "window": "built from 06/2006",
+     "kind": "changeover",
+     "changeover": "06/2006 80721-CL00A",
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-CL70B"
+     ],
+     "t": [
+      "Infiniti",
+      "FX45",
+      2007
+     ],
+     "window": "built from 06/2006",
+     "kind": "changeover",
+     "changeover": "06/2006 80721-CL00A",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2008
+     ],
+     "window": "built 12/2004-06/2008",
+     "kind": "changeover",
+     "changeover": "06/2008 80721-EH10A",
+     "lot": {
+      "plain": 35
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2008
+     ],
+     "window": "built 12/2004-06/2008",
+     "kind": "changeover",
+     "changeover": "06/2008 80721-EH10A",
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-1LE0A"
+     ],
+     "t": [
+      "Infiniti",
+      "QX80",
+      2014
+     ],
+     "window": "built 04/2010-07/2014",
+     "kind": "changeover",
+     "changeover": "07/2014 80730-1LE0B",
+     "lot": {
+      "plain": 14
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-8991A"
+     ],
+     "t": [
+      "Nissan",
+      "Versa",
+      2008
+     ],
+     "window": "built 01/2007-06/2011",
+     "kind": "changeover",
+     "changeover": "07/2007 80730-89915",
+     "lot": {
+      "plain": 160,
+      "unc": 2
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-JK60C"
+     ],
+     "t": [
+      "Infiniti",
+      "G25",
+      2012
+     ],
+     "window": "built 06/2011-06/2014",
+     "kind": "changeover",
+     "changeover": "06/2011 80730-JK60B",
+     "lot": {
+      "plain": 12
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80731-1LE0A"
+     ],
+     "t": [
+      "Infiniti",
+      "QX80",
+      2014
+     ],
+     "window": "built 04/2010-07/2014",
+     "kind": "changeover",
+     "changeover": "07/2014 80731-1LE0B",
+     "lot": {
+      "plain": 14
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80731-JK60C"
+     ],
+     "t": [
+      "Infiniti",
+      "G25",
+      2012
+     ],
+     "window": "built 06/2011-06/2014",
+     "kind": "changeover",
+     "changeover": "06/2011 80731-JK60B",
+     "lot": {
+      "plain": 12
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-0E715"
+     ],
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "window": "built 08/1993-07/1996",
+     "kind": "changeover",
+     "changeover": "07/1996 82720-0E717",
+     "lot": {
+      "plain": 9
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-0E715"
+     ],
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "window": "built 08/1993-07/1996",
+     "kind": "changeover",
+     "changeover": "07/1996 82720-0E717",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-0E717"
+     ],
+     "t": [
+      "Nissan",
+      "Altima",
+      1997
+     ],
+     "window": "built from 07/1996",
+     "kind": "changeover",
+     "changeover": "07/1996 82720-0E715",
+     "lot": {
+      "plain": 25
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-0E717"
+     ],
+     "t": [
+      "Nissan",
+      "Stanza",
+      1997
+     ],
+     "window": "built from 07/1996",
+     "kind": "changeover",
+     "changeover": "07/1996 82720-0E715",
+     "lot": {}
+    }
+   ],
+   "d4_cross_position": [
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-89915"
+     ],
+     "apps": [
+      [
+       "Nissan",
+       "Murano",
+       2005,
+       2006
+      ],
+      [
+       "Nissan",
+       "Versa",
+       2007,
+       2007
+      ]
+     ],
+     "positions": {
+      "Nissan Murano": [
+       "RR"
+      ],
+      "Nissan Versa": [
+       "FR"
+      ]
+     },
+     "lot": {
+      "unc": 146,
+      "plain": 354
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-8991A"
+     ],
+     "apps": [
+      [
+       "Nissan",
+       "Murano",
+       2007,
+       2007
+      ],
+      [
+       "Nissan",
+       "Versa",
+       2008,
+       2008
+      ],
+      [
+       "Nissan",
+       "Versa",
+       2010,
+       2011
+      ]
+     ],
+     "positions": {
+      "Nissan Murano": [
+       "RR"
+      ],
+      "Nissan Versa": [
+       "FR"
+      ]
+     },
+     "lot": {
+      "unc": 246,
+      "plain": 561
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-JX30B"
+     ],
+     "apps": [
+      [
+       "Nissan",
+       "Cube",
+       2011,
+       2011
+      ],
+      [
+       "Nissan",
+       "Rogue",
+       2010,
+       2010
+      ]
+     ],
+     "positions": {
+      "Nissan Cube": [
+       "FR"
+      ],
+      "Nissan Rogue": [
+       "RR"
+      ]
+     },
+     "lot": {
+      "unc": 37,
+      "plain": 261
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-JX30C"
+     ],
+     "apps": [
+      [
+       "Nissan",
+       "Cube",
+       2012,
+       2014
+      ],
+      [
+       "Nissan",
+       "Juke",
+       2012,
+       2014
+      ],
+      [
+       "Nissan",
+       "Rogue",
+       2012,
+       2012
+      ]
+     ],
+     "positions": {
+      "Nissan Cube": [
+       "FR"
+      ],
+      "Nissan Juke": [
+       "FR"
+      ],
+      "Nissan Rogue": [
+       "RR"
+      ]
+     },
+     "lot": {
+      "plain": 605
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-3Z005"
+     ],
+     "apps": [
+      [
+       "Nissan",
+       "Altima",
+       2003,
+       2003
+      ],
+      [
+       "Nissan",
+       "Sentra",
+       2005,
+       2006
+      ]
+     ],
+     "positions": {
+      "Nissan Altima": [
+       "RR"
+      ],
+      "Nissan Sentra": [
+       "FR"
+      ]
+     },
+     "lot": {
+      "unc": 205,
+      "plain": 346
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-3Z005"
+     ],
+     "apps": [
+      [
+       "Nissan",
+       "Altima",
+       2003,
+       2003
+      ],
+      [
+       "Nissan",
+       "Sentra",
+       2005,
+       2006
+      ]
+     ],
+     "positions": {
+      "Nissan Altima": [
+       "RL"
+      ],
+      "Nissan Sentra": [
+       "FL"
+      ]
+     },
+     "lot": {
+      "unc": 205,
+      "plain": 346
+     }
+    }
+   ],
+   "d1_page_cut": [
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-89915"
+     ],
+     "t": [
+      "Nissan",
+      "Versa",
+      2007
+     ],
+     "window": "built 12/2006-01/2007",
+     "kind": "linked",
+     "lot": {
+      "plain": 175
+     }
+    }
+   ],
+   "d5_star_blind": [
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3JA9A"
+     ],
+     "t": [
+      "Infiniti",
+      "QX60",
+      2015
+     ],
+     "drive": "2WD only",
+     "lot": {
+      "plain": 56,
+      "exc": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3JA9A"
+     ],
+     "t": [
+      "Infiniti",
+      "QX60",
+      2015
+     ],
+     "drive": "2WD only",
+     "lot": {
+      "plain": 56,
+      "exc": 1
+     }
+    }
+   ]
+  }
+ },
+ "pairs": {
+  "gm": {
+   "main": {
+    "payload_groups": 205,
+    "plain": 53045,
+    "if_equipped": 2106,
+    "excluded": 3867
+   },
+   "round7": {
+    "payload_groups": 205,
+    "plain": 53045,
+    "if_equipped": 2106,
+    "excluded": 3867
+   }
+  },
+  "ford": {
+   "main": {
+    "payload_groups": 66,
+    "plain": 23523,
+    "if_equipped": 1050,
+    "excluded": 187
+   },
+   "round7": {
+    "payload_groups": 66,
+    "plain": 23523,
+    "if_equipped": 1050,
+    "excluded": 187
+   }
+  },
+  "mopar": {
+   "main": {
+    "payload_groups": 291,
+    "plain": 108297,
+    "if_equipped": 1980,
+    "excluded": 751
+   },
+   "round7": {
+    "payload_groups": 291,
+    "plain": 108297,
+    "if_equipped": 1980,
+    "excluded": 751
+   }
+  },
+  "toyota": {
+   "main": {
+    "payload_groups": 529,
+    "plain": 96550,
+    "if_equipped": 8436,
+    "excluded": 7196
+   },
+   "round7": {
+    "payload_groups": 529,
+    "plain": 96536,
+    "if_equipped": 8450,
+    "excluded": 7196
+   }
+  },
+  "subaru": {
+   "main": {
+    "payload_groups": 27,
+    "plain": 3838,
+    "if_equipped": 36,
+    "excluded": 27
+   },
+   "round7": {
+    "payload_groups": 27,
+    "plain": 3838,
+    "if_equipped": 36,
+    "excluded": 27
+   }
+  },
+  "hmg": {
+   "main": {
+    "payload_groups": 15,
+    "plain": 3104,
+    "if_equipped": 650,
+    "excluded": 0
+   },
+   "round7": {
+    "payload_groups": 15,
+    "plain": 3104,
+    "if_equipped": 650,
+    "excluded": 0
+   }
+  },
+  "vag": {
+   "main": {
+    "payload_groups": 19,
+    "plain": 1489,
+    "if_equipped": 6,
+    "excluded": 6
+   },
+   "round7": {
+    "payload_groups": 19,
+    "plain": 1489,
+    "if_equipped": 6,
+    "excluded": 6
+   }
+  },
+  "mb": {
+   "main": {
+    "payload_groups": 10,
+    "plain": 243,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "round7": {
+    "payload_groups": 10,
+    "plain": 243,
+    "if_equipped": 0,
+    "excluded": 0
+   }
+  },
+  "nissan": {
+   "main": {
+    "payload_groups": 171,
+    "plain": 30048,
+    "if_equipped": 3268,
+    "excluded": 246
+   },
+   "round7": {
+    "payload_groups": 153,
+    "plain": 24198,
+    "if_equipped": 2464,
+    "excluded": 178
+   }
+  },
+  "shipped": {
+   "main": {
+    "payload_groups": 1162,
+    "plain": 290089,
+    "if_equipped": 14264,
+    "excluded": 12034
+   },
+   "round7": {
+    "payload_groups": 1162,
+    "plain": 290075,
+    "if_equipped": 14278,
+    "excluded": 12034
+   }
+  }
+ }
+}

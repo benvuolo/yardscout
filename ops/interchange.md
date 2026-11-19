@@ -5614,3 +5614,190 @@ re-check, not independent):
   ford / gm gas-only gates was not measured; worth a census.
 - The 160 cap now costs ford 2 live groups (decision 4's windows on both
   models).
+
+## 2026-11-19 Round 7: per-page window cut, changeover months both sides, date splits from other pages, cross-position groups, star-blind (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round7-1119` from origin/main 23376d18)
+
+Hub decisions 2026-11-19 ~11:40 UTC after check 1119g (1 WRONG: 80730-89915
+Versa 2007 plain). No fetch, dispatch or email. `docs/app.js` unchanged.
+`policy.py` untouched (rules in curate.py), so `policy_sha256` did not move;
+the 8 live makes were re-curated and the payload rebuilt (oemStatus ok x8).
+
+### The real cause of the WRONG
+
+`build_window` merged the windows of every own row on T's pages before the cut
+test:
+- sedan page 12/2006-07/2007 + hatchback page 05/2006-01/2007 = 05/2006-07/2007;
+- that union covers the 07/2006-06/2007 span, so the year was "full", plain.
+
+The checker's guess was right. A second, related path made the same mistake:
+an undated row on one page beside a dated cutting row on another made the
+whole year plain ("a dateless own row: listed for the whole year").
+
+### Rules (curate.py)
+
+1. **Per page.** The cut test runs on each page that lists the number. A page
+   with an undated row covers the year. When a dated page cuts the span, the
+   year gets the months every dated page lists (Versa 2007: 12/2006-01/2007).
+   Pages with no month in common leave the year out.
+2. **Changeover months.** A same-option number on T's page whose window
+   starts or ends where ours does sets a changeover month. If that month falls
+   in 07/(y-1)-06/y widened a month either way, the year is gated even when our
+   window covers it (FX35/FX45 2006, G25 2012, M35/M45 2008, Altima/Stanza
+   1997).
+3. **Splits on other pages.** When T's page lists the number undated beside a
+   same-option number and pages of the site date the split, the year is gated
+   with the narrower reading.
+   - The window comes from the model's own dated pages first (Titan 2006
+     96302-7S600: 10/2004-08/2006).
+   - Otherwise it comes from the pages that show the split (Frontier 2010
+     80721-EA000: 08/2009-04/2010, from the Pathfinder and Xterra pages).
+4. **Cross-position groups.** A group whose number sits in another known
+   position on another model is held whole (`held_cross_position`,
+   `<ns>.round7_held.json`).
+   - Positions are the slots each model's own pages resolve.
+   - An unknown position ("position_missing", every slot) does not count. A
+     first pass that counted it would have held 11 live groups: GM Alero,
+     Transit Connect, Lexus rows with no door named.
+5. **Star-blind reading.** `starred_scope` also reads the configurations
+   without their marks. If a drive or engine limit then appears, the year is
+   held (`held_starred_scope`, via `star_blind`). It catches exactly
+   96301/96302-3JA9A QX60 2015.
+
+**Only narrows.** The note cap now runs on the round-6 reading as well as the
+round-5b one. A group either refuses stays refused, and a year either leaves
+out stays out.
+
+### Part A, live makes (`groups/_report/round7_census_2026-11-19.json`)
+
+Census on the groups origin/main ships:
+
+| ns | 1 per-page cut | 2 changeover | 3 split | 4 cross-position |
+|---|---|---|---|---|
+| toyota | 2 vy / 2 groups / 2 plain (IS 350 2012) | 2 / 2 / 12 plain (GS 430 2006) | 0 | 0 |
+| gm, ford, mopar, hmg, subaru, vag, mb | 0 | 0 | 0 | 0 |
+
+Applied:
+- toyota 81145/81185-53543: IS 350 2012 `built 2011-09..2013-04`.
+- toyota 81070-30B51/30B61: GS 430 2006 `built 2005-07..2006-07`.
+
+`live_diff.py` against origin/main
+(`groups/_report/live_diff_2026-11-19_round7.txt`): **0 added groups, 0
+gained app-years, 0 widened gates** in all 9; 8 of the live makes are
+byte-identical except toyota.
+
+Shipped pairs:
+
+| | Before | After |
+|---|---|---|
+| Plain | 290,089 | 290,075 |
+| If equipped | 14,264 | 14,278 |
+| Excluded | 12,034 | 12,034 |
+| Payload groups | 1,162 | 1,162 |
+
+### Part B, nissan candidate (NOT shipped)
+
+| | Round 6 (main) | Round 7 |
+|---|---|---|
+| Likely / shippable | 174 / 171 | 156 / **153** |
+| climate / gauge / mirrors / regulators | 16 / 8 / 43 / 104 | 13 / 7 / 39 / 94 |
+| Shippable app-years | 1,000 | 915 |
+| Gated groups (built) | 98 (64) | 94 (67) |
+| Pairs plain / if equipped / excluded | 30,048 / 3,268 / 246 | **24,198 / 2,464 / 178** |
+
+Census on main's candidate:
+
+| class | vehicle-years / groups | lot rows |
+|---|---|---|
+| 1 per-page cut | 1 / 1 (Versa 2007) | 175 plain |
+| 2 changeover | 30 / 18 | 784 plain |
+| 3 split | 28 / 16 | 1,888 plain |
+| 4 cross-position | 6 groups | 2,473 plain + 839 if equipped |
+| 5 star-blind | 2 / 2 | 112 plain |
+
+Held lists by reason:
+- **`nissan.round7_held.json`:** `held_cross_position` 5 groups (18
+  vehicle-years). The sixth, 80730-89915, left earlier at the note cap.
+- **`nissan.starred_held.json`:** 47 groups (37 whole), 148 vehicle-years.
+  - By kind: starred_only 116, a 8, b 6, c_drive 6 (the 2 star-blind among
+    them), c_engine 43.
+- **`nissan.round6_held.json`:** `held_cab_inferred` 6 / 6 and
+  `held_option_tie` 8 / 7.
+- **Refusals in `nissan.json`:** `held_window_note_cap` 61 (round 6: 45).
+
+Every 1119g item (`groups/_report/nissan_recheck_2026-11-19g.json`; my own
+re-check, not independent):
+
+| item | now |
+|---|---|
+| G23 WRONG 80730-89915 Versa 2007 | gated 12/2006-01/2007, then the group left at the note cap (Murano 2005 + Versa windows); also cross-door |
+| G15 80721-CL00A FX35/FX45 2006 | `built 2004-09..2006-06` (decision 2) |
+| G16 80730-JK60C G25 2012 | `built 2011-06..2014-06` (changeover 06/2011, a month before the span) |
+| P03 82720-0E717 Altima/Stanza 1997 | `built 1996-07..` (decision 2) |
+| P12 / P30 80721/80720-EH100 M35/M45 2008 | `built 2004-12..2008-06` (decision 2) |
+| G08 96302-7S200 Titan 2006 | **still plain**: changeover 08/2006, two months after the span |
+| G21 80730-2Y000 I35 2003 | **still plain**: changeover 08/2003, two months after |
+| G03 27510-8Z310 Xterra 2002 | **still plain**: changeover 09/2002, three months after |
+| G12 96302-7S600 Titan 2006 | gated by decision 3, then the group left at the note cap |
+| G24 80721-EA000 Frontier 2010-2011 | gated / dropped by decision 3, then the group left at the note cap |
+| G27 80720-2Z710 Xterra 2002-2003 | decision 3, then the group left at the note cap |
+| G05 J6301-1E400 Altima/Stanza 1995-1996 | **still plain**: the J6301 pair (1E400 / 2B500) is dated on no page; only the black 96301 pair splits at 02/1995 |
+| G25 82730-3Z005, P08 80730-JX30B (+ 8991A, JX30C, 82731-3Z005) | held, `held_cross_position` |
+| G10 96301/96302-3JA9A | held, `held_starred_scope` via star_blind (QX60 2015) |
+
+### What the positions data would allow (decision 4, not written into notes)
+
+Each held group's position per model comes from that model's own page:
+- the page name (front_door_window_regulator / rear_door_window_regulator);
+- its Location field (Passenger Side / Driver side);
+- resolved by positions.py into door and side.
+
+So a note could name the donor's door per model without new evidence, for
+example "front right on the Versa, rear right on the Murano". The 5 groups:
+
+| group | positions |
+|---|---|
+| 80730-8991A | Murano RR, Versa FR |
+| 80730-JX30B | Cube FR, Rogue RR |
+| 80730-JX30C | Cube and Juke FR, Rogue RR |
+| 82730-3Z005 | Altima RR, Sentra FR |
+| 82731-3Z005 | Altima RL, Sentra FL |
+
+The app would need to show the line on the donor row; that is an app change.
+
+### Tests
+
+- **New `curation_tests/test_round7_1119.py`, 21 checks:** Versa per page
+  and the union cause, pages disjoint, undated beside a cutting page, FX
+  changeover, G25 widened month, Titan 7S200 two months out stays plain,
+  another option no changeover, Titan 7S600 split, Frontier EA000
+  cross-model split, no split without the sibling on T's page, the
+  star-blind filter, and the committed files.
+- **Updated:** `test_round4_1119` / `test_round5_1119` fakes pinned to their
+  reading (`_r7 = False`); `test_round5b_1119` 7S00E/7S006 now decided via
+  star_blind; `test_round6_1119` accepts the two groups now held at the cap.
+- curation_tests: 28/28 files pass (Phase 2 parity SKIP unchanged).
+- pf_guards_unit: ALL PASS.
+- test_interchange and test_am_gates: pass.
+
+### Stricter or looser than the brief
+
+- **Looser (2):** a changeover two or more months outside the span stays
+  plain (G08, G21, G03). The brief says a month either way; the check's band
+  (06/(Y-1)-09/Y) is wider.
+- **Looser (3):** G05 stays plain. The decision needs a dated split; no page
+  dates the J6301 pair. Holding "two same-option numbers on the page, both
+  undated, no date anywhere" would be a new class: 36 vy / 9 groups on
+  nissan, but 155 vy / 97 groups / 13,892 plain on gm.
+- **Narrower (4):** only known positions count.
+- **Decision 1 window:** the intersection of the dated pages (the narrower
+  reading), because the app's built gate cannot tie a window to a body.
+
+### Suggestions
+
+- **Per-body windows:** a body-specific build window would need a gate that
+  pairs body and window (app change).
+- **Door words for cross-position groups:** the positions data above is
+  enough for the note and the donor row (app change).
+- **G05 class:** decide whether "two same-option numbers, both undated" should
+  be held. The census sizes it per make in `round7_census_2026-11-19.json`
+  (class x).

@@ -855,6 +855,21 @@ heated splits remain. It is deferred.
   (`hybrid_only_disps`). The note cap runs on the round-5b window reading
   too, and a vehicle-year it leaves out stays out. Held lists:
   `groups/_report/<ns>.round6_held.json` and `nissan.starred_held.json`.
+- **Round 7 (hub 2026-11-19 ~11:40 UTC, after the 1119g check; curate.py).**
+  The build-window cut test runs per page that lists the number (body-variant
+  pages: 2007 Versa sedan 12/2006-07/2007, hatchback 05/2006-01/2007), never
+  on their union; a dated page that cuts gates the year with the months every
+  dated page lists (none in common: the year leaves). A changeover month with
+  a same-option number on T's page inside the span widened a month either way
+  gates the year on both sides, even when the window covers the span. When T's
+  page lists the number undated beside a same-option number and other pages of
+  the site date the split, the narrower reading gates the year (the model's
+  own dated pages first, else the pages showing the split). A group whose
+  number sits in another known position on another model is held whole
+  (`held_cross_position`; unknown positions do not count). The star-blind
+  reading (marks taken off) also decides `held_starred_scope`. The note cap
+  runs on the round-6 and round-5b readings too (only narrows). Held list:
+  `groups/_report/<ns>.round7_held.json`.
 - **Skips and refusals.** Single-model classes are skipped, because the
   same-model generation loop already covers them. Classes over the 12-model
   cap are refused.
