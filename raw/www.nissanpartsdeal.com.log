@@ -2351,3 +2351,6 @@
 11:38:15 chain-unlinked strut 3 numbers named by 56210-CD325, no catalog link: 56210-CD726, E6B10-CD70A, E6210-CD70A
 11:38:15 seg done tier=C Nissan 350Z [2003, 2008] seeds=[2004] records=5347 errors=36
 11:38:15 finished records=5347 errors=36 chain_records=0 chain_unlinked=608 chain_failed=1 chain_given_up=0
+16:27:19 start site=www.nissanpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=5347 list_lines=994 year_lines=275 url_index=7640
+16:27:19 completion worklist completion/nissan.own_page_1119.json: 5 rows
+16:27:32 STOPPED: www.nissanpartsdeal.com refused or challenged (HTTP 403); domain stopped for this program
