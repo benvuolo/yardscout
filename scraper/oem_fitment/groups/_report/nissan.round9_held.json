@@ -1,0 +1,1395 @@
+{
+ "groups_by_reason": {
+  "held_body_mark": 4,
+  "held_drive_open": 12,
+  "held_twin_changeover": 22,
+  "held_variant_unread": 2
+ },
+ "held": [
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7S005"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Armada",
+    2004
+   ],
+   "twins": [
+    "24810-7S01A"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7S005"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Armada",
+    2005
+   ],
+   "twins": [
+    "24810-7S01A"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7S01A"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Titan",
+    2005
+   ],
+   "twins": [
+    "24810-7S005",
+    "24810-7S00D",
+    "24810-7S00E",
+    "24810-7S01C",
+    "24810-7S204",
+    "24810-7S205",
+    "24810-7S20C",
+    "24810-7S20E",
+    "24810-7S21A"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZD016"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    2003
+   ],
+   "twins": [
+    "24810-1Z916",
+    "24810-7Z901"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZD016"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2003
+   ],
+   "twins": [
+    "24810-2Z916",
+    "24810-7Z916"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZD103"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    2003
+   ],
+   "twins": [
+    "24810-7Z903"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZD103"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2003
+   ],
+   "twins": [
+    "24810-7Z909"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZD103"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "24810-ZD210 4wd"
+   ],
+   "t": [
+    "Nissan",
+    "Xterra",
+    2003
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-1MA5B"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Infiniti",
+    "M37",
+    2012
+   ],
+   "twins": [
+    "24820-1MA2B"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-1MA5B"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "24820-1MK2A 2wd",
+    "24820-1MK5A 2wd"
+   ],
+   "t": [
+    "Infiniti",
+    "M37",
+    2012
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-1MA5B"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Infiniti",
+    "M37",
+    2013
+   ],
+   "twins": [
+    "24820-1MA2B"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-1MA5B"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "24820-1MK2A 2wd",
+    "24820-1MK5A 2wd"
+   ],
+   "t": [
+    "Infiniti",
+    "M37",
+    2013
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-1MA5B"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "24820-1MK5A 2wd"
+   ],
+   "t": [
+    "Infiniti",
+    "Q70",
+    2014
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-3ZD0C"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "24820-1ZS0A awd",
+    "24820-1ZS0C awd"
+   ],
+   "t": [
+    "Infiniti",
+    "QX56",
+    2013
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-3ZD1C"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "24820-1ZS0A awd",
+    "24820-1ZS0C awd"
+   ],
+   "t": [
+    "Infiniti",
+    "QX56",
+    2013
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-6AH1B"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "24820-1MK2A 2wd",
+    "24820-6AH2A 2wd"
+   ],
+   "t": [
+    "Infiniti",
+    "M37",
+    2013
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "marks": [
+    "24820-4AM1B LSEDAN beside SEDAN"
+   ],
+   "pn": [
+    "24820-6AH1B"
+   ],
+   "reason": "held_body_mark",
+   "ships": false,
+   "t": [
+    "Infiniti",
+    "Q70",
+    2014
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-6AH1B"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "24820-4AM2A 2wd",
+    "24820-6AH2A 2wd"
+   ],
+   "t": [
+    "Infiniti",
+    "Q70",
+    2014
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "offered": [
+    "b14u",
+    "b14x"
+   ],
+   "pn": [
+    "24820-89Y00"
+   ],
+   "read": [
+    "b14u"
+   ],
+   "reason": "held_variant_unread",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Sentra",
+    1995
+   ],
+   "unread": [
+    "b14x"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "offered": [
+    "b14u",
+    "b14x"
+   ],
+   "pn": [
+    "24820-89Y00"
+   ],
+   "read": [
+    "b14u"
+   ],
+   "reason": "held_variant_unread",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Sentra",
+    1996
+   ],
+   "unread": [
+    "b14x"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "offered": [
+    "b14u",
+    "b14x"
+   ],
+   "pn": [
+    "24820-89Y00"
+   ],
+   "read": [
+    "b14u"
+   ],
+   "reason": "held_variant_unread",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Sentra",
+    1997
+   ],
+   "unread": [
+    "b14x"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "offered": [
+    "b14u",
+    "b14x"
+   ],
+   "pn": [
+    "24820-89Y00"
+   ],
+   "read": [
+    "b14u"
+   ],
+   "reason": "held_variant_unread",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Sentra",
+    1998
+   ],
+   "unread": [
+    "b14x"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "marks": [
+    "24820-8Z002 4S beside C"
+   ],
+   "pn": [
+    "24820-89Y00"
+   ],
+   "reason": "held_body_mark",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Sentra",
+    1998
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "offered": [
+    "b14u",
+    "b14x"
+   ],
+   "pn": [
+    "24820-89Y00"
+   ],
+   "read": [
+    "b14u"
+   ],
+   "reason": "held_variant_unread",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Sentra",
+    1999
+   ],
+   "unread": [
+    "b14x"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "offered": [
+    "b14u",
+    "b14x"
+   ],
+   "pn": [
+    "24820-8B703"
+   ],
+   "read": [
+    "b14u"
+   ],
+   "reason": "held_variant_unread",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Sentra",
+    1999
+   ],
+   "unread": [
+    "b14x"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-EH101"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Infiniti",
+    "M45",
+    2006
+   ],
+   "twins": [
+    "24820-EH11A",
+    "24820-EH11B",
+    "24820-EJ20A",
+    "24820-EJ20B"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27510-2B000"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Altima",
+    1994
+   ],
+   "twins": [
+    "27510-1E400",
+    "27510-2B001"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27510-2B000"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1994
+   ],
+   "twins": [
+    "27510-1E400",
+    "27510-2B001"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27510-2B001"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "twins": [
+    "28525-1E504",
+    "28525-1E505"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27510-2B001"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Altima",
+    1997
+   ],
+   "twins": [
+    "28525-1E505"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27510-2B001"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1996
+   ],
+   "twins": [
+    "28525-1E504",
+    "28525-1E505"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27510-2B001"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1997
+   ],
+   "twins": [
+    "28525-1E505"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80700-0E710"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Altima",
+    1994
+   ],
+   "twins": [
+    "80720-0E700",
+    "80720-0E715"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80700-0E710"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1994
+   ],
+   "twins": [
+    "80720-0E700",
+    "80720-0E715"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80701-0E710"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Altima",
+    1994
+   ],
+   "twins": [
+    "80721-0E700",
+    "80721-0E715"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80701-0E710"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1994
+   ],
+   "twins": [
+    "80721-0E700",
+    "80721-0E715"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-2Z700"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    2003
+   ],
+   "twins": [
+    "80720-2Z710",
+    "80720-3S510"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-EA010"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "80720-EA000 2wd"
+   ],
+   "t": [
+    "Nissan",
+    "Frontier",
+    2005
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80720-EA010"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "80720-EA000 2wd"
+   ],
+   "t": [
+    "Nissan",
+    "Frontier",
+    2006
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-2Z700"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    2002
+   ],
+   "twins": [
+    "80721-3S500"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-2Z700"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    2003
+   ],
+   "twins": [
+    "80721-2Z710",
+    "80721-3S500",
+    "80721-3S510"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-2Z700"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2002
+   ],
+   "twins": [
+    "80721-3S500"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-2Z700"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2003
+   ],
+   "twins": [
+    "80721-3S500"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-EA010"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "80721-EA000 2wd"
+   ],
+   "t": [
+    "Nissan",
+    "Frontier",
+    2005
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80721-EA010"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "80721-EA000 2wd"
+   ],
+   "t": [
+    "Nissan",
+    "Frontier",
+    2006
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-7B400"
+   ],
+   "reason": "held_drive_open",
+   "ships": true,
+   "siblings": [
+    "80730-3S500 2wd"
+   ],
+   "t": [
+    "Nissan",
+    "Frontier",
+    1999
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-7B400"
+   ],
+   "reason": "held_drive_open",
+   "ships": true,
+   "siblings": [
+    "80730-3S500 2wd"
+   ],
+   "t": [
+    "Nissan",
+    "Frontier",
+    2000
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80731-7B400"
+   ],
+   "reason": "held_drive_open",
+   "ships": true,
+   "siblings": [
+    "80731-3S500 2wd"
+   ],
+   "t": [
+    "Nissan",
+    "Frontier",
+    1999
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80731-7B400"
+   ],
+   "reason": "held_drive_open",
+   "ships": true,
+   "siblings": [
+    "80731-3S500 2wd"
+   ],
+   "t": [
+    "Nissan",
+    "Frontier",
+    2000
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "marks": [
+    "96301-5UB0A LWB beside WAG"
+   ],
+   "pn": [
+    "96301-1BA1D"
+   ],
+   "reason": "held_body_mark",
+   "ships": true,
+   "t": [
+    "Infiniti",
+    "QX50",
+    2015
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "marks": [
+    "96301-5UB0A LWB beside WAG"
+   ],
+   "pn": [
+    "96301-1BA1D"
+   ],
+   "reason": "held_body_mark",
+   "ships": true,
+   "t": [
+    "Infiniti",
+    "QX50",
+    2016
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-3JA9A"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "96301-3JN9B awd"
+   ],
+   "t": [
+    "Infiniti",
+    "JX35",
+    2013
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-3JA9A"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "96301-3JN9B awd",
+    "96301-3JN9C awd"
+   ],
+   "t": [
+    "Infiniti",
+    "QX60",
+    2015
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-3S500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    1999
+   ],
+   "twins": [
+    "96301-3S501",
+    "96301-3S511"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-3S500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    2000
+   ],
+   "twins": [
+    "96301-3S501",
+    "96301-3S511"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-9BC9B"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2012
+   ],
+   "twins": [
+    "96301-EA005"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-9BC9B"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2013
+   ],
+   "twins": [
+    "96301-EA005"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-EA000"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2013
+   ],
+   "twins": [
+    "96301-9BC9A"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "marks": [
+    "96302-5UB0A LWB beside WAG"
+   ],
+   "pn": [
+    "96302-1BA1D"
+   ],
+   "reason": "held_body_mark",
+   "ships": true,
+   "t": [
+    "Infiniti",
+    "QX50",
+    2015
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "marks": [
+    "96302-5UB0A LWB beside WAG"
+   ],
+   "pn": [
+    "96302-1BA1D"
+   ],
+   "reason": "held_body_mark",
+   "ships": true,
+   "t": [
+    "Infiniti",
+    "QX50",
+    2016
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-3JA9A"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "96302-3JN9B awd"
+   ],
+   "t": [
+    "Infiniti",
+    "JX35",
+    2013
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-3JA9A"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "96302-3JN9B awd",
+    "96302-3JN9C awd"
+   ],
+   "t": [
+    "Infiniti",
+    "QX60",
+    2015
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-3S500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    1999
+   ],
+   "twins": [
+    "96302-3S501",
+    "96302-3S511"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-3S500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    2000
+   ],
+   "twins": [
+    "96302-3S501",
+    "96302-3S511"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-3S500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Frontier",
+    2003
+   ],
+   "twins": [
+    "96302-3B300",
+    "96302-S3800"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-9BC9B"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2012
+   ],
+   "twins": [
+    "96302-EA005"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-9BC9B"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2013
+   ],
+   "twins": [
+    "96302-EA005"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-EA000"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": false,
+   "t": [
+    "Nissan",
+    "Xterra",
+    2013
+   ],
+   "twins": [
+    "96302-9BC9A"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-ZC20A"
+   ],
+   "reason": "held_drive_open",
+   "ships": false,
+   "siblings": [
+    "96302-ZR00E 2wd",
+    "96302-ZR20E 2wd"
+   ],
+   "t": [
+    "Nissan",
+    "Titan",
+    2007
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6301-1E400"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "twins": [
+    "J6301-2B500"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6301-1E400"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "twins": [
+    "J6301-2B500"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6301-1E400"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1996
+   ],
+   "twins": [
+    "J6301-2B500"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6301-2B500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "twins": [
+    "J6301-1E400"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6301-2B500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "twins": [
+    "J6301-1E400"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6301-2B500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1996
+   ],
+   "twins": [
+    "J6301-1E400"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6302-1E400"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "twins": [
+    "J6302-2B500"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6302-1E400"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "twins": [
+    "J6302-2B500"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6302-1E400"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1996
+   ],
+   "twins": [
+    "J6302-2B500"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6302-2B500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "twins": [
+    "J6302-1E400"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6302-2B500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "twins": [
+    "J6302-1E400"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "pn": [
+    "J6302-2B500"
+   ],
+   "reason": "held_twin_changeover",
+   "ships": true,
+   "t": [
+    "Nissan",
+    "Stanza",
+    1996
+   ],
+   "twins": [
+    "J6302-1E400"
+   ]
+  }
+ ],
+ "note": "round9-1119 (hub 2026-11-19 after check 1119i): held_part_name (group), held_variant_unread, held_twin_changeover, held_body_mark, held_drive_open (vehicle-years); rows are recorded where the rule held them, 'ships' says whether the group still ships.",
+ "ns": "nissan",
+ "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
+ "vehicle_years_by_reason": {
+  "held_body_mark": 6,
+  "held_drive_open": 21,
+  "held_twin_changeover": 48,
+  "held_variant_unread": 6
+ }
+}

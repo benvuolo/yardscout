@@ -5730,11 +5730,11 @@
  },
  "input_issues": [],
  "inputs": {
-  "decodes": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/r8/pin/vin_decodes.json.gz",
+  "decodes": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/r9/pin/vin_decodes.json.gz",
   "decodes_sha256": "1357625b4429eaf936acafb234b64efb383abdbdcfbbe5ba84b3518139a32fc4",
-  "extras": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/r8/pin/vehicle_extras.json",
+  "extras": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/r9/pin/vehicle_extras.json",
   "extras_sha256": "6ff3d44b86fe224c0bf39398516c25c94f9ee01c551a9a803946cd3d09e065e3",
-  "inventory": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/r8/pin/inventory_live.json",
+  "inventory": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/r9/pin/inventory_live.json",
   "inventory_sha256": "1a9cfa73e9c15e41809e1149c2e752504e797efd91c18de4668df454364ce1d6"
  },
  "lint": [],
@@ -180956,11 +180956,31 @@
   },
   {
    "cat": "climate-control",
+   "detail": "Nissan Altima 1993 held_undated_siblings; Nissan Altima 1994 held_twin_changeover; Nissan Stanza 1993 held_undated_siblings; Nissan Stanza 1994 held_twin_changeover; Nissan Stanza 1995 held_undated_siblings",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1568"
+   ],
+   "pn": "27510-2B000",
+   "reason": "held_undated_siblings",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
    "detail": "Nissan Altima 1993 held_undated_siblings; Nissan Stanza 1993 held_undated_siblings",
    "evidence": [
     "www.nissanpartsdeal.com:records:L4815"
    ],
    "pn": "27510-1E400",
+   "reason": "held_undated_siblings",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "detail": "Nissan Altima 1996 held_twin_changeover; Nissan Altima 1997 held_twin_changeover; Nissan Stanza 1995 held_undated_siblings; Nissan Stanza 1996 held_twin_changeover; Nissan Stanza 1997 held_twin_changeover",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1569"
+   ],
+   "pn": "27510-2B001",
    "reason": "held_undated_siblings",
    "t": null
   },
@@ -182595,7 +182615,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Infiniti M35 2007 held_starred_only/held_undated_siblings; Infiniti M45 2006 held_starred_only; Infiniti M45 2007 held_starred_only/held_undated_siblings",
+   "detail": "Infiniti M35 2007 held_starred_only/held_undated_siblings; Infiniti M45 2006 held_starred_only/held_twin_changeover; Infiniti M45 2007 held_starred_only/held_undated_siblings",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1151"
    ],
@@ -182645,11 +182665,21 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Infiniti M37 2012 held_undated_siblings; Infiniti M37 2013 held_undated_siblings; Infiniti Q70 2014 held_undated_siblings",
+   "detail": "Infiniti M37 2012 held_drive_open/held_twin_changeover/held_undated_siblings; Infiniti M37 2013 held_drive_open/held_twin_changeover/held_undated_siblings; Infiniti Q70 2014 held_drive_open/held_undated_siblings",
    "evidence": [
     "www.infinitipartsdeal.com:records:L2303"
    ],
    "pn": "24820-1MA5B",
+   "reason": "held_undated_siblings",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Infiniti M37 2013 held_drive_open/held_undated_siblings; Infiniti Q70 2014 held_body_mark/held_drive_open/held_undated_siblings",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L2311"
+   ],
+   "pn": "24820-6AH1B",
    "reason": "held_undated_siblings",
    "t": null
   },
@@ -182665,12 +182695,22 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Infiniti M37 2013 held_undated_siblings; Infiniti Q70 2014 held_undated_siblings",
+   "detail": "Infiniti QX56 2013 held_drive_open",
    "evidence": [
-    "www.infinitipartsdeal.com:records:L2311"
+    "www.infinitipartsdeal.com:records:L1727"
    ],
-   "pn": "24820-6AH1B",
-   "reason": "held_undated_siblings",
+   "pn": "24820-3ZD1C",
+   "reason": "held_drive_open",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Infiniti QX56 2013 held_drive_open/held_starred_only; Infiniti QX80 2014 held_starred_only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1725"
+   ],
+   "pn": "24820-3ZD0C",
+   "reason": "held_starred_only",
    "t": null
   },
   {
@@ -182690,16 +182730,6 @@
     "www.infinitipartsdeal.com:records:L1726"
    ],
    "pn": "24820-3ZD1A",
-   "reason": "held_starred_only",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Infiniti QX56 2013 held_starred_only; Infiniti QX80 2014 held_starred_only",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1725"
-   ],
-   "pn": "24820-3ZD0C",
    "reason": "held_starred_only",
    "t": null
   },
@@ -182751,6 +182781,36 @@
    ],
    "pn": "24820-6AH2A",
    "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Nissan 200SX 1997 held_undated_siblings; Nissan 200SX 1998 held_undated_siblings; Nissan Sentra 1995 held_variant_unread; Nissan Sentra 1996 held_variant_unread; Nissan Sentra 1997 held_variant_unread; Nissan Sentra 1998 held_body_mark/held_variant_unread; Nissan Sentra 1999 held_variant_unread",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2506"
+   ],
+   "pn": "24820-89Y00",
+   "reason": "held_undated_siblings",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Nissan 200SX 1997 held_undated_siblings; Nissan Sentra 1999 held_variant_unread",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4920"
+   ],
+   "pn": "24820-8B703",
+   "reason": "held_undated_siblings",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Nissan Armada 2004 held_twin_changeover; Nissan Armada 2005 held_twin_changeover; Nissan Titan 2006 held_starred_only/held_starred_scope",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2752"
+   ],
+   "pn": "24810-7S005",
+   "reason": "held_starred_only",
    "t": null
   },
   {
@@ -182815,7 +182875,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Nissan Frontier 2003 held_starred_only/held_starred_scope; Nissan Frontier 2004 held_starred_only/held_starred_scope/held_undated_siblings; Nissan Xterra 2003 held_starred_only",
+   "detail": "Nissan Frontier 2003 held_starred_only/held_starred_scope/held_twin_changeover; Nissan Frontier 2004 held_starred_only/held_starred_scope/held_undated_siblings; Nissan Xterra 2003 held_starred_only/held_twin_changeover",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2155"
    ],
@@ -182825,7 +182885,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Nissan Frontier 2003 held_starred_only/held_undated_siblings; Nissan Frontier 2004 held_starred_only/held_undated_siblings; Nissan Xterra 2003 held_starred_only/held_undated_siblings",
+   "detail": "Nissan Frontier 2003 held_starred_only/held_twin_changeover/held_undated_siblings; Nissan Frontier 2004 held_starred_only/held_undated_siblings; Nissan Xterra 2003 held_drive_open/held_starred_only/held_twin_changeover/held_undated_siblings",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2156"
    ],
@@ -182835,7 +182895,7 @@
   },
   {
    "cat": "gauge-cluster",
-   "detail": "Nissan Titan 2005 held_starred_only/held_undated_siblings",
+   "detail": "Nissan Titan 2005 held_starred_only/held_twin_changeover/held_undated_siblings",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2758"
    ],
@@ -182850,16 +182910,6 @@
     "www.nissanpartsdeal.com:records:L2757"
    ],
    "pn": "24810-7S00E",
-   "reason": "held_starred_only",
-   "t": null
-  },
-  {
-   "cat": "gauge-cluster",
-   "detail": "Nissan Titan 2006 held_starred_only/held_starred_scope",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L2752"
-   ],
-   "pn": "24810-7S005",
    "reason": "held_starred_only",
    "t": null
   },
@@ -183807,26 +183857,6 @@
   },
   {
    "cat": "grille",
-   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2015-2015",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1258"
-   ],
-   "pn": "62310-3JA0A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "grille",
-   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2015-2015",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1259"
-   ],
-   "pn": "62310-3JA0B",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "grille",
    "detail": "Infiniti M35 2007-2008;Infiniti M45 2006-2008",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1169"
@@ -183933,6 +183963,26 @@
    ],
    "pn": "62310-EA700",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "QX60: 3.5L only; QX60: checked on gas-model pages",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1258"
+   ],
+   "pn": "62310-3JA0A",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "QX60: 3.5L only; QX60: checked on gas-model pages",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1259"
+   ],
+   "pn": "62310-3JA0B",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -187158,27 +187208,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Infiniti JX35 2013 held_starred_scope/held_undated_siblings; Infiniti QX60 2015 held_starred_scope/held_undated_siblings",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L371"
-   ],
-   "pn": "96302-3JA9C",
-   "reason": "held_starred_scope",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "Infiniti JX35 2013 held_starred_scope/held_undated_siblings; Infiniti QX60 2015 held_starred_scope/held_undated_siblings",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L376"
-   ],
-   "pn": "96301-3JA9C",
-   "reason": "held_starred_scope",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "Infiniti JX35 2013 held_undated_siblings; Infiniti QX60 2015 held_starred_scope/held_undated_siblings",
+   "detail": "Infiniti JX35 2013 held_drive_open/held_undated_siblings; Infiniti QX60 2015 held_drive_open/held_starred_scope/held_undated_siblings",
    "evidence": [
     "www.infinitipartsdeal.com:records:L369"
    ],
@@ -187188,7 +187218,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Infiniti JX35 2013 held_undated_siblings; Infiniti QX60 2015 held_starred_scope/held_undated_siblings",
+   "detail": "Infiniti JX35 2013 held_drive_open/held_undated_siblings; Infiniti QX60 2015 held_drive_open/held_starred_scope/held_undated_siblings",
    "evidence": [
     "www.infinitipartsdeal.com:records:L374"
    ],
@@ -187318,7 +187348,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Nissan Armada 2007 held_undated_siblings; Nissan Titan 2007 held_starred_only",
+   "detail": "Nissan Armada 2007 held_undated_siblings; Nissan Titan 2007 held_drive_open/held_starred_only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L1008"
    ],
@@ -187328,7 +187358,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Nissan Frontier 1998 held_plus_reading/held_starred_only/held_undated_siblings; Nissan Frontier 1999 held_starred_only/held_undated_siblings; Nissan Frontier 2000 held_starred_only/held_undated_siblings; Nissan Frontier 2001 held_starred_only/held_starred_scope/held_undated_siblings; Nissan Frontier 2002 held_plus_reading/held_starred_only/held_starred_scope/held_undated_siblings; Nissan Frontier ",
+   "detail": "Nissan Frontier 1998 held_plus_reading/held_starred_only/held_undated_siblings; Nissan Frontier 1999 held_starred_only/held_twin_changeover/held_undated_siblings; Nissan Frontier 2000 held_starred_only/held_twin_changeover/held_undated_siblings; Nissan Frontier 2001 held_starred_only/held_starred_scope/held_undated_siblings; Nissan Frontier 2002 held_plus_reading/held_starred_only/held_starred_sco",
    "evidence": [
     "www.nissanpartsdeal.com:records:L260"
    ],
@@ -187338,7 +187368,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Nissan Frontier 1998 held_plus_reading/held_starred_only; Nissan Frontier 1999 held_starred_only; Nissan Frontier 2000 held_starred_only; Nissan Frontier 2001 held_starred_only/held_undated_siblings; Nissan Frontier 2002 held_starred_only/held_undated_siblings; Nissan Frontier 2003 held_plus_reading/held_starred_only/held_starred_scope/held_undated_siblings; Nissan Frontier 2004 held_starred_only/",
+   "detail": "Nissan Frontier 1998 held_plus_reading/held_starred_only; Nissan Frontier 1999 held_starred_only/held_twin_changeover; Nissan Frontier 2000 held_starred_only/held_twin_changeover; Nissan Frontier 2001 held_starred_only/held_undated_siblings; Nissan Frontier 2002 held_starred_only/held_undated_siblings; Nissan Frontier 2003 held_plus_reading/held_starred_only/held_starred_scope/held_undated_sibling",
    "evidence": [
     "www.nissanpartsdeal.com:records:L264"
    ],
@@ -187348,7 +187378,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Nissan Frontier 2016 held_undated_siblings; Nissan Xterra 2012 held_undated_siblings; Nissan Xterra 2013 held_undated_siblings",
+   "detail": "Nissan Frontier 2016 held_undated_siblings; Nissan Xterra 2012 held_twin_changeover/held_undated_siblings; Nissan Xterra 2013 held_twin_changeover/held_undated_siblings",
    "evidence": [
     "www.nissanpartsdeal.com:records:L4807"
    ],
@@ -187358,7 +187388,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Nissan Frontier 2016 held_undated_siblings; Nissan Xterra 2012 held_undated_siblings; Nissan Xterra 2013 held_undated_siblings",
+   "detail": "Nissan Frontier 2016 held_undated_siblings; Nissan Xterra 2012 held_twin_changeover/held_undated_siblings; Nissan Xterra 2013 held_twin_changeover/held_undated_siblings",
    "evidence": [
     "www.nissanpartsdeal.com:records:L4808"
    ],
@@ -187368,7 +187398,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Nissan Xterra 2005 held_undated_siblings; Nissan Xterra 2006 held_undated_siblings; Nissan Xterra 2007 held_plus_reading/held_undated_siblings; Nissan Xterra 2008 held_plus_reading/held_undated_siblings; Nissan Xterra 2009 held_undated_siblings; Nissan Xterra 2011 held_undated_siblings; Nissan Xterra 2013 held_option_tie/held_undated_siblings",
+   "detail": "Nissan Xterra 2005 held_undated_siblings; Nissan Xterra 2006 held_undated_siblings; Nissan Xterra 2007 held_plus_reading/held_undated_siblings; Nissan Xterra 2008 held_plus_reading/held_undated_siblings; Nissan Xterra 2009 held_undated_siblings; Nissan Xterra 2011 held_undated_siblings; Nissan Xterra 2013 held_option_tie/held_twin_changeover/held_undated_siblings",
    "evidence": [
     "www.nissanpartsdeal.com:records:L304"
    ],
@@ -187378,7 +187408,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "Nissan Xterra 2005 held_undated_siblings; Nissan Xterra 2006 held_undated_siblings; Nissan Xterra 2007 held_plus_reading/held_undated_siblings; Nissan Xterra 2008 held_plus_reading/held_undated_siblings; Nissan Xterra 2009 held_undated_siblings; Nissan Xterra 2011 held_undated_siblings; Nissan Xterra 2013 held_option_tie/held_undated_siblings",
+   "detail": "Nissan Xterra 2005 held_undated_siblings; Nissan Xterra 2006 held_undated_siblings; Nissan Xterra 2007 held_plus_reading/held_undated_siblings; Nissan Xterra 2008 held_plus_reading/held_undated_siblings; Nissan Xterra 2009 held_undated_siblings; Nissan Xterra 2011 held_undated_siblings; Nissan Xterra 2013 held_option_tie/held_twin_changeover/held_undated_siblings",
    "evidence": [
     "www.nissanpartsdeal.com:records:L307"
    ],
@@ -187404,6 +187434,46 @@
    ],
    "pn": "96301-EA005",
    "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "QX60: 2WD only; QX60: checked on gas-model pages",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L370"
+   ],
+   "pn": "96302-3JA9B",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "QX60: 2WD only; QX60: checked on gas-model pages",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L375"
+   ],
+   "pn": "96301-3JA9B",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "QX60: 3.5L only; QX60: checked on gas-model pages",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L371"
+   ],
+   "pn": "96302-3JA9C",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "QX60: 3.5L only; QX60: checked on gas-model pages",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L376"
+   ],
+   "pn": "96301-3JA9C",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -187463,26 +187533,6 @@
     "www.infinitipartsdeal.com:records:L301"
    ],
    "pn": "96301-EH100",
-   "reason": "held_window_note_cap",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "as round 5b",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L370"
-   ],
-   "pn": "96302-3JA9B",
-   "reason": "held_window_note_cap",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "as round 5b",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L375"
-   ],
-   "pn": "96301-3JA9B",
    "reason": "held_window_note_cap",
    "t": null
   },
@@ -188895,22 +188945,42 @@
   },
   {
    "cat": "window-regulator",
-   "detail": "Altima: RL; Sentra: FL",
+   "detail": "Altima: built 11/2002-01/2004 only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L414"
    ],
    "pn": "82731-3Z005",
-   "reason": "held_cross_position",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
    "cat": "window-regulator",
-   "detail": "Altima: RR; Sentra: FR",
+   "detail": "Altima: built 11/2002-01/2004 only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L415"
    ],
    "pn": "82730-3Z005",
-   "reason": "held_cross_position",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Armada: built 08/2006-04/2008 only; Titan: crew cab only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L854"
+   ],
+   "pn": "82731-7S000",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Armada: built 08/2006-04/2008 only; Titan: crew cab only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L855"
+   ],
+   "pn": "82730-7S000",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -189025,6 +189095,26 @@
   },
   {
    "cat": "window-regulator",
+   "detail": "G25: built 06/2011-06/2014 only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L875"
+   ],
+   "pn": "80731-JK60C",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "G25: built 06/2011-06/2014 only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L877"
+   ],
+   "pn": "80730-JK60C",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
    "detail": "Infiniti FX35 2003: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L211"
@@ -189065,31 +189155,41 @@
   },
   {
    "cat": "window-regulator",
-   "detail": "Infiniti G25 2012 held_plus_reading; Infiniti Q40 2015 held_undated_siblings",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L875"
-   ],
-   "pn": "80731-JK60C",
-   "reason": "held_undated_siblings",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
-   "detail": "Infiniti G25 2012 held_plus_reading; Infiniti Q40 2015 held_undated_siblings",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L877"
-   ],
-   "pn": "80730-JK60C",
-   "reason": "held_undated_siblings",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
    "detail": "Murano 2005: built 08/2004-12/2006 only; Murano 2007: built 08/2004-12/2006 only; Versa: built 12/2006-01/2007 only",
    "evidence": [
     "www.nissanpartsdeal.com:records:L920"
    ],
    "pn": "80730-89915",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Murano 2016-2017, Rogue: checked on gas-model pages",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1287"
+   ],
+   "pn": "80730-4BA1A",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Murano 2016-2017, Rogue: checked on gas-model pages",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1291"
+   ],
+   "pn": "82731-4BA0A",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Murano 2016-2017, Rogue: checked on gas-model pages",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1292"
+   ],
+   "pn": "82730-4BA0A",
    "reason": "held_window_note_cap",
    "t": null
   },
@@ -189125,17 +189225,7 @@
   },
   {
    "cat": "window-regulator",
-   "detail": "Nissan Frontier 2002 held_undated_siblings; Nissan Frontier 2003 held_undated_siblings; Nissan Frontier 2004 held_starred_only/held_undated_siblings; Nissan Xterra 2002 held_plus_reading/held_undated_siblings; Nissan Xterra 2003 held_plus_reading/held_undated_siblings",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L272"
-   ],
-   "pn": "80720-2Z700",
-   "reason": "held_starred_only",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
-   "detail": "Nissan Frontier 2002 held_undated_siblings; Nissan Frontier 2004 held_starred_only/held_undated_siblings; Nissan Xterra 2002 held_plus_reading/held_undated_siblings; Nissan Xterra 2003 held_plus_reading/held_undated_siblings",
+   "detail": "Nissan Frontier 2002 held_twin_changeover/held_undated_siblings; Nissan Frontier 2003 held_twin_changeover; Nissan Frontier 2004 held_starred_only/held_undated_siblings; Nissan Xterra 2002 held_plus_reading/held_twin_changeover/held_undated_siblings; Nissan Xterra 2003 held_plus_reading/held_twin_changeover/held_undated_siblings",
    "evidence": [
     "www.nissanpartsdeal.com:records:L270"
    ],
@@ -189145,7 +189235,17 @@
   },
   {
    "cat": "window-regulator",
-   "detail": "Nissan Frontier 2005 held_undated_siblings; Nissan Frontier 2006 held_undated_siblings; Nissan Frontier 2007 held_undated_siblings; Nissan Frontier 2008 held_undated_siblings; Nissan Frontier 2009 held_undated_siblings; Nissan Frontier 2010 held_undated_siblings; Nissan Frontier 2011 held_undated_siblings; Nissan Xterra 2005 held_undated_siblings; Nissan Xterra 2006 held_undated_siblings; Nissan X",
+   "detail": "Nissan Frontier 2002 held_undated_siblings; Nissan Frontier 2003 held_twin_changeover/held_undated_siblings; Nissan Frontier 2004 held_starred_only/held_undated_siblings; Nissan Xterra 2002 held_plus_reading/held_undated_siblings; Nissan Xterra 2003 held_plus_reading/held_undated_siblings",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L272"
+   ],
+   "pn": "80720-2Z700",
+   "reason": "held_starred_only",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Nissan Frontier 2005 held_drive_open/held_undated_siblings; Nissan Frontier 2006 held_drive_open/held_undated_siblings; Nissan Frontier 2007 held_undated_siblings; Nissan Frontier 2008 held_undated_siblings; Nissan Frontier 2009 held_undated_siblings; Nissan Frontier 2010 held_undated_siblings; Nissan Frontier 2011 held_undated_siblings; Nissan Xterra 2005 held_undated_siblings; Nissan Xterra 2006",
    "evidence": [
     "www.nissanpartsdeal.com:records:L1596"
    ],
@@ -189155,7 +189255,7 @@
   },
   {
    "cat": "window-regulator",
-   "detail": "Nissan Frontier 2005 held_undated_siblings; Nissan Frontier 2006 held_undated_siblings; Nissan Frontier 2007 held_undated_siblings; Nissan Frontier 2008 held_undated_siblings; Nissan Frontier 2009 held_undated_siblings; Nissan Frontier 2010 held_undated_siblings; Nissan Frontier 2011 held_undated_siblings; Nissan Xterra 2005 held_undated_siblings; Nissan Xterra 2006 held_undated_siblings; Nissan X",
+   "detail": "Nissan Frontier 2005 held_drive_open/held_undated_siblings; Nissan Frontier 2006 held_drive_open/held_undated_siblings; Nissan Frontier 2007 held_undated_siblings; Nissan Frontier 2008 held_undated_siblings; Nissan Frontier 2009 held_undated_siblings; Nissan Frontier 2010 held_undated_siblings; Nissan Frontier 2011 held_undated_siblings; Nissan Xterra 2005 held_undated_siblings; Nissan Xterra 2006",
    "evidence": [
     "www.nissanpartsdeal.com:records:L1597"
    ],
@@ -189185,26 +189285,6 @@
   },
   {
    "cat": "window-regulator",
-   "detail": "Nissan Titan 2012 held_cab_inferred",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4724"
-   ],
-   "pn": "82731-9FJ0A",
-   "reason": "held_cab_inferred",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
-   "detail": "Nissan Titan 2012 held_cab_inferred",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L4725"
-   ],
-   "pn": "82730-9FJ0A",
-   "reason": "held_cab_inferred",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
    "detail": "QX60 2014 held_no_own_page",
    "evidence": [
     "www.infinitipartsdeal.com:records:L387"
@@ -189221,6 +189301,26 @@
    ],
    "pn": "82720-3JA0A",
    "reason": "held_no_own_page",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Titan: crew cab, built 08/2011-11/2014 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4724"
+   ],
+   "pn": "82731-9FJ0A",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Titan: crew cab, built 08/2011-11/2014 only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4725"
+   ],
+   "pn": "82730-9FJ0A",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -189260,26 +189360,6 @@
     "www.infinitipartsdeal.com:records:L2429"
    ],
    "pn": "82720-1MA0B",
-   "reason": "held_window_note_cap",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
-   "detail": "as round 5b",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L854"
-   ],
-   "pn": "82731-7S000",
-   "reason": "held_window_note_cap",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
-   "detail": "as round 5b",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L855"
-   ],
-   "pn": "82730-7S000",
    "reason": "held_window_note_cap",
    "t": null
   },
@@ -190129,11 +190209,16 @@
    "earlier_cap_kept_out:headlights": 2,
    "earlier_cap_kept_out:hood": 1,
    "earlier_cap_kept_out:liftgate": 4,
-   "earlier_cap_kept_out:side-mirrors": 12,
+   "earlier_cap_kept_out:side-mirrors": 6,
    "earlier_cap_kept_out:tail-lights": 3,
-   "earlier_cap_kept_out:window-regulator": 16,
-   "held_cab_inferred:window-regulator": 4,
-   "held_cross_position:window-regulator": 18,
+   "earlier_cap_kept_out:window-regulator": 10,
+   "held_body_mark:gauge-cluster": 2,
+   "held_body_mark:side-mirrors": 4,
+   "held_cab_inferred:window-regulator": 2,
+   "held_cross_position:window-regulator": 12,
+   "held_drive_open:gauge-cluster": 8,
+   "held_drive_open:side-mirrors": 5,
+   "held_drive_open:window-regulator": 8,
    "held_no_own_page:bumper-front": 4,
    "held_no_own_page:bumper-rear": 3,
    "held_no_own_page:climate-control": 13,
@@ -190152,14 +190237,19 @@
    "held_option_tie:side-mirrors": 2,
    "held_plus_reading:climate-control": 2,
    "held_plus_reading:side-mirrors": 29,
-   "held_plus_reading:window-regulator": 10,
+   "held_plus_reading:window-regulator": 8,
    "held_starred_only:gauge-cluster": 24,
    "held_starred_only:side-mirrors": 61,
    "held_starred_only:window-regulator": 6,
+   "held_twin_changeover:climate-control": 6,
+   "held_twin_changeover:gauge-cluster": 10,
+   "held_twin_changeover:side-mirrors": 23,
+   "held_twin_changeover:window-regulator": 9,
    "held_undated_siblings:climate-control": 13,
    "held_undated_siblings:gauge-cluster": 17,
-   "held_undated_siblings:side-mirrors": 139,
-   "held_undated_siblings:window-regulator": 61,
+   "held_undated_siblings:side-mirrors": 135,
+   "held_undated_siblings:window-regulator": 59,
+   "held_variant_unread:gauge-cluster": 6,
    "held_window_other_page:bumper-front": 2,
    "held_window_other_page:climate-control": 12,
    "held_window_other_page:door-front": 37,
@@ -190178,7 +190268,7 @@
   "likely_app_years_starred_scope": {
    "climate-control": 0,
    "gauge-cluster": 5,
-   "side-mirrors": 46,
+   "side-mirrors": 42,
    "window-regulator": 2
   },
   "likely_app_years_without_own_page": {
@@ -190201,7 +190291,7 @@
    "window-regulator": 1950,
    "wiper-motor": 799
   },
-  "likely_groups": 111,
+  "likely_groups": 103,
   "likely_groups_drive_noted": {
    "bumper-front": 5,
    "bumper-rear": 5,
@@ -190210,14 +190300,14 @@
    "door-rear": 10,
    "fender": 6,
    "gauge-cluster": 37,
-   "grille": 11,
+   "grille": 9,
    "headlights": 31,
    "hood": 2,
    "liftgate": 11,
-   "side-mirrors": 35,
+   "side-mirrors": 33,
    "tail-lights": 28,
    "trunk-lid": 3,
-   "window-regulator": 60
+   "window-regulator": 47
   },
   "list_rows": 75222,
   "records": 7778,

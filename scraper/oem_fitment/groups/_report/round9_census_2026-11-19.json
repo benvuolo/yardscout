@@ -1,0 +1,1352 @@
+{
+ "report": "round9_census_2026-11-19",
+ "pins": {
+  "nissan_raw": "oem-raw@57e8b5b99de0",
+  "shipped_raw": "oem-raw@dca9cd845f26",
+  "lot": "main@a85c654 inventory 1a9cfa73, vin_decodes 1357625b, vehicle_extras 6ff3d44b"
+ },
+ "tool": "B: curate.Curation.round9_tests on every vehicle-year of the 1119i candidate (origin/main _report/nissan.candidate.json) with that year's gate; lot rows = car x group rows of the vehicle-year in the 1119i candidate's lot replay (audit11_4/lot_replay.mjs) on the pinned lot",
+ "b_summary": {
+  "held_variant_unread": {
+   "vehicle_years": 9,
+   "groups": 5,
+   "still_claimed_in_round9_candidate": 0,
+   "lot_rows_1119i": {
+    "plain": 377,
+    "unc": 10,
+    "exc": 27
+   }
+  },
+  "held_twin_changeover": {
+   "vehicle_years": 22,
+   "groups": 8,
+   "still_claimed_in_round9_candidate": 0,
+   "lot_rows_1119i": {
+    "plain": 106
+   }
+  },
+  "held_body_mark": {
+   "vehicle_years": 5,
+   "groups": 3,
+   "still_claimed_in_round9_candidate": 0,
+   "lot_rows_1119i": {
+    "plain": 35,
+    "unc": 2
+   }
+  },
+  "held_drive_open": {
+   "vehicle_years": 1,
+   "groups": 1,
+   "still_claimed_in_round9_candidate": 0,
+   "lot_rows_1119i": {
+    "unc": 8
+   }
+  }
+ },
+ "b_named": {
+  "B1 Rogue 2017": [
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "80730-4BA1A"
+    ],
+    "t": [
+     "Nissan",
+     "Rogue",
+     2017
+    ],
+    "offered": [
+     "t32d",
+     "t32j",
+     "t32u"
+    ],
+    "read": [
+     "t32u"
+    ],
+    "unread": [
+     "t32d",
+     "t32j"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 90
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "82730-4BA0A"
+    ],
+    "t": [
+     "Nissan",
+     "Rogue",
+     2017
+    ],
+    "offered": [
+     "t32d",
+     "t32j",
+     "t32u"
+    ],
+    "read": [
+     "t32u"
+    ],
+    "unread": [
+     "t32d",
+     "t32j"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 90
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "82731-4BA0A"
+    ],
+    "t": [
+     "Nissan",
+     "Rogue",
+     2017
+    ],
+    "offered": [
+     "t32d",
+     "t32j",
+     "t32u"
+    ],
+    "read": [
+     "t32u"
+    ],
+    "unread": [
+     "t32d",
+     "t32j"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 90
+    },
+    "held_cat": false
+   }
+  ],
+  "B1 Sentra 1995-96 24820-89Y00": [
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-89Y00"
+    ],
+    "t": [
+     "Nissan",
+     "Sentra",
+     1995
+    ],
+    "offered": [
+     "b14u",
+     "b14x"
+    ],
+    "read": [
+     "b14u"
+    ],
+    "unread": [
+     "b14x"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 12
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-89Y00"
+    ],
+    "t": [
+     "Nissan",
+     "Sentra",
+     1996
+    ],
+    "offered": [
+     "b14u",
+     "b14x"
+    ],
+    "read": [
+     "b14u"
+    ],
+    "unread": [
+     "b14x"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 21
+    },
+    "held_cat": false
+   }
+  ],
+  "B2 27510-2B000 Altima 1994": [
+   {
+    "cat": "climate-control",
+    "pn": [
+     "27510-2B000"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1994
+    ],
+    "twins": [
+     "27510-1E400",
+     "27510-2B001"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 12
+    },
+    "held_cat": false
+   }
+  ],
+  "B2 J6301/J6302-1E400 Altima 1995-96": [
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6301-1E400"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "twins": [
+     "J6301-2B500"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 9
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6302-1E400"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "twins": [
+     "J6302-2B500"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 9
+    },
+    "held_cat": false
+   }
+  ],
+  "B2 J6301/J6302-2B500 Stanza 1995": [
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6301-2B500"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "twins": [
+     "J6301-1E400"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6302-2B500"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "twins": [
+     "J6302-1E400"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   }
+  ],
+  "B3 QX50 2016 mirrors": [
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "96301-1BA1D"
+    ],
+    "t": [
+     "Infiniti",
+     "QX50",
+     2015
+    ],
+    "marks": [
+     "96301-5UB0A LWB beside WAG"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 1
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "96301-1BA1D"
+    ],
+    "t": [
+     "Infiniti",
+     "QX50",
+     2016
+    ],
+    "marks": [
+     "96301-5UB0A LWB beside WAG"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 6
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "96302-1BA1D"
+    ],
+    "t": [
+     "Infiniti",
+     "QX50",
+     2015
+    ],
+    "marks": [
+     "96302-5UB0A LWB beside WAG"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 1
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "96302-1BA1D"
+    ],
+    "t": [
+     "Infiniti",
+     "QX50",
+     2016
+    ],
+    "marks": [
+     "96302-5UB0A LWB beside WAG"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 6
+    },
+    "held_cat": false
+   }
+  ],
+  "B4 QX56 2013 24820-3ZD1C": [
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-3ZD1C"
+    ],
+    "t": [
+     "Infiniti",
+     "QX56",
+     2013
+    ],
+    "siblings": [
+     "24820-1ZS0A awd",
+     "24820-1ZS0C awd"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "unc": 8
+    },
+    "held_cat": false
+   }
+  ]
+ },
+ "b_rows": {
+  "held_variant_unread": [
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-89Y00"
+    ],
+    "t": [
+     "Nissan",
+     "Sentra",
+     1995
+    ],
+    "offered": [
+     "b14u",
+     "b14x"
+    ],
+    "read": [
+     "b14u"
+    ],
+    "unread": [
+     "b14x"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 12
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-89Y00"
+    ],
+    "t": [
+     "Nissan",
+     "Sentra",
+     1996
+    ],
+    "offered": [
+     "b14u",
+     "b14x"
+    ],
+    "read": [
+     "b14u"
+    ],
+    "unread": [
+     "b14x"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 21
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-89Y00"
+    ],
+    "t": [
+     "Nissan",
+     "Sentra",
+     1997
+    ],
+    "offered": [
+     "b14u",
+     "b14x"
+    ],
+    "read": [
+     "b14u"
+    ],
+    "unread": [
+     "b14x"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 26,
+     "unc": 2
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-89Y00"
+    ],
+    "t": [
+     "Nissan",
+     "Sentra",
+     1998
+    ],
+    "offered": [
+     "b14u",
+     "b14x"
+    ],
+    "read": [
+     "b14u"
+    ],
+    "unread": [
+     "b14x"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 21,
+     "unc": 2
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-89Y00"
+    ],
+    "t": [
+     "Nissan",
+     "Sentra",
+     1999
+    ],
+    "offered": [
+     "b14u",
+     "b14x"
+    ],
+    "read": [
+     "b14u"
+    ],
+    "unread": [
+     "b14x"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 26,
+     "unc": 3,
+     "exc": 1
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-8B703"
+    ],
+    "t": [
+     "Nissan",
+     "Sentra",
+     1999
+    ],
+    "offered": [
+     "b14u",
+     "b14x"
+    ],
+    "read": [
+     "b14u"
+    ],
+    "unread": [
+     "b14x"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 1,
+     "unc": 3,
+     "exc": 26
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "80730-4BA1A"
+    ],
+    "t": [
+     "Nissan",
+     "Rogue",
+     2017
+    ],
+    "offered": [
+     "t32d",
+     "t32j",
+     "t32u"
+    ],
+    "read": [
+     "t32u"
+    ],
+    "unread": [
+     "t32d",
+     "t32j"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 90
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "82730-4BA0A"
+    ],
+    "t": [
+     "Nissan",
+     "Rogue",
+     2017
+    ],
+    "offered": [
+     "t32d",
+     "t32j",
+     "t32u"
+    ],
+    "read": [
+     "t32u"
+    ],
+    "unread": [
+     "t32d",
+     "t32j"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 90
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "82731-4BA0A"
+    ],
+    "t": [
+     "Nissan",
+     "Rogue",
+     2017
+    ],
+    "offered": [
+     "t32d",
+     "t32j",
+     "t32u"
+    ],
+    "read": [
+     "t32u"
+    ],
+    "unread": [
+     "t32d",
+     "t32j"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 90
+    },
+    "held_cat": false
+   }
+  ],
+  "held_twin_changeover": [
+   {
+    "cat": "climate-control",
+    "pn": [
+     "27510-2B000"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1994
+    ],
+    "twins": [
+     "27510-1E400",
+     "27510-2B001"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 12
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "climate-control",
+    "pn": [
+     "27510-2B000"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1994
+    ],
+    "twins": [
+     "27510-1E400",
+     "27510-2B001"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "climate-control",
+    "pn": [
+     "27510-2B001"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "twins": [
+     "28525-1E504",
+     "28525-1E505"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 9
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "climate-control",
+    "pn": [
+     "27510-2B001"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1997
+    ],
+    "twins": [
+     "28525-1E505"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 25
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "climate-control",
+    "pn": [
+     "27510-2B001"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1996
+    ],
+    "twins": [
+     "28525-1E504",
+     "28525-1E505"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "climate-control",
+    "pn": [
+     "27510-2B001"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1997
+    ],
+    "twins": [
+     "28525-1E505"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "80700-0E710"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1994
+    ],
+    "twins": [
+     "80720-0E700",
+     "80720-0E715"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 12
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "80700-0E710"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1994
+    ],
+    "twins": [
+     "80720-0E700",
+     "80720-0E715"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "80701-0E710"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1994
+    ],
+    "twins": [
+     "80721-0E700",
+     "80721-0E715"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 12
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "window-regulator",
+    "pn": [
+     "80701-0E710"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1994
+    ],
+    "twins": [
+     "80721-0E700",
+     "80721-0E715"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6301-1E400"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "twins": [
+     "J6301-2B500"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 9
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6301-1E400"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "twins": [
+     "J6301-2B500"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6301-1E400"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1996
+    ],
+    "twins": [
+     "J6301-2B500"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6301-2B500"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "twins": [
+     "J6301-1E400"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 9
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6301-2B500"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "twins": [
+     "J6301-1E400"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6301-2B500"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1996
+    ],
+    "twins": [
+     "J6301-1E400"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6302-1E400"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "twins": [
+     "J6302-2B500"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 9
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6302-1E400"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "twins": [
+     "J6302-2B500"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6302-1E400"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1996
+    ],
+    "twins": [
+     "J6302-2B500"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6302-2B500"
+    ],
+    "t": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "twins": [
+     "J6302-1E400"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 9
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6302-2B500"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "twins": [
+     "J6302-1E400"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "J6302-2B500"
+    ],
+    "t": [
+     "Nissan",
+     "Stanza",
+     1996
+    ],
+    "twins": [
+     "J6302-1E400"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {},
+    "held_cat": false
+   }
+  ],
+  "held_body_mark": [
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-89Y00"
+    ],
+    "t": [
+     "Nissan",
+     "Sentra",
+     1998
+    ],
+    "marks": [
+     "24820-8Z002 4S beside C"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "plain": 21,
+     "unc": 2
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "96301-1BA1D"
+    ],
+    "t": [
+     "Infiniti",
+     "QX50",
+     2015
+    ],
+    "marks": [
+     "96301-5UB0A LWB beside WAG"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 1
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "96301-1BA1D"
+    ],
+    "t": [
+     "Infiniti",
+     "QX50",
+     2016
+    ],
+    "marks": [
+     "96301-5UB0A LWB beside WAG"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 6
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "96302-1BA1D"
+    ],
+    "t": [
+     "Infiniti",
+     "QX50",
+     2015
+    ],
+    "marks": [
+     "96302-5UB0A LWB beside WAG"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 1
+    },
+    "held_cat": false
+   },
+   {
+    "cat": "side-mirrors",
+    "pn": [
+     "96302-1BA1D"
+    ],
+    "t": [
+     "Infiniti",
+     "QX50",
+     2016
+    ],
+    "marks": [
+     "96302-5UB0A LWB beside WAG"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": true,
+    "lot_rows_1119i": {
+     "plain": 6
+    },
+    "held_cat": false
+   }
+  ],
+  "held_drive_open": [
+   {
+    "cat": "gauge-cluster",
+    "pn": [
+     "24820-3ZD1C"
+    ],
+    "t": [
+     "Infiniti",
+     "QX56",
+     2013
+    ],
+    "siblings": [
+     "24820-1ZS0A awd",
+     "24820-1ZS0C awd"
+    ],
+    "in_round9_candidate": false,
+    "group_in_round9_candidate": false,
+    "lot_rows_1119i": {
+     "unc": 8
+    },
+    "held_cat": false
+   }
+  ]
+ },
+ "round9_held_in_curation": {
+  "vehicle_years_by_reason": {
+   "held_body_mark": 6,
+   "held_drive_open": 21,
+   "held_twin_changeover": 48,
+   "held_variant_unread": 6
+  },
+  "groups_by_reason": {
+   "held_body_mark": 4,
+   "held_drive_open": 12,
+   "held_twin_changeover": 22,
+   "held_variant_unread": 2
+  }
+ },
+ "c": {
+  "labels": {
+   "Nissan catalog": 48,
+   "Infiniti catalog": 55
+  },
+  "mixed_site_groups": [],
+  "note_opening_differs_from_label": [],
+  "max_note_len": 159,
+  "cap": 160,
+  "rule": "a group names the site its records came from: 'Infiniti catalog' (infinitipartsdeal.com), 'Nissan catalog' (nissanpartsdeal.com), 'Infiniti/Nissan' if both (none today); the app turns 'X catalog' into 'X factory parts catalog'"
+ },
+ "d": {
+  "rule": "plain rows (lot replay, app OEM-GATE code) of apps whose gate has fuel 'gas', the donor's extras engine field empty (no engine decode), and the claimed model-year has a hybrid: a car of that make/model/year on the pinned lot whose listing, VIN series/trim or engine says hybrid (the app's pfOemCarFuel words), or (nissan) the catalog year index offers a hybrid catalog",
+  "by_ns": {
+   "gm": {
+    "plain_rows_gas_gate": 819,
+    "no_engine_decode": 63
+   },
+   "nissan": {
+    "plain_rows_gas_gate": 180,
+    "no_engine_decode": 24,
+    "no_engine_decode_hybrid_my": 24,
+    "no_engine_decode_hybrid_my_no_vin": 24
+   },
+   "mopar": {
+    "plain_rows_gas_gate": 0
+   },
+   "toyota": {
+    "plain_rows_gas_gate": 0
+   },
+   "ford": {
+    "plain_rows_gas_gate": 0
+   },
+   "hmg": {
+    "plain_rows_gas_gate": 0
+   },
+   "subaru": {
+    "plain_rows_gas_gate": 0
+   },
+   "vag": {
+    "plain_rows_gas_gate": 0
+   },
+   "mb": {
+    "plain_rows_gas_gate": 0
+   }
+  },
+  "examples": {
+   "nissan": [
+    {
+     "group": "oem:nissan:window-regulator:FR:7b083459e1",
+     "pn": [
+      "80720-3JA0A"
+     ],
+     "app": [
+      "Infiniti",
+      "QX60",
+      2015,
+      2017
+     ],
+     "car": [
+      "indy-58f9d0f234eb",
+      2015,
+      "Infiniti",
+      "QX60"
+     ],
+     "vin": false,
+     "hybrid_from": "catalog"
+    },
+    {
+     "group": "oem:nissan:window-regulator:FR:7b083459e1",
+     "pn": [
+      "80720-3JA0A"
+     ],
+     "app": [
+      "Infiniti",
+      "QX60",
+      2015,
+      2017
+     ],
+     "car": [
+      "ace-f28832",
+      2017,
+      "Infiniti",
+      "QX60"
+     ],
+     "vin": false,
+     "hybrid_from": "catalog"
+    },
+    {
+     "group": "oem:nissan:window-regulator:FR:7b083459e1",
+     "pn": [
+      "80720-3JA0A"
+     ],
+     "app": [
+      "Infiniti",
+      "QX60",
+      2015,
+      2017
+     ],
+     "car": [
+      "ace-f30480",
+      2015,
+      "Infiniti",
+      "QX60"
+     ],
+     "vin": false,
+     "hybrid_from": "catalog"
+    }
+   ]
+  }
+ },
+ "replay_pairs": {
+  "nmain": {
+   "plain": 14890,
+   "unc": 1198,
+   "exc": 32
+  },
+  "nnew": {
+   "plain": 13974,
+   "unc": 1153,
+   "exc": 2
+  },
+  "live": {
+   "plain": 290075,
+   "unc": 14278,
+   "exc": 12034
+  }
+ }
+}

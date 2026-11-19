@@ -1,0 +1,5718 @@
+{
+ "report": "round9_names_2026-11-19",
+ "pins": {
+  "nissan_raw": "oem-raw@57e8b5b99de0",
+  "shipped_raw": "oem-raw@dca9cd845f26",
+  "lot": "main@a85c654 inventory 1a9cfa73, vin_decodes 1357625b, vehicle_extras 6ff3d44b"
+ },
+ "rule": "A1: a nissan window-regulator number's class is read from every catalog part name the raw prints for it (list rows on every page with site:lists:L<line>, product records with site:records:L<line>): 'Motor Assy-...' -> motor ('window motor only'), 'Regulator Assy-...' -> regulator (no packaging words: the name does not say whether the motor comes with it). A2/A3: names that mix motor and regulator, name a component (glass, cover, lens, bezel, knob, cap, garnish, holder, bulb, socket, finisher, housing, base, bracket, switch, cable, harness, motor outside wiper-motor) or are missing from the raw hold the group (held_part_name).",
+ "cause": "positions.packaging() reads 'Motor Assy-Regulator, RH' as 'reg?' (the head holds 'Regulator'), and PACK_TEXT has no words for 'reg?', so no nissan note said 'window motor only'. positions.py is a policy input (policy_sha256), so the fix reads the names in curate.py for nissan only (_name_class / _note_pack); c.packaging is unchanged.",
+ "groups": 103,
+ "by_category": {
+  "climate-control": {
+   "groups": 5,
+   "classes": {
+    "assembly": 5
+   },
+   "phrases": {
+    "(none)": 5
+   },
+   "heads": {
+    "Controller Assy-Air Conditiner": 30
+   },
+   "held_by_name": 0
+  },
+  "side-mirrors": {
+   "groups": 16,
+   "classes": {
+    "assembly": 16
+   },
+   "phrases": {
+    "(none)": 16
+   },
+   "heads": {
+    "Door Mirror Assy-RH": 55,
+    "Door Mirror Assy-LH": 55,
+    "Mirror Assy-Outside": 17
+   },
+   "held_by_name": 0
+  },
+  "window-regulator": {
+   "groups": 79,
+   "classes": {
+    "regulator": 49,
+    "motor": 30
+   },
+   "phrases": {
+    "(none)": 49,
+    "window motor only": 30
+   },
+   "heads": {
+    "Motor Assy-Regulator": 401,
+    "Regulator Assy-Door Window": 315,
+    "Regulator Assy-Rear Door Window": 144
+   },
+   "held_by_name": 0
+  },
+  "wiper-motor": {
+   "groups": 3,
+   "classes": {
+    "assembly": 3
+   },
+   "phrases": {
+    "rear wiper motor": 1,
+    "windshield wiper motor with linkage": 1,
+    "windshield wiper motor": 1
+   },
+   "heads": {
+    "Motor Assy-Windshield Wiper": 9,
+    "Motor Assy-Rear Window Wiper": 5,
+    "Drive Assy-Windshield Wiper": 3
+   },
+   "held_by_name": 0
+  },
+  "gauge-cluster": {
+   "groups": 0,
+   "note": "no gauge-cluster group is left in the round-9 candidate (the three of 1119i are held by B1, B4: 24820-89Y00, 24820-8B703, 24820-3ZD1C)"
+  }
+ },
+ "held_by_name": [],
+ "removed_from_1119i_candidate": [
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27510-2B000"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "pn": [
+    "27510-2B001"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-3ZD1C"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-89Y00"
+   ]
+  },
+  {
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-8B703"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "80730-4BA1A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82730-4BA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "pn": [
+    "82731-4BA0A"
+   ]
+  }
+ ],
+ "a5_live_window_regulator": {
+  "gm": {
+   "groups": 76,
+   "counts": {
+    "motor_name_no_phrase": 0,
+    "regulator_name_with_phrase": 0,
+    "mixed_names": 0,
+    "no_name_in_raw": 0
+   },
+   "kinds": {
+    "motor": 24,
+    "regulator": 52,
+    "regulator+motor": 0,
+    "other": 0
+   },
+   "examples": {}
+  },
+  "mopar": {
+   "groups": 54,
+   "counts": {
+    "motor_name_no_phrase": 21,
+    "regulator_name_with_phrase": 0,
+    "mixed_names": 0,
+    "no_name_in_raw": 0
+   },
+   "kinds": {
+    "motor": 21,
+    "regulator": 33,
+    "regulator+motor": 0,
+    "other": 0
+   },
+   "examples": {
+    "motor_name_no_phrase": [
+     {
+      "pn": [
+       "5012545AA"
+      ],
+      "kinds": [
+       "motor"
+      ],
+      "heads": [
+       "MOTOR Window Regulator"
+      ],
+      "refs": [
+       "www.moparpartsgiant.com:lists:L1013",
+       "www.moparpartsgiant.com:lists:L1194",
+       "www.moparpartsgiant.com:lists:L814"
+      ],
+      "phrase": false,
+      "flag": "motor_name_no_phrase",
+      "note": "Mopar catalog lists #5012545AA for both \u2014 older catalog-only number; verify the number on the part"
+     },
+     {
+      "pn": [
+       "68004590AC"
+      ],
+      "kinds": [
+       "motor"
+      ],
+      "heads": [
+       "Motor - Window Regulator",
+       "Window Motor"
+      ],
+      "refs": [
+       "www.jeeppartsdeal.com:lists:L471",
+       "www.jeeppartsdeal.com:records:L180",
+       "www.jeeppartsdeal.com:records:L180"
+      ],
+      "phrase": false,
+      "flag": "motor_name_no_phrase",
+      "note": "Mopar catalog lists #68004590AC for both \u2014 trim-limited; verify the number on the part"
+     },
+     {
+      "pn": [
+       "68004591AB"
+      ],
+      "kinds": [
+       "motor"
+      ],
+      "heads": [
+       "MOTOR WINDOW REGULATOR 6 Pin",
+       "Motor - Window Regulator",
+       "Window Motor"
+      ],
+      "refs": [
+       "www.moparpartsgiant.com:lists:L335",
+       "www.jeeppartsdeal.com:lists:L471",
+       "www.jeeppartsdeal.com:records:L181"
+      ],
+      "phrase": false,
+      "flag": "motor_name_no_phrase",
+      "note": "Mopar catalog lists #68004591AB for both \u2014 trim-limited; verify the number on the part"
+     }
+    ]
+   }
+  },
+  "toyota": {
+   "groups": 37,
+   "counts": {
+    "motor_name_no_phrase": 0,
+    "regulator_name_with_phrase": 0,
+    "mixed_names": 0,
+    "no_name_in_raw": 0
+   },
+   "kinds": {
+    "motor": 15,
+    "regulator": 22,
+    "regulator+motor": 0,
+    "other": 0
+   },
+   "examples": {}
+  },
+  "ford": {
+   "groups": 14,
+   "counts": {
+    "motor_name_no_phrase": 0,
+    "regulator_name_with_phrase": 0,
+    "mixed_names": 0,
+    "no_name_in_raw": 0
+   },
+   "kinds": {
+    "motor": 11,
+    "regulator": 1,
+    "regulator+motor": 2,
+    "other": 0
+   },
+   "examples": {}
+  },
+  "hmg": {
+   "groups": 0
+  },
+  "subaru": {
+   "groups": 17,
+   "counts": {
+    "motor_name_no_phrase": 8,
+    "regulator_name_with_phrase": 0,
+    "mixed_names": 0,
+    "no_name_in_raw": 0
+   },
+   "kinds": {
+    "motor": 8,
+    "regulator": 4,
+    "regulator+motor": 5,
+    "other": 0
+   },
+   "examples": {
+    "motor_name_no_phrase": [
+     {
+      "pn": [
+       "61188AE00A"
+      ],
+      "kinds": [
+       "motor"
+      ],
+      "heads": [
+       "Motor Assembly-Regulator"
+      ],
+      "refs": [
+       "www.subarupartsdeal.com:lists:L107",
+       "www.subarupartsdeal.com:lists:L133",
+       "www.subarupartsdeal.com:lists:L19"
+      ],
+      "phrase": false,
+      "flag": "motor_name_no_phrase",
+      "note": "Subaru catalog lists #61188AE00A for both \u2014 fits some configurations; verify the number on the part"
+     },
+     {
+      "pn": [
+       "61188AE00B"
+      ],
+      "kinds": [
+       "motor"
+      ],
+      "heads": [
+       "Motor Assembly-Regulator"
+      ],
+      "refs": [
+       "www.subarupartsdeal.com:lists:L120",
+       "www.subarupartsdeal.com:records:L413"
+      ],
+      "phrase": false,
+      "flag": "motor_name_no_phrase",
+      "note": "Subaru catalog lists #61188AE00B for both \u2014 fits some configurations; verify the number on the part"
+     },
+     {
+      "pn": [
+       "61188AE01A"
+      ],
+      "kinds": [
+       "motor"
+      ],
+      "heads": [
+       "Motor Assembly-Regulator"
+      ],
+      "refs": [
+       "www.subarupartsdeal.com:lists:L107",
+       "www.subarupartsdeal.com:lists:L133",
+       "www.subarupartsdeal.com:lists:L19"
+      ],
+      "phrase": false,
+      "flag": "motor_name_no_phrase",
+      "note": "Subaru catalog lists #61188AE01A for both \u2014 fits some configurations; verify the number on the part"
+     }
+    ]
+   }
+  },
+  "vag": {
+   "groups": 0
+  },
+  "mb": {
+   "groups": 0
+  }
+ },
+ "a5_rule": "a name whose head starts with a motor word is 'motor'; one that starts with 'regulator' is 'regulator' ('regulator+motor' when the head also names a motor); the note's phrase is 'window motor only'",
+ "rows": [
+  {
+   "cat": "climate-control",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L546"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L669"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L808"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L820"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:records:L4816"
+    }
+   ],
+   "note": "Nissan catalog lists #27515-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "27515-1E400"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L546"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L669"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L808"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L814"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L820"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:records:L1570"
+    }
+   ],
+   "note": "Nissan catalog lists #27515-2B000 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "27515-2B000"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L510"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L546"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L625"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L808"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L814"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L826"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L832"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:records:L1571"
+    }
+   ],
+   "note": "Nissan catalog lists #27515-2B001 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "27515-2B001"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L546"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L669"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L808"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L814"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L820"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:records:L1572"
+    }
+   ],
+   "note": "Nissan catalog lists #28525-1E501 for both \u2014 option: fits some option packages; Altima 1994: built 06/1992-07/1994 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "28525-1E501"
+   ]
+  },
+  {
+   "cat": "climate-control",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L510"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L625"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L826"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:lists:L832"
+    },
+    {
+     "name": "Controller Assy-Air Conditiner",
+     "ref": "www.nissanpartsdeal.com:records:L4804"
+    }
+   ],
+   "note": "Nissan catalog lists #28525-1E505 for both \u2014 option: fits some option packages; built 02/1996-07/1996 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "28525-1E505"
+   ]
+  },
+  {
+   "cat": "wiper-motor",
+   "class": "assembly",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Rear Window Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L118"
+    },
+    {
+     "name": "Motor Assy-Rear Window Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L209"
+    },
+    {
+     "name": "Motor Assy-Rear Window Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L27"
+    },
+    {
+     "name": "Motor Assy-Rear Window Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L77"
+    },
+    {
+     "name": "Motor Assy-Rear Window Wiper",
+     "ref": "www.infinitipartsdeal.com:records:L1874"
+    }
+   ],
+   "note": "Infiniti catalog lists #28710-1BA0A for both \u2014 rear wiper motor; fits some configurations; verify the number on the part",
+   "phrase": "rear wiper motor",
+   "pn": [
+    "28710-1BA0A"
+   ]
+  },
+  {
+   "cat": "wiper-motor",
+   "class": "assembly",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Drive Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L231"
+    },
+    {
+     "name": "Drive Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L84"
+    },
+    {
+     "name": "Drive Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:records:L2028"
+    }
+   ],
+   "note": "Infiniti catalog lists #28800-1LA0A for both \u2014 windshield wiper motor with linkage; fits some configurations; verify the number on the part",
+   "phrase": "windshield wiper motor with linkage",
+   "pn": [
+    "28800-1LA0A"
+   ]
+  },
+  {
+   "cat": "wiper-motor",
+   "class": "assembly",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L107"
+    },
+    {
+     "name": "Motor Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L109"
+    },
+    {
+     "name": "Motor Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L22"
+    },
+    {
+     "name": "Motor Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L252"
+    },
+    {
+     "name": "Motor Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L258"
+    },
+    {
+     "name": "Motor Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L264"
+    },
+    {
+     "name": "Motor Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L95"
+    },
+    {
+     "name": "Motor Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:lists:L97"
+    },
+    {
+     "name": "Motor Assy-Windshield Wiper",
+     "ref": "www.infinitipartsdeal.com:records:L1856"
+    }
+   ],
+   "note": "Infiniti catalog lists #28815-CG000 for both \u2014 windshield wiper motor; fits some configurations; verify the number on the part",
+   "phrase": "windshield wiper motor",
+   "pn": [
+    "28815-CG000"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L514"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L550"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L629"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L673"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L812"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L818"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L824"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L830"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L836"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:records:L1558"
+    }
+   ],
+   "note": "Nissan catalog lists #80700-0E710 for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80700-0E710"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L514"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L550"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L629"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L673"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L812"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L818"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L824"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L830"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L836"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:records:L1556"
+    }
+   ],
+   "note": "Nissan catalog lists #80701-0E710 for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80701-0E710"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L550"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L673"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L812"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L824"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:records:L4820"
+    }
+   ],
+   "note": "Nissan catalog lists #80720-0E700 for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-0E700"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1001"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1039"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1081"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1112"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1194"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1276"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1305"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L756"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L903"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L664"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-1BA0B for both \u2014 fits some configurations; EX35: built 08/2009-07/2012 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-1BA0B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1067"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1402"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L666"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L683"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L2210"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-1CA0A for both \u2014 fits some configurations; built 03/2008-04/2009 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-1CA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1026"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1052"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1067"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1159"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1168"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1218"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1227"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1402"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1456"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1466"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L666"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L683"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L256"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-1CA0B for both \u2014 fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-1CA0B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1016"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1125"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1182"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1209"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1251"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1291"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1318"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1358"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1430"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1480"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1492"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L918"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L959"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L855"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-1MA0A for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-1MA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1125"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1318"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1358"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1363"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1370"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1492"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1497"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1507"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1515"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L2383"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-1MA0B for both \u2014 option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-1MA0B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L569"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L634"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L716"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L815"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L513"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-2Y000 for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-2Y000"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1144"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1262"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L338"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L530"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L743"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L842"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L384"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-3JA0A for both \u2014 fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-3JA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L686"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L691"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L705"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L730"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L738"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L756"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L776"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L780"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L794"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L804"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:records:L4890"
+    }
+   ],
+   "note": "Nissan catalog lists #80720-9BF0A for both \u2014 option: fits some option packages; Xterra 2014: built from 10/2013 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-9BF0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1249"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1353"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1365"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1372"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1517"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L297"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L489"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L595"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L649"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L651"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L668"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L702"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L855"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L857"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L890"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L944"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L43"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-AR000 for both \u2014 fits some configurations; FX35: built 11/2002-07/2004 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-AR000"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1387"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L476"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L489"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L582"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L702"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L890"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L931"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L944"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L206"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-CL00A for both \u2014 fits some configurations; built 07/2004-06/2006 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-CL00A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1239"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1387"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L476"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L542"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L582"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L931"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L639"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-CL70B for both \u2014 fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-CL70B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1415"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L463"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L555"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L647"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L696"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L771"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L984"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L303"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-EH100 for both \u2014 fits some configurations; built 12/2004-06/2008 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-EH100"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1415"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1443"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L555"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L647"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L872"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L984"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L907"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-EH10A for both \u2014 fits some configurations; built 06/2008-03/2009 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-EH10A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L324"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L365"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L421"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L449"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L516"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L610"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L731"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L830"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L162"
+    }
+   ],
+   "note": "Infiniti catalog lists #80720-JK00A for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-JK00A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L395"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L419"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L475"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L508"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L521"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L563"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L619"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L643"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L686"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L691"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L730"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L794"
+    },
+    {
+     "name": "Regulator Assy-Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:records:L313"
+    }
+   ],
+   "note": "Nissan catalog lists #80720-ZL90A for both \u2014 option: fits some option packages; Frontier: built 08/2011-05/2013 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80720-ZL90A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L550"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L673"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L812"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L824"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:records:L4819"
+    }
+   ],
+   "note": "Nissan catalog lists #80721-0E700 for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-0E700"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1001"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1039"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1081"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1112"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1194"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1276"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1305"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L756"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L903"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L663"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-1BA0B for both \u2014 fits some configurations; EX35: built 08/2009-07/2012 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-1BA0B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1067"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1402"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L666"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L683"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L2209"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-1CA0A for both \u2014 fits some configurations; built 03/2008-04/2009 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-1CA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1026"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1052"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1067"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1159"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1168"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1218"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1227"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1402"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1456"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1466"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L666"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L683"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L255"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-1CA0B for both \u2014 fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-1CA0B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1016"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1125"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1182"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1209"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1251"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1291"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1318"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1358"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1430"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1480"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1492"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L918"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L959"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L854"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-1MA0A for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-1MA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1125"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1318"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1358"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1363"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1370"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1492"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1497"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1507"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1515"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L2382"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-1MA0B for both \u2014 option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-1MA0B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1144"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1262"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L338"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L530"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L743"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L842"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L383"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-3JA0A for both \u2014 fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-3JA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L686"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L691"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L705"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L730"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L738"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L756"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L776"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L780"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L794"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L804"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:records:L4889"
+    }
+   ],
+   "note": "Nissan catalog lists #80721-9BF0A for both \u2014 option: fits some option packages; Xterra 2014: built from 10/2013 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-9BF0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1249"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1353"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1365"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1372"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1517"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L297"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L489"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L595"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L649"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L651"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L668"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L702"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L855"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L857"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L890"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L944"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L38"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-AR000 for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-AR000"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1387"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L476"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L489"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L582"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L702"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L890"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L931"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L944"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L205"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-CL00A for both \u2014 fits some configurations; built 09/2004-06/2006 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-CL00A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1239"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1387"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L476"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L542"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L582"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L931"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L638"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-CL70B for both \u2014 fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-CL70B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1415"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L463"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L555"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L647"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L696"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L771"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L984"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L302"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-EH100 for both \u2014 fits some configurations; built 12/2004-06/2008 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-EH100"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1415"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1443"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L555"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L647"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L872"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L984"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L906"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-EH10A for both \u2014 fits some configurations; built 06/2008-03/2009 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-EH10A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L324"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L365"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L421"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L449"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L516"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L610"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L731"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L830"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L161"
+    }
+   ],
+   "note": "Infiniti catalog lists #80721-JK00A for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-JK00A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L395"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L419"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L475"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L508"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L521"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L563"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L619"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L643"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L686"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L691"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L730"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L794"
+    },
+    {
+     "name": "Regulator Assy-Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:records:L311"
+    }
+   ],
+   "note": "Nissan catalog lists #80721-ZL90A for both \u2014 option: fits some option packages; Frontier: built 08/2011-05/2013 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "80721-ZL90A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L514"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L550"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L629"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L673"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L812"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L818"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L824"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L830"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L836"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:records:L1555"
+    }
+   ],
+   "note": "Nissan catalog lists #80730-1E400 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80730-1E400"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1140"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L620"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L786"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L801"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L987"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:records:L573"
+    }
+   ],
+   "note": "Infiniti catalog lists #80730-1LE0A for both \u2014 window motor only; fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80730-1LE0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1016"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1125"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1182"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1209"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1251"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1291"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1318"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1358"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1363"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1370"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1430"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1480"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1492"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1497"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1507"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1515"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L918"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L959"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:records:L853"
+    }
+   ],
+   "note": "Infiniti catalog lists #80730-1MA0A for both \u2014 window motor only; fits some configurations; Q70 2014: checked on gas-model pages; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80730-1MA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L569"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L634"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L716"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L815"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:records:L511"
+    }
+   ],
+   "note": "Infiniti catalog lists #80730-2Y000 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80730-2Y000"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L176"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L193"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L214"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L278"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L316"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L333"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L389"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L412"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L439"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L534"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:records:L268"
+    }
+   ],
+   "note": "Nissan catalog lists #80730-7B400 for both \u2014 window motor only; option: fits some option packages; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80730-7B400"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1239"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1387"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L297"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L476"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L489"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L542"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L582"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L595"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L649"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L651"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L668"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L702"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L855"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L857"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L890"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L931"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L944"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:records:L35"
+    }
+   ],
+   "note": "Infiniti catalog lists #80730-AL501 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80730-AL501"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L219"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L230"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L241"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L258"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L287"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L292"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L298"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L360"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L374"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L406"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L452"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L467"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L475"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L508"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L563"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L575"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L586"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L619"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L643"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L686"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L691"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L705"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L730"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L738"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L756"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L776"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L780"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L794"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L804"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:records:L309"
+    }
+   ],
+   "note": "Nissan catalog lists #80730-EA005 for both \u2014 window motor only; option: fits some option packages; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80730-EA005"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L514"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L550"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L629"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L673"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L812"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L818"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L824"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L830"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L836"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:records:L1554"
+    }
+   ],
+   "note": "Nissan catalog lists #80731-1E400 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80731-1E400"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1140"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L620"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L786"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L801"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L987"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:records:L574"
+    }
+   ],
+   "note": "Infiniti catalog lists #80731-1LE0A for both \u2014 window motor only; fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80731-1LE0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1016"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1125"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1182"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1209"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1251"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1291"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1318"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1358"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1363"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1370"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1430"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1480"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1492"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1497"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1507"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1515"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L918"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L959"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:records:L852"
+    }
+   ],
+   "note": "Infiniti catalog lists #80731-1MA0A for both \u2014 window motor only; fits some configurations; Q70 2014: checked on gas-model pages; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80731-1MA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L176"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L193"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L214"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L278"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L316"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L333"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L389"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L412"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L439"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L534"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:records:L267"
+    }
+   ],
+   "note": "Nissan catalog lists #80731-7B400 for both \u2014 window motor only; option: fits some option packages; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80731-7B400"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1239"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1387"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L297"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L476"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L489"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L542"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L582"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L595"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L649"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L651"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L668"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L702"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L855"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L857"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L890"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L931"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L944"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:records:L31"
+    }
+   ],
+   "note": "Infiniti catalog lists #80731-AL511 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80731-AL511"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L219"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L292"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L298"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L360"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L374"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L406"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L452"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L467"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L475"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L508"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L563"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L575"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L586"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L619"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L643"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L686"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L691"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L705"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L730"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L738"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L756"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L776"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L780"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L794"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L804"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:records:L308"
+    }
+   ],
+   "note": "Nissan catalog lists #80731-EA005 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80731-EA005"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L540"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L542"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L602"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L655"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L665"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L693"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L709"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L725"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L734"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L741"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L746"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L782"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L784"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:records:L1415"
+    }
+   ],
+   "note": "Nissan catalog lists #80731-JX30C for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "80731-JX30C"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L515"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L630"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L819"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L837"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:records:L1564"
+    }
+   ],
+   "note": "Nissan catalog lists #82700-0E710 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82700-0E710"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L515"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L630"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L819"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L837"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:records:L1562"
+    }
+   ],
+   "note": "Nissan catalog lists #82701-0E710 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82701-0E710"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:records:L4824"
+    }
+   ],
+   "note": "Nissan catalog lists #82720-0E700 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82720-0E700"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L515"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L630"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L819"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L837"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:records:L1565"
+    }
+   ],
+   "note": "Nissan catalog lists #82720-0E715 for both \u2014 option: fits some option packages; Altima: built 08/1993-07/1996 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82720-0E715"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L515"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L630"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L837"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:records:L4806"
+    }
+   ],
+   "note": "Nissan catalog lists #82720-0E717 for both \u2014 option: fits some option packages; built from 07/1996 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82720-0E717"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1002"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1040"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1082"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1113"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1195"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1277"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1306"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L757"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L904"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L554"
+    }
+   ],
+   "note": "Infiniti catalog lists #82720-1BA0A for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82720-1BA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1141"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1248"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1352"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1488"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1511"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L621"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L787"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L802"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L988"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L580"
+    }
+   ],
+   "note": "Infiniti catalog lists #82720-1LA0A for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82720-1LA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L541"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L543"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L603"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L666"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L694"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L710"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L726"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L735"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L783"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.nissanpartsdeal.com:records:L1422"
+    }
+   ],
+   "note": "Nissan catalog lists #82720-1U600 for both \u2014 fits some configurations; Juke: built 09/2011-03/2015, 09/2015-02/2016 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82720-1U600"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L296"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L325"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L366"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L394"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L422"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L450"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L517"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L611"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L732"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L759"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, RH",
+     "ref": "www.infinitipartsdeal.com:records:L124"
+    }
+   ],
+   "note": "Infiniti catalog lists #82720-JK000 for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82720-JK000"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:records:L4823"
+    }
+   ],
+   "note": "Nissan catalog lists #82721-0E700 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82721-0E700"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L515"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L630"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L819"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L837"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:records:L1563"
+    }
+   ],
+   "note": "Nissan catalog lists #82721-0E715 for both \u2014 option: fits some option packages; Altima: built 08/1993-02/1996 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82721-0E715"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L515"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L630"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L837"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:records:L4805"
+    }
+   ],
+   "note": "Nissan catalog lists #82721-0E717 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82721-0E717"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1002"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1040"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1082"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1113"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1195"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1277"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1306"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L757"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L904"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L553"
+    }
+   ],
+   "note": "Infiniti catalog lists #82721-1BA0A for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82721-1BA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1141"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1248"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1352"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1488"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1511"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L621"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L787"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L802"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L988"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L579"
+    }
+   ],
+   "note": "Infiniti catalog lists #82721-1LA0A for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82721-1LA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L541"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L543"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L603"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L666"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L694"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L710"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L726"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L735"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L783"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.nissanpartsdeal.com:records:L1421"
+    }
+   ],
+   "note": "Nissan catalog lists #82721-1U600 for both \u2014 fits some configurations; Juke: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82721-1U600"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "regulator",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L296"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L325"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L366"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L394"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L422"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L450"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L517"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L611"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L732"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L759"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Regulator Assy-Rear Door Window, LH",
+     "ref": "www.infinitipartsdeal.com:records:L123"
+    }
+   ],
+   "note": "Infiniti catalog lists #82721-JK000 for both \u2014 fits some configurations; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "82721-JK000"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:records:L4822"
+    }
+   ],
+   "note": "Nissan catalog lists #82730-1E400 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82730-1E400"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1017"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1126"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1141"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1183"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1210"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1248"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1252"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1292"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1319"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1352"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1359"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1364"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1431"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1481"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1488"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1493"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1498"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1503"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1508"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L621"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L787"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L802"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L919"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L960"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L988"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:records:L578"
+    }
+   ],
+   "note": "Infiniti catalog lists #82730-1MA0A for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82730-1MA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1352"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1364"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1371"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1488"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1498"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1503"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1508"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1511"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1516"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:records:L2425"
+    }
+   ],
+   "note": "Infiniti catalog lists #82730-1MA0B for both \u2014 window motor only; fits some configurations; Q70: checked on gas-model pages; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82730-1MA0B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1145"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1263"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L339"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L531"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L744"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L843"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:records:L386"
+    }
+   ],
+   "note": "Infiniti catalog lists #82730-3KG0A for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82730-3KG0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L377"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L442"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L480"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L486"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L526"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L528"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L555"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L566"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L591"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L646"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L678"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L721"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L733"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L773"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L840"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:records:L64"
+    }
+   ],
+   "note": "Nissan catalog lists #82730-3TA2A for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82730-3TA2A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L541"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L543"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L603"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L605"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L656"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L666"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L694"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L710"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L726"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L735"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L742"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L747"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L783"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L785"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:records:L1419"
+    }
+   ],
+   "note": "Nissan catalog lists #82730-CV01B for both \u2014 window motor only; option: fits some option packages; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82730-CV01B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L515"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L630"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L819"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L837"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:records:L1561"
+    }
+   ],
+   "note": "Nissan catalog lists #82730-D9000 for both \u2014 window motor only; fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82730-D9000"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1416"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1444"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L464"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L556"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L648"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L697"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L772"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L873"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:lists:L985"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.infinitipartsdeal.com:records:L305"
+    }
+   ],
+   "note": "Infiniti catalog lists #82730-EH100 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82730-EH100"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:records:L4821"
+    }
+   ],
+   "note": "Nissan catalog lists #82731-1E400 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82731-1E400"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1017"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1126"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1141"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1183"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1210"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1248"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1252"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1292"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1319"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1352"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1359"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1364"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1431"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1481"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1488"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1493"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1498"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1503"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1508"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L621"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L787"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L802"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L919"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L960"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L988"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:records:L577"
+    }
+   ],
+   "note": "Infiniti catalog lists #82731-1MA0A for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82731-1MA0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1352"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1364"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1371"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1488"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1498"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1503"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1508"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1511"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1516"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:records:L2424"
+    }
+   ],
+   "note": "Infiniti catalog lists #82731-1MA0B for both \u2014 window motor only; fits some configurations; Q70: checked on gas-model pages; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82731-1MA0B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1145"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1263"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L339"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L531"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L744"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L843"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:records:L385"
+    }
+   ],
+   "note": "Infiniti catalog lists #82731-3KG0A for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82731-3KG0A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L377"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L442"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L480"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L486"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L526"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L528"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L555"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L566"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L591"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L646"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L678"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L721"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L733"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L773"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L840"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:records:L63"
+    }
+   ],
+   "note": "Nissan catalog lists #82731-3TA2A for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82731-3TA2A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L541"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L543"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L603"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L605"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L656"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L666"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L694"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L710"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L726"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L735"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L742"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L747"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L783"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L785"
+    },
+    {
+     "name": "Motor Assy-Regulator, RH",
+     "ref": "www.nissanpartsdeal.com:records:L1420"
+    }
+   ],
+   "note": "Nissan catalog lists #82731-CV01B for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82731-CV01B"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L515"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L551"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L630"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L674"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L813"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L819"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L825"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L831"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:lists:L837"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.nissanpartsdeal.com:records:L1560"
+    }
+   ],
+   "note": "Nissan catalog lists #82731-D9000 for both \u2014 window motor only; fits some configurations; Altima: built 08/1993-02/1996 only; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82731-D9000"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "class": "motor",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1416"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1444"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L464"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L556"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L648"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L697"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L772"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L873"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:lists:L985"
+    },
+    {
+     "name": "Motor Assy-Regulator, LH",
+     "ref": "www.infinitipartsdeal.com:records:L304"
+    }
+   ],
+   "note": "Infiniti catalog lists #82731-EH100 for both \u2014 window motor only; fits some configurations; verify the number on the part",
+   "phrase": "window motor only",
+   "pn": [
+    "82731-EH100"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1079"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1274"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1303"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L901"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L999"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:records:L657"
+    }
+   ],
+   "note": "Infiniti catalog lists #96301-1BA1D for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96301-1BA1D"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1024"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1050"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1065"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1157"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1166"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1216"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1225"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1258"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1400"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1454"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1464"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L664"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L681"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:records:L252"
+    }
+   ],
+   "note": "Infiniti catalog lists #96301-1CA1A for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96301-1CA1A"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L548"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L627"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L671"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L810"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L816"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L822"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L828"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:records:L1550"
+    }
+   ],
+   "note": "Nissan catalog lists #96301-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96301-1E400"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L512"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L627"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L816"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L828"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L834"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:records:L1551"
+    }
+   ],
+   "note": "Nissan catalog lists #96301-2B500 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96301-2B500"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1412"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L1440"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L552"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L644"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L869"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:lists:L981"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.infinitipartsdeal.com:records:L905"
+    }
+   ],
+   "note": "Infiniti catalog lists #96301-EV50A for both \u2014 fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96301-EV50A"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L185"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L203"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L271"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L308"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L342"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L353"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:records:L1010"
+    }
+   ],
+   "note": "Nissan catalog lists #96301-ZC60A for both \u2014 option: fits some option packages; built 08/2005-08/2006 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96301-ZC60A"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L185"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L203"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L342"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L385"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L696"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L702"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L762"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L764"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:lists:L767"
+    },
+    {
+     "name": "Mirror Assy-Outside, RH",
+     "ref": "www.nissanpartsdeal.com:records:L4323"
+    }
+   ],
+   "note": "Nissan catalog lists #96301-ZH10A for both \u2014 option: fits some option packages; Titan: built 08/2005-04/2007 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96301-ZH10A"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1079"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1274"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1303"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L901"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L999"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:records:L653"
+    }
+   ],
+   "note": "Infiniti catalog lists #96302-1BA1D for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96302-1BA1D"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1024"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1050"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1065"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1157"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1166"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1216"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1225"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1258"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1400"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1454"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1464"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L664"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L681"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:records:L249"
+    }
+   ],
+   "note": "Infiniti catalog lists #96302-1CA1A for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96302-1CA1A"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L548"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L627"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L671"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L810"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L816"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L822"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L828"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:records:L1546"
+    }
+   ],
+   "note": "Nissan catalog lists #96302-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96302-1E400"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L512"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L627"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L816"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L828"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L834"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:records:L1547"
+    }
+   ],
+   "note": "Nissan catalog lists #96302-2B500 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96302-2B500"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Infiniti catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1412"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L1440"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L552"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L644"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L869"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:lists:L981"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.infinitipartsdeal.com:records:L904"
+    }
+   ],
+   "note": "Infiniti catalog lists #96302-EV50A for both \u2014 fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "96302-EV50A"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L548"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L627"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L671"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L810"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L816"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L822"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L828"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:records:L1552"
+    }
+   ],
+   "note": "Nissan catalog lists #J6301-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "J6301-1E400"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L512"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L627"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L816"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L828"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:lists:L834"
+    },
+    {
+     "name": "Door Mirror Assy-RH",
+     "ref": "www.nissanpartsdeal.com:records:L1553"
+    }
+   ],
+   "note": "Nissan catalog lists #J6301-2B500 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "J6301-2B500"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L548"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L627"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L671"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L810"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L816"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L822"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L828"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:records:L1548"
+    }
+   ],
+   "note": "Nissan catalog lists #J6302-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "J6302-1E400"
+   ]
+  },
+  {
+   "cat": "side-mirrors",
+   "class": "assembly",
+   "label": "Nissan catalog",
+   "names": [
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L512"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L627"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L816"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L828"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:lists:L834"
+    },
+    {
+     "name": "Door Mirror Assy-LH",
+     "ref": "www.nissanpartsdeal.com:records:L1549"
+    }
+   ],
+   "note": "Nissan catalog lists #J6302-2B500 for both \u2014 option: fits some option packages; verify the number on the part",
+   "phrase": null,
+   "pn": [
+    "J6302-2B500"
+   ]
+  }
+ ]
+}
