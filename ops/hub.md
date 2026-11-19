@@ -2070,3 +2070,29 @@ under another number (borderline).
   on the nissan candidate. A new independent check follows before nissan
   ships.
 - 00:40 UTC container restart stopped the round 3 builder after its first push (894bde7b: lot replay + census tools); a new builder continues on the same branch, pushing every 20-30 min.
+
+## 2026-11-19 ~02:30 UTC interchange round 3 to main (sw `jh-v213`, b3d995d4)
+
+`interchange/round3-1119` (builder section at the end of ops/interchange.md;
+census groups/_report/class_census_2026-11-19.json; live diff
+live_diff_2026-11-19_round3.txt). The verifier's five flaw classes, fixed on
+all 8 LIVE makes, claims only down: 0 added groups, 0 gained years, 0 widened
+gates; 16 groups removed (3 Ford km/h clusters, 1 MKZ 2010 hybrid cluster, 3
+Mopar export mirrors, 9 note-cap refusals), 87 narrowed. Biggest live wrong:
+2011 Camry hybrid-only body parts were plain for ~350 gas Camrys each; Fusion/
+MKZ hybrid clusters; 2016 Malibu motors on the Malibu Limited. Plain donor
+pairs on the pinned lot 319,276 -> 292,967; "if equipped" 1,814 -> 12,071;
+excluded 4,113 -> 12,076. New gate keys (cab lists, drive_not, eng_not);
+payload shape unchanged.
+- Tests: builder's full regression on bf5fe452: 101 PASS, 3 FAIL:
+  cars_feed_e2e 1 check (passed 139/0 re-run alone: flake);
+  ui_no_truncation both halves "[cards-mixed] setup-error: no real-photo card
+  with three cards after it". Hub ran that screen on MAIN (55cb877a, 390 light)
+  and it fails the same way: data-dependent, pre-existing on main with the
+  newest scan data; to be fixed in the test. Main was contained; fast-forward.
+- Nissan candidate rebuilt: 246 shippable groups (was 283). Not shipped; a
+  new independent check is next.
+- Builder's open points: the 160-char note cap now costs 9 live and 65 nissan
+  groups (suggestion: once a limit is a gate, the note may say "engine-limited,
+  see each car"); YL3Z-10849-DA removed on a strict "KPH/MPH" reading;
+  JK61C/JK61D left the nissan candidate with no refusal recorded.
