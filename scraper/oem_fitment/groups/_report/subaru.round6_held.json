@@ -1,0 +1,385 @@
+{
+ "groups": 2,
+ "groups_by_reason": {
+  "held_option_tie": 2
+ },
+ "groups_held_whole": 2,
+ "held": [
+  {
+   "cat": "window-regulator",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "own_rows": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: (S+OBK).(25IL+25ILEYE+36RL+36RLEYE)"
+       ],
+       "page": "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/door_parts_glass_regulator.html",
+       "pn": "61041AL04A"
+      }
+     ],
+     "reasons": [
+      "held_option_tie"
+     ],
+     "siblings": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.36RL, *S.36RL, (S+OBK).25I.CVT, (S+OBK).6MT +(S+OBK).(25IP+25IPEYE+36RP), S.36R"
+       ],
+       "pn": "61041AL00A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.36RL, *S.36RL, (S+OBK).25I.CVT, (S+OBK).6MT +S.(25IP+25IPEYE+36RP) +OBK.(25IP+25IPEYE+36R+36RP), S.36R"
+       ],
+       "pn": "61041AL01A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: (S+OBK).25I.CVT, OBK.36R, S.36R"
+       ],
+       "pn": "61041AL02A"
+      }
+     ],
+     "t": [
+      "Subaru",
+      "Legacy",
+      2015
+     ],
+     "tie": {
+      "a_gate_would_fit": {
+       "drive": null,
+       "trans": [
+        "auto"
+       ]
+      },
+      "uncovered": [
+       "any drive manual"
+      ],
+      "via": "sibling"
+     }
+    },
+    {
+     "own_rows": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: (S+OBK).(25IL+25ILEYE+36RL+36RLEYE)"
+       ],
+       "page": "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/door_parts_glass_regulator.html",
+       "pn": "61041AL04A"
+      }
+     ],
+     "reasons": [
+      "held_option_tie"
+     ],
+     "siblings": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.36RL, *S.36RL, (S+OBK).25I.CVT, (S+OBK).6MT +(S+OBK).(25IP+25IPEYE+36RP), S.36R"
+       ],
+       "pn": "61041AL00A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.36RL, *S.36RL, (S+OBK).25I.CVT, (S+OBK).6MT +S.(25IP+25IPEYE+36RP) +OBK.(25IP+25IPEYE+36R+36RP), S.36R"
+       ],
+       "pn": "61041AL01A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: (S+OBK).25I.CVT, OBK.36R, S.36R"
+       ],
+       "pn": "61041AL02A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT"
+       ],
+       "pn": "62011AL10A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT"
+       ],
+       "pn": "62011AL11A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#), *OBK.25I.CVT"
+       ],
+       "pn": "62011AL12A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#), *OBK.25I.CVT"
+       ],
+       "pn": "62011AL13A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT"
+       ],
+       "pn": "62012AL30A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT"
+       ],
+       "pn": "62012AL31A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#), *OBK.25I.CVT"
+       ],
+       "pn": "62012AL32A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#), *OBK.25I.CVT"
+       ],
+       "pn": "62012AL33A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT, OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#)"
+       ],
+       "pn": "62284AL10A"
+      }
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "tie": {
+      "a_gate_would_fit": {
+       "drive": null,
+       "trans": [
+        "auto"
+       ]
+      },
+      "uncovered": [
+       "any drive manual"
+      ],
+      "via": "sibling"
+     }
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "61041AL04A"
+   ],
+   "reason_text": "option text ties the part to a transmission the gates do not enforce",
+   "reasons": [
+    "held_option_tie"
+   ],
+   "round5_apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "unit": "group"
+  },
+  {
+   "cat": "window-regulator",
+   "group_reason": "fewer than two models left",
+   "held": [
+    {
+     "own_rows": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: (S+OBK).(25IL+25ILEYE+36RL+36RLEYE)"
+       ],
+       "page": "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/door_parts_glass_regulator.html",
+       "pn": "61041AL05A"
+      }
+     ],
+     "reasons": [
+      "held_option_tie"
+     ],
+     "siblings": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.36RL, *S.36RL, (S+OBK).25I.CVT, (S+OBK).6MT +(S+OBK).(25IP+25IPEYE+36RP), S.36R"
+       ],
+       "pn": "61041AL00A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.36RL, *S.36RL, (S+OBK).25I.CVT, (S+OBK).6MT +S.(25IP+25IPEYE+36RP) +OBK.(25IP+25IPEYE+36R+36RP), S.36R"
+       ],
+       "pn": "61041AL01A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: (S+OBK).25I.CVT, OBK.36R, S.36R"
+       ],
+       "pn": "61041AL02A"
+      }
+     ],
+     "t": [
+      "Subaru",
+      "Legacy",
+      2015
+     ],
+     "tie": {
+      "a_gate_would_fit": {
+       "drive": null,
+       "trans": [
+        "auto"
+       ]
+      },
+      "uncovered": [
+       "any drive manual"
+      ],
+      "via": "sibling"
+     }
+    },
+    {
+     "own_rows": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: (S+OBK).(25IL+25ILEYE+36RL+36RLEYE)"
+       ],
+       "page": "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/door_parts_glass_regulator.html",
+       "pn": "61041AL05A"
+      }
+     ],
+     "reasons": [
+      "held_option_tie"
+     ],
+     "siblings": [
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.36RL, *S.36RL, (S+OBK).25I.CVT, (S+OBK).6MT +(S+OBK).(25IP+25IPEYE+36RP), S.36R"
+       ],
+       "pn": "61041AL00A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.36RL, *S.36RL, (S+OBK).25I.CVT, (S+OBK).6MT +S.(25IP+25IPEYE+36RP) +OBK.(25IP+25IPEYE+36R+36RP), S.36R"
+       ],
+       "pn": "61041AL01A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: (S+OBK).25I.CVT, OBK.36R, S.36R"
+       ],
+       "pn": "61041AL02A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT"
+       ],
+       "pn": "62011AL10A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT"
+       ],
+       "pn": "62011AL11A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#), *OBK.25I.CVT"
+       ],
+       "pn": "62011AL12A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#), *OBK.25I.CVT"
+       ],
+       "pn": "62011AL13A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT"
+       ],
+       "pn": "62012AL30A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT"
+       ],
+       "pn": "62012AL31A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#), *OBK.25I.CVT"
+       ],
+       "pn": "62012AL32A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#), *OBK.25I.CVT"
+       ],
+       "pn": "62012AL33A"
+      },
+      {
+       "notes": [
+        "Fitting Vehicle Options: *OBK.25I.CVT, OBK.6MT +OBK.(25IP+25IPEYE+25IL+25ILEYE+36R#)"
+       ],
+       "pn": "62284AL10A"
+      }
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "tie": {
+      "a_gate_would_fit": {
+       "drive": null,
+       "trans": [
+        "auto"
+       ]
+      },
+      "uncovered": [
+       "any drive manual"
+      ],
+      "via": "sibling"
+     }
+    }
+   ],
+   "kept_apps": [],
+   "pn": [
+    "61041AL05A"
+   ],
+   "reason_text": "option text ties the part to a transmission the gates do not enforce",
+   "reasons": [
+    "held_option_tie"
+   ],
+   "round5_apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "unit": "group"
+  }
+ ],
+ "note": "round6-1119 (hub decisions 2026-11-19 ~10:10 UTC): vehicle-years held out. held_cab_inferred (decision 1): a cab gate the number's own row for that vehicle-year does not carry (read from page structure or another year); not reworded, held. held_option_tie (decision 5): the option text ties the part to a transmission (or to a drive for one transmission) that no gate the app has can state from the row itself (uncovered = what the gates would let through that no configuration covers; via sibling = only a same-part sibling's transmission makes the tie). unit vehicle-year: the group ships without them (kept_apps, after every hold); unit group: held whole.",
+ "ns": "subaru",
+ "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "vehicle_years_by_reason": {
+  "held_option_tie": 4
+ }
+}

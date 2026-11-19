@@ -86521,9 +86521,29 @@
    ],
    "cars": 23,
    "cat": "door-rear",
+   "gates": [
+    [
+     "Lexus",
+     "GS 300",
+     1998,
+     1998,
+     {
+      "built": "1997-08..1998-08"
+     }
+    ],
+    [
+     "Lexus",
+     "GS 400",
+     1998,
+     1998,
+     {
+      "built": "1997-08..1998-08"
+     }
+    ]
+   ],
    "id": "oem:toyota:door-rear:R:8d20e463c5",
    "kind": "body",
-   "note": "Toyota catalog lists #67003-30550 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #67003-30550 for both — fits some configurations; built 08/1997-08/1998 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:40:25Z",
    "pn": [
     "67003-30550"
@@ -86716,9 +86736,29 @@
    ],
    "cars": 23,
    "cat": "door-rear",
+   "gates": [
+    [
+     "Lexus",
+     "GS 300",
+     1998,
+     1998,
+     {
+      "built": "1997-08..1998-08"
+     }
+    ],
+    [
+     "Lexus",
+     "GS 400",
+     1998,
+     1998,
+     {
+      "built": "1997-08..1998-08"
+     }
+    ]
+   ],
    "id": "oem:toyota:door-rear:L:da7b213e37",
    "kind": "body",
-   "note": "Toyota catalog lists #67004-30550 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #67004-30550 for both — fits some configurations; built 08/1997-08/1998 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:40:41Z",
    "pn": [
     "67004-30550"

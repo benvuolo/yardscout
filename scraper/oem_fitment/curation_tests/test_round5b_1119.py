@@ -131,14 +131,19 @@ for e in held["held"]:
     if e["unit"] == "vehicle-year" and (g is None or years(g["apps"]) != years(e["kept_apps"]) or years(g["apps"]) & hy):
         bad.append(("kept apps", e["pn"]))
 check("candidate: no held vehicle-year is claimed; a vehicle-year hold leaves exactly kept_apps", not bad, bad[:3])
-check("held list: one reason, known kinds, every held vehicle-year shows a starred configuration",
-      all(e["reason"] == "held_starred_scope" and all(set(h["kinds"]) <= {"a", "b", "c_drive", "c_engine"} and h["kinds"]
-                                                     and any(x["starred"] for x in h["clauses"]) for h in e["held"])
+# round6-1119 (hub decision 2): the same file also lists held_starred_only (kind starred_only)
+R6 = ("held_cab_inferred", "held_starred_only", "held_starred_scope", "held_option_tie")
+check("held list: known reasons and kinds, every held vehicle-year shows a starred configuration",
+      all(e["reason"] in ("held_starred_scope", "held_starred_only")
+          and all(set(h["kinds"]) <= {"a", "b", "c_drive", "c_engine", "starred_only"} and h["kinds"]
+                  and any(x["starred"] for x in h["clauses"]) for h in e["held"])
           for e in held["held"]))
-check("report: one held_starred_scope refusal per group held whole",
-      sum(r["reason"] == "held_starred_scope" for r in rep["refusals"]) == held["groups_held_whole"]
-      and rep["summary"].get("likely_app_years_starred_scope")
-      and sum(rep["summary"]["likely_app_years_starred_scope"].values()) == held["vehicle_years"])
+whole = {(e["cat"], e["pn"][0]) for e in held["held"] if e["unit"] == "group"}
+refd = {(r["cat"], r["pn"]) for r in rep["refusals"] if r["reason"] in R6}
+check("report: every group held whole has its round-5b/6 refusal; the scope counter matches the a/b/c kinds",
+      whole <= refd and rep["summary"].get("likely_app_years_starred_scope")
+      and sum(rep["summary"]["likely_app_years_starred_scope"].values())
+      == sum(any(k != "starred_only" for k in h["kinds"]) for e in held["held"] for h in e["held"]), sorted(whole - refd)[:3])
 
 
 def claims(cat, pn, mk, md, y):

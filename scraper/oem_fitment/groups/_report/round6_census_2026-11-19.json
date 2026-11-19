@@ -1,0 +1,4545 @@
+{
+ "report": "round6_census_2026-11-19",
+ "branch": "interchange/round6-1119",
+ "base": "origin/main 8c48be12 (round 5b live; nissan candidate at round 5b)",
+ "pins": {
+  "shipped_raw": "oem-raw@dca9cd845f26",
+  "nissan_raw": "oem-raw@57e8b5b99de0",
+  "lot": "main@a85c654 inventory 1a9cfa73, vin_decodes 1357625b, vehicle_extras 6ff3d44b"
+ },
+ "tool": "census on the groups origin/main ships, read with this branch's detectors (curate.Curation.cab_stated, build_window, option_tie, _own_starred_only, _pn_other_windows); lot rows = car x group rows of the vehicle-year in the main replay (audit11_4/lot_replay.mjs, this tree's app)",
+ "model_year_span": "07/(y-1)-06/y (curate._my_range; the 1119f check assumed 08/(y-1)-07/y)",
+ "classes": {
+  "d1_cab_not_on_own_row": "cab gate whose cabs the number's own rows / fitment trims for that vehicle-year do not carry (held_cab_inferred)",
+  "d2_starred_only": "nissan: the number is listed for the vehicle-year only through starred configurations (held_starred_only)",
+  "d4_window_cuts_span_ungated": "no built gate while the number's window cuts the model-year span; kind drop = the narrower other-page window (decision 6) leaves under 5 months of the year",
+  "d5_option_tie": "(drive family, transmission) pairs the gate lets through that no configuration covers, config-tuple option columns only (held_option_tie)",
+  "d6_pages_disagree": "other model-year pages of the same model date the number differently (read narrowly)"
+ },
+ "census_on_main": {
+  "gm": {},
+  "ford": {
+   "d4_window_cuts_span_ungated": {
+    "vehicle_years": 5,
+    "groups": 5,
+    "lot_rows": {
+     "plain": 303
+    }
+   }
+  },
+  "mopar": {},
+  "toyota": {
+   "d4_window_cuts_span_ungated": {
+    "vehicle_years": 4,
+    "groups": 2,
+    "lot_rows": {
+     "plain": 46
+    }
+   }
+  },
+  "subaru": {
+   "d5_option_tie": {
+    "vehicle_years": 4,
+    "groups": 2,
+    "lot_rows": {
+     "plain": 154
+    }
+   }
+  },
+  "hmg": {},
+  "vag": {},
+  "mb": {},
+  "nissan": {
+   "d1_cab_not_on_own_row": {
+    "vehicle_years": 8,
+    "groups": 6,
+    "lot_rows": {
+     "unc": 454
+    }
+   },
+   "d2_starred_only": {
+    "vehicle_years": 91,
+    "groups": 33,
+    "lot_rows": {
+     "plain": 3180,
+     "unc": 999,
+     "exc": 99
+    }
+   },
+   "d4_window_cuts_span_ungated": {
+    "vehicle_years": 90,
+    "groups": 48,
+    "lot_rows": {
+     "unc": 93,
+     "exc": 1,
+     "plain": 3663
+    }
+   },
+   "d5_option_tie": {
+    "vehicle_years": 9,
+    "groups": 7,
+    "lot_rows": {
+     "plain": 507,
+     "unc": 28,
+     "exc": 4
+    }
+   },
+   "d6_pages_disagree": {
+    "vehicle_years": 62,
+    "groups": 33,
+    "lot_rows": {
+     "plain": 2758,
+     "unc": 268
+    }
+   }
+  }
+ },
+ "census_rows": {
+  "gm": {},
+  "ford": {
+   "d4_window_cuts_span_ungated": [
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "1L2Z-7823394-BB"
+     ],
+     "t": [
+      "Ford",
+      "Explorer Sport",
+      2001
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 01/2001-05/2003",
+     "lot": {
+      "plain": 43
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "1L2Z-7823395-BB"
+     ],
+     "t": [
+      "Ford",
+      "Explorer Sport",
+      2001
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 01/2001-05/2003",
+     "lot": {
+      "plain": 43
+     }
+    },
+    {
+     "cat": "window-switch",
+     "pn": [
+      "5F9Z-14529-BAC"
+     ],
+     "t": [
+      "Mercury",
+      "Montego",
+      2005
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 07/2004-03/2005",
+     "lot": {
+      "plain": 51
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "8G1Z-19980-C"
+     ],
+     "t": [
+      "Ford",
+      "Taurus X",
+      2008
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 06/2007-12/2007",
+     "lot": {
+      "plain": 83
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "8G1Z-19980-F"
+     ],
+     "t": [
+      "Ford",
+      "Taurus X",
+      2008
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 12/2007-06/2009",
+     "lot": {
+      "plain": 83
+     }
+    }
+   ]
+  },
+  "mopar": {},
+  "toyota": {
+   "d4_window_cuts_span_ungated": [
+    {
+     "cat": "door-rear",
+     "pn": [
+      "67003-30550"
+     ],
+     "t": [
+      "Lexus",
+      "GS 300",
+      1998
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 08/1997-08/1998",
+     "lot": {
+      "plain": 12
+     }
+    },
+    {
+     "cat": "door-rear",
+     "pn": [
+      "67003-30550"
+     ],
+     "t": [
+      "Lexus",
+      "GS 400",
+      1998
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 08/1997-08/1998",
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "door-rear",
+     "pn": [
+      "67004-30550"
+     ],
+     "t": [
+      "Lexus",
+      "GS 300",
+      1998
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 08/1997-08/1998",
+     "lot": {
+      "plain": 12
+     }
+    },
+    {
+     "cat": "door-rear",
+     "pn": [
+      "67004-30550"
+     ],
+     "t": [
+      "Lexus",
+      "GS 400",
+      1998
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 08/1997-08/1998",
+     "lot": {
+      "plain": 11
+     }
+    }
+   ]
+  },
+  "subaru": {
+   "d5_option_tie": [
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "61041AL04A"
+     ],
+     "t": [
+      "Subaru",
+      "Legacy",
+      2015
+     ],
+     "uncovered": [
+      [
+       "*",
+       "manual"
+      ]
+     ],
+     "via": "sibling",
+     "fit": {
+      "drive": null,
+      "trans": [
+       "auto"
+      ]
+     },
+     "lot": {
+      "plain": 49
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "61041AL04A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "uncovered": [
+      [
+       "*",
+       "manual"
+      ]
+     ],
+     "via": "sibling",
+     "fit": {
+      "drive": null,
+      "trans": [
+       "auto"
+      ]
+     },
+     "lot": {
+      "plain": 28
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "61041AL05A"
+     ],
+     "t": [
+      "Subaru",
+      "Legacy",
+      2015
+     ],
+     "uncovered": [
+      [
+       "*",
+       "manual"
+      ]
+     ],
+     "via": "sibling",
+     "fit": {
+      "drive": null,
+      "trans": [
+       "auto"
+      ]
+     },
+     "lot": {
+      "plain": 49
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "61041AL05A"
+     ],
+     "t": [
+      "Subaru",
+      "Outback",
+      2015
+     ],
+     "uncovered": [
+      [
+       "*",
+       "manual"
+      ]
+     ],
+     "via": "sibling",
+     "fit": {
+      "drive": null,
+      "trans": [
+       "auto"
+      ]
+     },
+     "lot": {
+      "plain": 28
+     }
+    }
+   ]
+  },
+  "hmg": {},
+  "vag": {},
+  "mb": {},
+  "nissan": {
+   "d2_starred_only": [
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-3JA1B"
+     ],
+     "t": [
+      "Infiniti",
+      "JX35",
+      2013
+     ],
+     "lot": {
+      "plain": 114
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-3JA1B"
+     ],
+     "t": [
+      "Infiniti",
+      "QX60",
+      2014
+     ],
+     "lot": {
+      "plain": 68,
+      "unc": 3,
+      "exc": 8
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S00E"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "lot": {
+      "plain": 151,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S01A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2004
+     ],
+     "lot": {
+      "plain": 169
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S01A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2005
+     ],
+     "lot": {
+      "plain": 145
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S01A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "lot": {
+      "plain": 151,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S01A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ],
+     "lot": {
+      "plain": 79
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S02E"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2006
+     ],
+     "lot": {
+      "unc": 119
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S02E"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "lot": {
+      "unc": 152
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S03A"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2006
+     ],
+     "lot": {
+      "unc": 119
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S03A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2006
+     ],
+     "lot": {
+      "unc": 152
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S04E"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ],
+     "lot": {
+      "unc": 79
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-7S05A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ],
+     "lot": {
+      "unc": 79
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-ZD103"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2003
+     ],
+     "lot": {
+      "plain": 24,
+      "unc": 7,
+      "exc": 17
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-ZD103"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ],
+     "lot": {
+      "plain": 26,
+      "unc": 5,
+      "exc": 23
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-ZD103"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2003
+     ],
+     "lot": {
+      "plain": 92,
+      "unc": 9,
+      "exc": 1
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-ZD103"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2004
+     ],
+     "lot": {
+      "plain": 128,
+      "unc": 15,
+      "exc": 4
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-ZR29A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2008
+     ],
+     "lot": {
+      "unc": 102
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-3ZD0C"
+     ],
+     "t": [
+      "Infiniti",
+      "QX56",
+      2013
+     ],
+     "lot": {
+      "unc": 8
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-3ZD0C"
+     ],
+     "t": [
+      "Infiniti",
+      "QX80",
+      2014
+     ],
+     "lot": {
+      "plain": 14
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-EH101"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "lot": {
+      "plain": 86
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-EH101"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ],
+     "lot": {
+      "plain": 69
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-EH101"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-EH101"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ],
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-EH11B"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "lot": {
+      "unc": 86
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-EH11B"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "lot": {
+      "unc": 20
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-JK61C"
+     ],
+     "t": [
+      "Infiniti",
+      "G35",
+      2008
+     ],
+     "lot": {
+      "plain": 143
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-JK61C"
+     ],
+     "t": [
+      "Infiniti",
+      "G37",
+      2008
+     ],
+     "lot": {
+      "plain": 43
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "27510-7Z411"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2000
+     ],
+     "lot": {
+      "plain": 103
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "27510-7Z411"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2001
+     ],
+     "lot": {
+      "plain": 96
+     }
+    },
+    {
+     "cat": "climate-control",
+     "pn": [
+      "27510-7Z411"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2002
+     ],
+     "lot": {
+      "plain": 159
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-2Z700"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ],
+     "lot": {
+      "plain": 54
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-2Z700"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ],
+     "lot": {
+      "plain": 54
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-7B400"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1999
+     ],
+     "lot": {
+      "plain": 24
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-7B400"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ],
+     "lot": {
+      "plain": 82
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80731-7B400"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1999
+     ],
+     "lot": {
+      "plain": 24
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80731-7B400"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ],
+     "lot": {
+      "plain": 82
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ],
+     "lot": {
+      "unc": 8
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ],
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3EV0B"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2016
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3EV0B"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2017
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1998
+     ],
+     "lot": {
+      "plain": 43
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1999
+     ],
+     "lot": {
+      "plain": 24
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ],
+     "lot": {
+      "plain": 82
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2001
+     ],
+     "lot": {
+      "plain": 52
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     "lot": {
+      "plain": 70
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ],
+     "lot": {
+      "plain": 26,
+      "unc": 5,
+      "exc": 23
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3WV1E"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3WV1E"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ],
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3WV1E"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3WV3E"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3WV3E"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ],
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3WV3E"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2000
+     ],
+     "lot": {
+      "plain": 30
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2001
+     ],
+     "lot": {
+      "plain": 26
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2002
+     ],
+     "lot": {
+      "plain": 32
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2003
+     ],
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2004
+     ],
+     "lot": {
+      "plain": 15
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA1E"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ],
+     "lot": {
+      "unc": 8
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA1E"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA1E"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA1E"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ],
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA1E"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ],
+     "lot": {
+      "unc": 8
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ],
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3D"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3E"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ],
+     "lot": {
+      "unc": 8
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3E"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3E"
+     ],
+     "t": [
+      "Infiniti",
+      "EX37",
+      2013
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3E"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2014
+     ],
+     "lot": {
+      "plain": 4
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-1BA3E"
+     ],
+     "t": [
+      "Infiniti",
+      "QX50",
+      2015
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3EV0B"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2016
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3EV0B"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2017
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1998
+     ],
+     "lot": {
+      "plain": 43
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      1999
+     ],
+     "lot": {
+      "plain": 24
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2000
+     ],
+     "lot": {
+      "plain": 82
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3S500"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2004
+     ],
+     "lot": {
+      "plain": 26,
+      "unc": 5,
+      "exc": 23
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2000
+     ],
+     "lot": {
+      "plain": 30
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I30",
+      2001
+     ],
+     "lot": {
+      "plain": 26
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2002
+     ],
+     "lot": {
+      "plain": 32
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2003
+     ],
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-3Y300"
+     ],
+     "t": [
+      "Infiniti",
+      "I35",
+      2004
+     ],
+     "lot": {
+      "plain": 15
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-ZC20A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ],
+     "lot": {
+      "plain": 79
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-ZC20A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2008
+     ],
+     "lot": {
+      "plain": 102
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "K6301-1PM0B"
+     ],
+     "t": [
+      "Infiniti",
+      "M35h",
+      2012
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "K6302-1PM0B"
+     ],
+     "t": [
+      "Infiniti",
+      "M35h",
+      2012
+     ],
+     "lot": {
+      "plain": 3
+     }
+    }
+   ],
+   "d4_window_cuts_span_ungated": [
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-9BD4C"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2012
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 08/2011-12/2012",
+     "lot": {
+      "unc": 12,
+      "exc": 1
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-9BD4C"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2012
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 08/2011-12/2012",
+     "lot": {
+      "unc": 14
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-1MA5A"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2014
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 01/2013-11/2013",
+     "lot": {
+      "plain": 1,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-1BA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2009-09/2010",
+     "lot": {
+      "plain": 8
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-1BA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2009-09/2010",
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-1CA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2014
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 04/2014-03/2015",
+     "lot": {
+      "plain": 5
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2018
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 02/2015-02/2018",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2018
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 02/2015-02/2018",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-AR000"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2003
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 11/2002-07/2004",
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-AR000"
+     ],
+     "t": [
+      "Infiniti",
+      "FX45",
+      2003
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 11/2002-07/2004",
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2009
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2009-04/2010",
+     "lot": {
+      "plain": 34
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2009
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2009-04/2010",
+     "lot": {
+      "plain": 13
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-06/2008",
+     "lot": {
+      "plain": 86
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-06/2008",
+     "lot": {
+      "plain": 69
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-06/2008",
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-06/2008",
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-ZL90A"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2012
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 08/2011-05/2013",
+     "lot": {
+      "plain": 13
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-ZL90A"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2012
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 04/2010-08/2011",
+     "lot": {
+      "plain": 49
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-1BA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2009-09/2010",
+     "lot": {
+      "plain": 8
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-1BA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2009-09/2010",
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-1CA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2014
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 04/2014-03/2015",
+     "lot": {
+      "plain": 5
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2018
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 02/2015-02/2018",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2018
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 02/2015-02/2018",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-AR000"
+     ],
+     "t": [
+      "Infiniti",
+      "FX35",
+      2003
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 11/2002-09/2004",
+     "lot": {
+      "plain": 22
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-AR000"
+     ],
+     "t": [
+      "Infiniti",
+      "FX45",
+      2003
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 11/2002-09/2004",
+     "lot": {
+      "plain": 6
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2009
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2009-04/2010",
+     "lot": {
+      "plain": 34
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2009
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2009-04/2010",
+     "lot": {
+      "plain": 13
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-06/2008",
+     "lot": {
+      "plain": 86
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-06/2008",
+     "lot": {
+      "plain": 69
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-06/2008",
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-06/2008",
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-ZL90A"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2012
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 08/2011-05/2013",
+     "lot": {
+      "plain": 13
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-ZL90A"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2012
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 04/2010-08/2011",
+     "lot": {
+      "plain": 49
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-89915"
+     ],
+     "t": [
+      "Nissan",
+      "Murano",
+      2005
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 08/2004-12/2006",
+     "lot": {
+      "plain": 146
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-JX30B"
+     ],
+     "t": [
+      "Nissan",
+      "Cube",
+      2009
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 10/2010-04/2011",
+     "lot": {
+      "plain": 62
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-JX30B"
+     ],
+     "t": [
+      "Nissan",
+      "Cube",
+      2010
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 10/2010-04/2011",
+     "lot": {
+      "plain": 54
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-JX30C"
+     ],
+     "t": [
+      "Nissan",
+      "Rogue",
+      2013
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 05/2011-06/2012",
+     "lot": {
+      "plain": 432
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2019
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 10/2017-02/2018",
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2019
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 10/2017-02/2018",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2012
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2015-02/2016",
+     "lot": {
+      "plain": 63
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2013
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2015-02/2016",
+     "lot": {
+      "plain": 81
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2014
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2015-02/2016",
+     "lot": {
+      "plain": 57
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2004
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 10/2004-12/2005",
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-0E715"
+     ],
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 08/1993-02/1996",
+     "lot": {
+      "plain": 9
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-0E715"
+     ],
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 08/1993-02/1996",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2019
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 10/2017-02/2018",
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2019
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 10/2017-02/2018",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2012
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2015-02/2016",
+     "lot": {
+      "plain": 63
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2013
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2015-02/2016",
+     "lot": {
+      "plain": 81
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2014
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2015-02/2016",
+     "lot": {
+      "plain": 57
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2004
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 10/2004-12/2005",
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-1MA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2016
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 09/2015-04/2017",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-1MA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2016
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 09/2015-04/2017",
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2019
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 04/2017-02/2018",
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2019
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 04/2017-02/2018",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-3Z005"
+     ],
+     "t": [
+      "Nissan",
+      "Altima",
+      2004
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 11/2002-09/2003",
+     "lot": {
+      "plain": 115,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2007
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 08/2006-04/2008",
+     "lot": {
+      "plain": 77
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2010
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2010-08/2011",
+     "lot": {
+      "unc": 32
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-1MA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2016
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 09/2015-04/2017",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-1MA0A"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2016
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 09/2015-04/2017",
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2019
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 04/2017-02/2018",
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2019
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 04/2017-02/2018",
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-3Z005"
+     ],
+     "t": [
+      "Nissan",
+      "Altima",
+      2004
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 11/2002-09/2003",
+     "lot": {
+      "plain": 115,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2007
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 08/2006-04/2008",
+     "lot": {
+      "plain": 77
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2010
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2010-08/2011",
+     "lot": {
+      "unc": 32
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-CV01B"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2013
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2015-02/2016",
+     "lot": {
+      "plain": 81
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-CV01B"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2014
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2015-02/2016",
+     "lot": {
+      "plain": 57
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-D9000"
+     ],
+     "t": [
+      "Nissan",
+      "Altima",
+      1996
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 08/1993-02/1996",
+     "lot": {
+      "plain": 9
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-D9000"
+     ],
+     "t": [
+      "Nissan",
+      "Stanza",
+      1996
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 08/1993-02/1996",
+     "lot": {}
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-7S200"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2005
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 10/2004-08/2005",
+     "lot": {
+      "plain": 103
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-7S600"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2005
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 10/2004-08/2005",
+     "lot": {
+      "plain": 103
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-7S600"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2004
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 10/2004-08/2005",
+     "lot": {
+      "plain": 169
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2011-04/2012",
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-01/2008",
+     "lot": {
+      "plain": 86
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-01/2008",
+     "lot": {
+      "plain": 69
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-01/2008",
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-01/2008",
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-ZC20A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 04/2007-04/2007",
+     "lot": {
+      "plain": 79
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-7S200"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2005
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 10/2004-08/2005",
+     "lot": {
+      "plain": 103
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-7S600"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2005
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 10/2004-08/2005",
+     "lot": {
+      "plain": 103
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 08/2011-04/2012",
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-01/2008",
+     "lot": {
+      "plain": 86
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-01/2008",
+     "lot": {
+      "plain": 69
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-01/2008",
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ],
+     "kind": "drop",
+     "src": "other_page",
+     "window": "built 09/2007-01/2008",
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-ZC20A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2008
+     ],
+     "kind": "no_other_row",
+     "src": "page",
+     "window": "built 08/2006-04/2008",
+     "lot": {
+      "plain": 102
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "K6301-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "M37",
+      2012
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 12/2010-04/2012",
+     "lot": {
+      "plain": 8
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "K6301-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "M56",
+      2012
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 12/2010-04/2012",
+     "lot": {}
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "K6302-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "M37",
+      2012
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 12/2010-04/2012",
+     "lot": {
+      "plain": 8
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "K6302-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "M56",
+      2012
+     ],
+     "kind": "no_other_row",
+     "src": "other_page",
+     "window": "built 12/2010-04/2012",
+     "lot": {}
+    }
+   ],
+   "d5_option_tie": [
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-9BD5A"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2011
+     ],
+     "uncovered": [
+      [
+       "2",
+       "auto"
+      ]
+     ],
+     "via": "own",
+     "fit": null,
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-9BD5A"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2012
+     ],
+     "uncovered": [
+      [
+       "2",
+       "auto"
+      ]
+     ],
+     "via": "own",
+     "fit": null,
+     "lot": {
+      "plain": 14
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-9BD5B"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2012
+     ],
+     "uncovered": [
+      [
+       "2",
+       "manual"
+      ],
+      [
+       "4",
+       "manual"
+      ]
+     ],
+     "via": "own",
+     "fit": {
+      "drive": null,
+      "trans": [
+       "auto"
+      ]
+     },
+     "lot": {
+      "unc": 13
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24810-ZD103"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2004
+     ],
+     "uncovered": [
+      [
+       "4",
+       "auto"
+      ]
+     ],
+     "via": "sibling",
+     "fit": null,
+     "lot": {
+      "plain": 128,
+      "unc": 15,
+      "exc": 4
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-JK61C"
+     ],
+     "t": [
+      "Infiniti",
+      "G35",
+      2008
+     ],
+     "uncovered": [
+      [
+       "2",
+       "manual"
+      ],
+      [
+       "4",
+       "manual"
+      ]
+     ],
+     "via": "sibling",
+     "fit": {
+      "drive": null,
+      "trans": [
+       "auto"
+      ]
+     },
+     "lot": {
+      "plain": 143
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-JK61D"
+     ],
+     "t": [
+      "Infiniti",
+      "G35",
+      2008
+     ],
+     "uncovered": [
+      [
+       "2",
+       "manual"
+      ],
+      [
+       "4",
+       "manual"
+      ]
+     ],
+     "via": "sibling",
+     "fit": {
+      "drive": null,
+      "trans": [
+       "auto"
+      ]
+     },
+     "lot": {
+      "plain": 143
+     }
+    },
+    {
+     "cat": "gauge-cluster",
+     "pn": [
+      "24820-JK61D"
+     ],
+     "t": [
+      "Infiniti",
+      "G37",
+      2008
+     ],
+     "uncovered": [
+      [
+       "2",
+       "manual"
+      ],
+      [
+       "4",
+       "manual"
+      ]
+     ],
+     "via": "sibling",
+     "fit": {
+      "drive": null,
+      "trans": [
+       "auto"
+      ]
+     },
+     "lot": {
+      "plain": 43
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2013
+     ],
+     "uncovered": [
+      [
+       "4",
+       "auto"
+      ]
+     ],
+     "via": "own",
+     "fit": null,
+     "lot": {
+      "plain": 8
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2013
+     ],
+     "uncovered": [
+      [
+       "4",
+       "auto"
+      ]
+     ],
+     "via": "own",
+     "fit": null,
+     "lot": {
+      "plain": 8
+     }
+    }
+   ],
+   "d6_pages_disagree": [
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-1BA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ],
+     "lot": {
+      "plain": 8
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-1BA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-1CA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2014
+     ],
+     "lot": {
+      "plain": 5
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2009
+     ],
+     "lot": {
+      "plain": 34
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2009
+     ],
+     "lot": {
+      "plain": 13
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "lot": {
+      "plain": 86
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ],
+     "lot": {
+      "plain": 69
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ],
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-ZL90A"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2012
+     ],
+     "lot": {
+      "plain": 49
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80720-ZL90A"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2012
+     ],
+     "lot": {
+      "plain": 14
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-1BA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2011
+     ],
+     "lot": {
+      "plain": 8
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-1BA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "EX35",
+      2012
+     ],
+     "lot": {
+      "plain": 3
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-1CA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "QX70",
+      2014
+     ],
+     "lot": {
+      "plain": 5
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2009
+     ],
+     "lot": {
+      "plain": 34
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2009
+     ],
+     "lot": {
+      "plain": 13
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "lot": {
+      "plain": 86
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ],
+     "lot": {
+      "plain": 69
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ],
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-ZL90A"
+     ],
+     "t": [
+      "Nissan",
+      "Pathfinder",
+      2012
+     ],
+     "lot": {
+      "plain": 49
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80721-ZL90A"
+     ],
+     "t": [
+      "Nissan",
+      "Xterra",
+      2012
+     ],
+     "lot": {
+      "plain": 14
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-JX30B"
+     ],
+     "t": [
+      "Nissan",
+      "Cube",
+      2009
+     ],
+     "lot": {
+      "plain": 62
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-JX30B"
+     ],
+     "t": [
+      "Nissan",
+      "Cube",
+      2010
+     ],
+     "lot": {
+      "plain": 54
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "80730-JX30C"
+     ],
+     "t": [
+      "Nissan",
+      "Rogue",
+      2013
+     ],
+     "lot": {
+      "plain": 432
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2019
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2019
+     ],
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2012
+     ],
+     "lot": {
+      "plain": 63
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2013
+     ],
+     "lot": {
+      "plain": 81
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2014
+     ],
+     "lot": {
+      "plain": 57
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2004
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2019
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2019
+     ],
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2012
+     ],
+     "lot": {
+      "plain": 63
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2013
+     ],
+     "lot": {
+      "plain": 81
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-1U600"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2014
+     ],
+     "lot": {
+      "plain": 57
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Armada",
+      2004
+     ],
+     "lot": {
+      "plain": 85
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2019
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2019
+     ],
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-3Z005"
+     ],
+     "t": [
+      "Nissan",
+      "Altima",
+      2004
+     ],
+     "lot": {
+      "plain": 115,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2010
+     ],
+     "lot": {
+      "unc": 32
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-CV01B"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2015
+     ],
+     "lot": {
+      "unc": 21
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70",
+      2019
+     ],
+     "lot": {
+      "plain": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-1MA0B"
+     ],
+     "t": [
+      "Infiniti",
+      "Q70L",
+      2019
+     ],
+     "lot": {}
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-3Z005"
+     ],
+     "t": [
+      "Nissan",
+      "Altima",
+      2004
+     ],
+     "lot": {
+      "plain": 115,
+      "unc": 1
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2010
+     ],
+     "lot": {
+      "unc": 32
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-CV01B"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2013
+     ],
+     "lot": {
+      "plain": 81
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-CV01B"
+     ],
+     "t": [
+      "Nissan",
+      "Juke",
+      2014
+     ],
+     "lot": {
+      "plain": 57
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-7S600"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2004
+     ],
+     "lot": {
+      "plain": 169
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "lot": {
+      "plain": 86
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ],
+     "lot": {
+      "plain": 69
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ],
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96301-ZC20A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ],
+     "lot": {
+      "plain": 79
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EA000"
+     ],
+     "t": [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2006
+     ],
+     "lot": {
+      "plain": 86
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M35",
+      2007
+     ],
+     "lot": {
+      "plain": 69
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2006
+     ],
+     "lot": {
+      "plain": 20
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-EH100"
+     ],
+     "t": [
+      "Infiniti",
+      "M45",
+      2007
+     ],
+     "lot": {
+      "plain": 11
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-ZH10A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2007
+     ],
+     "lot": {
+      "unc": 79
+     }
+    },
+    {
+     "cat": "side-mirrors",
+     "pn": [
+      "96302-ZH10A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2008
+     ],
+     "lot": {
+      "unc": 102
+     }
+    }
+   ],
+   "d1_cab_not_on_own_row": [
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82720-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2005
+     ],
+     "cab": "crew cab",
+     "lot": {
+      "unc": 145
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82721-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2005
+     ],
+     "cab": "crew cab",
+     "lot": {
+      "unc": 145
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2010
+     ],
+     "cab": "crew cab",
+     "lot": {
+      "unc": 32
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2011
+     ],
+     "cab": "crew cab",
+     "lot": {
+      "unc": 30
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82730-9FJ0A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2012
+     ],
+     "cab": "crew cab",
+     "lot": {
+      "unc": 20
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2010
+     ],
+     "cab": "crew cab",
+     "lot": {
+      "unc": 32
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-7S000"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2011
+     ],
+     "cab": "crew cab",
+     "lot": {
+      "unc": 30
+     }
+    },
+    {
+     "cat": "window-regulator",
+     "pn": [
+      "82731-9FJ0A"
+     ],
+     "t": [
+      "Nissan",
+      "Titan",
+      2012
+     ],
+     "cab": "crew cab",
+     "lot": {
+      "unc": 20
+     }
+    }
+   ]
+  }
+ },
+ "pairs": {
+  "gm": {
+   "main": {
+    "payload_groups": 205,
+    "plain": 53045,
+    "if_equipped": 2106,
+    "excluded": 3867
+   },
+   "round6": {
+    "payload_groups": 205,
+    "plain": 53045,
+    "if_equipped": 2106,
+    "excluded": 3867
+   }
+  },
+  "ford": {
+   "main": {
+    "payload_groups": 68,
+    "plain": 23826,
+    "if_equipped": 1117,
+    "excluded": 187
+   },
+   "round6": {
+    "payload_groups": 66,
+    "plain": 23523,
+    "if_equipped": 1050,
+    "excluded": 187
+   }
+  },
+  "mopar": {
+   "main": {
+    "payload_groups": 291,
+    "plain": 108297,
+    "if_equipped": 1980,
+    "excluded": 751
+   },
+   "round6": {
+    "payload_groups": 291,
+    "plain": 108297,
+    "if_equipped": 1980,
+    "excluded": 751
+   }
+  },
+  "toyota": {
+   "main": {
+    "payload_groups": 529,
+    "plain": 96596,
+    "if_equipped": 8390,
+    "excluded": 7196
+   },
+   "round6": {
+    "payload_groups": 529,
+    "plain": 96550,
+    "if_equipped": 8436,
+    "excluded": 7196
+   }
+  },
+  "subaru": {
+   "main": {
+    "payload_groups": 29,
+    "plain": 3992,
+    "if_equipped": 36,
+    "excluded": 27
+   },
+   "round6": {
+    "payload_groups": 27,
+    "plain": 3838,
+    "if_equipped": 36,
+    "excluded": 27
+   }
+  },
+  "hmg": {
+   "main": {
+    "payload_groups": 15,
+    "plain": 3104,
+    "if_equipped": 650,
+    "excluded": 0
+   },
+   "round6": {
+    "payload_groups": 15,
+    "plain": 3104,
+    "if_equipped": 650,
+    "excluded": 0
+   }
+  },
+  "vag": {
+   "main": {
+    "payload_groups": 19,
+    "plain": 1489,
+    "if_equipped": 6,
+    "excluded": 6
+   },
+   "round6": {
+    "payload_groups": 19,
+    "plain": 1489,
+    "if_equipped": 6,
+    "excluded": 6
+   }
+  },
+  "mb": {
+   "main": {
+    "payload_groups": 10,
+    "plain": 243,
+    "if_equipped": 0,
+    "excluded": 0
+   },
+   "round6": {
+    "payload_groups": 10,
+    "plain": 243,
+    "if_equipped": 0,
+    "excluded": 0
+   }
+  },
+  "nissan": {
+   "main": {
+    "payload_groups": 214,
+    "plain": 38357,
+    "if_equipped": 5424,
+    "excluded": 297
+   },
+   "round6": {
+    "payload_groups": 171,
+    "plain": 30048,
+    "if_equipped": 3268,
+    "excluded": 246
+   }
+  },
+  "shipped": {
+   "main": {
+    "payload_groups": 1166,
+    "plain": 290592,
+    "if_equipped": 14285,
+    "excluded": 12034
+   },
+   "round6": {
+    "payload_groups": 1162,
+    "plain": 290089,
+    "if_equipped": 14264,
+    "excluded": 12034
+   }
+  }
+ }
+}
