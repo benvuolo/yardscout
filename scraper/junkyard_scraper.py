@@ -25868,8 +25868,43 @@ def _vpic_model_mismatch(v: dict, vin_dec: dict, stats: bool = False) -> str | N
         if not hit:
             MODEL_MISMATCH_UNCLASSIFIED[(make, listed, decoded)] += 1
     if hit and hit[0] == "different":
-        return f"VIN decodes as {make} {hit[1]} (listed {listed})"
+        return f"VIN decodes as {_vin_make(v, vin_dec)} {hit[1]} (listed {listed})"
     return None
+
+
+def _vin_make(v: dict, vin_dec: dict) -> str:
+    """The VIN's make in the scan's own spelling (normalize_make of the
+    decode), else the listing's. Differs from the listing only inside a
+    brand family (a 'Saturn' listing on a 1G1 Chevrolet VIN)."""
+    try:
+        mk = normalize_make((vin_dec.get("make") or "").strip())
+    except Exception:  # noqa: BLE001
+        mk = ""
+    return mk or (v.get("make") or "").strip()
+
+
+def _vin_rematch_model(v: dict, vin_dec: dict | None) -> tuple[str, str] | None:
+    """(make, model) to match parts on instead of the listing's (2026-11-19,
+    hub task after the model-mismatch flag): the VIN's make and model when the pair
+    is hand-sorted 'different' in vin_model_names.json and the makes agree.
+    Same precedent as the year: the lot sign is what is displayed and
+    searched, the VIN decides which parts the car carries. 'same', 'unsure',
+    'decode_wrong', pairs in no list, and make mismatches return None (the
+    listing stays the basis). A broken table returns None (no 'different')."""
+    if not vin_dec:
+        return None
+    if _vpic_mismatch_msg({**v, "year": 0}, vin_dec, check_model=False):
+        return None   # a make mismatch: not this rule
+    dec_raw = (vin_dec.get("model") or "").strip()
+    listed = (v.get("model") or "").strip()
+    make = (v.get("make") or "").strip()
+    if not dec_raw or not listed or not make:
+        return None
+    decoded = normalize_model(dec_raw, make)
+    if not _model_words_disjoint(listed, decoded):
+        return None
+    hit = _vin_model_table().get(_vin_model_key(make, listed, decoded))
+    return (_vin_make(v, vin_dec), hit[1]) if hit and hit[0] == "different" else None
 
 
 def _vpic_mismatch_msg(v: dict, vin_dec: dict | None, check_model: bool = True,
@@ -27246,6 +27281,15 @@ def enrich_vehicles(
         mismatch = _vpic_mismatch_msg(v, vin_dec, stats=True)
         if mismatch:
             v["_vpic_mismatch"] = mismatch
+        # A VIN whose make is in another maker group than the listing's (a
+        # Titan with a Yamaha VIN, a Yaris with a trailer VIN) belongs to some
+        # other vehicle: nothing from it steers the match (year, gates,
+        # VIN-confirmed marks) and output_json drops its specs. The flag
+        # stays. Hub decision 2026-11-19; same test as the transmission rule.
+        if vin_dec and _trans_make_conflict(v, vin_dec):
+            v["_vin_other_vehicle"] = True
+            MODEL_MISMATCH_STATS["vin_other_vehicle"] += 1
+            vin_dec = None
         match_year = v.get("year", 0)
         if vin_dec:
             # Trust the VIN over the lot sign for the model year used in
@@ -27258,8 +27302,18 @@ def enrich_vehicles(
             if vy:
                 match_year = vy
         v["_spanYear"] = match_year   # modelYears: VIN year, else the listing's
+        # Same precedent for the model: a VIN hand-sorted as another vehicle
+        # ('different' in vin_model_names.json) is matched on the VIN's
+        # model; make, model and year of the record stay the listing's
+        # (display, search, watches, catalog-donor lookup by listing).
+        match_make, match_model = v.get("make", ""), v.get("model", "")
+        vin_vehicle = _vin_rematch_model(v, vin_dec)
+        if vin_vehicle:
+            match_make, match_model = vin_vehicle
+            v["_vin_rematch"] = f"{match_make} {match_model}"
+            MODEL_MISMATCH_STATS["rematched"] += 1
         v["_matches"] = match_vehicle(
-            match_year, v.get("make", ""), v.get("model", ""),
+            match_year, match_make, match_model,
             vin_decode=vin_dec,
         )
         if v["_matches"]:
@@ -27455,7 +27509,9 @@ def _log_model_mismatch_stats() -> None:
     try:
         s = MODEL_MISMATCH_STATS
         top = ", ".join(f"{mk} {li} / {de} {n}" for (mk, li, de), n in MODEL_MISMATCH_UNCLASSIFIED.most_common(10))
-        print(f"  [vin model] {s.get('different', 0)} car(s) flagged: VIN decodes as another model; "
+        print(f"  [vin model] {s.get('different', 0)} car(s) flagged: VIN decodes as another model "
+              f"({s.get('rematched', 0)} matched on the VIN's model); "
+              f"{s.get('vin_other_vehicle', 0)} VIN(s) of another maker's vehicle ignored for matching and specs; "
               f"not flagged: same name {s.get('same', 0)}, unsure {s.get('unsure', 0)}, "
               f"decode wrong {s.get('decode_wrong', 0)}, unclassified {s.get('unclassified', 0)} "
               f"in {len(MODEL_MISMATCH_UNCLASSIFIED)} pair(s)" + (f"; top unclassified: {top}" if top else ""),
@@ -27663,6 +27719,8 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
         # "Manual"; the UI names the source in plain words.
         vp = v.get("_vpic")
         vp = vp if isinstance(vp, dict) and vp else None
+        if v.get("_vin_other_vehicle"):
+            vp = None   # the VIN is another maker's vehicle: none of its specs
         entry["trans"], entry["transSrc"] = _resolve_trans(v, vp, entry)
         entry["body"] = body_style_from_vpic(vp, entry.get("make", ""))
         if vp:
@@ -27683,6 +27741,8 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
             entry["noPick"] = True
         if v.get("_spanYear"):
             entry["spanYear"] = v["_spanYear"]
+        if v.get("_vin_rematch"):
+            entry["vinRematch"] = v["_vin_rematch"]   # parts matched on this (VIN) vehicle
         output.append(entry)
     return output
 

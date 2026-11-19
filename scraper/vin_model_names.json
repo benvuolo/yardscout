@@ -2254,6 +2254,13 @@
   },
   {
    "make": "Chevrolet",
+   "listed": "10 Van",
+   "decoded": "G-Series",
+   "cars": 1,
+   "basis": "'10 Van' is the feed's name for the Chevrolet G10 (1/2 ton) full-size van; G-Series is vPIC's name for it (scan b22c3640 log, added 2026-11-19)"
+  },
+  {
+   "make": "Chevrolet",
    "listed": "Blazer",
    "decoded": "Military Truck",
    "cars": 1,

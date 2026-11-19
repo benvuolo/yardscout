@@ -1019,3 +1019,177 @@ of GitHub's scheduler, `backend/src/scan_watchdog.js` on Cloudflare's
 hourly cron, token configured, last decision at the API's `/v1/health`).
 Both start a scan when the last successful one began 5+ hours ago. Nothing
 is open on this; see `ops/hub.md` 15:35 UTC.
+
+## 2026-11-19 — a "different" VIN is matched on the VIN's vehicle (branch data/vin-rematch-1119)
+
+Owner (11-19 16:20 UTC): do what the hub thinks; the hub's task followed the
+open item of the model-mismatch section above.
+
+### Rule (`scraper/junkyard_scraper.py`)
+
+- `_vin_rematch_model` (~line 25886): returns (make, model) to match on
+  when the pair (listing make, listed model, decoded model) is hand-sorted
+  `different` in `vin_model_names.json` and there is no make mismatch. Make
+  = the VIN's make through `normalize_make` (`_vin_make`, ~25875); it differs
+  from the listing only inside a brand family (one car on the b22c3640 lot:
+  a "Saturn L-Series" with a 1G1 Chevrolet Malibu VIN). The flag text uses
+  the same make ("VIN decodes as Chevrolet Malibu (listed L-Series)").
+- `enrich_vehicles._apply_match` (~27301): the year path's precedent. The
+  match year was already the VIN's; now make and model are too for these
+  cars. Same fields written (`_matches`, `_top_parts`, `_max_value`,
+  `_display`; `_spanYear` as before); same tier rules (`match_vehicle`'s
+  `option` / `body` / `drive` / manual gates, run on the VIN decode as for
+  every car). Only rows the parts table already has for the VIN's vehicle
+  can appear (rules 3 and 4). `make`, `model`, `year` of the record stay the
+  listing's: display, list search, watches and catalog-donor lookup by
+  listing are untouched. `output_json` adds `vinRematch` ("Infiniti QX60")
+  to the entry (not in the compact payload; for the log and audits).
+- `same`, `unsure` (Legacy / Outback stays there), `decode_wrong`, pairs in
+  no list, and make mismatches: no change. A broken table: no flag, no
+  re-match, one warning (tested through `enrich_vehicles`).
+- Log: `[vin model] N car(s) flagged: VIN decodes as another model (M
+  matched on the VIN's model); …`.
+- `vin_model_names.json`: Chevrolet "10 Van" / "G-Series" sorted `same`
+  (the G10 half-ton full-size van; vPIC's G-Series), the one unclassified
+  pair in scan 44535632042's log.
+
+### What a user sees on a re-matched car (no app change)
+
+The year path shows nothing beyond the flag either. On the car card: the
+listing's name and year; the orange `vpicMismatch` chip "VIN decodes as
+Infiniti QX60 (listed QX80)" whose tooltip already says "The VIN's factory
+decode disagrees with the yard listing — the lot sign may be mislabeled. The
+VIN is used for matching; verify at the yard." (now true for the model as
+well as the year); the parts table is the QX60's. Part Finder: every flagged
+car is demoted from Verified to Likely ("the yard's listing doesn't match
+the VIN — verify"); OEM interchange rows become "if equipped: this car's
+listing and VIN disagree, check the car". Every re-matched car carries the
+flag (tested over every `different` pair), so none is ever Verified there.
+The car card's own "VIN-confirmed" badge (`trim_status` "vin", the decode
+confirms a trim/drive gate) follows the year path's tier rules unchanged:
+2 re-matched rows on 2 cars carry it on the b22c3640 lot.
+
+Proposed wording (not built; a data-field change, shown by released apps
+in the same chip): "VIN decodes as Infiniti QX60 (listed QX80); parts
+matched on the VIN". One string in `_vpic_model_mismatch`; the year
+message could gain the same tail.
+
+### Before/after on the committed lot b22c3640 (`scraper/vin_rematch_2026-11-19.json`)
+
+Built offline from git objects (inventory + vin_decodes.json.gz at
+b22c3640), no scan. "before" equals the published partSet for all 120 cars.
+120 cars re-matched; 112 lists change, 8 unchanged; rows 889 -> 838 (323
+added, 374 dropped); 14 cars gain a list (had none), 6 lose every row;
+31 cars carry at least one "if equipped" row after. Examples:
+- wap-STK039874 (Wrench-A-Part Holland), 2017 Infiniti QX80 -> QX60:
+  drops 3rd Row Seat, Bose Amp + Speakers, Power Liftgate Motor (QX80
+  rows); gains 14 general QX60 rows (headlights, mirrors, A/C compressor,
+  modules …).
+- 2006 Subaru Outback (VIN JF1GG, Impreza Outback Sport) -> Impreza, 30
+  cars: e.g. drops Roof Rails + Crossbars and the Outback headlights, gains
+  the Impreza's OEM Headlights.
+- 2000 Chevrolet "Silverado 1500" with a 1GN (Suburban) VIN -> 2002
+  Suburban: drops Tailgate and pickup tow mirrors, gains 3rd Row Seat,
+  Rear Barn Door Glass.
+
+### Make mismatches (the older check), unchanged
+
+105 cars on b22c3640: 28 within one maker group (GMC / Chevrolet,
+Chrysler / Dodge / Ram: 25 of them have a parts list, matched on the
+listing's make and model, which is right for twins), 77 across groups. Of
+the 77, 56 have no parts list (motorcycles, ATVs, semis: "Atv /
+Motorcycle" listings, International trucks) and 21 do, all on the
+listing's make and model: a Titan whose VIN is a Yamaha YZF-R1, a Yaris
+with a Timpte trailer VIN, Tribecas with CPS trailer VINs, an Accord with
+an International 9400i VIN, Acura CL / RL with Dodge Ram VINs, a Passat
+with a Corolla Matrix VIN, a Sequoia with a Town and Country VIN, … These
+read as a wrong VIN typed onto the car (a trailer or a semi on a self-serve
+lot's car row), so the VIN's vehicle is the weaker evidence; re-matching
+on it would be wrong for most. Today their parts use the VIN's model year
+(`match_year`), 15 of the 105 have a year that differs.
+Recommendation (not built, a different rule): when the makes cross maker
+groups (`_trans_make_conflict`, already used to drop transmission claims
+for the same reason), match on the listing year too, and keep the flag.
+**Built after hub review, see "Addition" below.**
+
+### Hub decisions (review of 19b511ef)
+
+Accepted as built. "Parts only" watches: whether a car has parts is match
+logic (rule 6 allows it to improve); no change. Chip wording "…; parts
+matched on the VIN": not now (no layout test for a longer chip in released
+shells); `vinRematch` is enough for a later app line. The E-350 7.3L Power
+Stroke row goes to `ops/parts.md`; the table is left alone.
+
+### Addition: a VIN of another maker group steers nothing
+
+When `_trans_make_conflict(v, vin_dec)` is true (the listing's make and the
+VIN's make are in different maker groups), `enrich_vehicles._apply_match`
+marks the car `_vin_other_vehicle` and drops the decode for matching:
+- **Changed:** match year = the listing's year (was the VIN's);
+  `_spanYear` / `spanYear` = the listing's year (modelYears spans);
+  `match_vehicle(..., vin_decode=None)`, so no decode gate (trim, drive,
+  body, transmission, hybrid) confirms or rules out a row and no row is
+  "VIN-confirmed" (gated rows are "if equipped", as for a car with no
+  decode). In `output_json` the decode is not read: no `vpicTrim`,
+  `vpicTrimQuality`, `vpicDecodeWell`, `vpicSeries`, `vpicDriveType`, no
+  engine or body from the decode, and the transmission resolves from the
+  listing only (the decode's own transmission used to be applied; only the
+  rule claims were skipped). The payload's vpic side table therefore
+  carries only the flag for these cars, so watch trim/drive filters,
+  landed drive and notable-trim hits no longer read the other vehicle.
+- **Kept:** `vpicMismatch` (the year and make messages, from the real
+  decode); `_vpic` itself (the decode cache and the decode-well count).
+- **Already safe, unchanged:** `resolve_model_blob` and `_scion_by_vin` run
+  before the check and only use a decode whose make agrees; the
+  foreign-make resolution changes the listing's make to the VIN's when it
+  applies, after which the makes no longer conflict.
+- One maker group (GMC / Chevrolet, Chrysler / Dodge / Ram): unchanged.
+- Log line adds "K VIN(s) of another maker's vehicle ignored for matching
+  and specs".
+
+On b22c3640 (`crossMakeGroup` in `scraper/vin_rematch_2026-11-19.json`;
+"before" equals the published list for every car): 105 make mismatches,
+28 in one group (unchanged), 77 across groups. 21 had a parts list; 12
+had a VIN year different from the listing's (the earlier 15 counted all
+105; 3 are one-group cars and keep the VIN year). 7 lists change, rows
+169 -> 198 (rows the other vehicle's decode had ruled out come back as
+"if equipped"); 0 VIN-confirmed rows dropped. Example: a 1994 Ford F-150
+with a 2002 Nissan Sentra VIN was matched as a 2002 F-150 (Headlights,
+Tailgate); now as a 1994 (OBS Grille + Headlight Bezels, Tailgate
+straight, rust-free, Bench Seat).
+
+Tests: `test_vin_model_mismatch.py` 87 checks (+14: cross-group flag kept,
+listing year, parts with no decode, no VIN-confirmed row, no re-match,
+output without decode specs / engine / body / VIN transmission, listing
+fields and spanYear; one-group car keeps the VIN year, decode gates and
+specs; log line). `tools/regress.sh --quick` on 3634d957: 75 passed, 0 failed, 0 skipped.
+
+### Tests
+
+- `python3 scraper/test_vin_model_mismatch.py`: 73 checks (48 before + 25:
+  re-match for `different` incl. the brand-family make, none for same /
+  unsure / decode_wrong / unknown / make mismatch / no decode; every
+  `different` pair re-matches and is flagged; through `enrich_vehicles`
+  with stubbed decodes: QX80 listing gets the QX60 rows, listing fields
+  unchanged, `vinRematch` + `vpicMismatch` in the output entry, a `same` car
+  keeps its listing match, a broken table neither raises nor re-matches).
+- Re-run, all pass: test_am_gates, test_interchange,
+  test_inventory_shards, test_landed_models, test_listing_trans,
+  test_manual_detect, test_model_normalization, test_make_normalization,
+  test_notable_trims, test_parts_gaps, test_pns_make_model,
+  test_vin_schema_upgrade, test_vpic_fixes, test_date_sanity,
+  test_model_lifespan.
+- `tools/regress.sh --quick` on 9ecd4336: 75 passed, 0 failed, 0 skipped.
+
+### Open / noticed
+
+- "Parts only" watches (`matchOnly`, app `watchlistMatches` and the
+  scraper's local watchlist) read whether a car has parts. Watch records are
+  never touched, and make / model / year matching is unchanged, but for the
+  20 cars whose list appears (14) or disappears (6) a parts-only watch on
+  the listing's make / model would now include / exclude them. CLAUDE.md
+  rule 6 allows the match logic to improve; the hub's brief asked that
+  what watches match not change, so this is named here for a decision.
+- A 1993 Ford "F-450 Super Duty" with an E-350 VIN gains "7.3L Powerstroke
+  Parts (verify engine)", an existing E-350 row; the Power Stroke began in
+  1994.5, so the row's year window is a question for the parts workstream.
