@@ -2592,3 +2592,41 @@ Groups 23 RIGHT / 1 WRONG / 6 RISK; pairs 21 / 1 / 8.
   subaru groups show as "if equipped" instead of being held; the note cap
   now costs ford 2 live groups; a census of hybrid displacements on the
   live makes' gas-only gates before deciding anything there.
+
+## 2026-11-19 ~11:30 UTC the game plan is LIVE with real data (task #77)
+
+- **Scan 44500938468 finished 11:18 UTC** (commit f40e7ff7) and wrote the
+  first real arrivals history: 196,802 arrivals in 8 weeks, 307 yards (4
+  stale), 77 files, 3.87 MB, 6.9 s. Numbers, coverage and the checks are in
+  `ops/data.md` (11:25 entry).
+- **One live load at 11:21 UTC** (zip 95112, 2004 Toyota 4Runner,
+  alternator, 4.7 V8): caches `jh-v217`, no page error, no overflow.
+  - Card: "42 donor cars at 12 yards within 100 mi", ranked: iPull-uPull
+    Sacramento 82 mi, 8 donor cars, newest set out 6 days ago; Pick-n-Pull
+    Rancho Cordova 92 mi, 8, yard price $32.99; Pick-n-Pull Stockton 54 mi,
+    5, $32.99; "Show all 12 yards".
+  - Forecast in the card: "2003-2009 4Runner: About one every 2 weeks lands
+    within 100 mi", bars 1 0 1 0 1 2 0 0, "5 in the last 8 weeks at 17
+    yards", "Most land at: Pick-n-Pull - American Canyon (2), Pick-n-Pull -
+    Salinas (1)".
+  - Cars watch strip for the 4Runner: "4Runner, any year: About 5 a week
+    land within 100 mi", bars 7 6 2 1 6 6 3 5, "36 in the last 8 weeks at
+    17 yards", "Most land at: Pick-n-Pull - Stockton (6), Pick-n-Pull - San
+    Jose North (5)".
+  - Screenshots of that load: `ops/screens/game-plan-live-1119-{1,2,3}.png`.
+- **Arrivals rules 2** (b1055c74): a batch-loaded week restarts a yard's
+  coverage (5 yards, 610 of 196,802 arrivals on today's numbers); the index
+  carries a rules version, so the next scan rebuilds the files once. No
+  extra scan dispatched for it. To check after the next scan: the
+  `[arrivals]` line shows "bulk week" and `index.json` has `rules: 2`.
+- **Cloudflare, 24 h to 11:28 UTC** (cf-usage 44514626425): CPU EXCEEDED
+  total 0; 14,634 requests, every one success or client-disconnected; API
+  CPU p50 2.6 ms, p99 24.7 ms. The 11-18 fix holds. The 11:25 check-in is
+  answered by this.
+- Web only. The store apps (Android 1.13.2, iOS build 43 not yet
+  submitted) do not have the list order, the card or the forecast. A
+  1.13.3 needs the owner's "ship"; if it comes before Apple approves
+  1.13.1, submit 1.13.3 instead of build 43 and save a review cycle.
+- Not done / next: the card's forecast is for the seeker's own model and
+  generation, not for every donor model; the `pf-yards/*` counters are not
+  in the daily email yet; a forecast line on the public landed pages.
