@@ -5234,6 +5234,14 @@ Every 1119e WRONG / RISK item (`groups/_report/nissan_recheck_2026-11-19e.json`;
   test_am_gates, test_interchange, interchange_e2e, part_finder_e2e,
   pf_ux_e2e and cars_feed_e2e. backend/node_modules was a symlink for the
   run; removed, not committed.
+- After the run, origin/main moved to b8bb1bc4 (auto-scans and ops) and was
+  merged (0ca3aeb4): the 30 payload files taken from main and rebuilt from
+  this branch's groups (oemStatus ok x8; groups unchanged by the merge). On
+  the merged tree curation_tests 25/25, pf_guards_unit, test_interchange and
+  test_am_gates pass; the full regression was not re-run on the merge.
+- The container's disk filled up near the end (0 MB free under /tmp); I
+  deleted only my own round-4/5 scratch output. The scratchpad still holds
+  about 14 GB of other subagents' trees and tarballs (wt-*, w7, oem, *.tar).
 
 ### For the hub
 
