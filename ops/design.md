@@ -510,3 +510,62 @@ Left / suggestions:
   chip, location guess): the Cars blocks there are untouched here, but the
   first-screen budget (four tiles at 360x800) depends on what sits above the
   grid; cars_feed_e2e asserts it.
+
+## 2026-11-19 "Best yards for this part" (game-plan card, branch `feat/where-to-go-1119`)
+
+Owner ask 2026-11-19 ("build something meaningful ... that differentiates
+us"); hub chose a game plan on the Parts tab. This is the yard half; the
+forecast half (`docs/forecast.js`, `YSForecast`) is another builder's.
+
+- **Where:** fit search only (`pfRunSearch`, seeker year+make+model + part),
+  a card `.pf-plan` right under `.pf-results-head` (+ its Pro box), before
+  the watch line, sort and donor rows. Browse mode (no full car) has no card.
+- **What it counts:** exactly the donor rows the list renders (the first
+  CAP=120 rows; only Verified rows while "Verified fits only" is on; the
+  toggle recounts via `pfPlanRefresh`). `pfPlanShownRows()` is the single
+  source. Per yard: "N donor cars", "M to check first" (rows whose warns
+  carry the list's own "if equipped" text), newest set-out
+  (`pfPlanSetOutText`: today / yesterday / N days ago / date; nothing when
+  unknown), the yard's published price for the part (`yardPartQuote` with
+  the rows' own `quoteVariants`; nothing when not published), and the
+  existing `lot-fast` "leaves fast here" when `lifespanFor` says so for a
+  donor there.
+- **Order (`pfPlanYards`, pure):** default Most donor cars, ties to the
+  closer yard; chips Closest, Newest arrival (no dates last), Lowest price
+  (no published price last); full ties by yard name. The line under the
+  title states the rule and changes with the chip (`pfPlanRuleText`). Yards
+  whose list has stopped changing (`yardListStale`: stale OR frozen) go
+  after all others in every order and carry the app's "List unchanged since"
+  badge (`yardListChipHtml`); their donors stay in the list.
+- **UI:** top 3 yards, "Show all N yards" toggles. One yard: no chips. No
+  donors: the card still shows "No donor cars within R mi right now." (the
+  list's own `.pf-empty` stays above it). Tapping a yard hides other yards'
+  rows (`.pf-yard-out`, no re-render), shows `.pf-yard-only` "Showing
+  <yard> only · All yards" plus the car screen's maps link (`yardMapsUrl`,
+  else `carDirectionsUrl`), and scrolls there. View state `pfPlanView`
+  (order, yard, expanded) survives re-renders of the same search (sort,
+  lazy files) and resets when part/car/engine/radius change.
+- **Counters** (sendEvent, aggregate, no ids): `pf-yards/shown` once per
+  search key, `pf-yards/tap`, `pf-yards/chip-<order>`, `pf-yards/all`. Not
+  `pf/` (that prefix feeds the daily email's "most searched parts"). The
+  ops email does not read them yet.
+- **Forecast hook:** `<div class="pf-forecast">` inside the card;
+  `ysForecastMount(el, ctx)` calls `YSForecast.mount` when defined, ctx
+  `{make, model, year, yrMin, yrMax (pfGenWindow), lat, lng, radiusMi,
+  where:'parts'}`. Cars tab: `watchStripHtml` adds `<div
+  class="strip-forecast">` when the filter is exactly one model;
+  `stripForecastMount()` runs after each list render (`where:'cars'`, year
+  span from the year filters). Empty mount points are `display:none`.
+- **CSS:** beside the `.pf-watch` rules in `docs/styles.css` (not at the end).
+- **Tests:** `backend/test/pf_plan_unit.mjs` (pure functions),
+  `backend/test/pf_plan_e2e.mjs` (count proof per yard incl. every chip,
+  reset, verified-only, re-sort and one yard; ordering measured from the
+  list's rows; tap/reset; empty; forecast absent and stubbed; counters),
+  `ui_no_truncation` screens `pf-plan-many|long|one|none`.
+  `pf_guards_unit.mjs` stubs `pfPlanStart`/`pfPlanAfterRender`.
+- **Screens:** `ops/screens/where-to-go-1119-{1,2,3}.png` (2009 Camry side
+  mirrors near 95112: several yards; Rancho Cordova tapped; 1985 4Runner, no
+  donors).
+- **Open / next:** the verified-only count proof ran on a search with 0
+  Verified rows (side mirrors); a search with Verified rows would make it
+  stronger. Show the counters in the ops email (backend, hub's call).
