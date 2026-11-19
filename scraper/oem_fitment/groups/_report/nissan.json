@@ -183336,6 +183336,76 @@
    "t": null
   },
   {
+   "cat": "gauge-cluster",
+   "detail": "starred clause decides scope: Infiniti M37 2012 drive/engine; Infiniti M37 2013 drive/engine; Infiniti Q70 2014 drive/engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L2304"
+   ],
+   "pn": "24820-1MK5A",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "starred clause decides scope: Infiniti M37 2013 drive/engine; Infiniti Q70 2014 drive/engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L2314"
+   ],
+   "pn": "24820-6AH2A",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "starred clause decides scope: Infiniti QX56 2013 drive",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1724"
+   ],
+   "pn": "24820-3ZD0A",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "starred clause decides scope: Infiniti QX56 2013 drive",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1726"
+   ],
+   "pn": "24820-3ZD1A",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "starred clause decides scope: Nissan Frontier 2003 engine; Nissan Frontier 2004 engine",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2155"
+   ],
+   "pn": "24810-ZD016",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "starred clause decides scope: Nissan Frontier 2005 drive; Nissan Xterra 2005 drive",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3526"
+   ],
+   "pn": "24810-EA101",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "starred clause decides scope: Nissan Titan 2006 drive",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2752"
+   ],
+   "pn": "24810-7S005",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
    "cat": "grille",
    "detail": "Infiniti EX35 2008-2012;Infiniti EX37 2013-2013;Infiniti QX50 2014-2016",
    "evidence": [
@@ -186722,6 +186792,26 @@
    "t": null
   },
   {
+   "cat": "side-mirrors",
+   "detail": "starred clause decides scope: Infiniti FX35 2009 engine; Infiniti FX35 2010 engine; Infiniti FX35 2011 engine; Infiniti FX35 2012 engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L247"
+   ],
+   "pn": "96302-1CA0B",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "starred clause decides scope: Infiniti FX35 2009 engine; Infiniti FX35 2010 engine; Infiniti FX35 2011 engine; Infiniti FX35 2012 engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L250"
+   ],
+   "pn": "96301-1CA0B",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
    "cat": "starter",
    "detail": "13 feed models",
    "evidence": [],
@@ -189000,6 +189090,11 @@
   },
   "likely_app_years_generation_cut": {},
   "likely_app_years_note_restricted": {},
+  "likely_app_years_starred_scope": {
+   "gauge-cluster": 13,
+   "side-mirrors": 44,
+   "window-regulator": 2
+  },
   "likely_app_years_without_own_page": {
    "bumper-front": 225,
    "bumper-rear": 298,
@@ -189020,7 +189115,7 @@
    "window-regulator": 1950,
    "wiper-motor": 799
   },
-  "likely_groups": 226,
+  "likely_groups": 217,
   "likely_groups_drive_noted": {
    "bumper-front": 6,
    "bumper-rear": 5,
