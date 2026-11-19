@@ -775,7 +775,7 @@ function vinMetaHtml(v, unlocked = false) {
   }
   let mismatch = '';
   if (v.vpicMismatch) {
-    mismatch = ` <span class="meta-warn" title="The VIN\u2019s factory decode disagrees with the yard listing — the lot sign may be mislabeled. The VIN is used for matching; verify at the yard.">${escapeHtml(v.vpicMismatch)}</span>`;
+    mismatch = ` <span class="meta-warn" title="The VIN\u2019s factory decode disagrees with the yard listing — the lot sign may be mislabeled. Verify at the yard before you pull.">${escapeHtml(v.vpicMismatch)}</span>`;
   }
   return { vin: `<span class="vin-chunk">VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}</span>`, spec: vpic, warn: `${dup}${mismatch}` };
 }
