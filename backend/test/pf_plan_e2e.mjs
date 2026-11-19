@@ -80,7 +80,13 @@ async function open(browser, { forecastStub = false } = {}) {
     localStorage.setItem('jh_zip', zip);
     window.__fc = [];
     if (forecastStub) {
-      window.YSForecast = { mount(el, ctx) { window.__fc.push({ ctx: JSON.parse(JSON.stringify(ctx)), cls: el.className }); el.innerHTML = '<p class="stub-forecast">Forecast stub</p>'; } };
+      // The real module (docs/forecast.js) loads after this and assigns
+      // window.YSForecast; the stub must win, so the name is a getter with a
+      // setter that ignores the assignment (hub, 2026-11-19: with the real
+      // module merged, a plain assignment here was overwritten and the four
+      // stub checks failed).
+      const stub = { mount(el, ctx) { window.__fc.push({ ctx: JSON.parse(JSON.stringify(ctx)), cls: el.className }); el.innerHTML = '<p class="stub-forecast">Forecast stub</p>'; } };
+      Object.defineProperty(window, 'YSForecast', { get: () => stub, set: () => {}, configurable: true });
     }
   }, { zip: ZIP, forecastStub });
   const errors = [];
