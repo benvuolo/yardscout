@@ -5008,7 +5008,14 @@ Every WRONG and RISK item of the 1119d report (`groups/_report/nissan_recheck_20
 
 ### Regression
 
-(filled in below when the run ends)
+`tools/regress.sh --out <scratch>` (not under flock) on code head 1ba97fd7
+(only this ops text follows it): **104 passed, 0 failed, 0 skipped**. It
+includes pf_guards_unit (r4 block), test_am_gates, test_interchange,
+interchange_e2e, part_finder_e2e, pf_ux_e2e, cars_feed_e2e (the round-3
+flake passed) and both layout halves (the cards-mixed setup error of round 3
+is gone with main's af391cf1 fix). backend/node_modules was a symlink to the
+main checkout's for the run; removed, not committed. origin/main moved to
+79de0758 meanwhile (ops/hub.md and ops/yards.md only): no merge needed.
 
 ### For the hub
 
