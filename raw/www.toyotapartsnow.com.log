@@ -3467,3 +3467,7 @@
 12:29:55 seg done tier=D Toyota Corolla [2017, 2019] seeds=[2017, 2019, 2018] records=4902 errors=11
 12:31:39 seg done tier=D Toyota T100 [1993, 1998] seeds=[1995, 1996, 1997] records=4902 errors=11
 12:31:39 finished records=4902 errors=11 chain_records=37 chain_unlinked=1019 chain_failed=0 chain_given_up=0
+16:20:06 start site=www.toyotapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4902 list_lines=3307 year_lines=620 url_index=30777
+16:20:06 completion worklist completion/toyota.own_page_1119.json: 8 rows
+16:23:04 chain-unlinked grille 1 numbers named by 53101-33230-B0, no catalog link: 53101-33280-B0
+16:25:56 completion finished records=4902 errors=11 open_rows=0 chains_owed=0
