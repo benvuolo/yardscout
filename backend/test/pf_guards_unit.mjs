@@ -947,6 +947,66 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
     r.rows['2011 Nissan Altima']?.warn.includes("listed for coupe only — this donor's body style isn't confirmed, check the car"), JSON.stringify(r.rows['2011 Nissan Altima']));
   lazyPreset = null;
 }
+/* ==== OEM-GATE round3-1119: cab lists, drive_not (All-Mode sibling), the
+ * product-page engine column on a hybrid twin ============================== */
+{
+  const G = (gate, v = {}, ex = null) => ctx.pfOemGate(gate, { model: 'Frontier', ...v }, ex).verdict;
+  const ex = (o = {}) => ['', '', o.engine || '', o.trans || '', '', o.body || ''];
+  const KC_CC = ['king cab', 'crew cab'];
+  check('r3 cab list: a listing naming a listed cab confirms (King Cab, Crew Cab)',
+    G({ cab: KC_CC }, { model: 'Frontier King Cab' }) === 'confirm' && G({ cab: KC_CC }, { model: 'Frontier Crew Cab' }) === 'confirm');
+  check('r3 cab list: a listing naming a cab outside the list excludes (Regular Cab)',
+    G({ cab: KC_CC }, { model: 'Frontier Regular Cab' }) === 'exclude');
+  check('r3 cab list: nothing said about the cab -> unconfirmed ("if equipped")', G({ cab: KC_CC }, {}) === 'unconfirmed');
+  check('r3 cab list: two cabs named, one listed -> unconfirmed (not confirmed, not excluded)',
+    G({ cab: KC_CC }, { model: 'Frontier', vpicTrim: 'Regular Cab, King Cab', vpicTrimQuality: 'usable' }) === 'unconfirmed');
+  check('r3 cab string unchanged by the list support: crew cab vs extended cab excludes, crew confirms',
+    G({ cab: 'crew cab' }, { model: 'Silverado', vpicSeries: 'Extended Cab' }) === 'exclude' && G({ cab: 'crew cab' }, { model: 'Silverado Crew Cab' }) === 'confirm');
+  check('r3 cab list text: "king cab/crew cab"', ctx.pfOemGateText({ cab: KC_CC }) === 'king cab/crew cab');
+  const DT4 = '4WD/4-Wheel Drive/4x4', DT2 = '4x2';
+  const PT = { drive: '4wd', drive_basis: 'stated', drive_not: 'a4wd' };
+  check('r3 drive_not a4wd: a 4WD decode (could be All-Mode) stays unconfirmed', G(PT, { model: 'Pathfinder', vpicDriveType: DT4 }) === 'unconfirmed');
+  check('r3 drive_not a4wd: the listing saying 4WD cannot confirm either', G(PT, { model: 'Pathfinder 4WD' }) === 'unconfirmed');
+  check('r3 drive_not a4wd: a 4x2 or AWD decode still excludes',
+    G(PT, { model: 'Pathfinder', vpicDriveType: DT2 }) === 'exclude' && G(PT, { model: 'Pathfinder', vpicDriveType: 'AWD/All-Wheel Drive' }) === 'exclude');
+  check('r3 drive 4wd without drive_not: a 4WD decode confirms (unchanged)', G({ drive: '4wd' }, { vpicDriveType: DT4 }) === 'confirm');
+  check('r3 drive_not text: "part-time 4WD"', ctx.pfOemGateText(PT) === 'part-time 4WD');
+  const W = ctx.pfOemDonorGate([['Nissan', 'Pathfinder', 2005, 2005, null, PT]], { model: 'Pathfinder', vpicDriveType: DT4 }, null).warn;
+  check('r3 drive_not donor line names the part-time limit', W.startsWith('if equipped: this part is listed for part-time 4WD only'), W);
+  // the QX60 3.5L cluster: engine gate from the product page; the 2.5L hybrid
+  // (decoded 2.5L, listed plain "QX60", nothing saying hybrid) is ruled out
+  const Q = { eng: ['3.5L'], fuel: 'gas' };
+  check('r3 eng+gas: a QX60 decoded 2.5L with nothing saying hybrid is excluded by the engine',
+    G(Q, { model: 'QX60' }, ex({ engine: '2.5L 4-cyl' })) === 'exclude');
+  check('r3 eng+gas: a 3.5L QX60 confirms; undecoded unconfirmed',
+    G(Q, { model: 'QX60' }, ex({ engine: '3.5L 6-cyl' })) === 'confirm' && G(Q, { model: 'QX60' }, null) === 'unconfirmed');
+  // a hybrid-only Camry part (engine column "2.4 L FULL HYBRID"): gas Camrys out
+  const H = { eng: ['2.4L'], fuel: 'hybrid' };
+  check('r3 eng+hybrid: a 2.5L gas Camry is excluded; a 2.4L "Camry" not named hybrid is unconfirmed; a named hybrid 2.4L confirms',
+    G(H, { model: 'Camry' }, ex({ engine: '2.5L 4-cyl' })) === 'exclude'
+    && G(H, { model: 'Camry' }, ex({ engine: '2.4L 4-cyl' })) === 'unconfirmed'
+    && G(H, { model: 'Camry', vpicTrim: 'Hybrid', vpicTrimQuality: 'usable' }, ex({ engine: '2.4L 4-cyl' })) === 'confirm');
+  check('r3 gate text: "2.4L, hybrid"', ctx.pfOemGateText(H) === '2.4L, hybrid');
+}
+{
+  // pfRunSearch with a cab-list app (2002 Frontier power regulator) beside an ungated twin
+  const gF = oemG({ id: 'oem:nissan:window-regulator:FL:r3', ns: 'nissan', cat: 'window-regulator', label: 'Nissan catalog', pn: ['80721-3S500'],
+    note: 'Nissan catalog lists #80721-3S500 for both — fits some configurations; Frontier: king cab/crew cab only; verify the number on the part',
+    apps: [['Nissan', 'Frontier', 2002, 2004, null, { cab: ['king cab', 'crew cab'] }], ['Nissan', 'Xterra', 2002, 2004]] });
+  // one Frontier per year: VIN series naming the regular cab, the king cab, nothing
+  const inv = [car(1, 2002, 'Nissan', 'Frontier', { vpicSeries: 'Regular Cab' }), car(2, 2003, 'Nissan', 'Frontier', { vpicSeries: 'King Cab' }),
+    car(3, 2004, 'Nissan', 'Frontier'), car(4, 2003, 'Nissan', 'Xterra')];
+  lazyPreset = { 'window-regulator': { oemGroups: [gF], amGroups: [] } };
+  const r = run(base([], lazyIdx({ 'window-regulator': { oem: 1, am: 0 } })), inv, { year: 2003, make: 'Nissan', model: 'Xterra' },
+    cat({ id: 'window-regulator', label: 'Window regulator', tokens: ['window regulator'], priceTokens: ['regulator'], rowWarn: '' }));
+  check('r3 OEM cab list: a Frontier whose VIN series says Regular Cab is not offered', !r.rows['2002 Nissan Frontier'], JSON.stringify(Object.keys(r.rows)));
+  check('r3 OEM cab list: a Frontier whose VIN series says King Cab is a plain row', r.rows['2003 Nissan Frontier'] && !r.rows['2003 Nissan Frontier'].warn.includes('if equipped'),
+    JSON.stringify(r.rows['2003 Nissan Frontier']));
+  check('r3 OEM cab list: a Frontier with nothing on the cab is "if equipped", the cab list named',
+    (r.rows['2004 Nissan Frontier']?.warn || '').includes("listed for king cab/crew cab only — this donor's cab isn't confirmed, check the car"), JSON.stringify(r.rows['2004 Nissan Frontier']));
+  check('r3 OEM cab list: the ungated twin is unchanged', r.rows['2003 Nissan Xterra'] && !r.rows['2003 Nissan Xterra'].warn.includes('if equipped'));
+  lazyPreset = null;
+}
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);

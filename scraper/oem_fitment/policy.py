@@ -128,6 +128,63 @@ LIKELY_ENGINE_TRANS_RULE = True
 # gas pages only is "gas only"; a feed name that says Hybrid with gas-page
 # evidence only refuses the group.
 LIKELY_FUEL_RULE = True
+# §5.16 product-page engine column (round3-1119, class 1 of the 2026-11-18c
+# independent nissan check, groups/_report/nissan_verify_2026-11-18c.json;
+# the same census found it on every shipped make: Toyota Camry 2011 hybrid
+# bumpers/clusters "Hybrid | 4 Cyl 2.4 L FULL HYBRID" credited to the gas
+# Camry, Ford Fusion/MKZ 2.5L-only clusters). When every product-page fitment
+# row of a number for T prints an engine column, and those engines leave out a
+# displacement T's model-year offers (any fitment row of T in any category, or
+# T's year page), the number is limited to the printed displacements: an
+# engine gate ("Xterra: 3.3L only"). When the printed engines are all hybrids
+# and the model-year has gas engines, the limit is "hybrid"; all gas while the
+# model-year has a hybrid, "gas" (the QX60 3.5L cluster beside the 2.5L
+# hybrid). A feed name that says Hybrid on a gas-only number leaves that
+# vehicle-year out. Only narrows or removes claims.
+LIKELY_FIT_ENGINE_RULE = True
+# §5.16 market rule, extended (round3-1119, class 3): a speedometer whose own
+# words put km/h first ("KMH/MPH Speedometer", "Instrument-Kph": the Canada
+# cluster; "MPH/KMH" is the US one) and an option-group note that makes an
+# export equipment group mandatory ("EXPORT Mandatory (Middle East Equipment
+# Group)", "(EUROPEAN EQUIPMENT GROUP)") are not listed for a US feed car. Per
+# own-page row (curate._market_excludes), and class-wide when the product
+# record itself names the km/h unit. Only removes claims.
+LIKELY_MARKET_UNIT_RULE = True
+# §5.16 cab / body lists (round3-1119, class 4): every fitment trim of the
+# number names a cab (or every own-page alternative a Nissan cab code T / KC /
+# CC) and the same category on T's pages lists a cab the number leaves out
+# under another number (2002 Frontier power regulator 80721-3S500 'KC + CC'
+# beside 3S510 'T + KC + CC'; Silverado 2008 master switch 20835552 extended +
+# crew cab beside the regular-cab switch): a cab-list gate ("Frontier: king
+# cab/crew cab only"). The same for silhouette words in the fitment trims
+# (Alero 2001 coupe-only regulators beside the sedan's): a body gate. Only
+# narrows.
+LIKELY_CAB_LIST_RULE = True
+# §5.16 All-Mode sibling (round3-1119, item 4): on the Nissan drive field
+# (2WD / 4WD / AUTO) a number listed for "4WD" on a page that lists another
+# number of the same slot for "AUTO" (All-Mode 4WD) is part-time 4WD only. A
+# vPIC decode never says which 4WD system a car has, so the gate carries
+# "drive_not": "a4wd" and the app shows 4WD decodes "if equipped". Only narrows.
+LIKELY_AUTO_SIBLING_RULE = True
+# Feed model-years that hold two catalog models (round3-1119, item 6): yards
+# list the 2014-2015 S35 Rogue Select (VIN JN8AS5) as plain "Rogue", while the
+# catalog files it as its own model. A number for such a T joins a Likely
+# group only when T's own pages AND the other catalog model's own pages of that
+# year both list it. Only removes claims.
+AMBIGUOUS_FEED_YEARS = {
+    ("Nissan", "Rogue"): (
+        (2014, 2015, "Rogue Select", "2026-11-18c check item 30: 34 lot 'Rogue' 2014-15 carry S35 VINs (JN8AS5M); "
+                                     "nissanpartsdeal files them as 2014/2015-nissan-rogue-select"),
+    ),
+}
+
+
+def ambiguous_feed_alt(make: str, model: str, year: int):
+    """The other catalog model a feed model-year also holds (AMBIGUOUS_FEED_YEARS), or None."""
+    for a, b, alt, _basis in AMBIGUOUS_FEED_YEARS.get((make, model), ()):
+        if a <= year <= b:
+            return alt
+    return None
 # §5.16 body-variant rule, fixed bodies (2026-11-18, flaw 2: the B14 200SX is a
 # coupe, but the lots decode 1998 200SX coupes "Sedan/Saloon", hold one decoded
 # 1995 car and none for 1999, so sedan "4S." rows on the shared Sentra/200SX

@@ -90,6 +90,10 @@ class Options:
     strict: bool = False                    # raise on lint errors (tests)
     model_bodies: dict | None = None        # {(make, model): {body style}} from vPIC decodes (rear wiper gate)
     body_counts: dict | None = None         # {(make, model, year): Counter(silhouette)} (§5.16 body-variant rule)
+    # {(make, model, year): {"lits": frozenset, "hybrid": bool, "gas": bool}} from the lot's
+    # decoded engines (lot_engines(); round3-1119 engine-column materiality). None: no extras
+    # input, every engine the catalog attests counts (fail closed: more limits)
+    lot_engines: dict | None = None
 
 
 class LintError(Exception):
@@ -1394,6 +1398,8 @@ class Curation:
         self.likely_drive_noted = Counter()       # cat -> groups whose note names a drive limit
         self.likely_drive_single = Counter()      # cat -> vehicle-years whose limit is dropped: one drive only
         self.likely_generation_cut = Counter()     # cat -> vehicle-years cut at a generation break  # cat -> vehicle-years a class-wide note restricts away
+        self.likely_fit_hybrid_dropped = Counter()   # cat -> Hybrid-named vehicle-years on a gas-only engine column
+        self.likely_ambiguous_feed_dropped = Counter()   # cat -> vehicle-years of a two-model feed year (Rogue 2014-15)
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
         self.release_notes = policy.release_notes()
         self.released_exterior = []
@@ -1436,6 +1442,11 @@ class Curation:
                     self.likely_engine_conflict[cat] += 1
                     continue
                 cand.append((T, m))
+            if cand and _kmh_part(c, class_notes):
+                # round3-1119: a km/h (Canada) cluster is no US car's part
+                self.refuse("held_market_kph", cat=cat, pn=sorted(c.pns)[0],
+                            evidence=[r.pointer for r in c.records], detail="km/h-first unit")
+                continue
             # R3 own-page completion input: the left-out vehicle-years of a
             # class that would span 2+ feed models if their own pages listed it
             if dropped and len({(T[0], T[1]) for T in dropped} | {(T[0], T[1]) for T, _ in cand}) >= 2:
@@ -1486,6 +1497,26 @@ class Curation:
                     Ts = [T for T in Ts if T in drive_by_T]
                     if len({(T[0], T[1]) for T in Ts}) < 2:
                         continue
+            # round3-1119: a feed name that says Hybrid on a number whose engine
+            # column prints gas engines only, and a feed model-year that also
+            # holds another catalog model (policy.AMBIGUOUS_FEED_YEARS: 2014-15
+            # "Rogue" = Rogue Select too) where that model's pages do not list
+            # the number, leave the vehicle-year out
+            keep = []
+            for T in Ts:
+                if re.search(r"hybrid", T[1], re.I) and self.fit_engine_limit(c, cat, T)[1] == "gas":
+                    self.likely_fit_hybrid_dropped[cat] += 1
+                    continue
+                alt = policy.ambiguous_feed_alt(T[0], T[1], T[2])
+                if alt and not self._listed_on_seed(c, cat, (T[0], alt, T[2])):
+                    self.likely_ambiguous_feed_dropped[cat] += 1
+                    continue
+                keep.append(T)
+            if len(keep) != len(Ts):
+                Ts = keep
+                drive_by_T = {T: d for T, d in drive_by_T.items() if T in set(Ts)}
+                if len({(T[0], T[1]) for T in Ts}) < 2:
+                    continue
             if cat in policy.STRICT_NOTE_CATS:
                 why_s = self._strict_refusal(c, cat, [(T, m) for T, m in cand if T in set(Ts)], slots)
                 if why_s:
@@ -1496,7 +1527,17 @@ class Curation:
             text = policy.GROUP_NOTES.get((self.ns, cat, sorted(c.pns)[0]), text)
             slot = "+".join(sorted(slots)) or "C"
             cab_map = self._cab_only_map(c, cat, Ts)
-            cab = "; ".join(f"{md}: {cb} only" for (_mk, md), cb in cab_map.items())
+            body_map = {}
+            if policy.LIKELY_CAB_LIST_RULE:
+                # round3-1119: a cab / body list the page splits by number
+                for k, v in self._cab_list_map(c, cat, Ts, slots).items():
+                    cab_map.setdefault(k, v)
+                body_map = self._body_list_map(c, cat, Ts, slots)
+            cab = "; ".join(f"{md}: {cb if isinstance(cb, str) else '/'.join(cb)} only"
+                            for (_mk, md), cb in sorted(cab_map.items()))
+            if body_map:
+                cab = "; ".join(x for x in (cab, "; ".join(f"{md}: {' or '.join(b)} only"
+                                                          for (_mk, md), b in sorted(body_map.items()))) if x)
             # §5.16 limits per vehicle-year: rear-door crew cab, drive, engine,
             # transmission, fuel (2026-11-18); ambiguous fuel leaves T out.
             # The same limits become the vehicle-year's gate (gates-1118): the
@@ -1508,21 +1549,39 @@ class Curation:
                 if rc and f"{T[1]}: crew cab only" not in cab:
                     labs.append(rc)
                 if cab_map.get((T[0], T[1])) or rc:
-                    gate["cab"] = _cab_gate(cab_map.get((T[0], T[1])) or rc)
+                    cb = cab_map.get((T[0], T[1])) or rc
+                    gate["cab"] = _cab_gate(cb) if isinstance(cb, str) else [_cab_gate(x) for x in cb]
+                if body_map.get((T[0], T[1])):
+                    b = body_map[(T[0], T[1])]
+                    gate["body"] = b[0] if len(b) == 1 else list(b)
                 if drive_by_T.get(T):
                     d = drive_by_T[T]
                     basis = self.drive_basis(c, cat, T, d)
+                    # round3-1119 item 4: "4WD" beside an All-Mode "AUTO" number
+                    pt = set(d) == {"4wd"} and self._auto_sibling(c, cat, T, slots)
+                    lab = "part-time 4WD" if pt else _drive_label(d)
                     if basis == "stated":
-                        labs.append(_drive_label(d))
+                        labs.append(lab)
                     else:
                         # hub 2026-11-18: same gate, honest words (checked drive only)
-                        unchecked_by_T[T] = _drive_label(d)
+                        unchecked_by_T[T] = lab
                     gate["drive"] = _drive_gate(d)
                     gate["drive_basis"] = basis
+                    if pt:
+                        gate["drive_not"] = "a4wd"
                 fu = self.fuel_of(c, cat, T)
                 if fu == DRIVE_AMBIGUOUS:
                     fuel_drop = True
                     break
+                # the engine column's fuel (round3-1119): 'hybrid' / 'gas' for a
+                # feed name that does not say Hybrid (a Hybrid name on a gas
+                # column left T out above; on a hybrid column it says it)
+                ffu = self.fit_engine_limit(c, cat, T)[1]
+                if ffu and not re.search(r"hybrid", T[1], re.I):
+                    if fu and fu != ffu:
+                        fuel_drop = True
+                        break
+                    fu = ffu
                 eng, tr = self.engine_trans_of(c, cat, T, gas_only=(fu == "gas"))
                 if eng == DRIVE_AMBIGUOUS:
                     fuel_drop = "engine"
@@ -2126,32 +2185,146 @@ class Curation:
             cache[T] = frozenset(page)
         return set(cache[T]) or None
 
+    def _listed_on_seed(self, c, cat, seed) -> bool:
+        """True when a catalog page seeded as `seed` (make, catalog model,
+        year) lists class c in cat: a matched manifest row, or a record seeded
+        there (policy.AMBIGUOUS_FEED_YEARS; the seed need not map to a feed
+        model, 'Rogue Select' does not)."""
+        cache = self.__dict__.setdefault("_seed_keys", None)
+        if cache is None:
+            cache = defaultdict(set)
+            for lr in self.list_rows:
+                if lr.matched:
+                    cache[(tuple(lr.seed), lr.cat)].add(policy.pn_key(self.ns, lr.pn))
+            for r in self.records:
+                cache[(tuple(r.seed), r.cat)].add(r.key)
+            self._seed_keys = cache
+        return c.key in cache.get((tuple(seed), cat), ())
+
+    def _t_fit_engines(self, T):
+        """(all, hybrid, gas) displacements T's model-year offers on the
+        catalog's own evidence: every product-page fitment row of T in any
+        category (rows_by_T) and T's year page (engine list, or fordpartsgiant
+        engine sub-catalog slugs). A row's engines span its years, so this can
+        hold an engine of a neighbouring year; a limit read against it can
+        only narrow (round3-1119)."""
+        cache = self.__dict__.setdefault("_fit_engines_cache", {})
+        if T not in cache:
+            U, UH, UG, YP, YPH = set(), set(), set(), set(), False
+            es = [e for (_cat, _c, _r, f, _t) in self.rows_by_T.get(T, []) for e in (f.engines or [])]
+            for ym in self.t_years.get(T, []):
+                if ym.error or not _status_ok(ym.status):
+                    continue
+                for e in ym.engines or []:
+                    x = _fit_lit(e)
+                    if x is not None:
+                        YP.add(x)
+                        U.add(x)
+                        (UH if _FIT_HYBRID_RE.search(e) else UG).add(x)
+                for s in [ym.variant] + list(ym.variants or []) + list(ym.trims or []):
+                    m = _FIT_SLUG_LIT_RE.search(str(s or ""))
+                    if m:
+                        x = round(int(m.group(1)) + int(m.group(2)) / 10, 1)
+                        YP.add(x)
+                        U.add(x)
+                    if re.search(r"hybrid", str(s or ""), re.I):
+                        YPH = True
+            for e in es:
+                x = _fit_lit(e)
+                if x is None:
+                    continue
+                U.add(x)
+                (UH if _FIT_HYBRID_RE.search(e) else UG).add(x)
+            cache[T] = (frozenset(U), frozenset(UH), frozenset(UG), frozenset(YP), YPH)
+        return cache[T]
+
+    def fit_engine_limit(self, c, cat, T):
+        """(displacements, fuel) the product page's engine column limits class
+        c to on T (policy.LIKELY_FIT_ENGINE_RULE): every fitment row of c for
+        T prints at least one displacement, and their union leaves out one T's
+        model-year offers -> frozenset of litres, else None; fuel 'hybrid' when
+        every printed engine is a hybrid and T has gas engines, 'gas' when none
+        is and T has a hybrid, else ''. A row with no displacement (no engine
+        column, 'BATTERY EV') limits nothing.
+        "Offers": T's year page lists the displacement, or a car of T on the
+        pinned lot is decoded with it (Options.lot_engines), whether or not a
+        catalog row attests it for T (fail closed). A fitment row's engines
+        span its years and often several catalog models (one Camry row covers
+        2007-2017 with 2.4L/2.5L/3.5L; "GS350, GS430"), so the catalog alone
+        would put "2.4L/3.5L only" on every 2007 Camry part; the lot's own
+        decodes are the cars a missing displacement would wrongly show plain.
+        Likewise a fuel limit needs T's year page offering a hybrid catalog or
+        a hybrid (gas) car of T on the lot. Without the lot input (lot_engines
+        None) every displacement the catalog attests for T counts: more limits."""
+        if not policy.LIKELY_FIT_ENGINE_RULE:
+            return None, ""
+        fit = [f for (cc, _r, f, _t) in self.t_rows.get((T, cat), []) if cc is c]
+        if not fit:
+            return None, ""
+        L, LH, LG = set(), set(), set()
+        for f in fit:
+            es = [e for e in (f.engines or []) if _fit_lit(e) is not None]
+            if not es:
+                return None, ""
+            for e in es:
+                x = _fit_lit(e)
+                L.add(x)
+                (LH if _FIT_HYBRID_RE.search(e) else LG).add(x)
+        U, UH, UG, YP, YPH = self._t_fit_engines(T)
+        lots = self.o.lot_engines
+        lot = None if lots is None else (lots.get(T) or {"lits": frozenset(), "hybrid": False, "gas": False})
+        missing = [u for u in U if not _lit_in(L, u)]
+        if lot is not None:
+            # offered: on T's year page, or decoded on a lot car of T; a lot
+            # displacement no catalog row attests counts too (fail closed: the
+            # engine column still does not list it)
+            missing = [u for u in set(YP) | set(lot["lits"]) if not _lit_in(L, u)]
+        lim = frozenset(L) if missing else None
+        fuel = ""
+        if LH and not LG and UG and (lot is None or lot["gas"]):
+            fuel = "hybrid"
+        elif LG and not LH and UH and (lot is None or lot["hybrid"] or YPH):
+            fuel = "gas"
+        return lim, fuel
+
     def engine_trans_of(self, c, cat, T, gas_only=False):
-        """(engine label, transmission label) the option column limits class c
-        to on T, '' when none: _engine_limit names fewer displacements than
-        T's engine list (year page); or every configuration names a
-        transmission of one class and T's own pages show the other class.
-        Config-tuple option columns only (policy.DRIVE_CONFIG_FVO_SITES)."""
+        """(engine label, transmission label) the evidence limits class c to
+        on T, '' when none. Engine: the option column (_engine_limit names
+        fewer displacements than T's engine list; config-tuple option columns,
+        policy.DRIVE_CONFIG_FVO_SITES) and the product page's engine column
+        (fit_engine_limit, every site), intersected; an empty intersection is
+        DRIVE_AMBIGUOUS. Transmission: every configuration names one class
+        and T's own pages show the other class (config-tuple columns only)."""
         rows = self._own_rows(c, cat, T)
-        if not rows or not policy.LIKELY_ENGINE_TRANS_RULE:
+        E_fit = self.fit_engine_limit(c, cat, T)[0]
+        if not policy.LIKELY_ENGINE_TRANS_RULE:
             return "", ""
         xs = [_row_engine_trans(n, st)[1] for n, st, _v, _u in rows]
-        E = self._engine_limit(c, cat, T, gas_only)
-        eng = ""
+        E = self._engine_limit(c, cat, T, gas_only) if rows else None
+        disp = _INFINITI_DISP.get(re.sub(r"\s+", "", str(T[1])).upper()) if T[0] == "Infiniti" else None
         if E:
             U = self._t_engines(T, cat, gas_only)
-            disp = _INFINITI_DISP.get(re.sub(r"\s+", "", str(T[1])).upper()) if T[0] == "Infiniti" else None
             if disp and round(disp / 10, 1) in E:
-                eng = ""
+                E = None
             elif disp:
                 # the limit leaves out the only engine the name allows (FX45
                 # mirror 96301-CL21A: the sibling rule takes 4.5L away): the
                 # evidence contradicts itself for this vehicle-year
                 return DRIVE_AMBIGUOUS, ""
             elif U and U <= E:
-                eng = ""
-            else:
-                eng = "/".join(f"{x:.1f}L" for x in sorted(E))
+                E = None
+        if E_fit and disp:
+            if not _lit_in(E_fit, round(disp / 10, 1)):
+                return DRIVE_AMBIGUOUS, ""     # the engine column leaves out the name's engine
+            E_fit = None                       # the name says the engine: no label needed
+        if E and E_fit:
+            both = frozenset(x for x in E if _lit_in(E_fit, x))
+            if not both:
+                return DRIVE_AMBIGUOUS, ""     # option column and engine column disagree
+            E = both
+        else:
+            E = E or E_fit
+        eng = "/".join(f"{x:.1f}L" for x in sorted(E)) if E else ""
         tr = ""
         if xs and all(x for x in xs) and len(set(xs)) == 1:
             x = xs[0]
@@ -2249,6 +2422,137 @@ class Curation:
             if all_cab and len(cabs) == 1:
                 out[(mk, md)] = self._NISSAN_CABS[next(iter(cabs))]
         return out
+
+    # ------------------------- §5.16 cab / body lists, All-Mode sibling (round3-1119)
+    _NISSAN_CAB3 = {"T": "regular cab", "KC": "king cab", "CC": "crew cab"}
+    _CAB_ORDER = ("regular cab", "extended cab", "king cab", "access cab", "double cab", "quad cab",
+                  "super cab", "supercab", "crew cab", "super crew", "supercrew", "crewmax")
+
+    def _slot_mates(self, c, cat, T, slots):
+        """Class keys of T's cell in cat whose slots overlap class c's (any
+        member when slots are unknown), c itself left out."""
+        members = (self.cells_info.get((T, cat)) or {}).get("members") or {}
+        mine = set(slots or ())
+        out = set()
+        for k, m in members.items():
+            if k == c.key:
+                continue
+            if not mine or set(m["slot"].slots) & mine or not m["slot"].slots:
+                out.add(k)
+        return out
+
+    def _cab_list_map(self, c, cat, Ts, slots) -> dict:
+        """policy.LIKELY_CAB_LIST_RULE: {(make, model): [cab, ...]} where the
+        number's own evidence names two or more cabs for every configuration
+        (every fitment trim names a cab; or, on the Nissan pages, every own-page
+        alternative starts with T / KC / CC) and the same category on T's
+        pages lists a cab it leaves out under another number of the same slot.
+        A single cab is _cab_only_map's; models already there are skipped."""
+        if not policy.LIKELY_CAB_LIST_RULE:
+            return {}
+        out = {}
+        for mk, md in sorted({(T[0], T[1]) for T in Ts}):
+            ours, page, all_ours = set(), set(), True
+            for T in Ts:
+                if (T[0], T[1]) != (mk, md):
+                    continue
+                mates = self._slot_mates(c, cat, T, slots)
+                fit = [f for (cc, _r, f, _t) in self.t_rows.get((T, cat), []) if cc is c]
+                fcabs, fall = set(), bool(fit)
+                for f in fit:
+                    for tr in (f.trims or []):
+                        m = self._CAB_RE.search(tr)
+                        if m:
+                            fcabs.add(re.sub(r"\s+", " ", m.group(1).lower()))
+                        else:
+                            fall = False
+                    if not f.trims:
+                        fall = False
+                if fall and fcabs:
+                    ours |= fcabs
+                    for (cc, _r, f, _t) in self.t_rows.get((T, cat), []):
+                        if cc is not c and cc.key in mates:
+                            for tr in (f.trims or []):
+                                m = self._CAB_RE.search(tr)
+                                if m:
+                                    page.add(re.sub(r"\s+", " ", m.group(1).lower()))
+                    continue
+                if self.ns != "nissan":
+                    all_ours = False
+                    continue
+                rows = [lr for lr in self.t_list_rows.get((T, cat), [])
+                        if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched]
+                codes = [_fvo_cab_set(lr.notes) for lr in rows]
+                if not rows or any(x is None for x in codes):
+                    all_ours = False
+                    continue
+                ours |= {self._NISSAN_CAB3[x] for s in codes for x in s}
+                for lr in self.t_list_rows.get((T, cat), []):
+                    if policy.pn_key(self.ns, lr.pn) != c.key and policy.pn_key(self.ns, lr.pn) in mates:
+                        page |= {self._NISSAN_CAB3[x] for x in (_fvo_cab_heads(lr.notes) or ())}
+            if all_ours and len(ours) >= 2 and page - ours:
+                out[(mk, md)] = sorted(ours, key=lambda x: (self._CAB_ORDER.index(x) if x in self._CAB_ORDER
+                                                            else len(self._CAB_ORDER), x))
+        return out
+
+    _BODY_WORDS = {"coupe": "coupe", "sedan": "sedan", "notchback": "sedan", "wagon": "wagon",
+                   "hatchback": "hatchback", "liftback": "hatchback", "convertible": "convertible"}
+    _BODY_WORD_RE = re.compile(r"\b(coupe|sedan|notchback|wagon|hatchback|liftback|convertible)\b", re.I)
+
+    def _body_list_map(self, c, cat, Ts, slots) -> dict:
+        """policy.LIKELY_CAB_LIST_RULE, bodies: {(make, model): [silhouette, ...]}
+        where every fitment trim of the number for the model's years names a
+        silhouette (coupe, sedan/notchback, wagon, hatchback, convertible) and
+        the same category on T's pages lists another silhouette under another
+        number of the same slot (Alero 2001 regulators: coupe trims beside the
+        sedan's). The gate is the number's silhouettes."""
+        if not policy.LIKELY_CAB_LIST_RULE or cat in policy.LIKELY_BODY_SKIP_CATS:
+            return {}
+        out = {}
+        for mk, md in sorted({(T[0], T[1]) for T in Ts}):
+            ours, page, all_ours = set(), set(), True
+            for T in Ts:
+                if (T[0], T[1]) != (mk, md):
+                    continue
+                mates = self._slot_mates(c, cat, T, slots)
+                fit = [f for (cc, _r, f, _t) in self.t_rows.get((T, cat), []) if cc is c]
+                if not fit:
+                    all_ours = False
+                    continue
+                for f in fit:
+                    if not f.trims:
+                        all_ours = False
+                    for tr in (f.trims or []):
+                        ws = {self._BODY_WORDS[w.lower()] for w in self._BODY_WORD_RE.findall(tr)}
+                        if ws:
+                            ours |= ws
+                        else:
+                            all_ours = False
+                for (cc, _r, f, _t) in self.t_rows.get((T, cat), []):
+                    if cc is not c and cc.key in mates:
+                        for tr in (f.trims or []):
+                            page |= {self._BODY_WORDS[w.lower()] for w in self._BODY_WORD_RE.findall(tr)}
+            if all_ours and ours and page - ours:
+                out[(mk, md)] = sorted(ours)
+        return out
+
+    def _auto_sibling(self, c, cat, T, slots) -> bool:
+        """policy.LIKELY_AUTO_SIBLING_RULE: T's own pages in cat list another
+        number of the same slot for the Nissan drive field AUTO (All-Mode 4WD),
+        so this number's "4WD" is the part-time system only."""
+        if not policy.LIKELY_AUTO_SIBLING_RULE or self.ns != "nissan":
+            return False
+        mates = self._slot_mates(c, cat, T, slots)
+        for lr in self.t_list_rows.get((T, cat), []):
+            k = policy.pn_key(self.ns, lr.pn)
+            if k == c.key or k not in mates:
+                continue
+            for n in lr.notes:
+                m = _FVO_BODY_RE.match(n or "")
+                if m and any(re.search(r"(?:^|\.)\s*\*?AUTO\s*(?:\.|$)", part)
+                             for alt in _split_top_plus(m.group(1), ",") for part in _split_top_plus(alt, "+")):
+                    return True
+        return False
 
     # ------------------------------------------------------------ report
     def report(self, doc, inv_counts: Counter):
@@ -2686,9 +2990,46 @@ def _market_excludes(notes) -> bool:
     keeps the row."""
     for n in notes or []:
         alts = [a for a in re.split(r"\s/\s", n or "") if a.strip()]
-        if alts and all(_MARKET_RE.search(a) and not _US_MARKET_RE.search(a) for a in alts):
+        if alts and all(_foreign_alt(a) and not _US_MARKET_RE.search(a) for a in alts):
             return True
     return False
+
+
+# round3-1119 (policy.LIKELY_MARKET_UNIT_RULE): km/h-first speedometers and
+# mandatory export equipment groups. "MPH/KMH" is the US dual-scale unit;
+# "KMH/MPH", "KPH/MPH" and "Instrument-Kph" the Canada one (fordpartsgiant
+# AE5Z-10849-LA "With MPH/KMH Speedometer" vs -MA "With KMH/MPH"). A negated
+# group ("(-)GCC", "EXC", "W/O") keeps the row.
+_KMH_RE = re.compile(r"(?<![A-Za-z])(?:KPH|KMH|KM\s*/\s*H)(?![A-Za-z])", re.I)
+_MPH_RE = re.compile(r"(?<![A-Za-z])MPH(?![A-Za-z])", re.I)
+_EXPORT_GROUP_RE = re.compile(r"(?<!EXC )(?<!W/O )(?<!WITHOUT )(?<!\(-\))\b(?:EUROPEAN|EUROPE|MIDDLE\s+EAST|EXPORT|GULF|"
+                              r"GCC|MEXICAN|MEXICO|CANADIAN|CANADA)\s+EQUIPMENT\s+GROUP\b|"
+                              r"(?<!EXC )\bEXPORT\s+Mandatory\b", re.I)
+
+
+def _kmh_first(text: str) -> bool:
+    """True when text names a km/h unit before any MPH ('KMH/MPH', 'Instrument-Kph')."""
+    m = _KMH_RE.search(str(text or ""))
+    if not m:
+        return False
+    p = _MPH_RE.search(str(text or ""))
+    return not p or p.start() > m.start()
+
+
+def _foreign_alt(a: str) -> bool:
+    if _MARKET_RE.search(a):
+        return True
+    return bool(policy.LIKELY_MARKET_UNIT_RULE and (_EXPORT_GROUP_RE.search(a) or _kmh_first(a)))
+
+
+def _kmh_part(c, notes) -> bool:
+    """policy.LIKELY_MARKET_UNIT_RULE, class-wide: the product record itself
+    (name, description, other names) or any own-page note of the class names a
+    km/h-first unit: the part is the Canada cluster, for every vehicle-year."""
+    if not policy.LIKELY_MARKET_UNIT_RULE:
+        return False
+    texts = [x for r in c.records for x in (r.name, r.aux, r.description, r.other_names)] + list(notes or [])
+    return any(_kmh_first(t) for t in texts if t)
 
 
 _EXPORT_RE = re.compile(r"(?<!EXC )(?<!EXC\()\bEXPORT\b", re.I)
@@ -2979,6 +3320,42 @@ def _fvo_cab_codes(notes) -> set | None:
     return codes if seen else None
 
 
+def _fvo_cab_parts(notes):
+    """[(code or None)] for every configuration of the row's option column,
+    reading the Nissan pickup cab field T (regular cab), KC, CC (round3-1119:
+    the 2002 Frontier page lists 80721-3S510 'KC + CC. SB + CC. XB, T + KC +
+    CC' beside 3S500 '*KC + *CC'); None when the row has no option column."""
+    out, seen = [], False
+    for n in notes or []:
+        m = re.match(r"^\s*fitting\s+vehicle\s+options\s*:\s*(.*)$", n or "", re.I)
+        if not m:
+            continue
+        seen = True
+        for alt in _split_top_plus(m.group(1), ","):
+            for part in _split_top_plus(alt, "+"):
+                part = part.strip().lstrip("*")
+                grp = re.match(r"^\(([^)]*)\)", part)
+                heads = _split_top_plus(grp.group(1), "+") if grp else [part]
+                for h in heads:
+                    mm = re.match(r"^\*?(T|KC|CC)(?![A-Za-z0-9])", h.strip())
+                    out.append(mm.group(1) if mm else None)
+    return out if seen else None
+
+
+def _fvo_cab_set(notes):
+    """{T / KC / CC} when every configuration of the row starts with a cab
+    code, else None."""
+    parts = _fvo_cab_parts(notes)
+    if not parts or any(p is None for p in parts):
+        return None
+    return set(parts)
+
+
+def _fvo_cab_heads(notes) -> set:
+    """Every cab code a configuration of the row starts with (others ignored)."""
+    return {p for p in (_fvo_cab_parts(notes) or []) if p}
+
+
 def _split_top_plus(text: str, sep: str) -> list:
     """Split on sep outside parentheses ("CC. 4WD. (S+ SV). 6MT" stays whole)."""
     out, depth, cur = [], 0, ""
@@ -3160,10 +3537,17 @@ _DRIVE_FILLER_RE = re.compile(r"\b(?:with|w/o|w/|without|less|non|exc|except|exc
 DRIVE_AMBIGUOUS = "?"
 
 
+# round3-1119 (item 3 of the 2026-11-18c check): infinitipartsdeal joins the
+# drive code to the steering code in one token ("*SEDAN. 2WDHICAS. SPORTTEC",
+# "*SEDAN. 2WDSTD. BASE"; the M37/Q70 pages, 771 rows). These two are the only
+# joined forms in the raw (census of oem-raw@57e8b5b9 and @dca9cd84).
+_JOINED_DRIVE_RE = re.compile(r"(?<![A-Za-z0-9])(2WD|4WD|AWD)(STD|HICAS)(?![A-Za-z0-9])", re.I)
+
+
 def _drive_terms(text: str):
     """(positive classes, negated classes, leftover text) named in text."""
     pos, neg = set(), set()
-    s = str(text or "")
+    s = _JOINED_DRIVE_RE.sub(r"\1 \2", str(text or ""))
     for classes, rx in _DRIVE_PATTERNS:
         while True:
             m = rx.search(s)
@@ -3436,6 +3820,23 @@ def _engine_terms(text: str) -> set:
     out = {int(d) / 10 for d in _ENGINE_CODE_RE.findall(t.upper())}
     out |= {int(a) + int(b) / 10 for a, b in _LITRE_RE.findall(t)}
     return {round(x, 1) for x in out}
+
+
+# product-page engine column (policy.LIKELY_FIT_ENGINE_RULE, round3-1119):
+# "6 Cyl 3.5L DOHC", "2.4L L4", "4 Cyl 2.4 L FULL HYBRID EV-GAS (FHEV)"; a
+# year page's engine sub-catalog slug ("8_cyl_5_0l-4at_4r70w", fordpartsgiant)
+_FIT_LIT_RE = re.compile(r"(?<![0-9.])(\d{1,2}\.\d)\s*L(?![A-Za-z])", re.I)
+_FIT_SLUG_LIT_RE = re.compile(r"(?:^|_)(\d{1,2})_(\d)l(?:-|_|$)", re.I)
+_FIT_HYBRID_RE = re.compile(r"HYBRID|\bFHEV\b|\bHEV\b|\bPHEV\b|PLUG-IN", re.I)
+
+
+def _fit_lit(e: str):
+    m = _FIT_LIT_RE.search(str(e or ""))
+    return round(float(m.group(1)), 1) if m else None
+
+
+def _lit_in(xs, x) -> bool:
+    return any(abs(x - y) < 0.05 for y in xs)
 
 
 def _trans_terms(text: str) -> set:
@@ -3758,6 +4159,43 @@ def _sha256_file(path) -> str | None:
     return hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None
 
 
+def lot_engines(inv, extras_path) -> dict | None:
+    """{(make, model, year): {"lits", "hybrid", "gas"}} over the inventory's
+    cars (round3-1119, the engine column's materiality): the displacements
+    their decoded engines name (docs/data/vehicle_extras.json "engine", read
+    the way docs/app.js pfAmParseEngine reads it), whether one is a hybrid
+    (the listing, the VIN series, the VIN trim when usable, or the engine
+    naming Hybrid / Electric, as pfOemCarFuel) and whether one is a
+    non-hybrid with a decoded engine. None when either input is missing:
+    every displacement the catalog attests then counts (fail closed)."""
+    p = Path(extras_path or "")
+    if not inv or not p.exists():
+        return None
+    ex = json.loads(p.read_text())
+    fields = ex.get("extraFields") or []
+    ei = fields.index("engine") if "engine" in fields else 2
+    extras = ex.get("extras") or {}
+    f = inv.get("fields") or []
+    iid, imk, imd, iy = f.index("id"), f.index("make"), f.index("model"), f.index("year")
+    vp = inv.get("vpic") or {}
+    out = defaultdict(lambda: {"lits": set(), "hybrid": False, "gas": False})
+    for i, r in enumerate(inv["vehicles"]):
+        e = extras.get(str(r[iid]))
+        es = str(e[ei]) if e and len(e) > ei and e[ei] else ""
+        v = vp.get(str(i)) or ["", "", "", "", ""]
+        name = " ".join(str(x) for x in (r[imd], v[2] if len(v) > 2 else "",
+                                         v[0] if len(v) > 1 and v[1] == "usable" else "") if x)
+        m = re.search(r"(\d+\.\d+)\s*l\b", es.lower()) or re.search(r"(\d+\.\d+)l", es.lower())
+        d = out[(r[imk], r[imd], r[iy])]
+        if m:
+            d["lits"].add(round(float(m.group(1)), 1))
+        if re.search(r"\bhybrid\b", name + " " + es, re.I) or re.search(r"\belectric\b", es, re.I):
+            d["hybrid"] = True
+        elif m:
+            d["gas"] = True
+    return {k: {"lits": frozenset(v["lits"]), "hybrid": v["hybrid"], "gas": v["gas"]} for k, v in out.items()}
+
+
 def model_bodies(inv, js, decodes_path) -> dict:
     """{(make, model): {body style}} and {(make, model, year): {body style}}
     over the inventory's VINs, from the vPIC
@@ -3830,6 +4268,10 @@ def main(argv=None) -> int:
     ap.add_argument("--inventory", default=str(MM.INVENTORY_PATH))
     ap.add_argument("--decodes", default=str(MM.INVENTORY_PATH.parent / "vin_decodes.json.gz"),
                     help="vPIC decode cache (rear wiper body gate); missing file: every rear wiper group refused")
+    ap.add_argument("--extras", default=str(MM.INVENTORY_PATH.parent / "vehicle_extras.json"),
+                    help="the lot's decoded engines (engine-column limits need a model-year to offer the "
+                         "missing displacement: year page or a lot car); missing file: every displacement "
+                         "the catalog attests counts (more limits)")
     a = ap.parse_args(argv)
     import junkyard_scraper as js  # noqa: E402  (offline: curated tables + normalizers)
     import validate as V  # noqa: E402
@@ -3847,12 +4289,17 @@ def main(argv=None) -> int:
     hand = hand_payload(js)
     bodies = model_bodies(inv, js, a.decodes)
     body_counts = model_body_counts(inv, js, a.decodes)
+    lot_eng = lot_engines(inv, a.extras)
+    if lot_eng is None:
+        print(f"[curate] no lot engines ({a.extras}): every displacement the catalog attests counts",
+              file=sys.stderr)
     out = Path(a.out)
     results = {}
     no_ns = [s for s in src.sites() if s not in policy.SITE_NS]
     for ns in nss:
         opts = Options(as_of=a.as_of, fixtures=a.fixtures, model_map=mm, model_map_path=Path(a.model_map),
-                       inventory=inv, js=js, model_bodies=bodies, body_counts=body_counts)
+                       inventory=inv, js=js, model_bodies=bodies, body_counts=body_counts,
+                       lot_engines=lot_eng)
         cur, doc = curate(ns, src, opts)
         results[ns] = cur
         if not cur.raw_meta:
@@ -3864,7 +4311,8 @@ def main(argv=None) -> int:
         # curation inputs outside the policy hash, pinned by content (hub 2026-11-10):
         # a changed decodes or inventory file must never change shipped groups unseen
         rep["inputs"] = {"inventory": a.inventory, "inventory_sha256": _sha256_file(a.inventory),
-                         "decodes": a.decodes, "decodes_sha256": _sha256_file(a.decodes)}
+                         "decodes": a.decodes, "decodes_sha256": _sha256_file(a.decodes),
+                         "extras": a.extras, "extras_sha256": _sha256_file(a.extras)}
         rep["sites_without_namespace"] = no_ns
         # §7.6, the same test the payload builder runs (it demotes; this reports)
         rep["contradictions"] = js._oem_contradictions(hand, {ns: doc}) if hand else []

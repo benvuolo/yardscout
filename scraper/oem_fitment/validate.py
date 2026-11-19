@@ -173,9 +173,15 @@ def gate_problem(gate) -> str | None:
     """Why one app gate is malformed, or None."""
     if not isinstance(gate, dict) or not gate:
         return f"gate is not a non-empty object: {gate!r}"
-    extra = set(gate) - {"drive", "drive_basis", "body", "cab", "eng", "fuel", "trans"}
+    extra = set(gate) - {"drive", "drive_basis", "drive_not", "body", "cab", "eng", "fuel", "trans"}
     if extra:
         return f"gate keys {sorted(extra)}"
+    if "drive_not" in gate:
+        # round3-1119: "4wd" beside an All-Mode AUTO number ("drive_not": "a4wd")
+        dn, d = gate["drive_not"], gate.get("drive")
+        if dn not in GATE_DRIVES_FOUR or not isinstance(d, str) or dn in d.split("/") \
+                or not set(d.split("/")) <= set(GATE_DRIVES_FOUR):
+            return f"gate drive_not {dn!r} with drive {d!r}"
     if "drive" in gate:
         d = gate["drive"]
         cl = d.split("/") if isinstance(d, str) else []
@@ -189,8 +195,13 @@ def gate_problem(gate) -> str | None:
         bs = [b] if isinstance(b, str) else b if isinstance(b, list) else None
         if not bs or any(x not in GATE_BODIES for x in bs) or len(set(bs)) != len(bs):
             return f"gate body {b!r}"
-    if "cab" in gate and gate["cab"] not in GATE_CABS:
-        return f"gate cab {gate['cab']!r}"
+    if "cab" in gate:
+        # one cab, or (round3-1119) a list of two or more distinct cabs
+        cb = gate["cab"]
+        ok = cb in GATE_CABS if isinstance(cb, str) else (
+            isinstance(cb, list) and len(cb) >= 2 and len(set(cb)) == len(cb) and all(x in GATE_CABS for x in cb))
+        if not ok:
+            return f"gate cab {cb!r}"
     if "eng" in gate:
         e = gate["eng"]
         if not isinstance(e, list) or not e or any(not isinstance(x, str) or not _GATE_ENG_RE.match(x) for x in e):

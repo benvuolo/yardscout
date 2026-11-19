@@ -9669,8 +9669,11 @@ function pfAmSplitNote(note) {
  * note names for that vehicle-year (curate._gate_runs, validate.gate_problem):
  *   drive "2wd" | "fwd" | "rwd" | "4wd" | "awd" | "a4wd" (classes of ONE drive
  *         family, several joined by "/"); body a silhouette word or a list;
- *   cab "crew cab" ...; eng ["3.7L", ...]; fuel "gas" | "hybrid" | "diesel";
- *   trans "MT" | "AT".
+ *   cab "crew cab" ... or a list ["king cab", "crew cab"] (round3-1119);
+ *   eng ["3.7L", ...]; fuel "gas" | "hybrid" | "diesel"; trans "MT" | "AT";
+ *   drive_not "a4wd" beside drive "4wd" (round3-1119: the page lists the
+ *   All-Mode AUTO system under another number; a 4WD decode stays "if
+ *   equipped").
  * Same honesty as the aftermarket gate above and the car-card parts table
  * (match_vehicle's drive, body and manual gates): the donor's own VIN decode
  * or listing naming the limit confirms it; one naming something else rules
@@ -9693,7 +9696,15 @@ function pfOemDriveSet(drive) {
   if (allow.has('fwd') && allow.has('rwd')) allow.add('2wd');
   return allow;
 }
-function pfOemDriveVerdict(drive, model, driveType) {
+/* drive_not (round3-1119): the catalog lists the other 4WD system of the same
+ * family under another number ("4wd" beside an All-Mode "AUTO" number, gate
+ * drive_not "a4wd"). No decode or listing says which system a car has, so
+ * what would confirm the drive stays "if equipped". */
+function pfOemDriveVerdict(drive, model, driveType, driveNot) {
+  const v = pfOemDriveVerdict1(drive, model, driveType);
+  return v === 'confirm' && driveNot ? 'unconfirmed' : v;
+}
+function pfOemDriveVerdict1(drive, model, driveType) {
   const allow = pfOemDriveSet(drive);
   const two = [...allow].every(c => PF_OEM_TWO.includes(c));
   const ok = c => allow.has(c) || (allow.has('2wd') && (c === 'fwd' || c === 'rwd'));
@@ -9717,10 +9728,12 @@ function pfOemCabsIn(text) {
   return new Set(Object.keys(PF_OEM_CABS).filter(k => PF_OEM_CABS[k].some(t => pfAmWord(t, text))));
 }
 function pfOemCabVerdict(cab, v) {
-  // the listing, the VIN series, and the VIN trim when it is one trim
+  // the listing, the VIN series, and the VIN trim when it is one trim; cab is
+  // one cab or (round3-1119) a list of the cabs the number is listed for
+  const allow = new Set(Array.isArray(cab) ? cab : [cab]);
   const named = pfOemCabsIn([v.model, v.vpicSeries, v.vpicTrimQuality === 'usable' ? v.vpicTrim : ''].filter(Boolean).join(' '));
-  if (named.size === 1 && named.has(cab)) return 'confirm';
-  return named.size && !named.has(cab) ? 'exclude' : 'unconfirmed';
+  if (named.size === 1 && allow.has([...named][0])) return 'confirm';
+  return named.size && ![...named].some(c => allow.has(c)) ? 'exclude' : 'unconfirmed';
 }
 function pfOemEngVerdict(eng, carEng) {
   const l = pfAmParseEngine(carEng).l;
@@ -9759,7 +9772,7 @@ function pfOemGate(gate, v, ex) {
   const g = pfOemGateParse(gate);
   if (!g) return { verdict: 'confirm', keys: [] };
   const vs = {};
-  if (g.drive) vs.drive = pfOemDriveVerdict(g.drive, v.model, v.vpicDriveType);
+  if (g.drive) vs.drive = pfOemDriveVerdict(g.drive, v.model, v.vpicDriveType, g.drive_not);
   if (g.body) vs.body = pfOemBodyVerdict(g.body, v.model, ex ? ex[extraIdx.body] : '');
   if (g.cab) vs.cab = pfOemCabVerdict(g.cab, v);
   if (g.eng) vs.eng = pfOemEngVerdict(g.eng, ex ? ex[extraIdx.engine] : '');
@@ -9775,11 +9788,12 @@ function pfOemGateText(gate) {
   const g = pfOemGateParse(gate);
   if (!g) return '';
   const bits = [];
-  if (g.cab) bits.push(String(g.cab));
+  if (g.cab) bits.push(Array.isArray(g.cab) ? g.cab.join('/') : String(g.cab));
   if (g.drive) {
     const a = pfOemDriveSet(g.drive);
     bits.push([...a].every(c => PF_OEM_TWO.includes(c))
       ? (a.size === 1 && a.has('fwd') ? 'FWD' : a.size === 1 && a.has('rwd') ? 'RWD' : '2WD')
+      : (g.drive_not === 'a4wd' && a.size === 1 && a.has('4wd')) ? 'part-time 4WD'
       : ['4wd', 'awd', 'a4wd'].filter(c => a.has(c)).map(c => (c === 'a4wd' ? '4WD AUTO' : c.toUpperCase())).join('/'));
   }
   if (g.body) bits.push((Array.isArray(g.body) ? g.body : [g.body]).join(' or '));
