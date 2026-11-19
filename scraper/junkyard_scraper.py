@@ -15316,7 +15316,9 @@ def _oem_entries(ns: str, doc: dict) -> tuple[list, list]:
     groups, vg = [], []
     for g in list(doc.get("groups") or []) + list(doc.get("likely") or []):
         groups.append({"id": g["id"], "ns": ns, "cat": g["cat"], "tier": g["tier"],
-                       "label": f"{brand} catalog", "note": g["note"],
+                       # round9-1119: a group names the site its pages came from
+                       # ("Infiniti catalog"); a namespace's brand otherwise
+                       "label": g.get("label") or f"{brand} catalog", "note": g["note"],
                        "apps": _oem_gated_apps(g["apps"], g.get("gates")),
                        "pn": g["pn"], "src": "oem", **({"cars": g["cars"]} if g.get("cars") else {})})
     for g in doc.get("vg") or []:
