@@ -217,7 +217,8 @@ check("every drive gate carries its basis, and the note words it ('X only' state
 # payload: the shipped OEM groups carry the gates and exactly the curated app-years
 lazy = {}
 for p in sorted((OEM.parents[1] / "docs" / "data" / "oem").glob("*.json")):
-    for g in json.loads(p.read_text()).get("oemGroups") or []:
+    _d = json.loads(p.read_text())
+    for g in (_d.get("oemGroups") or []) + (_d.get("oemGroups2") or []):   # round 9 G: the newer field too
         lazy[g["id"]] = g
 yrs = lambda apps_: {(a[0], a[1], y) for a in apps_ for y in range(a[2], a[3] + 1)}  # noqa: E731
 mism, gated_ship = [], 0
@@ -237,7 +238,9 @@ for name, d in by_ns.items():
             mism.append(g["id"])
 check("payload files: every shipped group has exactly its curated app-years, and its gates on the gated years",
       not mism and gated_ship, str(mism[:5]))
-check("nissan stays a candidate: no groups/nissan.json", not (OEM / "groups" / "nissan.json").exists())
+# round 9 E (2026-11-19): nissan ships its candidate, in the newer payload field only
+check("nissan ships the reviewed candidate: groups/nissan.json is _report/nissan.candidate.json",
+      (OEM / "groups" / "nissan.json").read_bytes() == (OEM / "groups" / "_report" / "nissan.candidate.json").read_bytes())
 single_hits = [(n, g["id"], mk, md, y) for n, d in by_ns.items() for g in d["likely"]
                for mk, md, lo, hi, gate in g.get("gates") or [] if "drive" in gate
                for y in range(lo, hi + 1) if policy.single_drive(mk, md, y) is not None]

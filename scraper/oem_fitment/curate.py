@@ -1420,11 +1420,15 @@ class Curation:
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
         self.release_notes = policy.release_notes()
         self.released_exterior = []
+        self.round9_rows, self.round9_names = [], []
+        brand0 = brand
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
                 continue
             if not c.verified or "universal_part_suspect" in c.problems:
                 continue
+            # round9-1119 C: the site the pages came from names the catalog
+            brand = self._group_brand(c, brand0) if self.ns in ROUND9_NS else brand0
             # only vehicle-years where the class is a member of the cell
             # (cover yes / maybe, §5.16): a record that resolves out of the
             # category there (Mopar passenger window switch 4602540AF) makes
@@ -1754,7 +1758,8 @@ class Curation:
                 self.refuse(hold, cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
                             detail=";".join(f"{a[0]} {a[1]} {a[2]}-{a[3]}" for a in apps))
                 self.held_exterior.append({"ns": self.ns, "cat": cat, "pn": pns, "apps": apps,
-                                           "note": _likely_note(brand, pns[0], text, _pack_text(cat, c.packaging)),
+                                           "note": _likely_note(brand, pns[0], text,
+                                                                _pack_text(cat, self._note_pack(c, cat))),
                                            "reason": reason, "urls": urls})
                 continue
             if cat == "wheels":
@@ -1810,6 +1815,9 @@ class Curation:
                     pl = self.plus_dependent(c, cat, T, slots, gas_only=(g.get("fuel") == "gas"))
                     if pl:
                         rs.append(("held_plus_reading", pl))
+                if self.ns in ROUND9_NS:
+                    for r9, d9 in self.round9_tests(c, cat, T, g):
+                        rs.append((r9, d9))
                 if rs:
                     why6[T] = rs
             if held or why6:
@@ -1837,6 +1845,8 @@ class Curation:
                     for r6, d6 in rs:
                         if r6 in ("held_undated_siblings", "held_plus_reading"):
                             self.round8_rows.append({"cat": cat, "pn": pns, "t": list(T), "reason": r6, **d6})
+                        if r6 in ("held_variant_unread", "held_twin_changeover", "held_body_mark", "held_drive_open"):
+                            self.round9_rows.append({"cat": cat, "pn": pns, "t": list(T), "reason": r6, **d6})
                 r6_T = {T: [x for x in rs if x[0] in ("held_cab_inferred", "held_option_tie")]
                         for T, rs in why6.items()}
                 r6_T = {T: rs for T, rs in r6_T.items() if rs}
@@ -1847,7 +1857,9 @@ class Curation:
                     # fits, or an owner release of the exact apps: held whole
                     reasons = {r6 for rs in why6.values() for r6, _d in rs} | ({"held_starred_scope"} if held else set())
                     code = next(r for r in ("held_cab_inferred", "held_starred_only", "held_starred_scope",
-                                            "held_option_tie", "held_undated_siblings", "held_plus_reading")
+                                            "held_option_tie", "held_undated_siblings", "held_plus_reading",
+                                            "held_variant_unread", "held_twin_changeover", "held_body_mark",
+                                            "held_drive_open")
                                 if r in reasons)
                     self.refuse(code, cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
                                 detail="; ".join(
@@ -1859,7 +1871,22 @@ class Curation:
                 text, drv, gate_by_T = lim2["text"], lim2["drv"], lim2["gates"]
                 apps = _runs(Ts)
             slot = "+".join(sorted(slots)) or "C"
-            note = _likely_note(brand, pns[0], text, _pack_text(cat, c.packaging, slot))
+            if self.ns in ROUND9_NS:
+                # round9-1119 A: the number's catalog part name decides the
+                # note's words; a name the rule cannot place holds the group
+                nm = self._name_class(c, cat)
+                if nm["hold"]:
+                    self.refuse("held_part_name", cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                                detail=nm["hold"])
+                    self.round9_rows.append({"cat": cat, "pn": pns, "reason": "held_part_name", "unit": "group",
+                                             "detail": nm["hold"], "names": nm["names"]})
+                    continue
+            note = _likely_note(brand, pns[0], text, _pack_text(cat, self._note_pack(c, cat), slot))
+            if self.ns in ROUND9_NS:
+                nm = self._name_class(c, cat)
+                self.round9_names.append({"cat": cat, "pn": pns, "class": nm["class"], "names": nm["names"],
+                                          "phrase": _pack_text(cat, self._note_pack(c, cat), slot) or None,
+                                          "label": f"{brand} catalog", "note": note})
             # its own evidence date: build-time expiry drops a Likely group
             # whose oldest record passes 120 days (review F18)
             stamps = sorted(r.retrieved for r in c.records if _ts(r.retrieved))
@@ -1868,6 +1895,7 @@ class Curation:
                         "tier": "likely", "kind": "body", "apps": apps, "pn": pns, "reason": reason,
                         "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts),
                         "oldest_retrieved": stamps[0] if stamps else None,
+                        **({"label": f"{brand} catalog"} if self.ns in ROUND9_NS else {}),
                         **({"gates": gates} if gates else {})})
         self._likely_out = out
         return out
@@ -1879,7 +1907,7 @@ class Curation:
         the rest be tried again). status 'ok' | 'held_cab_qualifier' |
         'held_drive_qualifier' | 'held_engine_conflict' | 'held_fuel_conflict'."""
         slot = "+".join(sorted(slots)) or "C"
-        pack = _pack_text(cat, c.packaging, slot)
+        pack = _pack_text(cat, self._note_pack(c, cat), slot)
         cab_map = self._cab_only_map(c, cat, Ts)
         cab = "; ".join(f"{md}: {cb} only" for (_mk, md), cb in cab_map.items())
         # round3-1119: cab / body lists the page splits by number, per
@@ -3283,6 +3311,145 @@ class Curation:
         if left and left == {(f, t) for f in fs for t in ts}:
             fit = {"drive": sorted(fs) if fs != Gd else None, "trans": sorted(ts) if ts != Gt else None}
         return {"uncovered": sorted(G - A), "via": "own" if not G <= A_own else "sibling", "fit": fit}
+
+    # ------------------------------ round9-1119 (hub 2026-11-19 after 1119i)
+    def _group_brand(self, c, default):
+        """C: 'Infiniti' when every record of the class comes from the
+        Infiniti site, 'Nissan' from the Nissan site, 'Nissan/Infiniti' when
+        both."""
+        bs = sorted({_SITE_BRAND.get(r.site, default) for r in c.records})
+        return "/".join(bs) if bs else default
+
+    def _class_names(self, c, cat) -> list:
+        """[(name, 'site:file:Lline')] the catalog prints for the number: the
+        list rows' part name on every page and the product records' name."""
+        out = set()
+        for lr in self._pn_list_rows(c.key, cat):
+            if lr.main and lr.main.strip():
+                out.add((lr.main.strip().rstrip(","), f"{lr.site}:lists:L{lr.line}"))
+        for r in c.records:
+            for n in r.oem_names:
+                if n and n.strip():
+                    out.add((n.strip().rstrip(","), r.pointer))
+        return sorted(out)
+
+    def _name_class(self, c, cat) -> dict:
+        """A: {class, names, hold}. class 'motor' / 'regulator' (window-
+        regulator), 'assembly' (the category's own assembly), 'component';
+        hold a reason when the names mix a motor and a regulator, name another
+        component, or none is in the raw."""
+        names = self._class_names(c, cat)
+        heads = sorted({re.sub(r"\s+", " ", n.split(",")[0]).strip() for n, _p in names})
+        kinds = set()
+        for h in heads:
+            if cat == "window-regulator" and _NAME_MOTOR_RE.match(h):
+                kinds.add("motor")
+            elif cat == "window-regulator" and _NAME_REG_RE.match(h):
+                kinds.add("regulator")
+            elif _NAME_COMPONENT_RE.match(h) and not (cat == "wiper-motor" and re.match(r"\s*(motor|drive)\b", h, re.I)):
+                kinds.add("component")
+            else:
+                kinds.add("assembly")
+        out = {"names": [{"name": n, "ref": p} for n, p in names], "class": "/".join(sorted(kinds)) or None,
+               "hold": None}
+        if not names:
+            out["hold"] = "no catalog part name in the raw"
+        elif kinds == {"motor", "regulator"} or len(kinds) > 1:
+            out["hold"] = "the names mix " + " and ".join(sorted(kinds)) + ": " + "; ".join(heads)[:200]
+        elif kinds == {"component"}:
+            out["hold"] = "a component, not the assembly the category names: " + "; ".join(heads)[:200]
+        return out
+
+    def _note_pack(self, c, cat) -> str:
+        """The packaging the note words: 'motor' where every catalog name of a
+        nissan window-regulator number is 'Motor Assy-...' (A), else the
+        class's packaging."""
+        if self.ns in ROUND9_NS and cat == "window-regulator":
+            cache = self.__dict__.setdefault("_note_pack_c", {})
+            if (c.key, cat) not in cache:
+                cache[(c.key, cat)] = "motor" if self._name_class(c, cat)["class"] == "motor" else c.packaging
+            return cache[(c.key, cat)]
+        return c.packaging
+
+    def round9_tests(self, c, cat, T, gate) -> list:
+        """B1-B4 for one vehicle-year: [(reason, detail)]."""
+        out = []
+        rows = self.t_list_rows.get((T, cat)) or []
+        # B1: the year index's variant pages (the hybrid aside: the gas gate
+        # and its words cover it) that no list page of T in cat comes from
+        offered = set()
+        for ym in self.t_years.get(T, []):
+            for v in [ym.variant] + list(ym.variants or []):
+                if v and "hybrid" not in str(v).lower():
+                    offered.add(str(v).lower())
+        if len(offered) > 1 and rows:
+            read = set()
+            for lr in rows:
+                slug = (lr.list_url or "").lower()
+                read |= {v for v in offered if v == str(lr.variant or "").lower() or re.search(
+                    r"-" + re.escape(v) + r"(?:/|$)", slug)}
+            missing = sorted(offered - read)
+            if missing:
+                out.append(("held_variant_unread", {"offered": sorted(offered), "read": sorted(read),
+                                                    "unread": missing}))
+        own = [lr for lr in rows if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched
+               and not self.note_excludes(lr.notes, T)]
+        if not own:
+            return out
+        undated = not any(_row_windows(lr.notes) for lr in own)
+        lo, hi = _my_range(T[2])
+        mine_cls = [(t, p, n) for lr in own for t, p, n in _row_clauses(lr.notes, lr.site)]
+        mine = [set(t) for t, _p, _n in mine_cls]
+        tw, bm, dv = [], [], []
+        for sr in rows:
+            k2 = policy.pn_key(self.ns, sr.pn)
+            if k2 == c.key or not any(lr.list_url == sr.list_url and self._same_part(lr, sr) for lr in own):
+                continue
+            # a twin whose window overlaps T by under five months is not listed
+            # for T (production rule), but its changeover still falls inside
+            # T's span (27510-2B001 'from 04/1994' on the Altima 1994 page):
+            # B2 reads it; every other exclusion skips the row
+            prod_only = self.note_excludes(sr.notes, T) and not self.note_excludes(
+                [n for n in sr.notes or [] if not re.search(r"production\s+date", n or "", re.I)], T)
+            if self.note_excludes(sr.notes, T) and not prod_only:
+                continue
+            cls2 = _row_clauses(sr.notes, sr.site)
+            theirs = [set(t) for t, _p, _n in cls2]
+            sw = _row_windows(sr.notes)
+            # B2 (undated number): a twin listed for our configuration or a
+            # broader one that changes over inside the span, or the number's
+            # own predecessor / successor listed for it undated
+            covers = any(b <= a for a in mine for b in theirs)
+            overlap = covers or any(a <= b for a in mine for b in theirs)
+            if undated and ((covers and any(lo < a <= hi or lo <= b < hi for a, b in sw))
+                            or (overlap and not sw and self.comparable(cat, c.key, k2))):
+                tw.append(sr.pn)
+            if prod_only:
+                continue
+            # B3 (both undated): the same configuration under another leading
+            # body code only, the sibling listed for none of ours
+            if undated and not sw and not any(set(t2) == a for a in mine for t2, _p, _n in cls2):
+                for t1, _p1, _n1 in mine_cls:
+                    for t2, _p2, _n2 in cls2:
+                        if t1 and t2 and t1[1:] == t2[1:] and t1[0] != t2[0] and \
+                                not {t1[0], t2[0]} & {"KC", "CC", "T", "FED", "CAL"}:
+                            bm.append(f"{sr.pn} {t2[0]} beside {t1[0]}")
+            # B4: our row names no drive and no gate reads one; a same-part
+            # number lists a narrower configuration (or ours under another
+            # mark) with a drive word: the pages do not say this one is the
+            # other drive only
+            if not gate.get("drive") and not gate.get("drive_not") and not any(p or n for _t, p, n in mine_cls):
+                for t2, p2, n2 in cls2:
+                    if (p2 or n2) and any(a <= set(t2) for a in mine):
+                        dv.append(f"{sr.pn} {'/'.join(sorted(p2 or n2))}")
+                        break
+        if tw:
+            out.append(("held_twin_changeover", {"twins": sorted(set(tw))}))
+        if bm:
+            out.append(("held_body_mark", {"marks": sorted(set(bm))[:4]}))
+        if dv:
+            out.append(("held_drive_open", {"siblings": sorted(set(dv))[:4]}))
+        return out
 
     # ------------------------------ round8-1119: own pages only (hub 2026-11-19 after 1119h)
     def _round8_pre(self, c, cat, T, w):
@@ -5500,6 +5667,27 @@ ROUND7_WINDOW_KINDS = ROUND6_WINDOW_KINDS + ("changeover", "split")
 # "gas only" where the hybrid's pages were never read is worded "checked on
 # gas-model pages" (5). Shipped namespaces: census only (round8_census).
 ROUND8_NS = frozenset({"nissan"})
+# round9-1119 (hub 2026-11-19 after check 1119i, before nissan ships):
+#  A  the note says what the number is, from the catalog's own part name:
+#     "Motor Assy-Regulator" -> "window motor only"; a group whose names mix a
+#     motor and a regulator, name another component, or cannot be read from
+#     the raw is held (held_part_name); census <ns>.round9_names.json;
+#  B1 held_variant_unread: the year index offers variant pages (other than
+#     the hybrid one, which the gas gate covers) the raw does not hold;
+#  B2 held_twin_changeover: undated beside a same-option number that changes
+#     over inside the model year (dated edge inside the span, or the number's
+#     own predecessor / successor listed for the same configuration);
+#  B3 held_body_mark: undated beside a same-option number that differs only
+#     in an unexplained leading body code (WAG / LWB; KC / CC / T read as cabs);
+#  B4 held_drive_open: a narrower same-part number lists the configuration
+#     with a drive word, the row names none and no gate reads it;
+#  C  the label and note name the site the pages came from (Infiniti catalog).
+ROUND9_NS = frozenset({"nissan"})
+_NAME_MOTOR_RE = re.compile(r"^\s*motor\s+ass(?:y|embly)\b", re.I)
+_NAME_REG_RE = re.compile(r"^\s*regulator\s+ass(?:y|embly)\b", re.I)
+_NAME_COMPONENT_RE = re.compile(r"^\s*(glass|cover|lens|bezel|knob|cap|garnish|holder|bulb|socket|finisher|"
+                                r"housing|base|bracket|switch|cable|harness|motor)\b", re.I)
+_SITE_BRAND = {"www.nissanpartsdeal.com": "Nissan", "www.infinitipartsdeal.com": "Infiniti"}
 
 
 def _starred(cfg: str) -> bool:
@@ -6142,6 +6330,25 @@ def main(argv=None) -> int:
                 "crawl": {"pages": len(pages), "pages_by_model_year": dict(sorted(by_model.items())),
                           "list": pages},
                 "held": held8})
+        r9 = getattr(results[ns], "round9_rows", None)
+        if ns in ROUND9_NS and r9 is not None:
+            cur9 = results[ns]
+            shipped9 = {(g["cat"], tuple(g["pn"])) for g in getattr(cur9, "_likely_out", [])}
+            write_json(out / "_report" / f"{ns}.round9_held.json", {
+                "note": "round9-1119 (hub 2026-11-19 after check 1119i): held_part_name (group), "
+                        "held_variant_unread, held_twin_changeover, held_body_mark, held_drive_open (vehicle-years); "
+                        "rows are recorded where the rule held them, 'ships' says whether the group still ships.",
+                "ns": ns, "raw": cur9.src.commit or "fixtures",
+                "vehicle_years_by_reason": dict(sorted(Counter(r["reason"] for r in r9 if "t" in r).items())),
+                "groups_by_reason": {k: len({(r["cat"], tuple(r["pn"])) for r in r9 if r["reason"] == k})
+                                     for k in sorted({r["reason"] for r in r9})},
+                "held": [dict(r, ships=(r["cat"], tuple(r["pn"])) in shipped9) for r in r9]})
+            write_json(out / "_report" / f"{ns}.round9_names.json", {
+                "note": "round9-1119 A: every candidate group's catalog part names (list rows on every page and "
+                        "product records, with site:file:line), the class the rule assigned and the note's words.",
+                "ns": ns, "groups": len(cur9.round9_names),
+                "by_category_class": dict(sorted(Counter(f"{x['cat']}:{x['class']}" for x in cur9.round9_names).items())),
+                "rows": cur9.round9_names})
         r7 = getattr(results[ns], "round7_held", None)
         if r7:
             write_json(out / "_report" / f"{ns}.round7_held.json", {

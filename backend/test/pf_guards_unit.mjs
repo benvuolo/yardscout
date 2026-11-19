@@ -102,6 +102,15 @@ for (const fn of P1_FNS) {
   if (s) new vm.Script(s);
   code += (s || `function ${fn}() { return ${fn === 'pfAmRows' ? 0 : 'null'}; }`) + '\n';
 }
+// round 9 G (2026-11-19): the reader of oemGroups + oemGroups2. Absent in an
+// older app.js, whose every read is oemGroups only: that is the stub.
+const OLD_OEM_READ = 'function pfOemGroupsOf(d) { return d && Array.isArray(d.oemGroups) ? d.oemGroups : []; }';
+{
+  const s = extractFn('pfOemGroupsOf');
+  check('app.js has top-level function pfOemGroupsOf', !!s);
+  if (s) new vm.Script(s);
+  code += (s || OLD_OEM_READ) + '\n';
+}
 
 /* ---- stubs for everything else pfRunSearch touches ---------------------- */
 const prelude = `
@@ -1160,6 +1169,69 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
   check('r5 linked window: the ungated years of the same group stay plain', r.rows['1996 Nissan Stanza'] && !r.rows['1996 Nissan Stanza'].warn.includes('if equipped')
     && r.rows['1996 Nissan Altima'] && !r.rows['1996 Nissan Altima'].warn.includes('if equipped'));
   lazyPreset = null;
+}
+
+/* ==== round 9 G (2026-11-19): oemGroups2, the newer payload field ==========
+ * A namespace an older store shell cannot read correctly (nissan) ships under
+ * oemGroups2. This shell reads oemGroups then oemGroups2 (pfOemGroupsOf); an
+ * older shell reads oemGroups only: below it is this same code with
+ * pfOemGroupsOf put back to that read. Fixture: one lazy file carrying a live
+ * (toyota) group in oemGroups and a nissan group in oemGroups2, and a main
+ * file with one Verified group in each field; then the same files without
+ * oemGroups2 (today's payload), which both readers must render identically. */
+{
+  const newRead = ctx.pfOemGroupsOf;
+  const oldRead = d => (d && Array.isArray(d.oemGroups) ? d.oemGroups : []);
+  const gT = oemG();
+  const gN = oemG({ id: 'oem:nissan:side-mirrors:R:g2', ns: 'nissan', label: 'Nissan catalog', pn: ['96301-ZX00A'],
+    note: 'Nissan catalog lists #96301-ZX00A for both — fits some configurations; verify the number on the part',
+    apps: [['Nissan', 'Altima', 2009, 2011], ['Nissan', 'Maxima', 2009, 2011]] });
+  const inv = [car(1, 2010, 'Toyota', 'Avalon'), car(2, 2010, 'Nissan', 'Altima')];
+  const NSEEK = { year: 2010, make: 'Nissan', model: 'Maxima' };
+  const gTv = oemG({ id: 'oem:toyota:side-mirrors:V:m1', tier: 'verified', note: 'Toyota catalog lists #87910-06470 for every trim of both' });
+  const gNv = { ...gN, id: 'oem:nissan:side-mirrors:V:m2', tier: 'verified', note: 'Nissan catalog lists #96301-ZX00A for every trim of both' };
+  const lazySearch = async (file, seeker) => {
+    ctx.__files = { 'data/oem/side-mirrors.json': file };
+    ctx.__fetched = [];
+    lazyPreset = null;
+    run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, seeker, cat());
+    await new Promise(res => setTimeout(res, 0));
+    return parse(ctx);
+  };
+  const shell = async (read, withField2) => {
+    ctx.pfOemGroupsOf = read;
+    const file = { schemaVersion: 1, cat: 'side-mirrors', oemGroups: [gT], amGroups: [],
+      ...(withField2 ? { oemGroups2: [gN] } : {}) };
+    const out = { toyota: await lazySearch(file, SEEK), nissan: await lazySearch(file, NSEEK) };
+    lazyPreset = { 'side-mirrors': { oemGroups: [], amGroups: [] } };
+    const main = base([], { oemGroups: [gTv], ...(withField2 ? { oemGroups2: [gNv] } : {}) });
+    out.mainT = run(main, inv, SEEK, cat());
+    out.mainN = run(main, inv, NSEEK, cat());
+    lazyPreset = null;
+    return out;
+  };
+  const nw = await shell(newRead, true);
+  const od = await shell(oldRead, true);
+  const nw0 = await shell(newRead, false);
+  const od0 = await shell(oldRead, false);
+  ctx.pfOemGroupsOf = newRead;
+  check('r9 G: this shell lists the oemGroups2 (nissan) donor from a lazy file',
+    !!nw.nissan.rows['2010 Nissan Altima'] && nw.nissan.rows['2010 Nissan Altima'].src.includes('Nissan factory parts catalog #96301-ZX00A'),
+    JSON.stringify(nw.nissan.rows));
+  check('r9 G: this shell still lists the oemGroups (toyota) donor', !!nw.toyota.rows['2010 Toyota Avalon']);
+  check('r9 G: an older shell (oemGroups only) lists no nissan donor from the same lazy file',
+    !od.nissan.rows['2010 Nissan Altima'] && !od.nissan.html.includes('Nissan catalog'), JSON.stringify(od.nissan.rows));
+  check('r9 G: an older shell shows the toyota rows exactly as this shell does', od.toyota.html === nw.toyota.html);
+  check('r9 G: main file: this shell reads the oemGroups2 Verified group, an older shell does not',
+    !!nw.mainN.rows['2010 Nissan Altima'] && !od.mainN.rows['2010 Nissan Altima'] && od.mainT.html === nw.mainT.html,
+    JSON.stringify([Object.keys(nw.mainN.rows), Object.keys(od.mainN.rows)]));
+  check('r9 G: with no oemGroups2 in the payload this shell renders byte-identically to the old read (lazy and main file)',
+    ['toyota', 'nissan', 'mainT', 'mainN'].every(k => nw0[k].html === od0[k].html && nw0[k].status === od0[k].status)
+    && !!nw0.toyota.rows['2010 Toyota Avalon'] && !nw0.nissan.rows['2010 Nissan Altima']);
+  check('r9 G: pfOemGroupsOf reads oemGroups then oemGroups2, and a file without oemGroups2 as before',
+    JSON.stringify(newRead({ oemGroups: [1], oemGroups2: [2] })) === '[1,2]'
+    && JSON.stringify(newRead({ oemGroups: [1] })) === '[1]' && JSON.stringify(newRead(null)) === '[]'
+    && JSON.stringify(newRead({ oemGroups: 'x', oemGroups2: [2] })) === '[2]');
 }
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');

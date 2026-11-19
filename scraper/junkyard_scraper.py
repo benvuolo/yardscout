@@ -15316,7 +15316,9 @@ def _oem_entries(ns: str, doc: dict) -> tuple[list, list]:
     groups, vg = [], []
     for g in list(doc.get("groups") or []) + list(doc.get("likely") or []):
         groups.append({"id": g["id"], "ns": ns, "cat": g["cat"], "tier": g["tier"],
-                       "label": f"{brand} catalog", "note": g["note"],
+                       # round9-1119: a group names the site its pages came from
+                       # ("Infiniti catalog"); a namespace's brand otherwise
+                       "label": g.get("label") or f"{brand} catalog", "note": g["note"],
                        "apps": _oem_gated_apps(g["apps"], g.get("gates")),
                        "pn": g["pn"], "src": "oem", **({"cars": g["cars"]} if g.get("cars") else {})})
     for g in doc.get("vg") or []:
@@ -15447,8 +15449,10 @@ def _attach_oem_layer_inner(payload: dict, before: dict, lazy_out: dict | None =
         # Verified groups and oemVg stay in the main file.
         lazy_out["oem"] = [g for g in payload["oemGroups"] if g["tier"] != "verified"]
         payload["oemGroups"] = [g for g in payload["oemGroups"] if g["tier"] == "verified"]
+        _oem_split_new_field(payload)
         lazy_out["budget"] = (V, vg_ns)     # V11 runs on the main file once the index is in
         return
+    _oem_split_new_field(payload)
     _oem_fit_budget(payload, V, vg_ns)
 
 
@@ -15651,7 +15655,16 @@ def _lazy_trim(doc: dict, budget: int) -> tuple[list, int]:
     if len(dumps(doc)) + 1 <= budget:
         return [], 0
     V = _oem_validator()
-    dropped = V.size_trim(doc, budget - 1) if doc.get("oemGroups") else []
+    dropped = []
+    if doc.get(OEM_NEW_FIELD):
+        view = {"oemGroups": doc[OEM_NEW_FIELD]}
+        over = len(dumps(doc)) + 1 - budget
+        dropped += V.size_trim(view, max(0, len(dumps(view)) - over))
+        doc[OEM_NEW_FIELD] = view["oemGroups"]
+        if not doc[OEM_NEW_FIELD]:
+            doc.pop(OEM_NEW_FIELD)
+    if len(dumps(doc)) + 1 > budget and doc.get("oemGroups"):
+        dropped += V.size_trim(doc, budget - 1)
     n_am = 0
     if len(dumps(doc)) + 1 > budget and doc.get("amGroups"):
         doc["amGroups"].sort(key=lambda g: (-len(g["apps"]), g["id"]))
@@ -15721,6 +15734,28 @@ GROUP_HOLD_CATS = frozenset({
     "wiper-motor"})
 
 
+# Namespaces whose OEM groups ship in the newer payload field only (hub,
+# round 9 G, 2026-11-19). Store apps bundle the shell and read new payloads
+# with their own older code: an app older than gates-1118 ignores every gate,
+# later shells miss newer keys and wordings. A namespace (or gate key) that an
+# older shell cannot read correctly ships under oemGroups2, which only shells
+# from this release on read (docs/app.js pfOemGroupsOf: oemGroups then
+# oemGroups2); older shells read oemGroups only and show none of it, exactly
+# as before it shipped. The live namespaces stay in oemGroups, byte-identical.
+OEM_NEW_FIELD_NS: frozenset = frozenset({"nissan"})
+OEM_NEW_FIELD = "oemGroups2"
+
+
+def _oem_split_new_field(payload: dict) -> None:
+    """Move the new-field namespaces' groups out of payload["oemGroups"] into
+    payload[OEM_NEW_FIELD] (the key is written only when it holds a group)."""
+    groups = payload.get("oemGroups") or []
+    new = [g for g in groups if g.get("ns") in OEM_NEW_FIELD_NS]
+    if new:
+        payload["oemGroups"] = [g for g in groups if g.get("ns") not in OEM_NEW_FIELD_NS]
+        payload[OEM_NEW_FIELD] = new
+
+
 def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
     """Group the lazy entries by category into lazy_out["files"] ({cat:
     doc}), index them in payload["oemLazy"], then run V11 on the main file.
@@ -15736,7 +15771,8 @@ def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
             if _oem_held(g["cat"], g.get("ns")):
                 held += 1
                 continue
-            by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["oemGroups"].append(g)
+            key = OEM_NEW_FIELD if g.get("ns") in OEM_NEW_FIELD_NS else "oemGroups"
+            by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []}).setdefault(key, []).append(g)
         for g in am["groups"]:
             if _am_held(g["cat"], (am.get("site_of") or {}).get(g["id"], "")):
                 held += 1
@@ -15750,6 +15786,8 @@ def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
         for cat in sorted(by_cat):
             doc = {"schemaVersion": OEM_LAZY_SCHEMA, "builtAt": payload["builtAt"], "cat": cat,
                    "oemGroups": by_cat[cat]["oemGroups"], "amGroups": by_cat[cat]["amGroups"]}
+            if by_cat[cat].get(OEM_NEW_FIELD):
+                doc[OEM_NEW_FIELD] = by_cat[cat][OEM_NEW_FIELD]
             dropped, n_am = _lazy_trim(doc, V.policy.PAYLOAD_BYTE_BUDGET)
             for gid in dropped:
                 ns = gid.split(":")[1] if gid.startswith("oem:") else "_unknown"
@@ -15760,10 +15798,11 @@ def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
                 for site in list(payload.get("amStatus") or {}):
                     if payload["amStatus"][site].startswith("ok"):
                         payload["amStatus"][site] += f"; {n_am} dropped for size ({cat} file)"
-            if not doc["oemGroups"] and not doc["amGroups"]:
+            if not doc["oemGroups"] and not doc["amGroups"] and not doc.get(OEM_NEW_FIELD):
                 continue
             files[cat] = doc
-            index[cat] = {"oem": len(doc["oemGroups"]), "am": len(doc["amGroups"])}
+            index[cat] = {"oem": len(doc["oemGroups"]), "am": len(doc["amGroups"]),
+                          **({"oem2": len(doc[OEM_NEW_FIELD])} if doc.get(OEM_NEW_FIELD) else {})}
         lazy_out["files"] = files
         if index:
             payload["oemLazy"] = {"schema": OEM_LAZY_SCHEMA, "path": f"data/{OEM_LAZY_DIR}/", "cats": index}

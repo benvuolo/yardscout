@@ -1,0 +1,233 @@
+nissan REMOVED LIVE ('climate-control', ('27510-2B000',)) [['Nissan', 'Altima', 1994, 1994], ['Nissan', 'Stanza', 1994, 1994]]
+nissan REMOVED LIVE ('climate-control', ('27510-2B001',)) [['Nissan', 'Altima', 1996, 1997], ['Nissan', 'Stanza', 1996, 1997]]
+nissan REMOVED LIVE ('gauge-cluster', ('24820-3ZD1C',)) [['Infiniti', 'QX56', 2013, 2013], ['Infiniti', 'QX80', 2014, 2014]]
+nissan REMOVED LIVE ('gauge-cluster', ('24820-89Y00',)) [['Nissan', '200SX', 1995, 1996], ['Nissan', 'Sentra', 1995, 1999]]
+nissan REMOVED LIVE ('gauge-cluster', ('24820-8B703',)) [['Nissan', '200SX', 1999, 1999], ['Nissan', 'Sentra', 1999, 1999]]
+nissan CHANGED LIVE ('side-mirrors', ('96301-1BA1D',)) [['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2014]] lost [('Infiniti', 'QX50', 2015), ('Infiniti', 'QX50', 2016)] gained []
+    old: Nissan catalog lists #96301-1BA1D for both — option: fits some option packages; verify the number on the part
+    new: Infiniti catalog lists #96301-1BA1D for both — option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('side-mirrors', ('96301-1CA1A',)) [['Infiniti', 'FX35', 2010, 2010], ['Infiniti', 'QX70', 2016, 2017]] lost [] gained []
+    old: Nissan catalog lists #96301-1CA1A for both — option: fits some option packages; verify the number on the part
+    new: Infiniti catalog lists #96301-1CA1A for both — option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('side-mirrors', ('96301-EV50A',)) [['Infiniti', 'M35', 2008, 2010], ['Infiniti', 'M45', 2009, 2010]] lost [] gained []
+    old: Nissan catalog lists #96301-EV50A for both — fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part
+    new: Infiniti catalog lists #96301-EV50A for both — fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part
+nissan CHANGED LIVE ('side-mirrors', ('96302-1BA1D',)) [['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2014]] lost [('Infiniti', 'QX50', 2015), ('Infiniti', 'QX50', 2016)] gained []
+    old: Nissan catalog lists #96302-1BA1D for both — option: fits some option packages; verify the number on the part
+    new: Infiniti catalog lists #96302-1BA1D for both — option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('side-mirrors', ('96302-1CA1A',)) [['Infiniti', 'FX35', 2010, 2010], ['Infiniti', 'QX70', 2016, 2017]] lost [] gained []
+    old: Nissan catalog lists #96302-1CA1A for both — option: fits some option packages; verify the number on the part
+    new: Infiniti catalog lists #96302-1CA1A for both — option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('side-mirrors', ('96302-EV50A',)) [['Infiniti', 'M35', 2008, 2010], ['Infiniti', 'M45', 2009, 2010]] lost [] gained []
+    old: Nissan catalog lists #96302-EV50A for both — fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part
+    new: Infiniti catalog lists #96302-EV50A for both — fits some configurations; M35 2008: built from 01/2008 only; verify the number on the part
+nissan CHANGED LIVE ('side-mirrors', ('J6301-1E400',)) [['Nissan', 'Altima', 1993, 1994], ['Nissan', 'Stanza', 1993, 1994]] lost [('Nissan', 'Altima', 1996), ('Nissan', 'Stanza', 1995), ('Nissan', 'Stanza', 1996)] gained []
+nissan CHANGED LIVE ('side-mirrors', ('J6301-2B500',)) [['Nissan', 'Altima', 1997, 1997], ['Nissan', 'Stanza', 1997, 1997]] lost [('Nissan', 'Altima', 1996), ('Nissan', 'Stanza', 1995), ('Nissan', 'Stanza', 1996)] gained []
+nissan CHANGED LIVE ('side-mirrors', ('J6302-1E400',)) [['Nissan', 'Altima', 1993, 1994], ['Nissan', 'Stanza', 1993, 1994]] lost [('Nissan', 'Altima', 1996), ('Nissan', 'Stanza', 1995), ('Nissan', 'Stanza', 1996)] gained []
+nissan CHANGED LIVE ('side-mirrors', ('J6302-2B500',)) [['Nissan', 'Altima', 1997, 1997], ['Nissan', 'Stanza', 1997, 1997]] lost [('Nissan', 'Altima', 1996), ('Nissan', 'Stanza', 1995), ('Nissan', 'Stanza', 1996)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80700-0E710',)) [['Nissan', 'Altima', 1993, 1993], ['Nissan', 'Stanza', 1993, 1993]] lost [('Nissan', 'Altima', 1994), ('Nissan', 'Stanza', 1994)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80701-0E710',)) [['Nissan', 'Altima', 1993, 1993], ['Nissan', 'Stanza', 1993, 1993]] lost [('Nissan', 'Altima', 1994), ('Nissan', 'Stanza', 1994)] gained []
+nissan CHANGED LIVE ('window-regulator', ('80720-1BA0B',)) [['Infiniti', 'EX35', 2010, 2010], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #80720-1BA0B for both — fits some configurations; EX35: built 08/2009-07/2012 only; verify the number on the part
+    new: Infiniti catalog lists #80720-1BA0B for both — fits some configurations; EX35: built 08/2009-07/2012 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-1CA0A',)) [['Infiniti', 'FX35', 2009, 2009], ['Infiniti', 'FX50', 2009, 2009]] lost [] gained []
+    old: Nissan catalog lists #80720-1CA0A for both — fits some configurations; built 03/2008-04/2009 only; verify the number on the part
+    new: Infiniti catalog lists #80720-1CA0A for both — fits some configurations; built 03/2008-04/2009 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-1CA0B',)) [['Infiniti', 'FX35', 2010, 2010], ['Infiniti', 'FX35', 2012, 2012], ['Infiniti', 'FX37', 2013, 2013], ['Infiniti', 'FX50', 2010, 2012], ['Infiniti', 'QX70', 2015, 2015]] lost [] gained []
+    old: Nissan catalog lists #80720-1CA0B for both — fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part
+    new: Infiniti catalog lists #80720-1CA0B for both — fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013]] lost [] gained []
+    old: Nissan catalog lists #80720-1MA0A for both — option: fits some option packages; verify the number on the part
+    new: Infiniti catalog lists #80720-1MA0A for both — option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-1MA0B',)) [['Infiniti', 'Q70', 2016, 2017], ['Infiniti', 'Q70L', 2016, 2016]] lost [] gained []
+    old: Nissan catalog lists #80720-1MA0B for both — option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #80720-1MA0B for both — option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-2Y000',)) [['Infiniti', 'I30', 2001, 2001], ['Infiniti', 'I35', 2002, 2004]] lost [] gained []
+    old: Nissan catalog lists #80720-2Y000 for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #80720-2Y000 for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-3JA0A',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2015, 2019]] lost [] gained []
+    old: Nissan catalog lists #80720-3JA0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #80720-3JA0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-AR000',)) [['Infiniti', 'FX35', 2004, 2004], ['Infiniti', 'Q45', 2002, 2005]] lost [] gained []
+    old: Nissan catalog lists #80720-AR000 for both — fits some configurations; FX35: built 11/2002-07/2004 only; verify the number on the part
+    new: Infiniti catalog lists #80720-AR000 for both — fits some configurations; FX35: built 11/2002-07/2004 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-CL00A',)) [['Infiniti', 'FX35', 2005, 2006], ['Infiniti', 'FX45', 2005, 2006]] lost [] gained []
+    old: Nissan catalog lists #80720-CL00A for both — fits some configurations; built 07/2004-06/2006 only; verify the number on the part
+    new: Infiniti catalog lists #80720-CL00A for both — fits some configurations; built 07/2004-06/2006 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-CL70B',)) [['Infiniti', 'FX35', 2007, 2008], ['Infiniti', 'FX45', 2008, 2008]] lost [] gained []
+    old: Nissan catalog lists #80720-CL70B for both — fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part
+    new: Infiniti catalog lists #80720-CL70B for both — fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-EH100',)) [['Infiniti', 'M35', 2008, 2008], ['Infiniti', 'M45', 2008, 2008]] lost [] gained []
+    old: Nissan catalog lists #80720-EH100 for both — fits some configurations; built 12/2004-06/2008 only; verify the number on the part
+    new: Infiniti catalog lists #80720-EH100 for both — fits some configurations; built 12/2004-06/2008 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-EH10A',)) [['Infiniti', 'M35', 2009, 2009], ['Infiniti', 'M45', 2009, 2009]] lost [] gained []
+    old: Nissan catalog lists #80720-EH10A for both — fits some configurations; built 06/2008-03/2009 only; verify the number on the part
+    new: Infiniti catalog lists #80720-EH10A for both — fits some configurations; built 06/2008-03/2009 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80720-JK00A',)) [['Infiniti', 'G25', 2011, 2012], ['Infiniti', 'Q40', 2015, 2015]] lost [] gained []
+    old: Nissan catalog lists #80720-JK00A for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #80720-JK00A for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-1BA0B',)) [['Infiniti', 'EX35', 2010, 2010], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #80721-1BA0B for both — fits some configurations; EX35: built 08/2009-07/2012 only; verify the number on the part
+    new: Infiniti catalog lists #80721-1BA0B for both — fits some configurations; EX35: built 08/2009-07/2012 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-1CA0A',)) [['Infiniti', 'FX35', 2009, 2009], ['Infiniti', 'FX50', 2009, 2009]] lost [] gained []
+    old: Nissan catalog lists #80721-1CA0A for both — fits some configurations; built 03/2008-04/2009 only; verify the number on the part
+    new: Infiniti catalog lists #80721-1CA0A for both — fits some configurations; built 03/2008-04/2009 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-1CA0B',)) [['Infiniti', 'FX35', 2010, 2010], ['Infiniti', 'FX35', 2012, 2012], ['Infiniti', 'FX37', 2013, 2013], ['Infiniti', 'FX50', 2010, 2012], ['Infiniti', 'QX70', 2015, 2015]] lost [] gained []
+    old: Nissan catalog lists #80721-1CA0B for both — fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part
+    new: Infiniti catalog lists #80721-1CA0B for both — fits some configurations; QX70: built 06/2012-03/2015 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013]] lost [] gained []
+    old: Nissan catalog lists #80721-1MA0A for both — option: fits some option packages; verify the number on the part
+    new: Infiniti catalog lists #80721-1MA0A for both — option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-1MA0B',)) [['Infiniti', 'Q70', 2016, 2017], ['Infiniti', 'Q70L', 2016, 2016]] lost [] gained []
+    old: Nissan catalog lists #80721-1MA0B for both — option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #80721-1MA0B for both — option: fits some option packages; Q70: checked on gas-model pages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-3JA0A',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2015, 2019]] lost [] gained []
+    old: Nissan catalog lists #80721-3JA0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #80721-3JA0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-AR000',)) [['Infiniti', 'FX35', 2004, 2004], ['Infiniti', 'FX45', 2004, 2004], ['Infiniti', 'Q45', 2002, 2005]] lost [] gained []
+    old: Nissan catalog lists #80721-AR000 for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #80721-AR000 for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-CL00A',)) [['Infiniti', 'FX35', 2005, 2006], ['Infiniti', 'FX45', 2006, 2006]] lost [] gained []
+    old: Nissan catalog lists #80721-CL00A for both — fits some configurations; built 09/2004-06/2006 only; verify the number on the part
+    new: Infiniti catalog lists #80721-CL00A for both — fits some configurations; built 09/2004-06/2006 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-CL70B',)) [['Infiniti', 'FX35', 2007, 2008], ['Infiniti', 'FX45', 2008, 2008]] lost [] gained []
+    old: Nissan catalog lists #80721-CL70B for both — fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part
+    new: Infiniti catalog lists #80721-CL70B for both — fits some configurations; FX35 2007: built from 06/2006 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-EH100',)) [['Infiniti', 'M35', 2008, 2008], ['Infiniti', 'M45', 2008, 2008]] lost [] gained []
+    old: Nissan catalog lists #80721-EH100 for both — fits some configurations; built 12/2004-06/2008 only; verify the number on the part
+    new: Infiniti catalog lists #80721-EH100 for both — fits some configurations; built 12/2004-06/2008 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-EH10A',)) [['Infiniti', 'M35', 2009, 2009], ['Infiniti', 'M45', 2009, 2009]] lost [] gained []
+    old: Nissan catalog lists #80721-EH10A for both — fits some configurations; built 06/2008-03/2009 only; verify the number on the part
+    new: Infiniti catalog lists #80721-EH10A for both — fits some configurations; built 06/2008-03/2009 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80721-JK00A',)) [['Infiniti', 'G25', 2011, 2012], ['Infiniti', 'Q40', 2015, 2015]] lost [] gained []
+    old: Nissan catalog lists #80721-JK00A for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #80721-JK00A for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80730-1E400',)) [['Nissan', 'Altima', 1993, 1994], ['Nissan', 'Altima', 1996, 1997], ['Nissan', 'Stanza', 1993, 1997]] lost [] gained []
+    old: Nissan catalog lists #80730-1E400 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80730-1E400 for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80730-1LE0A',)) [['Infiniti', 'QX56', 2011, 2013], ['Infiniti', 'QX80', 2014, 2014]] lost [] gained []
+    old: Nissan catalog lists #80730-1LE0A for both — fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part
+    new: Infiniti catalog lists #80730-1LE0A for both — window motor only; fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80730-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'Q70', 2014, 2014], ['Infiniti', 'Q70', 2019, 2019], ['Infiniti', 'Q70L', 2015, 2016], ['Infiniti', 'Q70L', 2018, 2019]] lost [('Infiniti', 'Q70', 2015), ('Infiniti', 'Q70', 2016), ('Infiniti', 'Q70', 2017), ('Infiniti', 'Q70', 2018)] gained []
+    old: Nissan catalog lists #80730-1MA0A for both — fits some configurations; Q70 2014-2018: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #80730-1MA0A for both — window motor only; fits some configurations; Q70 2014: checked on gas-model pages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80730-2Y000',)) [['Infiniti', 'I30', 2001, 2001], ['Infiniti', 'I35', 2002, 2003]] lost [] gained []
+    old: Nissan catalog lists #80730-2Y000 for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #80730-2Y000 for both — window motor only; fits some configurations; verify the number on the part
+nissan REMOVED LIVE ('window-regulator', ('80730-4BA1A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2017, 2017]]
+nissan CHANGED LIVE ('window-regulator', ('80730-7B400',)) [['Nissan', 'Frontier', 2001, 2004], ['Nissan', 'Xterra', 2000, 2000]] lost [] gained []
+    old: Nissan catalog lists #80730-7B400 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80730-7B400 for both — window motor only; option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80730-AL501',)) [['Infiniti', 'FX35', 2003, 2008], ['Infiniti', 'FX45', 2003, 2008]] lost [] gained []
+    old: Nissan catalog lists #80730-AL501 for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #80730-AL501 for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80730-EA005',)) [['Nissan', 'Frontier', 2005, 2019], ['Nissan', 'Xterra', 2005, 2009], ['Nissan', 'Xterra', 2011, 2015]] lost [] gained []
+    old: Nissan catalog lists #80730-EA005 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80730-EA005 for both — window motor only; option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80731-1E400',)) [['Nissan', 'Altima', 1993, 1994], ['Nissan', 'Altima', 1996, 1997], ['Nissan', 'Stanza', 1993, 1997]] lost [] gained []
+    old: Nissan catalog lists #80731-1E400 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80731-1E400 for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80731-1LE0A',)) [['Infiniti', 'QX56', 2011, 2013], ['Infiniti', 'QX80', 2014, 2014]] lost [] gained []
+    old: Nissan catalog lists #80731-1LE0A for both — fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part
+    new: Infiniti catalog lists #80731-1LE0A for both — window motor only; fits some configurations; QX80: built 04/2010-07/2014 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80731-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'Q70', 2014, 2014], ['Infiniti', 'Q70', 2019, 2019], ['Infiniti', 'Q70L', 2015, 2016], ['Infiniti', 'Q70L', 2018, 2019]] lost [('Infiniti', 'Q70', 2015), ('Infiniti', 'Q70', 2016), ('Infiniti', 'Q70', 2017), ('Infiniti', 'Q70', 2018)] gained []
+    old: Nissan catalog lists #80731-1MA0A for both — fits some configurations; Q70 2014-2018: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #80731-1MA0A for both — window motor only; fits some configurations; Q70 2014: checked on gas-model pages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80731-7B400',)) [['Nissan', 'Frontier', 2001, 2004], ['Nissan', 'Xterra', 2000, 2000]] lost [] gained []
+    old: Nissan catalog lists #80731-7B400 for both — option: fits some option packages; verify the number on the part
+    new: Nissan catalog lists #80731-7B400 for both — window motor only; option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80731-AL511',)) [['Infiniti', 'FX35', 2003, 2008], ['Infiniti', 'FX45', 2003, 2008]] lost [] gained []
+    old: Nissan catalog lists #80731-AL511 for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #80731-AL511 for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80731-EA005',)) [['Nissan', 'Frontier', 2005, 2019], ['Nissan', 'Xterra', 2005, 2009], ['Nissan', 'Xterra', 2011, 2015]] lost [] gained []
+    old: Nissan catalog lists #80731-EA005 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80731-EA005 for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('80731-JX30C',)) [['Nissan', 'Cube', 2012, 2014], ['Nissan', 'Juke', 2012, 2014], ['Nissan', 'Leaf', 2012, 2012]] lost [] gained []
+    old: Nissan catalog lists #80731-JX30C for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #80731-JX30C for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82720-1BA0A',)) [['Infiniti', 'EX35', 2009, 2012], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #82720-1BA0A for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82720-1BA0A for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82720-1LA0A',)) [['Infiniti', 'QX56', 2011, 2013], ['Infiniti', 'QX80', 2014, 2019]] lost [] gained []
+    old: Nissan catalog lists #82720-1LA0A for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82720-1LA0A for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82720-JK000',)) [['Infiniti', 'G25', 2011, 2012], ['Infiniti', 'G35', 2008, 2008], ['Infiniti', 'Q40', 2015, 2015]] lost [] gained []
+    old: Nissan catalog lists #82720-JK000 for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82720-JK000 for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82721-1BA0A',)) [['Infiniti', 'EX35', 2009, 2012], ['Infiniti', 'EX37', 2013, 2013], ['Infiniti', 'QX50', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #82721-1BA0A for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82721-1BA0A for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82721-1LA0A',)) [['Infiniti', 'QX56', 2011, 2013], ['Infiniti', 'QX80', 2014, 2019]] lost [] gained []
+    old: Nissan catalog lists #82721-1LA0A for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82721-1LA0A for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82721-JK000',)) [['Infiniti', 'G25', 2011, 2012], ['Infiniti', 'G35', 2008, 2008], ['Infiniti', 'Q40', 2015, 2015]] lost [] gained []
+    old: Nissan catalog lists #82721-JK000 for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82721-JK000 for both — fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82730-1E400',)) [['Nissan', 'Altima', 1993, 1993], ['Nissan', 'Stanza', 1993, 1993]] lost [] gained []
+    old: Nissan catalog lists #82730-1E400 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #82730-1E400 for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82730-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'QX56', 2011, 2013], ['Infiniti', 'QX80', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #82730-1MA0A for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82730-1MA0A for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82730-1MA0B',)) [['Infiniti', 'Q70', 2018, 2018], ['Infiniti', 'Q70L', 2018, 2018], ['Infiniti', 'QX80', 2019, 2019]] lost [] gained []
+    old: Nissan catalog lists #82730-1MA0B for both — fits some configurations; Q70: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #82730-1MA0B for both — window motor only; fits some configurations; Q70: checked on gas-model pages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82730-3KG0A',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2018, 2019]] lost [('Infiniti', 'QX60', 2015), ('Infiniti', 'QX60', 2016), ('Infiniti', 'QX60', 2017)] gained []
+    old: Nissan catalog lists #82730-3KG0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #82730-3KG0A for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82730-3TA2A',)) [['Nissan', 'Altima', 2014, 2018], ['Nissan', 'Maxima', 2016, 2019], ['Nissan', 'Sentra', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #82730-3TA2A for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #82730-3TA2A for both — window motor only; fits some configurations; verify the number on the part
+nissan REMOVED LIVE ('window-regulator', ('82730-4BA0A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2017, 2017]]
+nissan CHANGED LIVE ('window-regulator', ('82730-CV01B',)) [['Nissan', 'Cube', 2011, 2014], ['Nissan', 'Leaf', 2011, 2012]] lost [('Nissan', 'Juke', 2016)] gained []
+    old: Nissan catalog lists #82730-CV01B for both — option: fits some option packages; Juke: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part
+    new: Nissan catalog lists #82730-CV01B for both — window motor only; option: fits some option packages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82730-D9000',)) [['Nissan', 'Altima', 1994, 1994], ['Nissan', 'Altima', 1996, 1997], ['Nissan', 'Stanza', 1995, 1997]] lost [] gained []
+    old: Nissan catalog lists #82730-D9000 for both — fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part
+    new: Nissan catalog lists #82730-D9000 for both — window motor only; fits some configurations; Altima 1994: built from 08/1993 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82730-EH100',)) [['Infiniti', 'M35', 2007, 2010], ['Infiniti', 'M45', 2006, 2010]] lost [] gained []
+    old: Nissan catalog lists #82730-EH100 for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82730-EH100 for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82731-1E400',)) [['Nissan', 'Altima', 1993, 1993], ['Nissan', 'Stanza', 1993, 1993]] lost [] gained []
+    old: Nissan catalog lists #82731-1E400 for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #82731-1E400 for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82731-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'QX56', 2011, 2013], ['Infiniti', 'QX80', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #82731-1MA0A for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82731-1MA0A for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82731-1MA0B',)) [['Infiniti', 'Q70', 2018, 2018], ['Infiniti', 'Q70L', 2018, 2018], ['Infiniti', 'QX80', 2019, 2019]] lost [] gained []
+    old: Nissan catalog lists #82731-1MA0B for both — fits some configurations; Q70: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #82731-1MA0B for both — window motor only; fits some configurations; Q70: checked on gas-model pages; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82731-3KG0A',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2018, 2019]] lost [('Infiniti', 'QX60', 2015), ('Infiniti', 'QX60', 2016), ('Infiniti', 'QX60', 2017)] gained []
+    old: Nissan catalog lists #82731-3KG0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part
+    new: Infiniti catalog lists #82731-3KG0A for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82731-3TA2A',)) [['Nissan', 'Altima', 2014, 2018], ['Nissan', 'Maxima', 2016, 2019], ['Nissan', 'Sentra', 2014, 2017]] lost [] gained []
+    old: Nissan catalog lists #82731-3TA2A for both — fits some configurations; verify the number on the part
+    new: Nissan catalog lists #82731-3TA2A for both — window motor only; fits some configurations; verify the number on the part
+nissan REMOVED LIVE ('window-regulator', ('82731-4BA0A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2017, 2017]]
+nissan CHANGED LIVE ('window-regulator', ('82731-CV01B',)) [['Nissan', 'Cube', 2011, 2014], ['Nissan', 'Leaf', 2011, 2012]] lost [('Nissan', 'Juke', 2016)] gained []
+    old: Nissan catalog lists #82731-CV01B for both — fits some configurations; Juke: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part
+    new: Nissan catalog lists #82731-CV01B for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82731-D9000',)) [['Nissan', 'Altima', 1994, 1994], ['Nissan', 'Stanza', 1995, 1995]] lost [] gained []
+    old: Nissan catalog lists #82731-D9000 for both — fits some configurations; Altima: built 08/1993-02/1996 only; verify the number on the part
+    new: Nissan catalog lists #82731-D9000 for both — window motor only; fits some configurations; Altima: built 08/1993-02/1996 only; verify the number on the part
+nissan CHANGED LIVE ('window-regulator', ('82731-EH100',)) [['Infiniti', 'M35', 2007, 2010], ['Infiniti', 'M45', 2006, 2010]] lost [] gained []
+    old: Nissan catalog lists #82731-EH100 for both — fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #82731-EH100 for both — window motor only; fits some configurations; verify the number on the part
+nissan CHANGED HELD ('wiper-motor', ('28710-1BA0A',)) [['Infiniti', 'EX35', 2008, 2008], ['Infiniti', 'FX35', 2011, 2011], ['Infiniti', 'QX50', 2017, 2017]] lost [] gained []
+    old: Nissan catalog lists #28710-1BA0A for both — rear wiper motor; fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #28710-1BA0A for both — rear wiper motor; fits some configurations; verify the number on the part
+nissan CHANGED HELD ('wiper-motor', ('28800-1LA0A',)) [['Infiniti', 'QX56', 2012, 2012], ['Infiniti', 'QX80', 2014, 2014]] lost [] gained []
+    old: Nissan catalog lists #28800-1LA0A for both — windshield wiper motor with linkage; fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #28800-1LA0A for both — windshield wiper motor with linkage; fits some configurations; verify the number on the part
+nissan CHANGED HELD ('wiper-motor', ('28815-CG000',)) [['Infiniti', 'FX35', 2005, 2005], ['Infiniti', 'FX45', 2004, 2004], ['Infiniti', 'FX45', 2006, 2007]] lost [] gained []
+    old: Nissan catalog lists #28815-CG000 for both — windshield wiper motor; fits some configurations; verify the number on the part
+    new: Infiniti catalog lists #28815-CG000 for both — windshield wiper motor; fits some configurations; verify the number on the part
+# gm LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# mopar LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# toyota LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# ford LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# hmg LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# subaru LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# vag LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# mb LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# nissan LIVE: removed 8 groups, added 0 groups, changed 73; app-years lost 36, gained 0; gates narrowed 0, widened 0; added claims 0
