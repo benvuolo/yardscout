@@ -3350,3 +3350,21 @@ number is written here.
   removed from Gmail, texts in `ops/yard-outreach-drafts.md`, rule in
   CLAUDE.md. Remaining draft: Budget U-Pull-It follow-up (has its
   recipient). Web search found no address confirmed by either company.
+
+## 2026-11-19 18:25 UTC owner: "lets just push 1.13.3 accross the board dont wait for apple to approve the first iteration"
+
+Owner, about 18:24 UTC. Explicit ship for 1.13.3 on both stores, and on
+iPhone straight into review: `release-ios.yml` with `submit=true`, whose
+submit step withdraws what is in the queue (1.13.1 build 42, waiting since
+11-18 15:03) and submits the new build. This is the "swap" the hub had not
+read into the 15:55 message; now it is said. 1.13.2 build 43 is never
+submitted.
+- Hub's timing: build once `hub/rc5-1119` (nissan, sw `jh-v220`) has
+  passed its full regression and is on main, about 19:15 UTC, so one
+  release carries the reader for the newer payload field. Apple's review
+  takes far longer than the wait. If rc5 fails, 1.13.3 is built from main
+  as it stands (jh-v219) and nissan follows in a later release.
+- Correction to the 18:21 note: the API Worker did deploy. A push to main
+  that touches `backend/` starts "Deploy Workers" by itself (run on
+  e166f63c, success 18:22:24), so the ops-email line is live and the
+  refused manual dispatch was never needed.
