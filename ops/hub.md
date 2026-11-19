@@ -3412,3 +3412,32 @@ check-in (`trig_01KrXdPRjWH6DnaHYspZKvsS`) now reads: check 1.13.3 build
 (`interchange/round10-1119`): "window motor only" on the mopar 21 and
 subaru 8 live groups, a measure of component-named numbers in the other
 categories, live claims may only say less (task 83).
+
+## 2026-11-19 20:04 UTC round 10 (mopar, subaru "window motor only"): independent check FAILED (1 WRONG); sent back; nothing merged
+
+- Builder's round 10 (`interchange/round10-1119` head 4e0bac45): 21 mopar
+  and 8 subaru window-regulator notes gain "window motor only"; cause as
+  on nissan (a motor name with "Regulator" in its head read as a
+  regulator). Hub's own check passed: the other seven groups files
+  identical; in mopar and subaru only those 29 notes differ, each the old
+  note with the phrase inserted; payload: 29 note-only differences in
+  `window-regulator.json`.
+- **Independent check** (fresh agent, blind, all 54 mopar and 17 subaru
+  window-regulator groups; branch `interchange/verify-round10-names-1119`
+  head a02ca918): mopar 51 RIGHT / 1 WRONG / 2 RISK, subaru 17 RIGHT.
+  WRONG: mopar 68079283AB: name, aux and alias say motor, the same
+  record's description says "Window Regulator, Front Driver Side"; names
+  disagree in kind and the new note asserts motor. The builder's reading
+  took the name and aux fields only. RISK: 68037296AA / 68037297AA (listed
+  once as "Regulator" and once as "Motor" on each page).
+- Hub's decision: 0 WRONG is the bar, so round 10 is not merged. Round
+  10b: the reading takes every naming field (name, aux, description,
+  aliases) on mopar, subaru and nissan (live since 19:17 with the narrower
+  reading); a number whose names disagree in kind gets no phrase and is
+  held; a new independent check before anything ships.
+- Measured, not changed (builder, all live makes): numbers named as a
+  component under a category that names the assembly, with no word saying
+  so: toyota bumper-front 26 of 26 and bumper-rear 15 of 15 ("Cover,
+  Front/Rear Bumper"), toyota tail-lights 16 of 24 ("Lens & Body"), mopar
+  bumper-front 1, vag bumper-front 1. Recommended to the owner as the next
+  wording round.
