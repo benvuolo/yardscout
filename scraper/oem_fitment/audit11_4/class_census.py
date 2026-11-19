@@ -44,7 +44,7 @@ import policy  # noqa: E402
 import junkyard_scraper as js  # noqa: E402
 
 LIT_RE = re.compile(r"(?<![0-9.])(\d{1,2}\.\d)\s*L(?![A-Za-z])", re.I)
-HYB_RE = re.compile(r"HYBRID|\bFHEV\b|\bHEV\b|\bPHEV\b|PLUG-IN", re.I)
+HYB_RE = C._FIT_HYBRID_RE if hasattr(C, "_FIT_HYBRID_RE") else re.compile(r"HYBRID|\bFHEV\b|\bHEV\b|\bPHEV\b|PLUG-IN|GAS\s*/\s*ELECTRIC", re.I)
 MARKET_RE = re.compile(r"\bkph\b|\bkm\s*/\s*h\b|\bkmh\b|kilomet|\bmetric\b|\bcanad|\bexport|\bmexic|\beurop|\bgcc\b|"
                        r"australia|\bjdm\b|\bright[\s-]hand[\s-]drive\b|\brhd\b|\bgeneral\s+market\b|\bnon[\s-]?us\b|"
                        r"\bexc(?:ept)?\.?\s*u\.?s\.?a?\b|\bnot\s+for\s+u\.?s", re.I)
@@ -79,6 +79,7 @@ def main(argv):
     inv = MM.load_inventory(invp)
     cur, _doc = C.curate(ns, A.RawSource(ref=raw), C.Options(
         model_map=mm, model_map_path=MM.MODEL_MAP_PATH, inventory=inv, js=js,
+        lot_engines=C.lot_engines(inv, exp) if hasattr(C, "lot_engines") else None,
         model_bodies=C.model_bodies(inv, js, decp), body_counts=C.model_body_counts(inv, js, decp)))
     hold = set(js.GROUP_HOLD_CATS)
     doc = json.loads(Path(gpath).read_text())
@@ -89,6 +90,21 @@ def main(argv):
     ei, bi = ef.index("engine"), ef.index("body")
     V = inv["vehicles"]
     vp = inv.get("vpic") or {}
+    # the lot's decoded displacements per T (curate.lot_engines), and the ones
+    # carried by cars the app itself reads as hybrid (listing, VIN series, VIN
+    # trim when usable, or the engine naming Hybrid / Electric: pfOemCarFuel)
+    LOT = C.lot_engines(inv, exp) if hasattr(C, "lot_engines") else {}
+    LH_, LG_ = collections.defaultdict(set), collections.defaultdict(set)
+    for i0, v0 in enumerate(V):
+        ex0 = extras.get(str(v0[0]))
+        d0 = car_lit(ex0, ei)
+        if d0 is None:
+            continue
+        p0 = vp.get(str(i0)) or ["", "", "", "", ""]
+        nm = " ".join(str(x) for x in (v0[4], p0[2], p0[0] if p0[1] == "usable" else "") if x)
+        es0 = str(ex0[ei]) if ex0 and len(ex0) > ei and ex0[ei] else ""
+        hyb = bool(re.search(r"\bhybrid\b", nm + " " + es0, re.I) or re.search(r"\belectric\b", es0, re.I))
+        (LH_ if hyb else LG_)[(v0[3], v0[4], v0[2])].add(d0)
     byk = {(cat, tuple(sorted(c.pns))): c for (_k, cat), c in cur.classes.items()}
 
     def car(i):
@@ -176,10 +192,16 @@ def main(argv):
                         "id": g["id"], "cat": g["cat"], "pn": g["pn"], "T": T, "listed": sorted(L),
                         "missing": sorted(miss), "gate": gate,
                         "plain_contra": len(bad), "plain_contra_in_U": sum(1 for cr in bad if has(U[T], cr["lit"])),
+                        # material: the catalog attests it for T and a lot car of T (or T's year page) has it
+                        "missing_material": sorted(x for x in miss if has((LOT.get(tuple(T)) or {}).get("lits", ()), x)
+                                                   or has(lits([e for ym in cur.t_years.get(tuple(T), [])
+                                                                for e in (ym.engines or [])]), x)),
                         "cars": [[cr["vin"], cr["lit"]] for cr in bad][:12]})
             # ---- fuel: gas gate, hybrid with its own displacement, no engine gate
             if gate.get("fuel") == "gas" and not gate.get("eng"):
                 hy = {x for x in UH.get(T, set()) if not has(UG.get(T, set()), x)}
+                # lot side: displacements only the lot's hybrid cars of T carry
+                hy |= {x for x in LH_.get(tuple(T), set()) if not has(LG_.get(tuple(T), set()), x)}
                 pcs = plain_cars(g, T) if pcs is None else pcs
                 bad = [cr for cr in pcs if cr["lit"] is not None and has(hy, cr["lit"])]
                 found["fuel"].append({"id": g["id"], "cat": g["cat"], "pn": g["pn"], "T": T, "gate": gate,
@@ -261,6 +283,12 @@ def main(argv):
                                         "drives": dict(collections.Counter(cr["drive"] for cr in pcs))})
     summ = {}
     for k, xs in found.items():
+        if k == "engine":
+            mx = [x for x in xs if x.get("missing_material")]
+            summ["engine_material"] = {"groups": len({x["id"] for x in mx}),
+                                       "app_years": len({(x["id"], tuple(x["T"])) for x in mx}),
+                                       "plain_contra": sum(x["plain_contra"] for x in mx),
+                                       "plain_contra_in_U": sum(x["plain_contra_in_U"] for x in mx)}
         summ[k] = {"groups": len({x["id"] for x in xs}),
                    "app_years": len({(x["id"], tuple(x["T"])) for x in xs}) if xs and "T" in xs[0] else len(xs),
                    "plain_contra": sum(x.get("plain_contra", 0) for x in xs)}
