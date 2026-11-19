@@ -8,6 +8,7 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 
 | Version | iOS | Android |
 |---|---|---|
+| 1.13.3 | DISPATCHED 2026-11-19 19:29 UTC (owner, 2026-11-19 18:24 UTC: "lets just push 1.13.3 accross the board dont wait for apple to approve the first iteration"). Built from main a48aac2b (sw jh-v220). iOS build 44, **submit=true**, run 44598878122: build uploaded and version bump pushed (322344e9, "submitted"); the submit step replaces what is in Apple's queue (1.13.1 build 42, waiting since 11-18 15:03). 1.13.2 build 43 stays in TestFlight, never submitted. | versionCode 43, track production, run 44598850958, succeeded 19:32. play-status 44600698366: production 1.13.3 (43), status completed, rollout 100% (Google review pending). |
 | 1.13.2 | BUILT 2026-11-19 07:27 UTC (owner, 2026-11-19 ~06:40 UTC: "Ship"). Built from main 3591e082 (sw jh-v215, round 5 parts gates). iOS build 43, **submit=false** (TestFlight only), run 44479745314, succeeded 07:31. NOT submitted: 1.13.1 build 42 is still WAITING_FOR_REVIEW (asc-status 44480392647, 07:33) and the workflow's submit step withdraws whatever is in the queue. When 1.13.1 is READY_FOR_SALE: `release-ios.yml` with `submit_only=true`, `build_number=43`, `marketing_version=1.13.2` and the notes below. | versionCode 42, track production, run 44479741801, succeeded 07:32. play-status 44480389133: production 1.13.2 (42), status completed, rollout 100% (Google review pending). |
 | 1.13.0 | SHIPPED 2026-11-16 13:29 UTC (owner: "Do it and ship!"). Built from main 67fa5d2b (sw jh-v202). iOS build 41, submit=true, run 43876188232. asc-status 43877889988: 1.13.0 build 41 WAITING_FOR_REVIEW, submitted 13:39 UTC, automatic release on approval; listing text and six new screenshots went up with it. | versionCode 40, run 43876161947, uploaded 13:32 UTC. play-status 43876886357: production 1.13.0 (40), status completed, rollout 100% (Google review pending). Play listing text and screenshots NOT sent yet: send after 1.13.0 is live. |
 | 1.12.16 | SHIPPED 2026-11-14 17:03 UTC (owner: "ship"). Built from main ac24bcb5 (sw jh-v196). iOS build 40, submit=true, run 43618949981. asc-status: 1.12.16 build 40 WAITING_FOR_REVIEW, submitted 17:13 UTC, automatic release on approval. Carries: Cars-tab search box, per-tab scroll, filter panel fix, card share button, trim badge and filter, model-range line, hours and directions links, narrowing and checkout-outcome counters. | versionCode 39, Play production, status completed, rollout 100% (run 43618947678); Google review pending |
@@ -132,3 +133,29 @@ screenshots, text) and `play-subscription-listing.yml` run 44543917581 (the
 four benefit lines), both success. Covered by the 11-17 "Ship" for 1.13.1.
 Not waiting for Apple any more: the Play page has nothing to do with the App
 Store review. iOS screenshots still go up with the iOS submission.
+
+## 1.13.3 — dispatched 2026-11-19 19:29 UTC (owner, 2026-11-19: "lets just push 1.13.3 accross the board dont wait for apple to approve the first iteration")
+
+Built from main a48aac2b (sw `jh-v220`). Checks on that tree: hub's full
+regression on `hub/rc5-1119` 113 passed, 0 failed, 0 skipped (both layout
+halves); after the icon-link merge, quick regression 76/0 and the share /
+landing tests 3/0. Live check of the website at 19:29 UTC: `jh-v220`, an
+Infiniti window-regulator search shows catalog rows with "window motor
+only", no page errors.
+In it since 1.13.2: the Cars list order (two newest days, nearest yard
+first); the Parts "Best yards for this part" card; the arrival forecast on
+Parts, Cars and each watch, with donor models and the "N of M cars of these
+models are donors" line on the Parts card; the reader for the newer catalog
+field, so Nissan and Infiniti catalog rows show (older app versions show
+none); the car-card mismatch tooltip wording.
+
+What's New (both stores):
+
+    Know where to go, and when.
+    • Search a part and see the best yards for it: donor cars at each yard, distance, newest arrival and the yard's own price.
+    • Arrival forecast: how often your model, or the models a part comes from, has landed near you over the last 8 weeks. On Parts, Cars and each alert.
+    • Newest arrivals now lead with the yards closest to you.
+    • Nissan and Infiniti added to factory-catalog parts matching: window regulators and motors, mirrors, climate controls.
+
+Still to do: confirm Apple's state after the submit step (asc-status); when
+Apple approves, check the App Store shows 1.13.3.

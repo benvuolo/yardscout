@@ -3368,3 +3368,35 @@ submitted.
   that touches `backend/` starts "Deploy Workers" by itself (run on
   e166f63c, success 18:22:24), so the ops-email line is live and the
   refused manual dispatch was never needed.
+
+## 2026-11-19 19:40 UTC nissan and infiniti LIVE (jh-v220); icon links; 1.13.3 dispatched to both stores
+
+- **`hub/rc5-1119` full regression: 113 passed, 0 failed, 0 skipped**
+  (finished about 19:12). Then the icon-link change merged
+  (`hub/favicon-v4` 5e8b47b1), quick regression 76/0, share / landing
+  tests 3/0. Pushed to main 19:17 UTC as a48aac2b. "Deploy Workers" ran by
+  itself (success 19:17:57; the share page's icon tag changed).
+- **Icon (owner 18:40 UTC, a browser tab still showing the orange icon:
+  "change the little logo to the new color aswell"):** the icon files have
+  been petrol since 11-17; the pages still linked them as `?v=3`, the
+  address browsers had saved the orange one under. Now `?v=4` on the home
+  page, 404, privacy, support, terms and the share pages.
+- **One live load 19:29 UTC** (2012 Infiniti M37, window regulator, zip
+  90001): cache `jh-v220`; icon links `?v=4`; `oemStatus.nissan` "ok
+  57e8b5b9 103 groups"; 79 nissan groups in the window-regulator file; 9
+  donor cars at 7 yards; notes read "Infiniti catalog lists #82730-1MA0A
+  for both — window motor only; fits some configurations; verify the
+  number on the part" and "#80720-1MA0A for both — option: fits some
+  option packages; …"; forecast "Cars of the donor models, about 2 a week
+  … 9 of 9 cars of these models are donors for this part"; no page errors.
+- **1.13.3 dispatched 19:29 UTC** from a48aac2b on the owner's word
+  (18:24 UTC). Android: run 44598850958 succeeded 19:32; play-status
+  44600698366: production 1.13.3 (43), completed, rollout 100%. iOS: run
+  44598878122, build 44 uploaded, on its submit step at 19:39 (it replaces
+  the queued 1.13.1). Details and What's New in `ops/release.md`.
+- Seen in the live load, for a later shell batch (all makes, not new): the
+  results head says donors "carry a fitting window regulator + motor"
+  (the category's name) above rows whose note says "window motor only".
+  When every row's basis is a motor-only number the head should say so.
+- Next: "window motor only" on the 21 mopar and 8 subaru live groups that
+  lack it; the re-pin of live makes to the newer raw (independent check).
