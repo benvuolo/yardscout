@@ -5834,3 +5834,5 @@ Suggestions (owner decides):
 5. Treat several undated numbers in one option slot as "if equipped".
 
 Checker outputs only: the JSON above and this section. No rule, policy, group, payload, app or test file was changed.
+
+Compared with earlier reports (read after the verdicts were pushed, headers only): `_report/` holds verify 1118/1118c and rechecks 1119/1119d-g. The latest, recheck 1119g, is the builder's own re-check of verify-1119g, which sits on branch interchange/verify-nissan-1119g and was not read here. Earlier files already mention `vpicMismatch` (the round-4 make/year rule). This WRONG is the gap that rule leaves open: a VIN decode naming another model. Whether the RISK classes above were raised before was not checked.
