@@ -3146,3 +3146,48 @@ change.
   maker's vehicle ignored" with K about 77.
 - Report: `scraper/vin_rematch_2026-11-19.json`. Parts-table row to check
   noted in `ops/parts.md` (E-350 7.3L Power Stroke year window).
+
+## 2026-11-19 16:50 UTC crawl 44564564713 finished: two sites read, FOUR MORE REFUSED (HTTP 403, permanent)
+
+Run 16:18 to about 16:28 UTC, conclusion success; oem-raw head d867a65a.
+
+| site | result |
+|---|---|
+| toyotapartsnow | finished, `.c2.done` (8 rows; 76 list lines, 8 year lines; 16:20-16:25) |
+| vwpartsgiant | finished, `.c2.done` (1 row; 16:26) |
+| infinitipartsdeal | HTTP 403 at 16:26:44 on its third request; `.blocked` |
+| jeeppartsdeal | HTTP 403 at 16:27:00 on its second request; `.blocked` |
+| lexuspartsnow | HTTP 403 at 16:27:16 on its second request; `.blocked` |
+| nissanpartsdeal | HTTP 403 at 16:27:32 on its second request; `.blocked` |
+
+- The crawler did what it is built to do: one refusal, the domain is
+  stopped for good, the refusal is logged with request counts
+  (`raw/<site>.refusals.jsonl`), nothing was retried. Rule 2: no
+  workaround is written. All six sites are on the same hosting platform;
+  the refusals began about six minutes and roughly 45 requests into the
+  run, at the crawler's 8-second pacing, and then met every next site on
+  its first requests.
+- Blocked now: gm, ford, mopar, mb, bmw, subaru (earlier) and infiniti,
+  nissan, jeep, lexus (today). Still open: toyota, vw, honda, acura,
+  hyundai, kia, audi, mazda, mitsubishi, volvo. **The scheduled 6-hourly
+  crawl goes on reading the open sites on the same platform; whether it
+  should is a question for the owner (below).**
+- What this does NOT change: everything live, and the nissan candidate,
+  are built from pages already stored on oem-raw (pin 57e8b5b9). Nissan
+  can still ship from them.
+- What it does change: the 22 nissan / infiniti own pages, the 3 jeep and
+  9 lexus pages will not be read; the nissan vehicle-years held for "no
+  page of its own" stay held. The hub's dispatch cost four sites their
+  future reading: the owner said "crawl", the hub chose to run six sites
+  in one job.
+- The route rule 2 names for a refusal is an email asking permission. To
+  put to the owner: (1) a draft to the catalog operator asking for
+  permission or a data arrangement (hub drafts, owner sends); (2) whether
+  the scheduled crawl should pause on the remaining open sites until an
+  answer comes, so they are not lost the same way.
+- Check-in `trig_014D4eJ7LVizMXhBBto8jp6C` deleted (done here).
+- Owner's email question (16:49 UTC): the Cloudflare "Missing email?"
+  notice is not a failure. The owner's test went from the same Gmail
+  account the alias forwards to; Gmail hides the forwarded copy of a
+  message the account itself sent (one copy, in Sent, 16:19 UTC, checked).
+  A test from any other account settles it.

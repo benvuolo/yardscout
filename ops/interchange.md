@@ -6060,3 +6060,13 @@ earlier report (independence kept; the comparison note further down was added af
   "*" marks are listed there as known and unchanged.
 - The VIN-identity cases match 1119h's class: the flagged ones now show "if equipped"; the
   EX37-listed / EX35-decoded car is not flagged (model pair not hand-sorted "different").
+
+## 2026-11-19 16:50 UTC (hub) own-page completion pass 2: result
+
+Run 44564564713 (oem-raw head d867a65a). toyotapartsnow and vwpartsgiant
+finished (`.c2.done`). infinitipartsdeal, jeeppartsdeal, lexuspartsnow and
+nissanpartsdeal each answered HTTP 403 within their first three requests
+and are now `.blocked` (permanent; rule 2, no workaround). The nissan,
+infiniti, jeep and lexus rows of the completion files stay unread; the
+vehicle-years they would have settled stay held. Details and the open
+questions for the owner: `ops/hub.md`, same time.
