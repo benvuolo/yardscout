@@ -1,95 +1,14 @@
 {
- "groups": 47,
+ "groups": 40,
  "groups_by_kind": {
-  "a": 5,
-  "b": 5,
+  "a": 3,
+  "b": 3,
   "c_drive": 4,
-  "c_engine": 14,
-  "starred_only": 41
+  "c_engine": 12,
+  "starred_only": 34
  },
- "groups_held_whole": 37,
+ "groups_held_whole": 36,
  "held": [
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-jx35/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-3JA1B",
-       "role": "own",
-       "starred": [
-        "*W. PREMIUM"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "JX35",
-      2013
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-qx60-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-3JA1B",
-       "role": "own",
-       "starred": [
-        "*W. PREMIUM"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "QX60",
-      2014
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24810-3JA1B"
-   ],
-   "reason": "held_starred_only",
-   "reason_text": "claim rests only on starred clauses",
-   "round5_apps": [
-    [
-     "Infiniti",
-     "JX35",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "QX60",
-     2014,
-     2014
-    ]
-   ],
-   "unit": "group"
-  },
   {
    "cat": "gauge-cluster",
    "group_reason": "fewer than two models left",
@@ -217,36 +136,6 @@
        "notes": [
         "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE), *KC. 2WD. SE + *CC. 2WD. SE"
        ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-titan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-7S01A",
-       "role": "own",
-       "starred": [
-        "*KC. (SE+ LE)",
-        "*CC. (SE+ LE)",
-        "*KC. 2WD. SE",
-        "*CC. 2WD. SE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Nissan",
-      "Titan",
-      2004
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *KC. (SE+ LE) + *CC. (SE+ LE), *KC. 2WD. SE + *CC. 2WD. SE"
-       ],
        "page": "https://www.nissanpartsdeal.com/parts-list/2005-nissan-titan/body_electrical/instrument_meter_gauge.html",
        "pn": "24810-7S01A",
        "role": "own",
@@ -282,13 +171,13 @@
     [
      "Nissan",
      "Armada",
-     2005,
+     2006,
      2006
     ],
     [
      "Nissan",
      "Titan",
-     2004,
+     2005,
      2005
     ]
    ],
@@ -703,33 +592,6 @@
       "Xterra",
       2003
      ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. KA24DE"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-ZD016",
-       "role": "own",
-       "starred": [
-        "*W. KA24DE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Nissan",
-      "Xterra",
-      2004
-     ]
     }
    ],
    "kept_apps": [],
@@ -749,7 +611,7 @@
      "Nissan",
      "Xterra",
      2003,
-     2004
+     2003
     ]
    ],
    "unit": "group"
@@ -848,34 +710,6 @@
       "Xterra",
       2003
      ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. VG33E + *W. VG33ER. SE"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2004-nissan-xterra/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-ZD103",
-       "role": "own",
-       "starred": [
-        "*W. VG33E",
-        "*W. VG33ER. SE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Nissan",
-      "Xterra",
-      2004
-     ]
     }
    ],
    "kept_apps": [],
@@ -895,413 +729,7 @@
      "Nissan",
      "Xterra",
      2003,
-     2004
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *KC. (2WD/SB+ 4WD/SB). LE + *CC. (2WD/SB+ 4WD/SB). LE"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2008-nissan-titan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24810-ZR29A",
-       "role": "own",
-       "starred": [
-        "*KC. (2WD/SB+ 4WD/SB). LE",
-        "*CC. (2WD/SB+ 4WD/SB). LE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Nissan",
-      "Titan",
-      2008
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24810-ZR29A"
-   ],
-   "reason": "held_starred_only",
-   "reason_text": "claim rests only on starred clauses",
-   "round5_apps": [
-    [
-     "Nissan",
-     "Armada",
-     2008,
-     2008
-    ],
-    [
-     "Nissan",
-     "Titan",
-     2008,
-     2008
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MK5A",
-       "role": "own",
-       "starred": [
-        "*SEDAN. 2WDHICAS. SPORTTEC",
-        "*SEDAN. 2WDSTD. VQ37VHR. TECHNOLO",
-        "*SEDAN. 2WDSTD. BASE"
-       ]
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (ADVTECH + SPADTEC), SEDAN. VQ37VHR. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. 2WDHICAS. VK56VD + SEDAN. 4WD. VK56VD. SPADTEC + SEDAN. VK56VD. ADVTECH, SEDAN. VK56VD. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. (PREMIUM + SPORTPRE), SEDAN. VK56VD. TECHNOLO"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2D",
-       "role": "sibling",
-       "starred": []
-      }
-     ],
-     "drive": {
-      "as_curated": "2WD only",
-      "via": "own",
-      "without_starred": "no limit"
-     },
-     "engine": {
-      "as_curated": "no limit",
-      "via": "own",
-      "without_starred": "left out (contradicts itself)"
-     },
-     "kinds": [
-      "a",
-      "c_engine",
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_scope",
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "M37",
-      2012
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MK5A",
-       "role": "own",
-       "starred": [
-        "*SEDAN. 2WDHICAS. SPORTTEC",
-        "*SEDAN. 2WDSTD. VQ37VHR. TECHNOLO",
-        "*SEDAN. 2WDSTD. BASE"
-       ]
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (ADVTECH + SPADTEC), SEDAN. VQ37VHR. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. 2WDHICAS. VK56VD + SEDAN. 4WD. VK56VD. SPADTEC + SEDAN. VK56VD. ADVTECH, SEDAN. VK56VD. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. (PREMIUM + SPORTPRE), SEDAN. VK56VD. TECHNOLO"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (ADVTECH + SPADTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. 2WDHICAS. VK56VD + SEDAN. 4WD. VK56VD. SPADTEC + SEDAN. VK56VD. ADVTECH"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. TECHNOLO"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1D",
-       "role": "sibling",
-       "starred": []
-      }
-     ],
-     "drive": {
-      "as_curated": "2WD only",
-      "via": "own",
-      "without_starred": "no limit"
-     },
-     "engine": {
-      "as_curated": "no limit",
-      "via": "own",
-      "without_starred": "left out (contradicts itself)"
-     },
-     "kinds": [
-      "a",
-      "c_engine",
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_scope",
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "M37",
-      2013
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *SEDAN. 2WDHICAS. SPORTTEC, *SEDAN. 2WDSTD. VQ37VHR. TECHNOLO + *SEDAN. 2WDSTD. BASE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MK5A",
-       "role": "own",
-       "starred": [
-        "*SEDAN. 2WDHICAS. SPORTTEC",
-        "*SEDAN. 2WDSTD. VQ37VHR. TECHNOLO",
-        "*SEDAN. 2WDSTD. BASE"
-       ]
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (ADVTECH + SPADTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. 2WDHICAS. VK56VD + SEDAN. 4WD. VK56VD. SPADTEC + SEDAN. VK56VD. ADVTECH"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. TECHNOLO"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (ADVTECH + SPADTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. 2WDHICAS. VK56VD + SEDAN. 4WD. VK56VD. SPADTEC + SEDAN. VK56VD. ADVTECH"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. TECHNOLO"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. (PREMIUM+ SPORTPRE) + LSEDAN. VK56VD. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-4AM1D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1D",
-       "role": "sibling",
-       "starred": []
-      }
-     ],
-     "drive": {
-      "as_curated": "2WD only",
-      "via": "own",
-      "without_starred": "no limit"
-     },
-     "engine": {
-      "as_curated": "3.7L",
-      "via": "own",
-      "without_starred": "no limit"
-     },
-     "kinds": [
-      "a",
-      "b",
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_scope",
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "Q70",
-      2014
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24820-1MK5A"
-   ],
-   "reason": "held_starred_scope",
-   "reason_text": "starred clause decides scope",
-   "round5_apps": [
-    [
-     "Infiniti",
-     "M37",
-     2012,
-     2013
-    ],
-    [
-     "Infiniti",
-     "Q70",
-     2014,
-     2014
+     2003
     ]
    ],
    "unit": "group"
@@ -1619,317 +1047,6 @@
      "clauses": [
       {
        "notes": [
-        "Fitting Vehicle Options: *SEDAN. 2WDSTD. SPORTPRE, *SEDAN. 2WDSTD. VQ37VHR. PREMIUM + *SEDAN. 2WDSTD. BASE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH2A",
-       "role": "own",
-       "starred": [
-        "*SEDAN. 2WDSTD. SPORTPRE",
-        "*SEDAN. 2WDSTD. VQ37VHR. PREMIUM",
-        "*SEDAN. 2WDSTD. BASE"
-       ]
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (ADVTECH + SPADTEC), SEDAN. VQ37VHR. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. 2WDHICAS. VK56VD + SEDAN. 4WD. VK56VD. SPADTEC + SEDAN. VK56VD. ADVTECH, SEDAN. VK56VD. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. (PREMIUM + SPORTPRE), SEDAN. VK56VD. TECHNOLO"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (ADVTECH + SPADTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. 2WDHICAS. VK56VD + SEDAN. 4WD. VK56VD. SPADTEC + SEDAN. VK56VD. ADVTECH"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. TECHNOLO"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2013-infiniti-m37/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1D",
-       "role": "sibling",
-       "starred": []
-      }
-     ],
-     "drive": {
-      "as_curated": "2WD only",
-      "via": "own",
-      "without_starred": "no limit"
-     },
-     "engine": {
-      "as_curated": "no limit",
-      "via": "own",
-      "without_starred": "left out (contradicts itself)"
-     },
-     "kinds": [
-      "a",
-      "c_engine",
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_scope",
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "M37",
-      2013
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *SEDAN. 2WDSTD. SPORTPRE, *SEDAN. 2WDSTD. VQ37VHR. PREMIUM + *SEDAN. 2WDSTD. BASE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH2A",
-       "role": "own",
-       "starred": [
-        "*SEDAN. 2WDSTD. SPORTPRE",
-        "*SEDAN. 2WDSTD. VQ37VHR. PREMIUM",
-        "*SEDAN. 2WDSTD. BASE"
-       ]
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (ADVTECH + SPADTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. 2WDHICAS. VK56VD + SEDAN. 4WD. VK56VD. SPADTEC + SEDAN. VK56VD. ADVTECH"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. TECHNOLO"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA2D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (ADVTECH + SPADTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. 2WDHICAS. VK56VD + SEDAN. 4WD. VK56VD. SPADTEC + SEDAN. VK56VD. ADVTECH"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. TECHNOLO"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-1MA5D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. (PREMIUM+ SPORTPRE) + LSEDAN. VK56VD. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-4AM1D",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VQ37VHR. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. (TECHNOLO + SPORTTEC)"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1C",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: SEDAN. VK56VD. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2014-infiniti-q70-gas/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-6AH1D",
-       "role": "sibling",
-       "starred": []
-      }
-     ],
-     "drive": {
-      "as_curated": "2WD only",
-      "via": "own",
-      "without_starred": "no limit"
-     },
-     "engine": {
-      "as_curated": "3.7L",
-      "via": "own",
-      "without_starred": "no limit"
-     },
-     "kinds": [
-      "a",
-      "b",
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_scope",
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "Q70",
-      2014
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24820-6AH2A"
-   ],
-   "reason": "held_starred_scope",
-   "reason_text": "starred clause decides scope",
-   "round5_apps": [
-    [
-     "Infiniti",
-     "M37",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "Q70",
-     2014,
-     2014
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S, *S. 2WD. VQ35DE + *S. VK45DE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-EH101",
-       "role": "own",
-       "starred": [
-        "*S",
-        "*S. 2WD. VQ35DE",
-        "*S. VK45DE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "M35",
-      2006
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
         "Fitting Vehicle Options: *S, *S. 2WD. VQ35DE + *S. VK45DE"
        ],
        "page": "https://www.infinitipartsdeal.com/parts-list/2007-infiniti-m35/body_electrical/instrument_meter_gauge.html",
@@ -2024,7 +1141,7 @@
     [
      "Infiniti",
      "M35",
-     2006,
+     2007,
      2007
     ],
     [
@@ -2032,245 +1149,13 @@
      "M45",
      2006,
      2007
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m35/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-EH11B",
-       "role": "own",
-       "starred": [
-        "*S"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "M35",
-      2006
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2006-infiniti-m45/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-EH11B",
-       "role": "own",
-       "starred": [
-        "*S"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "M45",
-      2006
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24820-EH11B"
-   ],
-   "reason": "held_starred_only",
-   "reason_text": "claim rests only on starred clauses",
-   "round5_apps": [
-    [
-     "Infiniti",
-     "M35",
-     2006,
-     2006
-    ],
-    [
-     "Infiniti",
-     "M45",
-     2006,
-     2006
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "gauge-cluster",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. (2WD+ 2WD/HI). SPORT/P. 5AT + *S. AWD. SPORT/P + *S. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g35-sedan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-JK61C",
-       "role": "own",
-       "starred": [
-        "*S. (2WD+ 2WD/HI). SPORT/P. 5AT",
-        "*S. AWD. SPORT/P",
-        "*S. PREMIUM"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "G35",
-      2008
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S. (2WD+ 2WD/HI). SPORT/P. 5AT + *S. AWD. SPORT/P + *S. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g37-sedan/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-JK61C",
-       "role": "own",
-       "starred": [
-        "*S. (2WD+ 2WD/HI). SPORT/P. 5AT",
-        "*S. AWD. SPORT/P",
-        "*S. PREMIUM"
-       ]
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *C. PREMIUM + *C. SPORT/P. 5AT"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2008-infiniti-g37-coupe/body_electrical/instrument_meter_gauge.html",
-       "pn": "24820-JK61C",
-       "role": "own",
-       "starred": [
-        "*C. PREMIUM",
-        "*C. SPORT/P. 5AT"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "G37",
-      2008
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "24820-JK61C"
-   ],
-   "reason": "held_starred_only",
-   "reason_text": "claim rests only on starred clauses",
-   "round5_apps": [
-    [
-     "Infiniti",
-     "G35",
-     2008,
-     2008
-    ],
-    [
-     "Infiniti",
-     "G37",
-     2008,
-     2008
-    ]
-   ],
-   "unit": "group"
-  },
-  {
-   "cat": "climate-control",
-   "group_reason": "fewer than two models left",
-   "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. KA24DE + *W. VG33E. XE"
-       ],
-       "page": "https://www.nissanpartsdeal.com/parts-list/2002-nissan-xterra/body_electrical/control_unit.html",
-       "pn": "27510-7Z411",
-       "role": "own",
-       "starred": [
-        "*W. KA24DE",
-        "*W. VG33E. XE"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Nissan",
-      "Xterra",
-      2002
-     ]
-    }
-   ],
-   "kept_apps": [],
-   "pn": [
-    "27510-7Z411"
-   ],
-   "reason": "held_starred_only",
-   "reason_text": "claim rests only on starred clauses",
-   "round5_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2002,
-     2002
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2002,
-     2002
     ]
    ],
    "unit": "group"
   },
   {
    "cat": "window-regulator",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -2302,20 +1187,7 @@
      ]
     }
    ],
-   "kept_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2002,
-     2003
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2002,
-     2004
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "80720-2Z700"
    ],
@@ -2332,13 +1204,14 @@
      "Nissan",
      "Xterra",
      2002,
-     2004
+     2003
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   },
   {
    "cat": "window-regulator",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -2370,20 +1243,7 @@
      ]
     }
    ],
-   "kept_apps": [
-    [
-     "Nissan",
-     "Frontier",
-     2002,
-     2003
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2002,
-     2004
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "80721-2Z700"
    ],
@@ -2400,10 +1260,10 @@
      "Nissan",
      "Xterra",
      2002,
-     2004
+     2003
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   },
   {
    "cat": "window-regulator",
@@ -2523,12 +1383,6 @@
      "Xterra",
      2000,
      2000
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2002,
-     2004
     ]
    ],
    "pn": [
@@ -2547,7 +1401,7 @@
      "Nissan",
      "Xterra",
      2000,
-     2004
+     2003
     ]
    ],
    "unit": "vehicle-year"
@@ -2670,12 +1524,6 @@
      "Xterra",
      2000,
      2000
-    ],
-    [
-     "Nissan",
-     "Xterra",
-     2002,
-     2004
     ]
    ],
    "pn": [
@@ -2694,7 +1542,7 @@
      "Nissan",
      "Xterra",
      2000,
-     2004
+     2003
     ]
    ],
    "unit": "vehicle-year"
@@ -2728,33 +1576,6 @@
       "Infiniti",
       "EX35",
       2011
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *WAG. LEATHER"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html",
-       "pn": "96301-1BA3D",
-       "role": "own",
-       "starred": [
-        "*WAG. LEATHER"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "EX35",
-      2012
      ]
     },
     {
@@ -2850,7 +1671,7 @@
      "Infiniti",
      "EX35",
      2011,
-     2012
+     2011
     ],
     [
      "Infiniti",
@@ -2869,6 +1690,7 @@
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -2963,32 +1785,7 @@
      ]
     }
    ],
-   "kept_apps": [
-    [
-     "Infiniti",
-     "FX35",
-     2009,
-     2012
-    ],
-    [
-     "Infiniti",
-     "FX37",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "FX50",
-     2009,
-     2010
-    ],
-    [
-     "Infiniti",
-     "QX70",
-     2016,
-     2017
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "96301-1CA0A"
    ],
@@ -2999,6 +1796,12 @@
      "Infiniti",
      "FX35",
      2009,
+     2010
+    ],
+    [
+     "Infiniti",
+     "FX35",
+     2012,
      2012
     ],
     [
@@ -3020,7 +1823,7 @@
      2017
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   },
   {
    "cat": "side-mirrors",
@@ -3119,51 +1922,6 @@
      "clauses": [
       {
        "notes": [
-        "Fitting Vehicle Options: *W. VQ35HR. PREMIUM, *W. VQ35HR. PREMIUM + *W. VK50VE, W. VK50VE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96301-1CA0B",
-       "role": "own",
-       "starred": [
-        "*W. VQ35HR. PREMIUM",
-        "*W. VQ35HR. PREMIUM",
-        "*W. VK50VE"
-       ]
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. VQ35HR. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96301-1CA0A",
-       "role": "sibling",
-       "starred": []
-      }
-     ],
-     "engine": {
-      "as_curated": "no limit",
-      "via": "own",
-      "without_starred": "left out (contradicts itself)"
-     },
-     "kinds": [
-      "c_engine",
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_scope",
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "FX35",
-      2011
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
         "Fitting Vehicle Options: *W. VQ35HR. PREMIUM, W. VK50VE"
        ],
        "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-fx35/miscellaneous/rear_view_mirror.html",
@@ -3229,6 +1987,12 @@
      "Infiniti",
      "FX35",
      2009,
+     2010
+    ],
+    [
+     "Infiniti",
+     "FX35",
+     2012,
      2012
     ],
     [
@@ -3243,58 +2007,6 @@
   {
    "cat": "side-mirrors",
    "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. BASE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96301-1CA1A",
-       "role": "own",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. VQ35HR. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96301-1CA0A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. VQ35HR. PREMIUM, *W. VQ35HR. PREMIUM + *W. VK50VE, W. VK50VE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96301-1CA0B",
-       "role": "sibling",
-       "starred": [
-        "*W. VQ35HR. PREMIUM",
-        "*W. VQ35HR. PREMIUM",
-        "*W. VK50VE"
-       ]
-      }
-     ],
-     "engine": {
-      "as_curated": "no limit",
-      "via": "sibling",
-      "without_starred": "left out (contradicts itself)"
-     },
-     "kinds": [
-      "c_engine"
-     ],
-     "listed_only_starred": false,
-     "reasons": [
-      "held_starred_scope"
-     ],
-     "t": [
-      "Infiniti",
-      "FX35",
-      2011
-     ]
-    },
     {
      "clauses": [
       {
@@ -3525,7 +2237,7 @@
     [
      "Infiniti",
      "FX35",
-     2009,
+     2010,
      2010
     ],
     [
@@ -3545,6 +2257,12 @@
      "Infiniti",
      "FX35",
      2009,
+     2010
+    ],
+    [
+     "Infiniti",
+     "FX35",
+     2012,
      2012
     ],
     [
@@ -4364,7 +3082,7 @@
      "Nissan",
      "Xterra",
      2000,
-     2004
+     2003
     ]
    ],
    "unit": "group"
@@ -4595,33 +3313,6 @@
        "notes": [
         "Fitting Vehicle Options: *S"
        ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2000-infiniti-i30/miscellaneous/rear_view_mirror.html",
-       "pn": "96301-3Y300",
-       "role": "own",
-       "starred": [
-        "*S"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "I30",
-      2000
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S"
-       ],
        "page": "https://www.infinitipartsdeal.com/parts-list/2001-infiniti-i30/miscellaneous/rear_view_mirror.html",
        "pn": "96301-3Y300",
        "role": "own",
@@ -4735,7 +3426,7 @@
     [
      "Infiniti",
      "I30",
-     2000,
+     2001,
      2001
     ],
     [
@@ -4776,33 +3467,6 @@
       "Infiniti",
       "EX35",
       2011
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *WAG. LEATHER"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html",
-       "pn": "96302-1BA1E",
-       "role": "own",
-       "starred": [
-        "*WAG. LEATHER"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "EX35",
-      2012
      ]
     },
     {
@@ -4898,7 +3562,7 @@
      "Infiniti",
      "EX35",
      2011,
-     2012
+     2011
     ],
     [
      "Infiniti",
@@ -4944,33 +3608,6 @@
       "Infiniti",
       "EX35",
       2011
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *WAG. LEATHER"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html",
-       "pn": "96302-1BA3D",
-       "role": "own",
-       "starred": [
-        "*WAG. LEATHER"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "EX35",
-      2012
      ]
     },
     {
@@ -5066,7 +3703,7 @@
      "Infiniti",
      "EX35",
      2011,
-     2012
+     2011
     ],
     [
      "Infiniti",
@@ -5112,33 +3749,6 @@
       "Infiniti",
       "EX35",
       2011
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *WAG. LEATHER"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-ex35/miscellaneous/rear_view_mirror.html",
-       "pn": "96302-1BA3E",
-       "role": "own",
-       "starred": [
-        "*WAG. LEATHER"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "EX35",
-      2012
      ]
     },
     {
@@ -5234,7 +3844,7 @@
      "Infiniti",
      "EX35",
      2011,
-     2012
+     2011
     ],
     [
      "Infiniti",
@@ -5253,6 +3863,7 @@
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -5349,32 +3960,7 @@
      ]
     }
    ],
-   "kept_apps": [
-    [
-     "Infiniti",
-     "FX35",
-     2009,
-     2012
-    ],
-    [
-     "Infiniti",
-     "FX37",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "FX50",
-     2009,
-     2010
-    ],
-    [
-     "Infiniti",
-     "QX70",
-     2016,
-     2017
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "96302-1CA0A"
    ],
@@ -5385,6 +3971,12 @@
      "Infiniti",
      "FX35",
      2009,
+     2010
+    ],
+    [
+     "Infiniti",
+     "FX35",
+     2012,
      2012
     ],
     [
@@ -5406,7 +3998,7 @@
      2017
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   },
   {
    "cat": "side-mirrors",
@@ -5505,51 +4097,6 @@
      "clauses": [
       {
        "notes": [
-        "Fitting Vehicle Options: *W. VQ35HR. PREMIUM, *W. VQ35HR. PREMIUM + *W. VK50VE, W. VK50VE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96302-1CA0B",
-       "role": "own",
-       "starred": [
-        "*W. VQ35HR. PREMIUM",
-        "*W. VQ35HR. PREMIUM",
-        "*W. VK50VE"
-       ]
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. VQ35HR. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96302-1CA0A",
-       "role": "sibling",
-       "starred": []
-      }
-     ],
-     "engine": {
-      "as_curated": "no limit",
-      "via": "own",
-      "without_starred": "left out (contradicts itself)"
-     },
-     "kinds": [
-      "c_engine",
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_scope",
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "FX35",
-      2011
-     ]
-    },
-    {
-     "clauses": [
-      {
-       "notes": [
         "Fitting Vehicle Options: *W. VQ35HR. PREMIUM, W. VK50VE"
        ],
        "page": "https://www.infinitipartsdeal.com/parts-list/2012-infiniti-fx35/miscellaneous/rear_view_mirror.html",
@@ -5615,6 +4162,12 @@
      "Infiniti",
      "FX35",
      2009,
+     2010
+    ],
+    [
+     "Infiniti",
+     "FX35",
+     2012,
      2012
     ],
     [
@@ -5629,58 +4182,6 @@
   {
    "cat": "side-mirrors",
    "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. BASE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96302-1CA1A",
-       "role": "own",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: W. VQ35HR. PREMIUM"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96302-1CA0A",
-       "role": "sibling",
-       "starred": []
-      },
-      {
-       "notes": [
-        "Fitting Vehicle Options: *W. VQ35HR. PREMIUM, *W. VQ35HR. PREMIUM + *W. VK50VE, W. VK50VE"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2011-infiniti-fx35/miscellaneous/rear_view_mirror.html",
-       "pn": "96302-1CA0B",
-       "role": "sibling",
-       "starred": [
-        "*W. VQ35HR. PREMIUM",
-        "*W. VQ35HR. PREMIUM",
-        "*W. VK50VE"
-       ]
-      }
-     ],
-     "engine": {
-      "as_curated": "no limit",
-      "via": "sibling",
-      "without_starred": "left out (contradicts itself)"
-     },
-     "kinds": [
-      "c_engine"
-     ],
-     "listed_only_starred": false,
-     "reasons": [
-      "held_starred_scope"
-     ],
-     "t": [
-      "Infiniti",
-      "FX35",
-      2011
-     ]
-    },
     {
      "clauses": [
       {
@@ -5911,7 +4412,7 @@
     [
      "Infiniti",
      "FX35",
-     2009,
+     2010,
      2010
     ],
     [
@@ -5931,6 +4432,12 @@
      "Infiniti",
      "FX35",
      2009,
+     2010
+    ],
+    [
+     "Infiniti",
+     "FX35",
+     2012,
      2012
     ],
     [
@@ -6794,7 +5301,7 @@
      "Nissan",
      "Xterra",
      2000,
-     2004
+     2003
     ]
    ],
    "unit": "group"
@@ -6803,33 +5310,6 @@
    "cat": "side-mirrors",
    "group_reason": "fewer than two models left",
    "held": [
-    {
-     "clauses": [
-      {
-       "notes": [
-        "Fitting Vehicle Options: *S"
-       ],
-       "page": "https://www.infinitipartsdeal.com/parts-list/2000-infiniti-i30/miscellaneous/rear_view_mirror.html",
-       "pn": "96302-3Y300",
-       "role": "own",
-       "starred": [
-        "*S"
-       ]
-      }
-     ],
-     "kinds": [
-      "starred_only"
-     ],
-     "listed_only_starred": true,
-     "reasons": [
-      "held_starred_only"
-     ],
-     "t": [
-      "Infiniti",
-      "I30",
-      2000
-     ]
-    },
     {
      "clauses": [
       {
@@ -6949,7 +5429,7 @@
     [
      "Infiniti",
      "I30",
-     2000,
+     2001,
      2001
     ],
     [
@@ -7018,6 +5498,7 @@
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -7113,32 +5594,7 @@
      ]
     }
    ],
-   "kept_apps": [
-    [
-     "Infiniti",
-     "M35h",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "M37",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "M56",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "Q70",
-     2014,
-     2014
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "K6301-1PM0B"
    ],
@@ -7170,10 +5626,11 @@
      2014
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   },
   {
    "cat": "side-mirrors",
+   "group_reason": "fewer than two models left",
    "held": [
     {
      "clauses": [
@@ -7269,32 +5726,7 @@
      ]
     }
    ],
-   "kept_apps": [
-    [
-     "Infiniti",
-     "M35h",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "M37",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "M56",
-     2013,
-     2013
-    ],
-    [
-     "Infiniti",
-     "Q70",
-     2014,
-     2014
-    ]
-   ],
+   "kept_apps": [],
    "pn": [
     "K6302-1PM0B"
    ],
@@ -7326,18 +5758,18 @@
      2014
     ]
    ],
-   "unit": "vehicle-year"
+   "unit": "group"
   }
  ],
  "note": "round5b-1119 (hub decision 1, 2026-11-19): vehicle-years held because a starred ('*') option configuration decides their drive or engine limit; the mark has no legend in the raw. reason held_starred_scope ('starred clause decides scope'). round6-1119 (hub decision 2): also every vehicle-year the number is listed for only through starred configurations, reason held_starred_only, kind starred_only. unit vehicle-year: the group ships without them (kept_apps, after every hold); unit group: the whole group is held. kinds: a = drive gate, b = engine gate, c_drive / c_engine = no gate, the starred configuration widens it. Not shipped; they come back when the mark is explained.",
  "ns": "nissan",
  "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
- "vehicle_years": 148,
+ "vehicle_years": 121,
  "vehicle_years_by_kind": {
-  "a": 8,
-  "b": 6,
+  "a": 3,
+  "b": 4,
   "c_drive": 6,
-  "c_engine": 43,
-  "starred_only": 116
+  "c_engine": 36,
+  "starred_only": 91
  }
 }

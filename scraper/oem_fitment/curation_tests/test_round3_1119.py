@@ -315,6 +315,7 @@ q = next((g for g in cand["likely"] if "24810-3JA1B" in g["pn"]), None)
 held6 = json.loads((OEM / "groups" / "_report" / "nissan.starred_held.json").read_text())["held"]
 check("candidate: 24810-3JA1B's QX60 gate rules out the 2.5L hybrid by engine (or the group is held, round 6)",
       (q is not None and any(x[1] == "QX60" and x[4].get("eng") == ["3.5L"] for x in q.get("gates") or []))
-      or (q is None and any("24810-3JA1B" in e["pn"] for e in held6)),
+      or (q is None and (any("24810-3JA1B" in e["pn"] for e in held6) or any("24810-3JA1B" in e["pn"] for e in json.loads(
+          (OEM / "groups" / "_report" / "nissan.round8_held.json").read_text())["held"]))),
       json.dumps(q and q.get("gates")))
 done("test_round3_1119")

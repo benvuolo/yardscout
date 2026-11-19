@@ -162,8 +162,12 @@ check("candidate: the 1119e '*' RISK items are held (K6301-1PM0B M37 2012, 96301
 check("candidate: 96301/96302-1CA0B claim no FX35 (listed for it only by the starred '*W. VQ35HR. PREMIUM')",
       not any(claims("side-mirrors", pn, "Infiniti", "FX35", y) for pn in ("96301-1CA0B", "96302-1CA0B")
               for y in range(2009, 2013)))
-check("candidate: kept where every starred configuration repeats an unstarred one (80720-2Z700 Xterra 2002)",
-      claims("window-regulator", "80720-2Z700", "Nissan", "Xterra", 2002))
+r8 = json.loads((OEM / "groups" / "_report" / "nissan.round8_held.json").read_text())
+r8_T = {(g["cat"], g["pn"][0], tuple(h["t"])) for g in r8["held"] for h in g["held"]}
+check("candidate: kept where every starred configuration repeats an unstarred one (80720-2Z700 Xterra 2002), "
+      "or held by a round-8 rule (not by the mark)",
+      claims("window-regulator", "80720-2Z700", "Nissan", "Xterra", 2002)
+      or ("window-regulator", "80720-2Z700", ("Nissan", "Xterra", 2002)) in r8_T)
 for p in sorted((OEM / "groups").glob("*.json")):
     check(f"shipped groups/{p.name}: no held_starred_scope claim removed (nissan candidate only)",
           not (OEM / "groups" / "_report" / f"{p.stem}.starred_held.json").exists())
