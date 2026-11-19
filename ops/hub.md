@@ -2630,3 +2630,44 @@ Groups 23 RIGHT / 1 WRONG / 6 RISK; pairs 21 / 1 / 8.
 - Not done / next: the card's forecast is for the seeker's own model and
   generation, not for every donor model; the `pf-yards/*` counters are not
   in the daily email yet; a forecast line on the public landed pages.
+
+## 2026-11-19 ~11:40 UTC seventh independent nissan check: FAIL (1 WRONG); round 7 started
+
+Check 1119g (seed 91371119, candidate at 0212ed03, branch
+`interchange/verify-nissan-1119g`, head d0399b47, report
+`groups/_report/nissan_verify_2026-11-19g.json` on that branch). Groups 18
+RIGHT / 1 WRONG / 11 RISK; pairs 26 / 0 / 4. Its lot replay matches
+`lot_replay.mjs` exactly (30,229 plain / 3,268 if equipped / 246 hidden).
+Every gate in the sample was judged right with its basis on the pages.
+
+- **WRONG:** 80730-89915 Versa 2007 (175 plain lot rows). Both 2007 Versa
+  pages end the number inside the model year (sedan 12/2006-07/2007,
+  hatchback 05/2006-01/2007, 8991A after), and the year carries no `built`
+  gate. The checker's guess at the cause: the sedan and hatchback windows
+  are joined before the cut test, and together they cover the year. Census:
+  the only such vehicle-year in the candidate.
+- **RISK kinds:** a changeover month at a model-year edge gated on one side
+  only (FX35 2005 gated, 2006 not; M 2009 gated, 2008 not): 45
+  vehicle-years / 26 groups / 1,268 plain; a number undated on its own
+  page whose date split shows on another page (4 items); the `*` deciding
+  AWD on 96301/96302-3JA9A (2 groups, 170 plain; round 5 put them back on
+  purpose); numbers that sit in a different door on different models with
+  no word about it in the note (6 groups, e.g. 82730-3Z005 rear on the
+  Altima, front on the Sentra).
+- Seven checks: 11, 2, 7 (the hub's own rule), 2, 2, 2, 1 WRONG. The
+  classes get thinner each time; none of round 6's came back.
+- **Round 7 started 11:40 UTC** (interchange builder resumed, branch
+  `interchange/round7-1119`), live makes first:
+  1. the window cut test runs against each body-variant page of a model
+     year on its own, never against their union;
+  2. a changeover month is treated the same on both sides: every
+     vehicle-year whose build span holds the changeover gets the `built`
+     gate (or leaves at the note cap);
+  3. a number undated on its own page with a date split on another page of
+     the same model: the narrower reading on every year it touches;
+  4. a group whose number sits in a different door or position on
+     different models is held until the note can name the donor's door
+     (no note wording invented in this round);
+  5. the two `*`-decides-AWD groups are held (reason: starred clause).
+  Then an eighth independent check, new seed (used: 46021118, 61181118,
+  73901118, 38271119, 52941119, 27641119, 91371119).
