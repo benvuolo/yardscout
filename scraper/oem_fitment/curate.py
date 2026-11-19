@@ -2916,15 +2916,15 @@ class Curation:
             return None
         per = [_row_windows(n) for n, _lr in items]
         src = "page"
+        sites = {lr.site for _n, lr in items if lr is not None} or {r.site for r in c.records}
+        models = {(lr.seed[0], lr.seed[1]) for _n, lr in items if lr is not None and lr.seed} or \
+            set(self.t_sources.get(T, set()))
         if all(per):
             wins = _win_merge([w for ws in per for w in ws])
         elif any(per):
             return None             # a dateless own row: listed for the whole year
         else:
             # decision 3: the same catalog model's other model-year pages
-            sites = {lr.site for _n, lr in items if lr is not None} or {r.site for r in c.records}
-            models = {(lr.seed[0], lr.seed[1]) for _n, lr in items if lr is not None and lr.seed} or \
-                set(self.t_sources.get(T, set()))
             # round5-1119 (hub decisions 1-2): the window is read from the
             # NUMBER's dated rows on the catalog model's other model-year
             # pages, whatever their option clause (Sentra 2004 82730-3Z005:
@@ -2932,13 +2932,7 @@ class Curation:
             # predecessor / successor on T's page no longer exempts it
             # ("Replaced By" runs one way). Pages within _OTHER_PAGE_SPAN
             # model years of T (None: every year of the model).
-            other = []
-            srcs = [(lr.site, lr.seed, lr.notes) for lr in self._pn_list_rows(c.key, cat)] + \
-                [(r.site, r.seed, r.note_texts) for r in c.records]
-            for site, seed, notes in srcs:
-                if site in sites and seed and (seed[0], seed[1]) in models and seed[2] != T[2] \
-                        and (_OTHER_PAGE_SPAN is None or abs(seed[2] - T[2]) <= _OTHER_PAGE_SPAN):
-                    other += _row_windows(notes)
+            other = self._pn_other_windows(c.key, cat, T, sites, models, c.records)
             if not other:
                 return None
             wins, src = _win_merge(other), "other_page"
@@ -2966,7 +2960,10 @@ class Curation:
             theirs = {t for t, _p, _n2 in _row_clauses(lr.notes, lr.site)}
             if not (mine & theirs or () in mine or () in theirs):
                 continue
-            ow = _row_windows(lr.notes)
+            # an undated row of the same part on T's page: its window from the
+            # model's other model-year pages (round5: Q70 2015 80720-1MA0A /
+            # 1MA0B, both undated on the 2015 page, dated on the 2016 page)
+            ow = _row_windows(lr.notes) or self._pn_other_windows(k2, cat, T, sites, models)
             if ow and any(_win_overlap(ow, a, b) for a, b in out["gap"]):
                 others.append((lr.pn, _win_merge(ow), self.comparable(cat, c.key, k2)))
         out["others"] = sorted(set((p, tuple(w), lk) for p, w, lk in others))
@@ -2982,6 +2979,20 @@ class Curation:
         else:
             out["kind"] = "unlinked"
         return out
+
+    def _pn_other_windows(self, key, cat, T, sites, models, records=()):
+        """Windows the number's dated rows print on the catalog model's other
+        model-year pages (same site, same seed make/model; within
+        _OTHER_PAGE_SPAN years of T, None = every year), whatever their
+        option clause (round5-1119, hub decision 2)."""
+        out = []
+        srcs = [(lr.site, lr.seed, lr.notes) for lr in self._pn_list_rows(key, cat)] + \
+            [(r.site, r.seed, r.note_texts) for r in records]
+        for site, seed, notes in srcs:
+            if site in sites and seed and (seed[0], seed[1]) in models and seed[2] != T[2] \
+                    and (_OTHER_PAGE_SPAN is None or abs(seed[2] - T[2]) <= _OTHER_PAGE_SPAN):
+                out += _row_windows(notes)
+        return _win_merge(out)
 
     def _pn_list_rows(self, key, cat):
         idx = self.__dict__.get("_pn_rows")

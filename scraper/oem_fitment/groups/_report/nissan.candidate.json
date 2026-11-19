@@ -82019,33 +82019,27 @@
     ],
     [
      "Infiniti",
-     "Q70",
-     2015,
-     2015
-    ],
-    [
-     "Infiniti",
      "Q70L",
      2015,
      2015
     ]
    ],
-   "cars": 53,
+   "cars": 49,
    "cat": "window-regulator",
    "gates": [
     [
      "Infiniti",
-     "Q70",
+     "Q70L",
      2015,
      2015,
      {
-      "fuel": "gas"
+      "built": "2014-07..2015-02"
      }
     ]
    ],
-   "id": "oem:nissan:window-regulator:FR:44072e2a6d",
+   "id": "oem:nissan:window-regulator:FR:c274303e72",
    "kind": "body",
-   "note": "Nissan catalog lists #80720-1MA0A for both — option: fits some option packages; Q70: gas only; verify the number on the part",
+   "note": "Nissan catalog lists #80720-1MA0A for both — option: fits some option packages; Q70L: built 07/2014-02/2015 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:28:08Z",
    "pn": [
     "80720-1MA0A"
@@ -82058,13 +82052,13 @@
     [
      "Infiniti",
      "Q70",
-     2015,
+     2016,
      2018
     ],
     [
      "Infiniti",
      "Q70L",
-     2015,
+     2016,
      2016
     ],
     [
@@ -82074,20 +82068,20 @@
      2018
     ]
    ],
-   "cars": 7,
+   "cars": 2,
    "cat": "window-regulator",
    "gates": [
     [
      "Infiniti",
      "Q70",
-     2015,
+     2016,
      2018,
      {
       "fuel": "gas"
      }
     ]
    ],
-   "id": "oem:nissan:window-regulator:FR:b852d2abef",
+   "id": "oem:nissan:window-regulator:FR:4be798272d",
    "kind": "body",
    "note": "Nissan catalog lists #80720-1MA0B for both — option: fits some option packages; Q70: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-10T13:12:45Z",
@@ -82848,33 +82842,27 @@
     ],
     [
      "Infiniti",
-     "Q70",
-     2015,
-     2015
-    ],
-    [
-     "Infiniti",
      "Q70L",
      2015,
      2015
     ]
    ],
-   "cars": 53,
+   "cars": 49,
    "cat": "window-regulator",
    "gates": [
     [
      "Infiniti",
-     "Q70",
+     "Q70L",
      2015,
      2015,
      {
-      "fuel": "gas"
+      "built": "2014-07..2015-02"
      }
     ]
    ],
-   "id": "oem:nissan:window-regulator:FL:40bda0411e",
+   "id": "oem:nissan:window-regulator:FL:07bea6c294",
    "kind": "body",
-   "note": "Nissan catalog lists #80721-1MA0A for both — option: fits some option packages; Q70: gas only; verify the number on the part",
+   "note": "Nissan catalog lists #80721-1MA0A for both — option: fits some option packages; Q70L: built 07/2014-02/2015 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:27:59Z",
    "pn": [
     "80721-1MA0A"
@@ -82887,13 +82875,13 @@
     [
      "Infiniti",
      "Q70",
-     2015,
+     2016,
      2018
     ],
     [
      "Infiniti",
      "Q70L",
-     2015,
+     2016,
      2016
     ],
     [
@@ -82903,20 +82891,20 @@
      2018
     ]
    ],
-   "cars": 7,
+   "cars": 2,
    "cat": "window-regulator",
    "gates": [
     [
      "Infiniti",
      "Q70",
-     2015,
+     2016,
      2018,
      {
       "fuel": "gas"
      }
     ]
    ],
-   "id": "oem:nissan:window-regulator:FL:63a284d00d",
+   "id": "oem:nissan:window-regulator:FL:58acc4d599",
    "kind": "body",
    "note": "Nissan catalog lists #80721-1MA0B for both — option: fits some option packages; Q70: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-10T13:12:37Z",
@@ -85296,7 +85284,7 @@
      "Nissan",
      "Juke",
      2015,
-     2015
+     2016
     ],
     [
      "Nissan",
@@ -85305,11 +85293,22 @@
      2012
     ]
    ],
-   "cars": 131,
+   "cars": 144,
    "cat": "window-regulator",
-   "id": "oem:nissan:window-regulator:RL:e211fa2ecb",
+   "gates": [
+    [
+     "Nissan",
+     "Juke",
+     2015,
+     2016,
+     {
+      "built": "2014-10..2015-03,2015-08..2016-02"
+     }
+    ]
+   ],
+   "id": "oem:nissan:window-regulator:RL:aa429aac7c",
    "kind": "body",
-   "note": "Nissan catalog lists #82730-CV01B for both — option: fits some option packages; verify the number on the part",
+   "note": "Nissan catalog lists #82730-CV01B for both — option: fits some option packages; Juke: built 10/2014-03/2015, 08/2015-02/2016 only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:08:34Z",
    "pn": [
     "82730-CV01B"

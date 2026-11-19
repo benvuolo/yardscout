@@ -66,6 +66,7 @@ class _Cur:
     _t_drive_systems = C.Curation._t_drive_systems
     build_window = C.Curation.build_window
     _pn_list_rows = C.Curation._pn_list_rows
+    _pn_other_windows = C.Curation._pn_other_windows
 
     def __init__(self, ns, pages, links=(), sources=None):
         self.ns = ns
