@@ -3243,3 +3243,45 @@ number is written here.
   Google 1 as of 11-17. The daily ops email reads that value.
 - This closes the 11-18 puzzle of "0 downloads since 11-06": they were
   under the LLC number.
+
+## 2026-11-19 17:05 UTC release candidate hub/rc4-1119 in full regression; permission email drafted
+
+- **Donor-model forecast, second hand-back** (`feat/donor-forecast-1119`
+  head c1ae117f, sw `jh-v219`): subject "Cars of the donor models"; under
+  the headline one line of fact from today's lot, "On lots within 100 mi
+  now: 42 of 61 cars of these models are donors for this part." (cars =
+  lot cars in range matching the spec set; donors = the rows the list
+  shows among them; never above cars; redraws with "Verified fits only").
+  Caveat now "The 8-week counts include every car of these models and
+  years, whatever its engine or options." Real data near 95112: 2004
+  4Runner alternator 42 of 61, "About 6 a week"; 2002 ES 300 alternator
+  363 of 570, "About 72 a week" (the list itself offers "engine not
+  confirmed" donors, so the ratio is what the list shows, not a decoded
+  engine share). Builder's tests: forecast_unit 119, pf_forecast_e2e 38,
+  forecast/pf set 10/0, layout 1,416 checks per half, quick 76/0.
+- **`hub/rc4-1119`** = main cce48870 + that branch (merge 19470c48). Full
+  regression started 17:04 UTC (about 50 minutes). On pass: push to main,
+  pages deploy, one live load, `deploy-workers.yml` for the ops-email
+  line.
+- Interchange builder asked (17:02 UTC) to push the app-side read of the
+  newer payload field first, on `interchange/payload-field2-reader`, so
+  1.13.3 can carry it even if round 9 finishes after the build.
+- **1.13.3 What's New, prepared** (`release/whatsnew_1133.txt` in the
+  scratchpad; goes into `ops/release.md` at dispatch; a Nissan line is
+  added only if Nissan is live by then):
+
+      Know where to go, and when.
+      • Search a part and see the best yards for it: donor cars at each yard, distance, newest arrival and the yard's own price.
+      • Arrival forecast: how often your model, or the models a part comes from, has landed near you over the last 8 weeks. On Parts, Cars and each alert.
+      • Newest arrivals now lead with the yards closest to you.
+
+- **Gmail draft for the owner** (no recipient yet, nothing sent): "Asking
+  permission to read your OEM parts catalog pages (YardScout)". Says what
+  the reader does (one page per eight seconds, robots rules, its
+  user-agent name), that several sites answered 403 and we stopped and
+  will not work around it, and asks for either a limited read at their
+  pace or a data arrangement; offers source credit and a link from each
+  part number to their product page (an offer the owner may strike: the
+  app does not link out today). No web addresses in the draft. The owner
+  needs the operator's contact address from one of the sites' contact
+  pages (the hub does not machine-read sites that refused it).
