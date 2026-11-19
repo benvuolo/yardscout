@@ -180706,7 +180706,7 @@
   },
   {
    "cat": "bumper-front",
-   "detail": "M37 2011: 2WD only; M56 2011: 2WD only; Q70: checked on gas-model pages",
+   "detail": "M37 2011: 2WD only; M56 2011: 2WD only; Q70: built 11/2013-07/2014 only; Q70: checked on gas-model pages",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1659"
    ],
@@ -182740,7 +182740,7 @@
     "www.infinitipartsdeal.com:records:L2304"
    ],
    "pn": "24820-1MK5A",
-   "reason": "held_drive_qualifier",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -182750,7 +182750,7 @@
     "www.infinitipartsdeal.com:records:L2314"
    ],
    "pn": "24820-6AH2A",
-   "reason": "held_drive_qualifier",
+   "reason": "held_window_note_cap",
    "t": null
   },
   {
@@ -183807,6 +183807,26 @@
   },
   {
    "cat": "grille",
+   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2015-2015",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1258"
+   ],
+   "pn": "62310-3JA0A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Infiniti JX35 2013-2013;Infiniti QX60 2015-2015",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1259"
+   ],
+   "pn": "62310-3JA0B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
    "detail": "Infiniti M35 2007-2008;Infiniti M45 2006-2008",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1169"
@@ -183847,6 +183867,16 @@
   },
   {
    "cat": "grille",
+   "detail": "Infiniti M37 2012-2013;Infiniti M56 2011-2013;Infiniti Q70L 2015-2015",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1661"
+   ],
+   "pn": "62310-1MA1B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
    "detail": "Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L2364"
@@ -183877,16 +183907,6 @@
   },
   {
    "cat": "grille",
-   "detail": "M37 2011: 2WD only; M56 2011: 2WD only; Q70: checked on gas-model pages",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1661"
-   ],
-   "pn": "62310-1MA1B",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "grille",
    "detail": "Nissan Armada 2004-2008;Nissan Titan 2006-2006",
    "evidence": [
     "www.nissanpartsdeal.com:records:L2801"
@@ -183913,26 +183933,6 @@
    ],
    "pn": "62310-EA700",
    "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "grille",
-   "detail": "QX60 2014-2015: 3.5L only; QX60: checked on gas-model pages",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1258"
-   ],
-   "pn": "62310-3JA0A",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "grille",
-   "detail": "QX60 2014-2015: 3.5L only; QX60: checked on gas-model pages",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1259"
-   ],
-   "pn": "62310-3JA0B",
-   "reason": "held_drive_qualifier",
    "t": null
   },
   {
@@ -185483,7 +185483,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L only; QX60 2016-2017: AWD only; QX60: checked on gas-model pages",
+   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L only; QX60 2016-2017: AWD only",
    "evidence": [
     "www.infinitipartsdeal.com:records:L364"
    ],
@@ -185493,7 +185493,7 @@
   },
   {
    "cat": "headlights",
-   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L only; QX60 2016-2017: AWD only; QX60: checked on gas-model pages",
+   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L only; QX60 2016-2017: AWD only",
    "evidence": [
     "www.infinitipartsdeal.com:records:L366"
    ],
@@ -187158,6 +187158,26 @@
   },
   {
    "cat": "side-mirrors",
+   "detail": "Infiniti JX35 2013 held_starred_scope/held_undated_siblings; Infiniti QX60 2015 held_starred_scope/held_undated_siblings",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L371"
+   ],
+   "pn": "96302-3JA9C",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti JX35 2013 held_starred_scope/held_undated_siblings; Infiniti QX60 2015 held_starred_scope/held_undated_siblings",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L376"
+   ],
+   "pn": "96301-3JA9C",
+   "reason": "held_starred_scope",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
    "detail": "Infiniti JX35 2013 held_undated_siblings; Infiniti QX60 2015 held_starred_scope/held_undated_siblings",
    "evidence": [
     "www.infinitipartsdeal.com:records:L369"
@@ -187258,7 +187278,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L only; QX60 2016-2017: AWD only; QX60: checked on gas-model pages",
+   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L only; QX60 2016-2017: AWD only",
    "evidence": [
     "www.infinitipartsdeal.com:records:L372"
    ],
@@ -187268,7 +187288,7 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L only; QX60 2016-2017: AWD only; QX60: checked on gas-model pages",
+   "detail": "JX35: AWD only; QX60 2014-2015: AWD, 3.5L only; QX60 2016-2017: AWD only",
    "evidence": [
     "www.infinitipartsdeal.com:records:L377"
    ],
@@ -187388,46 +187408,6 @@
   },
   {
    "cat": "side-mirrors",
-   "detail": "QX60 2014-2015: 3.5L only; QX60: checked on gas-model pages",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L371"
-   ],
-   "pn": "96302-3JA9C",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "QX60 2014-2015: 3.5L only; QX60: checked on gas-model pages",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L376"
-   ],
-   "pn": "96301-3JA9C",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "QX60 2015-2017: 2WD only; QX60: checked on gas-model pages",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L370"
-   ],
-   "pn": "96302-3JA9B",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
-   "detail": "QX60 2015-2017: 2WD only; QX60: checked on gas-model pages",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L375"
-   ],
-   "pn": "96301-3JA9B",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "side-mirrors",
    "detail": "Xterra 2004 held_no_own_page",
    "evidence": [
     "www.nissanpartsdeal.com:records:L262"
@@ -187483,6 +187463,26 @@
     "www.infinitipartsdeal.com:records:L301"
    ],
    "pn": "96301-EH100",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "as round 5b",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L370"
+   ],
+   "pn": "96302-3JA9B",
+   "reason": "held_window_note_cap",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "as round 5b",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L375"
+   ],
+   "pn": "96301-3JA9B",
    "reason": "held_window_note_cap",
    "t": null
   },
@@ -189095,36 +189095,6 @@
   },
   {
    "cat": "window-regulator",
-   "detail": "Murano 2016-2017, Rogue 2017-2019: checked on gas-model pages",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L1287"
-   ],
-   "pn": "80730-4BA1A",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
-   "detail": "Murano 2016-2017, Rogue 2017-2019: checked on gas-model pages",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L1291"
-   ],
-   "pn": "82731-4BA0A",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
-   "detail": "Murano 2016-2017, Rogue 2017-2019: checked on gas-model pages",
-   "evidence": [
-    "www.nissanpartsdeal.com:records:L1292"
-   ],
-   "pn": "82730-4BA0A",
-   "reason": "held_drive_qualifier",
-   "t": null
-  },
-  {
-   "cat": "window-regulator",
    "detail": "Murano: RR; Versa: FR",
    "evidence": [
     "www.nissanpartsdeal.com:records:L467"
@@ -190159,9 +190129,9 @@
    "earlier_cap_kept_out:headlights": 2,
    "earlier_cap_kept_out:hood": 1,
    "earlier_cap_kept_out:liftgate": 4,
-   "earlier_cap_kept_out:side-mirrors": 6,
+   "earlier_cap_kept_out:side-mirrors": 12,
    "earlier_cap_kept_out:tail-lights": 3,
-   "earlier_cap_kept_out:window-regulator": 10,
+   "earlier_cap_kept_out:window-regulator": 16,
    "held_cab_inferred:window-regulator": 4,
    "held_cross_position:window-regulator": 18,
    "held_no_own_page:bumper-front": 4,
@@ -190188,7 +190158,7 @@
    "held_starred_only:window-regulator": 6,
    "held_undated_siblings:climate-control": 13,
    "held_undated_siblings:gauge-cluster": 17,
-   "held_undated_siblings:side-mirrors": 135,
+   "held_undated_siblings:side-mirrors": 139,
    "held_undated_siblings:window-regulator": 61,
    "held_window_other_page:bumper-front": 2,
    "held_window_other_page:climate-control": 12,
@@ -190208,7 +190178,7 @@
   "likely_app_years_starred_scope": {
    "climate-control": 0,
    "gauge-cluster": 5,
-   "side-mirrors": 42,
+   "side-mirrors": 46,
    "window-regulator": 2
   },
   "likely_app_years_without_own_page": {
@@ -190231,7 +190201,7 @@
    "window-regulator": 1950,
    "wiper-motor": 799
   },
-  "likely_groups": 108,
+  "likely_groups": 111,
   "likely_groups_drive_noted": {
    "bumper-front": 5,
    "bumper-rear": 5,
@@ -190239,12 +190209,12 @@
    "door-front": 32,
    "door-rear": 10,
    "fender": 6,
-   "gauge-cluster": 39,
+   "gauge-cluster": 37,
    "grille": 11,
    "headlights": 31,
    "hood": 2,
    "liftgate": 11,
-   "side-mirrors": 37,
+   "side-mirrors": 35,
    "tail-lights": 28,
    "trunk-lid": 3,
    "window-regulator": 60

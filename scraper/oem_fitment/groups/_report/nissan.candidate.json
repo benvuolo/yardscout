@@ -70311,6 +70311,20 @@
    ],
    "reman": false
   },
+  "nissan:807304BA1A": {
+   "cat": "window-regulator",
+   "comp": "reg?",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1287"
+   ],
+   "names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "pns": [
+    "80730-4BA1A"
+   ],
+   "reman": false
+  },
   "nissan:807307B400": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -70745,6 +70759,20 @@
    ],
    "reman": false
   },
+  "nissan:827304BA0A": {
+   "cat": "window-regulator",
+   "comp": "reg?",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1292"
+   ],
+   "names": [
+    "Motor Assy-Regulator, RH"
+   ],
+   "pns": [
+    "82730-4BA0A"
+   ],
+   "reman": false
+  },
   "nissan:82730CV01B": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -70854,6 +70882,20 @@
    ],
    "pns": [
     "82731-3TA2A"
+   ],
+   "reman": false
+  },
+  "nissan:827314BA0A": {
+   "cat": "window-regulator",
+   "comp": "reg?",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L1291"
+   ],
+   "names": [
+    "Motor Assy-Regulator, LH"
+   ],
+   "pns": [
+    "82731-4BA0A"
    ],
    "reman": false
   },
@@ -79925,6 +79967,59 @@
    "apps": [
     [
      "Nissan",
+     "Murano",
+     2015,
+     2019
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017
+    ]
+   ],
+   "cars": 162,
+   "cat": "window-regulator",
+   "gates": [
+    [
+     "Nissan",
+     "Murano",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017,
+     {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "id": "oem:nissan:window-regulator:FL:48f3526d2a",
+   "kind": "body",
+   "note": "Nissan catalog lists #80730-4BA1A for both — fits some configurations; Murano 2016-2017, Rogue: checked on gas-model pages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T09:44:41Z",
+   "pn": [
+    "80730-4BA1A"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
      "Frontier",
      2001,
      2004
@@ -80993,6 +81088,59 @@
    "apps": [
     [
      "Nissan",
+     "Murano",
+     2015,
+     2019
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017
+    ]
+   ],
+   "cars": 162,
+   "cat": "window-regulator",
+   "gates": [
+    [
+     "Nissan",
+     "Murano",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017,
+     {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "id": "oem:nissan:window-regulator:RR:96909ce3ff",
+   "kind": "body",
+   "note": "Nissan catalog lists #82730-4BA0A for both — fits some configurations; Murano 2016-2017, Rogue: checked on gas-model pages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T09:45:29Z",
+   "pn": [
+    "82730-4BA0A"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
      "Cube",
      2011,
      2014
@@ -81293,6 +81441,59 @@
    "oldest_retrieved": "2026-11-05T01:18:25Z",
    "pn": [
     "82731-3TA2A"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Murano",
+     2015,
+     2019
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017
+    ]
+   ],
+   "cars": 162,
+   "cat": "window-regulator",
+   "gates": [
+    [
+     "Nissan",
+     "Murano",
+     2016,
+     2017,
+     {
+      "eng_not": [
+       "2.5L"
+      ],
+      "fuel": "gas"
+     }
+    ],
+    [
+     "Nissan",
+     "Rogue",
+     2017,
+     2017,
+     {
+      "eng_not": [
+       "2.0L"
+      ],
+      "fuel": "gas"
+     }
+    ]
+   ],
+   "id": "oem:nissan:window-regulator:RL:e361623530",
+   "kind": "body",
+   "note": "Nissan catalog lists #82731-4BA0A for both — fits some configurations; Murano 2016-2017, Rogue: checked on gas-model pages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T09:45:21Z",
+   "pn": [
+    "82731-4BA0A"
    ],
    "reason": "conditional",
    "tier": "likely"

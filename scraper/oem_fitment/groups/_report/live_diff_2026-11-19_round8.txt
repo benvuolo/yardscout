@@ -100,7 +100,9 @@ nissan CHANGED LIVE ('window-regulator', ('80730-1MA0A',)) [['Infiniti', 'M35h',
     old: Nissan catalog lists #80730-1MA0A for both — fits some configurations; Q70 2014-2018: gas only; verify the number on the part
     new: Nissan catalog lists #80730-1MA0A for both — fits some configurations; Q70 2014-2018: checked on gas-model pages; verify the number on the part
 nissan CHANGED LIVE ('window-regulator', ('80730-2Y000',)) [['Infiniti', 'I30', 2001, 2001], ['Infiniti', 'I35', 2002, 2003]] lost [('Infiniti', 'I30', 2000)] gained []
-nissan REMOVED LIVE ('window-regulator', ('80730-4BA1A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2016, 2019]]
+nissan CHANGED LIVE ('window-regulator', ('80730-4BA1A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2017, 2017]] lost [('Nissan', 'Rogue', 2016), ('Nissan', 'Rogue', 2018), ('Nissan', 'Rogue', 2019)] gained []
+    old: Nissan catalog lists #80730-4BA1A for both — fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part
+    new: Nissan catalog lists #80730-4BA1A for both — fits some configurations; Murano 2016-2017, Rogue: checked on gas-model pages; verify the number on the part
 nissan CHANGED LIVE ('window-regulator', ('80730-7B400',)) [['Nissan', 'Frontier', 2001, 2004], ['Nissan', 'Xterra', 2000, 2000]] lost [('Nissan', 'Xterra', 2002), ('Nissan', 'Xterra', 2003), ('Nissan', 'Xterra', 2004)] gained []
 nissan CHANGED LIVE ('window-regulator', ('80730-EA005',)) [['Nissan', 'Frontier', 2005, 2019], ['Nissan', 'Xterra', 2005, 2009], ['Nissan', 'Xterra', 2011, 2015]] lost [('Nissan', 'Pathfinder', 2005), ('Nissan', 'Pathfinder', 2006), ('Nissan', 'Pathfinder', 2007), ('Nissan', 'Pathfinder', 2008), ('Nissan', 'Xterra', 2010)] gained []
     old: Nissan catalog lists #80730-EA005 for both — option: fits some option packages; Pathfinder 2008: 4.0L only; verify the number on the part
@@ -134,7 +136,9 @@ nissan CHANGED LIVE ('window-regulator', ('82730-1MA0B',)) [['Infiniti', 'Q70', 
 nissan CHANGED LIVE ('window-regulator', ('82730-3KG0A',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2015, 2019]] lost [('Infiniti', 'QX60', 2014)] gained []
     old: Nissan catalog lists #82730-3KG0A for both — fits some configurations; QX60 2014-2017: gas only; verify the number on the part
     new: Nissan catalog lists #82730-3KG0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part
-nissan REMOVED LIVE ('window-regulator', ('82730-4BA0A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2016, 2019]]
+nissan CHANGED LIVE ('window-regulator', ('82730-4BA0A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2017, 2017]] lost [('Nissan', 'Rogue', 2016), ('Nissan', 'Rogue', 2018), ('Nissan', 'Rogue', 2019)] gained []
+    old: Nissan catalog lists #82730-4BA0A for both — fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part
+    new: Nissan catalog lists #82730-4BA0A for both — fits some configurations; Murano 2016-2017, Rogue: checked on gas-model pages; verify the number on the part
 nissan CHANGED LIVE ('window-regulator', ('82730-D9000',)) [['Nissan', 'Altima', 1994, 1994], ['Nissan', 'Altima', 1996, 1997], ['Nissan', 'Stanza', 1995, 1997]] lost [('Nissan', 'Altima', 1995)] gained []
 nissan CHANGED LIVE ('window-regulator', ('82730-EH100',)) [['Infiniti', 'M35', 2007, 2010], ['Infiniti', 'M45', 2006, 2010]] lost [('Infiniti', 'M35', 2006)] gained []
 nissan CHANGED LIVE ('window-regulator', ('82731-1MA0A',)) [['Infiniti', 'M35h', 2012, 2013], ['Infiniti', 'M37', 2011, 2013], ['Infiniti', 'M56', 2011, 2013], ['Infiniti', 'QX56', 2011, 2013], ['Infiniti', 'QX80', 2014, 2017]] lost [('Infiniti', 'Q70L', 2016), ('Infiniti', 'Q70L', 2017)] gained []
@@ -146,7 +150,9 @@ nissan CHANGED LIVE ('window-regulator', ('82731-1MA0B',)) [['Infiniti', 'Q70', 
 nissan CHANGED LIVE ('window-regulator', ('82731-3KG0A',)) [['Infiniti', 'JX35', 2013, 2013], ['Infiniti', 'QX60', 2015, 2019]] lost [('Infiniti', 'QX60', 2014)] gained []
     old: Nissan catalog lists #82731-3KG0A for both — fits some configurations; QX60 2014-2017: gas only; verify the number on the part
     new: Nissan catalog lists #82731-3KG0A for both — fits some configurations; QX60 2015-2017: checked on gas-model pages; verify the number on the part
-nissan REMOVED LIVE ('window-regulator', ('82731-4BA0A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2016, 2019]]
+nissan CHANGED LIVE ('window-regulator', ('82731-4BA0A',)) [['Nissan', 'Murano', 2015, 2019], ['Nissan', 'Rogue', 2017, 2017]] lost [('Nissan', 'Rogue', 2016), ('Nissan', 'Rogue', 2018), ('Nissan', 'Rogue', 2019)] gained []
+    old: Nissan catalog lists #82731-4BA0A for both — fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part
+    new: Nissan catalog lists #82731-4BA0A for both — fits some configurations; Murano 2016-2017, Rogue: checked on gas-model pages; verify the number on the part
 nissan CHANGED LIVE ('window-regulator', ('82731-D9000',)) [['Nissan', 'Altima', 1994, 1994], ['Nissan', 'Stanza', 1995, 1995]] lost [('Nissan', 'Altima', 1995)] gained []
     old: Nissan catalog lists #82731-D9000 for both — fits some configurations; Altima 1994: built 08/1993-02/1996 only; verify the number on the part
     new: Nissan catalog lists #82731-D9000 for both — fits some configurations; Altima: built 08/1993-02/1996 only; verify the number on the part
@@ -159,4 +165,4 @@ nissan CHANGED LIVE ('window-regulator', ('82731-EH100',)) [['Infiniti', 'M35', 
 # subaru LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # vag LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # mb LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
-# nissan LIVE: removed 48 groups, added 0 groups, changed 59; app-years lost 82, gained 0; gates narrowed 0, widened 0; added claims 0
+# nissan LIVE: removed 45 groups, added 0 groups, changed 62; app-years lost 91, gained 0; gates narrowed 0, widened 0; added claims 0

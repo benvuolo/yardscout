@@ -1650,15 +1650,30 @@ class Curation:
             # note past the cap leaves that vehicle-year out (never cut), one at
             # a time, the longest label first; other limits refuse as before
             def cap_loop(Ts_l, win, record):
+                # the round-3 test reads the round-3 words (round8: not the
+                # 'checked on gas-model pages' phrase, which the loop below fits)
+                self._gas_note_off = True
                 lim_l = self._likely_limits(c, cat, Ts_r3, slots, drive_r3, set(), {}, {}, text, brand)
+                self._gas_note_off = False
                 while lim_l["status"] == "ok" or lim_l.get("retry"):
                     lim_l = self._likely_limits(c, cat, Ts_l, slots, drive_by_T, sib_T, dnot_by_T, win, text, brand)
                     wTs = [T for T in Ts_l if T in win]
-                    if lim_l["status"] != "held_drive_qualifier" or not wTs or \
-                            self._likely_limits(c, cat, Ts_l, slots, drive_by_T, sib_T, dnot_by_T, {}, text,
-                                                brand)["status"] != "ok":
-                        break           # not the window's words: refused as before
-                    drop = max(wTs, key=lambda T: (len(lim_l["labels"].get(T, "")), T))
+                    gTs = [T for T in Ts_l if T in set(lim_l.get("gas") or ())]
+                    if lim_l["status"] != "held_drive_qualifier":
+                        break
+                    if wTs and self._likely_limits(c, cat, Ts_l, slots, drive_by_T, sib_T, dnot_by_T, {}, text,
+                                                   brand)["status"] == "ok":
+                        drop = max(wTs, key=lambda T: (len(lim_l["labels"].get(T, "")), T))
+                    else:
+                        # round8-1119 decision 5: the 'checked on gas-model pages'
+                        # words do not fit: a gas-checked year leaves, not the group
+                        self._gas_note_off = True
+                        fits = gTs and self._likely_limits(c, cat, Ts_l, slots, drive_by_T, sib_T, dnot_by_T, win,
+                                                           text, brand)["status"] == "ok"
+                        self._gas_note_off = False
+                        if not fits:
+                            break           # not the window's or the gas words: refused as before
+                        drop = max(gTs)
                     Ts_l = [T for T in Ts_l if T != drop]
                     if record:
                         self.likely_window_note_cap[cat] += 1
@@ -1989,8 +2004,10 @@ class Curation:
         if drv:
             text = f"{text}; {drv}"
             if not _likely_note_fits(brand, sorted(c.pns)[0], text, pack):
-                return {"status": "held_drive_qualifier", "detail": drv, "drv": drv, "labels": label_by_T}
-        return {"status": "ok", "text": text, "drv": drv, "gates": gate_by_T, "labels": label_by_T}
+                return {"status": "held_drive_qualifier", "detail": drv, "drv": drv, "labels": label_by_T,
+                        "gas": sorted(gas_checked)}
+        return {"status": "ok", "text": text, "drv": drv, "gates": gate_by_T, "labels": label_by_T,
+                "gas": sorted(gas_checked)}
 
     def _strict_refusal(self, c, cat, cand, slots):
         """(code, detail) for a strict-note category (policy.STRICT_NOTE_CATS,
@@ -2351,7 +2368,7 @@ class Curation:
     def _gas_checked_note(self, gas_checked, Ts) -> str:
         """'checked on gas-model pages' (every vehicle-year), else '<model>[
         years]: checked on gas-model pages'; '' for none (round8 decision 5)."""
-        if not gas_checked:
+        if not gas_checked or getattr(self, "_gas_note_off", False):
             return ""
         if set(gas_checked) == set(Ts):
             return "checked on gas-model pages"

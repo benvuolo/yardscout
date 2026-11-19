@@ -3,7 +3,7 @@
 Raw: `57e8b5b99de0` @ `57e8b5b99de0`; as of 2026-11-14T11:38:15Z.
 
 - records 7778, classes 7552, list rows 75222, year manifests 457, cells 9944
-- Verified groups 0, engine vg groups 0, Likely groups 108
+- Verified groups 0, engine vg groups 0, Likely groups 111
 - blocked sites: none
 
 ## Gates standing for the whole namespace
@@ -370,17 +370,17 @@ Raw: `57e8b5b99de0` @ `57e8b5b99de0`; as of 2026-11-14T11:38:15Z.
 - disputed_class: 226
 - held_cab_inferred: 4
 - held_cross_position: 5
-- held_drive_qualifier: 55
+- held_drive_qualifier: 43
 - held_engine_conflict: 38
-- held_exterior_cross_model: 238
+- held_exterior_cross_model: 241
 - held_market_kph: 62
 - held_no_own_page: 46
 - held_option_tie: 2
 - held_plus_reading: 1
 - held_starred_only: 32
-- held_starred_scope: 4
+- held_starred_scope: 6
 - held_undated_siblings: 22
-- held_window_note_cap: 45
+- held_window_note_cap: 49
 - held_window_other_page: 37
 - strict_note: 1
 - strict_slot_split: 9
