@@ -4698,7 +4698,29 @@ function getFilteredLive() {
     // except in the yard's own view (Yard filter on).
     const heldOf = locationFilter ? () => 0 : v => (arrivalHeld(v) ? 1 : 0);
     const dec = filtered.map(v => [dayOf(v), listPhotoFlag(v), dOf(v), v, heldOf(v)]);
-    dec.sort((x, y) => (x[4] - y[4]) || (y[0] - x[0]) || (y[1] - x[1]) || (x[2] - y[2]));
+    // The two newest days are ONE group, nearest yard first (owner,
+    // 2026-11-19, after 48 cars set out that day 80 miles off led the list
+    // over 52 set out the day before 1 mile away: "Yes" to "today's and
+    // yesterday's cars treated as one group, closest yard first"). The
+    // newest day is the newest one in THIS list (never a day after today),
+    // so the group holds before a yard has published today's cars too.
+    // Inside the group: the nearest yard, then the newer day, then the car
+    // whose photo shows. A photo still never puts a car above a newer one
+    // of the same yard (the 2026-11-16 rule above); only distance does,
+    // across yards, and only between these two days. Every older day is as
+    // before: strictly by day, then photo, then the nearest. With no place
+    // set, or in one yard's own view, every distance ties and the order is
+    // what it was.
+    const now = new Date();
+    const today = Math.round(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+    let top = 0;
+    for (const x of dec) if (!x[4] && x[0] > top && x[0] <= today) top = x[0];
+    // x[5]: the day a car sorts under (the day before the newest sorts with it)
+    for (const x of dec) x.push(!x[4] && top && x[0] === top - 1 ? top : x[0]);
+    const inTop = x => !x[4] && top > 0 && x[5] === top;
+    dec.sort((x, y) => (x[4] - y[4]) || (y[5] - x[5])
+      || (inTop(x) ? (x[2] - y[2]) || (y[0] - x[0]) || (y[1] - x[1])
+                   : (y[1] - x[1]) || (x[2] - y[2])));
     filtered = dec.map(d => d[3]);
   } else if (keyFn) {
     const dec = filtered.map(v => [keyFn(v), tieFn(v), v]);
@@ -5670,9 +5692,15 @@ function feedSinceInfo(vehicles) {
   const html = liveSinceOnly
     ? `<div class="since-line on" style="grid-column:1/-1;"><p>Showing the <b>${n.toLocaleString()}</b> ${n === 1 ? 'car' : 'cars'} set out${near} since your last visit (${when}).</p><button type="button" class="btn btn-quiet since-all">Show all cars</button></div>`
     : `<div class="since-line" style="grid-column:1/-1;"><p><b>${n.toLocaleString()}</b> set out${near} since your last visit (${when}).</p><button type="button" class="btn btn-primary since-show">Show just ${n === 1 ? 'that one' : 'those'}</button></div>`;
-  // The divider: only in the newest-first list, where the new ones lead.
+  // The divider: only in the newest-first list, and only where the new ones
+  // really lead. The two newest days sort as one group by distance
+  // (2026-11-19), so when the last visit was inside that group the new cars
+  // are mixed with the day before's: no divider then (the line above still
+  // counts them and "Show just those" still lists them).
   const sort = document.getElementById('live-sort').value;
-  const dividerAt = !liveSinceOnly && sort === 'date-desc' && n < vehicles.length ? n : -1;
+  const lead = !liveSinceOnly && sort === 'date-desc' && n < vehicles.length
+    && vehicles.slice(0, n).every(v => setOutSince(v, FEED_SINCE_DAY));
+  const dividerAt = lead ? n : -1;
   return { html, dividerAt, n };
 }
 document.getElementById('live-grid').addEventListener('click', (e) => {

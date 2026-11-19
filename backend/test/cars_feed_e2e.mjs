@@ -162,48 +162,83 @@ try {
   }
 
   /* ---------- 1b. the order of the list ---------- */
-  console.log('1b. Newest arrivals: strictly by day; a photo only orders cars of the same day');
+  console.log('1b. Newest arrivals: the two newest days are one group, nearest yard first; older days strictly by day');
   {
     const { page, ctx } = await open({ w: 390, h: 844 });
     const o = await page.evaluate(() => {
-      const list = getFilteredLive().slice(0, 1200);
+      const list = getFilteredLive();
+      const held = (v) => (arrivalHeld(v) ? 1 : 0);
+      const now = new Date(), today = Math.round(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
       const ph = (v) => listPhotoFlag(v);
       const day = (v) => { const ts = yardDateMs(v.dateAdded); if (!ts) return 0; const d = new Date(ts); return Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); };
       const dist = (v) => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; };
-      let dateOk = true, photoOk = true, distOk = true, buried = 0;
+      // The newest day in this list (owner, 2026-11-19): it and the day before
+      // are one group, nearest yard first; held cars are not arrivals.
+      let top = 0;
+      for (const v of list) { if (!held(v)) { const d = day(v); if (d > top && d <= today) top = d; } }
+      const grp = (v) => !held(v) && top > 0 && (day(v) === top || day(v) === top - 1);
+      const key = (v) => (grp(v) ? top : day(v));
+      let heldLast = true, dateOk = true, nearOk = true, yardDayOk = true, yardPhotoOk = true, photoOk = true, distOk = true, buried = 0, groupN = 0, mixed = 0;
+      const groupDays = new Set();
+      for (const v of list) if (grp(v)) { groupN++; groupDays.add(day(v)); }
       for (let i = 1; i < list.length; i++) {
         const a = list[i - 1], b = list[i];
-        if (day(a) < day(b)) { dateOk = false; if (ph(a) && !ph(b)) buried++; }
-        if (day(a) !== day(b)) continue;
+        if (held(a) > held(b)) heldLast = false;
+        if (held(a) !== held(b)) continue;
+        if (key(a) < key(b)) dateOk = false;
+        if (key(a) !== key(b)) continue;
+        if (grp(a) && grp(b)) {
+          if (dist(a) > dist(b) + 1e-9) nearOk = false;
+          else if (Math.abs(dist(a) - dist(b)) <= 1e-9) {
+            // the same yard: a newer car is never below an older one, photo or not
+            if (day(a) < day(b)) { yardDayOk = false; if (ph(a) && !ph(b)) buried++; }
+            else if (day(a) === day(b) && ph(a) < ph(b)) yardPhotoOk = false;
+          } else if (day(a) < day(b)) mixed++;   // a nearer car of the day before leads a farther car of the newest day
+          continue;
+        }
         if (ph(a) < ph(b)) photoOk = false;
         if (ph(a) === ph(b) && dist(a) > dist(b) + 1e-9) distOk = false;
       }
-      // Days that hold both kinds, so the photo rule is really exercised.
+      // Older days that hold both kinds, so the photo rule is really exercised there.
       const byDay = new Map();
-      for (const v of list) { const s = byDay.get(day(v)) || [0, 0]; s[ph(v)]++; byDay.set(day(v), s); }
+      for (const v of list) { if (grp(v) || held(v) || !day(v)) continue; const s = byDay.get(day(v)) || [0, 0]; s[ph(v)]++; byDay.set(day(v), s); }
       const mixedDays = [...byDay.values()].filter((s) => s[0] && s[1]).length;
       const keys = [...document.querySelectorAll('#live-grid > .car-tile')].slice(0, 20).map((t) => t.dataset.vkey);
       // The flag agrees with what a tile draws.
       const flagTrue = list.slice(0, 60).every((v) => { const ex = extrasFor(v); const info = ex && ex[0] ? photoInfo(ex[0]) : null; return ph(v) === (info && info.inList ? 1 : 0); });
-      const unknownLast = (() => { const k = list.findIndex((v) => !day(v)); return k < 0 || list.slice(k).every((v) => !day(v)); })();
-      return { n: list.length, dateOk, buried, photoOk, distOk, mixedDays, flagTrue, unknownLast, boost: typeof PHOTO_DAY_BOOST,
+      const fh = list.findIndex((v) => held(v)), arrivals = fh < 0 ? list : list.slice(0, fh);
+      const unknownLast = (() => { const k = arrivals.findIndex((v) => !day(v)); return k < 0 || arrivals.slice(k).every((v) => !day(v)); })();
+      return { n: list.length, top, today, groupN, groupDays: groupDays.size, mixed, heldLast, nearOk, yardDayOk, yardPhotoOk,
+        dateOk, buried, photoOk, distOk, mixedDays, flagTrue, unknownLast, boost: typeof PHOTO_DAY_BOOST,
         same: keys.length > 0 && keys.every((k, i) => vehicleKey(list[i]) === k), sort: document.getElementById('live-sort').value };
     });
-    ok(o.sort === 'date-desc' && o.dateOk && o.buried === 0 && o.boost === 'undefined', 'strictly newest first: no car sits below one set out on an earlier day, photo or not', o);
-    ok(o.mixedDays > 0 && o.photoOk && o.flagTrue, 'within a day: cars whose photo shows in the list come before the ones without', o);
-    ok(o.distOk, 'within a day and the same photo state: the nearest first', o);
+    ok(o.sort === 'date-desc' && o.top > 0 && o.groupN > 0 && o.dateOk && o.heldLast && o.boost === 'undefined', 'the two newest days lead as one group, every older day follows strictly newest first, held cars last', o);
+    ok(o.nearOk, 'inside the two-day group: the nearest yard first', o);
+    ok(o.yardDayOk && o.buried === 0 && o.yardPhotoOk, 'inside the group, at one yard: the newer day first (never below an older car for lacking a photo), then the car whose photo shows', o);
+    console.log(`   (group: ${o.groupN} cars over ${o.groupDays} day(s); ${o.mixed} places where a nearer car of the day before leads a farther car of the newest day)`);
+    ok(o.mixedDays > 0 && o.photoOk && o.flagTrue, 'older days, within a day: cars whose photo shows in the list come before the ones without', o);
+    ok(o.distOk, 'older days, within a day and the same photo state: the nearest first', o);
     ok(o.unknownLast, 'cars with no set-out date stay last', o);
     ok(o.same, 'the tiles on screen are the top of that list', o);
     await ctx.close();
-    // A returning visitor: everything set out since the last visit leads, photo or not.
-    const R = await open({ w: 390, h: 844, storage: { ys_last_visit_day: daysAgo(3) } });
-    const r = await R.page.evaluate(() => {
-      const list = getFilteredLive();
-      const n = list.filter((v) => setOutSince(v, FEED_SINCE_DAY)).length;
-      return { since: FEED_SINCE_DAY, n, total: list.length, lead: list.slice(0, n).every((v) => setOutSince(v, FEED_SINCE_DAY)), rest: list.slice(n, n + 400).every((v) => !setOutSince(v, FEED_SINCE_DAY)) };
-    });
-    ok(r.since && r.n > 0 && r.n < r.total && r.lead && r.rest, 'returning visitor: the cars set out since the last visit lead the list, so the divider still marks where they end', r);
-    await R.ctx.close();
+    // A returning visitor. Where the cars set out since the last visit all
+    // lead, the divider marks where they end. Where they are mixed with the
+    // day before's (the last visit fell inside the two-day group), there is
+    // no divider; the count line above the list shows either way.
+    for (const back of [3, 1]) {
+      const R = await open({ w: 390, h: 844, storage: { ys_last_visit_day: daysAgo(back) } });
+      const r = await R.page.evaluate(() => {
+        const list = getFilteredLive();
+        const n = list.filter((v) => setOutSince(v, FEED_SINCE_DAY)).length;
+        const lead = list.slice(0, n).every((v) => setOutSince(v, FEED_SINCE_DAY));
+        const info = feedSinceInfo(list);
+        return { since: FEED_SINCE_DAY, n, total: list.length, lead, dividerAt: info.dividerAt, line: !!info.html };
+      });
+      const want = r.n > 0 && r.n < r.total && r.lead ? r.n : -1;
+      ok(r.since && r.dividerAt === want && (r.n === 0 || r.line),
+        `returning visitor, last visit ${back} day(s) ago: ${want < 0 ? 'the new cars do not all lead, so no divider' : 'the new cars lead and the divider marks where they end'}; the count line shows`, r);
+      await R.ctx.close();
+    }
   }
 
   /* ---------- 2-6, 8, 11 on one phone page ---------- */
