@@ -2546,3 +2546,49 @@ Groups 23 RIGHT / 1 WRONG / 6 RISK; pairs 21 / 1 / 8.
   same classes on the live makes first (cab gates not on the number's own
   row, ungated windows that cut the model year, option text tying a part
   to a transmission or drive).
+
+## 2026-11-19 ~11:10 UTC game-plan card LIVE (jh-v217); round 6 on main; seventh nissan check started
+
+- **Full regression on the combined tree** (`hub/rc2-1119`: list order +
+  arrivals + best-yards card + the place/where fix): 109 passed, 1 failed,
+  0 skipped; both layout halves pass (1,380 checks each). The failure:
+  `pf_plan_e2e`, 4 "forecast stub" checks. Cause: the test put a stub on
+  `window.YSForecast` before load and the real module, now merged, replaced
+  it. Fixed in the test (a getter with an ignoring setter). Re-run:
+  `pf_plan_e2e` ALL PASS (91), `pf_forecast_e2e` PASS (17), `forecast_e2e`
+  PASS (70), `pf_plan_unit` PASS.
+- **Pushed to main 10:51 UTC (3a35f2f2), sw `jh-v217`.** One live load at
+  11:06 UTC: caches `jh-v217`. The hub's first script searched a 2004
+  4Runner alternator and saw no card: that search asks for the engine
+  first ("Pick your engine above"), and the card comes with the results
+  once one is picked (checked on the local tree: "45 donor cars at 13
+  yards within 100 mi"). The script now picks the engine; the live check
+  with real arrivals data follows the scan.
+- **Scan 44500938468** still scraping at 11:08 UTC (72 min in); the
+  arrivals files come with its commit.
+- **Round 6 (interchange builder), branch `interchange/round6-1119` head
+  5928f884, merged to main at 0212ed03.** Live makes, claims only down:
+  toyota 2 groups gated (GS 300/400 1998 rear doors, built 08/1997-08/1998),
+  ford 3 gated and 2 groups held at the note cap (8G1Z-19980-C,
+  1L2Z-7823394-BB), subaru 2 groups held (61041AL04A/05A Legacy/Outback
+  2015: a sibling lists the 6MT separately). Hub's own `live_diff.py`: 0
+  added groups, 0 gained app-years, 0 widened gates in all 8; quick
+  regression on the merged tree 74/0/0; `test_round6_1119` 26 checks.
+  Shipped pairs (pinned lot): plain 290,592 -> 290,089; if equipped
+  14,285 -> 14,264; excluded 12,034. App untouched, sw unchanged.
+  Live-make census of the 1119f classes: cab gates not on the number's own
+  row 0; ungated cutting windows ford 5 / toyota 4 vehicle-years; option
+  text tying a part to a transmission: subaru 4 vehicle-years.
+- Nissan candidate after round 6: 214 -> 171 shippable groups; plain pairs
+  38,357 -> 30,048. Held lists: `nissan.starred_held.json` (45 groups, 150
+  vehicle-years), `nissan.round6_held.json` (14 groups: inferred cab 6,
+  transmission tie 8).
+- **Seventh independent nissan check started 11:05 UTC**: fresh agent,
+  blind, seed 91371119, candidate at 0212ed03, branch
+  `interchange/verify-nissan-1119g`. Used seeds now: 46021118, 61181118,
+  73901118, 38271119, 52941119, 27641119, 91371119.
+- Builder suggestions kept for the owner: a transmission-basis line in the
+  app (like the drive "sibling" line) would let the held JK61D and the two
+  subaru groups show as "if equipped" instead of being held; the note cap
+  now costs ford 2 live groups; a census of hybrid displacements on the
+  live makes' gas-only gates before deciding anything there.
