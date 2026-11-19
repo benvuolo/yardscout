@@ -3022,3 +3022,38 @@ live, one live load.
 Not acted on from 1119i: EX37 listed / EX35 decoded (one model, already
 `same` in `scraper/vin_model_names.json`); "for both" in notes means the
 searcher's car and the donor, not two models.
+
+## 2026-11-19 ~16:40 UTC owner: "Great, ship and crawl and do whatever els[e]"
+
+Owner (16:20 UTC), in reply to the nissan result. Hub's reading, stated to
+the owner: "ship" = the 1.13.3 app release and "crawl" = the 226 catalog
+list pages, the two decisions the hub had put to them under those words
+(14:00 and 14:30 UTC entries); "whatever else" = the hub goes on with what
+it recommends, inside the standing rules. Not read into it: "swap" (the
+queued 1.13.1 at Apple stays in the queue).
+
+- **Crawl** (task 81): the interchange builder prepares it first (part F of
+  round 9, branch `interchange/crawl-own-pages-1119`): completion files
+  from the round 8 census lists and raised worklist versions, through the
+  existing completion mode; no change to fetch rules, pacing, allowlist,
+  robots handling or stop conditions (rule 2). Rogue 2017 / Sentra 1995-96
+  variant pages only if the existing crawler can reach them. The hub
+  reviews, merges and dispatches `oem-fitment-crawl.yml`.
+- **1.13.3** (task 80): one release with today's batch once it is on main
+  and green: list order, the part card and forecasts (jh-v216 to v218),
+  the donor-model forecast and tooltip fix (builder A), and the newer
+  payload field (below). Android to production; iPhone built to TestFlight
+  and submitted when Apple approves 1.13.1, in place of 1.13.2 build 43.
+  If the batch slips past about 19:30 UTC, what is on main and green ships.
+- **Nissan and older app versions** (hub decision): store apps bundle the
+  shell and read new payloads with their own older gate code (iPhone users
+  are on 1.13.0, which ignores every gate). For the eight live makes that
+  exposure exists; nissan must not add to it. Part G of round 9: nissan
+  groups go in a payload field only shells from this release on read, so
+  older apps show no nissan catalog rows, as today. Nissan reaches the
+  website when that merges, and the apps with 1.13.3.
+- **Flagged cars re-matched on the VIN's model** (task 82): builder B,
+  branch `data/vin-rematch-1119`; `different` class only, never Verified,
+  listing fields untouched (rule 6); also sorts the one unclassified pair.
+- Not started, on purpose: Subaru Legacy / Outback stays `unsure`; the
+  note-cap relaxation and the readers' user-agent names stay as they are.
