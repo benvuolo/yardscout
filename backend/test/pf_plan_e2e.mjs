@@ -135,6 +135,12 @@ const read = (page) => page.evaluate(() => {
     card: !!card,
     title: card ? (card.querySelector('.pf-plan-title') || {}).textContent : '',
     rule: card ? (card.querySelector('.pf-plan-rule') || {}).textContent : '',
+    headline: card && card.querySelector('.pf-plan-headline') ? card.querySelector('.pf-plan-headline').textContent : '',
+    ranks: card ? [...card.querySelectorAll('.pf-plan-yard .pf-plan-rank')].map(e => e.textContent.trim()) : [],
+    capped: pfPlan ? pfPlan.total > pfPlan.rows.length : false,
+    planTotal: pfPlan ? pfPlan.total : 0, planRows: pfPlan ? pfPlan.rows.length : 0,
+    radius: effectiveRadiusMi(),
+    allYards: pfPlan ? pfPlanYards(pfPlanItems(pfPlanShownRows()), pfPlanView.order).length : 0,
     chips: card ? [...card.querySelectorAll('.pf-plan-chip')].map(c => [c.dataset.order, c.getAttribute('aria-pressed')]) : [],
     allBtn: card && card.querySelector('.pf-plan-all') ? card.querySelector('.pf-plan-all').textContent.trim() : '',
     yards, listByYard, facts, shownN: shown.length,
@@ -157,6 +163,17 @@ function countProof(label, r) {
   check(`${label}: every yard's donor count equals the rows the list shows for it (${r.yards.length} yards, ${r.shownN} rows)`,
     !bad.length && !missing.length && r.yards.reduce((k, y) => k + y.n, 0) === r.shownN,
     JSON.stringify({ bad: bad.slice(0, 3), missing: missing.slice(0, 3), list: r.listByYard }));
+  // The headline counts the same rows: "N donor cars at Y yards within R mi."
+  const nY = Object.keys(r.listByYard).length;
+  if (!r.shownN) {
+    check(`${label}: no rows shown, the card says so (no headline)`, !r.headline && /^No donor cars within/.test(r.rule), r.headline + ' | ' + r.rule);
+    return;
+  }
+  const want = `${r.shownN.toLocaleString('en-US')} donor car${r.shownN === 1 ? '' : 's'} at ${nY} yard${nY === 1 ? '' : 's'} within ${r.radius} mi.`;
+  check(`${label}: headline "${want}" counts the rows the list shows`, r.headline.startsWith(want) && r.allYards === nY, `${r.headline} | yards ${r.allYards}/${nY}`);
+  const capLine = `Showing the first ${r.planRows} of ${r.planTotal.toLocaleString('en-US')} donors`;
+  check(`${label}: headline names the list's row cap exactly when the list is capped (${r.planRows}/${r.planTotal})`, r.capped === r.headline.includes(capLine), r.headline);
+  check(`${label}: rank numerals 1..n in the card's order`, r.ranks.length === r.yards.length && r.ranks.every((x, i) => x === String(i + 1)), JSON.stringify(r.ranks));
 }
 
 /** The card's yard order obeys `order`, measured from the list's own rows. */
@@ -288,6 +305,24 @@ try {
     check('counters: pf-yards/shown counted for the search, not again for chips, taps, the verified toggle or a re-sort', shownAtStart >= 1 && nShown === shownAtStart, `${shownAtStart} then ${nShown}: ${JSON.stringify(ev)}`);
     check('counters: chips, tap and show-all counted', ['pf-yards/chip-near', 'pf-yards/chip-new', 'pf-yards/chip-price', 'pf-yards/chip-most', 'pf-yards/tap'].every(e => ev.includes(e)) && (total <= 3 || ev.includes('pf-yards/all')), JSON.stringify(ev));
     check('counters: nothing but counter names (no ids)', ev.every(e => /^pf-yards\/(shown|tap|all|chip-(most|near|new|price))$/.test(e)), JSON.stringify(ev));
+
+    // A search past the list's 120-row cap: the headline says "Showing the
+    // first 120 of N donors" (the list's own words) and counts the 120.
+    {
+      let capped = null;
+      for (const s of [[2009, 'Toyota', 'Camry'], [2005, 'Honda', 'Accord'], [2002, 'Honda', 'Civic'], ...seekers]) {
+        try { await search(page, s, 'side-mirrors'); } catch (e) { continue; }
+        if (await page.evaluate(() => pfPlan.total > pfPlan.rows.length)) { capped = s; break; }
+      }
+      check('cap: a search past the list\'s row cap was found', !!capped);
+      if (capped) {
+        if (await page.$('#pf-results .pf-plan-all')) await page.click('#pf-results .pf-plan-all');
+        const rc = await read(page);
+        console.log(`  capped: ${capped.join(' ')}: ${rc.headline}`);
+        countProof('cap: count proof', rc);
+        check('cap: the list shows its own cap line too', await page.evaluate(() => /Showing the first 120 of/.test((document.querySelector('#pf-results .pf-more') || {}).textContent || '')));
+      }
+    }
 
     // One yard only: the list narrowed to one yard's cars
     const one = await page.evaluate(() => {

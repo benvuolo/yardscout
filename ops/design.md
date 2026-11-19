@@ -537,6 +537,12 @@ forecast half (`docs/forecast.js`, `YSForecast`) is another builder's.
   whose list has stopped changing (`yardListStale`: stale OR frozen) go
   after all others in every order and carry the app's "List unchanged since"
   badge (`yardListChipHtml`); their donors stay in the list.
+- **Headline + ranks (hub review, same day):** under the title, "N donor
+  cars at Y yards within R mi." from the same shown rows (singulars); when
+  the list is at its 120-row cap it adds the list's own line "Showing the
+  first 120 of T donors — tighten the radius to narrow." Each yard row
+  starts with a plain rank numeral in the current order (held yards keep
+  their numbers at the end).
 - **UI:** top 3 yards, "Show all N yards" toggles. One yard: no chips. No
   donors: the card still shows "No donor cars within R mi right now." (the
   list's own `.pf-empty` stays above it). Tapping a yard hides other yards'

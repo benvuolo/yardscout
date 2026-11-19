@@ -10242,12 +10242,12 @@ function pfPlanItems(rows) {
   });
 }
 /** Start a card for this render: rows = exactly the rows the list renders. */
-function pfPlanStart(rows, s, radius, variants, famId) {
+function pfPlanStart(rows, s, radius, variants, famId, total) {
   const key = [pfCat && pfCat.id, s.year, s.make, s.model, famId || '', radius || ''].join('|');
   if (pfPlanView.key !== key) pfPlanView = { key, order: 'most', yard: '', all: false };
   const w = pfGenWindow(s.make, s.model, s.year);
   pfPlan = {
-    rows, variants, radius, perEach: !!(pfCat && pfCat.perEach),
+    rows, variants, radius, total: Math.max(total || 0, rows.length), perEach: !!(pfCat && pfCat.perEach),
     ctx: { make: s.make, model: s.model, year: s.year, yrMin: w ? w[0] : null, yrMax: w ? w[1] : null,
       lat: activeZipCoords ? activeZipCoords.lat : null, lng: activeZipCoords ? activeZipCoords.lng : null,
       radiusMi: radius || null, where: 'parts' },
@@ -10268,26 +10268,33 @@ function pfPlanBodyHtml() {
       .map(([k, l]) => `<button type="button" class="pf-plan-chip" data-order="${k}" aria-pressed="${pfPlanView.order === k}">${l}</button>`).join('')}</div>`
     : '';
   const now = Date.now();
-  const row = (y) => {
+  const row = (y, i) => {
     const facts = [y.d != null ? `${Math.round(y.d)} mi` : '', `${y.n.toLocaleString()} donor car${y.n === 1 ? '' : 's'}`,
       y.nCheck ? `<span title="These donors carry an “if equipped” line: check the car has it before you pull">${y.nCheck.toLocaleString()} to check first</span>` : ''].filter(Boolean);
     const set = pfPlanSetOutText(y.newestMs, now);
-    const price = y.price != null ? `yard price${pfPlan.perEach ? ' from' : ''} $${y.price.toFixed(2)}${pfPlan.perEach ? ' each' : ''}` : '';
+    const price = y.price != null ? `yard price${pfPlan.perEach ? ' from' : ''} $${y.price.toFixed(2)}${pfPlan.perEach ? ' each' : ''}` : '';
     const more = [set, price ? `<span title="From the yard’s own published price list">${price}</span>` : '',
       y.fast ? `<span class="lot-fast" title="${escapeHtml(y.fastNote)}">leaves fast here</span>` : ''].filter(Boolean);
     const held = y.held ? yardListChipHtml(y.yard) : '';
     return `<li><button type="button" class="pf-plan-yard${y.held ? ' pf-plan-held' : ''}" data-yard="${escapeHtml(y.yard)}" aria-pressed="${pfPlanView.yard === y.yard}">`
+      + `<span class="pf-plan-rank" aria-hidden="true">${i + 1}</span><span class="pf-plan-main">`
       + `<span class="pf-plan-name">${escapeHtml(y.yard)}</span>`
       + `<span class="pf-plan-facts">${facts.join(' &middot; ')}</span>`
       + (more.length ? `<span class="pf-plan-facts pf-plan-more">${more.join(' &middot; ')}</span>` : '')
       + (held ? `<span class="pf-plan-badge">${held}</span>` : '')
-      + '</button></li>';
+      + '</span></button></li>';
   };
+  // The at-a-glance line: the same shown rows. At the list's row cap it says
+  // so in the list's own words (N is then not every donor in range).
+  const nRows = shown.length;
+  const capNote = pfPlan.total > pfPlan.rows.length
+    ? ` <span class="pf-plan-cap">Showing the first ${pfPlan.rows.length} of ${pfPlan.total.toLocaleString()} donors — tighten the radius to narrow.</span>` : '';
+  const headline = `<p class="pf-plan-headline">${nRows.toLocaleString()} donor car${nRows === 1 ? '' : 's'} at ${yards.length.toLocaleString()} yard${yards.length === 1 ? '' : 's'} ${pfPlan.radius ? `within ${pfPlan.radius} mi` : 'in range'}.${capNote}</p>`;
   const list = pfPlanView.all ? yards : yards.slice(0, PF_PLAN_TOP);
   const toggle = yards.length > PF_PLAN_TOP
     ? `<button type="button" class="linklike pf-plan-all">${pfPlanView.all ? `Show the top ${PF_PLAN_TOP}` : `Show all ${yards.length.toLocaleString()} yards`}</button>`
     : '';
-  return title + `<p class="pf-plan-rule">${escapeHtml(pfPlanRuleText(pfPlanView.order, anyHeld))}</p>` + chips
+  return title + headline + `<p class="pf-plan-rule">${escapeHtml(pfPlanRuleText(pfPlanView.order, anyHeld))}</p>` + chips
     + `<ol class="pf-plan-yards">${list.map(row).join('')}</ol>` + toggle;
 }
 /** The "Showing <yard> only" bar above the rows, and which rows show. */
@@ -10741,7 +10748,7 @@ function pfRunSearch() {
   }
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'} in range</strong> ${rows.length === 1 ? 'It carries' : 'They carry'} ${/s$/.test(pfCat.label) ? '' : 'a '}fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)}. ${pfSort === 'new' ? 'Newest arrivals first' : 'Nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
     // Best yards for this part: the rows rendered below, by yard.
-    + pfPlanStart(rows.slice(0, CAP), s, radius, quoteVariants, pfChosenFam)
+    + pfPlanStart(rows.slice(0, CAP), s, radius, quoteVariants, pfChosenFam, rows.length)
     + pfWatchHtml(s, true)
     + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit', nSame)

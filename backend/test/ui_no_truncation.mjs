@@ -1315,6 +1315,9 @@ const SCREENS = [
     }, kind);
     await page.waitForSelector('#pf-results .pf-plan', { timeout: 15000 });
     if (kind !== 'none' && !(await page.$('#pf-results .pf-plan-yard'))) throw new Error('no yard rows on the card');
+    // headline ("N donor cars at Y yards within R mi") and rank numerals
+    if (kind !== 'none' && !(await page.evaluate(() => /^\d[\d,]* donor cars? at \d+ yards? /.test((document.querySelector('#pf-results .pf-plan-headline') || {}).textContent || '')
+      && [...document.querySelectorAll('#pf-results .pf-plan-rank')].every((e, i) => e.textContent.trim() === String(i + 1))))) throw new Error('card headline or rank numerals missing');
     if (kind === 'none' && !(await page.evaluate(() => /^No donor cars within/.test(document.querySelector('#pf-results .pf-plan-rule').textContent)))) throw new Error('empty card line missing');
     if (kind === 'one' && (await page.$('#pf-results .pf-plan-chip'))) throw new Error('chips shown for one yard');
     await settle(page, 300);
