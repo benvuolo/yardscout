@@ -82,6 +82,35 @@ export function partsCardCounts(rows) {
   }
   return out;
 }
+/* Views of the public "what landed" pages, 7 d (2026-11-20; the pages' own
+ * script, backend/site-proxy/src/landed_count.js): landed-view/<page> and
+ * landed-src/<source>/<page>. Pure (tested). */
+export function landedCounts(rows) {
+  const pages = new Map(), sources = new Map();
+  let views = 0;
+  for (const r of rows || []) {
+    const e = String(r.event || ''), n = Number(r.n) || 0;
+    if (e.startsWith('landed-view/')) {
+      const p = e.slice(12);
+      if (!p) continue;
+      views += n;
+      pages.set(p, (pages.get(p) || 0) + n);
+    } else if (e.startsWith('landed-src/')) {
+      const src = e.slice(11).split('/')[0];
+      if (src) sources.set(src, (sources.get(src) || 0) + n);
+    }
+  }
+  const rank = (m) => [...m].map(([name, n]) => ({ name, n })).sort((a, b) => b.n - a.n || (a.name < b.name ? -1 : 1));
+  return { views, top: rank(pages).slice(0, 5), sources: rank(sources) };
+}
+/** One line, printed at 0 too. */
+export function landedLine(c) {
+  const k = c || landedCounts([]);
+  const list = (xs) => xs.map((x) => `${x.name} ${fmtInt(x.n)}`).join(', ');
+  return `Landed pages (7 d): ${fmtInt(k.views)} view${k.views === 1 ? '' : 's'}`
+    + (k.top.length ? ` · top: ${list(k.top)}` : '')
+    + ` · by source: ${k.sources.length ? list(k.sources) : 'none named'}`;
+}
 /** The two lines, printed even when every count is 0. */
 export function partsCardLines(c) {
   const k = c || partsCardCounts([]);
@@ -721,6 +750,7 @@ function usageLines(u, audience) {
   if (u.topParts && u.topParts.length) L.push(`  Most searched parts (7 d): ${u.topParts.map((x) => `${x.name} ${fmtInt(x.n)}`).join(', ')}`);
   if (u.topCars && u.topCars.length) L.push(`  Most searched cars (7 d): ${u.topCars.map((x) => `${x.name} ${fmtInt(x.n)}`).join(', ')}`);
   for (const line of partsCardLines(u.partsCard)) L.push(`  ${line}`);
+  L.push(`  ${landedLine(u.landed)}`);
   // Which gate opened the sheet, and which gate people bought from (7 d).
   if (u.gates && u.gates.length) {
     L.push('  Pro sheet by gate (7 d): opens / checkout taps / purchases');
@@ -868,7 +898,8 @@ async function loadUsage(env, now) {
     env.DB.prepare(
       `SELECT event, SUM(n) AS n FROM events_daily
         WHERE day >= ?1 AND day < ?2 AND (event LIKE 'pf/%' OR event LIKE 'pf-car/%'
-          OR event LIKE 'pf-yards/%' OR event LIKE 'pf-forecast/%' OR event LIKE 'watch-forecast/%')
+          OR event LIKE 'pf-yards/%' OR event LIKE 'pf-forecast/%' OR event LIKE 'watch-forecast/%'
+          OR event LIKE 'landed-view/%' OR event LIKE 'landed-src/%')
         GROUP BY event ORDER BY n DESC`
     ).bind(weekAgo, today),
     // First day each platform sent an event on counting rules v2 (all time).
@@ -955,6 +986,7 @@ async function loadUsage(env, now) {
     topWatches: top.map((r) => ({ name: [r.make, r.model].filter(Boolean).join(' ') || 'any', n: r.n })),
     topParts, topCars,
     partsCard: partsCardCounts(pfRows),
+    landed: landedCounts(pfRows),
     gates: [...gates.values()].sort((a, b) => b.purchase - a.purchase || b.checkout - a.checkout || b.paywall - a.paywall).slice(0, 10),
   };
 }
@@ -1131,7 +1163,7 @@ export function composeDailyHtml(r) {
     if (u.topWatches.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most watched:</span> ${u.topWatches.map((w) => `${esc(w.name)} <strong>${fmtInt(w.n)}</strong>`).join(', ')}</div>`);
     if (u.topParts && u.topParts.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most searched parts (7 d):</span> ${u.topParts.map((x) => `${esc(x.name)} <strong>${fmtInt(x.n)}</strong>`).join(', ')}</div>`);
     if (u.topCars && u.topCars.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most searched cars (7 d):</span> ${u.topCars.map((x) => `${esc(x.name)} <strong>${fmtInt(x.n)}</strong>`).join(', ')}</div>`);
-    for (const line of partsCardLines(u.partsCard)) {
+    for (const line of [...partsCardLines(u.partsCard), landedLine(u.landed)]) {
       const i = line.indexOf(': ');
       extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">${esc(line.slice(0, i + 1))}</span> ${esc(line.slice(i + 2))}</div>`);
     }

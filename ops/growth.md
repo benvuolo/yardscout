@@ -1403,3 +1403,28 @@ suite, the six API suites, the layout check). Layout at six widths: 2,664
 checks, 0 failures. `cars_feed_e2e` passed in full this time (its "New:
 only cars set out today or yesterday" check, which failed on the older
 inventory in the watertight run, passes on today's data).
+
+## 2026-11-20 Landed page views counted, with their source (branch `growth/landed-count-1120`)
+
+- The make and model "what landed" pages (`/landed/<make>`,
+  `/landed/<make>/<model>`) carry one inline script
+  (`backend/site-proxy/src/landed_count.js`, put in by `share.js`). In the
+  visitor's browser it sends, by `navigator.sendBeacon` to the API's
+  existing `/v1/events` (text/plain, body `{"e":"<name>","p":"web"}` only):
+  `landed-view/<page>` once per view, and `landed-src/<source>/<page>` when
+  the source is known. `<page>` = make slug or `<make>-<model>`, cut to fit
+  the 48-character name rule. No ids, cookies or storage; the edge worker
+  makes no call; automated browsers and local copies send nothing; scripts
+  off or the endpoint down, the page is the same (the server renders the
+  same HTML for `?s=`).
+- Source: `?s=<word>` (letters, digits, hyphen, starts with a letter or
+  digit, at most 12, lowercased) wins; else the referrer site when reddit,
+  google, bing, duckduckgo, facebook or youtube; else none.
+- With `?s=<word>`, the page's app buttons say `utm_source=<word>` instead
+  of `utm_source=page` (utm_medium and utm_campaign stay), so the app's
+  first-visit attribution records the outside source with the page as
+  medium/campaign. Canonical and og:url never carry `?s=`.
+- Daily ops email: "Landed pages (7 d): N views · top: <page> n, ... · by
+  source: reddit n, ..." (printed at 0 as "0 views · by source: none named").
+- For the owner's Reddit post: link `yardscout.io/landed/toyota/4runner?s=reddit`
+  if you want the source named even when Reddit's app strips the referrer.
