@@ -98,3 +98,14 @@ and every post it writes now ends with the two agreed lines: the visible
     python3 tools/landed_post.py Toyota 4Runner --years 1996-2002 --label "3rd gen"
 
 Still to do: a year range on the public landed page.
+
+Lesson 11-20 (owner's screenshot from the Reddit iPhone app): a Markdown
+block pasted into the phone app's composer shows its symbols as typed
+(`**State**`, `[text](url)`), and the hub cannot see how the app renders
+them after posting. For a post the owner makes from the phone, give plain
+text: state names on their own lines with no asterisks, rows as `* ` lines,
+no bold, the app address as a plain `https://yardscout.io/app`, and the one
+hyperlink added with the composer's link button (text `yardscout.io`, the
+tagged link as its target). The Markdown block is for a computer, in
+"Markdown Editor" mode. `tools/landed_post.py` should grow a `--plain`
+option for this.
