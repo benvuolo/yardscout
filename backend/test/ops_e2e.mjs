@@ -187,6 +187,7 @@ const ev = (e, extra = {}) => fetch(BASE + '/v1/events', { method: 'POST', heade
   body: JSON.stringify({ e, p: 'ios', ...extra }) });
 await ev('first-visit', { src: 'reddit', cmp: 'r-4runner' }); await ev('first-visit'); await ev('checkout-start');
 await ev('paywall/part-value'); await ev('paywall/part-value'); await ev('paywall/watch-limit'); await ev('checkout/watch-limit'); await ev('purchase/watch-limit');
+for (const e of ['landed-view/toyota-4runner', 'landed-view/toyota-4runner', 'landed-view/toyota', 'landed-src/reddit/toyota-4runner']) await ev(e);
 for (const e of ['pf-yards/shown', 'pf-yards/shown', 'pf-yards/shown', 'pf-yards/tap', 'pf-yards/chip-near', 'pf-yards/chip-price', 'pf-yards/chip-most', 'pf-yards/all', 'pf-forecast/donor-models', 'watch-forecast/shown', 'watch-forecast/shown']) await ev(e);
 await ev('pf/alternator'); await ev('pf/alternator'); await ev('pf/headlights'); await ev('pf-car/honda-civic'); await ev('pf-car/honda-civic'); await ev('pf-car/toyota-4runner');
 // Counting rules v2 (docs/app.js EVENTS_V): a web client on the fixed counters
@@ -262,6 +263,8 @@ check('usage: email lists searched parts and cars', /Most searched parts \(7 d\)
 check('usage: the Parts card counts (7 d)', JSON.stringify(u.partsCard) === JSON.stringify({ shown: 3, taps: 1, orders: 3, all: 1, donor: 1, alertForecasts: 2 }), JSON.stringify(u.partsCard));
 check('usage: email has the Parts card and alert forecast lines', /Parts card \(7 d\): shown 3, yard taps 1, order changes 3, show all 1, donor-model forecasts 1/.test(r.data.email?.text || '')
   && /Alert forecasts shown \(7 d\): 2/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
+check('usage: email has the landed pages line', /Landed pages \(7 d\): 3 views · top: toyota-4runner 2, toyota 1 · by source: reddit 1/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
+check('usage: html has the landed pages line', /Landed pages \(7 d\):<\/span> 3 views · top: toyota-4runner 2, toyota 1 · by source: reddit 1/.test(r.data.email?.html || ''));
 check('usage: html has them too', /Parts card \(7 d\):<\/span> shown 3, yard taps 1, order changes 3, show all 1, donor-model forecasts 1/.test(r.data.email?.html || '') && /Alert forecasts shown \(7 d\):<\/span> 2/.test(r.data.email?.html || ''));
 check('usage: tagged source listed', JSON.stringify(u.sources) === JSON.stringify([{ source: 'reddit', n: 1 }]), JSON.stringify(u.sources));
 check('usage: email shows source + checkout taps', /Tagged sources \(first visits, 7 d\): reddit 1/.test(r.data.email?.text || '')
