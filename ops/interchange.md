@@ -6643,3 +6643,16 @@ Comparison with `_report/round11_names_2026-11-20.json` (read only after the ver
 - The other 25 files differ only in `builtAt`.
 
 **Tests.** test_round11_1120: 60 checks, 0 failures.
+
+## 2026-11-20 — independent blind check of round 11c packaging words (branch interchange/verify-round11c-names-1120)
+
+Checked groups at fb5a1a61 against raw only (oem-raw dca9cd84 for gm/ford/mopar/toyota/subaru/vag; 57e8b5b9 for nissan; every lists part read, gm 1-5, ford 1-2; years files hold no names and were not read). Report: `scraper/oem_fitment/groups/_report/round11c_names_verify_2026-11-20.json`.
+
+- 368 groups in scope (bumper-front 29, bumper-rear 16, tail-lights 56, window-regulator 267; hmg and mb have none). **0 WRONG, 306 RIGHT, 62 RISK.** Every note is 160 characters or fewer (longest 159).
+- Phrases seen: window motor only 108, regulator with motor 27, regulator without motor 23, bumper cover only 26, bumper cover 15, lens and body unit 14.
+- RISK, window regulators with silent notes and bare "regulator" values (49): toyota 12 have no own list page; nissan 17 and subaru 4 have every list page listing a separate motor, but the record's own page (its list_url) is not in the list files; mopar 12 and gm 4 have own pages that list no separate motor (mopar Power-window regulators may include the motor).
+- RISK, toyota "regulator without motor" (10): no value says without motor; every list page lists the motor separately, but each record's own page (list_url, e.g. 2007 IS250) is not in the list files, so not every own page could be checked.
+- RISK, mopar 5073002AC "bumper cover only": the only beam on both claimed pages (55077960AC) is "With Sport Package" and its aux reads "Face Bar"; this cover is "Without Sport Package, Primed".
+- RISK, toyota 81551-33530 / 81561-33530 (tail lamps, note silent): besides lamp-assembly and lens-and-body wording, other_names has "Tail Light Lens" (a lens alone).
+- How my reading differs from round11_names_2026-11-20.json (read only after my verdicts were pushed): (1) the curation counts only list pages as own pages for the toyota without-motor basis; I also count each record's list_url page, which is missing, so I have RISK, not RIGHT; (2) the hub ruling on the two Camry lamps does not count the "Tail Light Lens" alias; (3) 5073002AC: the curation accepts the sport-package beam as the separate reinforcement.
+- Suggestions: say "regulator with motor" for mopar 68079286AA/87AA (other_names "Power Window Motor and Regulator Assembly") only if the owner accepts an alias as a basis; gm 15041706 values say W/O MOTOR but its note says nothing; the toyota 85710/85720 motor records list "Door Lock Actuator Motor" in other_names (a seller alias for another part; it does not change the verdict).
