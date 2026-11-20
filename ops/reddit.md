@@ -109,3 +109,10 @@ hyperlink added with the composer's link button (text `yardscout.io`, the
 tagged link as its target). The Markdown block is for a computer, in
 "Markdown Editor" mode. `tools/landed_post.py` should grow a `--plain`
 option for this.
+
+Correction to the lesson above (owner, 11-20 19:00 UTC, with a screenshot):
+what pastes correctly into the Reddit phone app is the post RENDERED in the
+chat (bold state names, real bullets, links as links), exactly as the
+playbook's step 3 says. A code block does not: its symbols paste as typed.
+So: always give the post as normal rendered chat text between two rules,
+never in a code block; the plain-text version is only a fallback.
