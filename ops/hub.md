@@ -3540,3 +3540,16 @@ owner's Gmail in the last two days. Live iPhone app still 1.13.0. Scan
 12:21 UTC (GitHub's schedule) succeeded. Next Apple check 18:31 UTC; if it
 is still in review then, the hub suggests the owner look in App Store
 Connect for a question from the reviewer. Nothing submitted.
+
+## 2026-11-20 17:25 UTC Apple approved 1.13.3; both stores carry it
+
+Owner asked for an update (17:20 UTC). Checks at 17:22 UTC:
+- asc-status 44782687250: version 1.13.3, **READY_FOR_SALE**, build 44;
+  review submission of 11-19 19:55 COMPLETE (in review from before 09:23
+  to some time after 15:29). iPhone users now get the petrol look, the
+  parts limits, the best-yards card, the forecasts and Nissan / Infiniti.
+- play-status 44782691927: production 1.13.3 (43), completed, rollout 100%.
+- Scans: 01:33, 07:23 and 12:21 UTC all successful; API health ok; the
+  Cloudflare watchdog saw the last scan 4 h old at 16:23 and starts one at
+  17:23 if GitHub has not.
+- Tasks 66 and 80 closed. The 18:30 UTC check-in is answered by this entry.
