@@ -5524,6 +5524,7 @@ function renderLive() {
   feedPlaceNote();
   feedPlaceStrip();   // after the note, so the strip ends up ahead of it
   feedPlaceAlertCard();
+  feedPlaceSide();    // wide screens: the strip beside the list
   stripAskCount();
   stripForecastMount();
   if (_feed.shown) appPromoListRendered();
@@ -5544,6 +5545,39 @@ function feedPlaceStrip() {
   const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
   tiles[Math.min(cols, tiles.length) - 1].after(strip);
 }
+/* ---- Wide screens: the watch strip beside the list (owner, 2026-11-20) ----
+ * On a computer a one-model link put the free alert's form, the Pro line and
+ * the forecast between the chips and the first car, which sat far below the
+ * fold. From WIDE_CARS_MQ up, the strip and the list's share line move into
+ * one side column (.live-side), still inside #live-grid (its handlers and
+ * queries are scoped there), as its LAST child, so the keyboard reaches the
+ * cars first. CSS lays the column beside the tiles; the grid keeps at least
+ * the column's height. Phones and tablets: unchanged. Re-run on every render
+ * and when the width crosses the breakpoint. */
+const WIDE_CARS_MQ = '(min-width: 1100px)';
+let _sideRO = null;
+function feedPlaceSide() {
+  const grid = document.getElementById('live-grid');
+  if (_sideRO) { _sideRO.disconnect(); _sideRO = null; }
+  grid.classList.remove('has-side');
+  grid.style.minHeight = '';
+  if (!(window.matchMedia && matchMedia(WIDE_CARS_MQ).matches) || focusedCarKey) return;
+  const items = [...grid.querySelectorAll(':scope > .watch-strip, :scope > .list-share')];
+  if (!items.length || !grid.querySelector(':scope > .car-tile')) return;
+  const side = document.createElement('div');
+  side.className = 'live-side';
+  for (const it of items) side.appendChild(it);
+  grid.appendChild(side);
+  grid.classList.add('has-side');
+  const fit = () => { grid.style.minHeight = side.offsetHeight ? side.offsetHeight + 'px' : ''; };
+  fit();
+  if ('ResizeObserver' in window) { _sideRO = new ResizeObserver(fit); _sideRO.observe(side); }
+}
+try {
+  const mq = window.matchMedia && matchMedia(WIDE_CARS_MQ);
+  const onWide = () => { if (typeof liveLoaded !== 'undefined' && liveLoaded) renderLive(); };
+  if (mq && mq.addEventListener) mq.addEventListener('change', onWide);
+} catch (e) { /* older browsers: the layout follows the next render */ }
 
 /* ---- One alert card in the feed (owner, 2026-11-16: "Yes add the alert
  * card"; alerts are the flagship) ----

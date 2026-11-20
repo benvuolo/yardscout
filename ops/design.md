@@ -650,3 +650,35 @@ forecast half (`docs/forecast.js`, `YSForecast`) is another builder's.
   a week" with 42 of 61; 2002 ES 300 alternator "About 72 a week" with 363
   of 570. The ES 300 list itself offers "engine not confirmed" donors, so
   its ratio still includes cars the decode cannot rule out.
+
+## 2026-11-20 Cars tab, first view on wide screens (branch `design/cars-wide-first-view-1120`, sw `jh-v221`)
+
+- Owner: a `#cars=Toyota|4Runner` link on a 1440 px computer put the first
+  car far below the fold (note, count, search, Filters, chips, then the
+  watch strip with the free alert form, Pro line and forecast).
+- From 1100 px only (`WIDE_CARS_MQ`, CSS `@media (min-width: 1100px)`):
+  - the search box and the zip + Filters bar share one row (`#tab-live` is
+    a two-column grid there; every other block spans both columns);
+  - `feedPlaceSide()` moves the watch strip and the share line into one
+    `.live-side` column, still inside `#live-grid` (its handlers and
+    queries are scoped there), as the grid's last child (after the tiles
+    and "Show more cars"), so the keyboard reaches the cars first. CSS
+    puts it beside the tiles (absolute, right; the grid keeps its height);
+    a width change across 1100 px re-renders.
+  - Nothing removed, no wording changed; below 1100 px nothing applies.
+- First car row (y, px, 900 px tall window), before -> after:
+
+  | width | model filter | no filter | guess shown | guess dismissed |
+  |---|---|---|---|---|
+  | 1280 | 1076 -> 493 | 445 -> 433 | 527 -> 471 | 445 -> 433 |
+  | 1440 | 1076 -> 493 | 445 -> 433 | 527 -> 471 | 445 -> 433 |
+  | 1920 | 1076 -> 493 | 445 -> 433 | 527 -> 471 | 445 -> 433 |
+
+  ("dismissed" = the zip typed into the place line's Change form.)
+- Phones and tablets: screenshots at 360, 390, 768 and 1024 px (model
+  filter and no filter) are pixel-identical to main's (one run showed
+  anti-aliasing noise on a few corner pixels; a repeat run matched main).
+- Screens: `ops/screens/cars-wide-1120-{before,after}.png` (1440 x 900).
+- Next if wanted: the three rows of model chips (148 px) are the largest
+  block left above the list on wide screens; a "more models" fold would
+  bring the first row up another ~100 px.
