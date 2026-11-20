@@ -3511,3 +3511,10 @@ asc-status 44617030388 at 21:16 UTC: version 1.13.3, WAITING_FOR_REVIEW,
 build 44 (1 h 20 min in the queue). Live iPhone app 1.13.0. Next check
 03:17 UTC 11-20, then every 6 hours; past 19:55 UTC 11-21 the hub suggests
 the owner look in App Store Connect. Nothing submitted.
+
+## 2026-11-20 03:21 UTC Apple check: 1.13.3 still waiting for review
+
+asc-status 44667034313 at 03:20 UTC: version 1.13.3, WAITING_FOR_REVIEW,
+build 44 (7 h 25 min in the queue). Live iPhone app 1.13.0. Scans are
+running: 22:17 UTC (started by the watchdog) and 01:33 UTC (GitHub's own
+schedule), both successful. Next Apple check 09:21 UTC. Nothing submitted.
