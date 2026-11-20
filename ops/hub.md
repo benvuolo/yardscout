@@ -3722,3 +3722,24 @@ Canonical and og:url never carry the parameter. Daily ops email gains
   gm's and ford's list files (adding the rest can add claims: independent
   check).
 - To confirm: the pages build for this push, then one live load.
+
+## 2026-11-20 19:30 UTC the project's roots: three old files from March 2026; `ops/origin.md` started
+
+Owner, after the question whether to answer the "copy" comment on Reddit:
+a Cursor agent on their own computer started this before the repository
+existed; they uploaded three files, "From march". The hub read them as
+data (nothing run, nothing imported): 1,188 cars from Tear A Part Salt Lake
+City and Ogden with every record stamped 03/22/2026 by the yard's feed, and
+1,002 Pick-n-Pull Salt Lake City cars (Row52's format) whose newest car was
+created 2026-03-20 07:20 UTC; an empty error log. Recorded in
+`ops/origin.md` with sizes and sha256 fingerprints; the files themselves
+stay out of the repository (third-party data; Row52 is out of scope).
+What it changes: the owner's own start dates from the same week the other
+site's domain was registered (2026-03-19), not from September. What it does
+not change: nobody was shown to be first, and the standing instruction not
+to claim it. The Reddit reply was reworded accordingly ("had a public site
+up well before I did" instead of "have been at it longer").
+- Also since the last entry: round 11 confirmed deployed (pages build
+  19:08 UTC); `hub/rc10-1120` (main + the wide-screen Cars view, sw
+  `jh-v221`) in the hub's full regression since 19:15 UTC; six finished
+  check working copies removed to free disk (2.5 -> 4.5 GB).
