@@ -6549,3 +6549,12 @@ motors whose toyotapartsnow other_names include a stray "Door Lock Actuator Moto
 
 Not checked: fits, years, gates (out of scope). Header `raw.sites.*.lists` counts equal part 1 only for gm
 (3281 vs 12783 lines across parts) and ford (2936 vs 3637).
+
+Comparison with `_report/round11_names_2026-11-20.json` (read only after the verdicts above were pushed at 65c1e8b6):
+- Of its 72 changed notes, 70 match my reading (RIGHT); the 2 that differ are ford 5G1Z-5423208-AA / -209-AA
+  ("regulator with motor"): its rule reads only record name and list main, so it never saw the row's list group /
+  list_info "Regulator - Window - Less Motor". Recommend holding both (or dropping the phrase) before ship.
+- Its 15 held groups are not in the live files. But the crash-part siblings stay live with silent notes:
+  ford AE5Z-17757-ACP and AE5Z-17906-ACP (list_info "Impact Bar - Steel": WRONG above), and 2L1Z-17757-BACP,
+  BT4Z-17906-ACP (RISK above), whose non-CP siblings 2L1Z-17757-BA / BT4Z-17906-A were held because their records
+  print "Impact Bar". Recommend the same hold for the -CP numbers, and reading list_info / list group in the naming rule.
