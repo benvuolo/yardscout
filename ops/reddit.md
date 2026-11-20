@@ -75,3 +75,10 @@ and a year range on the public landed page so the link can match the post.
 Link form for posts since 11-20: the visible text
 `yardscout.io/landed/<make>/<model>`, linked to the same address with
 `?s=reddit` (the landed pages count views and sources since 11-20).
+Correction the same day (owner: the landed page shows every generation):
+for a one-generation post the link is the app's own year-filtered list,
+`https://yardscout.io/?utm_source=reddit&utm_medium=post&utm_campaign=<model>-<gen>#cars=Make%7CModel%7C1996-2002`
+(the `#cars=` link takes `<make>|<model>|<years>`), put behind the visible
+text `yardscout.io` as a hyperlink. Checked live 11-20: near 90001 it
+opened the Cars tab with 33 cars, 1997 to 2002 only. One closing sentence
+names the iPhone and Android apps without store links.
