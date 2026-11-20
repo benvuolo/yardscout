@@ -53,6 +53,8 @@ def main():
     ap.add_argument('--days', type=int, default=7)
     ap.add_argument('--gens', default='', help='"<last model year>:<label>,..." in order, e.g. "2004:1st gen,2015:2nd gen"')
     ap.add_argument('--contains', action='store_true', help='match models that contain the name')
+    ap.add_argument('--years', default='', help='only these model years, e.g. "1996-2002" (a one-generation post)')
+    ap.add_argument('--label', default='', help='what to call that range in the title and text, e.g. "3rd gen"')
     ap.add_argument('--campaign', default='', help='utm_campaign for the link (default: the model, lower case)')
     ap.add_argument('--data', type=Path, default=ROOT / 'docs/data/inventory_live.json')
     ap.add_argument('--out', type=Path, help='write the draft here instead of printing it')
@@ -74,6 +76,14 @@ def main():
     def gen(year):
         return next((label for top, label in gens if year <= top), '') if gens else ''
 
+    yr_lo = yr_hi = None
+    if args.years.strip():
+        m = re.fullmatch(r'\s*(\d{4})\s*-\s*(\d{4})\s*', args.years)
+        if not m or int(m.group(1)) > int(m.group(2)):
+            ap.error('--years wants "<first>-<last>", e.g. 1996-2002')
+        yr_lo, yr_hi = int(m.group(1)), int(m.group(2))
+    label = ' '.join(args.label.split())
+
     want_make, want_model = norm(args.make), norm(args.model)
     rows = []
     for idx, v in enumerate(d['vehicles']):
@@ -89,26 +99,30 @@ def main():
             continue   # no set-out date or year: not listed
         if day < since or day > today:
             continue
+        if yr_lo is not None and not (yr_lo <= year <= yr_hi):
+            continue
         y = yards[v[F['yard']]]
         vp = vpic.get(str(idx)) or []
         drive = (vp[3] if len(vp) > 3 else '') or ''
         dr = '4x4' if ('4WD' in drive or '4x4' in drive.lower()) else '2WD' if '4x2' in drive.lower() else ''
-        rows.append(dict(year=year, yard=str(y[YF['location']]).replace(' - ', ' '), state=y[YF['state']] or '',
+        rows.append(dict(year=year, yard=' '.join(str(y[YF['location']]).replace(' - ', ' ').split()), state=y[YF['state']] or '',
                          row=v[F['row']], day=day, drive=dr))
 
     name = f'{args.make} {args.model}'
     short = args.model   # "4Runner", "Xterra": the title says "4Runners", "Xterras"
+    what = f'{label} {short}' if label else short            # "3rd gen 4Runner"
+    span = f' ({yr_lo} to {yr_hi})' if yr_lo is not None else ''
     by_state = collections.defaultdict(list)
     for r in rows:
         by_state[r['state']].append(r)
     n4 = sum(1 for r in rows if r['drive'] == '4x4')
     has_drive = any(r['drive'] for r in rows)
-    L = [f'**Title:** {short}s set out at u-pull yards this week ({since.month}/{since.day} to {today.month}/{today.day}), by state', '']
+    L = [f'**Title:** {what}s set out at u-pull yards this week ({since.month}/{since.day} to {today.month}/{today.day}), by state', '']
     if not rows:
-        L.append(f'No {name} was set out in the last {args.days} days at the yards I track.')
+        L.append(f'No {what if label else name}{span} was set out in the last {args.days} days at the yards I track.')
     else:
         places = 'states and provinces' if any(s in ('AB', 'BC', 'MB', 'NB', 'NS', 'ON', 'QC', 'SK') for s in by_state) else 'states'
-        lead = (f'I keep track of what self-service yards put out each day. Here is every {short} that was set out in the last '
+        lead = (f'I keep track of what self-service yards put out each day. Here is every {what}{span} that was set out in the last '
                 f'{args.days} days: {len(rows)} of them in {len(by_state)} {places}')
         L.append(lead + (f', {n4} confirmed 4x4.' if has_drive else '.'))
         L.append('')
@@ -129,11 +143,19 @@ def main():
                 L.append(f'* {r["year"]}{dr}, {r["yard"]}{row}, set out {r["day"].month}/{r["day"].day}')
         L += ['', 'If your state is not here, either nothing landed this week or I do not track your yard yet. '
                   'Tell me which yard you use and I will look at adding it.']
-    campaign = args.campaign or re.sub(r'[^a-z0-9]+', '', args.model.lower())
+    campaign = args.campaign or (re.sub(r'[^a-z0-9]+', '', args.model.lower())
+                                 + ('-' + re.sub(r'[^a-z0-9]+', '', label.lower()) if label else ''))
     make_q = args.make.replace(' ', '%20')
     model_q = args.model.replace(' ', '%20')
-    L += ['', 'The same list with photos where the yard posts them, narrowed to your area: '
-              f'https://yardscout.io/?utm_source=reddit&utm_medium=post&utm_campaign={campaign}#cars={make_q}%7C{model_q}']
+    years_q = f'%7C{yr_lo}-{yr_hi}' if yr_lo is not None else ''
+    tags = f'utm_source=reddit&utm_medium=post&utm_campaign={campaign}'
+    # Owner, 2026-11-20: a clean visible address with the tagged link behind
+    # it; the apps through yardscout.io/app (phones go to their own store),
+    # never store links.
+    L += ['', f'To see the {what}s near you, with photos where the yard posts them: '
+              f'[yardscout.io](https://yardscout.io/?{tags}#cars={make_q}%7C{model_q}{years_q})',
+          '', 'It is free and needs no account. The iPhone and Android apps are at '
+              f'[yardscout.io/app](https://yardscout.io/app?{tags}) if you want an alert when the next one lands.']
     text = '\n'.join(L) + '\n'
     note = (f'data as of {scraped:%Y-%m-%d %H:%M} UTC | {len(rows)} cars, {len(by_state)} states/provinces, '
             f'{n4} confirmed 4x4')

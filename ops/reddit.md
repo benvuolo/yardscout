@@ -88,3 +88,13 @@ out): neither. Use the existing say-it-out-loud address `yardscout.io/app`
 11-02 because people who searched the store by name sometimes landed on
 another app). Visible text `yardscout.io/app`, linked to the same address
 with the post's `utm_*` tags (Play receives them as the install referrer).
+
+Done 11-20 (hub): `tools/landed_post.py` takes `--years 1996-2002 --label
+"3rd gen"` (only those model years; title, counts and link for that range),
+and every post it writes now ends with the two agreed lines: the visible
+`yardscout.io` linked to the tagged, filtered list, and the apps through
+`yardscout.io/app`. Example:
+
+    python3 tools/landed_post.py Toyota 4Runner --years 1996-2002 --label "3rd gen"
+
+Still to do: a year range on the public landed page.
