@@ -3743,3 +3743,24 @@ up well before I did" instead of "have been at it longer").
   19:08 UTC); `hub/rc10-1120` (main + the wide-screen Cars view, sw
   `jh-v221`) in the hub's full regression since 19:15 UTC; six finished
   check working copies removed to free disk (2.5 -> 4.5 GB).
+
+## 2026-11-20 19:50 UTC Reddit: replies drafted; a yard-name gap found (former U-Pull-&-Pay yards)
+
+- Owner posted the reply to the "copy" comment (reworded after the March
+  files). Hub also drafted: an answer to "how did you get past lkq
+  cloudflare challenges" (nothing is got past: the LKQ pages are read as
+  ordinary pages, no challenge solving; the hub told the owner the LKQ
+  reader still sends a generic browser name, an open owner decision), and
+  advised no public reply to a 15-day-old "stolen platform" comment.
+- New comment on the 3rd gen post (ghua89): the post says "Pull-A-Part
+  Aurora" for the 1998 4x4 in Colorado, but Google Maps shows only a
+  U-Pull-&-Pay and a Pick Your Part in Aurora. Data checked: the car (row
+  411, set out 11-19) is at yard "Pull-A-Part - Aurora", which is the
+  former U-Pull-&-Pay at 1370 N Zeno St (the chains merged; maps still
+  carry the old name; `scraper/junkyard_scraper.py` line 404 says so).
+  Reply drafted for the owner.
+- **Gap, for the yards/data workstream (not built):** the former
+  U-Pull-&-Pay yards (AZ, NM, CO) are listed only under their new name, so
+  a reader cannot find them on a map, and a maps link that searches by
+  name may miss them. Recommend "formerly U-Pull-&-Pay" beside the name
+  for those yards and a maps link by address or coordinates.
