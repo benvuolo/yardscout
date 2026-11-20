@@ -6457,3 +6457,59 @@ ships today.
     a retailer alias rather than the catalog's name.
   - gm's description field often lists "Window Motor" for regulators. A per-site rule on which
     fields carry the catalog's own name would avoid holding real regulators-with-motor.
+
+### 2026-11-20 Round 11b (hub review): a bumper number naming another part is held
+
+**Rule.** Under bumper-front and bumper-rear, a number is held (`held_part_other`) when any of its
+naming values names a part other than the bumper cover or the bumper itself:
+- guard cover;
+- tow-hook cover;
+- grille;
+- moulding;
+- reinforcement, including "Impact Bar" and "Beam";
+- bracket, including "Stay";
+- absorber.
+
+The "bumper guard cover" phrase is gone. "Face Bar" (mopar 55077946AB, 55077107AN) is read as the
+bumper itself and is not held.
+
+**Census of every live make's bumper groups.** The groups are ford 14, mopar 3, toyota 41 and
+vag 1; gm, hmg, mb, nissan and subaru have none. **8 groups name another part and are held**
+(plain lot rows, lot main ships):
+- toyota bumper-front 52437-53010 and 52438-53010, "Cover, Front Bumper Guard, RH/LH" (Lexus IS
+  2006-07): 92 each.
+- ford bumper-front 2L1Z-17757-BA (569) and AE5Z-17757-A (975): "Bumper Assy - Front", with the
+  description "Impact Bar".
+- ford bumper-rear 6E5Z-17906-AA (365), AE5Z-17906-A (975) and BT4Z-17906-A (406): "Bumper Asy /
+  Assy - Rear", with the description "Impact Bar".
+- ford bumper-rear DG9Z-17906-A (730): "Beam Asy" and "Impact Bar".
+
+The five "Impact Bar" values are the record descriptions of numbers Ford names "Bumper Assy" (the
+`-CP` versions of the same bases say "Bumper Assembly" and are kept). Only DG9Z-17906-A is named a
+beam by the catalog itself. They are held under the rule all the same. The per-site naming-field
+rule of the next round can decide whether a description like this is the catalog's own name.
+
+**Final counts** (notes changed / held):
+
+| Make | Category | Changed | Held |
+|---|---|---|---|
+| toyota | bumper-front | 24 | 2 |
+| toyota | bumper-rear | 15 | 0 |
+| toyota | tail-lights | 14 | 2 |
+| mopar | bumper-front | 1 | 0 |
+| vag | bumper-front | 1 | 0 |
+| subaru | window-regulator | 5 | 0 |
+| ford | window-regulator | 2 | 0 |
+| ford | bumper-front | 0 | 2 |
+| ford | bumper-rear | 0 | 4 |
+| gm | window-regulator | 10 | 5 |
+| **Total** | | **72** | **15** |
+
+**Against 6d8f312e,** only those 8 groups leave: toyota.json 2 and ford.json 6. In the payload:
+- `bumper-front.json` and `bumper-rear.json` lose 4 groups each;
+- `interchange.json` carries the ford (66 → 60) and toyota (527 → 525) `oemStatus` counts and the
+  bumper `oemLazy` counts (front 37 → 33, rear 22 → 18);
+- the other 27 files differ only in `builtAt`;
+- the other groups files are byte-identical.
+
+test_round11_1120: 52 checks, 0 failures.
