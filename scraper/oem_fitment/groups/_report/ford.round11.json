@@ -1,19 +1,62 @@
 {
- "changed": 2,
- "held": 6,
+ "changed": 1,
+ "held": 14,
  "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, lens and body unit, regulator with motor) on the finished note (change 'phrase'); names that disagree in kind, a note past the cap, or other words already on the note hold the group (change 'held'). Names with field, kind and site:file:line.",
  "ns": "ford",
  "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "removed": 0,
  "rows": [
   {
    "cat": "bumper-front",
    "change": "held",
-   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "detail": "a value names a part other than the bumper cover or the bumper (reinforcement)",
    "kinds": [
     "bumper",
     "reinforcement"
    ],
    "names": [
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1666"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1672"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1674"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L767"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L773"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L775"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1666"
+    },
     {
      "field": "list.main",
      "kind": "bumper",
@@ -24,7 +67,25 @@
      "field": "list.main",
      "kind": "bumper",
      "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1674"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L767"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
      "ref": "www.fordpartsgiant.com:lists:L773"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L775"
     },
     {
      "field": "record.description",
@@ -39,9 +100,27 @@
      "ref": "www.fordpartsgiant.com:records:L4298"
     },
     {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L4298"
+    },
+    {
      "field": "record.name",
      "kind": "bumper",
      "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L4298"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L4298"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
      "ref": "www.fordpartsgiant.com:records:L4298"
     }
    ],
@@ -52,51 +131,242 @@
    "reason": "held_part_other"
   },
   {
-   "cat": "window-regulator",
-   "change": "phrase",
+   "cat": "bumper-front",
+   "change": "held",
+   "detail": "named only 'Bumper' while its own page lists a separate bumper cover",
    "kinds": [
-    "regulator+motor"
+    "bumper"
    ],
    "names": [
     {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1666"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1672"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1674"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L767"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L773"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L775"
+    },
+    {
      "field": "list.main",
-     "kind": "regulator+motor",
-     "name": "Regulator And Motor Assy - Window",
-     "ref": "www.fordpartsgiant.com:lists:L57"
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1666"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1672"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1674"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L767"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L773"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L775"
     },
     {
      "field": "record.description",
-     "kind": "regulator+motor",
-     "name": "Regulator And Motor Assy - Window",
-     "ref": "www.fordpartsgiant.com:records:L1953"
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L4299"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L4299"
     },
     {
      "field": "record.name",
-     "kind": "regulator+motor",
-     "name": "Regulator And Motor Assy - Window",
-     "ref": "www.fordpartsgiant.com:records:L1953"
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L4299"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L4299"
     }
    ],
-   "new_note": "Ford catalog lists #5G1Z-5423208-AA for both — regulator with motor; fits some configurations; verify the number on the part",
-   "old_note": "Ford catalog lists #5G1Z-5423208-AA for both — fits some configurations; verify the number on the part",
-   "pages_reinforcement": null,
-   "phrase": "regulator with motor",
+   "old_note": "Ford catalog lists #2L1Z-17757-BACP for both — fits some configurations; verify the number on the part",
    "pn": [
-    "5G1Z-5423208-AA"
-   ]
+    "2L1Z-17757-BACP"
+   ],
+   "reason": "held_bumper_bar"
   },
   {
    "cat": "window-regulator",
-   "change": "phrase",
+   "change": "held",
+   "detail": "one value has the motor, another says less motor",
    "kinds": [
-    "regulator+motor"
+    "regulator+motor",
+    "regulator-less"
    ],
    "names": [
+    {
+     "field": "list.group",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "list.group",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:lists:L59"
+    },
     {
      "field": "list.main",
      "kind": "regulator+motor",
      "name": "Regulator And Motor Assy - Window",
      "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:lists:L59"
+    },
+    {
+     "field": "list.notes",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "list.notes",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:lists:L59"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1953"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:records:L1953"
+    },
+    {
+     "field": "record.list_info",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:records:L1953"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1953"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1953"
+    }
+   ],
+   "old_note": "Ford catalog lists #5G1Z-5423208-AA for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "5G1Z-5423208-AA"
+   ],
+   "reason": "held_name_disagree"
+  },
+  {
+   "cat": "window-regulator",
+   "change": "held",
+   "detail": "one value has the motor, another says less motor",
+   "kinds": [
+    "regulator+motor",
+    "regulator-less"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "list.group",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:lists:L59"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:lists:L59"
+    },
+    {
+     "field": "list.notes",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "list.notes",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:lists:L59"
     },
     {
      "field": "record.description",
@@ -105,29 +375,57 @@
      "ref": "www.fordpartsgiant.com:records:L1954"
     },
     {
+     "field": "record.list_group",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:records:L1954"
+    },
+    {
+     "field": "record.list_info",
+     "kind": "regulator-less",
+     "name": "Regulator - Window - Less Motor",
+     "ref": "www.fordpartsgiant.com:records:L1954"
+    },
+    {
      "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1954"
+    },
+    {
+     "field": "record.part_description",
      "kind": "regulator+motor",
      "name": "Regulator And Motor Assy - Window",
      "ref": "www.fordpartsgiant.com:records:L1954"
     }
    ],
-   "new_note": "Ford catalog lists #5G1Z-5423209-AA for both — regulator with motor; fits some configurations; verify the number on the part",
    "old_note": "Ford catalog lists #5G1Z-5423209-AA for both — fits some configurations; verify the number on the part",
-   "pages_reinforcement": null,
-   "phrase": "regulator with motor",
    "pn": [
     "5G1Z-5423209-AA"
-   ]
+   ],
+   "reason": "held_name_disagree"
   },
   {
    "cat": "bumper-rear",
    "change": "held",
-   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "detail": "a value names a part other than the bumper cover or the bumper (reinforcement)",
    "kinds": [
     "bumper",
     "reinforcement"
    ],
    "names": [
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2322"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L863"
+    },
     {
      "field": "list.main",
      "kind": "bumper",
@@ -138,6 +436,18 @@
      "field": "list.main",
      "kind": "bumper",
      "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L863"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel / Impact Bar - Steel , Replacement Is 140MM Shorter That Early Production.This Is Correct And Currently Used In Production",
+     "ref": "www.fordpartsgiant.com:lists:L2322"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel / Impact Bar - Steel , Replacement Is 140MM Shorter That Early Production.This Is Correct And Currently Used In Production",
      "ref": "www.fordpartsgiant.com:lists:L863"
     },
     {
@@ -153,9 +463,33 @@
      "ref": "www.fordpartsgiant.com:records:L4590"
     },
     {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    },
+    {
+     "field": "record.list_info",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel / Impact Bar - Steel , Replacement Is 140MM Shorter That Early Production.This Is Correct And Currently Used In Production",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    },
+    {
      "field": "record.name",
      "kind": "bumper",
      "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
      "ref": "www.fordpartsgiant.com:records:L4590"
     }
    ],
@@ -168,17 +502,461 @@
   {
    "cat": "bumper-front",
    "change": "held",
-   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "detail": "named only 'Bumper' while its own page lists a separate bumper cover",
+   "kinds": [
+    "bumper"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1055"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1061"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1063"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2329"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2335"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2337"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2941"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2947"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2949"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1055"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1061"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1063"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2329"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2335"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2337"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2941"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2947"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L2949"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L4929"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Front Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L4929"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L4929"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L4929"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L4929"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Front Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L4929"
+    }
+   ],
+   "old_note": "Ford catalog lists #7L1Z-17757-A for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "7L1Z-17757-A"
+   ],
+   "reason": "held_bumper_bar"
+  },
+  {
+   "cat": "bumper-front",
+   "change": "held",
+   "detail": "named only 'Bumper' while its own page lists a separate bumper cover",
+   "kinds": [
+    "bumper"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1385"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1391"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1393"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L3293"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L3299"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L3301"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2229"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2235"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2237"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1385"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1391"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L1393"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L3293"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L3299"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:lists:L3301"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2229"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2235"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2237"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L5379"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Front Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L5379"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L5379"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L5379"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L5379"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Front Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L5379"
+    }
+   ],
+   "old_note": "Ford catalog lists #8A8Z-17757-A for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "8A8Z-17757-A"
+   ],
+   "reason": "held_bumper_bar"
+  },
+  {
+   "cat": "bumper-front",
+   "change": "held",
+   "detail": "a value names a part other than the bumper cover or the bumper (reinforcement)",
    "kinds": [
     "bumper",
     "reinforcement"
    ],
    "names": [
     {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1681"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1687"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1689"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2273"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2279"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2281"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2287"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2293"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2295"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2301"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2307"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2309"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2492"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2498"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2500"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L620"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L626"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L628"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1681"
+    },
+    {
      "field": "list.main",
      "kind": "bumper",
      "name": "Bumper Assy - Front",
      "ref": "www.fordpartsgiant.com:lists:L1687"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1689"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2273"
     },
     {
      "field": "list.main",
@@ -190,7 +968,31 @@
      "field": "list.main",
      "kind": "bumper",
      "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2281"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2287"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
      "ref": "www.fordpartsgiant.com:lists:L2293"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2295"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2301"
     },
     {
      "field": "list.main",
@@ -202,13 +1004,151 @@
      "field": "list.main",
      "kind": "bumper",
      "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2309"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2492"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
      "ref": "www.fordpartsgiant.com:lists:L2498"
     },
     {
      "field": "list.main",
      "kind": "bumper",
      "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2500"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L620"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
      "ref": "www.fordpartsgiant.com:lists:L626"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L628"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L1681"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L1687"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L1689"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2273"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2279"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2281"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2287"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2293"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2295"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2301"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2307"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2309"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2492"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2498"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2500"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L620"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L626"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L628"
     },
     {
      "field": "record.description",
@@ -223,9 +1163,33 @@
      "ref": "www.fordpartsgiant.com:records:L3955"
     },
     {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    },
+    {
+     "field": "record.list_info",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    },
+    {
      "field": "record.name",
      "kind": "bumper",
      "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
      "ref": "www.fordpartsgiant.com:records:L3955"
     }
    ],
@@ -236,14 +1200,432 @@
    "reason": "held_part_other"
   },
   {
-   "cat": "bumper-rear",
+   "cat": "bumper-front",
    "change": "held",
-   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "detail": "a value names a part other than the bumper cover or the bumper (reinforcement)",
    "kinds": [
     "bumper",
     "reinforcement"
    ],
    "names": [
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1681"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1687"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1689"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2273"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2279"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2281"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2287"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2293"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2295"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2301"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2307"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2309"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2492"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2498"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2500"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L620"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L626"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L628"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1681"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1687"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1689"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2273"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2279"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2281"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2287"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2293"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2295"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2301"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2307"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2309"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2492"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2498"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2500"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L620"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L626"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L628"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L1681"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L1687"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L1689"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2273"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2279"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2281"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2287"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2293"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2295"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2301"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2307"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2309"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2492"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2498"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2500"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L620"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L626"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L628"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L3956"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Front Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L3956"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L3956"
+    },
+    {
+     "field": "record.list_info",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:records:L3956"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L3956"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L3956"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Front Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L3956"
+    }
+   ],
+   "old_note": "Ford catalog lists #AE5Z-17757-ACP for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "AE5Z-17757-ACP"
+   ],
+   "reason": "held_part_other"
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "held",
+   "detail": "a value names a part other than the bumper cover or the bumper (reinforcement)",
+   "kinds": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L1688"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2280"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2294"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2308"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2499"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L627"
+    },
     {
      "field": "list.main",
      "kind": "bumper",
@@ -281,6 +1663,42 @@
      "ref": "www.fordpartsgiant.com:lists:L627"
     },
     {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L1688"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2280"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2294"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2308"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2499"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L627"
+    },
+    {
      "field": "record.description",
      "kind": "bumper",
      "name": "Bumper Assembly - Rear",
@@ -293,9 +1711,33 @@
      "ref": "www.fordpartsgiant.com:records:L3957"
     },
     {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    },
+    {
+     "field": "record.list_info",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    },
+    {
      "field": "record.name",
      "kind": "bumper",
      "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
      "ref": "www.fordpartsgiant.com:records:L3957"
     }
    ],
@@ -308,12 +1750,190 @@
   {
    "cat": "bumper-rear",
    "change": "held",
-   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "detail": "a value names a part other than the bumper cover or the bumper (reinforcement)",
    "kinds": [
     "bumper",
     "reinforcement"
    ],
    "names": [
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L1688"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2280"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2294"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2308"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2499"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L627"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L1688"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2280"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2294"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2308"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2499"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L627"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L1688"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2280"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2294"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2308"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L2499"
+    },
+    {
+     "field": "list.notes",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:lists:L627"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3958"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Rear Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L3958"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3958"
+    },
+    {
+     "field": "record.list_info",
+     "kind": "reinforcement",
+     "name": "Impact Bar - Steel",
+     "ref": "www.fordpartsgiant.com:records:L3958"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3958"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3958"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Rear Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L3958"
+    }
+   ],
+   "old_note": "Ford catalog lists #AE5Z-17906-ACP for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "AE5Z-17906-ACP"
+   ],
+   "reason": "held_part_other"
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "held",
+   "detail": "a value names a part other than the bumper cover or the bumper (reinforcement)",
+   "kinds": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2797"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L641"
+    },
     {
      "field": "list.main",
      "kind": "bumper",
@@ -339,9 +1959,27 @@
      "ref": "www.fordpartsgiant.com:records:L4043"
     },
     {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4043"
+    },
+    {
      "field": "record.name",
      "kind": "bumper",
      "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4043"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4043"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
      "ref": "www.fordpartsgiant.com:records:L4043"
     }
    ],
@@ -354,12 +1992,129 @@
   {
    "cat": "bumper-rear",
    "change": "held",
-   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "detail": "named only 'Bumper' while its own page lists a separate bumper cover",
+   "kinds": [
+    "bumper"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2797"
+    },
+    {
+     "field": "list.group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L641"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2797"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L641"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4044"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Rear Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L4044"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4044"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4044"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4044"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Rear Bumper Assembly",
+     "ref": "www.fordpartsgiant.com:records:L4044"
+    }
+   ],
+   "old_note": "Ford catalog lists #BT4Z-17906-ACP for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "BT4Z-17906-ACP"
+   ],
+   "reason": "held_bumper_bar"
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "held",
+   "detail": "a value names a part other than the bumper cover or the bumper (reinforcement)",
    "kinds": [
     "bumper",
     "reinforcement"
    ],
    "names": [
+    {
+     "field": "list.group",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2099"
+    },
+    {
+     "field": "list.group",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2110"
+    },
+    {
+     "field": "list.group",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2513"
+    },
+    {
+     "field": "list.group",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2527"
+    },
+    {
+     "field": "list.group",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2849"
+    },
+    {
+     "field": "list.group",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L3271"
+    },
+    {
+     "field": "list.group",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L656"
+    },
     {
      "field": "list.main",
      "kind": "reinforcement",
@@ -394,6 +2149,12 @@
      "field": "list.main",
      "kind": "reinforcement",
      "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L3271"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
      "ref": "www.fordpartsgiant.com:lists:L656"
     },
     {
@@ -409,9 +2170,27 @@
      "ref": "www.fordpartsgiant.com:records:L4098"
     },
     {
+     "field": "record.list_group",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:records:L4098"
+    },
+    {
      "field": "record.name",
      "kind": "reinforcement",
      "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:records:L4098"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L4098"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
      "ref": "www.fordpartsgiant.com:records:L4098"
     }
    ],
@@ -420,6 +2199,179 @@
     "DG9Z-17906-A"
    ],
    "reason": "held_part_other"
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator-less"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "regulator-less",
+     "name": "REGULATOR ASY. (FRONT DOOR WINDOW) ELECTRIC - LESS MOTOR AND DRIVE - AND 23209",
+     "ref": "www.fordpartsgiant.com:lists:L3122"
+    },
+    {
+     "field": "list.group",
+     "kind": "regulator-less",
+     "name": "REGULATOR ASY. (FRONT DOOR WINDOW) ELECTRIC - LESS MOTOR AND DRIVE - AND 23209",
+     "ref": "www.fordpartsgiant.com:lists:L3123"
+    },
+    {
+     "field": "list.group",
+     "kind": "regulator-less",
+     "name": "REGULATOR ASY. (FRONT DOOR WINDOW) ELECTRIC - LESS MOTOR AND DRIVE - AND 23209",
+     "ref": "www.fordpartsgiant.com:lists:L3148"
+    },
+    {
+     "field": "list.group",
+     "kind": "regulator-less",
+     "name": "REGULATOR ASY. (FRONT DOOR WINDOW) ELECTRIC - LESS MOTOR AND DRIVE - AND 23209",
+     "ref": "www.fordpartsgiant.com:lists:L940"
+    },
+    {
+     "field": "list.group",
+     "kind": "regulator-less",
+     "name": "REGULATOR ASY. (FRONT DOOR WINDOW) ELECTRIC - LESS MOTOR AND DRIVE - AND 23209",
+     "ref": "www.fordpartsgiant.com:lists:L941"
+    },
+    {
+     "field": "list.group",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:lists:L269"
+    },
+    {
+     "field": "list.group",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:lists:L270"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:lists:L269"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:lists:L270"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:lists:L3122"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:lists:L3123"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:lists:L3148"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:lists:L940"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:lists:L941"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "R.H.,",
+     "ref": "www.fordpartsgiant.com:lists:L3122"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "R.H.,",
+     "ref": "www.fordpartsgiant.com:lists:L3123"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "R.H.,",
+     "ref": "www.fordpartsgiant.com:lists:L3148"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "R.H.,",
+     "ref": "www.fordpartsgiant.com:lists:L940"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "R.H.,",
+     "ref": "www.fordpartsgiant.com:lists:L941"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "RH Front",
+     "ref": "www.fordpartsgiant.com:lists:L269"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "RH Front",
+     "ref": "www.fordpartsgiant.com:lists:L270"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:records:L1795"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:records:L1795"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "RH Front",
+     "ref": "www.fordpartsgiant.com:records:L1795"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:records:L1795"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "regulator",
+     "name": "Regulator Assy",
+     "ref": "www.fordpartsgiant.com:records:L1795"
+    }
+   ],
+   "new_note": "Ford catalog lists #F67Z-7823208-AA for both — regulator without motor; fits some configurations; verify the number on the part",
+   "old_note": "Ford catalog lists #F67Z-7823208-AA for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "regulator without motor",
+   "pn": [
+    "F67Z-7823208-AA"
+   ]
   }
  ]
 }

@@ -35,7 +35,7 @@ gm CHANGED LIVE ('window-regulator', ('5483149',)) [['Chevrolet', 'Blazer', 2001
     new: GM catalog lists #5483149 for both — regulator with motor; fits some configurations; Blazer: only 2WD checked; verify the number on the part
 mopar CHANGED LIVE ('bumper-front', ('5073002AC',)) [['Dodge', 'Ram 1500', 2002, 2002], ['Dodge', 'Ram 2500', 2003, 2003]] lost [] gained []
     old: Mopar catalog lists #5073002AC for both — trim-limited; verify the number on the part
-    new: Mopar catalog lists #5073002AC for both — bumper cover; trim-limited; verify the number on the part
+    new: Mopar catalog lists #5073002AC for both — bumper cover only; trim-limited; verify the number on the part
 toyota CHANGED LIVE ('bumper-front', ('52119-06919',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
     old: Toyota catalog lists #52119-06919 for both — plant-specific (US / Japan built); verify the number on the part
     new: Toyota catalog lists #52119-06919 for both — bumper cover; plant-specific (US / Japan built); verify the number on the part
@@ -161,7 +161,6 @@ toyota CHANGED LIVE ('tail-lights', ('81551-0E010',)) [['Lexus', 'RX 330', 2004,
 toyota CHANGED LIVE ('tail-lights', ('81551-30A50',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
     old: Toyota catalog lists #81551-30A50 for both — option: fits some option packages; verify the number on the part
     new: Toyota catalog lists #81551-30A50 for both — lens and body unit; option: fits some option packages; verify the number on the part
-toyota REMOVED LIVE ('tail-lights', ('81551-33530',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]]
 toyota CHANGED LIVE ('tail-lights', ('81551-48060',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
     old: Toyota catalog lists #81551-48060 for both — option: fits some option packages; verify the number on the part
     new: Toyota catalog lists #81551-48060 for both — lens and body unit; option: fits some option packages; verify the number on the part
@@ -183,7 +182,6 @@ toyota CHANGED LIVE ('tail-lights', ('81561-0E010',)) [['Lexus', 'RX 330', 2004,
 toyota CHANGED LIVE ('tail-lights', ('81561-30A40',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
     old: Toyota catalog lists #81561-30A40 for both — option: fits some option packages; verify the number on the part
     new: Toyota catalog lists #81561-30A40 for both — lens and body unit; option: fits some option packages; verify the number on the part
-toyota REMOVED LIVE ('tail-lights', ('81561-33530',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]]
 toyota CHANGED LIVE ('tail-lights', ('81561-48060',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
     old: Toyota catalog lists #81561-48060 for both — option: fits some option packages; verify the number on the part
     new: Toyota catalog lists #81561-48060 for both — lens and body unit; option: fits some option packages; verify the number on the part
@@ -199,18 +197,59 @@ toyota CHANGED LIVE ('tail-lights', ('81561-53230',)) [['Lexus', 'IS 250', 2013,
 toyota CHANGED LIVE ('tail-lights', ('81561-53260',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
     old: Toyota catalog lists #81561-53260 for both — fits some configurations; verify the number on the part
     new: Toyota catalog lists #81561-53260 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69801-06070',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #69801-06070 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #69801-06070 for both — plant-specific (US / Japan built); verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69801-06080',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #69801-06080 for both — regulator without motor; trim-limited; verify the number on the part
+    new: Toyota catalog lists #69801-06080 for both — trim-limited; verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69801-33060',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #69801-33060 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #69801-33060 for both — plant-specific (US / Japan built); verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69802-06070',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #69802-06070 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #69802-06070 for both — plant-specific (US / Japan built); verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69802-06080',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #69802-06080 for both — regulator without motor; trim-limited; verify the number on the part
+    new: Toyota catalog lists #69802-06080 for both — trim-limited; verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69802-33050',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #69802-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #69802-33050 for both — plant-specific (US / Japan built); verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69803-06110',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #69803-06110 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #69803-06110 for both — plant-specific (US / Japan built); verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69803-06140',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #69803-06140 for both — regulator without motor; trim-limited; verify the number on the part
+    new: Toyota catalog lists #69803-06140 for both — trim-limited; verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69803-33050',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #69803-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #69803-33050 for both — plant-specific (US / Japan built); verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69804-06110',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #69804-06110 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #69804-06110 for both — plant-specific (US / Japan built); verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69804-06140',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #69804-06140 for both — regulator without motor; trim-limited; verify the number on the part
+    new: Toyota catalog lists #69804-06140 for both — trim-limited; verify the number on the part
+toyota CHANGED LIVE ('window-regulator', ('69804-33050',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #69804-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #69804-33050 for both — plant-specific (US / Japan built); verify the number on the part
 ford REMOVED LIVE ('bumper-front', ('2L1Z-17757-BA',)) [['Ford', 'Expedition', 2003, 2003], ['Lincoln', 'Navigator', 2004, 2004]]
+ford REMOVED LIVE ('bumper-front', ('2L1Z-17757-BACP',)) [['Ford', 'Expedition', 2003, 2003], ['Lincoln', 'Navigator', 2004, 2004]]
+ford REMOVED LIVE ('bumper-front', ('7L1Z-17757-A',)) [['Ford', 'Expedition', 2007, 2007], ['Lincoln', 'Navigator', 2007, 2007]]
+ford REMOVED LIVE ('bumper-front', ('8A8Z-17757-A',)) [['Ford', 'Flex', 2009, 2009], ['Lincoln', 'MKS', 2009, 2009]]
 ford REMOVED LIVE ('bumper-front', ('AE5Z-17757-A',)) [['Ford', 'Fusion', 2012, 2012], ['Lincoln', 'MKZ', 2010, 2012], ['Mercury', 'Milan', 2010, 2010]]
+ford REMOVED LIVE ('bumper-front', ('AE5Z-17757-ACP',)) [['Ford', 'Fusion', 2012, 2012], ['Lincoln', 'MKZ', 2010, 2012], ['Mercury', 'Milan', 2010, 2010]]
 ford REMOVED LIVE ('bumper-rear', ('6E5Z-17906-AA',)) [['Ford', 'Fusion', 2008, 2008], ['Lincoln', 'MKZ', 2008, 2008]]
 ford REMOVED LIVE ('bumper-rear', ('AE5Z-17906-A',)) [['Ford', 'Fusion', 2012, 2012], ['Lincoln', 'MKZ', 2010, 2012], ['Mercury', 'Milan', 2010, 2010]]
+ford REMOVED LIVE ('bumper-rear', ('AE5Z-17906-ACP',)) [['Ford', 'Fusion', 2012, 2012], ['Lincoln', 'MKZ', 2010, 2012], ['Mercury', 'Milan', 2010, 2010]]
 ford REMOVED LIVE ('bumper-rear', ('BT4Z-17906-A',)) [['Ford', 'Edge', 2013, 2013], ['Lincoln', 'MKX', 2011, 2011]]
+ford REMOVED LIVE ('bumper-rear', ('BT4Z-17906-ACP',)) [['Ford', 'Edge', 2013, 2013], ['Lincoln', 'MKX', 2011, 2011]]
 ford REMOVED LIVE ('bumper-rear', ('DG9Z-17906-A',)) [['Ford', 'Fusion', 2014, 2014], ['Ford', 'Fusion', 2017, 2017], ['Lincoln', 'MKZ', 2014, 2014]]
-ford CHANGED LIVE ('window-regulator', ('5G1Z-5423208-AA',)) [['Ford', 'Five Hundred', 2005, 2005], ['Mercury', 'Montego', 2005, 2005]] lost [] gained []
-    old: Ford catalog lists #5G1Z-5423208-AA for both — fits some configurations; verify the number on the part
-    new: Ford catalog lists #5G1Z-5423208-AA for both — regulator with motor; fits some configurations; verify the number on the part
-ford CHANGED LIVE ('window-regulator', ('5G1Z-5423209-AA',)) [['Ford', 'Five Hundred', 2005, 2005], ['Mercury', 'Montego', 2005, 2005]] lost [] gained []
-    old: Ford catalog lists #5G1Z-5423209-AA for both — fits some configurations; verify the number on the part
-    new: Ford catalog lists #5G1Z-5423209-AA for both — regulator with motor; fits some configurations; verify the number on the part
+ford REMOVED LIVE ('window-regulator', ('5G1Z-5423208-AA',)) [['Ford', 'Five Hundred', 2005, 2005], ['Mercury', 'Montego', 2005, 2005]]
+ford REMOVED LIVE ('window-regulator', ('5G1Z-5423209-AA',)) [['Ford', 'Five Hundred', 2005, 2005], ['Mercury', 'Montego', 2005, 2005]]
+ford CHANGED LIVE ('window-regulator', ('F67Z-7823208-AA',)) [['Ford', 'Explorer Sport', 2001, 2001], ['Ford', 'Explorer Sport Trac', 2001, 2001]] lost [] gained []
+    old: Ford catalog lists #F67Z-7823208-AA for both — fits some configurations; verify the number on the part
+    new: Ford catalog lists #F67Z-7823208-AA for both — regulator without motor; fits some configurations; verify the number on the part
 subaru CHANGED LIVE ('window-regulator', ('61041AL00A',)) [['Subaru', 'Legacy', 2015, 2015], ['Subaru', 'Outback', 2015, 2015]] lost [] gained []
     old: Subaru catalog lists #61041AL00A for both — option: fits some option packages; verify the number on the part
     new: Subaru catalog lists #61041AL00A for both — regulator with motor; option: fits some option packages; verify the number on the part
@@ -231,8 +270,8 @@ vag CHANGED LIVE ('bumper-front', ('1HM-807-217-D-GRU',)) [['Volkswagen', 'Golf'
     new: VW/Audi catalog lists #1HM-807-217-D-GRU for both — bumper cover; trim-limited; verify the number on the part
 # gm LIVE: removed 5 groups, added 0 groups, changed 10; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # mopar LIVE: removed 0 groups, added 0 groups, changed 1; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
-# toyota LIVE: removed 4 groups, added 0 groups, changed 53; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
-# ford LIVE: removed 6 groups, added 0 groups, changed 2; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# toyota LIVE: removed 2 groups, added 0 groups, changed 65; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# ford LIVE: removed 14 groups, added 0 groups, changed 1; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # nissan LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # hmg LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # subaru LIVE: removed 0 groups, added 0 groups, changed 5; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0

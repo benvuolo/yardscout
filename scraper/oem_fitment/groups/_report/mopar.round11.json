@@ -4,6 +4,7 @@
  "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, lens and body unit, regulator with motor) on the finished note (change 'phrase'); names that disagree in kind, a note past the cap, or other words already on the note hold the group (change 'held'). Names with field, kind and site:file:line.",
  "ns": "mopar",
  "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "removed": 0,
  "rows": [
   {
    "cat": "bumper-front",
@@ -22,7 +23,19 @@
      "field": "list.aux",
      "kind": "cover",
      "name": "Bumper Cover",
+     "ref": "www.jeeppartsdeal.com:lists:L1093"
+    },
+    {
+     "field": "list.aux",
+     "kind": "cover",
+     "name": "Bumper Cover",
      "ref": "www.jeeppartsdeal.com:lists:L1625"
+    },
+    {
+     "field": "list.aux",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.jeeppartsdeal.com:lists:L1627"
     },
     {
      "field": "list.main",
@@ -34,7 +47,43 @@
      "field": "list.main",
      "kind": "cover",
      "name": "Fascia - Front",
+     "ref": "www.jeeppartsdeal.com:lists:L1093"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Fascia - Front",
      "ref": "www.jeeppartsdeal.com:lists:L1625"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Fascia - Front",
+     "ref": "www.jeeppartsdeal.com:lists:L1627"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Without Sport Package, Primed",
+     "ref": "www.jeeppartsdeal.com:lists:L1091"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Without Sport Package, Primed",
+     "ref": "www.jeeppartsdeal.com:lists:L1093"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Without Sport Package, Primed",
+     "ref": "www.jeeppartsdeal.com:lists:L1625"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Without Sport Package, Primed",
+     "ref": "www.jeeppartsdeal.com:lists:L1627"
     },
     {
      "field": "record.aux",
@@ -67,13 +116,18 @@
      "ref": "www.jeeppartsdeal.com:records:L3197"
     }
    ],
-   "new_note": "Mopar catalog lists #5073002AC for both — bumper cover; trim-limited; verify the number on the part",
+   "new_note": "Mopar catalog lists #5073002AC for both — bumper cover only; trim-limited; verify the number on the part",
    "old_note": "Mopar catalog lists #5073002AC for both — trim-limited; verify the number on the part",
-   "pages_reinforcement": {
-    "https://www.jeeppartsdeal.com/parts-list/2002-dodge-ram-1500/body-hardware/bumper-components-front": [],
-    "https://www.jeeppartsdeal.com/parts-list/2003-dodge-ram-2500/body-hardware/bumper-components-front": []
+   "pages": {
+    "https://www.jeeppartsdeal.com/parts-list/2002-dodge-ram-1500/body-hardware/bumper-components-front": [
+     "55077960AC Beam - Front Bumper"
+    ],
+    "https://www.jeeppartsdeal.com/parts-list/2003-dodge-ram-2500/body-hardware/bumper-components-front": [
+     "55077214AB BEAM Front Bumper",
+     "55077960AC Beam - Front Bumper"
+    ]
    },
-   "phrase": "bumper cover",
+   "phrase": "bumper cover only",
    "pn": [
     "5073002AC"
    ]

@@ -116095,7 +116095,7 @@
    "cat": "bumper-front",
    "id": "oem:mopar:bumper-front:C:aaa2efceb3",
    "kind": "body",
-   "note": "Mopar catalog lists #5073002AC for both — bumper cover; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5073002AC for both — bumper cover only; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T10:16:14Z",
    "pn": [
     "5073002AC"

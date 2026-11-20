@@ -66303,6 +66303,21 @@
    ],
    "reman": false
   },
+  "toyota:8155133530": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.toyotapartsnow.com:records:L529"
+   ],
+   "names": [
+    "Lens & Housing",
+    "Lens&Body, Rear Combination Lamp"
+   ],
+   "pns": [
+    "81551-33530"
+   ],
+   "reman": false
+  },
   "toyota:8155148060": {
    "cat": "tail-lights",
    "comp": null,
@@ -66457,6 +66472,21 @@
    ],
    "pns": [
     "81561-30A40"
+   ],
+   "reman": false
+  },
+  "toyota:8156133530": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.toyotapartsnow.com:records:L531"
+   ],
+   "names": [
+    "Lens & Housing",
+    "Lens&Body, Rear Combination Lamp"
+   ],
+   "pns": [
+    "81561-33530"
    ],
    "reman": false
   },
@@ -86826,7 +86856,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FR:057d7a7f83",
    "kind": "body",
-   "note": "Toyota catalog lists #69801-06070 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69801-06070 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:05Z",
    "pn": [
     "69801-06070"
@@ -86853,7 +86883,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FR:524955f967",
    "kind": "body",
-   "note": "Toyota catalog lists #69801-06080 for both — regulator without motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #69801-06080 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:43:10Z",
    "pn": [
     "69801-06080"
@@ -86991,7 +87021,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FR:36726c1517",
    "kind": "body",
-   "note": "Toyota catalog lists #69801-33060 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69801-33060 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:09Z",
    "pn": [
     "69801-33060"
@@ -87045,7 +87075,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FL:db13f19252",
    "kind": "body",
-   "note": "Toyota catalog lists #69802-06070 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69802-06070 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:53:57Z",
    "pn": [
     "69802-06070"
@@ -87072,7 +87102,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FL:bc2d3c0c96",
    "kind": "body",
-   "note": "Toyota catalog lists #69802-06080 for both — regulator without motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #69802-06080 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:43:18Z",
    "pn": [
     "69802-06080"
@@ -87210,7 +87240,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FL:c7e861dec5",
    "kind": "body",
-   "note": "Toyota catalog lists #69802-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69802-33050 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:01Z",
    "pn": [
     "69802-33050"
@@ -87264,7 +87294,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RR:8f36632bc4",
    "kind": "body",
-   "note": "Toyota catalog lists #69803-06110 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69803-06110 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:33Z",
    "pn": [
     "69803-06110"
@@ -87291,7 +87321,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RR:bb63838b23",
    "kind": "body",
-   "note": "Toyota catalog lists #69803-06140 for both — regulator without motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #69803-06140 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:43:42Z",
    "pn": [
     "69803-06140"
@@ -87363,7 +87393,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RR:24c3734e0e",
    "kind": "body",
-   "note": "Toyota catalog lists #69803-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69803-33050 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:41Z",
    "pn": [
     "69803-33050"
@@ -87390,7 +87420,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RL:1a045a4508",
    "kind": "body",
-   "note": "Toyota catalog lists #69804-06110 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69804-06110 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:37Z",
    "pn": [
     "69804-06110"
@@ -87417,7 +87447,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RL:50e8d1296e",
    "kind": "body",
-   "note": "Toyota catalog lists #69804-06140 for both — regulator without motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #69804-06140 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:43:50Z",
    "pn": [
     "69804-06140"
@@ -87489,7 +87519,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RL:6c50daad79",
    "kind": "body",
-   "note": "Toyota catalog lists #69804-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69804-33050 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:45Z",
    "pn": [
     "69804-33050"
@@ -89153,6 +89183,47 @@
   {
    "apps": [
     [
+     "Toyota",
+     "Camry",
+     2011,
+     2011
+    ],
+    [
+     "Toyota",
+     "Camry Hybrid",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 392,
+   "cat": "tail-lights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
+   "id": "oem:toyota:tail-lights:R:d79a7570e9",
+   "kind": "body",
+   "note": "Toyota catalog lists #81551-33530 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T01:40:51Z",
+   "pn": [
+    "81551-33530"
+   ],
+   "reason": "plant",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
      "Lexus",
      "RX 330",
      2004,
@@ -89465,6 +89536,47 @@
     "81561-30A40"
    ],
    "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011
+    ],
+    [
+     "Toyota",
+     "Camry Hybrid",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 392,
+   "cat": "tail-lights",
+   "gates": [
+    [
+     "Toyota",
+     "Camry",
+     2011,
+     2011,
+     {
+      "eng": [
+       "2.4L"
+      ],
+      "fuel": "hybrid"
+     }
+    ]
+   ],
+   "id": "oem:toyota:tail-lights:L:112300162d",
+   "kind": "body",
+   "note": "Toyota catalog lists #81561-33530 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T01:40:59Z",
+   "pn": [
+    "81561-33530"
+   ],
+   "reason": "plant",
    "tier": "likely"
   },
   {
