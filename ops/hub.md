@@ -3695,3 +3695,30 @@ Canonical and og:url never carry the parameter. Daily ops email gains
   curation's CLAIMS still read only part 1 of gm's and ford's list files.
   Fresh independent check started 18:52 UTC with the hub's rulings written
   into its verdict rules.
+
+## 2026-11-20 19:07 UTC round 11 on main: packaging words on bumpers, tail lamps and regulators
+
+- `interchange/round11-1120` head fb5a1a61 (round 11c) merged with the
+  check report (`interchange/verify-round11c-names-1120` head 0c01ae5f).
+  Data only: no app change, no cache-name bump.
+- **Independent check** (fresh agent, blind, all 368 groups of the four
+  categories on nine makes, every naming field, every list part): 306
+  RIGHT, **0 WRONG**, 62 RISK. Longest note 159.
+- **Hub's own check against main:** 83 notes changed and nothing else in
+  them (gain: "bumper cover only" 26, "bumper cover" 15, "lens and body
+  unit" 14, "regulator with motor" 15, "regulator without motor" 1; lose:
+  "regulator without motor" 12 on toyota, no basis); 21 groups removed
+  (ford 12 bumper numbers and the Montego regulator pair, gm 5 regulators,
+  toyota 2 Lexus guard covers); 0 added; aftermarket and the newer field
+  identical. `test_ship_1119` 16, `test_round11_1120` 60, quick
+  regression 78/0/0.
+- RISK the hub accepted, for the next round (which fields carry the
+  catalog's own name): mopar 5073002AC "bumper cover only" (the only beam
+  on its pages is a Sport Package face bar); 49 silent plain-regulator
+  notes; 10 toyota "regulator without motor" whose record page is not in
+  the list files; the two Camry lamps (an alias says "Tail Light Lens");
+  gm 15041706 could say "without motor"; the mopar 68079286AA / 87AA pair.
+- Builder's gap for its own round: curation's CLAIMS read only part 1 of
+  gm's and ford's list files (adding the rest can add claims: independent
+  check).
+- To confirm: the pages build for this push, then one live load.
