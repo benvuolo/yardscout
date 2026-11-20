@@ -2,8 +2,11 @@
  * "intuitive, shareable, easy to scroll, Facebook Marketplace level
  * addicting"). Items 1 to 11 of the build brief:
  *   1  tiles: at 390x844 and 360x800, zip set and the first-run note
- *      acknowledged, at least four tiles fully on the first screen above the
- *      tab bar; about five columns at 1280; car-card + data-vkey kept
+ *      acknowledged: rows without photos, at least four tiles fully on the
+ *      first screen above the tab bar (a fixed no-photo list every run, and
+ *      today's data when its first rows have no photos); rows with photos,
+ *      the first row whole and the second begun (2026-11-20); about five
+ *      columns at 1280; car-card + data-vkey kept
  *   2  a tile opens the car screen with every block the big card had, plus
  *      "More <make model> near you"; closing returns to the same scroll
  *      offset; the car screen's photo opens the viewer, a tile's opens the car
@@ -142,11 +145,44 @@ try {
       const full = tiles.filter(t => { const r = t.getBoundingClientRect(); return r.top >= 0 && r.bottom <= bottom + 0.5; });
       const cols = getComputedStyle(document.getElementById('live-grid')).gridTemplateColumns.split(' ').filter(Boolean).length;
       const t = tiles[0];
-      return { full: full.length, cols, bottom, hooks: tiles.every(x => x.classList.contains('car-card') && x.dataset.vkey),
+      // Rows of tiles whose photo loaded are taller (the photo's box) than
+      // rows drawn without one (2026-11-20: today's nearest cars carry photos).
+      const photo = tiles.slice(0, 2 * cols).some(x => x.querySelector('.card-photo.ph-filled img'));
+      const row1 = tiles.slice(0, cols), row2 = tiles.slice(cols, 2 * cols);
+      const row1Full = row1.length === cols && row1.every(x => { const r = x.getBoundingClientRect(); return r.top >= 0 && r.bottom <= bottom + 0.5; });
+      const row2Begun = row2.length > 0 && row2[0].getBoundingClientRect().top < bottom;
+      return { full: full.length, cols, bottom, photo, row1Full, row2Begun, hooks: tiles.every(x => x.classList.contains('car-card') && x.dataset.vkey),
         text: t.innerText.replace(/\s+/g, ' '), ell: tiles.slice(0, 8).some(x => [...x.querySelectorAll('*')].some(e => getComputedStyle(e).textOverflow === 'ellipsis' || (getComputedStyle(e).webkitLineClamp || 'none') !== 'none')),
         hscroll: document.documentElement.scrollWidth > innerWidth };
     });
-    ok(m.full >= 4, `${w}x${h}: at least four tiles fully on the first screen above the tab bar (${m.full})`, m);
+    // The first-screen rule, stated per case (2026-11-20, hub): rows of tiles
+    // without photos: at least four whole tiles; rows with photos: the first
+    // row whole and the second begun above the tab bar. Which case today's
+    // nearest cars are depends on the day's data; the fixed list below runs
+    // the no-photo case every time.
+    if (m.photo) ok(m.row1Full && m.row2Begun, `${w}x${h}, photo rows (today's data): first row whole, second begun above the tab bar (${m.full} whole)`, m);
+    else ok(m.full >= 4, `${w}x${h}, no-photo rows (today's data): at least four tiles fully on the first screen above the tab bar (${m.full})`, m);
+    // A fixed list (twelve 2005 Honda Civics set out today at the nearest yard,
+    // no photo, no part matches, so every tile has the same lines): the real
+    // header, notes, search, chips above it. Always at least four whole tiles.
+    const fx = await page.evaluate(() => {
+      const base = liveInventory.filter(v => (vehicleDistanceMi(v) ?? 1e9) < 10)[0];
+      const d = new Date(), ds = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      window.__realInv = liveInventory;
+      liveInventory = Array.from({ length: 12 }, (_, i) => ({ ...base, id: 900000 + i, vin: 'FIXTURE' + String(i).padStart(10, '0'), year: 2005, make: 'Honda', model: 'Civic', row: '12', dateAdded: ds, topParts: [], hasMatch: false, vpicTrim: '', vpicSeries: '' }));
+      renderLive();
+      window.scrollTo(0, 0);
+      return new Promise((res) => setTimeout(() => {
+        const tb = document.querySelector('.tabs').getBoundingClientRect();
+        const bottom = tb.top > innerHeight / 2 ? tb.top : innerHeight;
+        const tiles = [...document.querySelectorAll('#live-grid > .car-tile')];
+        const full = tiles.filter(t => { const r = t.getBoundingClientRect(); return r.top >= 0 && r.bottom <= bottom + 0.5; }).length;
+        const photos = tiles.filter(x => x.querySelector('.card-photo.ph-filled img')).length;
+        liveInventory = window.__realInv; renderLive();
+        res({ full, photos, n: tiles.length, bottom });
+      }, 400));
+    });
+    ok(fx.n === 12 && fx.photos === 0 && fx.full >= 4, `${w}x${h}, fixed no-photo list: at least four tiles fully on the first screen above the tab bar (${fx.full})`, fx);
     ok(m.cols === 2, `${w}x${h}: two columns`, m.cols);
     ok(m.hooks, `${w}x${h}: every tile keeps class car-card and data-vkey`);
     ok(/\d{4} \S+/.test(m.text) && / mi\b/.test(m.text) && /Row|No row yet/.test(m.text) && /Set out|Set-out date unknown/.test(m.text), `${w}x${h}: a tile has the name, yard + distance, row and set-out date`, m.text);
