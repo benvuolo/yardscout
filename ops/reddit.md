@@ -63,3 +63,15 @@ self-promotion (or asks its moderators first), and posts it themselves.
 America/Denver, a fresh session each run, push notification when it has
 drafts. The owner added the Gmail connector in the Claude app on 2026-11-13 (a
 session cannot attach one through the API here); enabled since 16:58 UTC.
+
+## One-generation posts (owner, 2026-11-20: "this would be for just 3rd gens")
+
+The owner posts in generation-specific subreddits too. `tools/landed_post.py`
+has no year filter yet; on 11-20 the hub cut the 3rd gen list (1996 to 2002)
+out of the tool's full output by script and recounted (38 cars, 15 states, 9
+confirmed 4x4, from the 13:40 UTC scan). To do: a `--years 1996-2002` option
+on the tool (title and counts for that range, no generation sub-headings),
+and a year range on the public landed page so the link can match the post.
+Link form for posts since 11-20: the visible text
+`yardscout.io/landed/<make>/<model>`, linked to the same address with
+`?s=reddit` (the landed pages count views and sources since 11-20).
