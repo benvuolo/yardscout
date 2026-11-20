@@ -3660,3 +3660,38 @@ Canonical and og:url never carry the parameter. Daily ops email gains
 - Also live since 17:54 UTC: landed pages count views and sources. The
   owner has the full 4Runner post with the clean link (text
   `yardscout.io/landed/toyota/4runner`, target with `?s=reddit`).
+
+## 2026-11-20 18:55 UTC Reddit post final form; wide-screen Cars view handed back; round 11c in its independent check
+
+- **Reddit (owner, several messages 18:10 to 18:50):** a 3rd-gen-only post
+  (1996 to 2002). Final form given as title plus one Markdown block, from
+  the 18:42 UTC scan: 40 cars, 16 states, 10 confirmed 4x4. Links, on the
+  owner's questions: the visible text `yardscout.io` hyperlinked to the
+  app's year-filtered list (`#cars=Toyota|4Runner|1996-2002`, with the
+  Reddit tags; checked live near 90001: 33 cars, 1997 to 2002), not the
+  landed page (it shows every generation); the apps through
+  `yardscout.io/app` (phones go to their own store), no store links.
+  `tools/landed_post.py` gained `--years` / `--label` and writes that
+  ending (69c92933). `ops/reddit.md` updated.
+- **Apple:** the 18:30 check-in was already answered (approved at the
+  17:22 check); no further checks scheduled.
+- **Builder A, wide-screen Cars view** (`design/cars-wide-first-view-1120`
+  head e4a0e08f, sw `jh-v221`): from 1100 px the search and Filters share a
+  row and the watch strip moves to a side column; first car row with a
+  model filter 1076 -> 493 px at 1280, 1440 and 1920; phones and tablets
+  pixel-identical; layout suite 1,428 checks per half; quick 78/0. Two
+  tests of the cars set fail on the branch AND on main: `cars_feed_e2e`
+  "at least four tiles fully on the first screen" at 360x800 (hub ran it
+  on main: 141 passed, 1 failed; today's nearest tiles carry photos, so one
+  row of two fits: data, not code) and `tab_retap_e2e` (timing or data).
+  Sent back to make both data-independent before the hub's full
+  regression; a fold for the model chips on wide screens if small.
+- **Round 11c** (`interchange/round11-1120` head fb5a1a61): every naming
+  field read (list group, list_info, remark with its name, all list
+  parts); 71 notes gain a phrase, 12 toyota notes lose "regulator without
+  motor" (no basis), 21 groups held (ford: the Montego pair and 12 bumper
+  numbers, only the two chrome XL3Z bumpers remain; gm 5; toyota 2 guard
+  covers), the two Camry lamps restored. Builder's gap for a later round:
+  curation's CLAIMS still read only part 1 of gm's and ford's list files.
+  Fresh independent check started 18:52 UTC with the hub's rulings written
+  into its verdict rules.
