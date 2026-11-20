@@ -150,6 +150,20 @@ for (const p of internal) {
 check(`internal links resolve (${internal.length} checked)`, !broken.length, broken.join(', '));
 
 /* ---------- zero arrivals ---------- */
+/* ---------- view counting (2026-11-20, src/landed_count.js) ---------- */
+{
+  const plain = await get('/landed/nissan/xterra');
+  const withS = await get('/landed/nissan/xterra?s=reddit');
+  const make = await get('/landed/nissan?s=reddit');
+  check('model page carries the count script for nissan-xterra', /<script>\(function\(\)\{try\{[\s\S]*"nissan-xterra"[\s\S]*sendBeacon\("https:\/\/yardscout-api\.yardscout\.workers\.dev\/v1\/events"/.test(plain.html), plain.html.slice(-600));
+  check('make page carries it for nissan', /"nissan",S\.src\)/.test(make.html) && make.status === 200);
+  check('?s=reddit: same canonical and og:url, no parameter in either', canonical(withS.html) === 'https://yardscout.io/landed/nissan/xterra' && meta(withS.html, 'og:url') === 'https://yardscout.io/landed/nissan/xterra'
+    && canonical(make.html) === 'https://yardscout.io/landed/nissan' && !/[?&]s=/.test(canonical(make.html) + meta(make.html, 'og:url')));
+  check('?s=reddit: the page is the same page (server does no per-visit work)', withS.html === plain.html);
+  check('scripts off: the buttons already carry the page tag', /href="https:\/\/yardscout\.io\/\?utm_source=page&amp;utm_medium=model&amp;utm_campaign=nissan-xterra/.test(plain.html) || /href="https:\/\/yardscout\.io\/\?utm_source=page&utm_medium=model&utm_campaign=nissan-xterra/.test(plain.html));
+  const other = await get('/yard/pick-n-pull-phoenix');
+  check('other pages carry no count script', !/sendBeacon/.test(other.html) && !/sendBeacon/.test((await get('/landed')).html));
+}
 r = await get('/landed/nissan/frontier');
 check('zero-arrival page → 200 and says so', r.status === 200 && h1s(r.html)[0] === 'Nissan Frontier junkyard inventory: none set out this week, 900 on the lots', h1s(r.html)[0]);
 check('zero-arrival: lots table still there', r.html.includes('id="on-lots"') && r.html.includes('>500<'));

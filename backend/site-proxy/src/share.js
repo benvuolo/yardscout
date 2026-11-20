@@ -24,6 +24,8 @@
  * no dollar values can appear here regardless of what the API grows later.
  */
 const API = 'https://yardscout-api.yardscout.workers.dev';
+import { landedCountScript } from './landed_count.js';
+
 const SITE = 'https://yardscout.io';
 export const IOS_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
 export const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
@@ -488,7 +490,7 @@ const ldItemList = (name, items) => ({ '@context': 'https://schema.org', '@type'
 /** Scan time → HTTP date for Last-Modified ('' when the stamp is unusable). */
 const httpDate = (iso) => { const d = new Date(iso || NaN); return isNaN(d) ? '' : d.toUTCString(); };
 
-function layout({ title, desc, canonical, body, status = 200, robots = 'index,follow', cache = 300, ogTitle, ogDesc, type = 'website', spec = 'SELF-SERVICE YARD INTEL', appArg, ld = [], lastModified, utm = null }) {
+function layout({ title, desc, canonical, body, status = 200, robots = 'index,follow', cache = 300, ogTitle, ogDesc, type = 'website', spec = 'SELF-SERVICE YARD INTEL', appArg, ld = [], lastModified, utm = null, tail = '' }) {
   // The header's "Open the app" is a button into the app too: tagged like the
   // page's own buttons when the page says what it is (utm: [medium, campaign]).
   const openHref = utm ? appHref(utm[0], utm[1]) : `${SITE}/`;
@@ -537,7 +539,7 @@ else{var fb=a.getAttribute('data-fallback')=='store'?PLAY:web;a.href='intent://y
 </script>
 <main class="share-main">
 ${body}
-</main></body></html>`;
+</main>${tail}</body></html>`;
   return new Response(html, {
     status,
     headers: {
@@ -974,7 +976,7 @@ ${mp && mp.models.length ? `<div class="section">Every ${esc(mk)} model with its
 ${statesBlock}
 <div class="cta">${appBtn(appHref('make', slug, '#tab=alerts'), `Alert me when a ${esc(mk)} I want lands near me`, true)}${appBtn(appHref('make', slug, '#cars=' + encodeURIComponent(mk)), `See every ${esc(mk)} near you`)}</div>${storesLine()}
 <p class="note">Straight from each yard's published list, refreshed every 4 hours (as of ${stamp}). Row numbers and dates are the yard's; call ahead before a long drive.</p>`;
-  return layout({ title: `${mk} in junkyards: ${m.total.toLocaleString()} on self-service lots, ${m.recentCount.toLocaleString()} new this week — YardScout`, ogTitle: `${count} landed in junkyards this week`, desc, canonical, body, cache: 900, spec: `${m.recentCount.toLocaleString()} ${mk.toUpperCase()} THIS WEEK`, ld: [ldBreadcrumb([['What landed this week', SITE + '/landed'], [mk, canonical]])], lastModified: landed.scrapedAt, utm: ['make', slug] });
+  return layout({ title: `${mk} in junkyards: ${m.total.toLocaleString()} on self-service lots, ${m.recentCount.toLocaleString()} new this week — YardScout`, ogTitle: `${count} landed in junkyards this week`, desc, canonical, body, cache: 900, spec: `${m.recentCount.toLocaleString()} ${mk.toUpperCase()} THIS WEEK`, ld: [ldBreadcrumb([['What landed this week', SITE + '/landed'], [mk, canonical]])], lastModified: landed.scrapedAt, utm: ['make', slug], tail: landedCountScript(slug) });
 }
 
 /* ---------- /landed/<make>/<model> — one model's week, by state ----------
@@ -1138,7 +1140,7 @@ ${siblingGrid(m.slug)}
   const cars = m.recent.slice(0, 100).map((r) => [`${r[0]} ${name} at ${(yards[r[1]] || [])[0] || 'a self-service yard'}`, `${SITE}/car/${encodeURIComponent(r[6])}`]);
   const ld = [ldBreadcrumb([['What landed this week', SITE + '/landed'], [mk, makeUrl], [name, canonical]])];
   if (cars.length) ld.push(ldItemList(`${name} set out at self-service junkyards in the last ${days} days`, cars));
-  return layout({ title, ogTitle: n ? `${n.toLocaleString()} ${name} set out in junkyards this week` : `${name} in self-service junkyards: ${total.toLocaleString()} on the lots`, desc, canonical, body, cache: 900, spec: `${n.toLocaleString()} ${md.toUpperCase()} THIS WEEK`, ld, lastModified: file.scrapedAt, utm: ['model', cmp] });
+  return layout({ title, ogTitle: n ? `${n.toLocaleString()} ${name} set out in junkyards this week` : `${name} in self-service junkyards: ${total.toLocaleString()} on the lots`, desc, canonical, body, cache: 900, spec: `${n.toLocaleString()} ${md.toUpperCase()} THIS WEEK`, ld, lastModified: file.scrapedAt, utm: ['model', cmp], tail: landedCountScript(cmp) });
 }
 /** Sitemap entries for every model page in the index. */
 function modelSitemapUrls(idx) {
