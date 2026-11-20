@@ -82,3 +82,9 @@ for a one-generation post the link is the app's own year-filtered list,
 text `yardscout.io` as a hyperlink. Checked live 11-20: near 90001 it
 opened the Cars tab with 33 cars, 1997 to 2002 only. One closing sentence
 names the iPhone and Android apps without store links.
+Apps in a post (owner asked 11-20 whether to link the stores or spell them
+out): neither. Use the existing say-it-out-loud address `yardscout.io/app`
+(phones go straight to their own store, everything else to the site; made
+11-02 because people who searched the store by name sometimes landed on
+another app). Visible text `yardscout.io/app`, linked to the same address
+with the post's `utm_*` tags (Play receives them as the install referrer).
