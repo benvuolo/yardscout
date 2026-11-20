@@ -3579,3 +3579,26 @@ nothing in my draft 4. draft it, ill post it".
   `tools/landed_post.py` from the 13:40 UTC scan (60 cars, 24 states, 21
   confirmed 4x4) and given to the owner in chat to post. No unanswered
   Reddit comment in the mailbox (5 days).
+
+## 2026-11-20 17:55 UTC owner on the Reddit post's link and the Cars tab on a computer
+
+Owner sent a 2000 px wide screenshot of the page behind the post's link
+(the Cars tab with the model filter set): location line, "How to read
+this", search, filters, two chip rows, the free email alert card, the Pro
+strip and the forecast all come before the first car. Their question:
+is the long tagged link at the bottom right for the post; they want it
+helpful, clean, and to drive people to web, iPhone and Android.
+- Hub's answer: link the public page that already exists for this,
+  `yardscout.io/landed/toyota/4runner` (short and readable; the same list
+  by state with a jump menu, refreshed every 4 hours; "See every 4Runner
+  near you", the alert button, "Open the app", and the two store links).
+  Hub looked at it at 1440 px and 390 px: clean on both. One link only;
+  three store links in a post read as an advertisement.
+- Cost stated to the owner: the long link carried a Reddit tag; the
+  landed page records neither views nor sources today.
+- Started (builder A, task 86): (1) `growth/landed-count-1120`: one
+  aggregate browser event per landed-page view, source from `?s=<word>` or
+  a short referrer list, the page's buttons carry it, a line in the daily
+  ops email; (2) `design/cars-wide-first-view-1120`: on wide screens the
+  car list starts within the first screen (alert card and forecast to a
+  side column), phones unchanged.
