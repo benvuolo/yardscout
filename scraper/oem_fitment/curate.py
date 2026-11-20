@@ -1422,6 +1422,7 @@ class Curation:
         self.released_exterior = []
         self.round9_rows, self.round9_names = [], []
         self.round10_rows = []
+        self.round11_rows = []
         brand0 = brand
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
@@ -1919,6 +1920,24 @@ class Curation:
                                 detail=why10[1][:200])
                     self.round10_rows.append(dict(row, change="held", reason=why10[0], detail=why10[1]))
                     continue
+            if self.ns in ROUND11_NS and cat in ("bumper-front", "bumper-rear", "tail-lights", "window-regulator"):
+                r11 = self._r11_words(c, cat, note, slot)
+                if r11:
+                    row = {"cat": cat, "pn": pns, "kinds": r11["kinds"], "names": r11["names"], "old_note": note}
+                    why11 = r11.get("hold")
+                    if not why11 and r11.get("phrase"):
+                        if not _likely_note_fits(brand, pns[0], text, r11["phrase"]):
+                            why11 = ("held_words_cap", f"'{r11['phrase']}' takes the note past "
+                                                       f"{policy.NOTE_MAX_LEN} characters")
+                        else:
+                            note = _likely_note(brand, pns[0], text, r11["phrase"])
+                            self.round11_rows.append(dict(row, change="phrase", phrase=r11["phrase"],
+                                                          new_note=note, pages_reinforcement=r11.get("reinf")))
+                    if why11:
+                        self.refuse(why11[0], cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                                    detail=why11[1][:200])
+                        self.round11_rows.append(dict(row, change="held", reason=why11[0], detail=why11[1]))
+                        continue
             if self.ns in ROUND9_NS:
                 nm = self._name_class(c, cat)
                 self.round9_names.append({"cat": cat, "pn": pns, "class": nm["class"], "names": nm["names"],
@@ -3434,6 +3453,67 @@ class Curation:
         if "motor" in kinds and kinds & {"regulator", "regulator+motor"}:
             return {"kinds": sorted(kinds),
                     "names": [{"field": f, "name": n, "ref": p_, "kind": _kind10b(n) or None} for f, n, p_ in names]}
+        return None
+
+    def _r11_words(self, c, cat, note, slot) -> dict | None:
+        """round11: None when the round adds nothing and holds nothing for the
+        group, else {kinds, names, phrase | hold, reinf}."""
+        names = self._wide_names(c, cat)
+        vals = [{"field": f, "name": n, "ref": p_, "kind": _kind11(cat, n) or None} for f, n, p_ in names]
+        kinds = sorted({v["kind"] for v in vals if v["kind"]})
+        out = {"kinds": kinds, "names": vals}
+        has_now = [w for w in PACK_TEXT.values() if f"— {w}; " in note]
+        if cat in ("bumper-front", "bumper-rear"):
+            if not set(kinds) & {"cover", "guard"}:
+                return None
+            if len(kinds) > 1:
+                out["hold"] = ("held_name_disagree", "the names disagree in kind (" + "/".join(kinds) + ")")
+            elif kinds == ["guard"]:
+                out["phrase"] = _R11_PHRASE["guard"]
+            else:
+                urls = sorted({lr.list_url for lr in self._pn_list_rows(c.key, cat) if lr.list_url})
+                idx = self.__dict__.get("_rows_by_url")
+                if idx is None:
+                    idx = defaultdict(list)
+                    for lr in self.list_rows:
+                        idx[lr.list_url].append(lr)
+                    self._rows_by_url = idx
+                reinf = {u: sorted({f"{o.pn} {o.main}".strip() for o in idx[u]
+                                    if policy.pn_key(self.ns, o.pn) != c.key
+                                    and re.search(r"reinf", f"{o.main} {o.aux}", re.I)}) for u in urls}
+                out["reinf"] = reinf
+                out["phrase"] = _R11_PHRASE["cover_only"] if urls and all(reinf.values()) else _R11_PHRASE["cover"]
+            return out
+        if cat == "tail-lights":
+            if "lens-body" not in kinds:
+                return None
+            if len(kinds) > 1:
+                out["hold"] = ("held_name_disagree", "the names disagree in kind (" + "/".join(kinds) + ")")
+            else:
+                out["phrase"] = _R11_PHRASE["lens-body"]
+            return out
+        # window-regulator
+        if "motor" in kinds and set(kinds) & {"regulator", "regulator+motor"}:
+            out["hold"] = ("held_name_disagree", "the names disagree in kind (" + "/".join(kinds) + ")")
+            return out
+        if "regulator+motor" in kinds and any(re.search(r"\b(?:w/o|without|less)\s*motor\b", v["name"], re.I)
+                                              for v in vals):
+            out["hold"] = ("held_name_disagree", "one name has the motor, another says without it")
+            return out
+        # the product record's part name carries the motor (GM's full catalog
+        # name "REGULATOR, ... (INCLUDES MOTOR)" beside its list row's bare
+        # "REGULATOR"); with no record, every list row's name must say it
+        rec = [v["kind"] for v in vals if v["field"] == "record.name"]
+        lst = [v["kind"] for v in vals if v["field"] == "list.main"]
+        if (rec and all(k == "regulator+motor" for k in rec) and all(k in ("regulator+motor", "regulator") for k in lst)) \
+                or (not rec and lst and all(k == "regulator+motor" for k in lst)):
+            if _R11_PHRASE["regulator+motor"] in has_now:
+                return None
+            if has_now:
+                out["hold"] = ("held_part_name", "regulator with motor by name, the note says '" + has_now[0] + "'")
+            else:
+                out["phrase"] = _R11_PHRASE["regulator+motor"]
+            return out
         return None
 
     def _r10_class(self, c, cat) -> dict:
@@ -5798,6 +5878,49 @@ def _kind10b(name: str) -> str:
     return "regulator" if _R10B_REG_RE.search(name) else ""
 
 
+# round11-1120 (hub 2026-11-20, from round 10's item-4 measure): packaging
+# words read from every naming field the raw prints (as round 10b), on every
+# live namespace. bumper-front / bumper-rear: a number named as the cover
+# ("Cover, Front Bumper", "Bumper Cover", "Fascia") says "bumper cover", and
+# "bumper cover only" when each of its own pages lists a reinforcement as a
+# separate number; "Cover, Front Bumper Guard" says "bumper guard cover".
+# tail-lights: "Lens & Body" (or "Lens & Housing") says "lens and body unit".
+# window-regulator: a number whose name fields all name the regulator with its
+# motor says "regulator with motor". Values that disagree in kind (a cover
+# beside a bumper or reinforcement, a lens-and-body unit beside a lamp
+# assembly, a motor beside a regulator) hold the group, as does a note the
+# words would take past the cap or a group whose note already carries other
+# packaging words. Nothing else in a group changes.
+ROUND11_NS = frozenset({"gm", "mopar", "toyota", "ford", "hmg", "subaru", "vag", "mb", "nissan"})
+_R11_PHRASE = {"cover": "bumper cover", "cover_only": "bumper cover only", "guard": "bumper guard cover",
+               "lens-body": "lens and body unit", "regulator+motor": "regulator with motor"}
+
+
+def _kind11(cat: str, name: str) -> str:
+    """The kind one naming value carries in cat ('' says nothing)."""
+    if cat in ("bumper-front", "bumper-rear"):
+        if re.search(r"bumper\s+guard", name, re.I):
+            return "guard"
+        if re.search(r"\bcover\b|\bfascia\b", name, re.I):
+            return "cover"
+        if re.search(r"reinf|impact\s+bar|\bbeam\b", name, re.I):
+            return "reinforcement"
+        return "bumper" if re.search(r"\bbumper\b|face\s*bar", name, re.I) else ""
+    if cat == "tail-lights":
+        if re.search(r"lens\s*(?:&|and)\s*(?:body|housing)", name, re.I):
+            return "lens-body"
+        if re.search(r"^\s*lens\b", name, re.I):
+            return "lens"
+        if re.search(r"bulb|socket|harness|\bwire\b", name, re.I):
+            return "socket"
+        return "assembly" if re.search(r"\bass(?:y|embly)\b", name, re.I) else ""
+    if cat == "window-regulator":
+        if re.search(r"\bincludes?\s+motor\b", name, re.I):
+            return "regulator+motor"
+        return _kind10b(name)
+    return ""
+
+
 _R10_REG_RE = re.compile(r"^\s*(?:power\s+)?(?:(?:front|rear)\s+)?(?:door\s+)?(?:window\s+)?regulator\b", re.I)
 _NAME_MOTOR_RE = re.compile(r"^\s*motor\s+ass(?:y|embly)\b", re.I)
 _NAME_REG_RE = re.compile(r"^\s*regulator\s+ass(?:y|embly)\b", re.I)
@@ -6474,6 +6597,16 @@ def main(argv=None) -> int:
                 "ns": ns, "raw": results[ns].src.commit or "fixtures",
                 "changed": sum(r["change"] == "phrase" for r in r10), "held": sum(r["change"] == "held" for r in r10),
                 "rows": r10})
+        r11 = getattr(results[ns], "round11_rows", None)
+        if ns in ROUND11_NS and r11:
+            write_json(out / "_report" / f"{ns}.round11.json", {
+                "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, "
+                        "lens and body unit, regulator with motor) on the finished note (change 'phrase'); names "
+                        "that disagree in kind, a note past the cap, or other words already on the note hold the "
+                        "group (change 'held'). Names with field, kind and site:file:line.",
+                "ns": ns, "raw": results[ns].src.commit or "fixtures",
+                "changed": sum(r["change"] == "phrase" for r in r11), "held": sum(r["change"] == "held" for r in r11),
+                "rows": r11})
         r7 = getattr(results[ns], "round7_held", None)
         if r7:
             write_json(out / "_report" / f"{ns}.round7_held.json", {

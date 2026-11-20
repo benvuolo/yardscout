@@ -99859,7 +99859,7 @@
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FR:a7f2df176a",
    "kind": "body",
-   "note": "Ford catalog lists #5G1Z-5423208-AA for both — fits some configurations; verify the number on the part",
+   "note": "Ford catalog lists #5G1Z-5423208-AA for both — regulator with motor; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:24:45Z",
    "pn": [
     "5G1Z-5423208-AA"
@@ -99886,7 +99886,7 @@
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL:c394cfe148",
    "kind": "body",
-   "note": "Ford catalog lists #5G1Z-5423209-AA for both — fits some configurations; verify the number on the part",
+   "note": "Ford catalog lists #5G1Z-5423209-AA for both — regulator with motor; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:24:53Z",
    "pn": [
     "5G1Z-5423209-AA"

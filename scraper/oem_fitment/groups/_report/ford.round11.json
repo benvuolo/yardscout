@@ -1,0 +1,77 @@
+{
+ "changed": 2,
+ "held": 0,
+ "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, lens and body unit, regulator with motor) on the finished note (change 'phrase'); names that disagree in kind, a note past the cap, or other words already on the note hold the group (change 'held'). Names with field, kind and site:file:line.",
+ "ns": "ford",
+ "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "rows": [
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1953"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1953"
+    }
+   ],
+   "new_note": "Ford catalog lists #5G1Z-5423208-AA for both — regulator with motor; fits some configurations; verify the number on the part",
+   "old_note": "Ford catalog lists #5G1Z-5423208-AA for both — fits some configurations; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "5G1Z-5423208-AA"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1954"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1954"
+    }
+   ],
+   "new_note": "Ford catalog lists #5G1Z-5423209-AA for both — regulator with motor; fits some configurations; verify the number on the part",
+   "old_note": "Ford catalog lists #5G1Z-5423209-AA for both — fits some configurations; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "5G1Z-5423209-AA"
+   ]
+  }
+ ]
+}

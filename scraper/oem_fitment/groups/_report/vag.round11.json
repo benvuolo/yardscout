@@ -1,0 +1,58 @@
+{
+ "changed": 1,
+ "held": 0,
+ "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, lens and body unit, regulator with motor) on the finished note (change 'phrase'); names that disagree in kind, a note past the cap, or other words already on the note hold the group (change 'held'). Names with field, kind and site:file:line.",
+ "ns": "vag",
+ "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "rows": [
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.vwpartsgiant.com:lists:L519"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.vwpartsgiant.com:lists:L624"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.vwpartsgiant.com:records:L1130"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.vwpartsgiant.com:records:L1130"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover",
+     "ref": "www.vwpartsgiant.com:records:L1130"
+    }
+   ],
+   "new_note": "VW/Audi catalog lists #1HM-807-217-D-GRU for both — bumper cover; trim-limited; verify the number on the part",
+   "old_note": "VW/Audi catalog lists #1HM-807-217-D-GRU for both — trim-limited; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.vwpartsgiant.com/parts-list/1996-volkswagen-golf/body-hardware/bumper-components-front": [],
+    "https://www.vwpartsgiant.com/parts-list/1997-volkswagen-jetta/body-hardware/bumper-components-front": []
+   },
+   "phrase": "bumper cover",
+   "pn": [
+    "1HM-807-217-D-GRU"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,5430 @@
+{
+ "report": "round11_names_2026-11-20",
+ "pins": {
+  "live_raw": "oem-raw@dca9cd845f26 (live makes), oem-raw@57e8b5b99de0 (nissan); not re-pinned",
+  "curation_lot": "main@a85c654 inventory 1a9cfa73, vin_decodes 1357625b, vehicle_extras 6ff3d44b",
+  "lot_rows": "docs/data on origin/main f59e8744 (the lot main ships today), audit11_4/lot_replay.mjs, origin/main's groups files"
+ },
+ "rule": "every naming value the raw prints for the number (list rows main, aux; records name, aux, description, other_names; ';' values apart), each with field, kind and site:file:line (curate._wide_names, _kind11). bumper-front/rear: cover ('cover', 'fascia') -> 'bumper cover', or 'bumper cover only' when each of the number's own pages lists a reinforcement as a separate number; 'bumper guard' -> 'bumper guard cover'. tail-lights: 'lens & body' / 'lens & housing' -> 'lens and body unit'. window-regulator: every name field (record name, list main) a regulator with its motor -> 'regulator with motor'. Values of another kind (bumper, reinforcement, lamp assembly, a motor beside a regulator) hold the group; so do a note past 160 and other packaging words already on the note. The phrase goes after the dash of the finished note; nothing else changes.",
+ "summary": {
+  "ford": {
+   "window-regulator": {
+    "changed": 2,
+    "held": 0,
+    "phrases": {
+     "regulator with motor": 2
+    },
+    "lot_rows_changed": {
+     "plain": 392
+    },
+    "lot_rows_held": {}
+   }
+  },
+  "gm": {
+   "window-regulator": {
+    "changed": 10,
+    "held": 5,
+    "phrases": {
+     "regulator with motor": 10
+    },
+    "lot_rows_changed": {
+     "plain": 2022,
+     "unc": 52,
+     "exc": 78
+    },
+    "lot_rows_held": {
+     "plain": 1659
+    }
+   }
+  },
+  "mopar": {
+   "bumper-front": {
+    "changed": 1,
+    "held": 0,
+    "phrases": {
+     "bumper cover": 1
+    },
+    "lot_rows_changed": {
+     "plain": 430
+    },
+    "lot_rows_held": {}
+   }
+  },
+  "subaru": {
+   "window-regulator": {
+    "changed": 5,
+    "held": 0,
+    "phrases": {
+     "regulator with motor": 5
+    },
+    "lot_rows_changed": {
+     "plain": 395
+    },
+    "lot_rows_held": {}
+   }
+  },
+  "toyota": {
+   "bumper-front": {
+    "changed": 26,
+    "held": 0,
+    "phrases": {
+     "bumper cover": 7,
+     "bumper cover only": 17,
+     "bumper guard cover": 2
+    },
+    "lot_rows_changed": {
+     "plain": 4349,
+     "unc": 60,
+     "exc": 690
+    },
+    "lot_rows_held": {}
+   },
+   "bumper-rear": {
+    "changed": 15,
+    "held": 0,
+    "phrases": {
+     "bumper cover": 7,
+     "bumper cover only": 8
+    },
+    "lot_rows_changed": {
+     "plain": 3488,
+     "unc": 1386,
+     "exc": 256
+    },
+    "lot_rows_held": {}
+   },
+   "tail-lights": {
+    "changed": 14,
+    "held": 2,
+    "phrases": {
+     "lens and body unit": 14
+    },
+    "lot_rows_changed": {
+     "plain": 986
+    },
+    "lot_rows_held": {
+     "plain": 26,
+     "unc": 60,
+     "exc": 690
+    }
+   }
+  },
+  "vag": {
+   "bumper-front": {
+    "changed": 1,
+    "held": 0,
+    "phrases": {
+     "bumper cover": 1
+    },
+    "lot_rows_changed": {
+     "plain": 7
+    },
+    "lot_rows_held": {}
+   }
+  }
+ },
+ "changed": [
+  {
+   "ns": "ford",
+   "cat": "window-regulator",
+   "pn": [
+    "5G1Z-5423208-AA"
+   ],
+   "group": "oem:ford:window-regulator:FR:a7f2df176a",
+   "class": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1953"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1953"
+    }
+   ],
+   "old_note": "Ford catalog lists #5G1Z-5423208-AA for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 196
+   },
+   "phrase": "regulator with motor",
+   "new_note": "Ford catalog lists #5G1Z-5423208-AA for both \u2014 regulator with motor; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "ford",
+   "cat": "window-regulator",
+   "pn": [
+    "5G1Z-5423209-AA"
+   ],
+   "group": "oem:ford:window-regulator:FL:c394cfe148",
+   "class": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:lists:L57"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1954"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator And Motor Assy - Window",
+     "ref": "www.fordpartsgiant.com:records:L1954"
+    }
+   ],
+   "old_note": "Ford catalog lists #5G1Z-5423209-AA for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 196
+   },
+   "phrase": "regulator with motor",
+   "new_note": "Ford catalog lists #5G1Z-5423209-AA for both \u2014 regulator with motor; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "10334396"
+   ],
+   "group": "oem:gm:window-regulator:FR:41f806d500",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L833"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L856"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L879"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1206"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1206"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1206"
+    }
+   ],
+   "old_note": "GM catalog lists #10334396 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 222
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #10334396 for both \u2014 regulator with motor; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "10334398"
+   ],
+   "group": "oem:gm:window-regulator:RR:54f9df9e40",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L834"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L857"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L880"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Rear Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1210"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1210"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1210"
+    }
+   ],
+   "old_note": "GM catalog lists #10334398 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 222
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #10334398 for both \u2014 regulator with motor; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "10334399"
+   ],
+   "group": "oem:gm:window-regulator:RL:38ff8fd5f4",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L834"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L857"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L880"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Rear Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1211"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1211"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1211"
+    }
+   ],
+   "old_note": "GM catalog lists #10334399 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 222
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #10334399 for both \u2014 regulator with motor; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "15091383"
+   ],
+   "group": "oem:gm:window-regulator:FL:845a875270",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1589"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1598"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1653"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1661"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1717"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1720"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1729"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1732"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator,Front Side Door Window",
+     "ref": "www.gmpartsgiant.com:records:L1813"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(USE TOGETHER WITH 88961505 WIRE ASM)(INCLUDES 48,55)(W/ROUND WIRE HARNESS CONNECT)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1813"
+    }
+   ],
+   "old_note": "GM catalog lists #15091383 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 145
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #15091383 for both \u2014 regulator with motor; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "15091384"
+   ],
+   "group": "oem:gm:window-regulator:FR:f96873c140",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1589"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1598"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1653"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1661"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1717"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1720"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1729"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1732"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Door And End Gate Window",
+     "ref": "www.gmpartsgiant.com:records:L1812"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1812"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(USE TOGETHER WITH 88961505 WIRE ASM)(INCLUDES 48,55)(W/ROUND WIRE HARNESS CONNECT)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1812"
+    }
+   ],
+   "old_note": "GM catalog lists #15091384 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 145
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #15091384 for both \u2014 regulator with motor; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "15922914"
+   ],
+   "group": "oem:gm:window-regulator:FL:d45372c7f3",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2099"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2101"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2138"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2140"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1385"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1385"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 7,8)(INCLUDES MOTOR)(16.260)",
+     "ref": "www.gmpartsgiant.com:records:L1385"
+    }
+   ],
+   "old_note": "GM catalog lists #15922914 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 177
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #15922914 for both \u2014 regulator with motor; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "15922915"
+   ],
+   "group": "oem:gm:window-regulator:FR:2d6852d3db",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2099"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2101"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2138"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2140"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1386"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1386"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 7,8)(INCLUDES MOTOR)(16.260)",
+     "ref": "www.gmpartsgiant.com:records:L1386"
+    }
+   ],
+   "old_note": "GM catalog lists #15922915 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 177
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #15922915 for both \u2014 regulator with motor; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "20783372"
+   ],
+   "group": "oem:gm:window-regulator:FL:84e55d225c",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L976"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L980"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L317"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L317"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 13)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L317"
+    }
+   ],
+   "old_note": "GM catalog lists #20783372 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 606
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #20783372 for both \u2014 regulator with motor; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "5483148"
+   ],
+   "group": "oem:gm:window-regulator:RL:00f17f69c1",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1213"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1217"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1789"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1793"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1849"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1853"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1908"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1912"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator Assembly, Rear Side Door Window",
+     "ref": "www.gmpartsgiant.com:records:L1276"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Door And End Gate Window",
+     "ref": "www.gmpartsgiant.com:records:L1276"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 29-32)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1276"
+    }
+   ],
+   "old_note": "GM catalog lists #5483148 for both \u2014 fits some configurations; Blazer: only 2WD checked; verify the number on the part",
+   "lot_rows": {
+    "plain": 53,
+    "unc": 26,
+    "exc": 39
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #5483148 for both \u2014 regulator with motor; fits some configurations; Blazer: only 2WD checked; verify the number on the part"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "5483149"
+   ],
+   "group": "oem:gm:window-regulator:RR:dd8cdf523e",
+   "class": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1213"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1217"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1789"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1793"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1849"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1853"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1908"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1912"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator Assembly, Rear Side Door Window",
+     "ref": "www.gmpartsgiant.com:records:L1277"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 29-32)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1277"
+    }
+   ],
+   "old_note": "GM catalog lists #5483149 for both \u2014 fits some configurations; Blazer: only 2WD checked; verify the number on the part",
+   "lot_rows": {
+    "plain": 53,
+    "unc": 26,
+    "exc": 39
+   },
+   "phrase": "regulator with motor",
+   "new_note": "GM catalog lists #5483149 for both \u2014 regulator with motor; fits some configurations; Blazer: only 2WD checked; verify the number on the part"
+  },
+  {
+   "ns": "mopar",
+   "cat": "bumper-front",
+   "pn": [
+    "5073002AC"
+   ],
+   "group": "oem:mopar:bumper-front:C:aaa2efceb3",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.aux",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.jeeppartsdeal.com:lists:L1091"
+    },
+    {
+     "field": "list.aux",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.jeeppartsdeal.com:lists:L1625"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Fascia - Front",
+     "ref": "www.jeeppartsdeal.com:lists:L1091"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Fascia - Front",
+     "ref": "www.jeeppartsdeal.com:lists:L1625"
+    },
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.jeeppartsdeal.com:records:L3197"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.jeeppartsdeal.com:records:L3197"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Fascia - Front",
+     "ref": "www.jeeppartsdeal.com:records:L3197"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.jeeppartsdeal.com:records:L3197"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Fascia - Front",
+     "ref": "www.jeeppartsdeal.com:records:L3197"
+    }
+   ],
+   "old_note": "Mopar catalog lists #5073002AC for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 430
+   },
+   "phrase": "bumper cover",
+   "new_note": "Mopar catalog lists #5073002AC for both \u2014 bumper cover; trim-limited; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.jeeppartsdeal.com/parts-list/2002-dodge-ram-1500/body-hardware/bumper-components-front": [],
+    "https://www.jeeppartsdeal.com/parts-list/2003-dodge-ram-2500/body-hardware/bumper-components-front": []
+   }
+  },
+  {
+   "ns": "subaru",
+   "cat": "window-regulator",
+   "pn": [
+    "61041AL00A"
+   ],
+   "group": "oem:subaru:window-regulator:FR:8320b0ed7c",
+   "class": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:records:L981"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:records:L981"
+    }
+   ],
+   "old_note": "Subaru catalog lists #61041AL00A for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 79
+   },
+   "phrase": "regulator with motor",
+   "new_note": "Subaru catalog lists #61041AL00A for both \u2014 regulator with motor; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "subaru",
+   "cat": "window-regulator",
+   "pn": [
+    "61041AL01A"
+   ],
+   "group": "oem:subaru:window-regulator:FL:661ca5e9e9",
+   "class": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Left",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Left",
+     "ref": "www.subarupartsdeal.com:records:L980"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Left",
+     "ref": "www.subarupartsdeal.com:records:L980"
+    }
+   ],
+   "old_note": "Subaru catalog lists #61041AL01A for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 79
+   },
+   "phrase": "regulator with motor",
+   "new_note": "Subaru catalog lists #61041AL01A for both \u2014 regulator with motor; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "subaru",
+   "cat": "window-regulator",
+   "pn": [
+    "61041AL02A"
+   ],
+   "group": "oem:subaru:window-regulator:FR:d817e2de1f",
+   "class": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:records:L982"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:records:L982"
+    }
+   ],
+   "old_note": "Subaru catalog lists #61041AL02A for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 79
+   },
+   "phrase": "regulator with motor",
+   "new_note": "Subaru catalog lists #61041AL02A for both \u2014 regulator with motor; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "subaru",
+   "cat": "window-regulator",
+   "pn": [
+    "61042AL00A"
+   ],
+   "group": "oem:subaru:window-regulator:RR:c61223d269",
+   "class": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Right",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Right",
+     "ref": "www.subarupartsdeal.com:records:L985"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Right",
+     "ref": "www.subarupartsdeal.com:records:L985"
+    }
+   ],
+   "old_note": "Subaru catalog lists #61042AL00A for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 79
+   },
+   "phrase": "regulator with motor",
+   "new_note": "Subaru catalog lists #61042AL00A for both \u2014 regulator with motor; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "subaru",
+   "cat": "window-regulator",
+   "pn": [
+    "61042AL01A"
+   ],
+   "group": "oem:subaru:window-regulator:RL:91c549f117",
+   "class": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Left",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Left",
+     "ref": "www.subarupartsdeal.com:records:L984"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Left",
+     "ref": "www.subarupartsdeal.com:records:L984"
+    }
+   ],
+   "old_note": "Subaru catalog lists #61042AL01A for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 79
+   },
+   "phrase": "regulator with motor",
+   "new_note": "Subaru catalog lists #61042AL01A for both \u2014 regulator with motor; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-06919"
+   ],
+   "group": "oem:toyota:bumper-front:C:7543adbbd6",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front, Front Upper",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-06919 for both \u2014 plant-specific (US / Japan built); verify the number on the part",
+   "lot_rows": {
+    "plain": 952
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52119-06919 for both \u2014 bumper cover; plant-specific (US / Japan built); verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-06957"
+   ],
+   "group": "oem:toyota:bumper-front:C:d309d52408",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/Pa",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/Pa",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-06957 for both \u2014 plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "lot_rows": {
+    "plain": 13,
+    "unc": 30,
+    "exc": 345
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52119-06957 for both \u2014 bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-06974"
+   ],
+   "group": "oem:toyota:bumper-front:C:30b6f38749",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-06974 for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 201
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52119-06974 for both \u2014 bumper cover; trim-limited; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-06975"
+   ],
+   "group": "oem:toyota:bumper-front:C:81d7ccfeaf",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-06975 for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 201
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52119-06975 for both \u2014 bumper cover; trim-limited; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-07912"
+   ],
+   "group": "oem:toyota:bumper-front:C:b5a5bbb832",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-07912 for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 56
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52119-07912 for both \u2014 bumper cover; trim-limited; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-0E900"
+   ],
+   "group": "oem:toyota:bumper-front:C:528d1e6d62",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2198"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2198"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-0E900 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-0E900 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-0E901"
+   ],
+   "group": "oem:toyota:bumper-front:C:aeab92835c",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2199"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2199"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-0E901 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-0E901 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-0E902"
+   ],
+   "group": "oem:toyota:bumper-front:C:92188bffa2",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2200"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2200"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-0E902 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-0E902 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-0E903"
+   ],
+   "group": "oem:toyota:bumper-front:C:20cc8fcdbd",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2203"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2203"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-0E903 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-0E903 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-30934"
+   ],
+   "group": "oem:toyota:bumper-front:C:468a55df0a",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L268"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L444"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L475"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2089"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2089"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-30934 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 23
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-30934 for both \u2014 bumper cover only; fits some configurations; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/1998-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52029-30140 Reinforcement Sub-Assy, Front Bumper, Upper",
+     "52123-30110 Plate, Front Bumper Reinforcement, RH",
+     "52123-30120 Plate, Front Bumper Reinforcement, RH",
+     "52124-30100 Plate, Front Bumper Reinforcement, LH",
+     "52124-30120 Plate, Front Bumper Reinforcement, LH",
+     "52131-30210 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/1998-lexus-gs400/body/front_bumper_bumper_stay.html": [
+     "52029-30140 Reinforcement Sub-Assy, Front Bumper, Upper",
+     "52123-30110 Plate, Front Bumper Reinforcement, RH",
+     "52123-30120 Plate, Front Bumper Reinforcement, RH",
+     "52124-30100 Plate, Front Bumper Reinforcement, LH",
+     "52124-30120 Plate, Front Bumper Reinforcement, LH",
+     "52131-30210 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2003-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52029-30140 Reinforcement Sub-Assy, Front Bumper, Upper",
+     "52123-30120 Plate, Front Bumper Reinforcement, RH",
+     "52124-30120 Plate, Front Bumper Reinforcement, LH",
+     "52131-30210 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-30961"
+   ],
+   "group": "oem:toyota:bumper-front:C:ae962fd69e",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2061"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2061"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-30961 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 105
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-30961 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/front_bumper_bumper_stay.html": [
+     "52131-30260 Reinforcement, Front Bumper",
+     "52131-30280 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-30962"
+   ],
+   "group": "oem:toyota:bumper-front:C:616f6707d6",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2062"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2062"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-30962 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 105
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-30962 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/front_bumper_bumper_stay.html": [
+     "52131-30260 Reinforcement, Front Bumper",
+     "52131-30280 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-30967"
+   ],
+   "group": "oem:toyota:bumper-front:C:d09e011ab2",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2059"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2059"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-30967 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 105
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-30967 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/front_bumper_bumper_stay.html": [
+     "52131-30260 Reinforcement, Front Bumper",
+     "52131-30280 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-30968"
+   ],
+   "group": "oem:toyota:bumper-front:C:f21563d838",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2060"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2060"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-30968 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 105
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-30968 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/front_bumper_bumper_stay.html": [
+     "52131-30260 Reinforcement, Front Bumper",
+     "52131-30280 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-33927"
+   ],
+   "group": "oem:toyota:bumper-front:C:86a7c87673",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L191"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L246"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1908"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1908"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-33927 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 210
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-33927 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2002-lexus-es300/body/front_bumper_bumper_stay.html": [
+     "52021-33120 Reinforcement Sub-Assy, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-es330/body/front_bumper_bumper_stay.html": [
+     "52021-33120 Reinforcement Sub-Assy, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-33943"
+   ],
+   "group": "oem:toyota:bumper-front:C:23999cfcc3",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/P",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front, Front Upper",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/P",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-33943 for both \u2014 plant-specific (US / Japan built); verify the number on the part",
+   "lot_rows": {
+    "plain": 952
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52119-33943 for both \u2014 bumper cover; plant-specific (US / Japan built); verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-33967"
+   ],
+   "group": "oem:toyota:bumper-front:C:5336565ba0",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/Pa",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/Pa",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-33967 for both \u2014 plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "lot_rows": {
+    "plain": 13,
+    "unc": 30,
+    "exc": 345
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52119-33967 for both \u2014 bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-48913"
+   ],
+   "group": "oem:toyota:bumper-front:C:be84ba6e16",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2193"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2193"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-48913 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-48913 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48060 Reinforcement, Front Bumper",
+     "52131-48061 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48061 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-48914"
+   ],
+   "group": "oem:toyota:bumper-front:C:b93583d952",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2194"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2194"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-48914 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-48914 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48060 Reinforcement, Front Bumper",
+     "52131-48061 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48061 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-48915"
+   ],
+   "group": "oem:toyota:bumper-front:C:75f94d65af",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2195"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2195"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-48915 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-48915 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48060 Reinforcement, Front Bumper",
+     "52131-48061 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48061 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-53917"
+   ],
+   "group": "oem:toyota:bumper-front:C:fe9408173f",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1981"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1981"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-53917 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-53917 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-53918"
+   ],
+   "group": "oem:toyota:bumper-front:C:1e02f1295a",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1983"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1983"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-53918 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-53918 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-53919"
+   ],
+   "group": "oem:toyota:bumper-front:C:5e031c4945",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1982"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1982"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-53919 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-53919 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52119-53925"
+   ],
+   "group": "oem:toyota:bumper-front:C:ad79f2c5e6",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1980"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1980"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52119-53925 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52119-53925 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-06952"
+   ],
+   "group": "oem:toyota:bumper-rear:C:f5f0729e70",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/ P",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/ P",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-06952 for both \u2014 plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "lot_rows": {
+    "plain": 131,
+    "unc": 693,
+    "exc": 128
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52159-06952 for both \u2014 bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-06961"
+   ],
+   "group": "oem:toyota:bumper-rear:C:655fa0e256",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-06961 for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 201
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52159-06961 for both \u2014 bumper cover; trim-limited; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-06963"
+   ],
+   "group": "oem:toyota:bumper-rear:C:550a080304",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-06963 for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 201
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52159-06963 for both \u2014 bumper cover; trim-limited; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-06989"
+   ],
+   "group": "oem:toyota:bumper-rear:C:3ccd5136ee",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear Upper",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-06989 for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 56
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52159-06989 for both \u2014 bumper cover; trim-limited; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-0E900"
+   ],
+   "group": "oem:toyota:bumper-rear:C:88b119606a",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L300"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L322"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2205"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2205"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-0E900 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52159-0E900 for both \u2014 bumper cover only; fits some configurations; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/rear_bumper_bumper_stay.html": [
+     "52171-0E020 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/rear_bumper_bumper_stay.html": [
+     "52171-0E020 Reinforcement, Rear Bumper, NO.1"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-30924"
+   ],
+   "group": "oem:toyota:bumper-rear:C:406c4301ae",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L269"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L445"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L476"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2091"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2091"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-30924 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 23
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52159-30924 for both \u2014 bumper cover only; fits some configurations; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/1998-lexus-gs300/body/rear_bumper_bumper_stay.html": [
+     "52023-30260 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/1998-lexus-gs400/body/rear_bumper_bumper_stay.html": [
+     "52023-30260 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2003-lexus-gs430/body/rear_bumper_bumper_stay.html": [
+     "52023-30260 Reinforcement, Rear Bumper, NO.1"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-30934"
+   ],
+   "group": "oem:toyota:bumper-rear:C:e9d4e351f1",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2063"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2063"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-30934 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 105
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52159-30934 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/rear_bumper_bumper_stay.html": [
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/rear_bumper_bumper_stay.html": [
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/rear_bumper_bumper_stay.html": [
+     "52023-30290 Reinforcement, Rear Bumper, NO.1",
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-30935"
+   ],
+   "group": "oem:toyota:bumper-rear:C:d9fea6e1f7",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2066"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2066"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-30935 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 105
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52159-30935 for both \u2014 bumper cover only; option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/rear_bumper_bumper_stay.html": [
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/rear_bumper_bumper_stay.html": [
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/rear_bumper_bumper_stay.html": [
+     "52023-30290 Reinforcement, Rear Bumper, NO.1",
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-33911"
+   ],
+   "group": "oem:toyota:bumper-rear:C:a841ac17af",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L192"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L247"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1910"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1910"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-33911 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 210
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52159-33911 for both \u2014 bumper cover only; fits some configurations; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2002-lexus-es300/body/rear_bumper_bumper_stay.html": [
+     "52171-33100 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-es330/body/rear_bumper_bumper_stay.html": [
+     "52171-33100 Reinforcement, Rear Bumper, NO.1"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-33918"
+   ],
+   "group": "oem:toyota:bumper-rear:C:097e4836c4",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2280"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.toyotapartsnow.com:records:L2280"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/P",
+     "ref": "www.toyotapartsnow.com:records:L2280"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-33918 for both \u2014 older catalog-only number; verify the number on the part",
+   "lot_rows": {
+    "plain": 952
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52159-33918 for both \u2014 bumper cover; older catalog-only number; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-33919"
+   ],
+   "group": "oem:toyota:bumper-rear:C:fc088b8de2",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2281"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.toyotapartsnow.com:records:L2281"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/P",
+     "ref": "www.toyotapartsnow.com:records:L2281"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-33919 for both \u2014 older catalog-only number; verify the number on the part",
+   "lot_rows": {
+    "plain": 952
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52159-33919 for both \u2014 bumper cover; older catalog-only number; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-33924"
+   ],
+   "group": "oem:toyota:bumper-rear:C:6ffe3e976b",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-33924 for both \u2014 plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "lot_rows": {
+    "plain": 131,
+    "unc": 693,
+    "exc": 128
+   },
+   "phrase": "bumper cover",
+   "new_note": "Toyota catalog lists #52159-33924 for both \u2014 bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-48903"
+   ],
+   "group": "oem:toyota:bumper-rear:C:d512ff970f",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L299"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L321"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L391"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2204"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2204"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-48903 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 129
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52159-48903 for both \u2014 bumper cover only; fits some configurations; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-jpp/body/rear_bumper_bumper_stay.html": [
+     "52171-48110 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-rx400h/body/rear_bumper_bumper_stay.html": [
+     "52171-48110 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/body/rear_bumper_bumper_stay.html": [
+     "52171-48110 Reinforcement, Rear Bumper, NO.1"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-53905"
+   ],
+   "group": "oem:toyota:bumper-rear:C:85ec23312d",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1986"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1986"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-53905 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52159-53905 for both \u2014 bumper cover only; fits some configurations; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-rear",
+   "pn": [
+    "52159-53906"
+   ],
+   "group": "oem:toyota:bumper-rear:C:63956afb76",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1987"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1987"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52159-53906 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "phrase": "bumper cover only",
+   "new_note": "Toyota catalog lists #52159-53906 for both \u2014 bumper cover only; fits some configurations; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ]
+   }
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52437-53010"
+   ],
+   "group": "oem:toyota:bumper-front:C:a72426fdc2",
+   "class": [
+    "guard"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:records:L1984"
+    },
+    {
+     "field": "record.name",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:records:L1984"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52437-53010 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "phrase": "bumper guard cover",
+   "new_note": "Toyota catalog lists #52437-53010 for both \u2014 bumper guard cover; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52438-53010"
+   ],
+   "group": "oem:toyota:bumper-front:C:96187e0208",
+   "class": [
+    "guard"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:records:L1985"
+    },
+    {
+     "field": "record.name",
+     "kind": "guard",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:records:L1985"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52438-53010 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "phrase": "bumper guard cover",
+   "new_note": "Toyota catalog lists #52438-53010 for both \u2014 bumper guard cover; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81551-0E010"
+   ],
+   "group": "oem:toyota:tail-lights:R:4ed79e39c0",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L10"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L842"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L842"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81551-0E010 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81551-0E010 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81551-30A50"
+   ],
+   "group": "oem:toyota:tail-lights:R:568fc71cb8",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L164"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L777"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L777"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81551-30A50 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 105
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81551-30A50 for both \u2014 lens and body unit; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81551-48060"
+   ],
+   "group": "oem:toyota:tail-lights:R:456fa30c63",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L9"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L839"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L839"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81551-48060 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81551-48060 for both \u2014 lens and body unit; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81551-53170"
+   ],
+   "group": "oem:toyota:tail-lights:R:eb313c4f80",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L289"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L289"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81551-53170 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 80
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81551-53170 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81551-53171"
+   ],
+   "group": "oem:toyota:tail-lights:R:4bf148074a",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L290"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L290"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81551-53171 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 80
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81551-53171 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81551-53240"
+   ],
+   "group": "oem:toyota:tail-lights:R:0794400acd",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L121"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L416"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L416"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81551-53240 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 6
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81551-53240 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81551-53260"
+   ],
+   "group": "oem:toyota:tail-lights:R:bbbef190f9",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L120"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L414"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L414"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81551-53260 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 6
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81551-53260 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81561-0E010"
+   ],
+   "group": "oem:toyota:tail-lights:L:133eefed90",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L10"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L844"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L844"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81561-0E010 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81561-0E010 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81561-30A40"
+   ],
+   "group": "oem:toyota:tail-lights:L:e5dc35f3e9",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L164"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L776"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L776"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81561-30A40 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 105
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81561-30A40 for both \u2014 lens and body unit; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81561-48060"
+   ],
+   "group": "oem:toyota:tail-lights:L:b3559b2e0d",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L9"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L837"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L837"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81561-48060 for both \u2014 option: fits some option packages; verify the number on the part",
+   "lot_rows": {
+    "plain": 108
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81561-48060 for both \u2014 lens and body unit; option: fits some option packages; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81561-53170"
+   ],
+   "group": "oem:toyota:tail-lights:L:e66c417c25",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L291"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L291"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81561-53170 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 80
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81561-53170 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81561-53171"
+   ],
+   "group": "oem:toyota:tail-lights:L:f92cb21600",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L292"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L292"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81561-53171 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 80
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81561-53171 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81561-53230"
+   ],
+   "group": "oem:toyota:tail-lights:L:7f8e01ae0d",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L121"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L417"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L417"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81561-53230 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 6
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81561-53230 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81561-53260"
+   ],
+   "group": "oem:toyota:tail-lights:L:0a2e12590f",
+   "class": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L120"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L415"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L415"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81561-53260 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 6
+   },
+   "phrase": "lens and body unit",
+   "new_note": "Toyota catalog lists #81561-53260 for both \u2014 lens and body unit; fits some configurations; verify the number on the part"
+  },
+  {
+   "ns": "vag",
+   "cat": "bumper-front",
+   "pn": [
+    "1HM-807-217-D-GRU"
+   ],
+   "group": "oem:vag:bumper-front:C:f54ee6d420",
+   "class": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.vwpartsgiant.com:lists:L519"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.vwpartsgiant.com:lists:L624"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.vwpartsgiant.com:records:L1130"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.vwpartsgiant.com:records:L1130"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover",
+     "ref": "www.vwpartsgiant.com:records:L1130"
+    }
+   ],
+   "old_note": "VW/Audi catalog lists #1HM-807-217-D-GRU for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 7
+   },
+   "phrase": "bumper cover",
+   "new_note": "VW/Audi catalog lists #1HM-807-217-D-GRU for both \u2014 bumper cover; trim-limited; verify the number on the part",
+   "pages_reinforcement": {
+    "https://www.vwpartsgiant.com/parts-list/1996-volkswagen-golf/body-hardware/bumper-components-front": [],
+    "https://www.vwpartsgiant.com/parts-list/1997-volkswagen-jetta/body-hardware/bumper-components-front": []
+   }
+  }
+ ],
+ "held": [
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "20914715"
+   ],
+   "group": "oem:gm:window-regulator:FL:8ed850ce7c",
+   "class": [
+    "motor",
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1109"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1112"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2383"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2387"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2435"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2439"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2481"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L129"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L129"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 8)(W/O MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L129"
+    }
+   ],
+   "old_note": "GM catalog lists #20914715 for both \u2014 regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
+   "lot_rows": {
+    "plain": 411
+   },
+   "reason": "held_name_disagree",
+   "detail": "the names disagree in kind (motor/regulator)"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "20945138"
+   ],
+   "group": "oem:gm:window-regulator:FL:95a5e67317",
+   "class": [
+    "motor",
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1109"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1112"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1270"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1275"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1400"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1405"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1466"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1474"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L173"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L180"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2187"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2195"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2272"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2277"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L235"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2383"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2387"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L242"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2435"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2439"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2481"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2637"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2643"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2938"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L77"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L77"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 15,36)(W/MOTOR)(16.260)(ORDER TOGETHER WITH NUT-11561645 (QTY 2))",
+     "ref": "www.gmpartsgiant.com:records:L77"
+    }
+   ],
+   "old_note": "GM catalog lists #20945138 for both \u2014 regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
+   "lot_rows": {
+    "plain": 475
+   },
+   "reason": "held_name_disagree",
+   "detail": "the names disagree in kind (motor/regulator/regulator+motor)"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "20945139"
+   ],
+   "group": "oem:gm:window-regulator:FR:e27cc3ca48",
+   "class": [
+    "motor",
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1109"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1112"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1270"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1275"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1400"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1405"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1466"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1474"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L173"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L180"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2187"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2195"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2272"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2277"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L235"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2383"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2387"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L242"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2435"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2439"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2481"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2637"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2643"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2938"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L78"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L78"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 15,36)(W/MOTOR)(16.260)",
+     "ref": "www.gmpartsgiant.com:records:L78"
+    }
+   ],
+   "old_note": "GM catalog lists #20945139 for both \u2014 regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
+   "lot_rows": {
+    "plain": 475
+   },
+   "reason": "held_name_disagree",
+   "detail": "the names disagree in kind (motor/regulator/regulator+motor)"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "25719488"
+   ],
+   "group": "oem:gm:window-regulator:RR:b8fa53031e",
+   "class": [
+    "motor",
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L906"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Rear Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1463"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L1463"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 17)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1463"
+    }
+   ],
+   "old_note": "GM catalog lists #25719488 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 149
+   },
+   "reason": "held_name_disagree",
+   "detail": "the names disagree in kind (motor/regulator/regulator+motor)"
+  },
+  {
+   "ns": "gm",
+   "cat": "window-regulator",
+   "pn": [
+    "25719489"
+   ],
+   "group": "oem:gm:window-regulator:RL:adcd306db3",
+   "class": [
+    "motor",
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L906"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Rear Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1464"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L1464"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 17)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1464"
+    }
+   ],
+   "old_note": "GM catalog lists #25719489 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 149
+   },
+   "reason": "held_name_disagree",
+   "detail": "the names disagree in kind (motor/regulator/regulator+motor)"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81551-33530"
+   ],
+   "group": "oem:toyota:tail-lights:R:d79a7570e9",
+   "class": [
+    "assembly",
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "lens-body",
+     "name": "Lens&Body, Rear Combination Lamp",
+     "ref": "www.toyotapartsnow.com:records:L529"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Housing, Passenger Side",
+     "ref": "www.toyotapartsnow.com:records:L529"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Housing",
+     "ref": "www.toyotapartsnow.com:records:L529"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "lens-body",
+     "name": "Lens&Body, Rear Combination Lamp",
+     "ref": "www.toyotapartsnow.com:records:L529"
+    },
+    {
+     "field": "record.other_names",
+     "kind": null,
+     "name": "Tail Lamps",
+     "ref": "www.toyotapartsnow.com:records:L529"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "assembly",
+     "name": "Tail Light Assembly, Rear Right",
+     "ref": "www.toyotapartsnow.com:records:L529"
+    },
+    {
+     "field": "record.other_names",
+     "kind": null,
+     "name": "Tail Light Lens",
+     "ref": "www.toyotapartsnow.com:records:L529"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81551-33530 for both \u2014 plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "lot_rows": {
+    "plain": 13,
+    "unc": 30,
+    "exc": 345
+   },
+   "reason": "held_name_disagree",
+   "detail": "the names disagree in kind (assembly/lens-body)"
+  },
+  {
+   "ns": "toyota",
+   "cat": "tail-lights",
+   "pn": [
+    "81561-33530"
+   ],
+   "group": "oem:toyota:tail-lights:L:112300162d",
+   "class": [
+    "assembly",
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "lens-body",
+     "name": "Lens&Body, Rear Combination Lamp",
+     "ref": "www.toyotapartsnow.com:records:L531"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Housing, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L531"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Housing",
+     "ref": "www.toyotapartsnow.com:records:L531"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "lens-body",
+     "name": "Lens&Body, Rear Combination Lamp",
+     "ref": "www.toyotapartsnow.com:records:L531"
+    },
+    {
+     "field": "record.other_names",
+     "kind": null,
+     "name": "Tail Lamps",
+     "ref": "www.toyotapartsnow.com:records:L531"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "assembly",
+     "name": "Tail Light Assembly, Rear Left",
+     "ref": "www.toyotapartsnow.com:records:L531"
+    },
+    {
+     "field": "record.other_names",
+     "kind": null,
+     "name": "Tail Light Lens",
+     "ref": "www.toyotapartsnow.com:records:L531"
+    }
+   ],
+   "old_note": "Toyota catalog lists #81561-33530 for both \u2014 plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "lot_rows": {
+    "plain": 13,
+    "unc": 30,
+    "exc": 345
+   },
+   "reason": "held_name_disagree",
+   "detail": "the names disagree in kind (assembly/lens-body)"
+  }
+ ],
+ "mopar_68079286AA_68079287AA": {
+  "decision": "left as they are (no phrase, not held)",
+  "why": "their values are 'Regulator - Front Door Window' (name, list main), 'Window Regulator' (aux), 'Window Regulator, Front Right/Left' (description, other names) and one other name 'Power Window Motor and Regulator Assembly, Front Right/Left': regulators, one alias with the motor. No value says motor alone, so the kinds do not disagree (the rule holds a motor beside a regulator); and the name fields do not carry 'with motor', so no phrase. The Durango page lists the motors 68079282AB / 68079283AB as separate numbers.",
+  "groups": [
+   {
+    "pn": [
+     "68079286AA"
+    ],
+    "group": "oem:mopar:window-regulator:FR:e87e25168f",
+    "note": "Mopar catalog lists #68079286AA for both \u2014 trim-limited; verify the number on the part",
+    "lot_rows": {
+     "plain": 291,
+     "unc": 1
+    },
+    "names": [
+     {
+      "field": "list.aux",
+      "name": "Window Regulator",
+      "ref": "www.jeeppartsdeal.com:lists:L521",
+      "kind": "regulator"
+     },
+     {
+      "field": "list.main",
+      "name": "Regulator - Front Door Window",
+      "ref": "www.jeeppartsdeal.com:lists:L521",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.aux",
+      "name": "Window Regulator",
+      "ref": "www.jeeppartsdeal.com:records:L279",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.description",
+      "name": "Window Regulator, Front Passenger Side",
+      "ref": "www.jeeppartsdeal.com:records:L279",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.name",
+      "name": "Regulator - Front Door Window",
+      "ref": "www.jeeppartsdeal.com:records:L279",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.other_names",
+      "name": "Power Window Motor and Regulator Assembly, Front Right",
+      "ref": "www.jeeppartsdeal.com:records:L279",
+      "kind": "regulator+motor"
+     },
+     {
+      "field": "record.other_names",
+      "name": "Regulator - Front Door Window",
+      "ref": "www.jeeppartsdeal.com:records:L279",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.other_names",
+      "name": "Window Regulator, Front Right",
+      "ref": "www.jeeppartsdeal.com:records:L279",
+      "kind": "regulator"
+     }
+    ]
+   },
+   {
+    "pn": [
+     "68079287AA"
+    ],
+    "group": "oem:mopar:window-regulator:FL:e9f02e91e3",
+    "note": "Mopar catalog lists #68079287AA for both \u2014 trim-limited; verify the number on the part",
+    "lot_rows": {
+     "plain": 291,
+     "unc": 1
+    },
+    "names": [
+     {
+      "field": "list.aux",
+      "name": "Window Regulator",
+      "ref": "www.jeeppartsdeal.com:lists:L521",
+      "kind": "regulator"
+     },
+     {
+      "field": "list.main",
+      "name": "Regulator - Front Door Window",
+      "ref": "www.jeeppartsdeal.com:lists:L521",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.aux",
+      "name": "Window Regulator",
+      "ref": "www.jeeppartsdeal.com:records:L280",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.description",
+      "name": "Window Regulator, Front Driver Side",
+      "ref": "www.jeeppartsdeal.com:records:L280",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.name",
+      "name": "Regulator - Front Door Window",
+      "ref": "www.jeeppartsdeal.com:records:L280",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.other_names",
+      "name": "Power Window Motor and Regulator Assembly, Front Left",
+      "ref": "www.jeeppartsdeal.com:records:L280",
+      "kind": "regulator+motor"
+     },
+     {
+      "field": "record.other_names",
+      "name": "Regulator - Front Door Window",
+      "ref": "www.jeeppartsdeal.com:records:L280",
+      "kind": "regulator"
+     },
+     {
+      "field": "record.other_names",
+      "name": "Window Regulator, Front Left",
+      "ref": "www.jeeppartsdeal.com:records:L280",
+      "kind": "regulator"
+     }
+    ]
+   }
+  ]
+ },
+ "toyota_tail_lights_other_8": {
+  "note": "named lamp assemblies; no wording change",
+  "groups": [
+   {
+    "pn": [
+     "81550-06350"
+    ],
+    "apps": [
+     [
+      "Toyota",
+      "Camry",
+      2011,
+      2011
+     ],
+     [
+      "Toyota",
+      "Camry Hybrid",
+      2011,
+      2011
+     ]
+    ],
+    "names": [
+     "Brake Light",
+     "Lamp Assembly, Rear Combination",
+     "Stop Light",
+     "Tail Lamp - RH",
+     "Tail Lamp Assembly",
+     "Tail Lamp Assembly, Passenger Side",
+     "Tail Lamps",
+     "Tail Light Assembly, Rear Right"
+    ],
+    "note": "Toyota catalog lists #81550-06350 for both \u2014 plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+    "page_bulbs_sockets": []
+   },
+   {
+    "pn": [
+     "81550-06470"
+    ],
+    "apps": [
+     [
+      "Toyota",
+      "Camry",
+      2012,
+      2012
+     ],
+     [
+      "Toyota",
+      "Camry Hybrid",
+      2012,
+      2012
+     ]
+    ],
+    "names": [
+     "Combination Lamp Assembly",
+     "Combination Lamp Assy, Passenger Side",
+     "Lamp Assembly, Rear Combination",
+     "Lamp Assembly, Rear Right Tail/Brake/Stop/Back Up Light"
+    ],
+    "note": "Toyota catalog lists #81550-06470 for both \u2014 trim-limited; verify the number on the part",
+    "page_bulbs_sockets": []
+   },
+   {
+    "pn": [
+     "81550-06640"
+    ],
+    "apps": [
+     [
+      "Toyota",
+      "Camry",
+      2015,
+      2015
+     ],
+     [
+      "Toyota",
+      "Camry Hybrid",
+      2015,
+      2015
+     ]
+    ],
+    "names": [
+     "Back Up Light",
+     "Lamp Assembly, Rear Combination",
+     "Tail Lamp Assembly",
+     "Tail Lamp Assembly, Passenger Side",
+     "Tail Lamps",
+     "Tail Light Assembly, Right"
+    ],
+    "note": "Toyota catalog lists #81550-06640 for both \u2014 trim-limited; verify the number on the part",
+    "page_bulbs_sockets": []
+   },
+   {
+    "pn": [
+     "81550-0E010"
+    ],
+    "apps": [
+     [
+      "Lexus",
+      "RX 330",
+      2004,
+      2004
+     ],
+     [
+      "Lexus",
+      "RX 350",
+      2007,
+      2007
+     ]
+    ],
+    "names": [
+     "Lamp Assy, Rear Combination, RH"
+    ],
+    "note": "Toyota catalog lists #81550-0E010 for both \u2014 fits some configurations; verify the number on the part",
+    "page_bulbs_sockets": [
+     "Bulb(For Rear Combination Lamp) | ",
+     "Socket & Wire Sub-Assy, Rear Combination Lamp, LH | ",
+     "Socket & Wire Sub-Assy, Rear Combination Lamp, RH | ",
+     "Socket Plug, NO.1 | ",
+     "Socket Plug, NO.2 | "
+    ]
+   },
+   {
+    "pn": [
+     "81560-06350"
+    ],
+    "apps": [
+     [
+      "Toyota",
+      "Camry",
+      2011,
+      2011
+     ],
+     [
+      "Toyota",
+      "Camry Hybrid",
+      2011,
+      2011
+     ]
+    ],
+    "names": [
+     "Brake Light",
+     "Lamp Assembly, Rear Combination",
+     "Stop Light",
+     "Tail Lamp - LH",
+     "Tail Lamp Assembly",
+     "Tail Lamp Assembly, Driver Side",
+     "Tail Lamps",
+     "Tail Light Assembly, Rear Left"
+    ],
+    "note": "Toyota catalog lists #81560-06350 for both \u2014 plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+    "page_bulbs_sockets": []
+   },
+   {
+    "pn": [
+     "81560-06470"
+    ],
+    "apps": [
+     [
+      "Toyota",
+      "Camry",
+      2012,
+      2012
+     ],
+     [
+      "Toyota",
+      "Camry Hybrid",
+      2012,
+      2012
+     ]
+    ],
+    "names": [
+     "Combination Lamp Assembly",
+     "Combination Lamp Assy, Driver Side",
+     "Lamp Assembly, Rear Combination",
+     "Rear Left Tail/Brake/Stop/Back Up Light"
+    ],
+    "note": "Toyota catalog lists #81560-06470 for both \u2014 trim-limited; verify the number on the part",
+    "page_bulbs_sockets": []
+   },
+   {
+    "pn": [
+     "81560-06640"
+    ],
+    "apps": [
+     [
+      "Toyota",
+      "Camry",
+      2015,
+      2015
+     ],
+     [
+      "Toyota",
+      "Camry Hybrid",
+      2015,
+      2015
+     ]
+    ],
+    "names": [
+     "Back Up Light",
+     "Lamp Assembly, Rear Combination",
+     "Tail Lamp Assembly",
+     "Tail Lamp Assembly, Driver Side",
+     "Tail Lamps",
+     "Tail Light Assembly, Left"
+    ],
+    "note": "Toyota catalog lists #81560-06640 for both \u2014 trim-limited; verify the number on the part",
+    "page_bulbs_sockets": []
+   },
+   {
+    "pn": [
+     "81560-0E010"
+    ],
+    "apps": [
+     [
+      "Lexus",
+      "RX 330",
+      2004,
+      2004
+     ],
+     [
+      "Lexus",
+      "RX 350",
+      2007,
+      2007
+     ]
+    ],
+    "names": [
+     "Lamp Assy, Rear Combination, LH"
+    ],
+    "note": "Toyota catalog lists #81560-0E010 for both \u2014 fits some configurations; verify the number on the part",
+    "page_bulbs_sockets": [
+     "Bulb(For Rear Combination Lamp) | ",
+     "Socket & Wire Sub-Assy, Rear Combination Lamp, LH | ",
+     "Socket & Wire Sub-Assy, Rear Combination Lamp, RH | ",
+     "Socket Plug, NO.1 | ",
+     "Socket Plug, NO.2 | "
+    ]
+   }
+  ]
+ },
+ "toyota_tail_lights_page_parts": {
+  "note": "the lens-and-body numbers' own pages list bulbs and socket-and-wire sub-assemblies as separate numbers (reported only; nothing added)",
+  "by_pn": {
+   "81550-0E010": [
+    "Bulb(For Rear Combination Lamp)",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket Plug, NO.1",
+    "Socket Plug, NO.2"
+   ],
+   "81551-0E010": [
+    "Bulb(For Rear Combination Lamp)",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket Plug, NO.1",
+    "Socket Plug, NO.2"
+   ],
+   "81551-30A50": [
+    "Bulb (For Rear Lamp)",
+    "Bulb(For Rear Combination Lamp)",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ],
+   "81551-48060": [
+    "Bulb(For Rear Combination Lamp)",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket Plug, NO.1",
+    "Socket Plug, NO.2"
+   ],
+   "81551-53170": [
+    "Bulb, Back Up Lamp",
+    "Bulb, Rear Turn Signal Lamp",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ],
+   "81551-53171": [
+    "Bulb, Back Up Lamp",
+    "Bulb, Rear Turn Signal Lamp",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ],
+   "81551-53240": [
+    "Bulb, Back Up Lamp",
+    "Bulb, Rear Turn Signal Lamp",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ],
+   "81551-53260": [
+    "Bulb, Back Up Lamp",
+    "Bulb, Rear Turn Signal Lamp",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ],
+   "81560-0E010": [
+    "Bulb(For Rear Combination Lamp)",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket Plug, NO.1",
+    "Socket Plug, NO.2"
+   ],
+   "81561-0E010": [
+    "Bulb(For Rear Combination Lamp)",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket Plug, NO.1",
+    "Socket Plug, NO.2"
+   ],
+   "81561-30A40": [
+    "Bulb (For Rear Lamp)",
+    "Bulb(For Rear Combination Lamp)",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ],
+   "81561-48060": [
+    "Bulb(For Rear Combination Lamp)",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket Plug, NO.1",
+    "Socket Plug, NO.2"
+   ],
+   "81561-53170": [
+    "Bulb, Back Up Lamp",
+    "Bulb, Rear Turn Signal Lamp",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ],
+   "81561-53171": [
+    "Bulb, Back Up Lamp",
+    "Bulb, Rear Turn Signal Lamp",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ],
+   "81561-53230": [
+    "Bulb, Back Up Lamp",
+    "Bulb, Rear Turn Signal Lamp",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ],
+   "81561-53260": [
+    "Bulb, Back Up Lamp",
+    "Bulb, Rear Turn Signal Lamp",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, LH",
+    "Socket & Wire Sub-Assy, Rear Combination Lamp, RH",
+    "Socket & Wire, Rear Lamp"
+   ]
+  }
+ },
+ "regulator_with_motor_names_all_makes": {
+  "gm": [
+   {
+    "pn": [
+     "10305685"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 97)(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "10305686"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 97)(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "10334396"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "10334398"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "10334399"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "15091383"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(USE TOGETHER WITH 88961505 WIRE ASM)(INCLUDES 48,55)(W/ROUND WIRE HARNESS CONNECT)(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "15091384"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(USE TOGETHER WITH 88961505 WIRE ASM)(INCLUDES 48,55)(W/ROUND WIRE HARNESS CONNECT)(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "15643719"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 29,56)(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "15643720"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 29,56)(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "15922914"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 7,8)(INCLUDES MOTOR)(16.260)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "15922915"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 7,8)(INCLUDES MOTOR)(16.260)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "19210257"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(PART OF 8)(W/MOTOR)(IF OLD INSIDE HANDLE HAS 3 BOLTS MUST ORDER NEW HANDLE.)(BUILT PRIOR TO 12/2/07 W/BELLCRANK ON BACK SIDE OF PLATE: ORDER TOGETHER WITH 2ND DESIGN LOCK RODS-19209898/900/902 & CLIP-19209909.)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "19210258"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(PART OF 8)(W/MOTOR)(IF OLD HANDLE HAS THREE BOLTS MUST ORDER NEW HANDLE)(BUILT PRIOR TO 12/2/07 W/BELLCRANK ON BACK SIDE OF PLATE: ORDER TOGETHER WITH 2ND DESIGN LOCK RODS-19209897/899/901 & CLIP-19209909.)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "19244837"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 52)(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "19244838"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 52)(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "20783372"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 13)(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "20945138"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 15,36)(W/MOTOR)(16.260)(ORDER TOGETHER WITH NUT-11561645 (QTY 2))"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "20945139"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 15,36)(W/MOTOR)(16.260)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "23227000"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 3,5,6,16,17)(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "23227001"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 3,5,6,16,17)(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "25701606"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "25701607"
+    ],
+    "names": [
+     "REGULATOR, FRONT SIDE DOOR WINDOW(W/MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": true
+   },
+   {
+    "pn": [
+     "25719488"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 17)(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "25719489"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 17)(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "5483148"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 29-32)(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "5483149"
+    ],
+    "names": [
+     "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 29-32)(INCLUDES MOTOR)"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   }
+  ],
+  "mopar": [
+   {
+    "pn": [
+     "68079286AA"
+    ],
+    "names": [
+     "Power Window Motor and Regulator Assembly, Front Right"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "68079287AA"
+    ],
+    "names": [
+     "Power Window Motor and Regulator Assembly, Front Left"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   }
+  ],
+  "ford": [
+   {
+    "pn": [
+     "5G1Z-5423208-AA"
+    ],
+    "names": [
+     "Regulator And Motor Assy - Window"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "5G1Z-5423209-AA"
+    ],
+    "names": [
+     "Regulator And Motor Assy - Window"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   }
+  ],
+  "subaru": [
+   {
+    "pn": [
+     "61041AL00A"
+    ],
+    "names": [
+     "Regulator & Motor Assembly-Front Right"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "61041AL01A"
+    ],
+    "names": [
+     "Regulator & Motor Assembly-Front Left"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "61041AL02A"
+    ],
+    "names": [
+     "Regulator & Motor Assembly-Front Right"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "61042AL00A"
+    ],
+    "names": [
+     "Regulator & Motor Assembly-Rear Right"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   },
+   {
+    "pn": [
+     "61042AL01A"
+    ],
+    "names": [
+     "Regulator & Motor Assembly-Rear Left"
+    ],
+    "origin_main_note_says_regulator_with_motor": false
+   }
+  ]
+ }
+}

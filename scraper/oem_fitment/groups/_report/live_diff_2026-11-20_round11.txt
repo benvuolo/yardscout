@@ -1,0 +1,238 @@
+gm CHANGED LIVE ('window-regulator', ('10334396',)) [['Buick', 'Century', 2003, 2003], ['Buick', 'Regal', 2000, 2000], ['Buick', 'Regal', 2003, 2004]] lost [] gained []
+    old: GM catalog lists #10334396 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #10334396 for both — regulator with motor; option: fits some option packages; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('10334398',)) [['Buick', 'Century', 2003, 2003], ['Buick', 'Regal', 2000, 2000], ['Buick', 'Regal', 2003, 2004]] lost [] gained []
+    old: GM catalog lists #10334398 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #10334398 for both — regulator with motor; fits some configurations; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('10334399',)) [['Buick', 'Century', 2003, 2003], ['Buick', 'Regal', 2000, 2000], ['Buick', 'Regal', 2003, 2004]] lost [] gained []
+    old: GM catalog lists #10334399 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #10334399 for both — regulator with motor; fits some configurations; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('15091383',)) [['Chevrolet', 'Astro', 2000, 2000], ['GMC', 'Safari', 1997, 1997], ['GMC', 'Safari', 2000, 2001]] lost [] gained []
+    old: GM catalog lists #15091383 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #15091383 for both — regulator with motor; option: fits some option packages; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('15091384',)) [['Chevrolet', 'Astro', 2000, 2000], ['GMC', 'Safari', 1997, 1997], ['GMC', 'Safari', 2000, 2001]] lost [] gained []
+    old: GM catalog lists #15091384 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #15091384 for both — regulator with motor; option: fits some option packages; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('15922914',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #15922914 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #15922914 for both — regulator with motor; option: fits some option packages; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('15922915',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #15922915 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #15922915 for both — regulator with motor; option: fits some option packages; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('20783372',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #20783372 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20783372 for both — regulator with motor; option: fits some option packages; verify the number on the part
+gm REMOVED LIVE ('window-regulator', ('20914715',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+gm REMOVED LIVE ('window-regulator', ('20945138',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+gm REMOVED LIVE ('window-regulator', ('20945139',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+gm REMOVED LIVE ('window-regulator', ('25719488',)) [['Cadillac', 'DeVille', 2004, 2004], ['Cadillac', 'Seville', 2003, 2003]]
+gm REMOVED LIVE ('window-regulator', ('25719489',)) [['Cadillac', 'DeVille', 2004, 2004], ['Cadillac', 'Seville', 2003, 2003]]
+gm CHANGED LIVE ('window-regulator', ('5483148',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #5483148 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part
+    new: GM catalog lists #5483148 for both — regulator with motor; fits some configurations; Blazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('5483149',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #5483149 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part
+    new: GM catalog lists #5483149 for both — regulator with motor; fits some configurations; Blazer: only 2WD checked; verify the number on the part
+mopar CHANGED LIVE ('bumper-front', ('5073002AC',)) [['Dodge', 'Ram 1500', 2002, 2002], ['Dodge', 'Ram 2500', 2003, 2003]] lost [] gained []
+    old: Mopar catalog lists #5073002AC for both — trim-limited; verify the number on the part
+    new: Mopar catalog lists #5073002AC for both — bumper cover; trim-limited; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-06919',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-06919 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #52119-06919 for both — bumper cover; plant-specific (US / Japan built); verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-06957',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #52119-06957 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    new: Toyota catalog lists #52119-06957 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-06974',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #52119-06974 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #52119-06974 for both — bumper cover; trim-limited; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-06975',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #52119-06975 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #52119-06975 for both — bumper cover; trim-limited; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-07912',)) [['Toyota', 'Camry', 2015, 2015], ['Toyota', 'Camry Hybrid', 2015, 2015]] lost [] gained []
+    old: Toyota catalog lists #52119-07912 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #52119-07912 for both — bumper cover; trim-limited; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-0E900',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-0E900 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-0E900 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-0E901',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-0E901 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-0E901 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-0E902',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-0E902 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-0E902 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-0E903',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-0E903 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-0E903 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-30934',)) [['Lexus', 'GS 300', 1998, 1998], ['Lexus', 'GS 400', 1998, 1998], ['Lexus', 'GS 430', 2003, 2003]] lost [] gained []
+    old: Toyota catalog lists #52119-30934 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #52119-30934 for both — bumper cover only; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-30961',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #52119-30961 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-30961 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-30962',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #52119-30962 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-30962 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-30967',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #52119-30967 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-30967 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-30968',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #52119-30968 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-30968 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-33927',)) [['Lexus', 'ES 300', 2002, 2002], ['Lexus', 'ES 330', 2004, 2004]] lost [] gained []
+    old: Toyota catalog lists #52119-33927 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-33927 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-33943',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-33943 for both — plant-specific (US / Japan built); verify the number on the part
+    new: Toyota catalog lists #52119-33943 for both — bumper cover; plant-specific (US / Japan built); verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-33967',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]] lost [] gained []
+    old: Toyota catalog lists #52119-33967 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    new: Toyota catalog lists #52119-33967 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-48913',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-48913 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-48913 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-48914',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-48914 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-48914 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-48915',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-48915 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-48915 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-53917',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-53917 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-53917 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-53918',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-53918 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-53918 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-53919',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-53919 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-53919 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52119-53925',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
+    old: Toyota catalog lists #52119-53925 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52119-53925 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52437-53010',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
+    old: Toyota catalog lists #52437-53010 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #52437-53010 for both — bumper guard cover; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('bumper-front', ('52438-53010',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
+    old: Toyota catalog lists #52438-53010 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #52438-53010 for both — bumper guard cover; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-06952',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52159-06952 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    new: Toyota catalog lists #52159-06952 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-06961',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #52159-06961 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #52159-06961 for both — bumper cover; trim-limited; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-06963',)) [['Toyota', 'Camry', 2012, 2012], ['Toyota', 'Camry Hybrid', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #52159-06963 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #52159-06963 for both — bumper cover; trim-limited; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-06989',)) [['Toyota', 'Camry', 2015, 2015], ['Toyota', 'Camry Hybrid', 2015, 2015]] lost [] gained []
+    old: Toyota catalog lists #52159-06989 for both — trim-limited; verify the number on the part
+    new: Toyota catalog lists #52159-06989 for both — bumper cover; trim-limited; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-0E900',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52159-0E900 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #52159-0E900 for both — bumper cover only; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-30924',)) [['Lexus', 'GS 300', 1998, 1998], ['Lexus', 'GS 400', 1998, 1998], ['Lexus', 'GS 430', 2003, 2003]] lost [] gained []
+    old: Toyota catalog lists #52159-30924 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #52159-30924 for both — bumper cover only; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-30934',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #52159-30934 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52159-30934 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-30935',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #52159-30935 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #52159-30935 for both — bumper cover only; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-33911',)) [['Lexus', 'ES 300', 2002, 2002], ['Lexus', 'ES 330', 2004, 2004]] lost [] gained []
+    old: Toyota catalog lists #52159-33911 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #52159-33911 for both — bumper cover only; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-33918',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52159-33918 for both — older catalog-only number; verify the number on the part
+    new: Toyota catalog lists #52159-33918 for both — bumper cover; older catalog-only number; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-33919',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52159-33919 for both — older catalog-only number; verify the number on the part
+    new: Toyota catalog lists #52159-33919 for both — bumper cover; older catalog-only number; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-33924',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #52159-33924 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+    new: Toyota catalog lists #52159-33924 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-48903',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007], ['Lexus', 'RX 400h', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #52159-48903 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #52159-48903 for both — bumper cover only; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-53905',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
+    old: Toyota catalog lists #52159-53905 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #52159-53905 for both — bumper cover only; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('bumper-rear', ('52159-53906',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
+    old: Toyota catalog lists #52159-53906 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #52159-53906 for both — bumper cover only; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81551-0E010',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #81551-0E010 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81551-0E010 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81551-30A50',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #81551-30A50 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #81551-30A50 for both — lens and body unit; option: fits some option packages; verify the number on the part
+toyota REMOVED LIVE ('tail-lights', ('81551-33530',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]]
+toyota CHANGED LIVE ('tail-lights', ('81551-48060',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #81551-48060 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #81551-48060 for both — lens and body unit; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81551-53170',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #81551-53170 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81551-53170 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81551-53171',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #81551-53171 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81551-53171 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81551-53240',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #81551-53240 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81551-53240 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81551-53260',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #81551-53260 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81551-53260 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81561-0E010',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #81561-0E010 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81561-0E010 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81561-30A40',)) [['Lexus', 'GS 300', 2006, 2006], ['Lexus', 'GS 350', 2007, 2007], ['Lexus', 'GS 430', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #81561-30A40 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #81561-30A40 for both — lens and body unit; option: fits some option packages; verify the number on the part
+toyota REMOVED LIVE ('tail-lights', ('81561-33530',)) [['Toyota', 'Camry', 2011, 2011], ['Toyota', 'Camry Hybrid', 2011, 2011]]
+toyota CHANGED LIVE ('tail-lights', ('81561-48060',)) [['Lexus', 'RX 330', 2004, 2004], ['Lexus', 'RX 350', 2007, 2007]] lost [] gained []
+    old: Toyota catalog lists #81561-48060 for both — option: fits some option packages; verify the number on the part
+    new: Toyota catalog lists #81561-48060 for both — lens and body unit; option: fits some option packages; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81561-53170',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #81561-53170 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81561-53170 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81561-53171',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2006]] lost [] gained []
+    old: Toyota catalog lists #81561-53171 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81561-53171 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81561-53230',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #81561-53230 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81561-53230 for both — lens and body unit; fits some configurations; verify the number on the part
+toyota CHANGED LIVE ('tail-lights', ('81561-53260',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
+    old: Toyota catalog lists #81561-53260 for both — fits some configurations; verify the number on the part
+    new: Toyota catalog lists #81561-53260 for both — lens and body unit; fits some configurations; verify the number on the part
+ford CHANGED LIVE ('window-regulator', ('5G1Z-5423208-AA',)) [['Ford', 'Five Hundred', 2005, 2005], ['Mercury', 'Montego', 2005, 2005]] lost [] gained []
+    old: Ford catalog lists #5G1Z-5423208-AA for both — fits some configurations; verify the number on the part
+    new: Ford catalog lists #5G1Z-5423208-AA for both — regulator with motor; fits some configurations; verify the number on the part
+ford CHANGED LIVE ('window-regulator', ('5G1Z-5423209-AA',)) [['Ford', 'Five Hundred', 2005, 2005], ['Mercury', 'Montego', 2005, 2005]] lost [] gained []
+    old: Ford catalog lists #5G1Z-5423209-AA for both — fits some configurations; verify the number on the part
+    new: Ford catalog lists #5G1Z-5423209-AA for both — regulator with motor; fits some configurations; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('61041AL00A',)) [['Subaru', 'Legacy', 2015, 2015], ['Subaru', 'Outback', 2015, 2015]] lost [] gained []
+    old: Subaru catalog lists #61041AL00A for both — option: fits some option packages; verify the number on the part
+    new: Subaru catalog lists #61041AL00A for both — regulator with motor; option: fits some option packages; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('61041AL01A',)) [['Subaru', 'Legacy', 2015, 2015], ['Subaru', 'Outback', 2015, 2015]] lost [] gained []
+    old: Subaru catalog lists #61041AL01A for both — option: fits some option packages; verify the number on the part
+    new: Subaru catalog lists #61041AL01A for both — regulator with motor; option: fits some option packages; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('61041AL02A',)) [['Subaru', 'Legacy', 2015, 2015], ['Subaru', 'Outback', 2015, 2015]] lost [] gained []
+    old: Subaru catalog lists #61041AL02A for both — option: fits some option packages; verify the number on the part
+    new: Subaru catalog lists #61041AL02A for both — regulator with motor; option: fits some option packages; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('61042AL00A',)) [['Subaru', 'Legacy', 2015, 2015], ['Subaru', 'Outback', 2015, 2015]] lost [] gained []
+    old: Subaru catalog lists #61042AL00A for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #61042AL00A for both — regulator with motor; fits some configurations; verify the number on the part
+subaru CHANGED LIVE ('window-regulator', ('61042AL01A',)) [['Subaru', 'Legacy', 2015, 2015], ['Subaru', 'Outback', 2015, 2015]] lost [] gained []
+    old: Subaru catalog lists #61042AL01A for both — fits some configurations; verify the number on the part
+    new: Subaru catalog lists #61042AL01A for both — regulator with motor; fits some configurations; verify the number on the part
+vag CHANGED LIVE ('bumper-front', ('1HM-807-217-D-GRU',)) [['Volkswagen', 'Golf', 1996, 1996], ['Volkswagen', 'Jetta', 1997, 1997]] lost [] gained []
+    old: VW/Audi catalog lists #1HM-807-217-D-GRU for both — trim-limited; verify the number on the part
+    new: VW/Audi catalog lists #1HM-807-217-D-GRU for both — bumper cover; trim-limited; verify the number on the part
+# gm LIVE: removed 5 groups, added 0 groups, changed 10; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# mopar LIVE: removed 0 groups, added 0 groups, changed 1; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# toyota LIVE: removed 2 groups, added 0 groups, changed 55; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# ford LIVE: removed 0 groups, added 0 groups, changed 2; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# nissan LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# hmg LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# subaru LIVE: removed 0 groups, added 0 groups, changed 5; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# vag LIVE: removed 0 groups, added 0 groups, changed 1; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# mb LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0

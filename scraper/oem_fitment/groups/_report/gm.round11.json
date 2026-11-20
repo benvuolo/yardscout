@@ -1,0 +1,1169 @@
+{
+ "changed": 10,
+ "held": 5,
+ "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, lens and body unit, regulator with motor) on the finished note (change 'phrase'); names that disagree in kind, a note past the cap, or other words already on the note hold the group (change 'held'). Names with field, kind and site:file:line.",
+ "ns": "gm",
+ "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "rows": [
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L833"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L856"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L879"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1206"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1206"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1206"
+    }
+   ],
+   "new_note": "GM catalog lists #10334396 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "old_note": "GM catalog lists #10334396 for both — option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "10334396"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L834"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L857"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L880"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Rear Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1210"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1210"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1210"
+    }
+   ],
+   "new_note": "GM catalog lists #10334398 for both — regulator with motor; fits some configurations; verify the number on the part",
+   "old_note": "GM catalog lists #10334398 for both — fits some configurations; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "10334398"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L834"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L857"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L880"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Rear Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1211"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1211"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1211"
+    }
+   ],
+   "new_note": "GM catalog lists #10334399 for both — regulator with motor; fits some configurations; verify the number on the part",
+   "old_note": "GM catalog lists #10334399 for both — fits some configurations; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "10334399"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1589"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1598"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1653"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1661"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1717"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1720"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1729"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1732"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator,Front Side Door Window",
+     "ref": "www.gmpartsgiant.com:records:L1813"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(USE TOGETHER WITH 88961505 WIRE ASM)(INCLUDES 48,55)(W/ROUND WIRE HARNESS CONNECT)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1813"
+    }
+   ],
+   "new_note": "GM catalog lists #15091383 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "old_note": "GM catalog lists #15091383 for both — option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "15091383"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1589"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1598"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1653"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1661"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1717"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1720"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1729"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1732"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Door And End Gate Window",
+     "ref": "www.gmpartsgiant.com:records:L1812"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1812"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(USE TOGETHER WITH 88961505 WIRE ASM)(INCLUDES 48,55)(W/ROUND WIRE HARNESS CONNECT)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1812"
+    }
+   ],
+   "new_note": "GM catalog lists #15091384 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "old_note": "GM catalog lists #15091384 for both — option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "15091384"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2099"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2101"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2138"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2140"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1385"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1385"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 7,8)(INCLUDES MOTOR)(16.260)",
+     "ref": "www.gmpartsgiant.com:records:L1385"
+    }
+   ],
+   "new_note": "GM catalog lists #15922914 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "old_note": "GM catalog lists #15922914 for both — option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "15922914"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2099"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2101"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2138"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2140"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1386"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1386"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 7,8)(INCLUDES MOTOR)(16.260)",
+     "ref": "www.gmpartsgiant.com:records:L1386"
+    }
+   ],
+   "new_note": "GM catalog lists #15922915 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "old_note": "GM catalog lists #15922915 for both — option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "15922915"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L976"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L980"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L317"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L317"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 13)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L317"
+    }
+   ],
+   "new_note": "GM catalog lists #20783372 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "old_note": "GM catalog lists #20783372 for both — option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "20783372"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "held",
+   "detail": "the names disagree in kind (motor/regulator)",
+   "kinds": [
+    "motor",
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1109"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1112"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2383"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2387"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2435"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2439"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2481"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L129"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L129"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 8)(W/O MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L129"
+    }
+   ],
+   "old_note": "GM catalog lists #20914715 for both — regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
+   "pn": [
+    "20914715"
+   ],
+   "reason": "held_name_disagree"
+  },
+  {
+   "cat": "window-regulator",
+   "change": "held",
+   "detail": "the names disagree in kind (motor/regulator/regulator+motor)",
+   "kinds": [
+    "motor",
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1109"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1112"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1270"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1275"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1400"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1405"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1466"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1474"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L173"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L180"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2187"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2195"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2272"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2277"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L235"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2383"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2387"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L242"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2435"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2439"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2481"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2637"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2643"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2938"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L77"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L77"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 15,36)(W/MOTOR)(16.260)(ORDER TOGETHER WITH NUT-11561645 (QTY 2))",
+     "ref": "www.gmpartsgiant.com:records:L77"
+    }
+   ],
+   "old_note": "GM catalog lists #20945138 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
+   "pn": [
+    "20945138"
+   ],
+   "reason": "held_name_disagree"
+  },
+  {
+   "cat": "window-regulator",
+   "change": "held",
+   "detail": "the names disagree in kind (motor/regulator/regulator+motor)",
+   "kinds": [
+    "motor",
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1109"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1112"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1270"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1275"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1400"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1405"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1466"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1474"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L173"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L180"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2187"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2195"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2272"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2277"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L235"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2383"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2387"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L242"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2435"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2439"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2481"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2637"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2643"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L2938"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Front Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L78"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L78"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 15,36)(W/MOTOR)(16.260)",
+     "ref": "www.gmpartsgiant.com:records:L78"
+    }
+   ],
+   "old_note": "GM catalog lists #20945139 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
+   "pn": [
+    "20945139"
+   ],
+   "reason": "held_name_disagree"
+  },
+  {
+   "cat": "window-regulator",
+   "change": "held",
+   "detail": "the names disagree in kind (motor/regulator/regulator+motor)",
+   "kinds": [
+    "motor",
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L906"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Rear Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1463"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L1463"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 17)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1463"
+    }
+   ],
+   "old_note": "GM catalog lists #25719488 for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "25719488"
+   ],
+   "reason": "held_name_disagree"
+  },
+  {
+   "cat": "window-regulator",
+   "change": "held",
+   "detail": "the names disagree in kind (motor/regulator/regulator+motor)",
+   "kinds": [
+    "motor",
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L906"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Rear Door Window Regulator",
+     "ref": "www.gmpartsgiant.com:records:L1464"
+    },
+    {
+     "field": "record.description",
+     "kind": "motor",
+     "name": "Window Motor",
+     "ref": "www.gmpartsgiant.com:records:L1464"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 17)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1464"
+    }
+   ],
+   "old_note": "GM catalog lists #25719489 for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "25719489"
+   ],
+   "reason": "held_name_disagree"
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1213"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1217"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1789"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1793"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1849"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1853"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1908"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1912"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator Assembly, Rear Side Door Window",
+     "ref": "www.gmpartsgiant.com:records:L1276"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator, Door And End Gate Window",
+     "ref": "www.gmpartsgiant.com:records:L1276"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 29-32)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1276"
+    }
+   ],
+   "new_note": "GM catalog lists #5483148 for both — regulator with motor; fits some configurations; Blazer: only 2WD checked; verify the number on the part",
+   "old_note": "GM catalog lists #5483148 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "5483148"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator",
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1213"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1217"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1789"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1793"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1849"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1853"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1908"
+    },
+    {
+     "field": "list.main",
+     "kind": "regulator",
+     "name": "REGULATOR",
+     "ref": "www.gmpartsgiant.com:lists:L1912"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator Assembly, Rear Side Door Window",
+     "ref": "www.gmpartsgiant.com:records:L1277"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 29-32)(INCLUDES MOTOR)",
+     "ref": "www.gmpartsgiant.com:records:L1277"
+    }
+   ],
+   "new_note": "GM catalog lists #5483149 for both — regulator with motor; fits some configurations; Blazer: only 2WD checked; verify the number on the part",
+   "old_note": "GM catalog lists #5483149 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "5483149"
+   ]
+  }
+ ]
+}

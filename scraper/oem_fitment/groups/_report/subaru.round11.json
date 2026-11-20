@@ -1,0 +1,179 @@
+{
+ "changed": 5,
+ "held": 0,
+ "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, lens and body unit, regulator with motor) on the finished note (change 'phrase'); names that disagree in kind, a note past the cap, or other words already on the note hold the group (change 'held'). Names with field, kind and site:file:line.",
+ "ns": "subaru",
+ "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "rows": [
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:records:L981"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:records:L981"
+    }
+   ],
+   "new_note": "Subaru catalog lists #61041AL00A for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "old_note": "Subaru catalog lists #61041AL00A for both — option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "61041AL00A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Left",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Left",
+     "ref": "www.subarupartsdeal.com:records:L980"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Left",
+     "ref": "www.subarupartsdeal.com:records:L980"
+    }
+   ],
+   "new_note": "Subaru catalog lists #61041AL01A for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "old_note": "Subaru catalog lists #61041AL01A for both — option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "61041AL01A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:records:L982"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Front Right",
+     "ref": "www.subarupartsdeal.com:records:L982"
+    }
+   ],
+   "new_note": "Subaru catalog lists #61041AL02A for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "old_note": "Subaru catalog lists #61041AL02A for both — option: fits some option packages; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "61041AL02A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Right",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Right",
+     "ref": "www.subarupartsdeal.com:records:L985"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Right",
+     "ref": "www.subarupartsdeal.com:records:L985"
+    }
+   ],
+   "new_note": "Subaru catalog lists #61042AL00A for both — regulator with motor; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #61042AL00A for both — fits some configurations; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "61042AL00A"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "phrase",
+   "kinds": [
+    "regulator+motor"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Left",
+     "ref": "www.subarupartsdeal.com:lists:L146"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Left",
+     "ref": "www.subarupartsdeal.com:records:L984"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator+motor",
+     "name": "Regulator & Motor Assembly-Rear Left",
+     "ref": "www.subarupartsdeal.com:records:L984"
+    }
+   ],
+   "new_note": "Subaru catalog lists #61042AL01A for both — regulator with motor; fits some configurations; verify the number on the part",
+   "old_note": "Subaru catalog lists #61042AL01A for both — fits some configurations; verify the number on the part",
+   "pages_reinforcement": null,
+   "phrase": "regulator with motor",
+   "pn": [
+    "61042AL01A"
+   ]
+  }
+ ]
+}
