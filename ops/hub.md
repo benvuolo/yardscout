@@ -3553,3 +3553,29 @@ Owner asked for an update (17:20 UTC). Checks at 17:22 UTC:
   Cloudflare watchdog saw the last scan 4 h old at 16:23 and starts one at
   17:23 if GitHub has not.
 - Tasks 66 and 80 closed. The 18:30 UTC check-in is answered by this entry.
+
+## 2026-11-20 17:45 UTC owner's answers to the open list; Budget draft re-created; 4Runner post drafted
+
+Owner (about 17:35 UTC): "1. test went through 2. I dont have them 3.
+nothing in my draft 4. draft it, ill post it".
+- 1 (ben@ address): the owner reports their test arrived. From the mailbox
+  the hub can see only the owner's own 11-19 test in Sent, no incoming
+  message addressed to ben@ from another sender; said so to the owner (if
+  they saw it land in the inbox it works; if they only saw it leave, look
+  in Spam).
+- 2 (recipient addresses for the catalog operator and 1A Auto): the owner
+  has none. Texts stay in `ops/yard-outreach-drafts.md`; no draft is made
+  (CLAUDE.md rule). The hub does not machine-read the sites that refused
+  it. Offered: paste the text into each company's own contact form.
+- 3 (Budget U-Pull-It follow-up): Drafts was empty and the whole 11-02
+  conversation with Budget is no longer in the mailbox (not in Sent or
+  Trash; the hub removed only the two recipient-less drafts on 11-19). A
+  fresh draft was made with the same text, to the yard's sales address,
+  subject "Following up: Budget U-Pull-It's inventory in YardScout";
+  "today" became "this week" (Bartow's list changed 11-19 and 11-20;
+  Winter Garden's 11-19). Not threaded under the 11-02 mail, which the
+  hub could not find.
+- 4 (Reddit): the weekly 4Runner "what landed" post generated with
+  `tools/landed_post.py` from the 13:40 UTC scan (60 cars, 24 states, 21
+  confirmed 4x4) and given to the owner in chat to post. No unanswered
+  Reddit comment in the mailbox (5 days).
