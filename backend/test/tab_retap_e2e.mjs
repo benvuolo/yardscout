@@ -47,6 +47,13 @@ try {
   const page = await open([]);
   const tabSel = (t) => `.tab[data-tab="${t}"]`;
   const y = () => page.evaluate(() => Math.round(window.scrollY));
+  // The page settles after a scroll: tiles and yard cards drawn for the first
+  // time replace their size estimates and failed photos switch to their
+  // drawing, and Chrome's scroll anchoring moves scrollY to keep what is on
+  // screen in place (2026-11-20: the car moved from -17 to -21 px and Yards
+  // from 500 to 509 within a second of the scroll, here and on main alike).
+  // So the "before" readings are taken once two readings 250 ms apart agree.
+  const settled = async (read) => { let a = await read(), b; for (let i = 0; i < 20; i++) { await page.waitForTimeout(250); b = await read(); if (JSON.stringify(a) === JSON.stringify(b)) return b; a = b; } return b; };
   // 1. Cars tab: scroll down, open a car, re-tap: the car screen closes first.
   await page.evaluate(() => window.scrollTo(0, 1500));
   // The car screen covers the tab bar, so the re-tap path is called directly
@@ -95,12 +102,12 @@ try {
     const want = c ? Math.round(window.scrollY + c.getBoundingClientRect().bottom + 500) : 1800;
     window.scrollTo(0, Math.max(1800, want));
   });
-  const liveY = await y();
   // The car at the top of the screen, and where it sits: coming back must
   // show the same car at the same place, not only the same scroll number
   // (2026-11-16: with a full-row card above, it came back ~100 px short).
   const topCar = () => page.evaluate(() => { for (const t of document.querySelectorAll('#live-grid > .car-tile')) { const r = t.getBoundingClientRect(); if (r.bottom > 0) return [t.dataset.vkey, Math.round(r.top)]; } return null; });
-  const carBefore = await topCar();
+  const carBefore = await settled(topCar);
+  const liveY = await y();
   const cardAbove = await page.evaluate(() => { const c = document.getElementById('alert-card'); return !!c && c.getBoundingClientRect().bottom < 0; });
   await page.click(tabSel('parts'));
   await page.waitForTimeout(300);
@@ -109,6 +116,7 @@ try {
   await page.waitForTimeout(300);
   check('-> Yards (left at the top earlier): at the top', (await y()) === 0, String(await y()));
   await page.evaluate(() => window.scrollTo(0, 500));
+  const yardsY = await settled(y);
   await page.click(tabSel('alerts'));
   await page.waitForTimeout(300);
   check('scrolled Yards -> Alerts: at the top', (await y()) === 0, String(await y()));
@@ -121,16 +129,19 @@ try {
   check('back to Cars: the same car at the top, in the same place (the alert card is above it)', cardAbove && carBefore && carAfter && carBefore[0] === carAfter[0] && Math.abs(carBefore[1] - carAfter[1]) <= 2, JSON.stringify([cardAbove, carBefore, carAfter]));
   await page.click(tabSel('yards'));
   await page.waitForTimeout(300);
-  check('back to Yards: returns to where it was left', Math.abs((await y()) - 500) <= 2, String(await y()));
+  check('back to Yards: returns to where it was left', yardsY > 400 && Math.abs((await y()) - yardsY) <= 2, `${await y()} vs ${yardsY}`);
   await page.click(tabSel('yards'));
   await page.waitForTimeout(400);
   check('re-tap still goes to the top', (await y()) === 0, String(await y()));
   await page.click(tabSel('alerts'));
   await page.waitForTimeout(300);
   // 5. A programmatic click on the active tab (used by app code to re-render) still re-renders, no scroll.
-  await page.evaluate(() => { window.scrollTo(0, 300); document.querySelector('.tab[data-tab="alerts"]').click(); });
+  await page.evaluate(() => window.scrollTo(0, 300));
+  const alertsY = await settled(y);
+  await page.evaluate(() => { document.querySelector('.tab[data-tab="alerts"]').click(); });
   await page.waitForTimeout(300);
-  check('programmatic click on the active tab keeps the old behaviour (no jump)', (await y()) === 300, String(await y()));
+  const alertsAfter = await settled(y);
+  check('programmatic click on the active tab keeps the old behaviour (no jump)', alertsY > 200 && alertsAfter === alertsY, `${alertsAfter} vs ${alertsY}`);
   await page.close();
 } finally {
   await browser.close();
