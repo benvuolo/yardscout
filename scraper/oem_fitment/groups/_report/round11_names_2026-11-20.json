@@ -1,13 +1,22 @@
 {
- "report": "round11_names_2026-11-20",
+ "report": "round11_names_2026-11-20 (round 11b)",
  "pins": {
   "live_raw": "oem-raw@dca9cd845f26 (live makes), oem-raw@57e8b5b99de0 (nissan); not re-pinned",
   "curation_lot": "main@a85c654 inventory 1a9cfa73, vin_decodes 1357625b, vehicle_extras 6ff3d44b",
   "lot_rows": "docs/data on origin/main f59e8744 (the lot main ships today), audit11_4/lot_replay.mjs, origin/main's groups files"
  },
- "rule": "every naming value the raw prints for the number (list rows main, aux; records name, aux, description, other_names; ';' values apart), each with field, kind and site:file:line (curate._wide_names, _kind11). bumper-front/rear: cover ('cover', 'fascia') -> 'bumper cover', or 'bumper cover only' when each of the number's own pages lists a reinforcement as a separate number; 'bumper guard' -> 'bumper guard cover'. tail-lights: 'lens & body' / 'lens & housing' -> 'lens and body unit'. window-regulator: every name field (record name, list main) a regulator with its motor -> 'regulator with motor'. Values of another kind (bumper, reinforcement, lamp assembly, a motor beside a regulator) hold the group; so do a note past 160 and other packaging words already on the note. The phrase goes after the dash of the finished note; nothing else changes.",
+ "rule": "every naming value the raw prints for the number (list rows main, aux; records name, aux, description, other_names; ';' values apart), each with field, kind and site:file:line (curate._wide_names, _kind11). bumper-front/rear: cover ('cover', 'fascia') -> 'bumper cover', or 'bumper cover only' when each of the number's own pages lists a reinforcement as a separate number; tail-lights: 'lens & body' / 'lens & housing' -> 'lens and body unit'. window-regulator: every name field (record name, list main) a regulator with its motor -> 'regulator with motor'. Values of another kind (bumper, reinforcement, lamp assembly, a motor beside a regulator) hold the group; so do a note past 160 and other packaging words already on the note. The phrase goes after the dash of the finished note; nothing else changes. Round 11b (hub review): under bumper-front / bumper-rear a number whose naming values name a part other than the bumper cover or the bumper itself (guard cover, tow-hook cover, grille, moulding, reinforcement incl. 'impact bar' and 'beam', bracket incl. 'stay', absorber) is held (held_part_other).",
  "summary": {
   "ford": {
+   "bumper-front": {
+    "changed": 0,
+    "held": 2,
+    "phrases": {},
+    "lot_rows_changed": {},
+    "lot_rows_held": {
+     "plain": 1544
+    }
+   },
    "window-regulator": {
     "changed": 2,
     "held": 0,
@@ -18,6 +27,15 @@
      "plain": 392
     },
     "lot_rows_held": {}
+   },
+   "bumper-rear": {
+    "changed": 0,
+    "held": 4,
+    "phrases": {},
+    "lot_rows_changed": {},
+    "lot_rows_held": {
+     "plain": 2476
+    }
    }
   },
   "gm": {
@@ -65,19 +83,20 @@
   },
   "toyota": {
    "bumper-front": {
-    "changed": 26,
-    "held": 0,
+    "changed": 24,
+    "held": 2,
     "phrases": {
      "bumper cover": 7,
-     "bumper cover only": 17,
-     "bumper guard cover": 2
+     "bumper cover only": 17
     },
     "lot_rows_changed": {
-     "plain": 4349,
+     "plain": 4165,
      "unc": 60,
      "exc": 690
     },
-    "lot_rows_held": {}
+    "lot_rows_held": {
+     "plain": 184
+    }
    },
    "bumper-rear": {
     "changed": 15,
@@ -3272,104 +3291,6 @@
   },
   {
    "ns": "toyota",
-   "cat": "bumper-front",
-   "pn": [
-    "52437-53010"
-   ],
-   "group": "oem:toyota:bumper-front:C:a72426fdc2",
-   "class": [
-    "guard"
-   ],
-   "names": [
-    {
-     "field": "list.main",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, RH",
-     "ref": "www.lexuspartsnow.com:lists:L224"
-    },
-    {
-     "field": "list.main",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, RH",
-     "ref": "www.lexuspartsnow.com:lists:L401"
-    },
-    {
-     "field": "list.main",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, RH",
-     "ref": "www.lexuspartsnow.com:lists:L433"
-    },
-    {
-     "field": "record.description",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, RH",
-     "ref": "www.lexuspartsnow.com:records:L1984"
-    },
-    {
-     "field": "record.name",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, RH",
-     "ref": "www.lexuspartsnow.com:records:L1984"
-    }
-   ],
-   "old_note": "Toyota catalog lists #52437-53010 for both \u2014 fits some configurations; verify the number on the part",
-   "lot_rows": {
-    "plain": 92
-   },
-   "phrase": "bumper guard cover",
-   "new_note": "Toyota catalog lists #52437-53010 for both \u2014 bumper guard cover; fits some configurations; verify the number on the part"
-  },
-  {
-   "ns": "toyota",
-   "cat": "bumper-front",
-   "pn": [
-    "52438-53010"
-   ],
-   "group": "oem:toyota:bumper-front:C:96187e0208",
-   "class": [
-    "guard"
-   ],
-   "names": [
-    {
-     "field": "list.main",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, LH",
-     "ref": "www.lexuspartsnow.com:lists:L224"
-    },
-    {
-     "field": "list.main",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, LH",
-     "ref": "www.lexuspartsnow.com:lists:L401"
-    },
-    {
-     "field": "list.main",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, LH",
-     "ref": "www.lexuspartsnow.com:lists:L433"
-    },
-    {
-     "field": "record.description",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, LH",
-     "ref": "www.lexuspartsnow.com:records:L1985"
-    },
-    {
-     "field": "record.name",
-     "kind": "guard",
-     "name": "Cover, Front Bumper Guard, LH",
-     "ref": "www.lexuspartsnow.com:records:L1985"
-    }
-   ],
-   "old_note": "Toyota catalog lists #52438-53010 for both \u2014 fits some configurations; verify the number on the part",
-   "lot_rows": {
-    "plain": 92
-   },
-   "phrase": "bumper guard cover",
-   "new_note": "Toyota catalog lists #52438-53010 for both \u2014 bumper guard cover; fits some configurations; verify the number on the part"
-  },
-  {
-   "ns": "toyota",
    "cat": "tail-lights",
    "pn": [
     "81551-0E010"
@@ -3954,6 +3875,378 @@
  ],
  "held": [
   {
+   "ns": "ford",
+   "cat": "bumper-front",
+   "pn": [
+    "2L1Z-17757-BA"
+   ],
+   "group": "oem:ford:bumper-front:C:580b60e8f2",
+   "class": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1672"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L773"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L4298"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L4298"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L4298"
+    }
+   ],
+   "old_note": "Ford catalog lists #2L1Z-17757-BA for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 569
+   },
+   "reason": "held_part_other",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)"
+  },
+  {
+   "ns": "ford",
+   "cat": "bumper-rear",
+   "pn": [
+    "6E5Z-17906-AA"
+   ],
+   "group": "oem:ford:bumper-rear:C:ae5b223866",
+   "class": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2322"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L863"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    }
+   ],
+   "old_note": "Ford catalog lists #6E5Z-17906-AA for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 365
+   },
+   "reason": "held_part_other",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)"
+  },
+  {
+   "ns": "ford",
+   "cat": "bumper-front",
+   "pn": [
+    "AE5Z-17757-A"
+   ],
+   "group": "oem:ford:bumper-front:C:f078f08633",
+   "class": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1687"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2279"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2293"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2307"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2498"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L626"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    }
+   ],
+   "old_note": "Ford catalog lists #AE5Z-17757-A for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 975
+   },
+   "reason": "held_part_other",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)"
+  },
+  {
+   "ns": "ford",
+   "cat": "bumper-rear",
+   "pn": [
+    "AE5Z-17906-A"
+   ],
+   "group": "oem:ford:bumper-rear:C:280f9df4b7",
+   "class": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L1688"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2280"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2294"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2308"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2499"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L627"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    }
+   ],
+   "old_note": "Ford catalog lists #AE5Z-17906-A for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 975
+   },
+   "reason": "held_part_other",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)"
+  },
+  {
+   "ns": "ford",
+   "cat": "bumper-rear",
+   "pn": [
+    "BT4Z-17906-A"
+   ],
+   "group": "oem:ford:bumper-rear:C:f557171499",
+   "class": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2797"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L641"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4043"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L4043"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4043"
+    }
+   ],
+   "old_note": "Ford catalog lists #BT4Z-17906-A for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 406
+   },
+   "reason": "held_part_other",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)"
+  },
+  {
+   "ns": "ford",
+   "cat": "bumper-rear",
+   "pn": [
+    "DG9Z-17906-A"
+   ],
+   "group": "oem:ford:bumper-rear:C:dc56b30291",
+   "class": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2099"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2110"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2513"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2527"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2849"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L656"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L4098"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L4098"
+    },
+    {
+     "field": "record.name",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:records:L4098"
+    }
+   ],
+   "old_note": "Ford catalog lists #DG9Z-17906-A for both \u2014 trim-limited; verify the number on the part",
+   "lot_rows": {
+    "plain": 730
+   },
+   "reason": "held_part_other",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)"
+  },
+  {
    "ns": "gm",
    "cat": "window-regulator",
    "pn": [
@@ -4488,6 +4781,104 @@
    },
    "reason": "held_name_disagree",
    "detail": "the names disagree in kind (motor/regulator/regulator+motor)"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52437-53010"
+   ],
+   "group": "oem:toyota:bumper-front:C:a72426fdc2",
+   "class": [
+    "guard cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:records:L1984"
+    },
+    {
+     "field": "record.name",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:records:L1984"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52437-53010 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "reason": "held_part_other",
+   "detail": "a name is a part other than the bumper cover or the bumper (guard cover)"
+  },
+  {
+   "ns": "toyota",
+   "cat": "bumper-front",
+   "pn": [
+    "52438-53010"
+   ],
+   "group": "oem:toyota:bumper-front:C:96187e0208",
+   "class": [
+    "guard cover"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:records:L1985"
+    },
+    {
+     "field": "record.name",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:records:L1985"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52438-53010 for both \u2014 fits some configurations; verify the number on the part",
+   "lot_rows": {
+    "plain": 92
+   },
+   "reason": "held_part_other",
+   "detail": "a name is a part other than the bumper cover or the bumper (guard cover)"
   },
   {
    "ns": "toyota",
@@ -5426,5 +5817,251 @@
     "origin_main_note_says_regulator_with_motor": false
    }
   ]
+ },
+ "bumper_other_part_census": {
+  "note": "every shipped bumper-front / bumper-rear group of every live make (origin/main), every naming value read; groups naming a part other than the bumper cover or the bumper are held. 'Face Bar' (mopar 55077946AB, 55077107AN) is read as the bumper itself, not held.",
+  "by_ns": {
+   "ford": {
+    "bumper_groups": 14,
+    "naming_another_part": [
+     {
+      "cat": "bumper-front",
+      "pn": [
+       "2L1Z-17757-BA"
+      ],
+      "group": "oem:ford:bumper-front:C:580b60e8f2",
+      "kinds": [
+       "bumper",
+       "reinforcement"
+      ],
+      "other": [
+       "reinforcement"
+      ],
+      "names": [
+       "Impact Bar"
+      ],
+      "refs": [
+       "www.fordpartsgiant.com:records:L4298"
+      ],
+      "lot_rows": {
+       "plain": 569
+      },
+      "held": true
+     },
+     {
+      "cat": "bumper-rear",
+      "pn": [
+       "6E5Z-17906-AA"
+      ],
+      "group": "oem:ford:bumper-rear:C:ae5b223866",
+      "kinds": [
+       "bumper",
+       "reinforcement"
+      ],
+      "other": [
+       "reinforcement"
+      ],
+      "names": [
+       "Impact Bar"
+      ],
+      "refs": [
+       "www.fordpartsgiant.com:records:L4590"
+      ],
+      "lot_rows": {
+       "plain": 365
+      },
+      "held": true
+     },
+     {
+      "cat": "bumper-front",
+      "pn": [
+       "AE5Z-17757-A"
+      ],
+      "group": "oem:ford:bumper-front:C:f078f08633",
+      "kinds": [
+       "bumper",
+       "reinforcement"
+      ],
+      "other": [
+       "reinforcement"
+      ],
+      "names": [
+       "Impact Bar"
+      ],
+      "refs": [
+       "www.fordpartsgiant.com:records:L3955"
+      ],
+      "lot_rows": {
+       "plain": 975
+      },
+      "held": true
+     },
+     {
+      "cat": "bumper-rear",
+      "pn": [
+       "AE5Z-17906-A"
+      ],
+      "group": "oem:ford:bumper-rear:C:280f9df4b7",
+      "kinds": [
+       "bumper",
+       "reinforcement"
+      ],
+      "other": [
+       "reinforcement"
+      ],
+      "names": [
+       "Impact Bar"
+      ],
+      "refs": [
+       "www.fordpartsgiant.com:records:L3957"
+      ],
+      "lot_rows": {
+       "plain": 975
+      },
+      "held": true
+     },
+     {
+      "cat": "bumper-rear",
+      "pn": [
+       "BT4Z-17906-A"
+      ],
+      "group": "oem:ford:bumper-rear:C:f557171499",
+      "kinds": [
+       "bumper",
+       "reinforcement"
+      ],
+      "other": [
+       "reinforcement"
+      ],
+      "names": [
+       "Impact Bar"
+      ],
+      "refs": [
+       "www.fordpartsgiant.com:records:L4043"
+      ],
+      "lot_rows": {
+       "plain": 406
+      },
+      "held": true
+     },
+     {
+      "cat": "bumper-rear",
+      "pn": [
+       "DG9Z-17906-A"
+      ],
+      "group": "oem:ford:bumper-rear:C:dc56b30291",
+      "kinds": [
+       "bumper",
+       "reinforcement"
+      ],
+      "other": [
+       "reinforcement"
+      ],
+      "names": [
+       "Beam Asy",
+       "Impact Bar"
+      ],
+      "refs": [
+       "www.fordpartsgiant.com:lists:L2099",
+       "www.fordpartsgiant.com:lists:L2110",
+       "www.fordpartsgiant.com:lists:L2513",
+       "www.fordpartsgiant.com:lists:L2527",
+       "www.fordpartsgiant.com:lists:L2849",
+       "www.fordpartsgiant.com:lists:L656",
+       "www.fordpartsgiant.com:records:L4098"
+      ],
+      "lot_rows": {
+       "plain": 730
+      },
+      "held": true
+     }
+    ]
+   },
+   "gm": {
+    "bumper_groups": 0,
+    "naming_another_part": []
+   },
+   "hmg": {
+    "bumper_groups": 0,
+    "naming_another_part": []
+   },
+   "mb": {
+    "bumper_groups": 0,
+    "naming_another_part": []
+   },
+   "mopar": {
+    "bumper_groups": 3,
+    "naming_another_part": []
+   },
+   "nissan": {
+    "bumper_groups": 0,
+    "naming_another_part": []
+   },
+   "subaru": {
+    "bumper_groups": 0,
+    "naming_another_part": []
+   },
+   "toyota": {
+    "bumper_groups": 41,
+    "naming_another_part": [
+     {
+      "cat": "bumper-front",
+      "pn": [
+       "52437-53010"
+      ],
+      "group": "oem:toyota:bumper-front:C:a72426fdc2",
+      "kinds": [
+       "guard cover"
+      ],
+      "other": [
+       "guard cover"
+      ],
+      "names": [
+       "Cover, Front Bumper Guard, RH"
+      ],
+      "refs": [
+       "www.lexuspartsnow.com:lists:L224",
+       "www.lexuspartsnow.com:lists:L401",
+       "www.lexuspartsnow.com:lists:L433",
+       "www.lexuspartsnow.com:records:L1984"
+      ],
+      "lot_rows": {
+       "plain": 92
+      },
+      "held": true
+     },
+     {
+      "cat": "bumper-front",
+      "pn": [
+       "52438-53010"
+      ],
+      "group": "oem:toyota:bumper-front:C:96187e0208",
+      "kinds": [
+       "guard cover"
+      ],
+      "other": [
+       "guard cover"
+      ],
+      "names": [
+       "Cover, Front Bumper Guard, LH"
+      ],
+      "refs": [
+       "www.lexuspartsnow.com:lists:L224",
+       "www.lexuspartsnow.com:lists:L401",
+       "www.lexuspartsnow.com:lists:L433",
+       "www.lexuspartsnow.com:records:L1985"
+      ],
+      "lot_rows": {
+       "plain": 92
+      },
+      "held": true
+     }
+    ]
+   },
+   "vag": {
+    "bumper_groups": 1,
+    "naming_another_part": []
+   }
+  }
  }
 }

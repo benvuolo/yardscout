@@ -63575,34 +63575,6 @@
    ],
    "reman": false
   },
-  "toyota:5243753010": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.lexuspartsnow.com:records:L1984"
-   ],
-   "names": [
-    "Cover, Front Bumper Guard, RH"
-   ],
-   "pns": [
-    "52437-53010"
-   ],
-   "reman": false
-  },
-  "toyota:5243853010": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.lexuspartsnow.com:records:L1985"
-   ],
-   "names": [
-    "Cover, Front Bumper Guard, LH"
-   ],
-   "pns": [
-    "52438-53010"
-   ],
-   "reman": false
-  },
   "toyota:5310106350": {
    "cat": "grille",
    "comp": null,
@@ -83389,60 +83361,6 @@
    "oldest_retrieved": "2026-11-05T22:21:49Z",
    "pn": [
     "52159-53906"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lexus",
-     "IS 250",
-     2007,
-     2007
-    ],
-    [
-     "Lexus",
-     "IS 350",
-     2006,
-     2007
-    ]
-   ],
-   "cars": 95,
-   "cat": "bumper-front",
-   "id": "oem:toyota:bumper-front:C:a72426fdc2",
-   "kind": "body",
-   "note": "Toyota catalog lists #52437-53010 for both — bumper guard cover; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T22:21:17Z",
-   "pn": [
-    "52437-53010"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lexus",
-     "IS 250",
-     2007,
-     2007
-    ],
-    [
-     "Lexus",
-     "IS 350",
-     2006,
-     2007
-    ]
-   ],
-   "cars": 95,
-   "cat": "bumper-front",
-   "id": "oem:toyota:bumper-front:C:96187e0208",
-   "kind": "body",
-   "note": "Toyota catalog lists #52438-53010 for both — bumper guard cover; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T22:21:25Z",
-   "pn": [
-    "52438-53010"
    ],
    "reason": "conditional",
    "tier": "likely"

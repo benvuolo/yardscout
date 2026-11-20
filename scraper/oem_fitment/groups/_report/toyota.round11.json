@@ -1,6 +1,6 @@
 {
- "changed": 55,
- "held": 2,
+ "changed": 53,
+ "held": 4,
  "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, lens and body unit, regulator with motor) on the finished note (change 'phrase'); names that disagree in kind, a note past the cap, or other words already on the note hold the group (change 'held'). Names with field, kind and site:file:line.",
  "ns": "toyota",
  "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
@@ -1989,95 +1989,93 @@
   },
   {
    "cat": "bumper-front",
-   "change": "phrase",
+   "change": "held",
+   "detail": "a name is a part other than the bumper cover or the bumper (guard cover)",
    "kinds": [
-    "guard"
+    "guard cover"
    ],
    "names": [
     {
      "field": "list.main",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, RH",
      "ref": "www.lexuspartsnow.com:lists:L224"
     },
     {
      "field": "list.main",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, RH",
      "ref": "www.lexuspartsnow.com:lists:L401"
     },
     {
      "field": "list.main",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, RH",
      "ref": "www.lexuspartsnow.com:lists:L433"
     },
     {
      "field": "record.description",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, RH",
      "ref": "www.lexuspartsnow.com:records:L1984"
     },
     {
      "field": "record.name",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, RH",
      "ref": "www.lexuspartsnow.com:records:L1984"
     }
    ],
-   "new_note": "Toyota catalog lists #52437-53010 for both — bumper guard cover; fits some configurations; verify the number on the part",
    "old_note": "Toyota catalog lists #52437-53010 for both — fits some configurations; verify the number on the part",
-   "pages_reinforcement": null,
-   "phrase": "bumper guard cover",
    "pn": [
     "52437-53010"
-   ]
+   ],
+   "reason": "held_part_other"
   },
   {
    "cat": "bumper-front",
-   "change": "phrase",
+   "change": "held",
+   "detail": "a name is a part other than the bumper cover or the bumper (guard cover)",
    "kinds": [
-    "guard"
+    "guard cover"
    ],
    "names": [
     {
      "field": "list.main",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, LH",
      "ref": "www.lexuspartsnow.com:lists:L224"
     },
     {
      "field": "list.main",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, LH",
      "ref": "www.lexuspartsnow.com:lists:L401"
     },
     {
      "field": "list.main",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, LH",
      "ref": "www.lexuspartsnow.com:lists:L433"
     },
     {
      "field": "record.description",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, LH",
      "ref": "www.lexuspartsnow.com:records:L1985"
     },
     {
      "field": "record.name",
-     "kind": "guard",
+     "kind": "guard cover",
      "name": "Cover, Front Bumper Guard, LH",
      "ref": "www.lexuspartsnow.com:records:L1985"
     }
    ],
-   "new_note": "Toyota catalog lists #52438-53010 for both — bumper guard cover; fits some configurations; verify the number on the part",
    "old_note": "Toyota catalog lists #52438-53010 for both — fits some configurations; verify the number on the part",
-   "pages_reinforcement": null,
-   "phrase": "bumper guard cover",
    "pn": [
     "52438-53010"
-   ]
+   ],
+   "reason": "held_part_other"
   },
   {
    "cat": "tail-lights",

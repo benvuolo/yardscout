@@ -108,12 +108,8 @@ toyota CHANGED LIVE ('bumper-front', ('52119-53919',)) [['Lexus', 'IS 250', 2007
 toyota CHANGED LIVE ('bumper-front', ('52119-53925',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
     old: Toyota catalog lists #52119-53925 for both — option: fits some option packages; verify the number on the part
     new: Toyota catalog lists #52119-53925 for both — bumper cover only; option: fits some option packages; verify the number on the part
-toyota CHANGED LIVE ('bumper-front', ('52437-53010',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
-    old: Toyota catalog lists #52437-53010 for both — fits some configurations; verify the number on the part
-    new: Toyota catalog lists #52437-53010 for both — bumper guard cover; fits some configurations; verify the number on the part
-toyota CHANGED LIVE ('bumper-front', ('52438-53010',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]] lost [] gained []
-    old: Toyota catalog lists #52438-53010 for both — fits some configurations; verify the number on the part
-    new: Toyota catalog lists #52438-53010 for both — bumper guard cover; fits some configurations; verify the number on the part
+toyota REMOVED LIVE ('bumper-front', ('52437-53010',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]]
+toyota REMOVED LIVE ('bumper-front', ('52438-53010',)) [['Lexus', 'IS 250', 2007, 2007], ['Lexus', 'IS 350', 2006, 2007]]
 toyota CHANGED LIVE ('bumper-rear', ('52159-06952',)) [['Toyota', 'Camry', 2007, 2007], ['Toyota', 'Camry Hybrid', 2007, 2007]] lost [] gained []
     old: Toyota catalog lists #52159-06952 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
     new: Toyota catalog lists #52159-06952 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part
@@ -203,6 +199,12 @@ toyota CHANGED LIVE ('tail-lights', ('81561-53230',)) [['Lexus', 'IS 250', 2013,
 toyota CHANGED LIVE ('tail-lights', ('81561-53260',)) [['Lexus', 'IS 250', 2013, 2013], ['Lexus', 'IS 350', 2012, 2012]] lost [] gained []
     old: Toyota catalog lists #81561-53260 for both — fits some configurations; verify the number on the part
     new: Toyota catalog lists #81561-53260 for both — lens and body unit; fits some configurations; verify the number on the part
+ford REMOVED LIVE ('bumper-front', ('2L1Z-17757-BA',)) [['Ford', 'Expedition', 2003, 2003], ['Lincoln', 'Navigator', 2004, 2004]]
+ford REMOVED LIVE ('bumper-front', ('AE5Z-17757-A',)) [['Ford', 'Fusion', 2012, 2012], ['Lincoln', 'MKZ', 2010, 2012], ['Mercury', 'Milan', 2010, 2010]]
+ford REMOVED LIVE ('bumper-rear', ('6E5Z-17906-AA',)) [['Ford', 'Fusion', 2008, 2008], ['Lincoln', 'MKZ', 2008, 2008]]
+ford REMOVED LIVE ('bumper-rear', ('AE5Z-17906-A',)) [['Ford', 'Fusion', 2012, 2012], ['Lincoln', 'MKZ', 2010, 2012], ['Mercury', 'Milan', 2010, 2010]]
+ford REMOVED LIVE ('bumper-rear', ('BT4Z-17906-A',)) [['Ford', 'Edge', 2013, 2013], ['Lincoln', 'MKX', 2011, 2011]]
+ford REMOVED LIVE ('bumper-rear', ('DG9Z-17906-A',)) [['Ford', 'Fusion', 2014, 2014], ['Ford', 'Fusion', 2017, 2017], ['Lincoln', 'MKZ', 2014, 2014]]
 ford CHANGED LIVE ('window-regulator', ('5G1Z-5423208-AA',)) [['Ford', 'Five Hundred', 2005, 2005], ['Mercury', 'Montego', 2005, 2005]] lost [] gained []
     old: Ford catalog lists #5G1Z-5423208-AA for both — fits some configurations; verify the number on the part
     new: Ford catalog lists #5G1Z-5423208-AA for both — regulator with motor; fits some configurations; verify the number on the part
@@ -229,8 +231,8 @@ vag CHANGED LIVE ('bumper-front', ('1HM-807-217-D-GRU',)) [['Volkswagen', 'Golf'
     new: VW/Audi catalog lists #1HM-807-217-D-GRU for both — bumper cover; trim-limited; verify the number on the part
 # gm LIVE: removed 5 groups, added 0 groups, changed 10; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # mopar LIVE: removed 0 groups, added 0 groups, changed 1; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
-# toyota LIVE: removed 2 groups, added 0 groups, changed 55; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
-# ford LIVE: removed 0 groups, added 0 groups, changed 2; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# toyota LIVE: removed 4 groups, added 0 groups, changed 53; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
+# ford LIVE: removed 6 groups, added 0 groups, changed 2; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # nissan LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # hmg LIVE: removed 0 groups, added 0 groups, changed 0; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0
 # subaru LIVE: removed 0 groups, added 0 groups, changed 5; app-years lost 0, gained 0; gates narrowed 0, widened 0; added claims 0

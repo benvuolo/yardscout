@@ -1,10 +1,56 @@
 {
  "changed": 2,
- "held": 0,
+ "held": 6,
  "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, lens and body unit, regulator with motor) on the finished note (change 'phrase'); names that disagree in kind, a note past the cap, or other words already on the note hold the group (change 'held'). Names with field, kind and site:file:line.",
  "ns": "ford",
  "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
  "rows": [
+  {
+   "cat": "bumper-front",
+   "change": "held",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "kinds": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1672"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L773"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L4298"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L4298"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L4298"
+    }
+   ],
+   "old_note": "Ford catalog lists #2L1Z-17757-BA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "2L1Z-17757-BA"
+   ],
+   "reason": "held_part_other"
+  },
   {
    "cat": "window-regulator",
    "change": "phrase",
@@ -72,6 +118,308 @@
    "pn": [
     "5G1Z-5423209-AA"
    ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "held",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "kinds": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2322"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L863"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Asy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4590"
+    }
+   ],
+   "old_note": "Ford catalog lists #6E5Z-17906-AA for both — trim-limited; verify the number on the part",
+   "pn": [
+    "6E5Z-17906-AA"
+   ],
+   "reason": "held_part_other"
+  },
+  {
+   "cat": "bumper-front",
+   "change": "held",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "kinds": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L1687"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2279"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2293"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2307"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L2498"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:lists:L626"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Front",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Front",
+     "ref": "www.fordpartsgiant.com:records:L3955"
+    }
+   ],
+   "old_note": "Ford catalog lists #AE5Z-17757-A for both — trim-limited; verify the number on the part",
+   "pn": [
+    "AE5Z-17757-A"
+   ],
+   "reason": "held_part_other"
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "held",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "kinds": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L1688"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2280"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2294"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2308"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2499"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L627"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L3957"
+    }
+   ],
+   "old_note": "Ford catalog lists #AE5Z-17906-A for both — trim-limited; verify the number on the part",
+   "pn": [
+    "AE5Z-17906-A"
+   ],
+   "reason": "held_part_other"
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "held",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "kinds": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L2797"
+    },
+    {
+     "field": "list.main",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:lists:L641"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper Assembly - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4043"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L4043"
+    },
+    {
+     "field": "record.name",
+     "kind": "bumper",
+     "name": "Bumper Assy - Rear",
+     "ref": "www.fordpartsgiant.com:records:L4043"
+    }
+   ],
+   "old_note": "Ford catalog lists #BT4Z-17906-A for both — trim-limited; verify the number on the part",
+   "pn": [
+    "BT4Z-17906-A"
+   ],
+   "reason": "held_part_other"
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "held",
+   "detail": "a name is a part other than the bumper cover or the bumper (reinforcement)",
+   "kinds": [
+    "bumper",
+    "reinforcement"
+   ],
+   "names": [
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2099"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2110"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2513"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2527"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L2849"
+    },
+    {
+     "field": "list.main",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:lists:L656"
+    },
+    {
+     "field": "record.description",
+     "kind": "bumper",
+     "name": "Bumper",
+     "ref": "www.fordpartsgiant.com:records:L4098"
+    },
+    {
+     "field": "record.description",
+     "kind": "reinforcement",
+     "name": "Impact Bar",
+     "ref": "www.fordpartsgiant.com:records:L4098"
+    },
+    {
+     "field": "record.name",
+     "kind": "reinforcement",
+     "name": "Beam Asy",
+     "ref": "www.fordpartsgiant.com:records:L4098"
+    }
+   ],
+   "old_note": "Ford catalog lists #DG9Z-17906-A for both — trim-limited; verify the number on the part",
+   "pn": [
+    "DG9Z-17906-A"
+   ],
+   "reason": "held_part_other"
   }
  ]
 }

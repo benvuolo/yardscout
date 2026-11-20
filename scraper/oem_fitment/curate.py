@@ -3464,12 +3464,15 @@ class Curation:
         out = {"kinds": kinds, "names": vals}
         has_now = [w for w in PACK_TEXT.values() if f"— {w}; " in note]
         if cat in ("bumper-front", "bumper-rear"):
-            if not set(kinds) & {"cover", "guard"}:
+            other = [k for k in kinds if k in _R11_BUMPER_OTHER]
+            if other:
+                out["hold"] = ("held_part_other", "a name is a part other than the bumper cover or the bumper ("
+                               + "/".join(other) + ")")
+                return out
+            if "cover" not in kinds:
                 return None
             if len(kinds) > 1:
                 out["hold"] = ("held_name_disagree", "the names disagree in kind (" + "/".join(kinds) + ")")
-            elif kinds == ["guard"]:
-                out["phrase"] = _R11_PHRASE["guard"]
             else:
                 urls = sorted({lr.list_url for lr in self._pn_list_rows(c.key, cat) if lr.list_url})
                 idx = self.__dict__.get("_rows_by_url")
@@ -5892,19 +5895,34 @@ def _kind10b(name: str) -> str:
 # words would take past the cap or a group whose note already carries other
 # packaging words. Nothing else in a group changes.
 ROUND11_NS = frozenset({"gm", "mopar", "toyota", "ford", "hmg", "subaru", "vag", "mb", "nissan"})
-_R11_PHRASE = {"cover": "bumper cover", "cover_only": "bumper cover only", "guard": "bumper guard cover",
+# round11b (hub review 2026-11-20): a person looking for a bumper is never sent
+# to a donor for another part, whatever the note says. Under bumper-front /
+# bumper-rear a number whose naming values name a part other than the bumper
+# cover or the bumper itself is held: these kinds.
+_R11_BUMPER_OTHER = ("guard cover", "tow-hook cover", "grille", "moulding", "reinforcement", "bracket", "absorber")
+_R11_PHRASE = {"cover": "bumper cover", "cover_only": "bumper cover only",
                "lens-body": "lens and body unit", "regulator+motor": "regulator with motor"}
 
 
 def _kind11(cat: str, name: str) -> str:
     """The kind one naming value carries in cat ('' says nothing)."""
     if cat in ("bumper-front", "bumper-rear"):
-        if re.search(r"bumper\s+guard", name, re.I):
-            return "guard"
-        if re.search(r"\bcover\b|\bfascia\b", name, re.I):
-            return "cover"
+        if re.search(r"bumper\s+guard|\bguard\b", name, re.I):
+            return "guard cover"
+        if re.search(r"tow(?:ing)?[\s-]*(?:hook|eye)", name, re.I):
+            return "tow-hook cover"
+        if re.search(r"\bgrille\b", name, re.I):
+            return "grille"
+        if re.search(r"\bmou?ld(?:ing)?s?\b", name, re.I):
+            return "moulding"
         if re.search(r"reinf|impact\s+bar|\bbeam\b", name, re.I):
             return "reinforcement"
+        if re.search(r"bracket|\bbrkt\b|\bstay\b|\bretainer\b|\bsupport\b", name, re.I):
+            return "bracket"
+        if re.search(r"absorber|\bfoam\b|isolator", name, re.I):
+            return "absorber"
+        if re.search(r"\bcover\b|\bfascia\b", name, re.I):
+            return "cover"
         return "bumper" if re.search(r"\bbumper\b|face\s*bar", name, re.I) else ""
     if cat == "tail-lights":
         if re.search(r"lens\s*(?:&|and)\s*(?:body|housing)", name, re.I):
