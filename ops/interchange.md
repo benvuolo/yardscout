@@ -6558,3 +6558,88 @@ Comparison with `_report/round11_names_2026-11-20.json` (read only after the ver
   ford AE5Z-17757-ACP and AE5Z-17906-ACP (list_info "Impact Bar - Steel": WRONG above), and 2L1Z-17757-BACP,
   BT4Z-17906-ACP (RISK above), whose non-CP siblings 2L1Z-17757-BA / BT4Z-17906-A were held because their records
   print "Impact Bar". Recommend the same hold for the -CP numbers, and reading list_info / list group in the naming rule.
+
+## 2026-11-20 Round 11c: every naming or describing field, the "without motor" basis, bare bumpers, the tail-lamp ruling (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round11-1120`, the check's branch 4f04e93a merged in)
+
+**Fields read** (`Curation._wide_names11`).
+- Records: name, aux, description, other_names, list_group, list_remark (read with the name),
+  list_info, and the "Part Description:" lines.
+- List rows: the number's rows on every page of every raw part, whatever category the page was read
+  for: main, aux, group, remark (read with main), notes. Ford prints "ELECTRIC - LESS MOTOR AND
+  DRIVE" for F67Z-7823208-AA on its door pages.
+- The remark must be read with its name. GM prints main "MOTOR" with remark "REAR SIDE DOOR WINDOW
+  REGULATOR"; read alone, that held 23 real motors by mistake on the first pass.
+- Keyed location, callout, replaced-by, production-date and base-number lines are skipped.
+- Fit notes and option columns state the vehicle's equipment ("Less Rear Towing Hooks", "Single
+  Chrome" exhaust), so they are not read for bumpers or lamps; they are read for regulators.
+- The continuation parts (gm lists.2-5, ford lists.2 at dca9cd84) are read for this naming reading
+  and the page tests. **Curation's claims still read part 1 only**: that is unchanged here and is a
+  gap for the hub.
+
+**Rules.**
+- Window regulators:
+  - a motor value beside any regulator kind holds the group, and so does "with motor" beside "less
+    motor";
+  - "regulator with motor" applies as in round 11;
+  - a value saying without or less motor gives "regulator without motor";
+  - that phrase stays on a note only with such a value, or where every own page lists the motor as
+    a separate number; otherwise it is removed.
+- Bumpers:
+  - a value naming another part holds, now in every field (impact bar, reinforcement, beam
+    included);
+  - a number named only "Bumper" whose own page lists a separate bumper cover holds (`held_bumper_bar`),
+    unless a value says chrome, face bar or "bar only".
+- Tail lamps (hub ruling): lamp assembly and lens and body are one unit. "lens and body unit" is
+  used only where no value says lamp assembly. Where the values mix, the note has no words and the
+  group is not held. A lens alone, or another part, still holds.
+
+**Changes against origin/main.** Lot rows are on the lot main ships today.
+
+| Make | Category | Notes changed (phrase) | Phrases removed | Held |
+|---|---|---|---|---|
+| toyota | bumper-front | 24 ("bumper cover only" 17, "bumper cover" 7) | — | 2 guard covers (184 plain) |
+| toyota | bumper-rear | 15 ("bumper cover only" 8, "bumper cover" 7) | — | 0 |
+| toyota | tail-lights | 14 ("lens and body unit") | — | 0 |
+| toyota | window-regulator | 0 | 12 "regulator without motor" (8,420 plain rows) | 0 |
+| mopar | bumper-front | 1 ("bumper cover only") | — | 0 |
+| vag | bumper-front | 1 ("bumper cover") | — | 0 |
+| subaru | window-regulator | 5 ("regulator with motor") | — | 0 |
+| gm | window-regulator | 10 ("regulator with motor") | — | 5 (1,659 plain) |
+| ford | window-regulator | 1 ("regulator without motor", F67Z-7823208-AA) | — | 2 |
+| ford | bumper-front | 0 | — | 6 |
+| ford | bumper-rear | 0 | — | 6 |
+| **Total** | | **71** | **12** | **21** |
+
+- **Toyota "regulator without motor":** none of its values says so. 10 notes keep the phrase, where
+  every own page lists the motor as a separate number. 12 lose it: 69801/69802-06070, -06080,
+  -33060/-33050 and 69803/69804-06110, -06140, -33050 have no own list page in the raw.
+- **gm "regulator without motor":** 12 notes keep it, because a value says "(W/O MOTOR)";
+  20914715 is held.
+- **mopar 5073002AC** changes from "bumper cover" (round 11) to "bumper cover only". Its own pages
+  (Ram 1500 2002, Ram 2500 2003) list "Beam - Front Bumper" as a separate number.
+- **New holds in 11c (8, all ford):**
+  - Montego pair 5G1Z-5423208-AA / -209-AA (196 plain each): named "Regulator And Motor Assy",
+    while the group and list_info say "Regulator - Window - Less Motor".
+  - AE5Z-17757-ACP and AE5Z-17906-ACP (975 plain each): list note "Impact Bar - Steel".
+  - Bare "Bumper" numbers whose page lists a separate cover: 2L1Z-17757-BACP (569),
+    7L1Z-17757-A (253 plain, 1 if equipped), 8A8Z-17757-A (229), BT4Z-17906-ACP (406).
+- **Kept holds from 11/11b:**
+  - gm 20914715, 20945138/39, 25719488/89;
+  - toyota 52437/52438-53010;
+  - ford 2L1Z-17757-BA, AE5Z-17757-A, 6E5Z-17906-AA, AE5Z-17906-A, BT4Z-17906-A, DG9Z-17906-A.
+- **Restored:** toyota 81551-33530 / 81561-33530 are back with origin/main's notes (no words).
+- **What is left under ford bumpers:** XL3Z-17757-AA and XL3Z-17757-AACP. Both are named "Bumper",
+  and no page of theirs lists a cover.
+- Rule (b) applied to mopar and vag finds nothing: mopar's two bumpers carry "Face Bar", and vag's
+  number is a cover.
+- **nissan, hmg, mb** are unchanged. **subaru and vag** are unchanged against e9024bd6.
+
+**Payload against e9024bd6.**
+- `window-regulator.json`: 13 notes change (the 12 removals and F67Z) and 2 groups leave.
+- `bumper-front.json`: mopar's note changes and 4 groups leave.
+- `bumper-rear.json`: 2 groups leave.
+- `tail-lights.json`: the 2 lamps come back.
+- `interchange.json`: the status and lazy-index counts follow.
+- The other 25 files differ only in `builtAt`.
+
+**Tests.** test_round11_1120: 60 checks, 0 failures.
