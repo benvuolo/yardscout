@@ -3525,3 +3525,9 @@ asc-status 44710298932 at 09:23 UTC: version 1.13.3, IN_REVIEW, build 44
 (13 h 28 min after submission). Live iPhone app still 1.13.0. Scans: 01:33
 UTC (GitHub's schedule) and 07:23 UTC (watchdog), both successful. Next
 Apple check 12:25 UTC. Nothing submitted.
+
+## 2026-11-20 12:27 UTC Apple check: 1.13.3 still in review
+
+asc-status 44735751756 at 12:26 UTC: version 1.13.3, IN_REVIEW, build 44
+(in review since before 09:23). Live iPhone app still 1.13.0. A scheduled
+scan started 12:21 UTC. Next Apple check 15:27 UTC. Nothing submitted.
