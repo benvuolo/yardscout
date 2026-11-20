@@ -6384,3 +6384,76 @@ Checker session, branch `interchange/verify-round10b-names-1119` (from 6449ee7e)
   regulators and its report does not mention their other_names value "Power Window Motor and Regulator
   Assembly"; I read RISK (regulator vs regulator-with-motor). Neither note says "window motor only", so
   this does not block the wording change.
+
+## 2026-11-20 Round 11: bumper covers, lens-and-body tail lamps, regulators with motor (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/round11-1120` from origin/main a1a0d50c)
+
+Packaging words only, no claim change. The rules are in curate.py (`ROUND11_NS` = every live
+namespace, `_kind11`, `Curation._r11_words`), read from every naming field as in round 10b. Pins
+are as shipped (no re-pin).
+
+Reports: `groups/_report/round11_names_2026-11-20.json`, `<ns>.round11.json` and
+`live_diff_2026-11-20_round11.txt`; test `test_round11_1120` (40). Lot rows are on the lot main
+ships today.
+
+- **Rule.**
+  - bumper-front / bumper-rear: a number named as the cover ("Cover, Front Bumper", "Bumper
+    Cover", "Fascia") says "bumper cover". It says "bumper cover only" when each of its own pages
+    lists a reinforcement as a separate number. "Cover, Front Bumper Guard" says "bumper guard
+    cover".
+  - tail-lights: "Lens & Body" or "Lens & Housing" says "lens and body unit".
+  - window-regulator: it says "regulator with motor" when the product record's part name carries
+    the motor ("Regulator & Motor Assembly", "(INCLUDES MOTOR)"). The list rows must say the same
+    or the bare "REGULATOR"; with no record, every list row must say it.
+  - Holds:
+    - values of another kind (a cover beside a bumper or reinforcement, lens-and-body beside a lamp
+      assembly, a motor beside a regulator, "includes motor" beside "w/o motor");
+    - a note past 160;
+    - other packaging words already on the note.
+  - The phrase goes after the dash of the finished note. Nothing else changes.
+- **Changed (74 groups):**
+
+  | Make | Category | Groups | Phrases | Lot rows |
+  |---|---|---|---|---|
+  | toyota | bumper-front | 26 | "bumper cover only" 17, "bumper cover" 7, "bumper guard cover" 2 (Lexus IS 52437/52438-53010, "Cover, Front Bumper Guard") | 4,349 plain / 60 if equipped / 690 hidden |
+  | toyota | bumper-rear | 15 | "bumper cover only" 8, "bumper cover" 7 | 3,488 / 1,386 / 256 |
+  | toyota | tail-lights | 14 | "lens and body unit" | 986 plain |
+  | mopar | bumper-front | 1 | "bumper cover" (5073002AC) | 430 plain |
+  | vag | bumper-front | 1 | "bumper cover" (1HM-807-217-D-GRU) | 7 plain |
+  | subaru | window-regulator | 5 | "regulator with motor" (61041AL00A, 61041AL01A, 61041AL02A, 61042AL00A, 61042AL01A) | 395 plain |
+  | ford | window-regulator | 2 | "regulator with motor" (5G1Z-5423208-AA, 5G1Z-5423209-AA, "Regulator And Motor Assy - Window") | 392 plain |
+  | gm | window-regulator | 10 | "regulator with motor" (10334396/98/99, 15091383/84, 15922914/15, 20783372, 5483148/49: record name "... (INCLUDES MOTOR)", list rows "REGULATOR") | 2,022 / 52 / 78 |
+
+- **Held (7 groups, live removals):**
+  - gm window-regulator, 1,659 plain rows in all:
+    - 20914715 (411 plain): name "(W/O MOTOR)", note said "regulator without motor", but the
+      description also lists "Window Motor".
+    - 20945138 and 20945139 (475 each): "(W/MOTOR)" beside "Window Motor".
+    - 25719488 and 25719489 (149 each): "(INCLUDES MOTOR)" beside "Window Motor".
+  - toyota tail-lights: 81551-33530 and 81561-33530 (13 plain / 30 if equipped / 345 hidden each).
+    The "Lens&Body" and "Lens & Housing" names sit beside the alias "Tail Light Assembly, Rear
+    Right/Left".
+- **The mopar pair is left as it is.** 68079286AA / 68079287AA have 291 plain and 1 if-equipped
+  row each. Their values are regulators: name, list rows and description, plus one alias "Power
+  Window Motor and Regulator Assembly". No value says motor alone, so the kinds do not disagree,
+  and the name fields do not carry the motor, so they get no phrase.
+- **The other 8 Toyota tail-light numbers are lamp assemblies**, unchanged: 81550/81560-06350,
+  -06470, -06640 ("Lamp Assembly, Rear Combination", "Tail Lamp Assembly", "Combination Lamp
+  Assembly") and 81550/81560-0E010 ("Lamp Assy, Rear Combination"). The lens-and-body numbers'
+  own pages list bulbs and "Socket & Wire Sub-Assy, Rear Combination Lamp" as separate numbers;
+  this is reported only, and nothing was added for it.
+- **Unchanged:** nissan, hmg and mb are byte-identical (nissan has no regulator-with-motor name).
+  The 13 gm groups that already say "regulator with motor" are unchanged. toyota window-regulator
+  has no regulator-with-motor names.
+- **Payload** (documented command). Five of the 30 files change content:
+  - `bumper-front.json`: 28 notes;
+  - `bumper-rear.json`: 15 notes;
+  - `tail-lights.json`: 14 notes, 2 groups out;
+  - `window-regulator.json`: 17 notes, 5 groups out;
+  - `interchange.json`: the gm and toyota `oemStatus` counts, and the tail-lights and
+    window-regulator `oemLazy` counts.
+  - The other 25 files differ only in `builtAt`.
+- **Suggestions.**
+  - The two held Toyota Camry tail lamps could come back if the hub reads "Tail Light Assembly" as
+    a retailer alias rather than the catalog's name.
+  - gm's description field often lists "Window Motor" for regulators. A per-site rule on which
+    fields carry the catalog's own name would avoid holding real regulators-with-motor.
