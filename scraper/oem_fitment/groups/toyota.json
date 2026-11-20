@@ -63575,34 +63575,6 @@
    ],
    "reman": false
   },
-  "toyota:5243753010": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.lexuspartsnow.com:records:L1984"
-   ],
-   "names": [
-    "Cover, Front Bumper Guard, RH"
-   ],
-   "pns": [
-    "52437-53010"
-   ],
-   "reman": false
-  },
-  "toyota:5243853010": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.lexuspartsnow.com:records:L1985"
-   ],
-   "names": [
-    "Cover, Front Bumper Guard, LH"
-   ],
-   "pns": [
-    "52438-53010"
-   ],
-   "reman": false
-  },
   "toyota:5310106350": {
    "cat": "grille",
    "comp": null,
@@ -82279,7 +82251,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:7543adbbd6",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-06919 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #52119-06919 for both — bumper cover; plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:38:04Z",
    "pn": [
     "52119-06919"
@@ -82320,7 +82292,7 @@
    ],
    "id": "oem:toyota:bumper-front:C:d309d52408",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-06957 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "note": "Toyota catalog lists #52119-06957 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T14:34:44Z",
    "pn": [
     "52119-06957"
@@ -82347,7 +82319,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:30b6f38749",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-06974 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #52119-06974 for both — bumper cover; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T15:55:50Z",
    "pn": [
     "52119-06974"
@@ -82374,7 +82346,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:81d7ccfeaf",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-06975 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #52119-06975 for both — bumper cover; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T15:55:58Z",
    "pn": [
     "52119-06975"
@@ -82401,7 +82373,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:b5a5bbb832",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-07912 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #52119-07912 for both — bumper cover; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T17:31:07Z",
    "pn": [
     "52119-07912"
@@ -82428,7 +82400,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:528d1e6d62",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-0E900 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-0E900 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:00:56Z",
    "pn": [
     "52119-0E900"
@@ -82455,7 +82427,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:aeab92835c",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-0E901 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-0E901 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:01:04Z",
    "pn": [
     "52119-0E901"
@@ -82482,7 +82454,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:92188bffa2",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-0E902 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-0E902 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:01:12Z",
    "pn": [
     "52119-0E902"
@@ -82509,7 +82481,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:20cc8fcdbd",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-0E903 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-0E903 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:01:36Z",
    "pn": [
     "52119-0E903"
@@ -82542,7 +82514,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:468a55df0a",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-30934 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #52119-30934 for both — bumper cover only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:41:37Z",
    "pn": [
     "52119-30934"
@@ -82575,7 +82547,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:ae962fd69e",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-30961 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-30961 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:36:25Z",
    "pn": [
     "52119-30961"
@@ -82608,7 +82580,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:616f6707d6",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-30962 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-30962 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:36:33Z",
    "pn": [
     "52119-30962"
@@ -82641,7 +82613,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:d09e011ab2",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-30967 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-30967 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:36:09Z",
    "pn": [
     "52119-30967"
@@ -82674,7 +82646,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:f21563d838",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-30968 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-30968 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:36:17Z",
    "pn": [
     "52119-30968"
@@ -82701,7 +82673,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:86a7c87673",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-33927 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-33927 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:06:29Z",
    "pn": [
     "52119-33927"
@@ -82728,7 +82700,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:23999cfcc3",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-33943 for both — plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #52119-33943 for both — bumper cover; plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:38:12Z",
    "pn": [
     "52119-33943"
@@ -82769,7 +82741,7 @@
    ],
    "id": "oem:toyota:bumper-front:C:5336565ba0",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-33967 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "note": "Toyota catalog lists #52119-33967 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T14:35:01Z",
    "pn": [
     "52119-33967"
@@ -82796,7 +82768,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:be84ba6e16",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-48913 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-48913 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:00:08Z",
    "pn": [
     "52119-48913"
@@ -82823,7 +82795,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:b93583d952",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-48914 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-48914 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:00:16Z",
    "pn": [
     "52119-48914"
@@ -82850,7 +82822,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:75f94d65af",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-48915 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-48915 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:00:24Z",
    "pn": [
     "52119-48915"
@@ -82877,7 +82849,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:fe9408173f",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-53917 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-53917 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:20:53Z",
    "pn": [
     "52119-53917"
@@ -82904,7 +82876,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:1e02f1295a",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-53918 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-53918 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:21:09Z",
    "pn": [
     "52119-53918"
@@ -82931,7 +82903,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:5e031c4945",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-53919 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-53919 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:21:01Z",
    "pn": [
     "52119-53919"
@@ -82958,7 +82930,7 @@
    "cat": "bumper-front",
    "id": "oem:toyota:bumper-front:C:ad79f2c5e6",
    "kind": "body",
-   "note": "Toyota catalog lists #52119-53925 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52119-53925 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:20:45Z",
    "pn": [
     "52119-53925"
@@ -82999,7 +82971,7 @@
    ],
    "id": "oem:toyota:bumper-rear:C:f5f0729e70",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-06952 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "note": "Toyota catalog lists #52159-06952 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:39:08Z",
    "pn": [
     "52159-06952"
@@ -83026,7 +82998,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:655fa0e256",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-06961 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #52159-06961 for both — bumper cover; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T15:56:30Z",
    "pn": [
     "52159-06961"
@@ -83053,7 +83025,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:550a080304",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-06963 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #52159-06963 for both — bumper cover; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T15:56:24Z",
    "pn": [
     "52159-06963"
@@ -83080,7 +83052,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:3ccd5136ee",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-06989 for both — trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #52159-06989 for both — bumper cover; trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T17:31:32Z",
    "pn": [
     "52159-06989"
@@ -83107,7 +83079,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:88b119606a",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-0E900 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #52159-0E900 for both — bumper cover only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:02:08Z",
    "pn": [
     "52159-0E900"
@@ -83140,7 +83112,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:406c4301ae",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-30924 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #52159-30924 for both — bumper cover only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:42:01Z",
    "pn": [
     "52159-30924"
@@ -83173,7 +83145,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:e9d4e351f1",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-30934 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52159-30934 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:36:49Z",
    "pn": [
     "52159-30934"
@@ -83206,7 +83178,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:d9fea6e1f7",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-30935 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #52159-30935 for both — bumper cover only; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:37:13Z",
    "pn": [
     "52159-30935"
@@ -83233,7 +83205,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:a841ac17af",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-33911 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #52159-33911 for both — bumper cover only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:06:53Z",
    "pn": [
     "52159-33911"
@@ -83260,7 +83232,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:097e4836c4",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-33918 for both — older catalog-only number; verify the number on the part",
+   "note": "Toyota catalog lists #52159-33918 for both — bumper cover; older catalog-only number; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:39:16Z",
    "pn": [
     "52159-33918"
@@ -83287,7 +83259,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:fc088b8de2",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-33919 for both — older catalog-only number; verify the number on the part",
+   "note": "Toyota catalog lists #52159-33919 for both — bumper cover; older catalog-only number; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:39:24Z",
    "pn": [
     "52159-33919"
@@ -83328,7 +83300,7 @@
    ],
    "id": "oem:toyota:bumper-rear:C:6ffe3e976b",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-33924 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "note": "Toyota catalog lists #52159-33924 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:38:44Z",
    "pn": [
     "52159-33924"
@@ -83361,7 +83333,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:d512ff970f",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-48903 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #52159-48903 for both — bumper cover only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T23:01:52Z",
    "pn": [
     "52159-48903"
@@ -83388,7 +83360,7 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:85ec23312d",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-53905 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #52159-53905 for both — bumper cover only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:21:41Z",
    "pn": [
     "52159-53905"
@@ -83415,64 +83387,10 @@
    "cat": "bumper-rear",
    "id": "oem:toyota:bumper-rear:C:63956afb76",
    "kind": "body",
-   "note": "Toyota catalog lists #52159-53906 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #52159-53906 for both — bumper cover only; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T22:21:49Z",
    "pn": [
     "52159-53906"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lexus",
-     "IS 250",
-     2007,
-     2007
-    ],
-    [
-     "Lexus",
-     "IS 350",
-     2006,
-     2007
-    ]
-   ],
-   "cars": 95,
-   "cat": "bumper-front",
-   "id": "oem:toyota:bumper-front:C:a72426fdc2",
-   "kind": "body",
-   "note": "Toyota catalog lists #52437-53010 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T22:21:17Z",
-   "pn": [
-    "52437-53010"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lexus",
-     "IS 250",
-     2007,
-     2007
-    ],
-    [
-     "Lexus",
-     "IS 350",
-     2006,
-     2007
-    ]
-   ],
-   "cars": 95,
-   "cat": "bumper-front",
-   "id": "oem:toyota:bumper-front:C:96187e0208",
-   "kind": "body",
-   "note": "Toyota catalog lists #52438-53010 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T22:21:25Z",
-   "pn": [
-    "52438-53010"
    ],
    "reason": "conditional",
    "tier": "likely"
@@ -86938,7 +86856,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FR:057d7a7f83",
    "kind": "body",
-   "note": "Toyota catalog lists #69801-06070 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69801-06070 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:05Z",
    "pn": [
     "69801-06070"
@@ -86965,7 +86883,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FR:524955f967",
    "kind": "body",
-   "note": "Toyota catalog lists #69801-06080 for both — regulator without motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #69801-06080 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:43:10Z",
    "pn": [
     "69801-06080"
@@ -87103,7 +87021,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FR:36726c1517",
    "kind": "body",
-   "note": "Toyota catalog lists #69801-33060 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69801-33060 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:09Z",
    "pn": [
     "69801-33060"
@@ -87157,7 +87075,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FL:db13f19252",
    "kind": "body",
-   "note": "Toyota catalog lists #69802-06070 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69802-06070 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:53:57Z",
    "pn": [
     "69802-06070"
@@ -87184,7 +87102,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FL:bc2d3c0c96",
    "kind": "body",
-   "note": "Toyota catalog lists #69802-06080 for both — regulator without motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #69802-06080 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:43:18Z",
    "pn": [
     "69802-06080"
@@ -87322,7 +87240,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FL:c7e861dec5",
    "kind": "body",
-   "note": "Toyota catalog lists #69802-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69802-33050 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:01Z",
    "pn": [
     "69802-33050"
@@ -87376,7 +87294,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RR:8f36632bc4",
    "kind": "body",
-   "note": "Toyota catalog lists #69803-06110 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69803-06110 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:33Z",
    "pn": [
     "69803-06110"
@@ -87403,7 +87321,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RR:bb63838b23",
    "kind": "body",
-   "note": "Toyota catalog lists #69803-06140 for both — regulator without motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #69803-06140 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:43:42Z",
    "pn": [
     "69803-06140"
@@ -87475,7 +87393,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RR:24c3734e0e",
    "kind": "body",
-   "note": "Toyota catalog lists #69803-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69803-33050 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:41Z",
    "pn": [
     "69803-33050"
@@ -87502,7 +87420,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RL:1a045a4508",
    "kind": "body",
-   "note": "Toyota catalog lists #69804-06110 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69804-06110 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:37Z",
    "pn": [
     "69804-06110"
@@ -87529,7 +87447,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RL:50e8d1296e",
    "kind": "body",
-   "note": "Toyota catalog lists #69804-06140 for both — regulator without motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #69804-06140 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:43:50Z",
    "pn": [
     "69804-06140"
@@ -87601,7 +87519,7 @@
    "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:RL:6c50daad79",
    "kind": "body",
-   "note": "Toyota catalog lists #69804-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #69804-33050 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:54:45Z",
    "pn": [
     "69804-33050"
@@ -89221,7 +89139,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:R:4ed79e39c0",
    "kind": "body",
-   "note": "Toyota catalog lists #81551-0E010 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81551-0E010 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:40:21Z",
    "pn": [
     "81551-0E010"
@@ -89254,7 +89172,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:R:568fc71cb8",
    "kind": "body",
-   "note": "Toyota catalog lists #81551-30A50 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81551-30A50 for both — lens and body unit; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:27:54Z",
    "pn": [
     "81551-30A50"
@@ -89322,7 +89240,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:R:456fa30c63",
    "kind": "body",
-   "note": "Toyota catalog lists #81551-48060 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81551-48060 for both — lens and body unit; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:39:49Z",
    "pn": [
     "81551-48060"
@@ -89349,7 +89267,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:R:eb313c4f80",
    "kind": "body",
-   "note": "Toyota catalog lists #81551-53170 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81551-53170 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:06:27Z",
    "pn": [
     "81551-53170"
@@ -89376,7 +89294,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:R:4bf148074a",
    "kind": "body",
-   "note": "Toyota catalog lists #81551-53171 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81551-53171 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:06:31Z",
    "pn": [
     "81551-53171"
@@ -89403,7 +89321,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:R:0794400acd",
    "kind": "body",
-   "note": "Toyota catalog lists #81551-53240 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81551-53240 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:31:45Z",
    "pn": [
     "81551-53240"
@@ -89430,7 +89348,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:R:bbbef190f9",
    "kind": "body",
-   "note": "Toyota catalog lists #81551-53260 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81551-53260 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:31:21Z",
    "pn": [
     "81551-53260"
@@ -89579,7 +89497,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:L:133eefed90",
    "kind": "body",
-   "note": "Toyota catalog lists #81561-0E010 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81561-0E010 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:40:37Z",
    "pn": [
     "81561-0E010"
@@ -89612,7 +89530,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:L:e5dc35f3e9",
    "kind": "body",
-   "note": "Toyota catalog lists #81561-30A40 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81561-30A40 for both — lens and body unit; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:27:46Z",
    "pn": [
     "81561-30A40"
@@ -89680,7 +89598,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:L:b3559b2e0d",
    "kind": "body",
-   "note": "Toyota catalog lists #81561-48060 for both — option: fits some option packages; verify the number on the part",
+   "note": "Toyota catalog lists #81561-48060 for both — lens and body unit; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:39:33Z",
    "pn": [
     "81561-48060"
@@ -89707,7 +89625,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:L:e66c417c25",
    "kind": "body",
-   "note": "Toyota catalog lists #81561-53170 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81561-53170 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:06:35Z",
    "pn": [
     "81561-53170"
@@ -89734,7 +89652,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:L:f92cb21600",
    "kind": "body",
-   "note": "Toyota catalog lists #81561-53171 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81561-53171 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:06:39Z",
    "pn": [
     "81561-53171"
@@ -89761,7 +89679,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:L:7f8e01ae0d",
    "kind": "body",
-   "note": "Toyota catalog lists #81561-53230 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81561-53230 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:31:53Z",
    "pn": [
     "81561-53230"
@@ -89788,7 +89706,7 @@
    "cat": "tail-lights",
    "id": "oem:toyota:tail-lights:L:0a2e12590f",
    "kind": "body",
-   "note": "Toyota catalog lists #81561-53260 for both — fits some configurations; verify the number on the part",
+   "note": "Toyota catalog lists #81561-53260 for both — lens and body unit; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:31:30Z",
    "pn": [
     "81561-53260"

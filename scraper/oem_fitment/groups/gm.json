@@ -177957,20 +177957,6 @@
    ],
    "reman": false
   },
-  "gm:20914715": {
-   "cat": "window-regulator",
-   "comp": "reg",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L129"
-   ],
-   "names": [
-    "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 8)(W/O MOTOR)"
-   ],
-   "pns": [
-    "20914715"
-   ],
-   "reman": false
-  },
   "gm:20914716": {
    "cat": "window-regulator",
    "comp": "reg",
@@ -177982,34 +177968,6 @@
    ],
    "pns": [
     "20914716"
-   ],
-   "reman": false
-  },
-  "gm:20945138": {
-   "cat": "window-regulator",
-   "comp": "assy",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L77"
-   ],
-   "names": [
-    "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 15,36)(W/MOTOR)(16.260)(ORDER TOGETHER WITH NUT-11561645 (QTY 2))"
-   ],
-   "pns": [
-    "20945138"
-   ],
-   "reman": false
-  },
-  "gm:20945139": {
-   "cat": "window-regulator",
-   "comp": "assy",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L78"
-   ],
-   "names": [
-    "REGULATOR, FRONT SIDE DOOR WINDOW(INCLUDES 15,36)(W/MOTOR)(16.260)"
-   ],
-   "pns": [
-    "20945139"
    ],
    "reman": false
   },
@@ -178262,34 +178220,6 @@
    ],
    "pns": [
     "25701607"
-   ],
-   "reman": false
-  },
-  "gm:25719488": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1463"
-   ],
-   "names": [
-    "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 17)(INCLUDES MOTOR)"
-   ],
-   "pns": [
-    "25719488"
-   ],
-   "reman": false
-  },
-  "gm:25719489": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1464"
-   ],
-   "names": [
-    "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 17)(INCLUDES MOTOR)"
-   ],
-   "pns": [
-    "25719489"
    ],
    "reman": false
   },
@@ -200940,7 +200870,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:41f806d500",
    "kind": "body",
-   "note": "GM catalog lists #10334396 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #10334396 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:20:55Z",
    "pn": [
     "10334396"
@@ -200973,7 +200903,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:54f9df9e40",
    "kind": "body",
-   "note": "GM catalog lists #10334398 for both — fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #10334398 for both — regulator with motor; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:21:35Z",
    "pn": [
     "10334398"
@@ -201006,7 +200936,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:38ff8fd5f4",
    "kind": "body",
-   "note": "GM catalog lists #10334399 for both — fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #10334399 for both — regulator with motor; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:21:43Z",
    "pn": [
     "10334399"
@@ -201528,7 +201458,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:845a875270",
    "kind": "body",
-   "note": "GM catalog lists #15091383 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15091383 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:27:50Z",
    "pn": [
     "15091383"
@@ -201561,7 +201491,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:f96873c140",
    "kind": "body",
-   "note": "GM catalog lists #15091384 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15091384 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:27:42Z",
    "pn": [
     "15091384"
@@ -202890,7 +202820,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:d45372c7f3",
    "kind": "body",
-   "note": "GM catalog lists #15922914 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15922914 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:20:45Z",
    "pn": [
     "15922914"
@@ -202923,7 +202853,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:2d6852d3db",
    "kind": "body",
-   "note": "GM catalog lists #15922915 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15922915 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:20:53Z",
    "pn": [
     "15922915"
@@ -204253,7 +204183,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:84e55d225c",
    "kind": "body",
-   "note": "GM catalog lists #20783372 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20783372 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:52:42Z",
    "pn": [
     "20783372"
@@ -204803,159 +204733,12 @@
      }
     ]
    ],
-   "id": "oem:gm:window-regulator:FL:8ed850ce7c",
-   "kind": "body",
-   "note": "GM catalog lists #20914715 for both — regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:28:37Z",
-   "pn": [
-    "20914715"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 417,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012,
-     {
-      "eng_not": [
-       "8.1L"
-      ],
-      "fuel": "gas"
-     }
-    ]
-   ],
    "id": "oem:gm:window-regulator:FR:270e9141c3",
    "kind": "body",
    "note": "GM catalog lists #20914716 for both — regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:28:42Z",
    "pn": [
     "20914716"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "Escalade",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 482,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012,
-     {
-      "fuel": "gas"
-     }
-    ]
-   ],
-   "id": "oem:gm:window-regulator:FL:95a5e67317",
-   "kind": "body",
-   "note": "GM catalog lists #20945138 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:21:09Z",
-   "pn": [
-    "20945138"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "Escalade",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 482,
-   "cat": "window-regulator",
-   "gates": [
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012,
-     {
-      "fuel": "gas"
-     }
-    ]
-   ],
-   "id": "oem:gm:window-regulator:FR:e27cc3ca48",
-   "kind": "body",
-   "note": "GM catalog lists #20945139 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:21:13Z",
-   "pn": [
-    "20945139"
    ],
    "reason": "option",
    "tier": "likely"
@@ -205490,60 +205273,6 @@
    "oldest_retrieved": "2026-11-05T07:35:09Z",
    "pn": [
     "25701607"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 148,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RR:b8fa53031e",
-   "kind": "body",
-   "note": "GM catalog lists #25719488 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:36:21Z",
-   "pn": [
-    "25719488"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 148,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RL:adcd306db3",
-   "kind": "body",
-   "note": "GM catalog lists #25719489 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:36:29Z",
-   "pn": [
-    "25719489"
    ],
    "reason": "conditional",
    "tier": "likely"
@@ -206643,7 +206372,7 @@
    ],
    "id": "oem:gm:window-regulator:RL:00f17f69c1",
    "kind": "body",
-   "note": "GM catalog lists #5483148 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part",
+   "note": "GM catalog lists #5483148 for both — regulator with motor; fits some configurations; Blazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:50:44Z",
    "pn": [
     "5483148"
@@ -206682,7 +206411,7 @@
    ],
    "id": "oem:gm:window-regulator:RR:dd8cdf523e",
    "kind": "body",
-   "note": "GM catalog lists #5483149 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part",
+   "note": "GM catalog lists #5483149 for both — regulator with motor; fits some configurations; Blazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:50:52Z",
    "pn": [
     "5483149"

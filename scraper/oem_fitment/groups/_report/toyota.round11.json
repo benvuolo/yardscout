@@ -1,0 +1,5558 @@
+{
+ "changed": 53,
+ "held": 2,
+ "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, lens and body unit, regulator with motor) on the finished note (change 'phrase'); names that disagree in kind, a note past the cap, or other words already on the note hold the group (change 'held'). Names with field, kind and site:file:line.",
+ "ns": "toyota",
+ "raw": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+ "removed": 12,
+ "rows": [
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front, Front Upper",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.toyotapartsnow.com:records:L2272"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-06919 for both — bumper cover; plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-06919 for both — plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52119-06919"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/Pa",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/Pa",
+     "ref": "www.toyotapartsnow.com:records:L2553"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-06957 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-06957 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52119-06957"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2945"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-06974 for both — bumper cover; trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-06974 for both — trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52119-06974"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2946"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-06975 for both — bumper cover; trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-06975 for both — trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52119-06975"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L3436"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-07912 for both — bumper cover; trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-07912 for both — trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52119-07912"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSU3#.. NAP",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2198"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2198"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSU3#.. NAP",
+     "ref": "www.lexuspartsnow.com:records:L2198"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:records:L2198"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2198"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2198"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2198"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-0E900 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-0E900 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-0E900"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSU3#.. NAP",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CANADA SPEC / PAINT REQ.,CANADA SPEC&SEAT HEATER-WITH / PAINT REQ.,SEAT HEATER-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CANADA SPEC / PAINT REQ.,CANADA SPEC&SEAT HEATER-WITH / PAINT REQ.,SEAT HEATER-WITH / PAINT REQ.,CANADA SPEC&SEAT HEARTER-WITH / PAINT REQ.,SEAT HEARTER-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2199"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2199"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSU3#.. NAP",
+     "ref": "www.lexuspartsnow.com:records:L2199"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,CANADA SPEC / PAINT REQ.,CANADA SPEC&SEAT HEATER-WITH / PAINT REQ.,SEAT HEATER-WITH / PAINT REQ.,CANADA SPEC&SEAT HEARTER-WITH / PAINT REQ.,SEAT HEARTER-WITH",
+     "ref": "www.lexuspartsnow.com:records:L2199"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2199"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2199"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2199"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-0E901 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-0E901 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-0E901"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSU3#.. NAP",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CANADA SPEC&CRUISE CONTROL-W(RADAR CRUISE) / PAINT REQ.,CANADA SPEC&CRUISE CONTROL-W(RADAR CRUISE)&SEAT HEATER-WITH / PAINT REQ.,CRUISE CONTROL-W(RADAR CRUISE)&SEAT HEATER-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CANADA SPEC&CRUISE CONTROL-W(RADAR CRUISE) / PAINT REQ.,CANADA SPEC&CRUISE CONTROL-W(RADAR CRUISE)&SEAT HEATER-WITH / PAINT REQ.,CRUISE CONTROL-W(RADAR CRUISE)&SEAT HEATER-WITH / PAINT REQ.,CANADA SPEC&CRUISE CONTROL-RADAR CRUISE / PAINT REQ.,CANADA SPEC&CRUISE CONTROL-RADAR CRUISE&SEAT HEARTER-WITH / PAINT REQ.,CRUISE CONTROL-RADAR CRUISE&SEAT HEARTER-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2200"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2200"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSU3#.. NAP",
+     "ref": "www.lexuspartsnow.com:records:L2200"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,CANADA SPEC&CRUISE CONTROL-W(RADAR CRUISE) / PAINT REQ.,CANADA SPEC&CRUISE CONTROL-W(RADAR CRUISE)&SEAT HEATER-WITH / PAINT REQ.,CRUISE CONTROL-W(RADAR CRUISE)&SEAT HEATER-WITH / PAINT REQ.,CANADA SPEC&CRUISE CONTROL-RADAR CRUISE / PAINT REQ.,CANADA SPEC&CRUISE CONTROL-RADAR CRUISE&SEAT HEARTER-WITH / PAINT REQ.,CRUISE CONTROL-RADAR CRUISE&SEAT HEARTER-WITH",
+     "ref": "www.lexuspartsnow.com:records:L2200"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2200"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2200"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2200"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-0E902 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-0E902 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-0E902"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSU3#.. NAP",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CRUISE CONTROL-W(RADAR CRUISE)",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CRUISE CONTROL-W(RADAR CRUISE) / PAINT REQ.,CRUISE CONTROL-RADAR CRUISE",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L298"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L320"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2203"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2203"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSU3#.. NAP",
+     "ref": "www.lexuspartsnow.com:records:L2203"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,CRUISE CONTROL-W(RADAR CRUISE) / PAINT REQ.,CRUISE CONTROL-RADAR CRUISE",
+     "ref": "www.lexuspartsnow.com:records:L2203"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2203"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2203"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2203"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-0E903 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-0E903 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/front_bumper_bumper_stay.html": [
+     "52131-0E020 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-0E903"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L268"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L444"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L475"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L268"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L444"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L475"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L268"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L444"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L475"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2089"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2089"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2089"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2089"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2089"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-30934 for both — bumper cover only; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-30934 for both — fits some configurations; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/1998-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52029-30140 Reinforcement Sub-Assy, Front Bumper, Upper",
+     "52123-30110 Plate, Front Bumper Reinforcement, RH",
+     "52123-30120 Plate, Front Bumper Reinforcement, RH",
+     "52124-30100 Plate, Front Bumper Reinforcement, LH",
+     "52124-30120 Plate, Front Bumper Reinforcement, LH",
+     "52131-30210 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/1998-lexus-gs400/body/front_bumper_bumper_stay.html": [
+     "52029-30140 Reinforcement Sub-Assy, Front Bumper, Upper",
+     "52123-30110 Plate, Front Bumper Reinforcement, RH",
+     "52123-30120 Plate, Front Bumper Reinforcement, RH",
+     "52124-30100 Plate, Front Bumper Reinforcement, LH",
+     "52124-30120 Plate, Front Bumper Reinforcement, LH",
+     "52131-30210 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2003-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52029-30140 Reinforcement Sub-Assy, Front Bumper, Upper",
+     "52123-30120 Plate, Front Bumper Reinforcement, RH",
+     "52124-30120 Plate, Front Bumper Reinforcement, LH",
+     "52131-30210 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-30934"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2061"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2061"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:records:L2061"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2061"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2061"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2061"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-30961 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-30961 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/front_bumper_bumper_stay.html": [
+     "52131-30260 Reinforcement, Front Bumper",
+     "52131-30280 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-30961"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2062"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2062"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:records:L2062"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2062"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2062"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2062"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-30962 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-30962 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/front_bumper_bumper_stay.html": [
+     "52131-30260 Reinforcement, Front Bumper",
+     "52131-30280 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-30962"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,WITH(HEADLAMP CLEANER)",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,WITH(HEADLAMP CLEANER)",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,WITH(HEADLAMP CLEANER)",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2059"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2059"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,WITH(HEADLAMP CLEANER)",
+     "ref": "www.lexuspartsnow.com:records:L2059"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2059"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2059"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2059"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-30967 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-30967 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/front_bumper_bumper_stay.html": [
+     "52131-30260 Reinforcement, Front Bumper",
+     "52131-30280 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-30967"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,WITH(HEADLAMP CLEANER)&CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,WITH(HEADLAMP CLEANER)&CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,WITH(HEADLAMP CLEANER)&CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L257"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L367"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L464"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2060"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2060"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,WITH(HEADLAMP CLEANER)&CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:records:L2060"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2060"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2060"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2060"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-30968 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-30968 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/front_bumper_bumper_stay.html": [
+     "52131-30280 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/front_bumper_bumper_stay.html": [
+     "52131-30260 Reinforcement, Front Bumper",
+     "52131-30280 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-30968"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L191"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L246"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L191"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L246"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L191"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L246"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1908"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1908"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L1908"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1908"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1908"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-33927 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-33927 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2002-lexus-es300/body/front_bumper_bumper_stay.html": [
+     "52021-33120 Reinforcement Sub-Assy, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-es330/body/front_bumper_bumper_stay.html": [
+     "52021-33120 Reinforcement Sub-Assy, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-33927"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/P",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front, Front Upper",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/P",
+     "ref": "www.toyotapartsnow.com:records:L2273"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-33943 for both — bumper cover; plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-33943 for both — plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52119-33943"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/Pa",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Front Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Front",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Front Bumper L/Pa",
+     "ref": "www.toyotapartsnow.com:records:L2555"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-33967 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-33967 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52119-33967"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSU3#.. JPP",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / PREMIUM PACKAGE&CRUISE CONTROL-RADAR CRUISE / SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / SPORT PACKAGE&CRUISE CONTROL-RADAR CRUISE",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2193"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2193"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSU3#.. JPP",
+     "ref": "www.lexuspartsnow.com:records:L2193"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / PREMIUM PACKAGE&CRUISE CONTROL-RADAR CRUISE / SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / SPORT PACKAGE&CRUISE CONTROL-RADAR CRUISE",
+     "ref": "www.lexuspartsnow.com:records:L2193"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2193"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2193"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2193"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-48913 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-48913 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48060 Reinforcement, Front Bumper",
+     "52131-48061 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48061 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-48913"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-RADAR CRUISE / CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-RADAR CRUISE&SEAT HEATER-WITH(DRIVER & PASSENGER) / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-RADAR CRUISE / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-RADAR CRUISE&SEAT HEATER-WITH(DRIVER & PASSENGER) / PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / PREMIUM PACKAGE&CRUISE CONTROL-RADAR CRUISE&SEAT HEATER-WITH(DRIVER & PASSENGER) / SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / SPORT PACKAGE&CRUISE CONTROL-RADAR CRUISE&SEAT HEATER-WITH(DRIVER & PASSENGER)",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSU3#.. JPP",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2194"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2194"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE) / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-RADAR CRUISE / CANADA SPEC&PREMIUM PACKAGE&CRUISE CONTROL-RADAR CRUISE&SEAT HEATER-WITH(DRIVER & PASSENGER) / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-RADAR CRUISE / CANADA SPEC&SPORT PACKAGE&CRUISE CONTROL-RADAR CRUISE&SEAT HEATER-WITH(DRIVER & PASSENGER) / PREMIUM PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / PREMIUM PACKAGE&CRUISE CONTROL-RADAR CRUISE&SEAT HEATER-WITH(DRIVER & PASSENGER) / SPORT PACKAGE&CRUISE CONTROL-WITH(RADAR CRUISE)&W/SEAT HEATER / SPORT PACKAGE&CRUISE CONTROL-RADAR CRUISE&SEAT HEATER-WITH(DRIVER & PASSENGER)",
+     "ref": "www.lexuspartsnow.com:records:L2194"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSU3#.. JPP",
+     "ref": "www.lexuspartsnow.com:records:L2194"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2194"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2194"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2194"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-48914 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-48914 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48060 Reinforcement, Front Bumper",
+     "52131-48061 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48061 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-48914"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "CANADA SPEC / CANADA SPEC&W/SEAT HEATER / CANADA SPEC&SEAT HEATER-WITH(DRIVER & PASSENGER) / SEAT HEATER-WITH(DRIVER & PASSENGER) / W/SEAT HEATER",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "CANADA SPEC / CANADA SPEC&W/SEAT HEATER / W/SEAT HEATER",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSU3#.. JPP",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L297"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L319"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2195"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2195"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "CANADA SPEC / CANADA SPEC&W/SEAT HEATER / CANADA SPEC&SEAT HEATER-WITH(DRIVER & PASSENGER) / SEAT HEATER-WITH(DRIVER & PASSENGER) / W/SEAT HEATER",
+     "ref": "www.lexuspartsnow.com:records:L2195"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSU3#.. JPP",
+     "ref": "www.lexuspartsnow.com:records:L2195"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L2195"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2195"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2195"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-48915 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-48915 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48060 Reinforcement, Front Bumper",
+     "52131-48061 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/body/front_bumper_bumper_stay.html": [
+     "52131-48061 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-48915"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1981"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1981"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:records:L1981"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L1981"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1981"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1981"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-53917 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-53917 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-53917"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSE20.. ATM",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSE20.. ATM",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSE20.. ATM",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,HEAD LAMP CLEANER-WITH / PAINT REQ.,KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH / PAINT REQ.,HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,HEAD LAMP CLEANER-WITH / PAINT REQ.,KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH / PAINT REQ.,HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,HEAD LAMP CLEANER-WITH / PAINT REQ.,KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH / PAINT REQ.,HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1983"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1983"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSE20.. ATM",
+     "ref": "www.lexuspartsnow.com:records:L1983"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,HEAD LAMP CLEANER-WITH / PAINT REQ.,KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH / PAINT REQ.,HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH",
+     "ref": "www.lexuspartsnow.com:records:L1983"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L1983"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1983"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1983"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-53918 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-53918 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-53918"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSE20.. ATM",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSE20.. ATM",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GSE20.. ATM",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH / PAINT REQ.,KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH / PAINT REQ.,HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH / PAINT REQ.,KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH / PAINT REQ.,HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH / PAINT REQ.,KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH / PAINT REQ.,HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1982"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1982"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSE20.. ATM",
+     "ref": "www.lexuspartsnow.com:records:L1982"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH / PAINT REQ.,KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH / PAINT REQ.,HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:records:L1982"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L1982"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1982"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1982"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-53919 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-53919 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-53919"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1980"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1980"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:records:L1980"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52119A",
+     "ref": "www.lexuspartsnow.com:records:L1980"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1980"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Front Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1980"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52119-53925 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52119-53925 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/front_bumper_bumper_stay.html": [
+     "52131-53060 Reinforcement, Front Bumper"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52119-53925"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/ P",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/ P",
+     "ref": "www.toyotapartsnow.com:records:L2279"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-06952 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-06952 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52159-06952"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2949"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-06961 for both — bumper cover; trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-06961 for both — trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52159-06961"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Le",
+     "ref": "www.toyotapartsnow.com:records:L2948"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-06963 for both — bumper cover; trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-06963 for both — trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52159-06963"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear Upper",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L3438"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-06989 for both — bumper cover; trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-06989 for both — trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52159-06989"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L300"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L322"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L300"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L322"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L300"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L322"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L300"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L322"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2205"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2205"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:records:L2205"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:records:L2205"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2205"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2205"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-0E900 for both — bumper cover only; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-0E900 for both — fits some configurations; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-nap/body/rear_bumper_bumper_stay.html": [
+     "52171-0E020 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-nap/body/rear_bumper_bumper_stay.html": [
+     "52171-0E020 Reinforcement, Rear Bumper, NO.1"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52159-0E900"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L269"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L445"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L476"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L269"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L445"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L476"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L269"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L445"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L476"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2091"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2091"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:records:L2091"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2091"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2091"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-30924 for both — bumper cover only; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-30924 for both — fits some configurations; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/1998-lexus-gs300/body/rear_bumper_bumper_stay.html": [
+     "52023-30260 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/1998-lexus-gs400/body/rear_bumper_bumper_stay.html": [
+     "52023-30260 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2003-lexus-gs430/body/rear_bumper_bumper_stay.html": [
+     "52023-30260 Reinforcement, Rear Bumper, NO.1"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52159-30924"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2063"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2063"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:records:L2063"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:records:L2063"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2063"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2063"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-30934 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-30934 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/rear_bumper_bumper_stay.html": [
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/rear_bumper_bumper_stay.html": [
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/rear_bumper_bumper_stay.html": [
+     "52023-30290 Reinforcement, Rear Bumper, NO.1",
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52159-30934"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L258"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L368"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L465"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2066"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2066"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:records:L2066"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:records:L2066"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2066"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2066"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-30935 for both — bumper cover only; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-30935 for both — option: fits some option packages; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs300/body/rear_bumper_bumper_stay.html": [
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-gs430/body/rear_bumper_bumper_stay.html": [
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-gs350/body/rear_bumper_bumper_stay.html": [
+     "52023-30290 Reinforcement, Rear Bumper, NO.1",
+     "52023-30310 Reinforcement Sub-Assy, Rear Bumper",
+     "52023-30330 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-30090 Reinforcement, Rear Bumper Arm, RH",
+     "52188-30110 Reinforcement, Rear Bumper Arm, LH"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52159-30935"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L192"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L247"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L192"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L247"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L192"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L247"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1910"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1910"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:records:L1910"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1910"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1910"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-33911 for both — bumper cover only; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-33911 for both — fits some configurations; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2002-lexus-es300/body/rear_bumper_bumper_stay.html": [
+     "52171-33100 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-es330/body/rear_bumper_bumper_stay.html": [
+     "52171-33100 Reinforcement, Rear Bumper, NO.1"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52159-33911"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2280"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.toyotapartsnow.com:records:L2280"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/P",
+     "ref": "www.toyotapartsnow.com:records:L2280"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-33918 for both — bumper cover; older catalog-only number; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-33918 for both — older catalog-only number; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52159-33918"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2281"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.toyotapartsnow.com:records:L2281"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/P",
+     "ref": "www.toyotapartsnow.com:records:L2281"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-33919 for both — bumper cover; older catalog-only number; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-33919 for both — older catalog-only number; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52159-33919"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Bumper Cover",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Bumper Cover, Rear",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper L/C",
+     "ref": "www.toyotapartsnow.com:records:L2276"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-33924 for both — bumper cover; plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-33924 for both — plant-specific (US / Japan built); Camry: 2.4L, hybrid only; verify the number on the part",
+   "pages": {},
+   "phrase": "bumper cover",
+   "pn": [
+    "52159-33924"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L299"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L321"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L391"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L299"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L321"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L391"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L391"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L299"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L321"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L391"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2204"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2204"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:records:L2204"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2204"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L2204"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-48903 for both — bumper cover only; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-48903 for both — fits some configurations; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2004-lexus-rx330-jpp/body/rear_bumper_bumper_stay.html": [
+     "52171-48110 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-rx400h/body/rear_bumper_bumper_stay.html": [
+     "52171-48110 Reinforcement, Rear Bumper, NO.1"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-rx350-jpp/body/rear_bumper_bumper_stay.html": [
+     "52171-48110 Reinforcement, Rear Bumper, NO.1"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52159-48903"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1986"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1986"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.",
+     "ref": "www.lexuspartsnow.com:records:L1986"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:records:L1986"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1986"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1986"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-53905 for both — bumper cover only; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-53905 for both — fits some configurations; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52159-53905"
+   ]
+  },
+  {
+   "cat": "bumper-rear",
+   "change": "phrase",
+   "kinds": [
+    "cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.main",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L225"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L402"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:lists:L434"
+    },
+    {
+     "field": "record.description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1987"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1987"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PAINT REQ.,CLEARANCE & BACK SONAR-WITH",
+     "ref": "www.lexuspartsnow.com:records:L1987"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52159",
+     "ref": "www.lexuspartsnow.com:records:L1987"
+    },
+    {
+     "field": "record.name",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1987"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "cover",
+     "name": "Cover, Rear Bumper",
+     "ref": "www.lexuspartsnow.com:records:L1987"
+    }
+   ],
+   "new_note": "Toyota catalog lists #52159-53906 for both — bumper cover only; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #52159-53906 for both — fits some configurations; verify the number on the part",
+   "pages": {
+    "https://www.lexuspartsnow.com/parts-list/2006-lexus-is350/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is250/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ],
+    "https://www.lexuspartsnow.com/parts-list/2007-lexus-is350/body/rear_bumper_bumper_stay.html": [
+     "52023-53030 Reinforcement Sub-Assy, Rear Bumper",
+     "52187-53010 Reinforcement, Rear Bumper Arm, RH",
+     "52188-53020 Reinforcement, Rear Bumper Arm, LH"
+    ]
+   },
+   "phrase": "bumper cover only",
+   "pn": [
+    "52159-53906"
+   ]
+  },
+  {
+   "cat": "bumper-front",
+   "change": "held",
+   "detail": "a value names a part other than the bumper cover or the bumper (guard cover)",
+   "kinds": [
+    "guard cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.group",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.group",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52437",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52437",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52437",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:records:L1984"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:records:L1984"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52437",
+     "ref": "www.lexuspartsnow.com:records:L1984"
+    },
+    {
+     "field": "record.name",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:records:L1984"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, RH",
+     "ref": "www.lexuspartsnow.com:records:L1984"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52437-53010 for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "52437-53010"
+   ],
+   "reason": "held_part_other"
+  },
+  {
+   "cat": "bumper-front",
+   "change": "held",
+   "detail": "a value names a part other than the bumper cover or the bumper (guard cover)",
+   "kinds": [
+    "guard cover"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.group",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.group",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.main",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52438",
+     "ref": "www.lexuspartsnow.com:lists:L224"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52438",
+     "ref": "www.lexuspartsnow.com:lists:L401"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 52438",
+     "ref": "www.lexuspartsnow.com:lists:L433"
+    },
+    {
+     "field": "record.description",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:records:L1985"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:records:L1985"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 52438",
+     "ref": "www.lexuspartsnow.com:records:L1985"
+    },
+    {
+     "field": "record.name",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:records:L1985"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "guard cover",
+     "name": "Cover, Front Bumper Guard, LH",
+     "ref": "www.lexuspartsnow.com:records:L1985"
+    }
+   ],
+   "old_note": "Toyota catalog lists #52438-53010 for both — fits some configurations; verify the number on the part",
+   "pn": [
+    "52438-53010"
+   ],
+   "reason": "held_part_other"
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L44"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator, Passenger Side",
+     "ref": "www.toyotapartsnow.com:records:L44"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L44"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L44"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator, Front Right",
+     "ref": "www.toyotapartsnow.com:records:L44"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69801-06070 for both — plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #69801-06070 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69801-06070"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L1105"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly, Front Door Window, Passenger Side",
+     "ref": "www.toyotapartsnow.com:records:L1105"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L1105"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L1105"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.toyotapartsnow.com:records:L1105"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69801-06080 for both — trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #69801-06080 for both — regulator without motor; trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69801-06080"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L45"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator, Passenger Side",
+     "ref": "www.toyotapartsnow.com:records:L45"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L45"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L45"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator, Front Right",
+     "ref": "www.toyotapartsnow.com:records:L45"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69801-33060 for both — plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #69801-33060 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69801-33060"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L42"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L42"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L42"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L42"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator, Front Left",
+     "ref": "www.toyotapartsnow.com:records:L42"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69802-06070 for both — plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #69802-06070 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69802-06070"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L1106"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly, Front Door Window, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L1106"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L1106"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L1106"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.toyotapartsnow.com:records:L1106"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69802-06080 for both — trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #69802-06080 for both — regulator without motor; trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69802-06080"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L43"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L43"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L43"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L43"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator, Front Left",
+     "ref": "www.toyotapartsnow.com:records:L43"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69802-33050 for both — plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #69802-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69802-33050"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L50"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator, Passenger Side",
+     "ref": "www.toyotapartsnow.com:records:L50"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L50"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L50"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator, Rear Right",
+     "ref": "www.toyotapartsnow.com:records:L50"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69803-06110 for both — plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #69803-06110 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69803-06110"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L1108"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator, Passenger Side",
+     "ref": "www.toyotapartsnow.com:records:L1108"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L1108"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L1108"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator, Rear Right",
+     "ref": "www.toyotapartsnow.com:records:L1108"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69803-06140 for both — trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #69803-06140 for both — regulator without motor; trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69803-06140"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L52"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly, Rear Door Window, Passenger Side",
+     "ref": "www.toyotapartsnow.com:records:L52"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L52"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L52"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator",
+     "ref": "www.toyotapartsnow.com:records:L52"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69803-33050 for both — plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #69803-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69803-33050"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L51"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L51"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L51"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L51"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator, Rear Left",
+     "ref": "www.toyotapartsnow.com:records:L51"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69804-06110 for both — plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #69804-06110 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69804-06110"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L1109"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L1109"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L1109"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L1109"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator, Rear Left",
+     "ref": "www.toyotapartsnow.com:records:L1109"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69804-06140 for both — trim-limited; verify the number on the part",
+   "old_note": "Toyota catalog lists #69804-06140 for both — regulator without motor; trim-limited; verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69804-06140"
+   ]
+  },
+  {
+   "cat": "window-regulator",
+   "change": "removed",
+   "kinds": [
+    "regulator"
+   ],
+   "names": [
+    {
+     "field": "record.aux",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L53"
+    },
+    {
+     "field": "record.description",
+     "kind": "regulator",
+     "name": "Window Regulator, Driver Side",
+     "ref": "www.toyotapartsnow.com:records:L53"
+    },
+    {
+     "field": "record.name",
+     "kind": "regulator",
+     "name": "Regulator",
+     "ref": "www.toyotapartsnow.com:records:L53"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Regulator Sub-Assembly",
+     "ref": "www.toyotapartsnow.com:records:L53"
+    },
+    {
+     "field": "record.other_names",
+     "kind": "regulator",
+     "name": "Window Regulator, Rear Left",
+     "ref": "www.toyotapartsnow.com:records:L53"
+    }
+   ],
+   "new_note": "Toyota catalog lists #69804-33050 for both — plant-specific (US / Japan built); verify the number on the part",
+   "old_note": "Toyota catalog lists #69804-33050 for both — regulator without motor; plant-specific (US / Japan built); verify the number on the part",
+   "pages": {},
+   "phrase": "regulator without motor",
+   "pn": [
+    "69804-33050"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L10"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L10"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:lists:L10"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L842"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L842"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:records:L842"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L842"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L842"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81551-0E010 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81551-0E010 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81551-0E010"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L164"
+    },
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L164"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GRS19#, URS190",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GRS191, 196, UZS190",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:lists:L164"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L777"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L777"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:records:L777"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L777"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L777"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81551-30A50 for both — lens and body unit; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #81551-30A50 for both — option: fits some option packages; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81551-30A50"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L9"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L9"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:lists:L9"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L839"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L839"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSU3#.. JPP",
+     "ref": "www.lexuspartsnow.com:records:L839"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:records:L839"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L839"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L839"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81551-48060 for both — lens and body unit; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #81551-48060 for both — option: fits some option packages; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81551-48060"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PNC 81555=TYPE A",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L289"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L289"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PNC 81555=TYPE A",
+     "ref": "www.lexuspartsnow.com:records:L289"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:records:L289"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L289"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L289"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81551-53170 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81551-53170 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81551-53170"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PNC 81555=TYPE B",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L290"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L290"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PNC 81555=TYPE B",
+     "ref": "www.lexuspartsnow.com:records:L290"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:records:L290"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L290"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L290"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81551-53171 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81551-53171 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81551-53171"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L121"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L121"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:lists:L121"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L416"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L416"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:records:L416"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L416"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L416"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81551-53240 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81551-53240 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81551-53240"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L120"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:lists:L120"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:lists:L120"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L414"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L414"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81551D",
+     "ref": "www.lexuspartsnow.com:records:L414"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L414"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, RH",
+     "ref": "www.lexuspartsnow.com:records:L414"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81551-53260 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81551-53260 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81551-53260"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L10"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L10"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:lists:L10"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L844"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L844"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:records:L844"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L844"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L844"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81561-0E010 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81561-0E010 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81561-0E010"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L164"
+    },
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L164"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GRS19#, URS190",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "GRS191, 196, UZS190",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:lists:L164"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:lists:L69"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L776"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L776"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:records:L776"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L776"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L776"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81561-30A40 for both — lens and body unit; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #81561-30A40 for both — option: fits some option packages; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81561-30A40"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L9"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L9"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:lists:L9"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L837"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L837"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "GSU3#.. JPP",
+     "ref": "www.lexuspartsnow.com:records:L837"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:records:L837"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L837"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L837"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81561-48060 for both — lens and body unit; option: fits some option packages; verify the number on the part",
+   "old_note": "Toyota catalog lists #81561-48060 for both — option: fits some option packages; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81561-48060"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PNC 81565=TYPE A",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L291"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L291"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PNC 81565=TYPE A",
+     "ref": "www.lexuspartsnow.com:records:L291"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:records:L291"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L291"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L291"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81561-53170 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81561-53170 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81561-53170"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "PNC 81565=TYPE B",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:lists:L104"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L292"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L292"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "PNC 81565=TYPE B",
+     "ref": "www.lexuspartsnow.com:records:L292"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:records:L292"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L292"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L292"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81561-53171 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81561-53171 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81561-53171"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L121"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L121"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:lists:L121"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L417"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L417"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:records:L417"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L417"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L417"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81561-53230 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81561-53230 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81561-53230"
+   ]
+  },
+  {
+   "cat": "tail-lights",
+   "change": "phrase",
+   "kinds": [
+    "lens-body"
+   ],
+   "names": [
+    {
+     "field": "list.group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L120"
+    },
+    {
+     "field": "list.main",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:lists:L120"
+    },
+    {
+     "field": "list.notes",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:lists:L120"
+    },
+    {
+     "field": "record.description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L415"
+    },
+    {
+     "field": "record.list_group",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L415"
+    },
+    {
+     "field": "record.list_info",
+     "kind": null,
+     "name": "Part Name Code: 81561D",
+     "ref": "www.lexuspartsnow.com:records:L415"
+    },
+    {
+     "field": "record.name",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L415"
+    },
+    {
+     "field": "record.part_description",
+     "kind": "lens-body",
+     "name": "Lens & Body, Rear Combination Lamp, LH",
+     "ref": "www.lexuspartsnow.com:records:L415"
+    }
+   ],
+   "new_note": "Toyota catalog lists #81561-53260 for both — lens and body unit; fits some configurations; verify the number on the part",
+   "old_note": "Toyota catalog lists #81561-53260 for both — fits some configurations; verify the number on the part",
+   "pages": null,
+   "phrase": "lens and body unit",
+   "pn": [
+    "81561-53260"
+   ]
+  }
+ ]
+}

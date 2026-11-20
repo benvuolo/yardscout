@@ -133,6 +133,10 @@ class Curation:
         self.raw_meta: dict = {}
         self.records: list[A.Record] = []
         self.list_rows: list[A.ListRow] = []
+        # round11c: list rows of the continuation parts (raw/<site>.lists.N.jsonl,
+        # line numbers counted across the parts); read for the naming reading
+        # and page tests of round 11 only, never for claims
+        self.list_rows_more: list[A.ListRow] = []
         self.years: list[A.YearManifest] = []
         self.blocked: set = set()
         self.unknown_clauses: Counter = Counter()
@@ -183,6 +187,16 @@ class Curation:
                         meta["years"] += 1
             if present:
                 self.raw_meta[site] = meta
+            first = self.src.read(f"raw/{site}.lists.jsonl")
+            off, n = (first.count("\n") if first else 0), 2
+            while self.src.has(site, f".lists.{n}.jsonl"):
+                t2 = self.src.read(f"raw/{site}.lists.{n}.jsonl") or ""
+                p2 = A.parse_jsonl(t2, self.o.fixtures)
+                if not p2.refused:
+                    for line, o in p2.objs:
+                        self.list_rows_more += A.to_list_rows(site, off + line, o)
+                off += t2.count("\n")
+                n += 1
         self.records.sort(key=lambda r: (r.site, r.line))
         self.list_rows.sort(key=lambda r: (r.site, r.line, r.pn))
         self.years.sort(key=lambda y: (y.site, y.line))
@@ -1422,6 +1436,7 @@ class Curation:
         self.released_exterior = []
         self.round9_rows, self.round9_names = [], []
         self.round10_rows = []
+        self.round11_rows = []
         brand0 = brand
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
@@ -1919,6 +1934,28 @@ class Curation:
                                 detail=why10[1][:200])
                     self.round10_rows.append(dict(row, change="held", reason=why10[0], detail=why10[1]))
                     continue
+            if self.ns in ROUND11_NS and cat in ("bumper-front", "bumper-rear", "tail-lights", "window-regulator"):
+                r11 = self._r11_words(c, cat, note, slot)
+                if r11:
+                    row = {"cat": cat, "pn": pns, "kinds": r11["kinds"], "names": r11["names"], "old_note": note}
+                    why11 = r11.get("hold")
+                    if not why11 and r11.get("remove"):
+                        note = _likely_note(brand, pns[0], text, "")
+                        self.round11_rows.append(dict(row, change="removed", phrase=r11["remove"], new_note=note,
+                                                      pages=r11.get("pages")))
+                    elif not why11 and r11.get("phrase"):
+                        if not _likely_note_fits(brand, pns[0], text, r11["phrase"]):
+                            why11 = ("held_words_cap", f"'{r11['phrase']}' takes the note past "
+                                                       f"{policy.NOTE_MAX_LEN} characters")
+                        else:
+                            note = _likely_note(brand, pns[0], text, r11["phrase"])
+                            self.round11_rows.append(dict(row, change="phrase", phrase=r11["phrase"],
+                                                          new_note=note, pages=r11.get("pages")))
+                    if why11:
+                        self.refuse(why11[0], cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                                    detail=why11[1][:200])
+                        self.round11_rows.append(dict(row, change="held", reason=why11[0], detail=why11[1]))
+                        continue
             if self.ns in ROUND9_NS:
                 nm = self._name_class(c, cat)
                 self.round9_names.append({"cat": cat, "pn": pns, "class": nm["class"], "names": nm["names"],
@@ -3434,6 +3471,157 @@ class Curation:
         if "motor" in kinds and kinds & {"regulator", "regulator+motor"}:
             return {"kinds": sorted(kinds),
                     "names": [{"field": f, "name": n, "ref": p_, "kind": _kind10b(n) or None} for f, n, p_ in names]}
+        return None
+
+    def _r11c_rows(self, key, cat) -> list:
+        """List rows of the number on every page of every raw part, whatever
+        category the page was read for (Ford prints 'ELECTRIC - LESS MOTOR AND
+        DRIVE' for F67Z-7823208-AA on its door pages)."""
+        idx = self.__dict__.get("_r11c_pn")
+        if idx is None:
+            idx = defaultdict(list)
+            for lr in list(self.list_rows) + list(self.list_rows_more):
+                idx[policy.pn_key(self.ns, lr.pn)].append(lr)
+            self._r11c_pn = idx
+        return idx.get(key, [])
+
+    def _r11c_page(self, url) -> list:
+        idx = self.__dict__.get("_r11c_url")
+        if idx is None:
+            idx = defaultdict(list)
+            for lr in list(self.list_rows) + list(self.list_rows_more):
+                idx[lr.list_url].append(lr)
+            self._r11c_url = idx
+        return idx.get(url, [])
+
+    def _wide_names11(self, c, cat) -> list:
+        """round11c: [(field, value, 'site:file:Lline')] every naming or
+        describing field the raw prints for the number. List rows on every page
+        of every raw part: main, aux, group, remark, notes (keyed location /
+        callout / replaced-by / production-date lines aside). Product records:
+        name, aux, description, other_names, list_group, list_remark,
+        list_info, 'Part Description:' lines. ';'-separated values apart."""
+        out = set()
+
+        def add(fld, val, ref):
+            for n in str(val or "").split(";"):
+                n = n.strip()
+                if n and not _R11C_SKIP_RE.match(n) and not (cat != "window-regulator" and _R11C_FIT_RE.match(n)):
+                    out.add((fld, n, ref))
+        for lr in self._r11c_rows(c.key, cat):
+            ref = f"{lr.site}:lists:L{lr.line}"
+            for fld in ("main", "aux", "group"):
+                add(f"list.{fld}", getattr(lr, fld, ""), ref)
+            # the remark continues the row's name (GM "MOTOR" + "REAR SIDE DOOR
+            # WINDOW REGULATOR" = "MOTOR, REAR SIDE DOOR WINDOW REGULATOR"): read
+            # with it, never alone
+            if lr.remark:
+                add("list.main+remark", f"{lr.main}, {lr.remark}" if lr.main else lr.remark, ref)
+            for n in lr.notes or []:
+                add("list.notes", n, ref)
+        for r in c.records:
+            raw = r.raw or {}
+            for fld in ("name", "aux", "description", "other_names"):
+                add(f"record.{fld}", getattr(r, fld, ""), r.pointer)
+            add("record.list_group", raw.get("list_group"), r.pointer)
+            rem = str(raw.get("list_remark") or "").strip()
+            if rem and rem.lower() not in str(r.name or "").lower():
+                add("record.name+list_remark", f"{r.name}, {rem}" if r.name else rem, r.pointer)
+            for n in raw.get("list_info") or []:
+                add("record.list_info", n, r.pointer)
+            for n in raw.get("evidence_lines") or []:
+                m = re.match(r"^\s*part\s+description\s*:\s*(.+)$", str(n), re.I)
+                if m:
+                    add("record.part_description", m.group(1), r.pointer)
+        return sorted(out)
+
+    def _r11c_page_has(self, c, cat, kind) -> dict:
+        """{own page url: [other numbers on it whose name is of `kind`]} over
+        every page of every raw part that lists the number in cat."""
+        urls = sorted({lr.list_url for lr in self._r11c_rows(c.key, cat) if lr.list_url})
+        return {u: sorted({f"{o.pn} {o.main}".strip() for o in self._r11c_page(u)
+                           if policy.pn_key(self.ns, o.pn) != c.key
+                           and any(_kind11(cat, x) == kind for x in (o.main, o.aux, o.group) if x)}) for u in urls}
+
+    def _r11_words(self, c, cat, note, slot) -> dict | None:
+        """round11 / 11c: None when the round adds, removes and holds nothing for
+        the group, else {kinds, names, phrase | remove | hold, pages}."""
+        names = self._wide_names11(c, cat)
+        vals = [{"field": f, "name": n, "ref": p_, "kind": _kind11(cat, n) or None} for f, n, p_ in names]
+        kinds = sorted({v["kind"] for v in vals if v["kind"]})
+        out = {"kinds": kinds, "names": vals}
+        has_now = [w for w in PACK_TEXT.values() if f"— {w}; " in note]
+        if cat in ("bumper-front", "bumper-rear"):
+            other = [k for k in kinds if k in _R11_BUMPER_OTHER]
+            if other:
+                out["hold"] = ("held_part_other", "a value names a part other than the bumper cover or the bumper ("
+                               + "/".join(other) + ")")
+                return out
+            if "cover" not in kinds:
+                # round11c: a bare bumper whose own page lists a separate bumper
+                # cover for the vehicle is the bar behind the cover in this
+                # catalog, unless a value says chrome, face bar or bar only
+                if kinds == ["bumper"]:
+                    covers = self._r11c_page_has(c, cat, "cover")
+                    if any(covers.values()):
+                        out["pages"] = covers
+                        out["hold"] = ("held_bumper_bar", "named only 'Bumper' while its own page lists a separate "
+                                                          "bumper cover")
+                        return out
+                return None
+            if len(kinds) > 1:
+                out["hold"] = ("held_name_disagree", "the names disagree in kind (" + "/".join(kinds) + ")")
+            else:
+                reinf = self._r11c_page_has(c, cat, "reinforcement")
+                out["pages"] = reinf
+                out["phrase"] = _R11_PHRASE["cover_only"] if reinf and all(reinf.values()) else _R11_PHRASE["cover"]
+            return out
+        if cat == "tail-lights":
+            if "lens-body" not in kinds:
+                return None
+            if set(kinds) - {"lens-body", "assembly"}:
+                out["hold"] = ("held_name_disagree", "the names disagree in kind (" + "/".join(kinds) + ")")
+                return out
+            if "assembly" in kinds:
+                return None     # hub ruling 11c: lamp assembly and lens and body are one unit; no words
+            out["phrase"] = _R11_PHRASE["lens-body"]
+            return out
+        # window-regulator
+        if "motor" in kinds and set(kinds) & {"regulator", "regulator+motor", "regulator-less"}:
+            out["hold"] = ("held_name_disagree", "the names disagree in kind (" + "/".join(kinds) + ")")
+            return out
+        if {"regulator+motor", "regulator-less"} <= set(kinds):
+            out["hold"] = ("held_name_disagree", "one value has the motor, another says less motor")
+            return out
+        rec = [v["kind"] for v in vals if v["field"] == "record.name"]
+        lst = [v["kind"] for v in vals if v["field"] == "list.main"]
+        if (rec and all(k == "regulator+motor" for k in rec) and all(k in ("regulator+motor", "regulator") for k in lst)) \
+                or (not rec and lst and all(k == "regulator+motor" for k in lst)):
+            if _R11_PHRASE["regulator+motor"] in has_now:
+                return None
+            if has_now:
+                out["hold"] = ("held_part_name", "regulator with motor by name, the note says '" + has_now[0] + "'")
+            else:
+                out["phrase"] = _R11_PHRASE["regulator+motor"]
+            return out
+        less = PACK_TEXT["reg"]
+        if "regulator-less" in kinds:
+            if less in has_now:
+                return None
+            if has_now:
+                out["hold"] = ("held_part_name", "a value says less motor, the note says '" + has_now[0] + "'")
+            else:
+                out["phrase"] = less
+            return out
+        if less in has_now:
+            # round11c: 'regulator without motor' needs a basis: a value saying
+            # so, or every own page listing the motor as a separate number
+            motors = self._r11c_page_has(c, cat, "motor")
+            out["pages"] = motors
+            if motors and all(motors.values()):
+                return None
+            out["remove"] = less
+            return out
         return None
 
     def _r10_class(self, c, cat) -> dict:
@@ -5798,6 +5986,77 @@ def _kind10b(name: str) -> str:
     return "regulator" if _R10B_REG_RE.search(name) else ""
 
 
+# round11-1120 (hub 2026-11-20, from round 10's item-4 measure): packaging
+# words read from every naming field the raw prints (as round 10b), on every
+# live namespace. bumper-front / bumper-rear: a number named as the cover
+# ("Cover, Front Bumper", "Bumper Cover", "Fascia") says "bumper cover", and
+# "bumper cover only" when each of its own pages lists a reinforcement as a
+# separate number; "Cover, Front Bumper Guard" says "bumper guard cover".
+# tail-lights: "Lens & Body" (or "Lens & Housing") says "lens and body unit".
+# window-regulator: a number whose name fields all name the regulator with its
+# motor says "regulator with motor". Values that disagree in kind (a cover
+# beside a bumper or reinforcement, a lens-and-body unit beside a lamp
+# assembly, a motor beside a regulator) hold the group, as does a note the
+# words would take past the cap or a group whose note already carries other
+# packaging words. Nothing else in a group changes.
+ROUND11_NS = frozenset({"gm", "mopar", "toyota", "ford", "hmg", "subaru", "vag", "mb", "nissan"})
+# round11b (hub review 2026-11-20): a person looking for a bumper is never sent
+# to a donor for another part, whatever the note says. Under bumper-front /
+# bumper-rear a number whose naming values name a part other than the bumper
+# cover or the bumper itself is held: these kinds.
+_R11_BUMPER_OTHER = ("guard cover", "tow-hook cover", "grille", "moulding", "reinforcement", "bracket", "absorber")
+_R11_PHRASE = {"cover": "bumper cover", "cover_only": "bumper cover only",
+               "lens-body": "lens and body unit", "regulator+motor": "regulator with motor"}
+
+
+def _kind11(cat: str, name: str) -> str:
+    """The kind one naming value carries in cat ('' says nothing)."""
+    if cat in ("bumper-front", "bumper-rear"):
+        if re.search(r"(?<!w/o\s)(?<!without\s)\bchrome\b|face\s*bar|\bbar\s+only\b", name, re.I):
+            return "bar"
+        if re.search(r"bumper\s+guard|\bguard\b", name, re.I):
+            return "guard cover"
+        if re.search(r"tow(?:ing)?[\s-]*(?:hook|eye)", name, re.I):
+            return "tow-hook cover"
+        if re.search(r"\bgrille\b", name, re.I):
+            return "grille"
+        if re.search(r"\bmou?ld(?:ing)?s?\b", name, re.I):
+            return "moulding"
+        if re.search(r"reinf|impact\s+bar|\bbeam\b", name, re.I):
+            return "reinforcement"
+        if re.search(r"bracket|\bbrkt\b|\bstay\b|\bretainer\b|\bsupport\b", name, re.I):
+            return "bracket"
+        if re.search(r"absorber|\bfoam\b|isolator", name, re.I):
+            return "absorber"
+        if re.search(r"\bcover\b|\bfascia\b", name, re.I):
+            return "cover"
+        return "bumper" if re.search(r"\bbumper\b|face\s*bar", name, re.I) else ""
+    if cat == "tail-lights":
+        if re.search(r"lens\s*(?:&|and)\s*(?:body|housing)", name, re.I):
+            return "lens-body"
+        if re.search(r"^\s*lens\b", name, re.I):
+            return "lens"
+        if re.search(r"bulb|socket|harness|\bwire\b", name, re.I):
+            return "socket"
+        return "assembly" if re.search(r"\bass(?:y|embly)\b", name, re.I) else ""
+    if cat == "window-regulator":
+        if re.search(r"\b(?:w/o|without|less)\s*(?:the\s+)?(?:window\s+)?motor\b", name, re.I):
+            return "regulator-less"
+        if re.search(r"\bincludes?\s+motor\b", name, re.I):
+            return "regulator+motor"
+        return _kind10b(name)
+    return ""
+
+
+# round11c: keyed list notes / list_info lines that never name the part
+_R11C_SKIP_RE = re.compile(r"^\s*(?:location|callout(?:\s+name)?|replaced\s+by|replaces|superseded\s+by|"
+                           r"production\s+date|quantity|qty|position|base\s+number)\s*:", re.I)
+# fit notes / option columns state the vehicle's equipment ("Less Rear Towing
+# Hooks", "Single Chrome exhaust"), not the part: not read for bumpers or lamps
+_R11C_FIT_RE = re.compile(r"^\s*(?:fit\s+note|fitting\s+vehicle\s+options|important\s+vehicle\s+option\s+details)"
+                          r"\s*:", re.I)
+
+
 _R10_REG_RE = re.compile(r"^\s*(?:power\s+)?(?:(?:front|rear)\s+)?(?:door\s+)?(?:window\s+)?regulator\b", re.I)
 _NAME_MOTOR_RE = re.compile(r"^\s*motor\s+ass(?:y|embly)\b", re.I)
 _NAME_REG_RE = re.compile(r"^\s*regulator\s+ass(?:y|embly)\b", re.I)
@@ -6474,6 +6733,17 @@ def main(argv=None) -> int:
                 "ns": ns, "raw": results[ns].src.commit or "fixtures",
                 "changed": sum(r["change"] == "phrase" for r in r10), "held": sum(r["change"] == "held" for r in r10),
                 "rows": r10})
+        r11 = getattr(results[ns], "round11_rows", None)
+        if ns in ROUND11_NS and r11:
+            write_json(out / "_report" / f"{ns}.round11.json", {
+                "note": "round11-1120: packaging words from every naming field (bumper cover, bumper guard cover, "
+                        "lens and body unit, regulator with motor) on the finished note (change 'phrase'); names "
+                        "that disagree in kind, a note past the cap, or other words already on the note hold the "
+                        "group (change 'held'). Names with field, kind and site:file:line.",
+                "ns": ns, "raw": results[ns].src.commit or "fixtures",
+                "changed": sum(r["change"] == "phrase" for r in r11), "held": sum(r["change"] == "held" for r in r11),
+                "removed": sum(r["change"] == "removed" for r in r11),
+                "rows": r11})
         r7 = getattr(results[ns], "round7_held", None)
         if r7:
             write_json(out / "_report" / f"{ns}.round7_held.json", {

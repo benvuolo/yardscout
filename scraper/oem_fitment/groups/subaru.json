@@ -20869,7 +20869,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FR:8320b0ed7c",
    "kind": "body",
-   "note": "Subaru catalog lists #61041AL00A for both — option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #61041AL00A for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:23:33Z",
    "pn": [
     "61041AL00A"
@@ -20896,7 +20896,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL:661ca5e9e9",
    "kind": "body",
-   "note": "Subaru catalog lists #61041AL01A for both — option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #61041AL01A for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:23:25Z",
    "pn": [
     "61041AL01A"
@@ -20923,7 +20923,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FR:d817e2de1f",
    "kind": "body",
-   "note": "Subaru catalog lists #61041AL02A for both — option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #61041AL02A for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:23:41Z",
    "pn": [
     "61041AL02A"
@@ -20950,7 +20950,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RR:c61223d269",
    "kind": "body",
-   "note": "Subaru catalog lists #61042AL00A for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #61042AL00A for both — regulator with motor; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:24:05Z",
    "pn": [
     "61042AL00A"
@@ -20977,7 +20977,7 @@
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RL:91c549f117",
    "kind": "body",
-   "note": "Subaru catalog lists #61042AL01A for both — fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #61042AL01A for both — regulator with motor; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:23:57Z",
    "pn": [
     "61042AL01A"

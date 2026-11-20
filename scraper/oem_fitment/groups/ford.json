@@ -87482,34 +87482,6 @@
    ],
    "reman": false
   },
-  "ford:2L1Z17757BA": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4298"
-   ],
-   "names": [
-    "Bumper Assy - Front"
-   ],
-   "pns": [
-    "2L1Z-17757-BA"
-   ],
-   "reman": false
-  },
-  "ford:2L1Z17757BACP": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4299"
-   ],
-   "names": [
-    "Bumper Assy - Front"
-   ],
-   "pns": [
-    "2L1Z-17757-BACP"
-   ],
-   "reman": false
-  },
   "ford:5F9Z14529BAC": {
    "cat": "window-switch",
    "comp": null,
@@ -87692,34 +87664,6 @@
    ],
    "reman": false
   },
-  "ford:5G1Z5423208AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1953"
-   ],
-   "names": [
-    "Regulator And Motor Assy - Window"
-   ],
-   "pns": [
-    "5G1Z-5423208-AA"
-   ],
-   "reman": false
-  },
-  "ford:5G1Z5423209AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1954"
-   ],
-   "names": [
-    "Regulator And Motor Assy - Window"
-   ],
-   "pns": [
-    "5G1Z-5423209-AA"
-   ],
-   "reman": false
-  },
   "ford:5G1Z5423395A": {
    "cat": "window-regulator",
    "comp": "motor",
@@ -87790,34 +87734,6 @@
    ],
    "reman": false
   },
-  "ford:6E5Z17906AA": {
-   "cat": "bumper-rear",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4590"
-   ],
-   "names": [
-    "Bumper Asy - Rear"
-   ],
-   "pns": [
-    "6E5Z-17906-AA"
-   ],
-   "reman": false
-  },
-  "ford:7L1Z17757A": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4929"
-   ],
-   "names": [
-    "Bumper"
-   ],
-   "pns": [
-    "7L1Z-17757-A"
-   ],
-   "reman": false
-  },
   "ford:8A5Z14529AB": {
    "cat": "window-switch",
    "comp": null,
@@ -87829,20 +87745,6 @@
    ],
    "pns": [
     "8A5Z-14529-AB"
-   ],
-   "reman": false
-  },
-  "ford:8A8Z17757A": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5379"
-   ],
-   "names": [
-    "Bumper"
-   ],
-   "pns": [
-    "8A8Z-17757-A"
    ],
    "reman": false
   },
@@ -87888,62 +87790,6 @@
    ],
    "reman": false
   },
-  "ford:AE5Z17757A": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3955"
-   ],
-   "names": [
-    "Bumper Assy - Front"
-   ],
-   "pns": [
-    "AE5Z-17757-A"
-   ],
-   "reman": false
-  },
-  "ford:AE5Z17757ACP": {
-   "cat": "bumper-front",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3956"
-   ],
-   "names": [
-    "Bumper Assy - Front"
-   ],
-   "pns": [
-    "AE5Z-17757-ACP"
-   ],
-   "reman": false
-  },
-  "ford:AE5Z17906A": {
-   "cat": "bumper-rear",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3957"
-   ],
-   "names": [
-    "Bumper Assy - Rear"
-   ],
-   "pns": [
-    "AE5Z-17906-A"
-   ],
-   "reman": false
-  },
-  "ford:AE5Z17906ACP": {
-   "cat": "bumper-rear",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3958"
-   ],
-   "names": [
-    "Bumper Assy - Rear"
-   ],
-   "pns": [
-    "AE5Z-17906-ACP"
-   ],
-   "reman": false
-  },
   "ford:BE5Z10849AC": {
    "cat": "gauge-cluster",
    "comp": null,
@@ -87955,34 +87801,6 @@
    ],
    "pns": [
     "BE5Z-10849-AC"
-   ],
-   "reman": false
-  },
-  "ford:BT4Z17906A": {
-   "cat": "bumper-rear",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4043"
-   ],
-   "names": [
-    "Bumper Assy - Rear"
-   ],
-   "pns": [
-    "BT4Z-17906-A"
-   ],
-   "reman": false
-  },
-  "ford:BT4Z17906ACP": {
-   "cat": "bumper-rear",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4044"
-   ],
-   "names": [
-    "Bumper Assy - Rear"
-   ],
-   "pns": [
-    "BT4Z-17906-ACP"
    ],
    "reman": false
   },
@@ -88011,20 +87829,6 @@
    ],
    "pns": [
     "CV6Z-5423395-B"
-   ],
-   "reman": false
-  },
-  "ford:DG9Z17906A": {
-   "cat": "bumper-rear",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4098"
-   ],
-   "names": [
-    "Beam Asy"
-   ],
-   "pns": [
-    "DG9Z-17906-A"
    ],
    "reman": false
   },
@@ -99401,60 +99205,6 @@
    "apps": [
     [
      "Ford",
-     "Expedition",
-     2003,
-     2003
-    ],
-    [
-     "Lincoln",
-     "Navigator",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 572,
-   "cat": "bumper-front",
-   "id": "oem:ford:bumper-front:C:580b60e8f2",
-   "kind": "body",
-   "note": "Ford catalog lists #2L1Z-17757-BA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T00:19:56Z",
-   "pn": [
-    "2L1Z-17757-BA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Expedition",
-     2003,
-     2003
-    ],
-    [
-     "Lincoln",
-     "Navigator",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 572,
-   "cat": "bumper-front",
-   "id": "oem:ford:bumper-front:C:eea3e7b6aa",
-   "kind": "body",
-   "note": "Ford catalog lists #2L1Z-17757-BACP for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T00:20:04Z",
-   "pn": [
-    "2L1Z-17757-BACP"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
      "Five Hundred",
      2005,
      2005
@@ -99857,60 +99607,6 @@
    ],
    "cars": 203,
    "cat": "window-regulator",
-   "id": "oem:ford:window-regulator:FR:a7f2df176a",
-   "kind": "body",
-   "note": "Ford catalog lists #5G1Z-5423208-AA for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:24:45Z",
-   "pn": [
-    "5G1Z-5423208-AA"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Five Hundred",
-     2005,
-     2005
-    ],
-    [
-     "Mercury",
-     "Montego",
-     2005,
-     2005
-    ]
-   ],
-   "cars": 203,
-   "cat": "window-regulator",
-   "id": "oem:ford:window-regulator:FL:c394cfe148",
-   "kind": "body",
-   "note": "Ford catalog lists #5G1Z-5423209-AA for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:24:53Z",
-   "pn": [
-    "5G1Z-5423209-AA"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Five Hundred",
-     2005,
-     2005
-    ],
-    [
-     "Mercury",
-     "Montego",
-     2005,
-     2005
-    ]
-   ],
-   "cars": 203,
-   "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL:2356112536",
    "kind": "body",
    "note": "Ford catalog lists #5G1Z-5423395-A for both — window motor only; fits some configurations; verify the number on the part",
@@ -100032,60 +99728,6 @@
   {
    "apps": [
     [
-     "Ford",
-     "Fusion",
-     2008,
-     2008
-    ],
-    [
-     "Lincoln",
-     "MKZ",
-     2008,
-     2008
-    ]
-   ],
-   "cars": 384,
-   "cat": "bumper-rear",
-   "id": "oem:ford:bumper-rear:C:ae5b223866",
-   "kind": "body",
-   "note": "Ford catalog lists #6E5Z-17906-AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T01:10:25Z",
-   "pn": [
-    "6E5Z-17906-AA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Expedition",
-     2007,
-     2007
-    ],
-    [
-     "Lincoln",
-     "Navigator",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 256,
-   "cat": "bumper-front",
-   "id": "oem:ford:bumper-front:C:601502a849",
-   "kind": "body",
-   "note": "Ford catalog lists #7L1Z-17757-A for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T03:14:51Z",
-   "pn": [
-    "7L1Z-17757-A"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Lincoln",
      "MKS",
      2009,
@@ -100106,33 +99748,6 @@
    "oldest_retrieved": "2026-11-05T11:14:19Z",
    "pn": [
     "8A5Z-14529-AB"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Flex",
-     2009,
-     2009
-    ],
-    [
-     "Lincoln",
-     "MKS",
-     2009,
-     2009
-    ]
-   ],
-   "cars": 224,
-   "cat": "bumper-front",
-   "id": "oem:ford:bumper-front:C:4ee47f3ec0",
-   "kind": "body",
-   "note": "Ford catalog lists #8A8Z-17757-A for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:58:53Z",
-   "pn": [
-    "8A8Z-17757-A"
    ],
    "reason": "conditional",
    "tier": "likely"
@@ -100249,138 +99864,6 @@
     [
      "Lincoln",
      "MKZ",
-     2010,
-     2012
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 1005,
-   "cat": "bumper-front",
-   "id": "oem:ford:bumper-front:C:f078f08633",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-17757-A for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T23:16:17Z",
-   "pn": [
-    "AE5Z-17757-A"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Fusion",
-     2012,
-     2012
-    ],
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2012
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 1005,
-   "cat": "bumper-front",
-   "id": "oem:ford:bumper-front:C:f5ddb56a94",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-17757-ACP for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T23:16:25Z",
-   "pn": [
-    "AE5Z-17757-ACP"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Fusion",
-     2012,
-     2012
-    ],
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2012
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 1005,
-   "cat": "bumper-rear",
-   "id": "oem:ford:bumper-rear:C:280f9df4b7",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-17906-A for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T23:16:41Z",
-   "pn": [
-    "AE5Z-17906-A"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Fusion",
-     2012,
-     2012
-    ],
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2012
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 1005,
-   "cat": "bumper-rear",
-   "id": "oem:ford:bumper-rear:C:2ab606ebcb",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-17906-ACP for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T23:16:49Z",
-   "pn": [
-    "AE5Z-17906-ACP"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Fusion",
-     2012,
-     2012
-    ],
-    [
-     "Lincoln",
-     "MKZ",
      2012,
      2012
     ]
@@ -100421,60 +99904,6 @@
     "BE5Z-10849-AC"
    ],
    "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Edge",
-     2013,
-     2013
-    ],
-    [
-     "Lincoln",
-     "MKX",
-     2011,
-     2011
-    ]
-   ],
-   "cars": 396,
-   "cat": "bumper-rear",
-   "id": "oem:ford:bumper-rear:C:f557171499",
-   "kind": "body",
-   "note": "Ford catalog lists #BT4Z-17906-A for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T23:29:53Z",
-   "pn": [
-    "BT4Z-17906-A"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Edge",
-     2013,
-     2013
-    ],
-    [
-     "Lincoln",
-     "MKX",
-     2011,
-     2011
-    ]
-   ],
-   "cars": 396,
-   "cat": "bumper-rear",
-   "id": "oem:ford:bumper-rear:C:ea96245317",
-   "kind": "body",
-   "note": "Ford catalog lists #BT4Z-17906-ACP for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T23:30:01Z",
-   "pn": [
-    "BT4Z-17906-ACP"
-   ],
-   "reason": "conditional",
    "tier": "likely"
   },
   {
@@ -100529,39 +99958,6 @@
     "CV6Z-5423395-B"
    ],
    "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Fusion",
-     2014,
-     2014
-    ],
-    [
-     "Ford",
-     "Fusion",
-     2017,
-     2017
-    ],
-    [
-     "Lincoln",
-     "MKZ",
-     2014,
-     2014
-    ]
-   ],
-   "cars": 755,
-   "cat": "bumper-rear",
-   "id": "oem:ford:bumper-rear:C:dc56b30291",
-   "kind": "body",
-   "note": "Ford catalog lists #DG9Z-17906-A for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T23:39:02Z",
-   "pn": [
-    "DG9Z-17906-A"
-   ],
-   "reason": "trim",
    "tier": "likely"
   },
   {
@@ -100715,7 +100111,7 @@
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FR:1cb61a3728",
    "kind": "body",
-   "note": "Ford catalog lists #F67Z-7823208-AA for both — fits some configurations; verify the number on the part",
+   "note": "Ford catalog lists #F67Z-7823208-AA for both — regulator without motor; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:57:24Z",
    "pn": [
     "F67Z-7823208-AA"
