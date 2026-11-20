@@ -63,3 +63,38 @@ self-promotion (or asks its moderators first), and posts it themselves.
 America/Denver, a fresh session each run, push notification when it has
 drafts. The owner added the Gmail connector in the Claude app on 2026-11-13 (a
 session cannot attach one through the API here); enabled since 16:58 UTC.
+
+## One-generation posts (owner, 2026-11-20: "this would be for just 3rd gens")
+
+The owner posts in generation-specific subreddits too. `tools/landed_post.py`
+has no year filter yet; on 11-20 the hub cut the 3rd gen list (1996 to 2002)
+out of the tool's full output by script and recounted (38 cars, 15 states, 9
+confirmed 4x4, from the 13:40 UTC scan). To do: a `--years 1996-2002` option
+on the tool (title and counts for that range, no generation sub-headings),
+and a year range on the public landed page so the link can match the post.
+Link form for posts since 11-20: the visible text
+`yardscout.io/landed/<make>/<model>`, linked to the same address with
+`?s=reddit` (the landed pages count views and sources since 11-20).
+Correction the same day (owner: the landed page shows every generation):
+for a one-generation post the link is the app's own year-filtered list,
+`https://yardscout.io/?utm_source=reddit&utm_medium=post&utm_campaign=<model>-<gen>#cars=Make%7CModel%7C1996-2002`
+(the `#cars=` link takes `<make>|<model>|<years>`), put behind the visible
+text `yardscout.io` as a hyperlink. Checked live 11-20: near 90001 it
+opened the Cars tab with 33 cars, 1997 to 2002 only. One closing sentence
+names the iPhone and Android apps without store links.
+Apps in a post (owner asked 11-20 whether to link the stores or spell them
+out): neither. Use the existing say-it-out-loud address `yardscout.io/app`
+(phones go straight to their own store, everything else to the site; made
+11-02 because people who searched the store by name sometimes landed on
+another app). Visible text `yardscout.io/app`, linked to the same address
+with the post's `utm_*` tags (Play receives them as the install referrer).
+
+Done 11-20 (hub): `tools/landed_post.py` takes `--years 1996-2002 --label
+"3rd gen"` (only those model years; title, counts and link for that range),
+and every post it writes now ends with the two agreed lines: the visible
+`yardscout.io` linked to the tagged, filtered list, and the apps through
+`yardscout.io/app`. Example:
+
+    python3 tools/landed_post.py Toyota 4Runner --years 1996-2002 --label "3rd gen"
+
+Still to do: a year range on the public landed page.

@@ -3626,3 +3626,37 @@ Canonical and og:url never carry the parameter. Daily ops email gains
   packaging words, 7 groups held); sent back once to hold the two Lexus
   bumper guard covers and census the bumper categories for parts that are
   not the cover; an independent check follows.
+
+## 2026-11-20 18:25 UTC round 11: independent check FAILED (4 WRONG); sent back; nothing merged
+
+- Round 11b (`interchange/round11-1120` head e9024bd6): 72 notes gain a
+  packaging phrase (toyota "bumper cover only" 25, "bumper cover" 14,
+  "lens and body unit" 14; mopar and vag "bumper cover" 1 each;
+  "regulator with motor" subaru 5, ford 2, gm 10); 15 groups held (gm 5
+  regulators with a "Window Motor" description, toyota 2 Camry lamps and 2
+  Lexus guard covers, ford 6 bumpers whose description says "Impact Bar"
+  or whose name is a beam: 5,016 plain rows). Hub's own check passed (72
+  note-only changes, 15 removals, nothing else).
+- **Independent check** (fresh agent, blind, all 374 groups of the four
+  categories on nine makes; branch `interchange/verify-round11-names-1120`
+  head 4f04e93a): 248 RIGHT, **4 WRONG**, 122 RISK.
+  - ford 5G1Z-5423208-AA / -209-AA: new note "regulator with motor"; the
+    list group and `list_info` say "Less Motor".
+  - ford AE5Z-17757-ACP and AE5Z-17906-ACP (live, untouched by the
+    round): named "Bumper Assy", `list_info` "Impact Bar - Steel".
+  - All 25 "bumper cover only" notes passed (a separate reinforcement
+    number on every claimed page).
+  - RISK worth acting on: 22 toyota notes say "regulator without motor"
+    with no value saying so; four more ford bumpers named only "Bumper
+    Assy" on pages that list a separate cover; six ford tail lamps named
+    "Lamp Assy" with `list_info` "Body and lens".
+- Hub's decisions for round 11c: every naming or describing field counts,
+  the list group and `list_info` included; "without motor" needs a value
+  or a separate motor number on every one of the number's pages, else the
+  phrase goes; a number named only "Bumper Assy" on a page that lists a
+  separate cover is held; "lamp assembly" and "lens and body" are the same
+  unit to a picker, so that pair is not a disagreement (the two Camry
+  lamps come back, no phrase). Then a new independent check.
+- Also live since 17:54 UTC: landed pages count views and sources. The
+  owner has the full 4Runner post with the clean link (text
+  `yardscout.io/landed/toyota/4runner`, target with `?s=reddit`).
