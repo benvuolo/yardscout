@@ -6513,3 +6513,39 @@ rule of the next round can decide whether a description like this is the catalog
 - the other groups files are byte-identical.
 
 test_round11_1120: 52 checks, 0 failures.
+
+## 2026-11-20 — independent check: round 11 packaging names (branch interchange/verify-round11-names-1120)
+
+Blind check of the packaging words in live notes at e9024bd6, every `likely` group with cat
+bumper-front / bumper-rear / tail-lights / window-regulator in all nine groups files (374 groups),
+against raw naming values streamed from git (dca9cd84 for gm ford mopar toyota subaru vag;
+57e8b5b9 for nissan; hmg and mb have no groups in these cats). All numbered continuation parts read
+(gm lists 1-5, ford lists 1-2). Output: `scraper/oem_fitment/groups/_report/round11_names_verify_2026-11-20.json`.
+
+**Result: FAIL — 4 WRONG, 122 RISK, 248 RIGHT. All notes <= 160 chars (max 159).**
+
+WRONG:
+- ford window-regulator 5G1Z-5423208-AA and 5G1Z-5423209-AA, note "regulator with motor": name/description
+  "Regulator And Motor Assy - Window", but list group and list_info on the same row print
+  "Regulator - Window - Less Motor" (2005 Montego page, lists.jsonl 57/59; record list_info too).
+- ford bumper-front AE5Z-17757-ACP and bumper-rear AE5Z-17906-ACP, note silent: name "Bumper Assy - Front/Rear",
+  list_info "Impact Bar - Steel"; the same 2012 Fusion page lists the fascia separately (17D957 "Bumper Assy - Front",
+  paint to match). This is the steel impact bar (a reinforcement) under a bumper category.
+
+RISK (not rounded to RIGHT):
+- 22 toyota window-regulator "regulator without motor": names say only "Regulator" / "Regulator Sub-Assy(embly)";
+  nothing says without motor (10 have Lexus pages that list a separate motor number; 12 toyotapartsnow, no pages).
+- 89 window-regulator with silent notes where names say regulator and never say whether the motor is included
+  (nissan 49, mopar 24, gm 12, subaru 4); 1 ford F67Z-7823208-AA whose list group says "ELECTRIC - LESS MOTOR AND
+  DRIVE" while the note is silent.
+- 4 ford bumpers (2L1Z-17757-BACP, 7L1Z-17757-A, 8A8Z-17757-A, BT4Z-17906-ACP): names "Bumper"/"Bumper Assy",
+  note silent, but their pages list separate covers and this catalog uses the same wording for the 17757 impact bar.
+- 6 ford tail-lights F87Z-13404/13405-AB/AC/ACCP: "Lamp Assy" names vs list_info "Body and lens"; note silent.
+
+Judgement calls marked RIGHT, with a reason: gm 19210257/8 (list group "REGULATOR, Door Lock Remote Control" is
+an illustration-group label; same row elsewhere under the window-regulator group with W/MOTOR); 7 toyota window
+motors whose toyotapartsnow other_names include a stray "Door Lock Actuator Motor" alias; 6 manual regulators
+("Manual" / "NO MOTOR REQUIRED") with silent notes; ford XL3Z-17757-AA/AACP chrome "bar only" bumpers.
+
+Not checked: fits, years, gates (out of scope). Header `raw.sites.*.lists` counts equal part 1 only for gm
+(3281 vs 12783 lines across parts) and ford (2936 vs 3637).
