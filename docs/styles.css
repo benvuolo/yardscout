@@ -3740,6 +3740,22 @@ select { white-space: normal; height: auto; }
 .list-share p { flex: 1 1 10em; min-width: 0; margin: 0; font-size: var(--t-sm); line-height: 1.4; color: var(--text-dim); }
 .list-share b { font-family: var(--font-mono); color: var(--text); }
 .list-share .btn { flex: 0 1 auto; }
+/* Wide screens (2026-11-20, owner: the first car sat far below the fold on a
+   computer). From 1100 px: the search box and the zip + Filters bar share one
+   row, and the watch strip (free alert form, Pro line, forecast) and the
+   share line sit in a side column beside the tiles (app.js feedPlaceSide;
+   the column is the grid's last child, so the keyboard reaches the cars
+   first). Below 1100 px nothing here applies. */
+@media (min-width: 1100px) {
+  #tab-live.active { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s3); align-items: start; }
+  #tab-live > * { grid-column: 1 / -1; min-width: 0; }
+  #tab-live > .car-search { grid-column: 1; }
+  #tab-live > .toolbar { grid-column: 2; min-width: 16rem; }
+  #live-grid.has-side { --side-w: clamp(20rem, 28vw, 30rem); position: relative; padding-right: calc(var(--side-w) + var(--s5)); align-content: start; }
+  #live-grid.has-side > .live-side { position: absolute; top: 0; right: 0; width: var(--side-w); display: flex; flex-direction: column; gap: var(--s3); }
+  #live-grid.has-side > .live-side > * { margin: 0; }
+  .live-side > .watch-strip { flex-wrap: wrap; }
+}
 /* Since your last visit: the line over the grid and the divider in the list. */
 .since-line {
   display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3);

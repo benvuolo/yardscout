@@ -509,6 +509,24 @@ const SCREENS = [
     if (await page.evaluate(() => !document.querySelector('#feed-chips .fchip-make') || !document.querySelector('#feed-chips .fchip[data-chip="model"]'))) throw new Error('no make chosen / no model chips');
     await page.evaluate(() => window.scrollTo(0, 0));
   }, async (page) => { await page.evaluate(() => { feedClearMake('chip'); }); }],
+  // Wide screens (2026-11-20): one model picked, the watch strip (free alert
+  // form, Pro line, forecast) and the share line in the side column beside
+  // the tiles from 1100 px; below that, the usual layout. At 1280 the screen
+  // also checks the side column is there, after the tiles in the DOM, and
+  // the first car row is on the first screen (above 600 px).
+  ['cars-wide-model', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { carSearchSetFilter('Toyota', 'Camry'); renderLive(); window.scrollTo(0, 0); });
+    await settle(page, 600);
+    const r = await page.evaluate(() => {
+      const g = document.getElementById('live-grid'), side = g.querySelector(':scope > .live-side'), t = g.querySelector('.car-tile');
+      return { wide: matchMedia('(min-width: 1100px)').matches, side: !!side, last: side === g.lastElementChild, strip: !!(side && side.querySelector('.watch-strip')),
+        top: t ? Math.round(t.getBoundingClientRect().top + scrollY) : null };
+    });
+    if (r.wide && !(r.side && r.last && r.strip)) throw new Error('wide: no side column with the strip, as the grid\'s last child ' + JSON.stringify(r));
+    if (!r.wide && r.side) throw new Error('side column below 1100 px');
+    if (r.wide && !(r.top < 600)) throw new Error('wide: first car row at ' + r.top + ' px');
+  }, async (page) => { await page.evaluate(() => { feedClearMake('chip'); }); }],
   // The Monday email in the strip: since 2026-11-18 a one-model strip asks
   // for the free email alert first, so this screen has an alert already
   // waiting in the browser (the state in which the Monday email is asked).
