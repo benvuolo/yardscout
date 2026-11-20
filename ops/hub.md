@@ -3531,3 +3531,12 @@ Apple check 12:25 UTC. Nothing submitted.
 asc-status 44735751756 at 12:26 UTC: version 1.13.3, IN_REVIEW, build 44
 (in review since before 09:23). Live iPhone app still 1.13.0. A scheduled
 scan started 12:21 UTC. Next Apple check 15:27 UTC. Nothing submitted.
+
+## 2026-11-20 15:31 UTC Apple check: 1.13.3 still in review (six hours and counting)
+
+asc-status 44763753263 at 15:29 UTC: version 1.13.3, IN_REVIEW, build 44
+(in review at 09:23, 12:26 and 15:29). No message from Apple in the
+owner's Gmail in the last two days. Live iPhone app still 1.13.0. Scan
+12:21 UTC (GitHub's schedule) succeeded. Next Apple check 18:31 UTC; if it
+is still in review then, the hub suggests the owner look in App Store
+Connect for a question from the reviewer. Nothing submitted.
