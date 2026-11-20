@@ -3602,3 +3602,27 @@ helpful, clean, and to drive people to web, iPhone and Android.
   ops email; (2) `design/cars-wide-first-view-1120`: on wide screens the
   car list starts within the first screen (alert card and forecast to a
   side column), phones unchanged.
+
+## 2026-11-20 17:58 UTC landed pages count views and their source: LIVE
+
+`growth/landed-count-1120` (builder A, head 29e95db4) merged to main as
+b467a59e. One aggregate browser event per view of a make or model
+"landed" page (`landed-view/<page>`), a second one naming the source
+(`landed-src/<source>/<page>`) from `?s=<word>` or a short referrer list
+(reddit, google, bing, duckduckgo, facebook, youtube); no ids, no
+cookies, no call from the edge worker; automated browsers send nothing.
+With `?s=<word>` the page's app buttons carry `utm_source=<word>`.
+Canonical and og:url never carry the parameter. Daily ops email gains
+"Landed pages (7 d): N views · top: … · by source: …".
+- Hub on the merged tree: quick regression 78/0/0; share / landing / ops /
+  landed / model-pages set 11/0/0. Both workers deployed by themselves
+  (success 17:54:32 UTC). Live page fetched once with `?s=reddit`: the
+  script is there, canonical unchanged.
+- For the owner's Reddit post: the visible address
+  `yardscout.io/landed/toyota/4runner`, linked to the same address with
+  `?s=reddit`.
+- Builder A started task 2 (Cars tab first view on wide screens).
+- Round 11 (interchange): handed back at 6d8f312e (74 notes gain
+  packaging words, 7 groups held); sent back once to hold the two Lexus
+  bumper guard covers and census the bumper categories for parts that are
+  not the cover; an independent check follows.
