@@ -3764,3 +3764,25 @@ up well before I did" instead of "have been at it longer").
   a reader cannot find them on a map, and a maps link that searches by
   name may miss them. Recommend "formerly U-Pull-&-Pay" beside the name
   for those yards and a maps link by address or coordinates.
+
+## 2026-11-20 20:22 UTC wide-screen Cars view LIVE (jh-v221); round 11 wording confirmed live
+
+- `hub/rc10-1120` (main + `design/cars-wide-first-view-1120` 62b2aa08) full
+  regression: **115 passed, 0 failed, 0 skipped** (both layout halves, 1,859
+  s). Pushed to main 20:10 UTC as fe74ae7a, sw `jh-v221`. The two tests
+  that failed on main for data and timing reasons were fixed on the branch
+  first (`cars_feed_e2e` now checks photo rows by rule and a fixed no-photo
+  list every run; `tab_retap_e2e` waits for the page to settle before its
+  "before" reading).
+- Two live loads at 20:21 UTC, no page errors:
+  - 1440 x 900, `#cars=Toyota|4Runner`, zip 90001: cache `jh-v221`; first
+    car row at 432 px (was 1076 before the change); the alert card sits in
+    the side column at the right; no sideways scroll.
+  - Parts, 2012 Camry front bumper: 37 rows; notes read "Toyota catalog
+    lists #52119-06974 for both — bumper cover; trim-limited; …" (round
+    11).
+- Web only; phones and tablets unchanged; the apps would carry the layout
+  code with a later release, where it has no effect.
+- Not built, by the builder's judgement and the hub's: a fold for the model
+  chips on wide screens (needs its own layout-test exemption and focus
+  handling).
