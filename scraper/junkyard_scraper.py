@@ -48,6 +48,7 @@ import os
 import re
 import smtplib
 import sys
+import threading
 import time
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
@@ -20357,11 +20358,40 @@ VINPLUS_TENANTS = {
 }
 
 
+# When the service says "too many requests" (2026-11-23). From the 11-22
+# 21:33 UTC scan on, searchVehicleHttp answered 429 to every request, the
+# first one of each scan included, and five scans in a row still sent all
+# ~1,124 searches into it. A service that refuses is asked no more: after
+# VINPLUS_STOP_AFTER refusals in a row, every later search of that scan is
+# not sent (both callers: the tenant loop below and iPull-uPull's photo
+# lookup share the count). Nothing here retries, waits out or goes around the
+# refusal; the yards keep their last published copy (STALE-KEEP) and the
+# provider is written to (ops/yard-outreach-drafts.md).
+VINPLUS_STOP_AFTER = 3
+_VINPLUS_STOP = {"refused": 0, "stopped": False, "not_sent": 0, "retry_after": ""}
+_VINPLUS_STOP_LOCK = threading.Lock()
+
+
+def _vinplus_stop_reset() -> None:
+    with _VINPLUS_STOP_LOCK:
+        _VINPLUS_STOP.update(refused=0, stopped=False, not_sent=0, retry_after="")
+
+
 def _vinplus_search(tenant: str, make: str, location_id: str,
                     year_min: int | None = None, year_max: int | None = None,
-                    depth: int = 0) -> list[dict]:
+                    depth: int = 0, failed: list | None = None) -> list[dict]:
     """One searchVehicleHttp query; recursively bisect year ranges when the
-    100-row cap is hit (cap responses have match_count == 100 exactly)."""
+    100-row cap is hit (cap responses have match_count == 100 exactly).
+
+    A query that fails, or is not sent because the service is refusing, adds
+    its make to `failed` (when given), so the caller can tell "no cars of
+    that make" from "no answer"."""
+    with _VINPLUS_STOP_LOCK:
+        if _VINPLUS_STOP["stopped"]:
+            _VINPLUS_STOP["not_sent"] += 1
+            if failed is not None:
+                failed.append(make)
+            return []
     time.sleep(VINPLUS_DELAY_SEC)
     try:
         r = requests.post(f"{VINPLUS_API}/searchVehicleHttp",
@@ -20369,20 +20399,36 @@ def _vinplus_search(tenant: str, make: str, location_id: str,
                                 "year_min": year_min, "year_max": year_max,
                                 "location_id": location_id},
                           headers=HEADERS, timeout=60)
+        if r.status_code == 429:
+            with _VINPLUS_STOP_LOCK:
+                _VINPLUS_STOP["refused"] += 1
+                ra = str(r.headers.get("Retry-After") or "").strip()[:40]
+                if ra:
+                    _VINPLUS_STOP["retry_after"] = ra
+                if _VINPLUS_STOP["refused"] >= VINPLUS_STOP_AFTER and not _VINPLUS_STOP["stopped"]:
+                    _VINPLUS_STOP["stopped"] = True
+                    print(f"  [VinPlus] the service answered 429 (too many requests) "
+                          f"{_VINPLUS_STOP['refused']} times in a row"
+                          + (f" (Retry-After: {ra})" if ra else "")
+                          + "; no more searches are sent in this scan", file=sys.stderr)
         r.raise_for_status()
         d = r.json()
     except Exception as e:
         print(f"  [VinPlus] {tenant}/{location_id} make {make!r} "
               f"({year_min}-{year_max}) fetch failed: {e}", file=sys.stderr)
+        if failed is not None:
+            failed.append(make)
         return []
+    with _VINPLUS_STOP_LOCK:
+        _VINPLUS_STOP["refused"] = 0   # an answer: the count is of refusals in a row
     rows = d.get("matches") or []
     if len(rows) >= 100:
         y0 = year_min if year_min is not None else 1900
         y1 = year_max if year_max is not None else 2035
         if y1 > y0 and depth < 8:
             mid = (y0 + y1) // 2
-            return (_vinplus_search(tenant, make, location_id, y0, mid, depth + 1)
-                    + _vinplus_search(tenant, make, location_id, mid + 1, y1, depth + 1))
+            return (_vinplus_search(tenant, make, location_id, y0, mid, depth + 1, failed)
+                    + _vinplus_search(tenant, make, location_id, mid + 1, y1, depth + 1, failed))
         print(f"  [VinPlus] {tenant}/{location_id} {make} {y0}-{y1}: still capped "
               f"at 100 on a leaf range — accepting partial", file=sys.stderr)
     return rows
@@ -20414,13 +20460,25 @@ def fetch_vinplus_inventory() -> list[dict]:
         return []
 
     all_vehicles: list[dict] = []
+    left_out: list[str] = []
     for tenant, locations in VINPLUS_TENANTS.items():
         for loc_id, yard in locations.items():
             loc_rows: list[dict] = []
+            failed: list[str] = []
             for make_name in makes:
                 # Single-location tenants (locations: [] in yard-info) key
                 # their one yard as "" here and search with location_id null.
-                loc_rows.extend(_vinplus_search(tenant, make_name, loc_id or None))
+                loc_rows.extend(_vinplus_search(tenant, make_name, loc_id or None, failed=failed))
+            if failed:
+                # A yard with an unanswered make is left out whole: a list
+                # missing some makes would read as those cars leaving the
+                # lot. Its last published copy stands (STALE-KEEP).
+                left_out.append(yard["name"])
+                if not _VINPLUS_STOP["stopped"]:
+                    print(f"  [VinPlus] {yard['name']}: {len(failed)} of {len(makes)} make "
+                          f"searches got no answer; this yard keeps its last copy "
+                          f"this scan", file=sys.stderr)
+                continue
             _indep_cache_raw(f"vinplus_{yard['code']}.json",
                              json.dumps(loc_rows).encode())
             id_prefix = yard.get("id_prefix") or f"vinplus-{yard['code']}-"
@@ -20458,6 +20516,10 @@ def fetch_vinplus_inventory() -> list[dict]:
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
     print(f"  [VinPlus] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    if left_out:
+        print(f"  [VinPlus] {len(left_out)} yard(s) got no full answer and keep their last copy"
+              + (f"; the service refused (429), {_VINPLUS_STOP['not_sent']} searches were not sent"
+                 if _VINPLUS_STOP["stopped"] else ""), file=sys.stderr)
     return unique
 
 
