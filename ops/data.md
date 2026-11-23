@@ -1193,3 +1193,32 @@ specs; log line). `tools/regress.sh --quick` on 3634d957: 75 passed, 0 failed, 0
 - A 1993 Ford "F-450 Super Duty" with an E-350 VIN gains "7.3L Powerstroke
   Parts (verify engine)", an existing E-350 row; the Power Stroke began in
   1994.5, so the row's year window is a question for the parts workstream.
+
+## 2026-11-23 17:28 UTC (hub) VinPlus refuses every search since 11-22 21:33 UTC; reader stops after 3 refusals (`f48cd23c`)
+
+What happened and the fix are in `ops/hub.md` (same time). In the reader:
+`VINPLUS_STOP_AFTER = 3`, shared by `fetch_vinplus_inventory` and
+`_ipull_apply_api_photos`; `_vinplus_search(..., failed=[])` reports an
+unanswered or unsent make; a yard with any is left out whole. The log line to
+look for: "the service answered 429 (too many requests) 3 times in a row
+… no more searches are sent in this scan", then "22 yard(s) got no full
+answer and keep their last copy; … N searches were not sent".
+
+Queued for the data builder (none started):
+1. **Fewer VinPlus requests once it answers again.** We sent ~1,124 searches
+   a sweep, 6 to 8 sweeps a day. Proposal for the owner: read these yards
+   twice a day, or whatever the provider says it accepts.
+2. **A scheduled scan right after a dispatched one.** Skip a `schedule` run
+   when another scan succeeded and started under 3 h ago. Pitfall: a run whose
+   scan job is skipped still concludes "success", and both watchdogs
+   (`scan-watchdog.yml`, `backend/src/scan_watchdog.js`) measure from the
+   last successful run's start, so a skipped run would push the next real
+   scan out. They must ignore such runs (or the run must not end "success").
+3. **Say "bot check" when it is one.** Pull-N-Save's make list came back HTTP
+   202 with a page that only reloads itself; Bevell's, Route 34 and Budget
+   Winter Garden logged "table/form not found — layout changed?" in the same
+   scans. The readers should recognise a challenge page and say so (and the
+   yard then gets a note, rule 2), instead of pointing at a redesign.
+4. **iPull-uPull photos** come from the same search each scan: while it is
+   refused those cars publish without photos. Carry the last photo codes.
+5. **Ops email headline** read "All good" with 33 yards on their last copy.

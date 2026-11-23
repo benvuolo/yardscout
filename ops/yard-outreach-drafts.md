@@ -434,3 +434,32 @@ leave it alone.
 Thanks,
 Ben
 YardScout
+
+### C. VinPlus (the inventory search behind 22 yards we list) — added 2026-11-23, no address on file
+
+Held out of Gmail: **missing the provider's contact address** (the company
+that runs the VinPlus yard search; the hub does not read its site by machine).
+
+Subject: YardScout and your inventory search: were we sending too much?
+
+Hi,
+
+I run YardScout, a small app that shows people which cars are sitting in
+self-service yards near them, so they drive out and pull parts. We list the
+yards that use your search (Go Pull-It, Chesterfield, Pickers, Bessler's,
+Joliet U-Pull-It and others). Every car is credited to its yard and links to
+the yard's own page.
+
+Since Sunday evening (Nov 22) your search has answered our reader with "too
+many requests". We have stopped. The reader now quits after three of those
+answers and sends nothing more.
+
+Until then we asked for each make at each yard, about 1,100 searches a pass,
+two seconds apart, six to eight passes a day. If that was too much, I'm
+sorry. Tell me what you are comfortable with (once a day, a slower pace,
+certain hours, a feed instead) and we will do exactly that. If you would
+rather we not read it at all, say so and those yards come down.
+
+Thanks,
+Ben
+YardScout

@@ -1116,3 +1116,17 @@ their public pages (Wrench-A-Part 7 yards, Pull-N-Save 8, Nevada Pic-A-Part
 (no web addresses in it): no rush, thanks, we would take the same feed
 format from the others, an intro would be welcome, our reader stays off.
 The U-Pull-R reader stays switched off (`UPULLR_READER_ENABLED = False`).
+
+## 2026-11-23 17:28 UTC (hub) VinPlus yards on their last copy; Pull-N-Save bot check on and off
+
+- **VinPlus tenants (22 yards, about 22,950 cars):** the search service has
+  answered 429 to every request since the 11-22 21:33 UTC scan. The reader now
+  stops after 3 refusals (`f48cd23c`); the yards show their 11-22 16:51 copy
+  until the service answers or the 30-scan carry cap drops them (about
+  11-26/27). Outreach text: `ops/yard-outreach-drafts.md` (C). **Missing: a
+  contact address for the provider.** Nothing is sent around the refusal.
+- **Pull-N-Save (8 yards, about 10,000 cars):** the make list returned a
+  bot-check page (HTTP 202, reloads itself) in the 11-21 04:33/10:33 and 11-23
+  03:33/10:33 scans; other scans read all 8 yards. Not worked around. The
+  photo note to info@pullnsave.com (thread `1a1e52cb8accbc08`) is still the
+  open contact; if the owner sends it, two lines about the scanner can go in.

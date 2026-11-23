@@ -1428,3 +1428,11 @@ inventory in the watertight run, passes on today's data).
   source: reddit n, ..." (printed at 0 as "0 views · by source: none named").
 - For the owner's Reddit post: link `yardscout.io/landed/toyota/4runner?s=reddit`
   if you want the source named even when Reddit's app strips the referrer.
+
+## 2026-11-23 17:28 UTC (hub) landed-page counts: 11-20 to 11-23 are missing, not zero
+
+The counting script never ran in a browser until `00ca0f11` (bundler helper
+`__name` in the emitted text; details in `ops/hub.md`). Read "Landed pages
+(7 d)" in the ops email only from 11-23 17:15 UTC on. The Reddit 3rd-gen post
+linked the app, not a landed page, so its numbers (about 44 visits, 11 zip
+entries, 2 watches) were never affected.

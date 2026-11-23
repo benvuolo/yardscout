@@ -3786,3 +3786,53 @@ up well before I did" instead of "have been at it longer").
 - Not built, by the builder's judgement and the hub's: a fold for the model
   chips on wide screens (needs its own layout-test exemption and focus
   handling).
+
+## 2026-11-23 17:28 UTC owner asked "update?": two faults found in today's numbers, both acted on
+
+**1. Landed pages counted nothing for three days (fixed, live).** The ops
+email read "Landed pages (7 d): 0 views". Cause: the page script is built from
+two functions' `.toString()`; the deployed Worker is bundled with names kept,
+so the text carried the bundler's `__name(...)` helper, which no browser has.
+The script threw inside its own `try` and sent nothing. On 11-20 the hub
+checked only that the script was present on the page, not that it ran. Fix
+`00ca0f11`: the script brings a harmless `__name`; the unit test now bundles
+the module the same way and runs what it emits (37 checks). Workers deployed
+by themselves; the script taken from the live 4Runner page and run in a fake
+browser sends `landed-view/toyota-4runner` and `landed-src/reddit/…`.
+Views from 11-20 to 11-23 17:15 UTC are lost, not zero.
+
+**2. 22 yards (about 22,950 cars) served from their last copy since 11-22
+21:33 UTC: the VinPlus search service refuses us.** Scan logs: the 15:33 and
+16:51 UTC sweeps on 11-22 read 22,953 cars; from the 21:33 sweep on, every
+search (the first of each scan included) answered "429 Too Many Requests",
+1,124 per scan, six scans in a row (21:33, 22:52, 03:33, 05:04, 10:33, and
+the 16:23 run still on the old code). The make list (a GET) still answers.
+Nothing on our side changed that day. Fix `f48cd23c` (rule 2: fewer
+requests, no workaround): after 3 refusals in a row no more searches are sent
+in that scan, and a yard with any unanswered make is left out whole so its
+last copy stands (before, it would have been published short). Test
+`scraper/test_vinplus_stop.py` (16). STALE-KEEP stops carrying after 30
+frozen scans (about 4 to 5 days), so these yards drop off around 11-26/27 if
+the refusal stands. No contact address for the provider is on file: the text
+is in `ops/yard-outreach-drafts.md` (C), held out of Gmail.
+
+**Other yards on their last copy in the 10:33 scan (11 of the 33):** all 8
+Pull-N-Save (the make list came back as an HTTP 202 page that only reloads
+itself, a bot check; on and off since 11-20, healthy in the 11-22 16:51
+scan), Bevell's, Route 34 U-Pull-M and Budget Winter Garden (each "table/form
+not found", in the same scans as each other, so more likely the same kind of
+page than three redesigns). No workaround; they have come back by themselves
+on a later scan before. Queued for the data builder in `ops/data.md`.
+
+**Gaps noted (recommendations, none built):** the ops email said "All good"
+with 33 yards on their last copy; a scheduled scan that starts right after a
+watchdog-dispatched one doubles the requests to every yard (11-22: 15:23 +
+15:48, 21:23 + 21:25); the VinPlus and LKQ readers still send a generic
+browser name (owner decision, not changed in answer to a refusal).
+
+Numbers given to the owner: both stores 1.13.3; ops email 13:07 UTC 307
+yards, 338,371 cars; paying subscribers 7 in the email (App Store 5 as of
+11-21, Play 1, web 1) while the 11-22 report reads 4 on iPhone, to be read
+again in tomorrow's email; Reddit 3rd-gen post about 44 visits, 11 entered a
+zip, 2 watches; chatgpt.com 23 visits, 12 entered a zip; App Store first-time
+downloads 11-19..11-22: 4, 8, 6, 6.
