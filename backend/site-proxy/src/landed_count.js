@@ -61,7 +61,12 @@ export function landedEventNames(page, src) {
 export function landedCountScript(page) {
   const p = String(page || '').toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '');
   if (!p) return '';
-  return `<script>(function(){try{
+  // The Worker is bundled before it runs, and the bundler may wrap inner
+  // functions in its own helper (`__name(fn, "x")`), which then appears in
+  // the .toString() text below. A browser has no such helper, so the script
+  // brings a harmless one (2026-11-23: without it every page view threw and
+  // nothing was counted for three days).
+  return `<script>(function(){try{var __name=function(f){return f;};
 var n=navigator;if(n.webdriver||/^(localhost|127\\.0\\.0\\.1|\\[::1\\])$/.test(location.hostname))return;
 var S=(${landedSource.toString()})(location.search,document.referrer);
 var E=(${landedEventNames.toString()})(${JSON.stringify(p)},S.src);

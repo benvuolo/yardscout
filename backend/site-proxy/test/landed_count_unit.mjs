@@ -36,7 +36,7 @@ check('unknown referrers: none', S('', 'https://example.com/').src === '' && S('
 check('no or bad referrer: none', J(S('', '')) === J({ src: '', explicit: false }) && S('', 'not a url').src === '');
 
 /* ---- the page script, run as a browser would ---- */
-function runScript(page, { search = '', referrer = '', webdriver = false, host = 'yardscout.io', beacon = true } = {}) {
+function runScript(page, { search = '', referrer = '', webdriver = false, host = 'yardscout.io', beacon = true, make = landedCountScript } = {}) {
   const sent = [], links = [{ href: 'https://yardscout.io/?utm_source=page&utm_medium=model&utm_campaign=toyota-4runner#cars=Toyota%7C4Runner' }, { href: 'https://yardscout.io/landed/toyota' }];
   const a = links.map((l) => ({ getAttribute: () => l.href, setAttribute: (k, v) => { l.href = v; } }));
   let ready = null;
@@ -46,7 +46,7 @@ function runScript(page, { search = '', referrer = '', webdriver = false, host =
     document: { referrer, addEventListener: (ev, f) => { if (ev === 'DOMContentLoaded') ready = f; }, querySelectorAll: (sel) => a.filter((x) => sel.includes('utm_source=page') && x.getAttribute().includes('utm_source=page')) },
     JSON, URL, Object, decodeURIComponent,
   });
-  const src = landedCountScript(page).replace(/^<script>|<\/script>$/g, '');
+  const src = make(page).replace(/^<script>|<\/script>$/g, '');
   vm.runInContext(src, ctx);
   if (ready) ready();
   return { sent: sent.map(([u, b]) => ({ u, body: JSON.parse(b.text), type: b.type })), links: links.map((l) => l.href) };
@@ -65,6 +65,33 @@ check('local copy: nothing sent', runScript('toyota-4runner', { host: 'localhost
 check('no sendBeacon: nothing sent, no error', runScript('toyota-4runner', { beacon: false }).sent.length === 0);
 check('the script is plain inline JS with no other host than the API', !/https?:\/\/(?!yardscout-api\.yardscout\.workers\.dev)/.test(landedCountScript('toyota-4runner').replace(/new URL\(/g, '')));
 check('no slug: no script', landedCountScript('') === '');
+
+/* ---- the script as the DEPLOYED Worker emits it (2026-11-23) ----
+ * The Worker is bundled with names kept, so .toString() of an inner function
+ * carries the bundler's __name(...) helper. The page script must still run
+ * in a browser, where that helper does not exist. Bundle the module the same
+ * way and run what it emits. */
+{
+  const { build } = await import('esbuild');
+  const { mkdtempSync, writeFileSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { pathToFileURL, fileURLToPath } = await import('node:url');
+  const entry = fileURLToPath(new URL('../src/landed_count.js', import.meta.url));
+  const out = await build({ entryPoints: [entry], bundle: true, format: 'esm', keepNames: true, write: false });
+  const dir = mkdtempSync(join(tmpdir(), 'landed-count-'));
+  try {
+    const file = join(dir, 'bundle.mjs');
+    writeFileSync(file, out.outputFiles[0].text);
+    const bundled = await import(pathToFileURL(file).href);
+    const text = bundled.landedCountScript('toyota-4runner');
+    check('bundled: the emitted script carries the bundler helper (this is the case being tested)', /__name\(/.test(text.replace('var __name=function(f){return f;};', '')), text.slice(0, 200));
+    const b = runScript('toyota-4runner', { search: '?s=reddit', make: bundled.landedCountScript });
+    check('bundled: the page script still sends view + source', J(b.sent.map((x) => x.body.e)) === J(['landed-view/toyota-4runner', 'landed-src/reddit/toyota-4runner']), J(b.sent));
+    const plain = runScript('toyota-4runner', { make: bundled.landedCountScript });
+    check('bundled: plain view sends one beacon', plain.sent.length === 1 && plain.sent[0].body.e === 'landed-view/toyota-4runner', J(plain.sent));
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+}
 
 console.log(failures ? `${failures} FAILURE(S), ${passes} passed` : `ALL PASS (${passes})`);
 process.exit(failures ? 1 : 0);
