@@ -3914,3 +3914,29 @@ Maiden and Bluegrass 15; eight yards 17 (San Antonio, Go Pull-It Jacksonville
 and Gainesville, Pickers Longview and Texarkana, Pipes, US Auto Supply, 195);
 the rest 19 to 23 (about 11-27/28). Not changed: counting from the last read
 instead would show an unread list for longer, which is the owner's call.
+
+## 2026-11-24 13:45 UTC follow-up check: the email headline works; VinPlus still refused; nothing dropped yet
+
+Own scheduled check, nothing changed in code.
+- **Ops email 13:07 UTC:** "[YardScout daily] 2 issues · 307 yards · 338,488
+  cars". Open issue 1 is the new one: "28 yards not read for 12+ hours
+  (showing the last copy): Bessler's U Pull & Save - Louisville, Pickers -
+  Reno, Raceway Pik-A-Part - Savannah, Bluegrass U Pull & Save - Lexington +24
+  more" (22 VinPlus, 6 Pull-N-Save). `1f4395dc` confirmed in the real email.
+- **Open issue 2:** "U-Pull-It Auto Parts's feed looks frozen: 4 of 5 yards
+  unchanged since 2026-11-23T00:00". The readers answer (WA 2,488 cars across
+  3 yards, Memphis TN 2,862 across 2 in the 10:23 scan); Kennewick, Pasco and
+  Yakima show the same lists since Sunday 00:00 UTC, Millington since 11-22.
+  The name joins two companies (WA and Memphis TN). Not a reader fault as far
+  as the log shows; watch one more day.
+- **VinPlus:** still 429 in the 04:31 and 10:23 UTC scans (4 searches each,
+  434 not sent). No "STALE-KEEP GIVING UP" yet; Bessler's Louisville is at 27
+  of 30, so it drops in the scan about 04:30 UTC 11-25.
+- **iPull-uPull photos:** 3,293 kept in both scans.
+- **Pull-N-Save:** 2,714 cars across 2 yards at 10:23; the same six carried.
+- **Landed pages (7 d): 6 views** (chevrolet 2, chevrolet-tahoe, honda-civic,
+  subaru, toyota-sequoia 1 each): the counter works since `00ca0f11`.
+- **Subscribers: 6 paying** (App Store 4 as of 11-22, Play 1, web 1); the 7
+  in the 11-23 email was the App Store's 11-21 figure, as flagged then.
+No further check scheduled: the daily email now carries this in its headline.
+Still waiting on the owner for a contact address (provider or yards).
