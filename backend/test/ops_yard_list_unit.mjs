@@ -4,7 +4,7 @@
  * 3-weekday rule for yards the site does not mark yet; a file without list
  * fields keeps the old behaviour.
  * Run: node backend/test/ops_yard_list_unit.mjs */
-import { yardFlags } from '../src/ops_monitor.js';
+import { yardFlags, carriedLong } from '../src/ops_monitor.js';
 
 let failures = 0;
 const check = (name, cond, extra = '') => { console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${!cond && extra ? ' — ' + extra : ''}`); if (!cond) failures++; };
@@ -45,6 +45,22 @@ const g = yardFlags(old);
 check('old file: list mode off, no early-warning list', g.listMode === false && g.frozenSoon.length === 0);
 check('old file: the 3-weekday rule as before (carried and missing excluded)',
   JSON.stringify(names(g.frozen)) === JSON.stringify(['Wrench-A-Part - Holland', 'Youngstown U-Pull-It', 'Pull-A-Part - Canton']), JSON.stringify(names(g.frozen)));
+
+// Yards on their last copy (2026-11-23): half a day without a read is an issue, one scan's miss is not.
+{
+  const C = yardFlags({ scrapedAt: '2026-11-23T20:58:41Z', yards: {
+    "Bessler's U Pull & Save - Hebron": { carried: true, count: 1190, lastChangedAt: '2026-11-21T22:38:54Z', listChangedAt: '2026-11-21T22:38:54Z', listReadAt: '2026-11-22T17:58:02Z', unchangedScans: 10 },
+    'Pull-N-Save - Tucson': { carried: true, count: 1036, lastChangedAt: '2026-11-22T10:40:01Z', listChangedAt: '2026-11-22T10:40:01Z', listReadAt: '2026-11-23T17:40:14Z', unchangedScans: 7 },
+    'Old File Yard - A': { carried: true, count: 300, lastChangedAt: '2026-11-20T10:00:00Z', unchangedScans: 12 },
+    'Fresh Yard - B': { count: 500, lastChangedAt: '2026-11-23T20:58:41Z', listChangedAt: '2026-11-23T20:58:41Z', unchangedScans: 0 },
+  } });
+  const long = carriedLong(C, 12).map((y) => y.name);
+  check('carried: all three are listed as re-serving', C.carried.length === 3, JSON.stringify(C.carried));
+  check('carried 27 h: an open issue', long.includes("Bessler's U Pull & Save - Hebron"), JSON.stringify(long));
+  check('carried, read 3 h ago: listed only, not an issue', !long.includes('Pull-N-Save - Tucson'), JSON.stringify(long));
+  check('carried, no read time in the file: falls back to the last change', long.includes('Old File Yard - A'), JSON.stringify(long));
+  check('no health file / nothing carried: no issue', carriedLong(null).length === 0 && carriedLong({ scrapedAt: NOW, carried: [] }).length === 0);
+}
 
 console.log(failures ? `\n${failures} FAILED` : '\nALL PASS');
 process.exit(failures ? 1 : 0);

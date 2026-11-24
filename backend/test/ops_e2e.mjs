@@ -140,7 +140,9 @@ const text = d.email?.text || '';
 // morning): then it is listed as quiet, not as an issue. Expect whichever is true.
 const bigChain = (d.yardHealth?.chainFrozen || []).find((c) => c.chain === 'Big Chain');
 const bigQuiet = !!bigChain && fullBusinessDaysBetween(Date.parse(bigChain.since), Date.parse(d.yardHealth.scrapedAt)) === 0;
-const NISSUES = bigQuiet ? 3 : 4;
+// +1 since 2026-11-24: a yard shown from its last copy for 12+ hours (the fixture's
+// 'Carried Yard - Bartow') is an open issue, not only a line under YARD HEALTH.
+const NISSUES = bigQuiet ? 4 : 5;
 check('daily dry run: 200 + not sent', r.status === 200 && d.dryRun === true && d.sent === false && (await opsSent()).length === before, JSON.stringify(d).slice(0, 300));
 check('daily subject + verdict', d.email?.subject === `[YardScout daily] ${NISSUES} issues · 3 yards · 1,541 cars`, d.email?.subject);
 check('daily: scan commit time + age', !!d.scan?.lastCommitAt && d.scan.ageHours >= 0 && d.scan.ageHours < 1, JSON.stringify(d.scan));
@@ -164,6 +166,7 @@ check('daily: per-channel 24 h sends', d.channels?.['email:auth']?.ok === 1 && d
 check('daily: audience counts', d.audience && ['proDevices', 'freeDevices', 'emailWatchers'].every((k) => Number.isInteger(d.audience[k])), JSON.stringify(d.audience));
 check('daily: usage loads', d.usage && !d.usage.error && Number.isInteger(d.usage.devices?.total) && typeof d.usage.funnel === 'object', JSON.stringify(d.usage));
 check('daily: open conditions', d.openConditions?.length === NISSUES, JSON.stringify(d.openConditions));
+check('daily: a yard not read for 12+ hours is an open issue', (d.openConditions || []).some((c) => c.id === 'yards-not-read' && /^1 yard not read for 12\+ hours \(showing the last copy\): Carried Yard - Bartow$/.test(c.title)), JSON.stringify(d.openConditions));
 for (const sec of [`Verdict: ${NISSUES} issues`, `OPEN ISSUES (${NISSUES})`, 'MISSING from the scan', 'Blocked Yard - Toledo', 'SCAN', 'Last commit:', 'Live: 3 yards · 1,541 vehicles', 'Watchdog:',
   'YARD HEALTH', 'Dormant Yard - Orem', 'Frozen Yard - Provo', 'Re-serving last copy', 'Carried Yard - Bartow', 'SENDS, last 24 h', 'email:auth', 'Resend today (UTC): 5 / 100', 'USAGE', 'App installs with notifications turned on:', 'never turns notifications on is not counted',
   'Funnel by platform', 'Store link taps', 'Purchases']) {

@@ -536,6 +536,21 @@ export async function runOpsCheck(env, { now = Date.now(), dryRun = false } = {}
 
 /* ===== daily health email ===== */
 
+/* Yards shown from their last copy for `hours` or longer (pure). One scan's
+ * miss comes and goes and is only listed; half a day without a read is an
+ * open issue. 2026-11-23: the email said "All good" with 33 yards on their
+ * last copy, 22 of them refused by their inventory service since the evening
+ * before. `yh` is yardFlags' result; a carried yard's `readAt` is the scan's
+ * listReadAt (when its list was last really read). */
+export function carriedLong(yh, hours = 12) {
+  if (!yh || !Array.isArray(yh.carried)) return [];
+  const at = Date.parse(yh.scrapedAt) || Date.now();
+  return yh.carried.filter((y) => {
+    const t = Date.parse(y.readAt || y.lastChangedAt);
+    return Number.isFinite(t) && at - t >= hours * 3600e3;
+  });
+}
+
 /* `frozen` = the yards the SITE marks: yard_health.json's listState (the
  * scan's scraper/yard_freshness.py, the same value the yard rows publish):
  * "stale" = no car added or removed for 3+ full business days, "frozen" =
@@ -578,7 +593,7 @@ export function yardFlags(h) {
     if (listMode && (y.listState === 'stale' || y.listState === 'frozen')) {
       frozen.push({ name, lastChangedAt: y.listChangedAt, state: y.listState, ...(y.carried ? { notRead: true } : {}) });
     }
-    if (y.carried) { carried.push({ name, lastChangedAt: y.lastChangedAt, count: y.count }); continue; }
+    if (y.carried) { carried.push({ name, lastChangedAt: y.lastChangedAt, count: y.count, readAt: y.listReadAt || null }); continue; }
     const newest = y.newestDateAdded ? Date.parse(String(y.newestDateAdded).slice(0, 10) + 'T00:00:00Z') : NaN;
     if (Number.isFinite(newest) && scraped - newest > DORMANT_MS) dormant.push({ name, newestDateAdded: y.newestDateAdded });
     const lc = listMode ? (y.listChangedAt || y.lastChangedAt) : y.lastChangedAt;
@@ -1371,6 +1386,10 @@ export async function buildDailyReport(env, { now = Date.now(), storeSnapshot = 
   if (unexplained.length) {
     const m = unexplained;
     conds.push({ id: 'yards-missing', title: `${m.length} yard${m.length === 1 ? '' : 's'} missing from the scan: ${m.slice(0, 4).map((y) => y.name).join(', ')}${m.length > 4 ? ` +${m.length - 4} more` : ''}` });
+  }
+  const notRead = carriedLong(yardHealth, 12);
+  if (notRead.length) {
+    conds.push({ id: 'yards-not-read', title: `${notRead.length} yard${notRead.length === 1 ? '' : 's'} not read for 12+ hours (showing the last copy): ${notRead.slice(0, 4).map((y) => y.name).join(', ')}${notRead.length > 4 ? ` +${notRead.length - 4} more` : ''}` });
   }
   if (yardHealth && yardHealth.chainFrozen && yardHealth.chainFrozen.length) {
     for (const c of yardHealth.chainFrozen) {
