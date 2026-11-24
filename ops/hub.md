@@ -3890,3 +3890,27 @@ read (its last copy is shown). Said in the next message.
 
 **Waiting on the owner:** a contact address for the VinPlus provider, and/or
 for the yards themselves (none on file for any of the 14 companies).
+
+## 2026-11-24 04:34 UTC follow-up check: iPull-uPull photos back; VinPlus still refused; the carry cap arrives sooner for slow yards
+
+Scan 45304723909 (started 01:23 UTC, first on `aa9d2de8`), own scheduled check:
+- **iPull-uPull photos: back.** "[iPull-uPull photos] 3293 of 4199 cars with
+  photos (46 make queries; 46 got no answer, 3293 photos kept from earlier
+  answers)"; `docs/data/vehicle_extras.json` (02:41 UTC) carries 3,293 photo
+  codes for `ipull-` cars (0 in the scans since 11-22 21:33; 3,359 before).
+- **VinPlus: still refused.** "asked 8 yard(s) this scan, reused the last read
+  of 0", the stop after 3 refusals, 4 searches sent, 434 not sent (8 yards a
+  scan now, so fewer are even queued). 22 yards on their last copy.
+- **Pull-N-Save:** 3,123 cars across 2 yards; the same six on their last copy.
+  Bevell's 1,136, Route 34 328, Budget Winter Garden 1,615: read.
+- 28 yards on their last copy in all.
+
+**Correction to what the owner was told ("drop off around Nov 26–27").** The
+carry cap (30) counts scans since a yard's list last CHANGED, not since it was
+last read, so a slow yard runs out sooner. From `yard_health.json` (02:41
+UTC): Bessler's Louisville (309 cars) has 5 scans left, about a day (early
+11-25 UTC); Pickers Reno 13 and Raceway 14 (about 11-26); Chesterfield x3, RTP
+Maiden and Bluegrass 15; eight yards 17 (San Antonio, Go Pull-It Jacksonville
+and Gainesville, Pickers Longview and Texarkana, Pipes, US Auto Supply, 195);
+the rest 19 to 23 (about 11-27/28). Not changed: counting from the last read
+instead would show an unread list for longer, which is the owner's call.

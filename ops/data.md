@@ -1244,3 +1244,16 @@ Queued for the data builder (none started):
   provider accepts a faster pace for the 9 photo yards, lower their hours.
   **8.** Unverified idea, only with the provider's OK: one search per yard
   with no make, split by year, instead of 49 per yard.
+
+## 2026-11-24 04:34 UTC (hub) first scan on `aa9d2de8` checked; one more queued item
+
+Confirmed in scan 45304723909: iPull-uPull 3,293 photos kept and published;
+VinPlus "asked 8 yard(s) this scan, reused the last read of 0", 4 searches
+sent, still refused. Details in `ops/hub.md` (same time).
+
+Queued: **9.** STALE-KEEP's cap reads `unchangedScans` (scans since the list
+last changed), so a yard whose list was quiet before its source failed is
+dropped after fewer than 30 carried scans (Bessler's Louisville: last read
+11-22 17:58, drops about 11-25, 2.5 days, not 5). If the owner wants "about 5
+days since the last read", count from `listReadAt`. That shows an unread
+list for longer, so it needs the owner's word.
