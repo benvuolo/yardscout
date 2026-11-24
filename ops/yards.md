@@ -1138,3 +1138,9 @@ service answers again the yards come back over three scans (8 a scan) and are
 then read about every 11 h (`aa9d2de8`). Owner decision 11-24: the LKQ
 reader stays exactly as it is. No contact on file for the provider or for any
 of the 14 yard companies; the owner offered to look for an address.
+
+## 2026-11-24 21:17 UTC (hub) VinPlus provider: draft to info@texnrewards.com in Gmail (owner sends)
+
+Address supplied by the owner on 11-24. Draft id `r2188196380699157980`.
+Still refused at 19:52 UTC. If they answer with a pace, set
+`VINPLUS_MIN_HOURS` / `VINPLUS_YARDS_PER_SCAN` to it (`ops/data.md`).

@@ -3940,3 +3940,29 @@ Own scheduled check, nothing changed in code.
   in the 11-23 email was the App Store's 11-21 figure, as flagged then.
 No further check scheduled: the daily email now carries this in its headline.
 Still waiting on the owner for a contact address (provider or yards).
+
+## 2026-11-24 21:17 UTC owner gave the VinPlus address; draft in Gmail; a wrong backup dispatch found and fixed
+
+**Owner, about 21:05 UTC:** "info@texnrewards.com should work for vinplus".
+Gmail draft created to that address (id `r2188196380699157980`, subject
+"YardScout and your VinPlus inventory search: were we sending too much?").
+Not sent; the owner sends. No web addresses in it. What it says that the held
+text did not: we took a day to notice; the reader still tries a few searches
+a pass; we can send a name or a key with each request if they want. The note
+for the yards themselves stays in `ops/yard-outreach-drafts.md` (C): no
+address on file for any of the 14 companies.
+
+**State at 19:52 UTC:** VinPlus still 429 (4 searches, the rest not sent); 28
+yards on their last copy; no "STALE-KEEP GIVING UP" yet.
+
+**Three scans in three hours today** (16:23 dispatched, 18:23 dispatched,
+19:14 GitHub's late cron). The 18:23 dispatch came from the Cloudflare
+watchdog two hours after a scan that had started 16:23 and succeeded 17:44,
+which its own rule (5 h) forbids. It read "last successful scan" only from
+GitHub's `status=success` list; that list lagging is the likely cause (not
+proven: the watchdog keeps only its last decision). Fix on main: the newest
+successful start in either of the two lists counts; first unit test for the
+file (11 checks). The late-cron-after-dispatch duplicate (item 2 in
+`ops/data.md`) is still queued. Extra scans matter twice now: more requests
+to every yard, and the carry cap counts scans, so Bessler's Louisville will
+drop a scan or two earlier than the "about 04:30 UTC 11-25" given before.

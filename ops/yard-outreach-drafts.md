@@ -435,10 +435,17 @@ Thanks,
 Ben
 YardScout
 
-### C. VinPlus (the inventory search behind 22 yards we list) — added 2026-11-23, no address on file
+### C. VinPlus (the inventory search behind 22 yards we list) — added 2026-11-23; IN GMAIL since 2026-11-24 21:15 UTC
 
-Held out of Gmail: **missing the provider's contact address** (the company
-that runs the VinPlus yard search; the hub does not read its site by machine).
+**Gmail draft to info@texnrewards.com** (address from the owner, 11-24: "info@texnrewards.com
+should work for vinplus"), subject "YardScout and your VinPlus inventory search:
+were we sending too much?", draft id `r2188196380699157980`. Not sent; the
+owner sends. The draft's wording differs from the first text below in three
+places, all to say only what is true: it took us a day to notice and we kept
+sending the full load that day; the reader still tries a few searches a pass
+(a couple dozen a day), it has not gone silent; and it offers to send a name
+or a key with each request if they want to tell us apart. The text below is
+the earlier version, kept for the record.
 
 Subject: YardScout and your inventory search: were we sending too much?
 
