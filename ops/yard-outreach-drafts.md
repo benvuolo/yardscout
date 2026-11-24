@@ -456,10 +456,39 @@ answers and sends nothing more.
 
 Until then we asked for each make at each yard, about 1,100 searches a pass,
 two seconds apart, six to eight passes a day. If that was too much, I'm
-sorry. Tell me what you are comfortable with (once a day, a slower pace,
-certain hours, a feed instead) and we will do exactly that. If you would
-rather we not read it at all, say so and those yards come down.
+sorry. If you let us back in, each yard would be asked about twice a day and
+never more than eight yards in one pass, roughly a quarter of what we did.
+If you want it slower still, at certain hours, or through a feed instead,
+tell me and we will do exactly that. If you would rather we not read it at
+all, say so and those yards come down.
 
 Thanks,
 Ben
 YardScout
+
+**The same note for a yard that uses VinPlus** (added 2026-11-24; for any of
+Go Pull-It, Chesterfield, Pickers / Pipes, Bessler's / Bluegrass / Raceway /
+RTP, Joliet U-Pull-It, US Auto Supply, Prestige, Pick Ur Part, San Antonio
+Pick-N-Pull, 195 Used Auto Parts; **no address on file for any of them**):
+
+Subject: Your inventory on YardScout
+
+Hi,
+
+I run YardScout, a small app that shows people which cars are sitting in
+self-service yards near them, so they drive out and pull parts. Your yard is
+on it, credited to you, with every car linking to your own page.
+
+Since Sunday (Nov 22) the search behind your inventory page has been turning
+our reader away with "too many requests", so your list on YardScout has not
+moved since then. We stopped asking rather than push.
+
+Would you be fine with us showing your inventory? If so, a word from you to
+your inventory vendor that YardScout is welcome would settle it, and I'm
+glad to read it as slowly as they like (we are set to about twice a day).
+If you would rather not be listed, tell me and I'll take the yard down.
+
+Thanks,
+Ben
+YardScout
+

@@ -3836,3 +3836,57 @@ yards, 338,371 cars; paying subscribers 7 in the email (App Store 5 as of
 again in tomorrow's email; Reddit 3rd-gen post about 44 visits, 11 entered a
 zip, 2 watches; chatgpt.com 23 visits, 12 entered a zip; App Store first-time
 downloads 11-19..11-22: 4, 8, 6, 6.
+
+## 2026-11-24 00:23 UTC the stop confirmed in a scan; owner's answers; asking less, kept photos, email headline
+
+**Follow-up check (own schedule).** Scan 45251515545 (started 11-23 19:41
+UTC, first on `f48cd23c`): the VinPlus reader sent 4 searches (3 from the
+yard loop, 1 from the iPull-uPull photo lookup already on its way), logged
+"the service answered 429 (too many requests) 3 times in a row; no more
+searches are sent in this scan" and "22 yard(s) got no full answer and keep
+their last copy; … 1120 searches were not sent". No Retry-After header came
+back. The service still refuses. 28 yards on their last copy: the 22 VinPlus
+yards and 6 Pull-N-Save (Gilbert, Glendale, Phoenix North, Riverside,
+Springville, Tucson; 2 of 8 read, 2,767 cars, with no line in the log saying
+why the six returned nothing). Bevell's (1,116), Route 34 (328) and Budget
+Winter Garden (1,615) read again in both the 16:23 and 19:41 scans.
+**Found in the same logs:** iPull-uPull's four yards publish 0 photos since
+11-22 21:33 (3,359 before): the photo file names come from the same search.
+
+**Owner, 11-24 about 00:10 UTC:** "I think reddit replies have been answered,
+do what you think for LKQ, I just dont want to be blocked, agreed on 3. What
+is VInPlus? I can look for a email address if needed, would love to get
+creative and around this. Espeically if we can just do something differently
+to get what we need".
+- Reddit replies: closed.
+- **LKQ reader: left exactly as it is** (hub's call on the owner's "do what
+  you think … I just dont want to be blocked": changing the name it sends is
+  the one change that could cost those ~60 yards; rule 2 keeps existing
+  readers as they are). Same for the VinPlus reader's name.
+- "Agreed on 3": the ops email headline. Built (`1f4395dc`): a yard shown
+  from its last copy for 12+ hours is an open issue ("N yards not read for
+  12+ hours (showing the last copy): …"); one scan's miss is only listed.
+- "Creative and around this": told the owner plainly that another network or
+  another name is what rule 2 forbids and is how a rate limit becomes a ban;
+  the hub took the "do it differently" reading instead (below). Rule 2 is not
+  relaxed by this message.
+
+**Built and on main (`aa9d2de8`), nothing sent around the refusal:**
+1. VinPlus yards are asked at most every 11 h, at most 8 yards a scan,
+   longest-unread first; the last full read (history DB, `reader_rows`) is
+   reused in between, never past 24 h. About a quarter of the old volume, a
+   third of the old burst. Takes effect only when the service answers again.
+   Cost told to the owner: new cars at these yards up to half a day later;
+   6,269 photos on 10-hour links show only for some hours after each read.
+2. iPull-uPull keeps the photo codes the search gave (DB `ipull_api`, and a
+   one-time seed of the 3,359 codes published 11-22 17:58 UTC): a car whose
+   make got no answer keeps its photo, which is still on the yard's own site.
+Tests: `scraper/test_vinplus_stop.py` 31, quick set 79/0/0, ops tests 5/0/0
+(`ops_e2e.mjs` now expects the new issue for its carried fixture yard).
+
+**Correction to the 11-23 update:** the hub told the owner nothing shows on
+screen for the 22 yards. The app does mark a yard the last scan could not
+read (its last copy is shown). Said in the next message.
+
+**Waiting on the owner:** a contact address for the VinPlus provider, and/or
+for the yards themselves (none on file for any of the 14 companies).

@@ -1222,3 +1222,25 @@ Queued for the data builder (none started):
 4. **iPull-uPull photos** come from the same search each scan: while it is
    refused those cars publish without photos. Carry the last photo codes.
 5. **Ops email headline** read "All good" with 33 yards on their last copy.
+
+## 2026-11-24 00:23 UTC (hub) VinPlus: asked less (`aa9d2de8`); iPull-uPull keeps photo codes; items 1, 4 and 5 of the 11-23 list done
+
+- Item 1 done: `VINPLUS_MIN_HOURS` 11, `VINPLUS_YARDS_PER_SCAN` 8,
+  `VINPLUS_KEEP_MAX_HOURS` 24 (`_vinplus_plan`, pure); kept reads in
+  `db.reader_rows` (`store_reader_rows` / `load_reader_rows`). Both
+  numbers read the environment, so the provider's answer can be applied
+  without a code change. Log line: "[VinPlus] asked N yard(s) this scan,
+  reused the last read of M".
+- Item 4 done: `_ipull_kept_photo_codes`, seed
+  `scraper/ipull_photo_seed.json` (3,359 codes as of 11-22 17:58 UTC).
+  Log line: "[iPull-uPull photos] N of M cars with photos (… K got no
+  answer, P photos kept from earlier answers)".
+- Item 5 done in the backend (`carriedLong`, `1f4395dc`).
+- Still queued: 2 (scheduled scan right after a dispatched one), 3 (say "bot
+  check" when it is one). New: **6.** Pull-N-Save reads 2 of 8 yards with no
+  log line for the six that return nothing (11-23 16:23 and 19:41 scans): the
+  reader should say what each yard answered. **7.** The 6,269 VinPlus photos
+  on 10-hour links: with reads 11 h apart they show part of the time; if the
+  provider accepts a faster pace for the 9 photo yards, lower their hours.
+  **8.** Unverified idea, only with the provider's OK: one search per yard
+  with no make, split by year, instead of 49 per yard.

@@ -1130,3 +1130,11 @@ The U-Pull-R reader stays switched off (`UPULLR_READER_ENABLED = False`).
   03:33/10:33 scans; other scans read all 8 yards. Not worked around. The
   photo note to info@pullnsave.com (thread `1a1e52cb8accbc08`) is still the
   open contact; if the owner sends it, two lines about the scanner can go in.
+
+## 2026-11-24 00:23 UTC (hub) VinPlus yards: stop confirmed (4 searches a scan); asked about twice a day once it answers; LKQ reader unchanged
+
+Scan 45251515545: 4 searches sent, 1,120 not sent; still refused. When the
+service answers again the yards come back over three scans (8 a scan) and are
+then read about every 11 h (`aa9d2de8`). Owner decision 11-24: the LKQ
+reader stays exactly as it is. No contact on file for the provider or for any
+of the 14 yard companies; the owner offered to look for an address.
