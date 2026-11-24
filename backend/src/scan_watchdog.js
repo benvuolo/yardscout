@@ -25,13 +25,18 @@ export async function runScanWatchdog(env, { now = Date.now() } = {}) {
   });
   const runs = await gh('/actions/workflows/scan.yml/runs?per_page=20');
   if (!runs.ok) return { action: 'error', status: runs.status };
-  const active = ((await runs.json()).workflow_runs || [])
-    .filter((r) => ['queued', 'in_progress', 'waiting', 'pending', 'requested'].includes(r.status));
+  const recent = (await runs.json()).workflow_runs || [];
+  const active = recent.filter((r) => ['queued', 'in_progress', 'waiting', 'pending', 'requested'].includes(r.status));
   if (active.length) return { action: 'none', reason: 'scan active' };
   const ok = await gh('/actions/workflows/scan.yml/runs?status=success&per_page=1');
   if (!ok.ok) return { action: 'error', status: ok.status };
   const last = ((await ok.json()).workflow_runs || [])[0];
-  const startedAt = last ? Date.parse(last.run_started_at || last.created_at) : 0;
+  // The newest successful start in EITHER answer counts. 2026-11-24: a scan
+  // was dispatched at 18:23 UTC, two hours after one that had started 16:23
+  // and succeeded 17:44. The filtered list above is the likely cause (it can
+  // lag behind the plain one); an extra scan is extra load on every yard.
+  const started = (r) => (r ? Date.parse(r.run_started_at || r.created_at) || 0 : 0);
+  const startedAt = Math.max(started(last), ...recent.filter((r) => r.conclusion === 'success').map(started));
   const ageMs = now - startedAt;
   if (ageMs < MAX_AGE_MS) return { action: 'none', reason: 'fresh', ageHours: +(ageMs / 3600_000).toFixed(1) };
   const d = await gh('/actions/workflows/scan.yml/dispatches', { method: 'POST', body: JSON.stringify({ ref: 'main' }) });
