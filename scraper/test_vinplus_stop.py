@@ -3,14 +3,31 @@
 UTC scan the search endpoint answered 429 to every request and each scan
 still sent all ~1,124 searches. The reader now stops asking after
 VINPLUS_STOP_AFTER refusals in a row, and a yard with any unanswered make is
-left out whole (its last copy stands) instead of published short. Offline.
+left out whole (its last copy stands) instead of published short.
+2026-11-24: a yard is asked at most about twice a day and a few yards a scan
+(the last full read is reused in between), and iPull-uPull photo codes the
+search gave once are kept for a scan in which it gives no answer. Offline.
 Run:  python3 scraper/test_vinplus_stop.py"""
+import json
 import sys
+import tempfile
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import db  # noqa: E402
 import junkyard_scraper as js  # noqa: E402
+
+TMP = Path(tempfile.mkdtemp())
+T0 = datetime(2026, 11, 24, 6, 0, tzinfo=timezone.utc)
+_n = [0]
+
+
+def fresh_db():
+    """An empty history DB: nothing kept from an earlier read."""
+    _n[0] += 1
+    db.DB_FILE = TMP / f"h{_n[0]}.db"
 
 fails = []
 
@@ -46,20 +63,28 @@ def row(stock, make="FORD", year=2005):
     return {"stock": stock, "make": make, "model": "F150", "year": year, "vin": "", "dateAdded": "2026-11-20"}
 
 
-def run(post):
+def run(post, now=T0, keep_db=False, per_scan=8, gets=None):
     """fetch_vinplus_inventory with fake HTTP: (cars, posts sent, cache files written)."""
     js._vinplus_stop_reset()
+    if not keep_db:
+        fresh_db()
     sent, cached = [], []
 
     def fake_post(url, json=None, **kw):
         sent.append(json)
         return post(json, len(sent))
 
+    def fake_get(url, **kw):
+        if gets is not None:
+            gets.append(url)
+        return GROUPS
+
     with mock.patch.object(js, "VINPLUS_TENANTS", TENANTS), mock.patch.object(js, "VINPLUS_DELAY_SEC", 0), \
-            mock.patch.object(js.requests, "get", return_value=GROUPS), \
+            mock.patch.object(js, "VINPLUS_YARDS_PER_SCAN", per_scan), \
+            mock.patch.object(js.requests, "get", side_effect=fake_get), \
             mock.patch.object(js.requests, "post", side_effect=fake_post), \
             mock.patch.object(js, "_indep_cache_raw", side_effect=lambda n, c: cached.append(n)):
-        cars = js.fetch_vinplus_inventory()
+        cars = js.fetch_vinplus_inventory(now=now)
     return cars, sent, cached
 
 
@@ -73,7 +98,7 @@ check("all refused: Retry-After is noted", js._VINPLUS_STOP["retry_after"] == "3
 
 # --- after the stop, the other caller (iPull-uPull photos) sends nothing either ---
 with mock.patch.object(js.requests, "post", side_effect=AssertionError("a search was sent after the stop")), \
-        mock.patch.object(js, "VINPLUS_DELAY_SEC", 0):
+        mock.patch.object(js, "IPULL_PHOTO_SEED", TMP / "none.json"), mock.patch.object(js, "VINPLUS_DELAY_SEC", 0):
     cars_i = [{"id": "ipull-sac1", "make": "Honda"}]
     try:
         js._ipull_apply_api_photos(cars_i)
@@ -118,9 +143,80 @@ check("a failed half of a year split: the yard is left out whole", "Yard A" not 
 
 # --- the make list itself failing is unchanged: nothing published, nothing sent ---
 js._vinplus_stop_reset()
-with mock.patch.object(js.requests, "get", return_value=Resp(503)), \
+fresh_db()
+with mock.patch.object(js, "VINPLUS_TENANTS", TENANTS), mock.patch.object(js.requests, "get", return_value=Resp(503)), \
         mock.patch.object(js.requests, "post", side_effect=AssertionError("sent")):
-    check("make list fails: no searches, no cars", js.fetch_vinplus_inventory() == [])
+    check("make list fails: no searches, no cars", js.fetch_vinplus_inventory(now=T0) == [])
+
+# --- asking less: a yard is asked at most every VINPLUS_MIN_HOURS, a few yards a scan ---
+ok_post = lambda q, n: Resp(body={"matches": [row(f"{q['location_id'] or 'c'}-{q['make']}", q["make"])]})  # noqa: E731
+cars0, sent, _ = run(ok_post)
+gets = []
+cars1, sent, cached = run(lambda q, n: Resp(500), now=T0 + timedelta(hours=4), keep_db=True, gets=gets)
+check("4 h after a full read: nothing is asked, not even the make list", sent == [] and gets == [], (len(sent), gets))
+check("4 h after: every yard publishes its last full read, unchanged",
+      sorted(c["id"] for c in cars1) == sorted(c["id"] for c in cars0) and len(cars1) == total, len(cars1))
+cars2, sent, _ = run(ok_post, now=T0 + timedelta(hours=11, minutes=30), keep_db=True)
+check("11.5 h after: every yard is asked again", len(sent) == total and len(cars2) == total, len(sent))
+
+cars, sent, _ = run(ok_post, per_scan=2)
+check("at most 2 yards a scan, nothing kept: two are asked, the third waits (left out)",
+      len(sent) == 2 * len(MAKES) and {c["_location"] for c in cars} == {"Yard A", "Yard B"}, (len(sent), {c["_location"] for c in cars}))
+cars, sent, _ = run(ok_post, per_scan=2, now=T0 + timedelta(hours=4), keep_db=True)
+check("next scan: only the third is asked, the first two reuse their read",
+      len(sent) == len(MAKES) and {q["yard_id"] for q in sent} == {"t2"} and {c["_location"] for c in cars} == {"Yard A", "Yard B", "Yard C"},
+      (len(sent), {c["_location"] for c in cars}))
+
+run(ok_post)
+cars, sent, _ = run(lambda q, n: Resp(429), now=T0 + timedelta(hours=12), keep_db=True)
+check("refused 12 h after a read: 3 searches; the yards asked are left out, a waiting yard would reuse (none here)",
+      len(sent) == 3 and cars == [], (len(sent), len(cars)))
+cars, sent, _ = run(lambda q, n: Resp(429), now=T0 + timedelta(hours=12), keep_db=True, per_scan=1)
+check("refused, 1 yard a scan: the two not asked still publish their 12 h old read",
+      {c["_location"] for c in cars} == {"Yard B", "Yard C"}, {c["_location"] for c in cars})
+cars, sent, _ = run(lambda q, n: Resp(429), now=T0 + timedelta(hours=30), keep_db=True, per_scan=1)
+check("refused, 30 h after the read: nothing that old is reused (STALE-KEEP and its cap decide)", cars == [], len(cars))
+
+K = {"a": ("2026-11-24T05:00:00Z", []), "b": ("2026-11-23T10:00:00Z", []), "c": ("bad", [])}
+with mock.patch.object(js, "VINPLUS_YARDS_PER_SCAN", 2):
+    ask, reuse = js._vinplus_plan(["a", "b", "c", "d"], K, T0)
+check("plan: longest-unread first (never read, unreadable time, then oldest), read 1 h ago is reused",
+      set(ask) <= {"b", "c", "d"} and len(ask) == 2 and "b" not in ask and "a" in reuse, (ask, reuse))
+check("plan: a 20 h old read not asked this scan is reused; nothing kept is not", "b" in reuse and "d" not in reuse and "c" not in reuse, (ask, reuse))
+
+# --- iPull-uPull photos: a code the search gave once is kept for a scan with no answer ---
+IC = "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/"
+fresh_db()
+seed = TMP / "seed.json"
+seed.write_text(json.dumps({"codes": {"SAC0003": "iSAC0003/SAC0003_1", "SAC0004": "iSAC0009/other-cars-file"}}))
+
+
+def ipull(post_fn):
+    js._vinplus_stop_reset()
+    cars = [{"id": "ipull-sac0001", "make": "Honda"}, {"id": "ipull-sac0002", "make": "Honda"},
+            {"id": "ipull-sac0003", "make": "Ford"}, {"id": "ipull-sac0004", "make": "Ford"}, {"id": "ipull-sac0005", "make": "Ford"}]
+    with mock.patch.object(js, "VINPLUS_DELAY_SEC", 0), mock.patch.object(js, "IPULL_PHOTO_SEED", seed), \
+            mock.patch.object(js.requests, "post", side_effect=lambda url, json=None, **kw: post_fn(json)):
+        js._ipull_apply_api_photos(cars)
+    return {c["id"]: c.get("_photo", "") for c in cars}
+
+
+answered = lambda q: Resp(body={"matches": (  # noqa: E731
+    [{"stock": "SAC0001", "imageUrl": IC + "SAC0001/SAC0001-1.jpg"}, {"stock": "SAC0002", "imageUrl": ""}] if q["make"] == "HONDA"
+    else [{"stock": "SAC0005", "imageUrl": IC + "SAC0005/IMG_4097.jpg"}])})
+got = ipull(answered)
+check("iPull answered: photos are the search's own answer; the seed is not used for an answered make",
+      got == {"ipull-sac0001": "iSAC0001/SAC0001-1", "ipull-sac0002": "", "ipull-sac0003": "", "ipull-sac0004": "", "ipull-sac0005": "iSAC0005/IMG_4097"}, got)
+got = ipull(lambda q: Resp(429))
+check("iPull refused: codes learned earlier (DB) and the seed are kept; a car never seen with a photo has none",
+      got["ipull-sac0001"] == "iSAC0001/SAC0001-1" and got["ipull-sac0005"] == "iSAC0005/IMG_4097" and got["ipull-sac0003"] == "iSAC0003/SAC0003_1" and got["ipull-sac0002"] == "", got)
+check("iPull refused: a kept code that is not this car's own folder is not used", got["ipull-sac0004"] == "", got)
+got = ipull(lambda q: Resp(429) if q["make"] == "FORD" else answered(q))
+check("iPull: one make unanswered: only that make's cars use kept codes",
+      got == {"ipull-sac0001": "iSAC0001/SAC0001-1", "ipull-sac0002": "", "ipull-sac0003": "iSAC0003/SAC0003_1", "ipull-sac0004": "", "ipull-sac0005": "iSAC0005/IMG_4097"}, got)
+real = json.loads(js.IPULL_PHOTO_SEED.read_text(encoding="utf8"))["codes"]
+check("the committed seed: every code is a file in that car's own folder",
+      len(real) > 3000 and all(js._ipull_photo_code(f"{IC}{c[1:]}.jpg", st) == c for st, c in real.items()), len(real))
 
 js._vinplus_stop_reset()
 print("ALL PASS" if not fails else f"{len(fails)} FAILURE(S): {fails}")

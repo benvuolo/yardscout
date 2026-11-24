@@ -96,6 +96,14 @@ CREATE TABLE IF NOT EXISTS pns_photo_checks (
     status       TEXT NOT NULL,      -- 'photo' | 'none'
     checked_at   TEXT NOT NULL
 );
+-- The rows of a reader's last full read of one yard, kept so a source that
+-- asked us to slow down can be asked less often than the scan runs
+-- (2026-11-24, VinPlus). body = zlib-compressed JSON list.
+CREATE TABLE IF NOT EXISTS reader_rows (
+    name      TEXT PRIMARY KEY,
+    saved_at  TEXT NOT NULL,
+    body      BLOB NOT NULL
+);
 """
 
 
@@ -626,6 +634,33 @@ def store_pns_photo_checks(results: dict, checked_at: str) -> int:
     conn.commit()
     conn.close()
     return n
+
+
+def store_reader_rows(name: str, rows: list, saved_at: str) -> None:
+    """Keep one yard's rows from a full read (replaces the earlier ones)."""
+    import zlib
+    conn = _connect()
+    conn.execute("INSERT INTO reader_rows (name, saved_at, body) VALUES (?,?,?) "
+                 "ON CONFLICT(name) DO UPDATE SET saved_at = excluded.saved_at, body = excluded.body",
+                 (name, saved_at, zlib.compress(json.dumps(rows, separators=(",", ":")).encode())))
+    conn.commit()
+    conn.close()
+
+
+def load_reader_rows(prefix: str) -> dict:
+    """{name: (saved_at, rows)} for every kept read whose name starts with prefix."""
+    import zlib
+    conn = _connect()
+    got = conn.execute("SELECT name, saved_at, body FROM reader_rows WHERE name LIKE ? ESCAPE '\\'",
+                       (prefix.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%",)).fetchall()
+    conn.close()
+    out = {}
+    for name, at, body in got:
+        try:
+            out[name] = (at, json.loads(zlib.decompress(body)))
+        except (ValueError, zlib.error):
+            continue   # an unreadable row is the same as none kept
+    return out
 
 
 def load_photo_lookups(source: str) -> dict:

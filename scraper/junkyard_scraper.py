@@ -19998,12 +19998,48 @@ def _ipull_photo_code(image_url: str, stock: str) -> str:
     return f"i{m.group(1)}/{m.group(2)}"
 
 
+# When the search gives no answer for a make (2026-11-24). The photo's file
+# name is only learned from the search, so from the 11-22 21:33 UTC scan, when
+# the search began refusing, all 3,359 photos of these four yards dropped off
+# although every photo was still on the yard's own site. A code the search
+# gave once is now kept (history DB, photo_lookups source "ipull_api") and
+# used for a car whose make got no answer this scan. Under the DB sit the
+# codes published on 2026-11-22 (ipull_photo_seed.json, written once from
+# that day's vehicle_extras.json). A make that IS answered is never
+# overridden: the search's own answer stands, photo or none.
+IPULL_PHOTO_SEED = SCRIPT_DIR / "ipull_photo_seed.json"
+_IPULL_CATALOG = "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/"
+
+
+def _ipull_kept_photo_codes() -> dict:
+    """{STOCK: code} from earlier answers of the search (seed, then the DB)."""
+    out: dict = {}
+    try:
+        seed = json.loads(IPULL_PHOTO_SEED.read_text(encoding="utf8")).get("codes") or {}
+        out.update({str(k).upper(): str(v) for k, v in seed.items()})
+    except (OSError, ValueError, AttributeError):
+        pass
+    try:
+        try:
+            import db as _db
+        except ImportError:
+            from scraper import db as _db  # pragma: no cover
+        for st, row in _db.load_photo_lookups("ipull_api").items():
+            if row[0] == "photo" and row[1]:
+                out[str(st).upper()] = row[1]
+    except Exception:  # noqa: BLE001 — photos are optional
+        pass
+    return out
+
+
 def _ipull_apply_api_photos(vehicles: list) -> int:
     by_stock = {v["id"].split("-", 1)[1].upper(): v for v in vehicles if v["id"].startswith("ipull-")}
     makes = sorted({str(v.get("make") or "").upper() for v in by_stock.values() if v.get("make")})
     n = 0
+    failed: list = []
+    learned: dict = {}
     for mk in makes:
-        for row in _vinplus_search(IPULL_API_TENANT, mk, None) or []:
+        for row in _vinplus_search(IPULL_API_TENANT, mk, None, failed=failed) or []:
             st = str(row.get("stock") or "").strip().upper()
             v = by_stock.get(st)
             if v is None or v.get("_photo"):
@@ -20011,10 +20047,33 @@ def _ipull_apply_api_photos(vehicles: list) -> int:
             code = _ipull_photo_code(str(row.get("imageUrl") or ""), st)
             if code:
                 v["_photo"] = code
+                learned[st] = ("photo", code)
                 n += 1
-    print(f"  [iPull-uPull photos] {n} of {len(by_stock)} cars with photos ({len(makes)} make queries)",
-          file=sys.stderr)
-    return n
+    kept_n = 0
+    unanswered = set(failed)
+    if unanswered:
+        kept = _ipull_kept_photo_codes()
+        for st, v in by_stock.items():
+            if v.get("_photo") or str(v.get("make") or "").upper() not in unanswered:
+                continue
+            code = kept.get(st, "")
+            # the kept code must still be this car's own folder on the yard's site
+            if code and _ipull_photo_code(f"{_IPULL_CATALOG}{code[1:]}.jpg", st) == code:
+                v["_photo"] = code
+                kept_n += 1
+    if learned:
+        try:
+            try:
+                import db as _db
+            except ImportError:
+                from scraper import db as _db  # pragma: no cover
+            _db.store_photo_lookups("ipull_api", learned, datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
+        except Exception as e:  # noqa: BLE001 — photos are optional
+            print(f"  [iPull-uPull photos] codes not kept ({e})", file=sys.stderr)
+    print(f"  [iPull-uPull photos] {n + kept_n} of {len(by_stock)} cars with photos ({len(makes)} make queries"
+          + (f"; {len(unanswered)} got no answer, {kept_n} photos kept from earlier answers" if unanswered else "")
+          + ")", file=sys.stderr)
+    return n + kept_n
 IPULL_PHOTO_LOOKUP_MAX = int(os.environ.get("IPULL_PHOTO_LOOKUP_MAX", "200"))
 IPULL_PHOTO_DELAY_SEC = 10.0
 
@@ -20446,41 +20505,100 @@ def _vinplus_photo_code(image_url: str, stock: str, brand: str) -> str:
     return _yardsmart_photo_code(image_url, sid=VINPLUS_BRAND_SIDS.get(brand))
 
 
-def fetch_vinplus_inventory() -> list[dict]:
-    """Fetch every VinPlus tenant's inventory (make x location loop)."""
+# Asking less (2026-11-24). Until the refusal of 11-22 every scan asked every
+# yard for every make: about 1,124 searches a scan, 6 to 8 scans a day. Now a
+# yard is asked at most once per VINPLUS_MIN_HOURS (about twice a day) and at
+# most VINPLUS_YARDS_PER_SCAN yards are asked in one scan, longest-unread
+# first, so no scan sends more than about a third of the old burst. Between
+# reads the scan reuses the rows of the yard's last full read, kept in the
+# history DB (reader_rows); rows older than VINPLUS_KEEP_MAX_HOURS are not
+# reused, the yard is left out and STALE-KEEP (with its cap) decides.
+VINPLUS_MIN_HOURS = float(os.environ.get("VINPLUS_MIN_HOURS", "11"))
+VINPLUS_YARDS_PER_SCAN = int(os.environ.get("VINPLUS_YARDS_PER_SCAN", "8"))
+VINPLUS_KEEP_MAX_HOURS = 24.0
+
+
+def _vinplus_plan(keys: list, kept: dict, now) -> tuple[list, list]:
+    """(yards to ask this scan, yards whose kept rows are reused); pure.
+    kept: {key: (saved_at ISO, rows)}."""
+    def age(k):
+        try:
+            at = datetime.fromisoformat(str(kept[k][0]).replace("Z", "+00:00"))
+            return (now - at).total_seconds() / 3600.0
+        except (KeyError, ValueError, TypeError):
+            return float("inf")
+    due = sorted((k for k in keys if age(k) >= VINPLUS_MIN_HOURS), key=lambda k: -age(k))
+    ask = due[:max(VINPLUS_YARDS_PER_SCAN, 0)]
+    reuse = [k for k in keys if k not in ask and age(k) < VINPLUS_KEEP_MAX_HOURS]
+    return ask, reuse
+
+
+def fetch_vinplus_inventory(now=None) -> list[dict]:
+    """Every VinPlus tenant's inventory: the yards due this scan are asked
+    (make x location loop), the others reuse their last full read."""
     try:
-        r = requests.get(f"{VINPLUS_API}/api/vehicle-groups", headers=HEADERS, timeout=60)
-        r.raise_for_status()
-        makes = sorted((r.json().get("data") or {}).keys())
-    except Exception as e:
-        print(f"  [VinPlus] vehicle-groups fetch failed: {e}", file=sys.stderr)
-        return []
-    if not makes:
-        print("  [VinPlus] no makes in vehicle-groups — API changed?", file=sys.stderr)
-        return []
+        import db as _db
+    except ImportError:
+        from scraper import db as _db  # pragma: no cover
+    now = now or datetime.now(timezone.utc)
+    yards = [(tenant, loc_id, yard) for tenant, locations in VINPLUS_TENANTS.items()
+             for loc_id, yard in locations.items()]
+    key_of = lambda tenant, loc_id: f"vinplus:{tenant}/{loc_id}"  # noqa: E731
+    try:
+        kept = _db.load_reader_rows("vinplus:")
+    except Exception as e:  # noqa: BLE001 — no kept rows: every yard is due
+        print(f"  [VinPlus] kept reads not loaded ({e})", file=sys.stderr)
+        kept = {}
+    ask, reuse = _vinplus_plan([key_of(t, l) for t, l, _ in yards], kept, now)
+    makes: list[str] = []
+    if ask:
+        try:
+            r = requests.get(f"{VINPLUS_API}/api/vehicle-groups", headers=HEADERS, timeout=60)
+            r.raise_for_status()
+            makes = sorted((r.json().get("data") or {}).keys())
+            if not makes:
+                print("  [VinPlus] no makes in vehicle-groups — API changed?", file=sys.stderr)
+        except Exception as e:
+            print(f"  [VinPlus] vehicle-groups fetch failed: {e}", file=sys.stderr)
 
     all_vehicles: list[dict] = []
     left_out: list[str] = []
+    asked = reused = 0
     for tenant, locations in VINPLUS_TENANTS.items():
         for loc_id, yard in locations.items():
-            loc_rows: list[dict] = []
-            failed: list[str] = []
-            for make_name in makes:
-                # Single-location tenants (locations: [] in yard-info) key
-                # their one yard as "" here and search with location_id null.
-                loc_rows.extend(_vinplus_search(tenant, make_name, loc_id or None, failed=failed))
-            if failed:
-                # A yard with an unanswered make is left out whole: a list
-                # missing some makes would read as those cars leaving the
-                # lot. Its last published copy stands (STALE-KEEP).
+            key = key_of(tenant, loc_id)
+            if key in reuse:
+                loc_rows = kept[key][1]
+                reused += 1
+            elif key in ask and makes:
+                asked += 1
+                loc_rows = []
+                failed: list[str] = []
+                for make_name in makes:
+                    # Single-location tenants (locations: [] in yard-info) key
+                    # their one yard as "" here and search with location_id null.
+                    loc_rows.extend(_vinplus_search(tenant, make_name, loc_id or None, failed=failed))
+                if failed:
+                    # A yard with an unanswered make is left out whole: a list
+                    # missing some makes would read as those cars leaving the
+                    # lot. Its last published copy stands (STALE-KEEP).
+                    left_out.append(yard["name"])
+                    if not _VINPLUS_STOP["stopped"]:
+                        print(f"  [VinPlus] {yard['name']}: {len(failed)} of {len(makes)} make "
+                              f"searches got no answer; this yard keeps its last copy "
+                              f"this scan", file=sys.stderr)
+                    continue
+                _indep_cache_raw(f"vinplus_{yard['code']}.json",
+                                 json.dumps(loc_rows).encode())
+                try:
+                    _db.store_reader_rows(key, loc_rows, now.strftime("%Y-%m-%dT%H:%M:%SZ"))
+                except Exception as e:  # noqa: BLE001 — not kept: the yard is asked again next scan
+                    print(f"  [VinPlus] {yard['name']}: read not kept ({e})", file=sys.stderr)
+            else:
+                # Due, but not among this scan's yards (or no make list) and
+                # nothing recent enough kept: left to its last published copy.
                 left_out.append(yard["name"])
-                if not _VINPLUS_STOP["stopped"]:
-                    print(f"  [VinPlus] {yard['name']}: {len(failed)} of {len(makes)} make "
-                          f"searches got no answer; this yard keeps its last copy "
-                          f"this scan", file=sys.stderr)
                 continue
-            _indep_cache_raw(f"vinplus_{yard['code']}.json",
-                             json.dumps(loc_rows).encode())
             id_prefix = yard.get("id_prefix") or f"vinplus-{yard['code']}-"
             for row in loc_rows:
                 stock = str(row.get("stock") or "").strip()
@@ -20516,6 +20634,9 @@ def fetch_vinplus_inventory() -> list[dict]:
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
     print(f"  [VinPlus] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    print(f"  [VinPlus] asked {asked} yard(s) this scan, reused the last read of {reused} "
+          f"(a yard is asked at most every {VINPLUS_MIN_HOURS:g} h, {VINPLUS_YARDS_PER_SCAN} yards a scan)",
+          file=sys.stderr)
     if left_out:
         print(f"  [VinPlus] {len(left_out)} yard(s) got no full answer and keep their last copy"
               + (f"; the service refused (429), {_VINPLUS_STOP['not_sent']} searches were not sent"
