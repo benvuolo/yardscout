@@ -29519,10 +29519,25 @@ _UPR = ("waiting on the yard: upullrparts.com puts its vehicle search behind a "
         "2026-11-03 asking for an exemption or a daily file; their CTO said "
         "2026-11-06 an official API is likely; our reader is switched off "
         "since 2026-11-17 (nothing is sent to their site) until it arrives")
+# 2026-11-27: the VinPlus yards dropped at the carry cap were listed as
+# "unknown — adapter failing?", which is wrong: the cause is known.
+_VINPLUS_REFUSED = ("waiting on the yard: its inventory provider (VinPlus) answers \"too many "
+                    "requests\" to every search since 2026-11-22 21:33 UTC; our reader stops "
+                    "after 3 refusals a scan (about 4 requests); owner emailed the provider "
+                    "2026-11-24; the yard comes back by itself the first scan the service answers")
+# Checked 2026-11-27 (getStores lists all 8; a search at Glendale answers "no
+# matching vehicles"): the yard's own site shows no cars at these six stores
+# since 2026-11-22, as it did from 2026-10-31 until it cleared on its own.
+_PNS_EMPTY = ("waiting on the yard: pullnsave.com's own inventory search shows no cars at "
+              "this store since 2026-11-22 (same as 2026-10-31, which cleared by itself); "
+              "owner emailed info@pullnsave.com 2026-11-02")
 KNOWN_MISSING_REASONS: dict[str, str] = {
     "U-Pull-R Parts - East Bethel": _UPR,
     "U-Pull-R Parts - Rosemount": _UPR,
     "U-Pull-R Parts - Toledo": _UPR,
+    **{y["name"]: _VINPLUS_REFUSED for _locs in VINPLUS_TENANTS.values() for y in _locs.values()},
+    **{f"Pull-N-Save - {n}": _PNS_EMPTY
+       for n in ("Glendale", "Gilbert", "Phoenix North", "Tucson", "Springville", "Riverside")},
 }
 
 def _yard_freshness_mod():

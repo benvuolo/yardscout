@@ -3966,3 +3966,46 @@ file (11 checks). The late-cron-after-dispatch duplicate (item 2 in
 `ops/data.md`) is still queued. Extra scans matter twice now: more requests
 to every yard, and the carry cap counts scans, so Bessler's Louisville will
 drop a scan or two earlier than the "about 04:30 UTC 11-25" given before.
+
+## 2026-11-27 04:01 UTC owner asked "Update?": VinPlus still refused, 3 yards dropped, Pull-N-Save's own site blank for 6 stores again
+
+- **VinPlus:** the owner sent the note to info@texnrewards.com on 11-24 21:38
+  UTC; no reply in Gmail by 11-27 04:00 UTC. Every scan since (13 checked,
+  11-25 00:34 to 11-27 02:43) got 429 and sent 4 searches. Dropped at the
+  carry cap: Bessler's Louisville (309 cars, scan 11-25 03:25), Pickers Reno
+  (547, 11-26 23:33), Raceway Savannah (513, 11-27 02:43). Next scan drops RTP
+  Maiden, Chesterfield x3 and Bluegrass (3,501 cars); two scans later eight
+  more (San Antonio, Go Pull-It Jacksonville and Gainesville, Pickers Longview
+  and Texarkana, Pipes, US Auto Supply, 195; 11,291 cars); then Hebron, then
+  Pick Ur Part, Prestige, Go Pull-It Tallahassee and Atlanta East, Joliet.
+  They come back by themselves, 8 yards a scan, the first scan VinPlus answers.
+- **Pull-N-Save six stores (Glendale, Gilbert, Phoenix North, Tucson,
+  Springville, Riverside; 7,267 cars carried since 11-22):** three requests to
+  the site 11 s apart under the scanner's own name, 11-27 ~04:05 UTC: getStores
+  lists all 8; a Jaguar search across all stores returns only Phoenix South
+  rows; a Honda search at Glendale answers "I'm sorry but there are no matching
+  vehicles". So the yard's own site shows nothing for those stores; not a
+  block, not our reader. The same six went blank on 2026-10-31 (the owner's
+  email of 11-02 told them; no reply) and it cleared by itself. Gmail draft
+  reply in that thread (`r-6189970851950725184`, to info@pullnsave.com, no
+  web addresses). They drop at the cap in about 7 scans if it stays blank.
+- **Wrong label fixed:** a dropped VinPlus yard was listed in the email as
+  "unknown — adapter failing?". `KNOWN_MISSING_REASONS` now names the cause
+  for the 22 VinPlus yards and the six Pull-N-Save stores ("waiting on the
+  yard: …"), so the email lists them with the reason and, by the existing
+  rule for known outside causes, not as an open issue. While carried they
+  still count under "not read for 12+ hours".
+- **Scans:** 6 a day since 11-25 (pairs: watchdog dispatch then GitHub's cron
+  2 to 4 h late), no failed runs. The duplicate guard (data item 2) is not
+  needed for volume while GitHub's cron runs this late.
+- **Ops email 11-26:** visitors 41.9 a day (+11%), watches 37 (-20%), Pro sheet
+  74 opens, 4 checkout taps, 2 bought; 6 paying (App Store 4, Play 1, web 1);
+  landed pages 64 views in 7 days (counter working).
+- **Free trial (owner: look again about 11-26):** first clean week says the
+  drop is between opening the Pro sheet and tapping checkout (74 to 4), not
+  at the payment screen (4 to 2). Put to the owner with a recommendation.
+- Tests for the label fix: quick set 79 passed and 1 failed only because this
+  new container had no backend packages (esbuild missing); after
+  `npm install --no-save --package-lock=false` in `backend/`, that test,
+  `e2e-ops.sh` and `ops_yard_list_unit.mjs` pass (3/0/0). Note for the next
+  session: `backend/` has no package-lock.json, so `npm ci` refuses.
